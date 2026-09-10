@@ -29,15 +29,11 @@ body.theme-midnight{--gold:#6a7fff;--gold2:#a8b8ff;--bg1:#0a0f2a;--bg2:#1a1f4a;-
 body.theme-rose{--gold:#e5547d;--gold2:#ffa8c0;--bg1:#3a0f1e;--bg2:#5a1f35;--bg3:#3a0f1e}
 body.theme-forest{--gold:#3e8c4a;--gold2:#8ccf95;--bg1:#0d1f12;--bg2:#1a3a22;--bg3:#0d1f12}
 
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
   color:var(--text);
   background:radial-gradient(circle at 75% 5%,#fff0ae 0,transparent 30%),
              linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));
-  min-height:100vh;
-  transition:background .3s,color .3s;
-}
+  min-height:100vh;transition:background .3s,color .3s;}
 button,input,select,textarea{font:inherit;outline:none}
 button{cursor:pointer}
 
@@ -181,6 +177,29 @@ body.dark .search{background:rgba(0,0,0,.4);border-color:#3a3220;color:#f5efdf}
 .panel-title h2{margin:0;font-size:18px}
 .panel-title a{color:#98701d;text-decoration:none;font-size:12px;font-weight:750;cursor:pointer}
 body.dark .panel-title a{color:var(--gold2)}
+
+/* GRANTS */
+.grants-summary{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.grants-total-box{padding:14px 18px;border-radius:14px;
+  background:linear-gradient(135deg,rgba(22,132,71,.12),rgba(247,220,122,.15));
+  border:1px solid rgba(22,132,71,.25);width:100%}
+.grants-label{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:1px}
+.grants-total{font-size:28px;font-weight:850;color:var(--green);letter-spacing:-1px;margin:4px 0}
+.grants-sub{font-size:11px;color:var(--muted)}
+.grant-item{display:flex;justify-content:space-between;align-items:center;
+  padding:8px 12px;border-radius:10px;background:rgba(22,132,71,.06);
+  margin-bottom:6px;font-size:11px}
+.grant-item strong{color:var(--green);font-weight:800}
+.grant-usage-bar{height:14px;border-radius:8px;overflow:hidden;
+  background:rgba(0,0,0,.08);margin:10px 0}
+body.dark .grant-usage-bar{background:rgba(255,255,255,.1)}
+.grant-usage-fill{height:100%;background:linear-gradient(90deg,#168447,#8ccf95);
+  border-radius:8px;transition:.4s}
+.grant-usage-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.grant-stat{padding:10px;border-radius:10px;background:rgba(255,255,255,.5);border:1px solid var(--line)}
+body.dark .grant-stat{background:rgba(255,255,255,.03)}
+.grant-stat-label{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.5px}
+.grant-stat-value{font-size:16px;font-weight:850;margin-top:2px}
 
 /* DONUT */
 .donut-wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
@@ -403,7 +422,8 @@ body.dark .statement-box{background:#1a1508;color:#f5efdf}
   .actions{grid-template-columns:repeat(2,1fr)}
   .panel{padding:18px}
   .topbar-right .icon-btn:nth-child(1),
-  .topbar-right .icon-btn:nth-child(2){display:none}
+  .topbar-right .icon-btn:nth-child(2),
+  .topbar-right .icon-btn:nth-child(3){display:none}
 }
 </style>
 </head>
@@ -412,10 +432,7 @@ body.dark .statement-box{background:#1a1508;color:#f5efdf}
 <!-- AUTH -->
 <div class="auth-overlay" id="authOverlay">
   <div class="auth-card" id="signInView">
-    <div class="auth-brand">
-      <div class="brand-logo">N</div>
-      <div class="brand-name">NovaPay</div>
-    </div>
+    <div class="auth-brand"><div class="brand-logo">N</div><div class="brand-name">NovaPay</div></div>
     <h2>Welcome Back</h2>
     <p>Sign in to send a verification code to your email.</p>
     <form class="auth-form" onsubmit="handleSignInStep1(event)">
@@ -565,16 +582,35 @@ body.dark .statement-box{background:#1a1508;color:#f5efdf}
 
       <div>
         <section class="panel" style="margin-bottom:20px">
+          <div class="panel-title"><h2>🏆 Grant Funding</h2></div>
+          <div class="grants-summary">
+            <div class="grants-total-box">
+              <div class="grants-label">TOTAL RECEIVED FROM IFUNDWOMEN</div>
+              <div class="grants-total" id="grantsTotal">$58,000.00</div>
+              <div class="grants-sub" id="grantsCount">1 disbursement</div>
+            </div>
+          </div>
+          <div id="grantsList" style="margin-top:12px"></div>
+        </section>
+
+        <section class="panel" style="margin-bottom:20px">
+          <div class="panel-title"><h2>📊 Grant Usage</h2></div>
+          <div id="grantUsage"></div>
+        </section>
+
+        <section class="panel" style="margin-bottom:20px">
           <div class="panel-title"><h2>Spending Breakdown</h2></div>
           <div class="donut-wrap">
             <canvas id="donutChart" width="160" height="160"></canvas>
             <div class="donut-legend" id="donutLegend"></div>
           </div>
         </section>
+
         <section class="panel" style="margin-bottom:20px">
           <div class="panel-title"><h2>Monthly Budgets</h2><a onclick="showPage('budgets')">Edit →</a></div>
           <div id="budgetPreview"></div>
         </section>
+
         <section class="panel">
           <div class="panel-title"><h2>Savings Goals</h2><a onclick="showPage('goals')">Manage →</a></div>
           <div id="goalsPreview"></div>
@@ -591,11 +627,12 @@ body.dark .statement-box{background:#1a1508;color:#f5efdf}
         <button class="acct-tab active" data-txfilter="all" onclick="filterTx('all',this)">All</button>
         <button class="acct-tab" data-txfilter="in" onclick="filterTx('in',this)">Money In</button>
         <button class="acct-tab" data-txfilter="out" onclick="filterTx('out',this)">Money Out</button>
+        <button class="acct-tab" data-txfilter="grants" onclick="filterTx('grants',this)">🏆 Grants</button>
         <button class="acct-tab" data-txfilter="starred" onclick="filterTx('starred',this)">⭐ Starred</button>
         <select id="dateRange" class="date-range" onchange="filterTxSearch()">
           <option value="all">All time</option>
           <option value="7">Last 7 days</option>
-          <option value="30" selected>Last 30 days</option>
+          <option value="30">Last 30 days</option>
           <option value="90">Last 90 days</option>
         </select>
         <input type="text" id="txSearch" placeholder="Search..." oninput="filterTxSearch()">
@@ -913,7 +950,7 @@ body.dark .statement-box{background:#1a1508;color:#f5efdf}
 
 <script>
 /* ============================================================
-   GLOBAL STATE
+   CURRENCIES & TRANSLATIONS
 ============================================================ */
 const CURRENCIES = {
   USD: { symbol: '$', rate: 1 },
@@ -921,19 +958,15 @@ const CURRENCIES = {
   GBP: { symbol: '£', rate: 0.79 },
   NGN: { symbol: '₦', rate: 1550 }
 };
-const TRANSLATIONS = {
-  en: { dashboard:'Dashboard', transactions:'Transactions', transfers:'Transfers', bills:'Pay Bills', deposit:'Deposit', statements:'Statements', profile:'Profile', cards:'Cards', support:'Support' },
-  es: { dashboard:'Panel', transactions:'Transacciones', transfers:'Transferencias', bills:'Pagar Facturas', deposit:'Depósito', statements:'Estados', profile:'Perfil', cards:'Tarjetas', support:'Soporte' },
-  fr: { dashboard:'Tableau', transactions:'Transactions', transfers:'Virements', bills:'Payer Factures', deposit:'Dépôt', statements:'Relevés', profile:'Profil', cards:'Cartes', support:'Support' },
-  yo: { dashboard:'Iboju', transactions:'Ìdúnàwò', transfers:'Ìfowó ránṣẹ́', bills:'Sanwó', deposit:'Ìdogo', statements:'Ìwé ìsọfúnni', profile:'Profáìlì', cards:'Káàdì', support:'Ìrànwọ́' },
-  ar: { dashboard:'لوحة القيادة', transactions:'المعاملات', transfers:'التحويلات', bills:'دفع الفواتير', deposit:'إيداع', statements:'كشوف الحساب', profile:'الملف الشخصي', cards:'البطاقات', support:'الدعم' }
-};
 
+/* ============================================================
+   STATE — CLEAN: Only iFundWomen grant
+============================================================ */
 let state = {
   user: { name: 'Jolan Newman', email: 'jolan@example.com', phone: '+1 (555) 000-0000', pin: '1234', avatarColor: '#b78622' },
   accounts: {
     checking: { label:'Available Balance', number:'Checking Account •••• 4821', short:'•••• 4821', balance:58000, type:'Checking' },
-    savings:  { label:'Savings Balance',   number:'Savings Account •••• 9910',  short:'•••• 9910', balance:12500, type:'Savings' }
+    savings:  { label:'Savings Balance',   number:'Savings Account •••• 9910',  short:'•••• 9910', balance:0, type:'Savings' }
   },
   activeAccount: 'checking',
   cards: [
@@ -943,12 +976,18 @@ let state = {
   activeCard: 0,
   cardFrozen: false,
   transactions: [
-    { id:1, name:'Incoming Transfer — Sarah Mitchell', type:'in', amount:5000, subtitle:'Acct ••8842', date:'Sep 10, 2026', ts: Date.now()-4*864e5, account:'checking', category:'Transfers', starred:false },
-    { id:2, name:'Transfer to Michael Chen', type:'out', amount:425, subtitle:'Acct ••3317', date:'Sep 8, 2026', ts: Date.now()-6*864e5, account:'checking', category:'Transfers', starred:false },
-    { id:3, name:'Bill — City Electric', type:'out', amount:182.40, subtitle:'Ref INV-20481', date:'Sep 6, 2026', ts: Date.now()-8*864e5, account:'checking', category:'Bills', starred:false },
-    { id:4, name:'Deposit — Employer Inc.', type:'in', amount:3250, subtitle:'Acct ••5590', date:'Sep 5, 2026', ts: Date.now()-9*864e5, account:'checking', category:'Deposits', starred:false },
-    { id:5, name:'Sent to Emma Rodriguez', type:'out', amount:150, subtitle:'Acct ••7723', date:'Sep 3, 2026', ts: Date.now()-11*864e5, account:'checking', category:'Transfers', starred:false },
-    { id:6, name:'Bill — FastNet Internet', type:'out', amount:89.99, subtitle:'Ref INV-77120', date:'Sep 1, 2026', ts: Date.now()-13*864e5, account:'checking', category:'Bills', starred:false }
+    {
+      id: 1,
+      name: 'iFundWomen Grant',
+      type: 'in',
+      amount: 58000,
+      subtitle: 'Grant Funding',
+      date: 'Sep 10, 2026',
+      ts: Date.now(),
+      account: 'checking',
+      category: 'Grants',
+      starred: true
+    }
   ],
   payees: [],
   budgets: [
@@ -958,13 +997,11 @@ let state = {
     { category:'Food', limit:200, color:'#3e8c4a' }
   ],
   goals: [
-    { id:1, name:'Vacation Fund', target:5000, current:1200, icon:'🏖️' },
-    { id:2, name:'New Laptop', target:1500, current:800, icon:'💻' }
+    { id:1, name:'Business Expansion', target:10000, current:0, icon:'💰' },
+    { id:2, name:'Emergency Fund', target:5000, current:0, icon:'🏠' }
   ],
   notifications: [
-    { text:'Welcome to NovaPay! Your account is ready.', time:'Just now' },
-    { text:'Received $5,000.00 from Sarah Mitchell.', time:'Sep 10, 2026' },
-    { text:'Bill payment to City Electric was successful.', time:'Sep 6, 2026' }
+    { text:'🏆 Received $58,000.00 grant from iFundWomen.', time:'Just now' }
   ],
   currency: 'USD',
   language: 'en',
@@ -1116,8 +1153,7 @@ function showPage(name) {
   if (activeLink) activeLink.classList.add('active');
   document.querySelectorAll('.mobile-nav button').forEach(b => b.classList.remove('active'));
   if (name === 'dashboard') document.querySelectorAll('.mobile-nav button')[0]?.classList.add('active');
-  if (name === 'history')   document.querySelectorAll('.mobile-nav button')[3]?.classList.add('active');
-  if (name === 'history')   renderHistory();
+  if (name === 'history')   { document.querySelectorAll('.mobile-nav button')[3]?.classList.add('active'); renderHistory(); }
   if (name === 'payees')    renderPayees();
   if (name === 'budgets')   renderBudgets();
   if (name === 'goals')     renderGoals();
@@ -1138,15 +1174,12 @@ function refreshAll() {
   document.getElementById('acctLabel').textContent = a.label;
   document.getElementById('acctNumber').textContent = a.number;
   document.getElementById('balanceDisplay').textContent = fmt(a.balance);
-  document.getElementById('ovNumber') && (document.getElementById('ovNumber').textContent = a.short);
-  document.getElementById('ovType') && (document.getElementById('ovType').textContent = a.type);
-  const ovBal = document.getElementById('overviewBalance');
-  if (ovBal) ovBal.textContent = fmt(a.balance);
   renderAccountTabs();
   renderCardDots();
   renderCard();
   renderTransactions();
-  renderChart();
+  renderGrantsSummary();
+  renderGrantUsage();
   renderDonut();
   renderBudgetPreview();
   renderGoalsPreview();
@@ -1206,8 +1239,7 @@ function generateVirtualCard() {
   const expiry = 'VALID THRU ' + String(Math.floor(1 + Math.random() * 12)).padStart(2,'0') + '/28';
   state.virtualCards.push({ number: num, expiry });
   toast('Virtual card generated: ' + num);
-  const label = document.getElementById('cardBrand');
-  label.textContent = 'Virtual Card (single-use)';
+  document.getElementById('cardBrand').textContent = 'Virtual Card (single-use)';
   document.getElementById('cardNumber').textContent = num;
   document.getElementById('cardExpiry').textContent = expiry;
   saveState();
@@ -1278,7 +1310,7 @@ function renderTransactions() {
   container.innerHTML = list.map(t => `
     <div class="transaction">
       <div class="transaction-left">
-        <div class="tx-icon">${t.type === 'in' ? '↓' : '↑'}</div>
+        <div class="tx-icon">${t.category === 'Grants' ? '🏆' : (t.type === 'in' ? '↓' : '↑')}</div>
         <div>
           <div class="tx-name">${escapeHtml(t.name)}</div>
           <div class="tx-date">${escapeHtml(t.subtitle)} • ${t.date}</div>
@@ -1296,10 +1328,10 @@ function renderHistory() {
     return;
   }
   list.innerHTML = filtered.map(t => `
-    <div class="transaction" data-type="${t.type}" data-name="${escapeHtml(t.name.toLowerCase())}" data-ts="${t.ts}" data-starred="${t.starred}">
+    <div class="transaction" data-type="${t.type}" data-name="${escapeHtml(t.name.toLowerCase())}" data-ts="${t.ts}" data-starred="${t.starred}" data-category="${t.category}">
       <div class="transaction-left">
         <button class="star-btn ${t.starred ? 'on' : ''}" onclick="toggleStar(${t.id})">⭐</button>
-        <div class="tx-icon">${t.type === 'in' ? '↓' : '↑'}</div>
+        <div class="tx-icon">${t.category === 'Grants' ? '🏆' : (t.type === 'in' ? '↓' : '↑')}</div>
         <div>
           <div class="tx-name">${escapeHtml(t.name)}</div>
           <div class="tx-date">${escapeHtml(t.subtitle)} • ${t.date}</div>
@@ -1331,8 +1363,11 @@ function applyTxFilters() {
   const range = document.getElementById('dateRange')?.value || 'all';
   const now = Date.now();
   document.querySelectorAll('#historyList .transaction').forEach(el => {
-    const typeOk = currentFilter === 'all' ||
-                   (currentFilter === 'starred' ? el.dataset.starred === 'true' : el.dataset.type === currentFilter);
+    let typeOk = false;
+    if (currentFilter === 'all') typeOk = true;
+    else if (currentFilter === 'starred') typeOk = el.dataset.starred === 'true';
+    else if (currentFilter === 'grants') typeOk = el.dataset.category === 'Grants';
+    else typeOk = el.dataset.type === currentFilter;
     const searchOk = !q || el.dataset.name.includes(q);
     const ts = Number(el.dataset.ts);
     const rangeOk = range === 'all' || (now - ts) <= Number(range) * 864e5;
@@ -1381,27 +1416,23 @@ function doTransfer() {
   const routing  = document.getElementById('tfRouting').value.trim();
   const account  = document.getElementById('tfAccount').value.trim();
   const amount   = Number(document.getElementById('tfAmount').value);
-  const recurring = document.getElementById('tfRecurring').value;
   const savePayee = document.getElementById('tfSavePayee').checked;
   const a = state.accounts[state.activeAccount];
 
-  if (!receiver)                 return toast('Enter receiver name.');
-  if (!vRoute(routing))          return toast('Routing number must be 9 digits.');
-  if (!vAcct(account))           return toast('Account number must be 4–17 digits.');
-  if (!vAmt(amount))             return toast('Enter a valid amount.');
-  if (amount > a.balance)        return toast('Insufficient balance.');
+  if (!receiver)          return toast('Enter receiver name.');
+  if (!vRoute(routing))   return toast('Routing number must be 9 digits.');
+  if (!vAcct(account))    return toast('Account number must be 4–17 digits.');
+  if (!vAmt(amount))      return toast('Enter a valid amount.');
+  if (amount > a.balance) return toast('Insufficient balance.');
 
   a.balance -= amount;
   addTransaction('Transfer to ' + receiver, amount, 'out', 'Acct ••' + account.slice(-4), 'Transfers');
   if (savePayee) savePayeeSilent(receiver, routing, account, 'Person');
-  if (recurring) toast(`Recurring ${recurring} transfer scheduled (demo)`);
   toast('Sent ' + fmt(amount) + ' to ' + receiver);
   closeAllModals();
   clearFields(['tfReceiver','tfRouting','tfAccount','tfAmount','tfMemo']);
   document.getElementById('tfSavePayee').checked = false;
-  document.getElementById('tfRecurring').value = '';
 }
-
 function doSendMoney() {
   const name    = document.getElementById('sdName').value.trim();
   const routing = document.getElementById('sdRouting').value.trim();
@@ -1424,7 +1455,6 @@ function doSendMoney() {
   clearFields(['sdName','sdRouting','sdAccount','sdAmount']);
   document.getElementById('sdSavePayee').checked = false;
 }
-
 function doPayBill() {
   const biller    = document.getElementById('blBiller').value.trim();
   const routing   = document.getElementById('blRouting').value.trim();
@@ -1446,7 +1476,6 @@ function doPayBill() {
   closeAllModals();
   clearFields(['blBiller','blRouting','blAccount','blReference','blAmount']);
 }
-
 function doDeposit() {
   const method  = document.getElementById('dpMethod').value;
   const sender  = document.getElementById('dpSender').value.trim();
@@ -1466,10 +1495,83 @@ function doDeposit() {
   closeAllModals();
   clearFields(['dpSender','dpRouting','dpAccount','dpAmount']);
 }
-
 function setAmount(id, value) {
   const el = document.getElementById(id);
   if (el) el.value = value.toFixed(2);
+}
+
+/* ============================================================
+   GRANTS
+============================================================ */
+function renderGrantsSummary() {
+  const grants = state.transactions.filter(t =>
+    t.account === state.activeAccount && t.category === 'Grants' && t.type === 'in'
+  );
+  const total = grants.reduce((s, t) => s + t.amount, 0);
+  const totalEl = document.getElementById('grantsTotal');
+  const countEl = document.getElementById('grantsCount');
+  if (totalEl) totalEl.textContent = fmt(total);
+  if (countEl) countEl.textContent = grants.length + ' disbursement' + (grants.length === 1 ? '' : 's');
+
+  const listEl = document.getElementById('grantsList');
+  if (listEl) {
+    listEl.innerHTML = grants.slice().reverse().map(g => `
+      <div class="grant-item">
+        <div>
+          <div style="font-weight:700">${escapeHtml(g.name)}</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:2px">${escapeHtml(g.subtitle)} • ${g.date}</div>
+        </div>
+        <strong>+${fmt(g.amount)}</strong>
+      </div>`).join('');
+  }
+}
+function renderGrantUsage() {
+  const el = document.getElementById('grantUsage');
+  if (!el) return;
+  const grants = state.transactions
+    .filter(t => t.account === state.activeAccount && t.category === 'Grants' && t.type === 'in')
+    .reduce((s, t) => s + t.amount, 0);
+  if (!grants) {
+    el.innerHTML = '<p style="text-align:center;color:var(--muted);padding:14px 0;font-size:12px">No grant funding to track yet.</p>';
+    return;
+  }
+  const firstGrantTs = Math.min(...state.transactions
+    .filter(t => t.account === state.activeAccount && t.category === 'Grants')
+    .map(t => t.ts));
+  const spentSinceGrant = state.transactions
+    .filter(t => t.account === state.activeAccount && t.type === 'out' && t.ts >= firstGrantTs)
+    .reduce((s, t) => s + t.amount, 0);
+  const remaining = Math.max(0, grants - spentSinceGrant);
+  const usedPct = Math.min(100, (spentSinceGrant / grants) * 100);
+  el.innerHTML = `
+    <div style="display:flex;justify-content:space-between;font-size:12px">
+      <span><strong style="color:var(--green)">${fmt(spentSinceGrant)}</strong> spent</span>
+      <span><strong>${fmt(remaining)}</strong> remaining</span>
+    </div>
+    <div class="grant-usage-bar">
+      <div class="grant-usage-fill" style="width:${usedPct}%"></div>
+    </div>
+    <div style="text-align:center;font-size:11px;color:var(--muted)">
+      ${usedPct.toFixed(1)}% of ${fmt(grants)} used
+    </div>
+    <div class="grant-usage-stats">
+      <div class="grant-stat">
+        <div class="grant-stat-label">RECEIVED</div>
+        <div class="grant-stat-value" style="color:var(--green)">${fmt(grants)}</div>
+      </div>
+      <div class="grant-stat">
+        <div class="grant-stat-label">SPENT</div>
+        <div class="grant-stat-value" style="color:var(--red)">${fmt(spentSinceGrant)}</div>
+      </div>
+      <div class="grant-stat">
+        <div class="grant-stat-label">REMAINING</div>
+        <div class="grant-stat-value">${fmt(remaining)}</div>
+      </div>
+      <div class="grant-stat">
+        <div class="grant-stat-label">EFFICIENCY</div>
+        <div class="grant-stat-value">${(100 - usedPct).toFixed(0)}%</div>
+      </div>
+    </div>`;
 }
 
 /* ============================================================
@@ -1522,7 +1624,7 @@ function renderPayees() {
         <div class="tx-icon">👤</div>
         <div>
           <div class="tx-name">${escapeHtml(p.name)}</div>
-          <div class="tx-date">${escapeHtml(p.category)} • Acct ••${p.account.slice(-4)} • Routing ${p.routing}</div>
+          <div class="tx-date">${escapeHtml(p.category)} • Acct ••${p.account.slice(-4)}</div>
         </div>
       </div>
       <button class="acct-tab" onclick="deletePayee(${p.id})">Delete</button>
@@ -1557,7 +1659,7 @@ function renderBudgets() {
         <div class="budget-bar"><div class="budget-fill ${cls}" style="width:${pct}%"></div></div>
         <div style="display:flex;gap:6px;margin-top:6px">
           <input type="number" value="${b.limit}" min="0" step="10" style="flex:1;padding:6px 10px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--text);font-size:12px"
-                 onchange="updateBudget('${b.category.replace(/'/g,"\\'")}', this.value)">
+                 onchange="updateBudget('${b.category}', this.value)">
         </div>
       </div>`;
   }).join('');
@@ -1588,7 +1690,7 @@ function renderBudgetPreview() {
 
 /* ============================================================
    GOALS
-   ============================================================ */
+============================================================ */
 function saveNewGoal() {
   const name = document.getElementById('newGoalName').value.trim();
   const target = Number(document.getElementById('newGoalTarget').value);
@@ -1658,7 +1760,7 @@ function renderGoalsPreview() {
 }
 
 /* ============================================================
-   DONUT CHART
+   DONUT
 ============================================================ */
 function renderDonut() {
   const canvas = document.getElementById('donutChart');
@@ -1690,11 +1792,6 @@ function renderDonut() {
       ctx.closePath(); ctx.fill();
       start += angle;
     });
-    ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--panel') || '#fff';
-    ctx.beginPath(); ctx.arc(cx, cy, r * 0.6, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--text') || '#191714';
-    ctx.font = 'bold 14px sans-serif'; ctx.textAlign = 'center';
-    ctx.fillText(fmt(total), cx, cy + 5);
   }
   const legend = document.getElementById('donutLegend');
   if (legend) {
@@ -1703,14 +1800,11 @@ function renderDonut() {
     ).join('') : '<div style="color:var(--muted)">No spending yet.</div>';
   }
 }
-function renderChart() { renderDonut(); }
 
 /* ============================================================
    NOTIFICATIONS
 ============================================================ */
-function toggleNotifs() {
-  document.getElementById('notifPanel').classList.toggle('show');
-}
+function toggleNotifs() { document.getElementById('notifPanel').classList.toggle('show'); }
 function renderNotifs() {
   const list = document.getElementById('notifList');
   if (!list) return;
@@ -1723,12 +1817,12 @@ function renderNotifs() {
       </div>
     </div>`).join('');
   const badge = document.getElementById('notifBadge');
-  badge.style.display = state.notifications.length > 1 ? 'block' : 'none';
+  badge.style.display = state.notifications.length > 0 ? 'block' : 'none';
 }
 function pushBrowserNotification(title, body) {
   if (!('Notification' in window)) return;
   if (Notification.permission === 'granted') {
-    new Notification(title, { body, icon: 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💰</text></svg>' });
+    new Notification(title, { body });
   } else if (Notification.permission !== 'denied') {
     Notification.requestPermission().then(p => {
       if (p === 'granted') new Notification(title, { body });
@@ -1763,20 +1857,10 @@ function setCurrency(cur) {
   toast('Currency: ' + cur);
 }
 function setLanguage(lang) {
-  if (!TRANSLATIONS[lang]) return;
   state.language = lang;
   saveState();
-  applyLanguage();
   closeAllModals();
   toast('Language: ' + lang);
-}
-function applyLanguage() {
-  const dict = TRANSLATIONS[state.language] || TRANSLATIONS.en;
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.dataset.i18n;
-    if (dict[key]) el.textContent = dict[key];
-  });
-  document.body.dir = state.language === 'ar' ? 'rtl' : 'ltr';
 }
 function toggleDropdown(id) {
   const el = document.getElementById(id);
@@ -1787,6 +1871,9 @@ function toggleDropdown(id) {
 document.addEventListener('click', e => {
   if (!e.target.closest('.icon-btn') && !e.target.closest('.dropdown')) {
     document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('show'));
+  }
+  if (!e.target.closest('#notifPanel') && !e.target.closest('.icon-btn')) {
+    document.getElementById('notifPanel').classList.remove('show');
   }
 });
 
@@ -1825,7 +1912,7 @@ function saveProfile() {
 }
 
 /* ============================================================
-   PIN LOCK
+   PIN
 ============================================================ */
 let pinInput = "";
 function startIdleTimer() {
@@ -1872,23 +1959,6 @@ function updatePinDots() {
 }
 
 /* ============================================================
-   BIOMETRIC (WebAuthn demo)
-============================================================ */
-function triggerBiometric() {
-  if (!window.PublicKeyCredential) {
-    toast('Biometric not supported on this device.');
-    return;
-  }
-  toast('🔐 Biometric scan simulated — you are verified!');
-  setTimeout(() => {
-    document.getElementById('authOverlay').style.display = 'none';
-    document.getElementById('pinOverlay').classList.remove('show');
-    refreshAll();
-    startIdleTimer();
-  }, 800);
-}
-
-/* ============================================================
    STATEMENTS
 ============================================================ */
 function generateStatement(month, btn) {
@@ -1929,9 +1999,7 @@ function generateStatement(month, btn) {
 /* ============================================================
    AI ASSISTANT
 ============================================================ */
-function toggleAIChat() {
-  document.getElementById('aiChat').classList.toggle('show');
-}
+function toggleAIChat() { document.getElementById('aiChat').classList.toggle('show'); }
 function sendAIMessage() {
   const input = document.getElementById('aiInput');
   const text = input.value.trim();
@@ -1939,8 +2007,7 @@ function sendAIMessage() {
   appendAIMessage(text, 'user');
   input.value = '';
   setTimeout(() => {
-    const reply = generateAIReply(text.toLowerCase());
-    appendAIMessage(reply, 'bot');
+    appendAIMessage(generateAIReply(text.toLowerCase()), 'bot');
   }, 500);
 }
 function appendAIMessage(text, type) {
@@ -1955,36 +2022,20 @@ function generateAIReply(q) {
   const a = state.accounts[state.activeAccount];
   const tx = state.transactions.filter(t => t.account === state.activeAccount);
   if (/balance|how much (do i|have)/.test(q)) return `Your ${a.type} balance is ${fmt(a.balance)}.`;
+  if (/grant|ifund/.test(q)) {
+    const g = tx.filter(t => t.category === 'Grants').reduce((s, t) => s + t.amount, 0);
+    return `You've received ${fmt(g)} in grants from iFundWomen. 🏆`;
+  }
   if (/spend|spent|spending/.test(q)) {
     const out = tx.filter(t => t.type === 'out').reduce((s, t) => s + t.amount, 0);
-    return `You've spent ${fmt(out)} total across ${tx.filter(t => t.type === 'out').length} transactions.`;
-  }
-  if (/bills?/.test(q)) {
-    const bills = tx.filter(t => t.category === 'Bills' && t.type === 'out').reduce((s, t) => s + t.amount, 0);
-    return `You've paid ${fmt(bills)} in bills.`;
-  }
-  if (/transfer/.test(q)) {
-    const t = tx.filter(t => t.category === 'Transfers' && t.type === 'out').reduce((s, t) => s + t.amount, 0);
-    return `You've transferred ${fmt(t)} out.`;
-  }
-  if (/deposit|received|income/.test(q)) {
-    const inc = tx.filter(t => t.type === 'in').reduce((s, t) => s + t.amount, 0);
-    return `You've received ${fmt(inc)} total.`;
+    return out ? `You've spent ${fmt(out)} total.` : `You haven't spent anything yet.`;
   }
   if (/goal|saving/.test(q)) {
     if (!state.goals.length) return `You don't have any savings goals yet.`;
-    return state.goals.map(g => `${g.icon} ${g.name}: ${fmt(g.current)} / ${fmt(g.target)} (${Math.round(g.current/g.target*100)}%)`).join('\n');
+    return state.goals.map(g => `${g.icon} ${g.name}: ${fmt(g.current)} / ${fmt(g.target)}`).join('\n');
   }
-  if (/budget/.test(q)) {
-    return state.budgets.map(b => {
-      const spent = tx.filter(t => t.category === b.category && t.type === 'out').reduce((s, t) => s + t.amount, 0);
-      return `${b.category}: ${fmt(spent)} / ${fmt(b.limit)}`;
-    }).join('\n');
-  }
-  if (/payee/.test(q)) return state.payees.length ? `You have ${state.payees.length} saved payees.` : `No saved payees yet.`;
-  if (/help|what can you/.test(q)) return `I can tell you about: balance, spending, bills, transfers, deposits, goals, budgets, and payees. Try asking "What's my balance?"`;
-  if (/hi|hello|hey/.test(q)) return `Hi ${state.user.name.split(' ')[0]}! How can I help you today?`;
-  return `I'm not sure about that. Try asking about balance, spending, bills, goals, or budgets.`;
+  if (/hi|hello|hey/.test(q)) return `Hi ${state.user.name.split(' ')[0]}! How can I help?`;
+  return `Try asking about your balance, grants, spending, or goals.`;
 }
 
 /* ============================================================
@@ -1997,10 +2048,7 @@ window.addEventListener('beforeinstallprompt', e => {
   document.getElementById('pwaBtn').style.display = 'flex';
 });
 function installPWA() {
-  if (!deferredPrompt) {
-    toast('App already installed or not supported.');
-    return;
-  }
+  if (!deferredPrompt) { toast('App already installed or not supported.'); return; }
   deferredPrompt.prompt();
   deferredPrompt.userChoice.then(choice => {
     if (choice.outcome === 'accepted') toast('App installed! 🎉');
@@ -2042,22 +2090,15 @@ window.addEventListener('load', () => {
   updateAccountName(state.user.name);
   document.getElementById('displayAvatar').style.background = state.user.avatarColor;
   document.getElementById('profileAvatar').style.background = state.user.avatarColor;
-  applyLanguage();
   refreshAll();
   renderPayeeDropdowns();
   if ('Notification' in window && Notification.permission === 'default') {
     setTimeout(() => Notification.requestPermission(), 3000);
   }
   setTimeout(() => toast('Tip: PIN is ' + state.user.pin + ' for lock screen'), 1500);
-  document.addEventListener('click', e => {
-    if (!e.target.closest('#notifPanel') && !e.target.closest('.icon-btn')) {
-      document.getElementById('notifPanel').classList.remove('show');
-    }
-  });
   window.addEventListener('beforeunload', saveState);
 });
 
-/* Periodic save (every 15s) to keep localStorage fresh */
 setInterval(saveState, 15000);
 </script>
 
