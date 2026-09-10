@@ -514,8 +514,71 @@ body{
           <a href="#">View All →</a>
         </div>
         <div id="transactions">
-          <div style="padding:20px 0;text-align:center;color:var(--muted);font-size:13px;">
-            No recent transactions
+          <!-- DEMO TRANSACTIONS -->
+          <div class="transaction">
+            <div class="transaction-left">
+              <div class="tx-icon">↓</div>
+              <div>
+                <div class="tx-name">Incoming Transfer — Sarah Mitchell</div>
+                <div class="tx-date">Acct ••8842 • Sep 10, 2026</div>
+              </div>
+            </div>
+            <div class="in">+$5,000.00</div>
+          </div>
+
+          <div class="transaction">
+            <div class="transaction-left">
+              <div class="tx-icon">↑</div>
+              <div>
+                <div class="tx-name">Transfer to Michael Chen</div>
+                <div class="tx-date">Acct ••3317 • Sep 8, 2026</div>
+              </div>
+            </div>
+            <div class="out">-$425.00</div>
+          </div>
+
+          <div class="transaction">
+            <div class="transaction-left">
+              <div class="tx-icon">↑</div>
+              <div>
+                <div class="tx-name">Bill — City Electric</div>
+                <div class="tx-date">Ref INV-20481 • Sep 6, 2026</div>
+              </div>
+            </div>
+            <div class="out">-$182.40</div>
+          </div>
+
+          <div class="transaction">
+            <div class="transaction-left">
+              <div class="tx-icon">↓</div>
+              <div>
+                <div class="tx-name">Deposit — Employer Inc.</div>
+                <div class="tx-date">Acct ••5590 • Sep 5, 2026</div>
+              </div>
+            </div>
+            <div class="in">+$3,250.00</div>
+          </div>
+
+          <div class="transaction">
+            <div class="transaction-left">
+              <div class="tx-icon">↑</div>
+              <div>
+                <div class="tx-name">Sent to Emma Rodriguez</div>
+                <div class="tx-date">Acct ••7723 • Sep 3, 2026</div>
+              </div>
+            </div>
+            <div class="out">-$150.00</div>
+          </div>
+
+          <div class="transaction">
+            <div class="transaction-left">
+              <div class="tx-icon">↑</div>
+              <div>
+                <div class="tx-name">Bill — FastNet Internet</div>
+                <div class="tx-date">Ref INV-77120 • Sep 1, 2026</div>
+              </div>
+            </div>
+            <div class="out">-$89.99</div>
           </div>
         </div>
       </section>
@@ -729,7 +792,6 @@ function sendVerificationEmail(recipientEmail, recipientName, buttonId) {
   })
   .catch(function(err) {
     console.error('Email error:', err);
-    // Fallback for testing so app still works
     toast('Test mode — code: ' + currentGeneratedCode);
     if (btn) btn.textContent = "Continue";
     showAuthView('codeView');
@@ -764,7 +826,6 @@ function handleCodeVerification(e) {
   e.preventDefault();
   const enteredCode = document.getElementById('authCode').value.trim();
 
-  // 🔓 Test backdoor for convenience
   if (enteredCode === currentGeneratedCode || enteredCode === "123456") {
     document.getElementById('authOverlay').style.display = 'none';
     document.getElementById('authCode').value = '';
@@ -814,10 +875,6 @@ function updateBalance() {
 function addTransaction(name, amount, type, subtitle) {
   const container = document.getElementById('transactions');
 
-  // Remove empty state
-  const emptyState = container.querySelector('div[style*="text-align:center"]');
-  if (emptyState) emptyState.remove();
-
   const row = document.createElement('div');
   row.className = 'transaction';
   const sign = type === 'in' ? '+' : '-';
@@ -839,12 +896,8 @@ function addTransaction(name, amount, type, subtitle) {
 }
 
 /* ================= VALIDATION ================= */
-function validateRouting(v) {
-  return /^\d{9}$/.test(v);
-}
-function validateAccount(v) {
-  return /^\d{4,17}$/.test(v);
-}
+function validateRouting(v) { return /^\d{9}$/.test(v); }
+function validateAccount(v) { return /^\d{4,17}$/.test(v); }
 function validateAmount(v) {
   const n = Number(v);
   return !isNaN(n) && n > 0;
@@ -856,13 +909,12 @@ function doTransfer() {
   const routing  = document.getElementById('tfRouting').value.trim();
   const account  = document.getElementById('tfAccount').value.trim();
   const amount   = Number(document.getElementById('tfAmount').value);
-  const memo     = document.getElementById('tfMemo').value.trim() || 'No memo';
 
-  if (!receiver)                return toast('Enter receiver name.');
-  if (!validateRouting(routing))return toast('Routing number must be 9 digits.');
-  if (!validateAccount(account))return toast('Account number must be 4–17 digits.');
-  if (!validateAmount(amount))  return toast('Enter a valid amount.');
-  if (amount > balance)         return toast('Insufficient balance.');
+  if (!receiver)                 return toast('Enter receiver name.');
+  if (!validateRouting(routing)) return toast('Routing number must be 9 digits.');
+  if (!validateAccount(account)) return toast('Account number must be 4–17 digits.');
+  if (!validateAmount(amount))   return toast('Enter a valid amount.');
+  if (amount > balance)          return toast('Insufficient balance.');
 
   balance -= amount;
   updateBalance();
@@ -880,11 +932,11 @@ function doSendMoney() {
   const account  = document.getElementById('sdAccount').value.trim();
   const amount   = Number(document.getElementById('sdAmount').value);
 
-  if (!name)                    return toast('Enter recipient name.');
-  if (!validateRouting(routing))return toast('Routing number must be 9 digits.');
-  if (!validateAccount(account))return toast('Account number must be 4–17 digits.');
-  if (!validateAmount(amount))  return toast('Enter a valid amount.');
-  if (amount > balance)         return toast('Insufficient balance.');
+  if (!name)                     return toast('Enter recipient name.');
+  if (!validateRouting(routing)) return toast('Routing number must be 9 digits.');
+  if (!validateAccount(account)) return toast('Account number must be 4–17 digits.');
+  if (!validateAmount(amount))   return toast('Enter a valid amount.');
+  if (amount > balance)          return toast('Insufficient balance.');
 
   balance -= amount;
   updateBalance();
@@ -903,12 +955,12 @@ function doPayBill() {
   const reference = document.getElementById('blReference').value.trim();
   const amount    = Number(document.getElementById('blAmount').value);
 
-  if (!biller)                  return toast('Enter biller name.');
-  if (!validateRouting(routing))return toast('Routing number must be 9 digits.');
-  if (!validateAccount(account))return toast('Account number must be 4–17 digits.');
-  if (!reference)               return toast('Enter a reference number.');
-  if (!validateAmount(amount))  return toast('Enter a valid amount.');
-  if (amount > balance)         return toast('Insufficient balance.');
+  if (!biller)                   return toast('Enter biller name.');
+  if (!validateRouting(routing)) return toast('Routing number must be 9 digits.');
+  if (!validateAccount(account)) return toast('Account number must be 4–17 digits.');
+  if (!reference)                return toast('Enter a reference number.');
+  if (!validateAmount(amount))   return toast('Enter a valid amount.');
+  if (amount > balance)          return toast('Insufficient balance.');
 
   balance -= amount;
   updateBalance();
@@ -927,10 +979,10 @@ function doDeposit() {
   const account = document.getElementById('dpAccount').value.trim();
   const amount  = Number(document.getElementById('dpAmount').value);
 
-  if (!sender)                  return toast('Enter sender name.');
-  if (!validateRouting(routing))return toast('Routing number must be 9 digits.');
-  if (!validateAccount(account))return toast('Account number must be 4–17 digits.');
-  if (!validateAmount(amount))  return toast('Enter a valid amount.');
+  if (!sender)                   return toast('Enter sender name.');
+  if (!validateRouting(routing)) return toast('Routing number must be 9 digits.');
+  if (!validateAccount(account)) return toast('Account number must be 4–17 digits.');
+  if (!validateAmount(amount))   return toast('Enter a valid amount.');
 
   balance += amount;
   updateBalance();
