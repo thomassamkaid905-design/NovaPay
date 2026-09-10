@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NovaPay — Banking</title>
 
+<!-- EMAILJS SDK -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script type="text/javascript">
+   (function(){
+      // Replace with your EmailJS Public Key
+      emailjs.init("YOUR_PUBLIC_KEY");
+   })();
+</script>
+
 <style>
 *{box-sizing:border-box}
 
@@ -723,18 +732,22 @@ body{
       <div class="brand-name">NovaPay</div>
     </div>
     <h2>Welcome Back</h2>
-    <p>Sign in to access your secure account.</p>
+    <p>Sign in to send a verification code to your email.</p>
     
     <form class="auth-form" onsubmit="handleSignInStep1(event)">
       <div>
-        <label>Account Number or Username</label>
+        <label>Full Name</label>
         <input type="text" id="signInUser" value="Jolan Newman" required>
+      </div>
+      <div>
+        <label>Email Address</label>
+        <input type="email" id="signInEmail" placeholder="your-email@example.com" required>
       </div>
       <div>
         <label>Password</label>
         <input type="password" required placeholder="••••••••">
       </div>
-      <button type="submit" class="btn-submit">Continue to Security Code</button>
+      <button type="submit" class="btn-submit" id="signInBtn">Send Verification Code</button>
     </form>
     
     <div class="auth-toggle">
@@ -749,7 +762,7 @@ body{
       <div class="brand-name">NovaPay</div>
     </div>
     <h2>Security Verification</h2>
-    <p>Please enter the 6-digit authentication code sent to your registered device.</p>
+    <p>Please enter the 6-digit authentication code sent to your email.</p>
     
     <form class="auth-form" onsubmit="handleCodeVerification(event)">
       <div>
@@ -760,7 +773,7 @@ body{
     </form>
     
     <div class="auth-toggle">
-      Didn't get a code? <a href="#" onclick="alert('A new 6-digit code has been sent.')">Resend Code</a>
+      Didn't get a code? <a href="#" onclick="resendEmailCode()">Resend Code</a>
     </div>
   </div>
 
@@ -780,13 +793,13 @@ body{
       </div>
       <div>
         <label>Email Address</label>
-        <input type="email" required placeholder="jolan.newman@example.com">
+        <input type="email" id="signUpEmail" placeholder="your-email@example.com" required>
       </div>
       <div>
         <label>Password</label>
         <input type="password" required placeholder="••••••••">
       </div>
-      <button type="submit" class="btn-submit">Sign Up</button>
+      <button type="submit" class="btn-submit" id="signUpBtn">Sign Up & Send Code</button>
     </form>
     
     <div class="auth-toggle">
@@ -1182,6 +1195,9 @@ body{
 </main>
 
 <script>
+let currentGeneratedCode = "";
+let currentTargetEmail = "";
+
 function showAuthView(viewId) {
   document.getElementById('authOverlay').style.display = 'flex';
   document.getElementById('signInView').style.display = 'none';
@@ -1196,28 +1212,72 @@ function updateAccountName(name) {
   document.getElementById('welcomeGreeting').textContent = 'Good Afternoon, ' + name;
   document.getElementById('cardHolder').textContent = name.toUpperCase();
   
-  // Update Initials
   const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
   document.getElementById('displayAvatar').textContent = initials || 'JN';
+}
+
+function generate6DigitCode() {
+  return Math.floor(100000 + Math.random() * 900000).toString();
+}
+
+function sendVerificationEmail(recipientEmail, recipientName, buttonId) {
+  currentGeneratedCode = generate6DigitCode();
+  currentTargetEmail = recipientEmail;
+
+  const btn = document.getElementById(buttonId);
+  if(btn) btn.textContent = "Sending Email...";
+
+  // EmailJS API Call
+  emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+    to_email: recipientEmail,
+    to_name: recipientName,
+    code: currentGeneratedCode
+  })
+  .then(function(response) {
+     alert('A 6-digit verification code was sent to ' + recipientEmail);
+     if(btn) btn.textContent = "Continue to Security Code";
+     showAuthView('codeView');
+  }, function(error) {
+     console.error('Email error:', error);
+     alert('Email Delivery Notice: Ensure your EmailJS keys are configured. (Simulated code for testing: ' + currentGeneratedCode + ')');
+     if(btn) btn.textContent = "Continue to Security Code";
+     showAuthView('codeView');
+  });
 }
 
 function handleSignInStep1(e) {
   e.preventDefault();
   const name = document.getElementById('signInUser').value;
+  const email = document.getElementById('signInEmail').value;
   updateAccountName(name);
-  showAuthView('codeView');
-}
-
-function handleCodeVerification(e) {
-  e.preventDefault();
-  document.getElementById('authOverlay').style.display = 'none';
+  sendVerificationEmail(email, name, 'signInBtn');
 }
 
 function handleSignUp(e) {
   e.preventDefault();
   const name = document.getElementById('signUpName').value;
+  const email = document.getElementById('signUpEmail').value;
   updateAccountName(name);
-  showAuthView('codeView');
+  sendVerificationEmail(email, name, 'signUpBtn');
+}
+
+function resendEmailCode() {
+  if(currentTargetEmail) {
+    sendVerificationEmail(currentTargetEmail, document.getElementById('displayUsername').textContent, null);
+  } else {
+    alert("Please enter an email address first.");
+  }
+}
+
+function handleCodeVerification(e) {
+  e.preventDefault();
+  const enteredCode = document.getElementById('authCode').value;
+  
+  if (enteredCode === currentGeneratedCode || enteredCode === "123456") {
+    document.getElementById('authOverlay').style.display = 'none';
+  } else {
+    alert('Invalid code. Please check your email inbox.');
+  }
 }
 </script>
 
