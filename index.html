@@ -3,25 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NovaPay — Banking</title>
-
-<!-- EMAILJS SDK -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<script type="text/javascript">
-   (function(){
-      // Replace with your EmailJS Public Key
-      emailjs.init("YOUR_PUBLIC_KEY");
-   })();
-</script>
+<title>NovaPay — Financial Dashboard</title>
 
 <style>
 *{box-sizing:border-box}
 
 :root{
   --gold:#d4a83b;
-  --gold2:#f5d778;
-  --dark:#0b0b0a;
-  --dark2:#171510;
+  --gold2:#f7dc7a;
+  --dark:#090908;
+  --dark2:#17140d;
   --cream:#fffaf0;
   --text:#191714;
   --muted:#777064;
@@ -39,132 +30,85 @@ body{
     linear-gradient(135deg,#f8edc9,#e1bb58,#fff8dd);
 }
 
-/* AUTH MODAL / OVERLAY */
+/* LOGIN */
 
-.auth-overlay{
+.login-screen{
   position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-  background:rgba(11,11,10,0.85);
-  backdrop-filter:blur(8px);
+  inset:0;
   z-index:9999;
   display:flex;
   align-items:center;
   justify-content:center;
   padding:20px;
+  background:rgba(9,9,8,.9);
+  backdrop-filter:blur(10px);
 }
 
-.auth-card{
+.login-box{
   width:100%;
-  max-width:420px;
-  background:linear-gradient(180deg,#171510,#070707);
-  border:1px solid rgba(239,199,73,.45);
-  border-radius:24px;
-  padding:36px 30px;
+  max-width:430px;
+  padding:35px;
+  border-radius:25px;
   color:white;
-  box-shadow:0 25px 50px rgba(0,0,0,0.5);
-  text-align:center;
+  background:linear-gradient(145deg,#211b0d,#050505);
+  border:1px solid rgba(247,220,122,.5);
+  box-shadow:0 30px 70px rgba(0,0,0,.55);
 }
 
-.auth-brand{
+.login-logo{
+  width:58px;
+  height:58px;
+  margin:auto auto 15px;
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:12px;
-  margin-bottom:24px;
-}
-
-.auth-brand .brand-logo{
-  width:48px;
-  height:48px;
-  border-radius:14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:linear-gradient(135deg,var(--gold2),#a97919);
+  border-radius:16px;
+  background:linear-gradient(135deg,#f7dc7a,#b47f1c);
   color:#111;
-  font-size:26px;
+  font-size:30px;
   font-weight:900;
 }
 
-.auth-brand .brand-name{
-  font-size:26px;
-  font-weight:800;
+.login-box h1{
+  text-align:center;
+  margin:0;
   color:var(--gold2);
 }
 
-.auth-card h2{
-  margin:0 0 8px;
-  font-size:22px;
-  letter-spacing:-0.5px;
-}
-
-.auth-card p{
+.login-box p{
+  text-align:center;
   color:#aaa49a;
   font-size:13px;
-  margin:0 0 24px;
+  margin:8px 0 25px;
 }
 
-.auth-form{
-  display:flex;
-  flex-direction:column;
-  gap:16px;
-  text-align:left;
-}
-
-.auth-form label{
-  font-size:12px;
-  font-weight:600;
-  color:#d4ccba;
+.login-box label{
   display:block;
-  margin-bottom:6px;
+  margin:14px 0 6px;
+  font-size:12px;
+  color:#d7cfbd;
+  font-weight:700;
 }
 
-.auth-form input{
+.login-box input{
   width:100%;
-  padding:14px 16px;
-  border-radius:12px;
+  padding:14px;
+  border-radius:11px;
   border:1px solid #725515;
   background:#090909;
   color:white;
-  font-size:14px;
   outline:none;
 }
 
-.auth-form input:focus{
-  border-color:var(--gold2);
-}
-
-.btn-submit{
+.login-btn{
   width:100%;
-  padding:14px;
-  margin-top:8px;
-  border-radius:12px;
-  border:0;
-  background:linear-gradient(135deg,#f8dc7a,#bd8c25);
-  color:#111;
-  font-weight:800;
-  font-size:15px;
-  cursor:pointer;
-  transition:0.2s;
-}
-
-.btn-submit:hover{
-  filter:brightness(1.1);
-}
-
-.auth-toggle{
   margin-top:20px;
-  font-size:13px;
-  color:#aaa49a;
-}
-
-.auth-toggle a{
-  color:var(--gold2);
-  text-decoration:none;
-  font-weight:700;
+  padding:14px;
+  border:0;
+  border-radius:11px;
+  background:linear-gradient(135deg,#f8dc7a,#bd8c25);
+  font-weight:900;
+  cursor:pointer;
 }
 
 /* SIDEBAR */
@@ -175,9 +119,9 @@ body{
   top:0;
   bottom:0;
   width:250px;
+  padding:28px 16px;
   background:linear-gradient(180deg,#070707,#19160e);
   color:white;
-  padding:28px 16px;
   z-index:20;
 }
 
@@ -191,10 +135,10 @@ body{
 .brand-logo{
   width:44px;
   height:44px;
-  border-radius:13px;
   display:flex;
   align-items:center;
   justify-content:center;
+  border-radius:13px;
   background:linear-gradient(135deg,var(--gold2),#a97919);
   color:#111;
   font-size:25px;
@@ -213,20 +157,24 @@ body{
   gap:5px;
 }
 
-.menu a{
+.menu button{
+  width:100%;
+  border:0;
+  background:transparent;
+  color:#aaa49a;
   display:flex;
   align-items:center;
   gap:14px;
   padding:13px 14px;
   border-radius:11px;
-  color:#aaa49a;
-  text-decoration:none;
   font-size:14px;
   font-weight:600;
+  cursor:pointer;
+  text-align:left;
 }
 
-.menu a:hover,
-.menu a.active{
+.menu button:hover,
+.menu button.active{
   color:#111;
   background:linear-gradient(135deg,#e8bd4d,#f6dc7b);
 }
@@ -234,7 +182,6 @@ body{
 .icon{
   width:21px;
   text-align:center;
-  font-size:16px;
 }
 
 .sidebar-card{
@@ -260,7 +207,7 @@ body{
   line-height:1.5;
 }
 
-.sidebar-card button{
+.logout-btn{
   width:100%;
   border:0;
   padding:10px;
@@ -294,7 +241,6 @@ body{
   border-radius:30px;
   border:1px solid #d7c9aa;
   background:rgba(255,255,255,.7);
-  font-size:13px;
   outline:none;
 }
 
@@ -308,10 +254,10 @@ body{
   width:42px;
   height:42px;
   border-radius:50%;
-  background:linear-gradient(135deg,#f5d875,#b78622);
   display:flex;
   align-items:center;
   justify-content:center;
+  background:linear-gradient(135deg,#f5d875,#b78622);
   font-weight:900;
 }
 
@@ -330,7 +276,6 @@ body{
 .welcome h1{
   margin:0 0 5px;
   font-size:30px;
-  letter-spacing:-.8px;
 }
 
 .welcome p{
@@ -339,39 +284,23 @@ body{
   font-size:14px;
 }
 
-/* HERO */
-
 .hero{
   display:grid;
   grid-template-columns:1.35fr .8fr;
   gap:20px;
 }
 
-/* BALANCE */
-
-.balance-card{
+.balance-card,
+.bank-card{
   min-height:245px;
   padding:31px;
   border-radius:24px;
-  position:relative;
-  overflow:hidden;
   color:white;
   background:
     radial-gradient(circle at 85% 15%,rgba(239,203,91,.32),transparent 27%),
     linear-gradient(135deg,#050505,#27200d,#080808);
   border:1px solid rgba(239,199,73,.45);
   box-shadow:0 22px 45px rgba(65,47,8,.18);
-}
-
-.balance-card:after{
-  content:"";
-  position:absolute;
-  width:300px;
-  height:300px;
-  border:1px solid rgba(242,207,103,.22);
-  border-radius:50%;
-  right:-125px;
-  bottom:-175px;
 }
 
 .balance-label{
@@ -382,8 +311,7 @@ body{
 .balance{
   font-size:47px;
   font-weight:850;
-  letter-spacing:-2px;
-  margin:7px 0 5px;
+  margin:7px 0;
 }
 
 .account{
@@ -391,58 +319,10 @@ body{
   font-size:13px;
 }
 
-.balance-actions{
-  display:flex;
-  gap:10px;
-  margin-top:26px;
-}
-
-.btn-gold,
-.btn-outline{
-  padding:11px 17px;
-  border-radius:10px;
-  font-size:12px;
-  font-weight:750;
-  cursor:pointer;
-}
-
-.btn-gold{
-  background:linear-gradient(135deg,#f9df82,#c28f26);
-  color:#111;
-}
-
-.btn-outline{
-  border:1px solid #a98025;
-  color:#f1d36d;
-}
-
-/* CARD */
-
-.card{
-  min-height:245px;
-  padding:27px;
-  border-radius:24px;
-  color:white;
-  background:
-    linear-gradient(145deg,#211b0d,#050505 60%,#33250b);
-  border:1px solid rgba(234,194,70,.48);
-  box-shadow:0 22px 45px rgba(65,47,8,.18);
-}
-
-.card-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
 .card-brand{
   color:#f3d36e;
   font-size:20px;
   font-weight:800;
-}
-
-.contactless{
-  font-size:22px;
 }
 
 .chip{
@@ -467,8 +347,6 @@ body{
   font-size:10px;
 }
 
-/* ACTIONS */
-
 .actions{
   display:grid;
   grid-template-columns:repeat(5,1fr);
@@ -480,10 +358,10 @@ body{
   padding:17px 8px;
   text-align:center;
   border-radius:15px;
-  background:rgba(255,255,255,.78);
+  background:rgba(255,255,255,.82);
   border:1px solid var(--line);
-  transition:.2s;
   cursor:pointer;
+  transition:.2s;
 }
 
 .action:hover{
@@ -503,12 +381,6 @@ body{
   font-weight:900;
 }
 
-.action strong{
-  font-size:12px;
-}
-
-/* LOWER */
-
 .lower{
   display:grid;
   grid-template-columns:1.35fr .8fr;
@@ -516,7 +388,7 @@ body{
 }
 
 .panel{
-  background:rgba(255,255,255,.78);
+  background:rgba(255,255,255,.82);
   border:1px solid var(--line);
   border-radius:20px;
   padding:23px;
@@ -535,25 +407,12 @@ body{
   font-size:18px;
 }
 
-.panel-title a{
-  color:#98701d;
-  text-decoration:none;
-  font-size:12px;
-  font-weight:750;
-}
-
-/* TRANSACTIONS */
-
 .transaction{
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding:15px 0;
   border-bottom:1px solid #eee5d4;
-}
-
-.transaction:last-child{
-  border-bottom:0;
 }
 
 .transaction-left{
@@ -586,16 +445,12 @@ body{
 .in{
   color:var(--green);
   font-weight:800;
-  font-size:13px;
 }
 
 .out{
   color:var(--red);
   font-weight:800;
-  font-size:13px;
 }
-
-/* ACCOUNT */
 
 .detail{
   display:flex;
@@ -605,10 +460,6 @@ body{
   font-size:12px;
 }
 
-.detail:last-child{
-  border-bottom:0;
-}
-
 .detail span{
   color:var(--muted);
 }
@@ -616,8 +467,6 @@ body{
 .active{
   color:var(--green);
 }
-
-/* SECURITY */
 
 .security{
   display:flex;
@@ -630,28 +479,6 @@ body{
   border:1px solid #e6cf88;
 }
 
-.security-icon{
-  width:42px;
-  height:42px;
-  border-radius:12px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#e7c65d;
-}
-
-.security strong{
-  font-size:13px;
-}
-
-.security p{
-  margin:3px 0 0;
-  color:#756b55;
-  font-size:10px;
-}
-
-/* FOOTER */
-
 .footer{
   text-align:center;
   padding:28px;
@@ -659,155 +486,130 @@ body{
   font-size:10px;
 }
 
+/* MODAL */
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:5000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.65);
+  backdrop-filter:blur(6px);
+}
+
+.modal-box{
+  width:100%;
+  max-width:500px;
+  max-height:90vh;
+  overflow:auto;
+  padding:28px;
+  border-radius:22px;
+  background:#fffaf0;
+  box-shadow:0 25px 60px rgba(0,0,0,.4);
+}
+
+.modal-box h2{
+  margin-top:0;
+}
+
+.modal-box label{
+  display:block;
+  margin:13px 0 6px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.modal-box input,
+.modal-box select,
+.modal-box textarea{
+  width:100%;
+  padding:13px;
+  border-radius:10px;
+  border:1px solid #d8c8a6;
+  background:white;
+  outline:none;
+}
+
+.modal-box textarea{
+  min-height:80px;
+  resize:vertical;
+}
+
+.form-buttons{
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+}
+
+.primary,
+.secondary{
+  flex:1;
+  padding:13px;
+  border-radius:10px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.primary{
+  border:0;
+  background:linear-gradient(135deg,#f7dc7a,#bd8c25);
+}
+
+.secondary{
+  border:1px solid #c9b98f;
+  background:white;
+}
+
 /* MOBILE */
 
 @media(max-width:950px){
-
-  .sidebar{
-    display:none;
-  }
-
-  .main{
-    margin-left:0;
-  }
-
-  .hero,
-  .lower{
-    grid-template-columns:1fr;
-  }
-
-  .actions{
-    grid-template-columns:repeat(3,1fr);
-  }
+  .sidebar{display:none}
+  .main{margin-left:0}
+  .hero,.lower{grid-template-columns:1fr}
+  .actions{grid-template-columns:repeat(3,1fr)}
 }
 
 @media(max-width:600px){
-
-  .topbar{
-    padding:0 15px;
-  }
-
-  .search{
-    display:none;
-  }
-
-  .content{
-    padding:22px 13px;
-  }
-
-  .welcome h1{
-    font-size:25px;
-  }
-
-  .balance{
-    font-size:36px;
-  }
-
-  .balance-card,
-  .card{
-    min-height:220px;
-    padding:24px;
-  }
-
-  .actions{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .panel{
-    padding:18px;
-  }
+  .topbar{padding:0 15px}
+  .search{display:none}
+  .content{padding:22px 13px}
+  .welcome h1{font-size:25px}
+  .balance{font-size:36px}
+  .balance-card,.bank-card{padding:24px}
+  .actions{grid-template-columns:repeat(2,1fr)}
+  .panel{padding:18px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- AUTH MODAL OVERLAY -->
-<div class="auth-overlay" id="authOverlay">
-  
-  <!-- SIGN IN VIEW -->
-  <div class="auth-card" id="signInView">
-    <div class="auth-brand">
-      <div class="brand-logo">N</div>
-      <div class="brand-name">NovaPay</div>
-    </div>
-    <h2>Welcome Back</h2>
-    <p>Sign in to send a verification code to your email.</p>
-    
-    <form class="auth-form" onsubmit="handleSignInStep1(event)">
-      <div>
-        <label>Full Name</label>
-        <input type="text" id="signInUser" value="Jolan Newman" required>
-      </div>
-      <div>
-        <label>Email Address</label>
-        <input type="email" id="signInEmail" placeholder="your-email@example.com" required>
-      </div>
-      <div>
-        <label>Password</label>
-        <input type="password" required placeholder="••••••••">
-      </div>
-      <button type="submit" class="btn-submit" id="signInBtn">Send Verification Code</button>
-    </form>
-    
-    <div class="auth-toggle">
-      Don't have an account? <a href="#" onclick="showAuthView('signUpView')">Sign Up</a>
-    </div>
-  </div>
+<!-- SIMPLE LOCAL LOGIN -->
+<div class="login-screen" id="loginScreen">
 
-  <!-- VERIFICATION CODE VIEW -->
-  <div class="auth-card" id="codeView" style="display:none;">
-    <div class="auth-brand">
-      <div class="brand-logo">N</div>
-      <div class="brand-name">NovaPay</div>
-    </div>
-    <h2>Security Verification</h2>
-    <p>Please enter the 6-digit authentication code sent to your email.</p>
-    
-    <form class="auth-form" onsubmit="handleCodeVerification(event)">
-      <div>
-        <label>6-Digit Security Code</label>
-        <input type="text" id="authCode" placeholder="123456" maxlength="6" pattern="[0-9]{6}" required style="text-align:center; letter-spacing: 6px; font-size:20px;">
-      </div>
-      <button type="submit" class="btn-submit">Verify & Access Dashboard</button>
-    </form>
-    
-    <div class="auth-toggle">
-      Didn't get a code? <a href="#" onclick="resendEmailCode()">Resend Code</a>
-    </div>
-  </div>
+  <div class="login-box">
 
-  <!-- SIGN UP VIEW -->
-  <div class="auth-card" id="signUpView" style="display:none;">
-    <div class="auth-brand">
-      <div class="brand-logo">N</div>
-      <div class="brand-name">NovaPay</div>
-    </div>
-    <h2>Create Your Account</h2>
-    <p>Join NovaPay for secure online banking.</p>
-    
-    <form class="auth-form" onsubmit="handleSignUp(event)">
-      <div>
-        <label>Full Name</label>
-        <input type="text" id="signUpName" value="Jolan Newman" required>
-      </div>
-      <div>
-        <label>Email Address</label>
-        <input type="email" id="signUpEmail" placeholder="your-email@example.com" required>
-      </div>
-      <div>
-        <label>Password</label>
-        <input type="password" required placeholder="••••••••">
-      </div>
-      <button type="submit" class="btn-submit" id="signUpBtn">Sign Up & Send Code</button>
-    </form>
-    
-    <div class="auth-toggle">
-      Already have an account? <a href="#" onclick="showAuthView('signInView')">Sign In</a>
-    </div>
+    <div class="login-logo">N</div>
+
+    <h1>NovaPay</h1>
+
+    <p>Personal financial dashboard</p>
+
+    <label>Your Name</label>
+    <input id="loginName" type="text" placeholder="Enter your name">
+
+    <button class="login-btn" onclick="login()">
+      Enter Dashboard
+    </button>
+
   </div>
 
 </div>
+
+<!-- SIDEBAR -->
 
 <aside class="sidebar">
 
@@ -818,50 +620,29 @@ body{
 
   <nav class="menu">
 
-    <a href="#" class="active">
-      <span class="icon">⌂</span>
-      Dashboard
-    </a>
+    <button class="active" onclick="closeModal()">
+      <span class="icon">⌂</span> Dashboard
+    </button>
 
-    <a href="#">
-      <span class="icon">▣</span>
-      Accounts
-    </a>
+    <button onclick="openTransfer()">
+      <span class="icon">⇄</span> Transfer
+    </button>
 
-    <a href="#">
-      <span class="icon">⇄</span>
-      Transfers
-    </a>
+    <button onclick="openSendMoney()">
+      <span class="icon">➤</span> Send Money
+    </button>
 
-    <a href="#">
-      <span class="icon">▤</span>
-      Pay Bills
-    </a>
+    <button onclick="openBill()">
+      <span class="icon">▤</span> Pay Bills
+    </button>
 
-    <a href="#">
-      <span class="icon">▭</span>
-      Cards
-    </a>
+    <button onclick="openDeposit()">
+      <span class="icon">↑</span> Deposit
+    </button>
 
-    <a href="#">
-      <span class="icon">☷</span>
-      Transactions
-    </a>
-
-    <a href="#">
-      <span class="icon">▤</span>
-      Statements
-    </a>
-
-    <a href="#">
-      <span class="icon">⚙</span>
-      Settings
-    </a>
-
-    <a href="#">
-      <span class="icon">?</span>
-      Support
-    </a>
+    <button onclick="openCard()">
+      <span class="icon">▭</span> Manage Card
+    </button>
 
   </nav>
 
@@ -870,11 +651,11 @@ body{
     <h3>♛ Premium Banking</h3>
 
     <p>
-      Manage your accounts and investments seamlessly.
+      Manage your sample financial dashboard and transactions.
     </p>
 
-    <button onclick="showAuthView('signInView')">
-      Sign Out
+    <button class="logout-btn" onclick="logout()">
+      Log Out
     </button>
 
   </div>
@@ -883,402 +664,878 @@ body{
 
 <main class="main">
 
-  <header class="topbar">
+<header class="topbar">
 
-    <input
-      class="search"
-      type="text"
-      placeholder="Search transactions, payees, or help...">
+  <input class="search"
+         type="text"
+         placeholder="Search transactions...">
 
-    <div class="user">
+  <div class="user">
 
-      <strong id="displayUsername">Jolan Newman</strong>
+    <strong id="displayUsername">Jolan Newman</strong>
 
-      <div class="avatar" id="displayAvatar">
-        JN
-      </div>
-
-    </div>
-
-  </header>
-
-  <div class="content">
-
-    <div class="welcome">
-
-      <h1 id="welcomeGreeting">Good Afternoon, Jolan Newman</h1>
-
-      <p>
-        Welcome to your NovaPay dashboard.
-      </p>
-
-    </div>
-
-    <!-- BALANCE + CARD -->
-
-    <div class="hero">
-
-      <section class="balance-card">
-
-        <div class="balance-label">
-          Available Balance
-        </div>
-
-        <div class="balance">
-          $58,000.00
-        </div>
-
-        <div class="account">
-          Checking Account •••• 4821
-        </div>
-
-        <div class="balance-actions">
-
-          <div class="btn-gold">
-            View Account
-          </div>
-
-          <div class="btn-outline">
-            Settings
-          </div>
-
-        </div>
-
-      </section>
-
-      <section class="card">
-
-        <div class="card-top">
-
-          <div class="card-brand">
-            NovaPay
-          </div>
-
-          <div class="contactless">
-            ))) 
-          </div>
-
-        </div>
-
-        <div class="chip"></div>
-
-        <div class="card-number">
-          •••• •••• •••• 4821
-        </div>
-
-        <div class="card-bottom">
-
-          <span id="cardHolder">JOLAN NEWMAN</span>
-
-          <span>VALID THRU 12/29</span>
-
-        </div>
-
-      </section>
-
-    </div>
-
-    <!-- ACTIONS -->
-
-    <div class="actions">
-
-      <div class="action">
-        <div class="action-icon">⇄</div>
-        <strong>Transfer</strong>
-      </div>
-
-      <div class="action">
-        <div class="action-icon">➤</div>
-        <strong>Send Money</strong>
-      </div>
-
-      <div class="action">
-        <div class="action-icon">▤</div>
-        <strong>Pay Bills</strong>
-      </div>
-
-      <div class="action">
-        <div class="action-icon">↑</div>
-        <strong>Deposit</strong>
-      </div>
-
-      <div class="action">
-        <div class="action-icon">▭</div>
-        <strong>Manage Card</strong>
-      </div>
-
-    </div>
-
-    <!-- LOWER -->
-
-    <div class="lower">
-
-      <section class="panel">
-
-        <div class="panel-title">
-
-          <h2>Recent Transactions</h2>
-
-          <a href="#">
-            View All →
-          </a>
-
-        </div>
-
-        <div class="transaction">
-
-          <div class="transaction-left">
-
-            <div class="tx-icon">↓</div>
-
-            <div>
-              <div class="tx-name">
-                Incoming Transfer
-              </div>
-
-              <div class="tx-date">
-                September 10, 2026
-              </div>
-            </div>
-
-          </div>
-
-          <div class="in">
-            +$5,000.00
-          </div>
-
-        </div>
-
-        <div class="transaction">
-
-          <div class="transaction-left">
-
-            <div class="tx-icon">🛒</div>
-
-            <div>
-              <div class="tx-name">
-                Business Purchase
-              </div>
-
-              <div class="tx-date">
-                September 8, 2026
-              </div>
-            </div>
-
-          </div>
-
-          <div class="out">
-            -$425.00
-          </div>
-
-        </div>
-
-        <div class="transaction">
-
-          <div class="transaction-left">
-
-            <div class="tx-icon">↑</div>
-
-            <div>
-              <div class="tx-name">
-                Deposit
-              </div>
-
-              <div class="tx-date">
-                September 6, 2026
-              </div>
-            </div>
-
-          </div>
-
-          <div class="in">
-            +$2,500.00
-          </div>
-
-        </div>
-
-        <div class="transaction">
-
-          <div class="transaction-left">
-
-            <div class="tx-icon">☕</div>
-
-            <div>
-              <div class="tx-name">
-                Coffee Shop
-              </div>
-
-              <div class="tx-date">
-                September 5, 2026
-              </div>
-            </div>
-
-          </div>
-
-          <div class="out">
-            -$8.50
-          </div>
-
-        </div>
-
-      </section>
-
-      <!-- ACCOUNT DETAILS -->
-
-      <div>
-
-        <section class="panel">
-
-          <div class="panel-title">
-
-            <h2>Account Overview</h2>
-
-            <span>•••</span>
-
-          </div>
-
-          <div class="detail">
-            <span>Account Type</span>
-            <strong>Checking</strong>
-          </div>
-
-          <div class="detail">
-            <span>Account Number</span>
-            <strong>•••• 4821</strong>
-          </div>
-
-          <div class="detail">
-            <span>Status</span>
-            <strong class="active">● Active</strong>
-          </div>
-
-          <div class="detail">
-            <span>Currency</span>
-            <strong>USD</strong>
-          </div>
-
-          <div class="detail">
-            <span>Balance</span>
-            <strong>$58,000.00</strong>
-          </div>
-
-        </section>
-
-        <div class="security">
-
-          <div class="security-icon">
-            🔒
-          </div>
-
-          <div>
-
-            <strong>Security & Privacy</strong>
-
-            <p>
-              Your account is protected with multi-factor security.
-            </p>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
+    <div class="avatar" id="displayAvatar">JN</div>
 
   </div>
 
-  <footer class="footer">
-    NovaPay — Online Banking Interface.
-  </footer>
+</header>
+
+<div class="content">
+
+<div class="welcome">
+
+  <h1 id="welcomeGreeting">
+    Good Afternoon, Jolan Newman
+  </h1>
+
+  <p>
+    Welcome to your NovaPay dashboard.
+  </p>
+
+</div>
+
+<div class="hero">
+
+<section class="balance-card">
+
+  <div class="balance-label">
+    Available Balance
+  </div>
+
+  <div class="balance" id="balance">
+    $58,000.00
+  </div>
+
+  <div class="account">
+    Checking Account •••• 4821
+  </div>
+
+</section>
+
+<section class="bank-card">
+
+  <div class="card-brand">
+    NovaPay
+  </div>
+
+  <div class="chip"></div>
+
+  <div class="card-number">
+    •••• •••• •••• 4821
+  </div>
+
+  <div class="card-bottom">
+
+    <span id="cardHolder">
+      JOLAN NEWMAN
+    </span>
+
+    <span>
+      VALID THRU 12/29
+    </span>
+
+  </div>
+
+</section>
+
+</div>
+
+<!-- QUICK ACTIONS -->
+
+<div class="actions">
+
+<div class="action" onclick="openTransfer()">
+  <div class="action-icon">⇄</div>
+  <strong>Transfer</strong>
+</div>
+
+<div class="action" onclick="openSendMoney()">
+  <div class="action-icon">➤</div>
+  <strong>Send Money</strong>
+</div>
+
+<div class="action" onclick="openBill()">
+  <div class="action-icon">▤</div>
+  <strong>Pay Bills</strong>
+</div>
+
+<div class="action" onclick="openDeposit()">
+  <div class="action-icon">↑</div>
+  <strong>Deposit</strong>
+</div>
+
+<div class="action" onclick="openCard()">
+  <div class="action-icon">▭</div>
+  <strong>Manage Card</strong>
+</div>
+
+</div>
+
+<div class="lower">
+
+<section class="panel">
+
+<div class="panel-title">
+  <h2>Recent Transactions</h2>
+</div>
+
+<div id="transactions">
+
+<div class="transaction">
+
+<div class="transaction-left">
+  <div class="tx-icon">↓</div>
+  <div>
+    <div class="tx-name">Incoming Transfer</div>
+    <div class="tx-date">September 10, 2026</div>
+  </div>
+</div>
+
+<div class="in">+$5,000.00</div>
+
+</div>
+
+<div class="transaction">
+
+<div class="transaction-left">
+  <div class="tx-icon">🛒</div>
+  <div>
+    <div class="tx-name">Business Purchase</div>
+    <div class="tx-date">September 8, 2026</div>
+  </div>
+</div>
+
+<div class="out">-$425.00</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="panel">
+
+<div class="panel-title">
+  <h2>Account Overview</h2>
+</div>
+
+<div class="detail">
+  <span>Account Type</span>
+  <strong>Checking</strong>
+</div>
+
+<div class="detail">
+  <span>Account Number</span>
+  <strong>•••• 4821</strong>
+</div>
+
+<div class="detail">
+  <span>Status</span>
+  <strong class="active">● Active</strong>
+</div>
+
+<div class="detail">
+  <span>Currency</span>
+  <strong>USD</strong>
+</div>
+
+<div class="detail">
+  <span>Balance</span>
+  <strong id="overviewBalance">$58,000.00</strong>
+</div>
+
+</section>
+
+</div>
+
+</div>
+
+<footer class="footer">
+  NovaPay — fictional financial interface. No real banking services or transactions are provided.
+</footer>
 
 </main>
 
+
+<!-- TRANSFER MODAL -->
+
+<div class="modal" id="transferModal">
+
+<div class="modal-box">
+
+<h2>Transfer Funds</h2>
+
+<p>Enter sample recipient details for this simulated transaction.</p>
+
+<label>Receiver Name</label>
+<input id="receiverName" placeholder="Receiver name">
+
+<label>Routing Number</label>
+<input id="routingNumber"
+       inputmode="numeric"
+       maxlength="9"
+       placeholder="Sample routing number">
+
+<label>Account Number</label>
+<input id="receiverAccount"
+       inputmode="numeric"
+       placeholder="Sample account number">
+
+<label>Amount</label>
+<input id="transferAmount"
+       type="number"
+       min="0.01"
+       step="0.01"
+       placeholder="0.00">
+
+<label>Memo</label>
+<textarea id="transferMemo"
+          placeholder="Optional memo"></textarea>
+
+<div class="form-buttons">
+
+<button class="secondary" onclick="closeModal()">
+Cancel
+</button>
+
+<button class="primary" onclick="makeTransfer()">
+Continue
+</button>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- SEND MONEY -->
+
+<div class="modal" id="sendModal">
+
+<div class="modal-box">
+
+<h2>Send Money</h2>
+
+<label>Recipient Name</label>
+<input id="sendName" placeholder="Recipient">
+
+<label>Amount</label>
+<input id="sendAmount"
+       type="number"
+       min="0.01"
+       step="0.01"
+       placeholder="0.00">
+
+<label>Memo</label>
+<textarea id="sendMemo"
+          placeholder="Optional note"></textarea>
+
+<div class="form-buttons">
+
+<button class="secondary" onclick="closeModal()">
+Cancel
+</button>
+
+<button class="primary" onclick="makeSend()">
+Send
+</button>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- BILL -->
+
+<div class="modal" id="billModal">
+
+<div class="modal-box">
+
+<h2>Pay Bill</h2>
+
+<label>Biller</label>
+
+<select id="biller">
+<option>Electric Company</option>
+<option>Internet Provider</option>
+<option>Mobile Service</option>
+<option>Insurance</option>
+<option>Other</option>
+</select>
+
+<label>Reference / Account Number</label>
+
+<input id="billReference"
+       placeholder="Sample reference number">
+
+<label>Amount</label>
+
+<input id="billAmount"
+       type="number"
+       min="0.01"
+       step="0.01"
+       placeholder="0.00">
+
+<div class="form-buttons">
+
+<button class="secondary" onclick="closeModal()">
+Cancel
+</button>
+
+<button class="primary" onclick="payBill()">
+Pay Bill
+</button>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- DEPOSIT -->
+
+<div class="modal" id="depositModal">
+
+<div class="modal-box">
+
+<h2>Deposit</h2>
+
+<label>Deposit Method</label>
+
+<select id="depositMethod">
+<option>Sample Bank Transfer</option>
+<option>Sample Cash Deposit</option>
+<option>Sample Check Deposit</option>
+</select>
+
+<label>Amount</label>
+
+<input id="depositAmount"
+       type="number"
+       min="0.01"
+       step="0.01"
+       placeholder="0.00">
+
+<div class="form-buttons">
+
+<button class="secondary" onclick="closeModal()">
+Cancel
+</button>
+
+<button class="primary" onclick="makeDeposit()">
+Add Deposit
+</button>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- CARD -->
+
+<div class="modal" id="cardModal">
+
+<div class="modal-box">
+
+<h2>Manage Card</h2>
+
+<p id="cardStatus">
+Card status: Active
+</p>
+
+<div class="form-buttons">
+
+<button class="primary"
+        onclick="toggleCard()"
+        id="freezeButton">
+Freeze Card
+</button>
+
+<button class="secondary"
+        onclick="closeModal()">
+Close
+</button>
+
+</div>
+
+</div>
+</div>
+
+
 <script>
-let currentGeneratedCode = "";
-let currentTargetEmail = "";
 
-function showAuthView(viewId) {
-  document.getElementById('authOverlay').style.display = 'flex';
-  document.getElementById('signInView').style.display = 'none';
-  document.getElementById('codeView').style.display = 'none';
-  document.getElementById('signUpView').style.display = 'none';
-  document.getElementById(viewId).style.display = 'block';
+let balance = 58000;
+
+let cardFrozen = false;
+
+let transactions = [];
+
+
+/* LOGIN */
+
+function login(){
+
+  const name =
+    document.getElementById("loginName").value.trim();
+
+  if(!name){
+
+    alert("Please enter your name.");
+
+    return;
+  }
+
+  localStorage.setItem("novaUser",name);
+
+  updateUser(name);
+
+  document.getElementById("loginScreen").style.display="none";
 }
 
-function updateAccountName(name) {
-  if(!name) return;
-  document.getElementById('displayUsername').textContent = name;
-  document.getElementById('welcomeGreeting').textContent = 'Good Afternoon, ' + name;
-  document.getElementById('cardHolder').textContent = name.toUpperCase();
-  
-  const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
-  document.getElementById('displayAvatar').textContent = initials || 'JN';
+
+function updateUser(name){
+
+  document.getElementById("displayUsername")
+    .textContent=name;
+
+  document.getElementById("welcomeGreeting")
+    .textContent="Good Afternoon, "+name;
+
+  document.getElementById("cardHolder")
+    .textContent=name.toUpperCase();
+
+  const initials=name
+    .split(" ")
+    .map(x=>x[0])
+    .join("")
+    .substring(0,2)
+    .toUpperCase();
+
+  document.getElementById("displayAvatar")
+    .textContent=initials || "NP";
 }
 
-function generate6DigitCode() {
-  return Math.floor(100000 + Math.random() * 900000).toString();
+
+function logout(){
+
+  localStorage.removeItem("novaUser");
+
+  closeModal();
+
+  document.getElementById("loginName").value="";
+
+  document.getElementById("loginScreen").style.display="flex";
 }
 
-function sendVerificationEmail(recipientEmail, recipientName, buttonId) {
-  currentGeneratedCode = generate6DigitCode();
-  currentTargetEmail = recipientEmail;
 
-  const btn = document.getElementById(buttonId);
-  if(btn) btn.textContent = "Sending Email...";
+/* MODALS */
 
-  // EmailJS API Call
-  emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
-    to_email: recipientEmail,
-    to_name: recipientName,
-    code: currentGeneratedCode
-  })
-  .then(function(response) {
-     alert('A 6-digit verification code was sent to ' + recipientEmail);
-     if(btn) btn.textContent = "Continue to Security Code";
-     showAuthView('codeView');
-  }, function(error) {
-     console.error('Email error:', error);
-     alert('Email Delivery Notice: Ensure your EmailJS keys are configured. (Simulated code for testing: ' + currentGeneratedCode + ')');
-     if(btn) btn.textContent = "Continue to Security Code";
-     showAuthView('codeView');
+function closeModal(){
+
+  document.querySelectorAll(".modal")
+    .forEach(m=>m.style.display="none");
+
+}
+
+
+function openTransfer(){
+
+  closeModal();
+
+  document.getElementById("transferModal")
+    .style.display="flex";
+
+}
+
+
+function openSendMoney(){
+
+  closeModal();
+
+  document.getElementById("sendModal")
+    .style.display="flex";
+
+}
+
+
+function openBill(){
+
+  closeModal();
+
+  document.getElementById("billModal")
+    .style.display="flex";
+
+}
+
+
+function openDeposit(){
+
+  closeModal();
+
+  document.getElementById("depositModal")
+    .style.display="flex";
+
+}
+
+
+function openCard(){
+
+  closeModal();
+
+  document.getElementById("cardModal")
+    .style.display="flex";
+
+}
+
+
+/* BALANCE */
+
+function updateBalance(){
+
+  document.getElementById("balance")
+    .textContent="$"+balance.toLocaleString(
+      "en-US",
+      {
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+      }
+    );
+
+  document.getElementById("overviewBalance")
+    .textContent="$"+balance.toLocaleString(
+      "en-US",
+      {
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+      }
+    );
+}
+
+
+/* TRANSACTIONS */
+
+function addTransaction(name,amount,type){
+
+  const container=
+    document.getElementById("transactions");
+
+  const row=document.createElement("div");
+
+  row.className="transaction";
+
+  const sign=type==="in" ? "+" : "-";
+
+  const amountText=
+    sign+
+    "$"+
+    amount.toLocaleString("en-US",{
+      minimumFractionDigits:2
+    });
+
+  row.innerHTML=`
+
+    <div class="transaction-left">
+
+      <div class="tx-icon">
+        ${type==="in" ? "↓" : "↑"}
+      </div>
+
+      <div>
+
+        <div class="tx-name">
+          ${escapeHTML(name)}
+        </div>
+
+        <div class="tx-date">
+          ${new Date().toLocaleDateString(
+            "en-US",
+            {
+              month:"long",
+              day:"numeric",
+              year:"numeric"
+            }
+          )}
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="${type}">
+      ${amountText}
+    </div>
+  `;
+
+  container.prepend(row);
+
+}
+
+
+/* TRANSFER */
+
+function makeTransfer(){
+
+  const name=
+    document.getElementById("receiverName").value.trim();
+
+  const routing=
+    document.getElementById("routingNumber").value.trim();
+
+  const account=
+    document.getElementById("receiverAccount").value.trim();
+
+  const amount=
+    Number(document.getElementById("transferAmount").value);
+
+  if(!name || !routing || !account || !amount){
+
+    alert("Please complete all required fields.");
+
+    return;
+  }
+
+  if(amount > balance){
+
+    alert("The sample balance is not sufficient.");
+
+    return;
+  }
+
+  balance-=amount;
+
+  updateBalance();
+
+  addTransaction(
+    "Transfer to "+name,
+    amount,
+    "out"
+  );
+
+  alert(
+    "Simulated transfer created successfully."
+  );
+
+  document.getElementById("receiverName").value="";
+  document.getElementById("routingNumber").value="";
+  document.getElementById("receiverAccount").value="";
+  document.getElementById("transferAmount").value="";
+  document.getElementById("transferMemo").value="";
+
+  closeModal();
+
+}
+
+
+/* SEND MONEY */
+
+function makeSend(){
+
+  const name=
+    document.getElementById("sendName").value.trim();
+
+  const amount=
+    Number(document.getElementById("sendAmount").value);
+
+  if(!name || !amount){
+
+    alert("Enter recipient and amount.");
+
+    return;
+  }
+
+  if(amount > balance){
+
+    alert("The sample balance is not sufficient.");
+
+    return;
+  }
+
+  balance-=amount;
+
+  updateBalance();
+
+  addTransaction(
+    "Send Money to "+name,
+    amount,
+    "out"
+  );
+
+  alert(
+    "Simulated money transfer completed."
+  );
+
+  closeModal();
+
+}
+
+
+/* PAY BILL */
+
+function payBill(){
+
+  const biller=
+    document.getElementById("biller").value;
+
+  const reference=
+    document.getElementById("billReference").value.trim();
+
+  const amount=
+    Number(document.getElementById("billAmount").value);
+
+  if(!reference || !amount){
+
+    alert("Please enter the reference number and amount.");
+
+    return;
+  }
+
+  if(amount > balance){
+
+    alert("The sample balance is not sufficient.");
+
+    return;
+  }
+
+  balance-=amount;
+
+  updateBalance();
+
+  addTransaction(
+    biller+" Payment",
+    amount,
+    "out"
+  );
+
+  alert(
+    "Simulated bill payment completed."
+  );
+
+  closeModal();
+
+}
+
+
+/* DEPOSIT */
+
+function makeDeposit(){
+
+  const method=
+    document.getElementById("depositMethod").value;
+
+  const amount=
+    Number(document.getElementById("depositAmount").value);
+
+  if(!amount){
+
+    alert("Enter a deposit amount.");
+
+    return;
+  }
+
+  balance+=amount;
+
+  updateBalance();
+
+  addTransaction(
+    method,
+    amount,
+    "in"
+  );
+
+  alert(
+    "Simulated deposit added successfully."
+  );
+
+  document.getElementById("depositAmount").value="";
+
+  closeModal();
+
+}
+
+
+/* CARD */
+
+function toggleCard(){
+
+  cardFrozen=!cardFrozen;
+
+  const status=
+    document.getElementById("cardStatus");
+
+  const button=
+    document.getElementById("freezeButton");
+
+  if(cardFrozen){
+
+    status.textContent="Card status: Frozen";
+
+    button.textContent="Unfreeze Card";
+
+  }else{
+
+    status.textContent="Card status: Active";
+
+    button.textContent="Freeze Card";
+
+  }
+
+}
+
+
+/* SAFETY */
+
+function escapeHTML(value){
+
+  return value
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* RESTORE LOGIN */
+
+window.addEventListener("load",()=>{
+
+  const saved=
+    localStorage.getItem("novaUser");
+
+  if(saved){
+
+    updateUser(saved);
+
+    document.getElementById("loginScreen")
+      .style.display="none";
+
+  }
+
+  updateBalance();
+
+});
+
+
+/* CLOSE MODAL WHEN CLICKING OUTSIDE */
+
+document.querySelectorAll(".modal")
+.forEach(modal=>{
+
+  modal.addEventListener("click",function(e){
+
+    if(e.target===modal){
+
+      closeModal();
+
+    }
+
   });
-}
 
-function handleSignInStep1(e) {
-  e.preventDefault();
-  const name = document.getElementById('signInUser').value;
-  const email = document.getElementById('signInEmail').value;
-  updateAccountName(name);
-  sendVerificationEmail(email, name, 'signInBtn');
-}
+});
 
-function handleSignUp(e) {
-  e.preventDefault();
-  const name = document.getElementById('signUpName').value;
-  const email = document.getElementById('signUpEmail').value;
-  updateAccountName(name);
-  sendVerificationEmail(email, name, 'signUpBtn');
-}
-
-function resendEmailCode() {
-  if(currentTargetEmail) {
-    sendVerificationEmail(currentTargetEmail, document.getElementById('displayUsername').textContent, null);
-  } else {
-    alert("Please enter an email address first.");
-  }
-}
-
-function handleCodeVerification(e) {
-  e.preventDefault();
-  const enteredCode = document.getElementById('authCode').value;
-  
-  if (enteredCode === currentGeneratedCode || enteredCode === "123456") {
-    document.getElementById('authOverlay').style.display = 'none';
-  } else {
-    alert('Invalid code. Please check your email inbox.');
-  }
-}
 </script>
 
 </body>
