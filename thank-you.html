@@ -1,1 +1,852 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Premium Banking Demo</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --navy: #102a43;
+  --blue: #2563eb;
+  --light: #f5f8fc;
+  --text: #172b4d;
+  --muted: #718096;
+  --border: #e6ebf2;
+  --white: #ffffff;
+  --green: #149447;
+  --red: #d64545;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Roboto, Arial, sans-serif;
+  background: var(--light);
+  color: var(--text);
+}
+
+/* DEMO LABEL */
+
+.demo-label {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 9999;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: #fff3cd;
+  color: #765800;
+  border: 1px solid #f0d98a;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* LAYOUT */
+
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+  width: 250px;
+  background: var(--white);
+  border-right: 1px solid var(--border);
+  padding: 28px 18px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.logo {
+  padding: 0 14px 35px;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.logo span {
+  color: var(--blue);
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #66758a;
+  padding: 13px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.nav a:hover,
+.nav a.active {
+  background: #edf4ff;
+  color: var(--blue);
+}
+
+.sidebar-bottom {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 25px;
+}
+
+.help {
+  background: #f5f8fc;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* MAIN */
+
+.main {
+  margin-left: 250px;
+  width: calc(100% - 250px);
+}
+
+/* TOPBAR */
+
+.topbar {
+  height: 78px;
+  background: white;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 35px;
+}
+
+.welcome {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #dce9ff;
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+}
+
+/* CONTENT */
+
+.content {
+  max-width: 1250px;
+  margin: auto;
+  padding: 35px;
+}
+
+.page-title {
+  margin-bottom: 25px;
+}
+
+.page-title h1 {
+  margin: 0 0 5px;
+  font-size: 28px;
+}
+
+.page-title p {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* BALANCE */
+
+.balance-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  padding: 32px;
+  color: white;
+  background: linear-gradient(135deg, #102a43, #1769aa);
+  box-shadow: 0 18px 35px rgba(16,42,67,.16);
+  margin-bottom: 25px;
+}
+
+.balance-card::after {
+  content: "";
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  right: -90px;
+  top: -100px;
+  background: rgba(255,255,255,.08);
+}
+
+.balance-label {
+  font-size: 13px;
+  opacity: .8;
+}
+
+.balance {
+  margin: 8px 0 22px;
+  font-size: 43px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.balance-info {
+  display: flex;
+  gap: 45px;
+  position: relative;
+  z-index: 2;
+}
+
+.balance-info small {
+  display: block;
+  opacity: .7;
+  margin-bottom: 3px;
+}
+
+.balance-info strong {
+  font-size: 15px;
+}
+
+/* ACTIONS */
+
+.actions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 30px;
+}
+
+.action {
+  border: 1px solid var(--border);
+  background: white;
+  padding: 18px;
+  border-radius: 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(0,0,0,.06);
+}
+
+.action-icon {
+  width: 42px;
+  height: 42px;
+  margin: auto auto 9px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #edf4ff;
+  color: var(--blue);
+  font-size: 19px;
+}
+
+.action strong {
+  display: block;
+  font-size: 13px;
+}
+
+/* GRID */
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.4fr .8fr;
+  gap: 22px;
+}
+
+.panel {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 23px;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.panel-header h2 {
+  margin: 0;
+  font-size: 17px;
+}
+
+.panel-header a {
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* TRANSACTIONS */
+
+.transaction {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.transaction:last-child {
+  border-bottom: none;
+}
+
+.transaction-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.transaction-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  background: #f0f4f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.transaction-name {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.transaction-date {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.amount {
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.positive {
+  color: var(--green);
+}
+
+.negative {
+  color: var(--red);
+}
+
+/* CARD */
+
+.bank-card {
+  height: 205px;
+  border-radius: 18px;
+  padding: 25px;
+  color: white;
+  background: linear-gradient(135deg, #202f46, #0c1727);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 14px 28px rgba(0,0,0,.15);
+}
+
+.bank-card::before {
+  content: "";
+  position: absolute;
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  right: -80px;
+  bottom: -110px;
+  background: rgba(255,255,255,.08);
+}
+
+.card-brand {
+  font-size: 13px;
+  font-weight: 700;
+  opacity: .85;
+}
+
+.chip {
+  width: 38px;
+  height: 28px;
+  border-radius: 6px;
+  background: #d9c27a;
+  margin-top: 25px;
+}
+
+.card-number {
+  margin-top: 20px;
+  font-size: 17px;
+  letter-spacing: 2px;
+}
+
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 17px;
+  font-size: 11px;
+  opacity: .85;
+}
+
+/* ACCOUNT */
+
+.account-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 13px 0;
+  border-bottom: 1px solid #edf0f4;
+  font-size: 13px;
+}
+
+.account-row:last-child {
+  border: none;
+}
+
+.account-row span {
+  color: var(--muted);
+}
+
+/* FOOTER */
+
+.footer {
+  text-align: center;
+  padding: 30px;
+  color: #8793a3;
+  font-size: 11px;
+}
+
+/* MOBILE */
+
+@media(max-width: 900px) {
+
+  .sidebar {
+    display: none;
+  }
+
+  .main {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .topbar {
+    padding: 0 18px;
+  }
+
+  .content {
+    padding: 25px 15px;
+  }
+
+  .actions {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media(max-width: 500px) {
+
+  .balance-card {
+    padding: 25px;
+  }
+
+  .balance {
+    font-size: 35px;
+  }
+
+  .balance-info {
+    gap: 25px;
+  }
+
+  .page-title h1 {
+    font-size: 24px;
+  }
+
+  .actions {
+    gap: 10px;
+  }
+
+  .action {
+    padding: 15px 8px;
+  }
+
+  .bank-card {
+    height: 190px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="demo-label">
+  DEMO • SIMULATED
+</div>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar">
+
+    <div class="logo">
+      Nova<span>Pay</span>
+    </div>
+
+    <nav class="nav">
+
+      <a href="#" class="active">
+        ◉ &nbsp; Dashboard
+      </a>
+
+      <a href="#">
+        ⇄ &nbsp; Transfers
+      </a>
+
+      <a href="#">
+        ↓ &nbsp; Deposits
+      </a>
+
+      <a href="#">
+        ▣ &nbsp; Cards
+      </a>
+
+      <a href="#">
+        ≡ &nbsp; Transactions
+      </a>
+
+      <a href="#">
+        ⚙ &nbsp; Settings
+      </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+      <div class="help">
+        <strong>Need help?</strong><br><br>
+        This is a simulated banking interface for demonstration purposes.
+      </div>
+
+    </div>
+
+  </aside>
+
+  <!-- MAIN -->
+
+  <main class="main">
+
+    <header class="topbar">
+
+      <div class="welcome">
+        Welcome back
+      </div>
+
+      <div class="profile">
+
+        <div>
+          <strong>Demo User</strong>
+        </div>
+
+        <div class="avatar">
+          DU
+        </div>
+
+      </div>
+
+    </header>
+
+    <div class="content">
+
+      <div class="page-title">
+
+        <h1>Good afternoon</h1>
+
+        <p>
+          Here's an overview of your account.
+        </p>
+
+      </div>
+
+      <!-- BALANCE -->
+
+      <section class="balance-card">
+
+        <div class="balance-label">
+          Available Balance
+        </div>
+
+        <div class="balance">
+          $58,000.00
+        </div>
+
+        <div class="balance-info">
+
+          <div>
+            <small>Account</small>
+            <strong>Checking •••• 4821</strong>
+          </div>
+
+          <div>
+            <small>Status</small>
+            <strong>Active</strong>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ACTIONS -->
+
+      <div class="actions">
+
+        <div class="action" onclick="showMessage('Transfer feature is available in this demo.')">
+          <div class="action-icon">⇄</div>
+          <strong>Transfer</strong>
+        </div>
+
+        <div class="action" onclick="showMessage('Send money feature is available in this demo.')">
+          <div class="action-icon">↑</div>
+          <strong>Send Money</strong>
+        </div>
+
+        <div class="action" onclick="showMessage('Deposit feature is available in this demo.')">
+          <div class="action-icon">↓</div>
+          <strong>Deposit</strong>
+        </div>
+
+        <div class="action" onclick="showMessage('Card management is available in this demo.')">
+          <div class="action-icon">▣</div>
+          <strong>Manage Card</strong>
+        </div>
+
+      </div>
+
+      <!-- CONTENT GRID -->
+
+      <div class="grid">
+
+        <!-- TRANSACTIONS -->
+
+        <section class="panel">
+
+          <div class="panel-header">
+
+            <h2>Recent Transactions</h2>
+
+            <a href="#">View all</a>
+
+          </div>
+
+          <div class="transaction">
+
+            <div class="transaction-left">
+
+              <div class="transaction-icon">↗</div>
+
+              <div>
+                <div class="transaction-name">
+                  Incoming Transfer
+                </div>
+
+                <div class="transaction-date">
+                  Sep 10, 2026
+                </div>
+              </div>
+
+            </div>
+
+            <div class="amount positive">
+              +$5,000.00
+            </div>
+
+          </div>
+
+          <div class="transaction">
+
+            <div class="transaction-left">
+
+              <div class="transaction-icon">🛒</div>
+
+              <div>
+                <div class="transaction-name">
+                  Business Purchase
+                </div>
+
+                <div class="transaction-date">
+                  Sep 8, 2026
+                </div>
+              </div>
+
+            </div>
+
+            <div class="amount negative">
+              -$425.00
+            </div>
+
+          </div>
+
+          <div class="transaction">
+
+            <div class="transaction-left">
+
+              <div class="transaction-icon">↗</div>
+
+              <div>
+                <div class="transaction-name">
+                  Deposit
+                </div>
+
+                <div class="transaction-date">
+                  Sep 6, 2026
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="amount positive">
+              +$2,500.00
+            </div>
+
+          </div>
+
+          <div class="transaction">
+
+            <div class="transaction-left">
+
+              <div class="transaction-icon">☕</div>
+
+              <div>
+                <div class="transaction-name">
+                  Coffee Shop
+                </div>
+
+                <div class="transaction-date">
+                  Sep 5, 2026
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="amount negative">
+              -$8.50
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- RIGHT COLUMN -->
+
+        <div>
+
+          <section class="panel">
+
+            <div class="panel-header">
+              <h2>My Card</h2>
+              <a href="#">Manage</a>
+            </div>
+
+            <div class="bank-card">
+
+              <div class="card-brand">
+                NOVA PAY
+              </div>
+
+              <div class="chip"></div>
+
+              <div class="card-number">
+                •••• &nbsp; •••• &nbsp; •••• &nbsp; 4821
+              </div>
+
+              <div class="card-bottom">
+
+                <span>DEMO USER</span>
+
+                <span>12/29</span>
+
+              </div>
+
+            </div>
+
+          </section>
+
+          <section class="panel" style="margin-top:22px;">
+
+            <div class="panel-header">
+              <h2>Account Details</h2>
+            </div>
+
+            <div class="account-row">
+              <span>Account Type</span>
+              <strong>Checking</strong>
+            </div>
+
+            <div class="account-row">
+              <span>Account Number</span>
+              <strong>••••4821</strong>
+            </div>
+
+            <div class="account-row">
+              <span>Currency</span>
+              <strong>USD</strong>
+            </div>
+
+            <div class="account-row">
+              <span>Status</span>
+              <strong>Active</strong>
+            </div>
+
+          </section>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <footer class="footer">
+      Demo / Simulated Banking Interface — No real banking or financial transactions are processed.
+    </footer>
+
+  </main>
+
+</div>
+
+<script>
+function showMessage(message) {
+  alert(message);
+}
+</script>
+
+</body>
+</html>
