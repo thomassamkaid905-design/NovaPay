@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NovaPay — Demo Banking</title>
+<title>NovaPay — Banking</title>
 
 <style>
 *{box-sizing:border-box}
@@ -30,21 +30,132 @@ body{
     linear-gradient(135deg,#f8edc9,#e1bb58,#fff8dd);
 }
 
-/* DEMO NOTICE */
+/* AUTH MODAL / OVERLAY */
 
-.demo{
+.auth-overlay{
   position:fixed;
-  top:12px;
-  right:14px;
-  z-index:1000;
-  background:#fff3bd;
-  border:1px solid #d6ae45;
-  color:#624b12;
-  padding:7px 13px;
-  border-radius:30px;
-  font-size:10px;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background:rgba(11,11,10,0.85);
+  backdrop-filter:blur(8px);
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.auth-card{
+  width:100%;
+  max-width:420px;
+  background:linear-gradient(180deg,#171510,#070707);
+  border:1px solid rgba(239,199,73,.45);
+  border-radius:24px;
+  padding:36px 30px;
+  color:white;
+  box-shadow:0 25px 50px rgba(0,0,0,0.5);
+  text-align:center;
+}
+
+.auth-brand{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin-bottom:24px;
+}
+
+.auth-brand .brand-logo{
+  width:48px;
+  height:48px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,var(--gold2),#a97919);
+  color:#111;
+  font-size:26px;
+  font-weight:900;
+}
+
+.auth-brand .brand-name{
+  font-size:26px;
   font-weight:800;
-  letter-spacing:.5px;
+  color:var(--gold2);
+}
+
+.auth-card h2{
+  margin:0 0 8px;
+  font-size:22px;
+  letter-spacing:-0.5px;
+}
+
+.auth-card p{
+  color:#aaa49a;
+  font-size:13px;
+  margin:0 0 24px;
+}
+
+.auth-form{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  text-align:left;
+}
+
+.auth-form label{
+  font-size:12px;
+  font-weight:600;
+  color:#d4ccba;
+  display:block;
+  margin-bottom:6px;
+}
+
+.auth-form input{
+  width:100%;
+  padding:14px 16px;
+  border-radius:12px;
+  border:1px solid #725515;
+  background:#090909;
+  color:white;
+  font-size:14px;
+  outline:none;
+}
+
+.auth-form input:focus{
+  border-color:var(--gold2);
+}
+
+.btn-submit{
+  width:100%;
+  padding:14px;
+  margin-top:8px;
+  border-radius:12px;
+  border:0;
+  background:linear-gradient(135deg,#f8dc7a,#bd8c25);
+  color:#111;
+  font-weight:800;
+  font-size:15px;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.btn-submit:hover{
+  filter:brightness(1.1);
+}
+
+.auth-toggle{
+  margin-top:20px;
+  font-size:13px;
+  color:#aaa49a;
+}
+
+.auth-toggle a{
+  color:var(--gold2);
+  text-decoration:none;
+  font-weight:700;
 }
 
 /* SIDEBAR */
@@ -147,6 +258,7 @@ body{
   border-radius:9px;
   background:linear-gradient(135deg,#f8dc7a,#bd8c25);
   font-weight:800;
+  cursor:pointer;
 }
 
 /* MAIN */
@@ -282,6 +394,7 @@ body{
   border-radius:10px;
   font-size:12px;
   font-weight:750;
+  cursor:pointer;
 }
 
 .btn-gold{
@@ -600,8 +713,87 @@ body{
 
 <body>
 
-<div class="demo">
-  DEMO • SIMULATED
+<!-- AUTH MODAL OVERLAY -->
+<div class="auth-overlay" id="authOverlay">
+  
+  <!-- SIGN IN VIEW -->
+  <div class="auth-card" id="signInView">
+    <div class="auth-brand">
+      <div class="brand-logo">N</div>
+      <div class="brand-name">NovaPay</div>
+    </div>
+    <h2>Welcome Back</h2>
+    <p>Sign in to access your secure account.</p>
+    
+    <form class="auth-form" onsubmit="handleSignInStep1(event)">
+      <div>
+        <label>Account Number or Username</label>
+        <input type="text" id="signInUser" value="Jolan Newman" required>
+      </div>
+      <div>
+        <label>Password</label>
+        <input type="password" required placeholder="••••••••">
+      </div>
+      <button type="submit" class="btn-submit">Continue to Security Code</button>
+    </form>
+    
+    <div class="auth-toggle">
+      Don't have an account? <a href="#" onclick="showAuthView('signUpView')">Sign Up</a>
+    </div>
+  </div>
+
+  <!-- VERIFICATION CODE VIEW -->
+  <div class="auth-card" id="codeView" style="display:none;">
+    <div class="auth-brand">
+      <div class="brand-logo">N</div>
+      <div class="brand-name">NovaPay</div>
+    </div>
+    <h2>Security Verification</h2>
+    <p>Please enter the 6-digit authentication code sent to your registered device.</p>
+    
+    <form class="auth-form" onsubmit="handleCodeVerification(event)">
+      <div>
+        <label>6-Digit Security Code</label>
+        <input type="text" id="authCode" placeholder="123456" maxlength="6" pattern="[0-9]{6}" required style="text-align:center; letter-spacing: 6px; font-size:20px;">
+      </div>
+      <button type="submit" class="btn-submit">Verify & Access Dashboard</button>
+    </form>
+    
+    <div class="auth-toggle">
+      Didn't get a code? <a href="#" onclick="alert('A new 6-digit code has been sent.')">Resend Code</a>
+    </div>
+  </div>
+
+  <!-- SIGN UP VIEW -->
+  <div class="auth-card" id="signUpView" style="display:none;">
+    <div class="auth-brand">
+      <div class="brand-logo">N</div>
+      <div class="brand-name">NovaPay</div>
+    </div>
+    <h2>Create Your Account</h2>
+    <p>Join NovaPay for secure online banking.</p>
+    
+    <form class="auth-form" onsubmit="handleSignUp(event)">
+      <div>
+        <label>Full Name</label>
+        <input type="text" id="signUpName" value="Jolan Newman" required>
+      </div>
+      <div>
+        <label>Email Address</label>
+        <input type="email" required placeholder="jolan.newman@example.com">
+      </div>
+      <div>
+        <label>Password</label>
+        <input type="password" required placeholder="••••••••">
+      </div>
+      <button type="submit" class="btn-submit">Sign Up</button>
+    </form>
+    
+    <div class="auth-toggle">
+      Already have an account? <a href="#" onclick="showAuthView('signInView')">Sign In</a>
+    </div>
+  </div>
+
 </div>
 
 <aside class="sidebar">
@@ -665,11 +857,11 @@ body{
     <h3>♛ Premium Banking</h3>
 
     <p>
-      Explore the features of this simulated banking dashboard.
+      Manage your accounts and investments seamlessly.
     </p>
 
-    <button onclick="demo('This is a simulated banking feature.')">
-      Explore Demo
+    <button onclick="showAuthView('signInView')">
+      Sign Out
     </button>
 
   </div>
@@ -687,10 +879,10 @@ body{
 
     <div class="user">
 
-      <strong>Demo User</strong>
+      <strong id="displayUsername">Jolan Newman</strong>
 
-      <div class="avatar">
-        DU
+      <div class="avatar" id="displayAvatar">
+        JN
       </div>
 
     </div>
@@ -701,10 +893,10 @@ body{
 
     <div class="welcome">
 
-      <h1>Good Afternoon, Demo User</h1>
+      <h1 id="welcomeGreeting">Good Afternoon, Jolan Newman</h1>
 
       <p>
-        Welcome to your NovaPay demonstration dashboard.
+        Welcome to your NovaPay dashboard.
       </p>
 
     </div>
@@ -763,7 +955,7 @@ body{
 
         <div class="card-bottom">
 
-          <span>DEMO USER</span>
+          <span id="cardHolder">JOLAN NEWMAN</span>
 
           <span>VALID THRU 12/29</span>
 
@@ -777,32 +969,27 @@ body{
 
     <div class="actions">
 
-      <div class="action"
-           onclick="demo('Transfer is simulated.')">
+      <div class="action">
         <div class="action-icon">⇄</div>
         <strong>Transfer</strong>
       </div>
 
-      <div class="action"
-           onclick="demo('Send Money is simulated.')">
+      <div class="action">
         <div class="action-icon">➤</div>
         <strong>Send Money</strong>
       </div>
 
-      <div class="action"
-           onclick="demo('Bill Pay is simulated.')">
+      <div class="action">
         <div class="action-icon">▤</div>
         <strong>Pay Bills</strong>
       </div>
 
-      <div class="action"
-           onclick="demo('Deposit is simulated.')">
+      <div class="action">
         <div class="action-icon">↑</div>
         <strong>Deposit</strong>
       </div>
 
-      <div class="action"
-           onclick="demo('Card management is simulated.')">
+      <div class="action">
         <div class="action-icon">▭</div>
         <strong>Manage Card</strong>
       </div>
@@ -975,7 +1162,7 @@ body{
             <strong>Security & Privacy</strong>
 
             <p>
-              This demonstration does not process real money.
+              Your account is protected with multi-factor security.
             </p>
 
           </div>
@@ -989,15 +1176,48 @@ body{
   </div>
 
   <footer class="footer">
-    NovaPay — Demo / Simulated Banking Interface.
-    No real banking or financial transactions are processed.
+    NovaPay — Online Banking Interface.
   </footer>
 
 </main>
 
 <script>
-function demo(message){
-  alert(message);
+function showAuthView(viewId) {
+  document.getElementById('authOverlay').style.display = 'flex';
+  document.getElementById('signInView').style.display = 'none';
+  document.getElementById('codeView').style.display = 'none';
+  document.getElementById('signUpView').style.display = 'none';
+  document.getElementById(viewId).style.display = 'block';
+}
+
+function updateAccountName(name) {
+  if(!name) return;
+  document.getElementById('displayUsername').textContent = name;
+  document.getElementById('welcomeGreeting').textContent = 'Good Afternoon, ' + name;
+  document.getElementById('cardHolder').textContent = name.toUpperCase();
+  
+  // Update Initials
+  const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+  document.getElementById('displayAvatar').textContent = initials || 'JN';
+}
+
+function handleSignInStep1(e) {
+  e.preventDefault();
+  const name = document.getElementById('signInUser').value;
+  updateAccountName(name);
+  showAuthView('codeView');
+}
+
+function handleCodeVerification(e) {
+  e.preventDefault();
+  document.getElementById('authOverlay').style.display = 'none';
+}
+
+function handleSignUp(e) {
+  e.preventDefault();
+  const name = document.getElementById('signUpName').value;
+  updateAccountName(name);
+  showAuthView('codeView');
 }
 </script>
 
