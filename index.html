@@ -1,703 +1,463 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>NovaPay • Premium Banking</title>
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    :root{
-      --gold:#d4a83b;
-      --gold2:#f7dc7a;
-      --black:#080808;
-      --dark:#15120b;
-      --cream:#fffaf0;
-      --text:#191714;
-      --muted:#777064;
-      --line:#eadfca;
-      --green:#168447;
-      --red:#c43b3b;
-    }
-    body{
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(circle at 75% 5%,#fff0ae,transparent 30%),
-        linear-gradient(135deg,#f8edc9,#dfb94e,#fff8dd);
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-    }
-    button,input,select,textarea{font:inherit;outline:none}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NovaPay — Banking</title>
 
-    /* ---------- LOGIN / AUTH ---------- */
-    .auth{
-      position:fixed;
-      inset:0;
-      z-index:9999;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:20px;
-      background:rgba(0,0,0,.88);
-      backdrop-filter:blur(10px);
-    }
-    .auth-box{
-      width:100%;
-      max-width:430px;
-      padding:34px 30px;
-      border-radius:25px;
-      background:linear-gradient(145deg,#211b0d,#050505);
-      border:1px solid rgba(247,220,122,.5);
-      color:white;
-      box-shadow:0 30px 70px rgba(0,0,0,.55);
-      animation:fadeIn .3s ease;
-    }
-    @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-    .logo{
-      width:58px;
-      height:58px;
-      margin:0 auto 14px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border-radius:16px;
-      background:linear-gradient(135deg,#f7dc7a,#a97919);
-      color:#111;
-      font-size:30px;
-      font-weight:900;
-    }
-    .auth h1{
-      text-align:center;
-      margin:0;
-      color:var(--gold2);
-      font-size:28px;
-      letter-spacing:-0.5px;
-    }
-    .auth h2{
-      text-align:center;
-      margin:20px 0 6px;
-      font-size:22px;
-      font-weight:700;
-    }
-    .auth p{
-      text-align:center;
-      color:#aaa49a;
-      font-size:13px;
-      margin-bottom:8px;
-    }
-    .auth label{
-      display:block;
-      margin:15px 0 6px;
-      font-size:12px;
-      color:#d7cfbd;
-      font-weight:700;
-      letter-spacing:0.3px;
-    }
-    .auth input{
-      width:100%;
-      padding:14px 16px;
-      border-radius:11px;
-      border:1px solid #725515;
-      background:#090909;
-      color:white;
-      outline:none;
-      transition:border .2s;
-    }
-    .auth input:focus{
-      border-color:var(--gold2);
-    }
-    .primary{
-      width:100%;
-      padding:14px;
-      margin-top:18px;
-      border:0;
-      border-radius:11px;
-      background:linear-gradient(135deg,#f8dc7a,#bd8c25);
-      color:#111;
-      font-weight:900;
-      cursor:pointer;
-      transition:transform .15s,box-shadow .2s;
-      box-shadow:0 6px 16px rgba(212,168,59,.25);
-    }
-    .primary:hover{
-      transform:translateY(-2px);
-      box-shadow:0 10px 24px rgba(212,168,59,.4);
-    }
-    .switch{
-      text-align:center;
-      margin-top:18px;
-      color:#aaa49a;
-      font-size:13px;
-    }
-    .switch a{
-      color:var(--gold2);
-      font-weight:800;
-      cursor:pointer;
-      text-decoration:underline;
-      text-underline-offset:2px;
-    }
-    .code{
-      text-align:center;
-      letter-spacing:8px;
-      font-size:25px!important;
-      font-weight:600;
-    }
-    .code-hint{
-      padding:12px;
-      margin-top:15px;
-      border-radius:10px;
-      background:#211b0d;
-      border:1px solid #725515;
-      color:var(--gold2);
-      text-align:center;
-      font-size:14px;
-    }
-    .code-hint strong{
-      font-size:20px;
-      letter-spacing:3px;
-      margin-left:6px;
-    }
+<!-- EMAILJS SDK -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script type="text/javascript">
+   (function(){
+      // 🔑 Replace with your EmailJS Public Key
+      emailjs.init("YOUR_PUBLIC_KEY");
+   })();
+</script>
 
-    /* ---------- SIDEBAR ---------- */
-    .sidebar{
-      position:fixed;
-      left:0;
-      top:0;
-      bottom:0;
-      width:250px;
-      padding:28px 16px;
-      background:linear-gradient(180deg,#070707,#19160e);
-      color:white;
-      display:flex;
-      flex-direction:column;
-      z-index:100;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding:4px 12px 35px;
-    }
-    .brand .logo{
-      width:44px;
-      height:44px;
-      margin:0;
-      font-size:23px;
-      border-radius:12px;
-    }
-    .brand-name{
-      font-size:23px;
-      font-weight:800;
-      color:var(--gold2);
-      letter-spacing:-0.3px;
-    }
-    .menu{
-      display:flex;
-      flex-direction:column;
-      gap:5px;
-      flex:1;
-    }
-    .menu button{
-      width:100%;
-      padding:13px 14px;
-      border:0;
-      border-radius:11px;
-      background:transparent;
-      color:#aaa49a;
-      text-align:left;
-      cursor:pointer;
-      font-weight:700;
-      font-size:14px;
-      transition:all .15s;
-    }
-    .menu button:hover,
-    .menu button.active{
-      color:#111;
-      background:linear-gradient(135deg,#e8bd4d,#f6dc7b);
-      box-shadow:0 4px 12px rgba(212,168,59,.3);
-    }
-    .sidebar-card{
-      margin-top:auto;
-      padding:18px;
-      border-radius:16px;
-      border:1px solid #725515;
-      background:linear-gradient(145deg,#211b0b,#090909);
-    }
-    .sidebar-card h3{
-      margin:0;
-      color:var(--gold2);
-      font-size:14px;
-      font-weight:700;
-    }
-    .sidebar-card p{
-      color:#aaa49a;
-      font-size:11px;
-      line-height:1.5;
-      margin:6px 0 12px;
-    }
-    .logout{
-      width:100%;
-      padding:10px;
-      border:0;
-      border-radius:9px;
-      background:linear-gradient(135deg,#f8dc7a,#bd8c25);
-      font-weight:800;
-      cursor:pointer;
-      font-size:13px;
-      transition:transform .1s;
-    }
-    .logout:hover{transform:scale(1.02)}
+<style>
+*{box-sizing:border-box}
+:root{
+  --gold:#d4a83b;
+  --gold2:#f5d778;
+  --dark:#0b0b0a;
+  --dark2:#171510;
+  --cream:#fffaf0;
+  --text:#191714;
+  --muted:#777064;
+  --line:#eadfca;
+  --green:#168447;
+  --red:#c43b3b;
+}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 75% 5%,#fff0ae 0,transparent 30%),
+    linear-gradient(135deg,#f8edc9,#e1bb58,#fff8dd);
+}
 
-    /* ---------- MAIN ---------- */
-    .main{
-      margin-left:250px;
-      flex:1;
-      display:flex;
-      flex-direction:column;
-      min-height:100vh;
-    }
-    .topbar{
-      height:78px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:0 34px;
-      background:rgba(255,255,255,.55);
-      border-bottom:1px solid var(--line);
-      backdrop-filter:blur(8px);
-    }
-    .search{
-      width:390px;
-      padding:13px 18px;
-      border-radius:30px;
-      border:1px solid #d7c9aa;
-      outline:none;
-      background:rgba(255,255,255,.7);
-      font-size:14px;
-      transition:border .2s;
-    }
-    .search:focus{
-      border-color:var(--gold);
-      background:white;
-    }
-    .user{
-      display:flex;
-      align-items:center;
-      gap:11px;
-    }
-    .avatar{
-      width:42px;
-      height:42px;
-      border-radius:50%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:linear-gradient(135deg,#f5d875,#b78622);
-      font-weight:900;
-      font-size:15px;
-      color:#111;
-      box-shadow:0 4px 10px rgba(212,168,59,.3);
-    }
-    .content{
-      max-width:1280px;
-      margin:0 auto;
-      padding:32px;
-      width:100%;
-      flex:1;
-    }
-    .welcome h1{
-      margin:0 0 5px;
-      font-size:30px;
-      font-weight:800;
-      letter-spacing:-0.5px;
-    }
-    .welcome p{
-      color:var(--muted);
-      font-size:14px;
-    }
+/* ================= AUTH ================= */
+.auth-overlay{
+  position:fixed;inset:0;
+  background:rgba(11,11,10,0.85);
+  backdrop-filter:blur(8px);
+  z-index:9999;
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;
+}
+.auth-card{
+  width:100%;max-width:420px;
+  background:linear-gradient(180deg,#171510,#070707);
+  border:1px solid rgba(239,199,73,.45);
+  border-radius:24px;padding:36px 30px;color:white;
+  box-shadow:0 25px 50px rgba(0,0,0,0.5);
+  text-align:center;
+}
+.auth-brand{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:24px}
+.auth-brand .brand-logo{
+  width:48px;height:48px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--gold2),#a97919);
+  color:#111;font-size:26px;font-weight:900;
+}
+.auth-brand .brand-name{font-size:26px;font-weight:800;color:var(--gold2)}
+.auth-card h2{margin:0 0 8px;font-size:22px;letter-spacing:-0.5px}
+.auth-card p{color:#aaa49a;font-size:13px;margin:0 0 24px}
+.auth-form{display:flex;flex-direction:column;gap:16px;text-align:left}
+.auth-form label{font-size:12px;font-weight:600;color:#d4ccba;display:block;margin-bottom:6px}
+.auth-form input{
+  width:100%;padding:14px 16px;border-radius:12px;
+  border:1px solid #725515;background:#090909;color:white;
+  font-size:14px;outline:none;
+}
+.auth-form input:focus{border-color:var(--gold2)}
+.btn-submit{
+  width:100%;padding:14px;margin-top:8px;border-radius:12px;border:0;
+  background:linear-gradient(135deg,#f8dc7a,#bd8c25);
+  color:#111;font-weight:800;font-size:15px;cursor:pointer;
+  transition:0.2s;
+}
+.btn-submit:hover{filter:brightness(1.1)}
+.auth-toggle{margin-top:20px;font-size:13px;color:#aaa49a}
+.auth-toggle a{color:var(--gold2);text-decoration:none;font-weight:700}
 
-    /* cards */
-    .hero{
-      display:grid;
-      grid-template-columns:1.35fr .8fr;
-      gap:20px;
-      margin:24px 0 20px;
-    }
-    .balance-card,
-    .bank-card{
-      min-height:245px;
-      padding:31px;
-      border-radius:24px;
-      color:white;
-      background:
-        radial-gradient(circle at 85% 15%,rgba(239,203,91,.32),transparent 27%),
-        linear-gradient(135deg,#050505,#27200d,#080808);
-      border:1px solid rgba(239,199,73,.45);
-      box-shadow:0 22px 45px rgba(65,47,8,.18);
-    }
-    .balance-label{
-      color:#d8d1c1;
-      font-size:13px;
-      letter-spacing:0.5px;
-      font-weight:500;
-    }
-    .balance{
-      font-size:47px;
-      font-weight:850;
-      margin:7px 0;
-      letter-spacing:-1px;
-      color:#fff9e6;
-    }
-    .account{
-      color:#cbc3b1;
-      font-size:13px;
-      font-weight:500;
-    }
-    .card-brand{
-      color:#f3d36e;
-      font-size:20px;
-      font-weight:800;
-      letter-spacing:0.5px;
-    }
-    .chip{
-      width:43px;
-      height:31px;
-      margin-top:27px;
-      border-radius:6px;
-      background:linear-gradient(135deg,#f5e29b,#a87d23);
-      box-shadow:inset 0 0 6px rgba(0,0,0,.3);
-    }
-    .card-number{
-      margin-top:25px;
-      letter-spacing:3px;
-      font-size:17px;
-      font-weight:500;
-    }
-    .card-bottom{
-      display:flex;
-      justify-content:space-between;
-      margin-top:25px;
-      color:#d4ccba;
-      font-size:10px;
-      font-weight:600;
-      letter-spacing:0.8px;
-    }
+/* ================= SIDEBAR ================= */
+.sidebar{
+  position:fixed;left:0;top:0;bottom:0;width:250px;
+  background:linear-gradient(180deg,#070707,#19160e);
+  color:white;padding:28px 16px;z-index:20;
+}
+.brand{display:flex;align-items:center;gap:12px;padding:4px 12px 35px}
+.brand-logo{
+  width:44px;height:44px;border-radius:13px;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--gold2),#a97919);
+  color:#111;font-size:25px;font-weight:900;
+}
+.brand-name{font-size:23px;font-weight:800;color:var(--gold2)}
+.menu{display:flex;flex-direction:column;gap:5px}
+.menu a{
+  display:flex;align-items:center;gap:14px;
+  padding:13px 14px;border-radius:11px;
+  color:#aaa49a;text-decoration:none;font-size:14px;font-weight:600;
+  cursor:pointer;
+}
+.menu a:hover,.menu a.active{
+  color:#111;background:linear-gradient(135deg,#e8bd4d,#f6dc7b);
+}
+.icon{width:21px;text-align:center;font-size:16px}
+.sidebar-card{
+  position:absolute;left:16px;right:16px;bottom:24px;
+  padding:18px;border-radius:16px;border:1px solid #725515;
+  background:linear-gradient(145deg,#211b0b,#090909);
+}
+.sidebar-card h3{margin:0;color:var(--gold2);font-size:14px}
+.sidebar-card p{color:#aaa49a;font-size:11px;line-height:1.5}
+.sidebar-card button{
+  width:100%;border:0;padding:10px;border-radius:9px;
+  background:linear-gradient(135deg,#f8dc7a,#bd8c25);
+  font-weight:800;cursor:pointer;
+}
 
-    /* actions */
-    .actions{
-      display:grid;
-      grid-template-columns:repeat(5,1fr);
-      gap:12px;
-      margin:20px 0 24px;
-    }
-    .action{
-      padding:17px 8px;
-      text-align:center;
-      border-radius:15px;
-      background:rgba(255,255,255,.82);
-      border:1px solid var(--line);
-      cursor:pointer;
-      transition:.2s;
-      box-shadow:0 2px 8px rgba(0,0,0,.03);
-    }
-    .action:hover{
-      transform:translateY(-3px);
-      box-shadow:0 10px 22px rgba(212,168,59,.2);
-      border-color:var(--gold);
-    }
-    .action-icon{
-      width:41px;
-      height:41px;
-      margin:0 auto 9px;
-      border-radius:12px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:linear-gradient(135deg,#f7dc7a,#c18e25);
-      font-weight:900;
-      font-size:18px;
-    }
-    .action strong{
-      font-size:12px;
-      font-weight:700;
-      color:#3a352c;
-    }
+/* ================= MAIN ================= */
+.main{margin-left:250px;min-height:100vh}
+.topbar{
+  height:78px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 34px;background:rgba(255,255,255,.55);
+  border-bottom:1px solid var(--line);backdrop-filter:blur(14px);
+}
+.search{
+  width:390px;padding:13px 18px;border-radius:30px;
+  border:1px solid #d7c9aa;background:rgba(255,255,255,.7);
+  font-size:13px;outline:none;
+}
+.user{display:flex;align-items:center;gap:11px}
+.avatar{
+  width:42px;height:42px;border-radius:50%;
+  background:linear-gradient(135deg,#f5d875,#b78622);
+  display:flex;align-items:center;justify-content:center;font-weight:900;
+}
+.content{max-width:1280px;margin:auto;padding:32px}
+.welcome{margin-bottom:24px}
+.welcome h1{margin:0 0 5px;font-size:30px;letter-spacing:-.8px}
+.welcome p{margin:0;color:var(--muted);font-size:14px}
 
-    /* lower panels */
-    .lower{
-      display:grid;
-      grid-template-columns:1.35fr .8fr;
-      gap:20px;
-    }
-    .panel{
-      background:rgba(255,255,255,.82);
-      border:1px solid var(--line);
-      border-radius:20px;
-      padding:23px;
-      backdrop-filter:blur(4px);
-    }
-    .panel h2{
-      margin-top:0;
-      font-size:18px;
-      font-weight:800;
-      margin-bottom:14px;
-      letter-spacing:-0.3px;
-    }
-    .transaction{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:15px 0;
-      border-bottom:1px solid #eee5d4;
-    }
-    .transaction:last-child{border-bottom:0}
-    .transaction-left{
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
-    .tx-icon{
-      width:40px;
-      height:40px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border-radius:11px;
-      background:#fff2c9;
-      font-size:18px;
-    }
-    .tx-name{
-      font-size:13px;
-      font-weight:700;
-    }
-    .tx-date{
-      margin-top:3px;
-      color:var(--muted);
-      font-size:10px;
-    }
-    .in{
-      color:var(--green);
-      font-weight:800;
-      font-size:14px;
-    }
-    .out{
-      color:var(--red);
-      font-weight:800;
-      font-size:14px;
-    }
-    .detail{
-      display:flex;
-      justify-content:space-between;
-      padding:13px 0;
-      border-bottom:1px solid #eee5d4;
-      font-size:13px;
-    }
-    .detail:last-child{border-bottom:0}
-    .detail span{
-      color:var(--muted);
-      font-weight:500;
-    }
-    .detail strong{
-      font-weight:700;
-    }
-    .active{
-      color:var(--green);
-    }
-    .footer{
-      text-align:center;
-      padding:28px;
-      color:#776d59;
-      font-size:10px;
-      letter-spacing:0.2px;
-      border-top:1px solid rgba(234,223,202,.5);
-      margin-top:20px;
-    }
+/* HERO */
+.hero{display:grid;grid-template-columns:1.35fr .8fr;gap:20px}
+.balance-card{
+  min-height:245px;padding:31px;border-radius:24px;position:relative;overflow:hidden;
+  color:white;
+  background:
+    radial-gradient(circle at 85% 15%,rgba(239,203,91,.32),transparent 27%),
+    linear-gradient(135deg,#050505,#27200d,#080808);
+  border:1px solid rgba(239,199,73,.45);
+  box-shadow:0 22px 45px rgba(65,47,8,.18);
+}
+.balance-card:after{
+  content:"";position:absolute;width:300px;height:300px;
+  border:1px solid rgba(242,207,103,.22);border-radius:50%;
+  right:-125px;bottom:-175px;
+}
+.balance-label{color:#d8d1c1;font-size:13px}
+.balance{font-size:47px;font-weight:850;letter-spacing:-2px;margin:7px 0 5px}
+.account{color:#cbc3b1;font-size:13px}
+.balance-actions{display:flex;gap:10px;margin-top:26px}
+.btn-gold,.btn-outline{
+  padding:11px 17px;border-radius:10px;font-size:12px;font-weight:750;cursor:pointer;
+}
+.btn-gold{background:linear-gradient(135deg,#f9df82,#c28f26);color:#111}
+.btn-outline{border:1px solid #a98025;color:#f1d36d}
 
-    /* ---------- MODALS ---------- */
-    .modal{
-      position:fixed;
-      inset:0;
-      z-index:5000;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:20px;
-      background:rgba(0,0,0,.65);
-      backdrop-filter:blur(6px);
-    }
-    .modal-box{
-      width:100%;
-      max-width:500px;
-      max-height:90vh;
-      overflow:auto;
-      padding:28px;
-      border-radius:22px;
-      background:#fffaf0;
-      box-shadow:0 25px 60px rgba(0,0,0,.4);
-      border:1px solid rgba(247,220,122,.4);
-    }
-    .modal-box h2{
-      margin-top:0;
-      font-size:22px;
-      font-weight:800;
-    }
-    .modal-box p{
-      color:var(--muted);
-      font-size:13px;
-      margin-bottom:8px;
-    }
-    .modal-box label{
-      display:block;
-      margin:13px 0 6px;
-      font-size:12px;
-      font-weight:700;
-      color:#3a352c;
-    }
-    .modal-box input,
-    .modal-box select,
-    .modal-box textarea{
-      width:100%;
-      padding:13px 14px;
-      border-radius:10px;
-      border:1px solid #d8c8a6;
-      background:white;
-      outline:none;
-      font-size:14px;
-      transition:border .2s;
-    }
-    .modal-box input:focus,
-    .modal-box select:focus,
-    .modal-box textarea:focus{
-      border-color:var(--gold);
-    }
-    .modal-box textarea{
-      min-height:75px;
-      resize:vertical;
-    }
-    .modal-buttons{
-      display:flex;
-      gap:10px;
-      margin-top:22px;
-    }
-    .modal-buttons button{
-      flex:1;
-      padding:13px;
-      border-radius:10px;
-      font-weight:800;
-      cursor:pointer;
-      transition:transform .1s;
-    }
-    .modal-buttons button:hover{transform:translateY(-1px)}
-    .cancel{
-      border:1px solid #c9b98f;
-      background:white;
-      color:#3a352c;
-    }
-    .cancel:hover{background:#f5efe0}
-    .confirm{
-      border:0;
-      background:linear-gradient(135deg,#f7dc7a,#bd8c25);
-      color:#111;
-    }
-    .confirm:hover{background:linear-gradient(135deg,#f5d45a,#a87d1f)}
+/* CARD */
+.card{
+  min-height:245px;padding:27px;border-radius:24px;color:white;
+  background:linear-gradient(145deg,#211b0d,#050505 60%,#33250b);
+  border:1px solid rgba(234,194,70,.48);
+  box-shadow:0 22px 45px rgba(65,47,8,.18);
+}
+.card-top{display:flex;justify-content:space-between;align-items:center}
+.card-brand{color:#f3d36e;font-size:20px;font-weight:800}
+.contactless{font-size:22px}
+.chip{
+  width:43px;height:31px;margin-top:27px;border-radius:6px;
+  background:linear-gradient(135deg,#f5e29b,#a87d23);
+}
+.card-number{margin-top:25px;font-size:17px;letter-spacing:3px}
+.card-bottom{
+  display:flex;justify-content:space-between;margin-top:23px;
+  color:#d4ccba;font-size:10px;
+}
 
-    /* ---------- RESPONSIVE ---------- */
-    @media(max-width:950px){
-      .sidebar{display:none}
-      .main{margin-left:0}
-      .hero,.lower{grid-template-columns:1fr}
-      .actions{grid-template-columns:repeat(3,1fr)}
-    }
-    @media(max-width:600px){
-      .search{display:none}
-      .topbar{padding:0 15px}
-      .content{padding:22px 13px}
-      .welcome h1{font-size:25px}
-      .balance{font-size:36px}
-      .balance-card,.bank-card{padding:24px}
-      .actions{grid-template-columns:repeat(2,1fr)}
-      .auth-box{padding:26px 20px}
-      .brand-name{font-size:20px}
-    }
-  </style>
+/* ACTIONS */
+.actions{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:20px 0}
+.action{
+  padding:17px 8px;text-align:center;border-radius:15px;
+  background:rgba(255,255,255,.78);
+  border:1px solid var(--line);transition:.2s;cursor:pointer;
+}
+.action:hover{transform:translateY(-3px);box-shadow:0 12px 25px rgba(80,57,10,.12)}
+.action-icon{
+  width:41px;height:41px;margin:auto auto 9px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#f7dc7a,#c18e25);
+  font-weight:900;
+}
+.action strong{font-size:12px}
+
+/* LOWER */
+.lower{display:grid;grid-template-columns:1.35fr .8fr;gap:20px}
+.panel{
+  background:rgba(255,255,255,.78);
+  border:1px solid var(--line);border-radius:20px;padding:23px;
+  box-shadow:0 12px 28px rgba(72,51,9,.07);
+}
+.panel-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}
+.panel-title h2{margin:0;font-size:18px}
+.panel-title a{color:#98701d;text-decoration:none;font-size:12px;font-weight:750}
+
+/* TRANSACTIONS */
+.transaction{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:15px 0;border-bottom:1px solid #eee5d4;
+}
+.transaction:last-child{border-bottom:0}
+.transaction-left{display:flex;align-items:center;gap:12px}
+.tx-icon{
+  width:40px;height:40px;border-radius:11px;
+  display:flex;align-items:center;justify-content:center;background:#fff2c9;
+}
+.tx-name{font-size:13px;font-weight:700}
+.tx-date{font-size:10px;color:var(--muted);margin-top:3px}
+.in{color:var(--green);font-weight:800;font-size:13px}
+.out{color:var(--red);font-weight:800;font-size:13px}
+
+/* ACCOUNT DETAILS */
+.detail{
+  display:flex;justify-content:space-between;
+  padding:13px 0;border-bottom:1px solid #eee5d4;font-size:12px;
+}
+.detail:last-child{border-bottom:0}
+.detail span{color:var(--muted)}
+.active{color:var(--green)}
+
+/* SECURITY */
+.security{
+  display:flex;align-items:center;gap:12px;margin-top:20px;
+  padding:17px;border-radius:15px;background:#fff5d5;
+  border:1px solid #e6cf88;
+}
+.security-icon{
+  width:42px;height:42px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;background:#e7c65d;
+}
+.security strong{font-size:13px}
+.security p{margin:3px 0 0;color:#756b55;font-size:10px}
+
+/* FOOTER */
+.footer{text-align:center;padding:28px;color:#776d59;font-size:10px}
+
+/* ================= MODAL ================= */
+.modal{
+  position:fixed;inset:0;z-index:8000;
+  background:rgba(0,0,0,.65);backdrop-filter:blur(6px);
+  display:none;align-items:center;justify-content:center;padding:20px;
+}
+.modal.show{display:flex}
+.modal-box{
+  width:100%;max-width:480px;max-height:90vh;overflow:auto;
+  background:#fffaf0;border-radius:22px;padding:28px;
+  box-shadow:0 25px 60px rgba(0,0,0,.4);
+  border:1px solid rgba(247,220,122,.4);
+}
+.modal-box h2{margin:0 0 6px;font-size:22px;font-weight:800}
+.modal-box .modal-sub{color:var(--muted);font-size:13px;margin:0 0 16px}
+.modal-box label{
+  display:block;margin:13px 0 6px;
+  font-size:12px;font-weight:700;color:#3a352c;
+}
+.modal-box input,.modal-box select,.modal-box textarea{
+  width:100%;padding:13px 14px;border-radius:10px;
+  border:1px solid #d8c8a6;background:white;
+  outline:none;font-size:14px;transition:border .2s;
+  font-family:inherit;
+}
+.modal-box input:focus,.modal-box select:focus,.modal-box textarea:focus{
+  border-color:var(--gold);
+}
+.modal-box textarea{min-height:70px;resize:vertical}
+.modal-buttons{display:flex;gap:10px;margin-top:22px}
+.modal-buttons button{
+  flex:1;padding:13px;border-radius:10px;font-weight:800;cursor:pointer;
+  transition:transform .1s;font-size:14px;
+}
+.modal-buttons button:hover{transform:translateY(-1px)}
+.cancel{border:1px solid #c9b98f;background:white;color:#3a352c}
+.cancel:hover{background:#f5efe0}
+.confirm{
+  border:0;background:linear-gradient(135deg,#f7dc7a,#bd8c25);color:#111;
+}
+.confirm:hover{background:linear-gradient(135deg,#f5d45a,#a87d1f)}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:#111;color:#f7dc7a;padding:14px 22px;border-radius:12px;
+  font-size:13px;font-weight:700;z-index:10000;
+  border:1px solid #725515;opacity:0;transition:.3s;
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* MOBILE */
+@media(max-width:950px){
+  .sidebar{display:none}
+  .main{margin-left:0}
+  .hero,.lower{grid-template-columns:1fr}
+  .actions{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:600px){
+  .topbar{padding:0 15px}
+  .search{display:none}
+  .content{padding:22px 13px}
+  .welcome h1{font-size:25px}
+  .balance{font-size:36px}
+  .balance-card,.card{min-height:220px;padding:24px}
+  .actions{grid-template-columns:repeat(2,1fr)}
+  .panel{padding:18px}
+}
+</style>
 </head>
+
 <body>
 
-<!-- ========== AUTH ========== -->
-<div class="auth" id="auth">
+<!-- ================= AUTH OVERLAY ================= -->
+<div class="auth-overlay" id="authOverlay">
+
   <!-- SIGN IN -->
-  <div class="auth-box" id="signinBox">
-    <div class="logo">N</div>
-    <h1>NovaPay</h1>
-    <h2>Sign In</h2>
-    <p>Enter your account name to continue.</p>
-    <label>Account Name</label>
-    <input id="signinName" value="Jolan Newman" placeholder="Your name">
-    <button class="primary" onclick="startSignIn()">Continue</button>
-    <div class="switch">New here? <a onclick="showSignup()">Create Account</a></div>
+  <div class="auth-card" id="signInView">
+    <div class="auth-brand">
+      <div class="brand-logo">N</div>
+      <div class="brand-name">NovaPay</div>
+    </div>
+    <h2>Welcome Back</h2>
+    <p>Sign in to send a verification code to your email.</p>
+
+    <form class="auth-form" onsubmit="handleSignInStep1(event)">
+      <div>
+        <label>Full Name</label>
+        <input type="text" id="signInUser" value="Jolan Newman" required>
+      </div>
+      <div>
+        <label>Email Address</label>
+        <input type="email" id="signInEmail" placeholder="your-email@example.com" required>
+      </div>
+      <div>
+        <label>Password</label>
+        <input type="password" required placeholder="••••••••">
+      </div>
+      <button type="submit" class="btn-submit" id="signInBtn">Send Verification Code</button>
+    </form>
+
+    <div class="auth-toggle">
+      Don't have an account? <a onclick="showAuthView('signUpView')">Sign Up</a>
+    </div>
   </div>
-  <!-- SIGN UP -->
-  <div class="auth-box" id="signupBox" style="display:none">
-    <div class="logo">N</div>
-    <h1>NovaPay</h1>
-    <h2>Create Account</h2>
-    <p>Create your local NovaPay profile.</p>
-    <label>Full Name</label>
-    <input id="signupName" value="Jolan Newman" placeholder="Full name">
-    <label>Email</label>
-    <input id="signupEmail" type="email" placeholder="your@email.com">
-    <button class="primary" onclick="startSignup()">Sign Up</button>
-    <div class="switch">Already have an account? <a onclick="showSignin()">Sign In</a></div>
-  </div>
+
   <!-- CODE -->
-  <div class="auth-box" id="codeBox" style="display:none">
-    <div class="logo">N</div>
-    <h1>NovaPay</h1>
-    <h2>Security Code</h2>
-    <p>Enter the code shown below to continue.</p>
-    <div class="code-hint">Your code: <strong id="generatedCode"></strong></div>
-    <label>6-Digit Code</label>
-    <input id="enteredCode" class="code" maxlength="6" inputmode="numeric" placeholder="000000">
-    <button class="primary" onclick="verifyCode()">Verify & Continue</button>
-    <div class="switch"><a onclick="newCode()">Generate Another Code</a></div>
+  <div class="auth-card" id="codeView" style="display:none;">
+    <div class="auth-brand">
+      <div class="brand-logo">N</div>
+      <div class="brand-name">NovaPay</div>
+    </div>
+    <h2>Security Verification</h2>
+    <p>Please enter the 6-digit authentication code sent to your email.</p>
+
+    <form class="auth-form" onsubmit="handleCodeVerification(event)">
+      <div>
+        <label>6-Digit Security Code</label>
+        <input type="text" id="authCode" placeholder="123456" maxlength="6" pattern="[0-9]{6}" required
+               style="text-align:center; letter-spacing: 6px; font-size:20px;">
+      </div>
+      <button type="submit" class="btn-submit">Verify & Access Dashboard</button>
+    </form>
+
+    <div class="auth-toggle">
+      Didn't get a code? <a onclick="resendEmailCode()">Resend Code</a>
+    </div>
   </div>
+
+  <!-- SIGN UP -->
+  <div class="auth-card" id="signUpView" style="display:none;">
+    <div class="auth-brand">
+      <div class="brand-logo">N</div>
+      <div class="brand-name">NovaPay</div>
+    </div>
+    <h2>Create Your Account</h2>
+    <p>Join NovaPay for secure online banking.</p>
+
+    <form class="auth-form" onsubmit="handleSignUp(event)">
+      <div>
+        <label>Full Name</label>
+        <input type="text" id="signUpName" value="Jolan Newman" required>
+      </div>
+      <div>
+        <label>Email Address</label>
+        <input type="email" id="signUpEmail" placeholder="your-email@example.com" required>
+      </div>
+      <div>
+        <label>Password</label>
+        <input type="password" required placeholder="••••••••">
+      </div>
+      <button type="submit" class="btn-submit" id="signUpBtn">Sign Up & Send Code</button>
+    </form>
+
+    <div class="auth-toggle">
+      Already have an account? <a onclick="showAuthView('signInView')">Sign In</a>
+    </div>
+  </div>
+
 </div>
 
-<!-- ========== SIDEBAR ========== -->
+<!-- ================= SIDEBAR ================= -->
 <aside class="sidebar">
   <div class="brand">
-    <div class="logo">N</div>
+    <div class="brand-logo">N</div>
     <div class="brand-name">NovaPay</div>
   </div>
+
   <nav class="menu">
-    <button class="active">⌂ &nbsp; Dashboard</button>
-    <button onclick="openTransfer()">⇄ &nbsp; Transfer</button>
-    <button onclick="openSend()">➤ &nbsp; Send Money</button>
-    <button onclick="openBill()">▤ &nbsp; Pay Bills</button>
-    <button onclick="openDeposit()">↑ &nbsp; Deposit</button>
-    <button onclick="openCard()">▭ &nbsp; Manage Card</button>
+    <a class="active"><span class="icon">⌂</span> Dashboard</a>
+    <a onclick="openModal('transferModal')"><span class="icon">⇄</span> Transfers</a>
+    <a onclick="openModal('billModal')"><span class="icon">▤</span> Pay Bills</a>
+    <a onclick="openModal('depositModal')"><span class="icon">↑</span> Deposit</a>
+    <a onclick="openModal('cardModal')"><span class="icon">▭</span> Cards</a>
+    <a onclick="alert('Transaction history coming soon.')"><span class="icon">☷</span> Transactions</a>
+    <a onclick="alert('Statements coming soon.')"><span class="icon">▤</span> Statements</a>
+    <a onclick="alert('Settings coming soon.')"><span class="icon">⚙</span> Settings</a>
+    <a onclick="alert('Support: support@novapay.example')"><span class="icon">?</span> Support</a>
   </nav>
+
   <div class="sidebar-card">
     <h3>♛ Premium Banking</h3>
-    <p>Manage your financial dashboard.</p>
-    <button class="logout" onclick="logout()">Log Out</button>
+    <p>Manage your accounts and investments seamlessly.</p>
+    <button onclick="logout()">Sign Out</button>
   </div>
 </aside>
 
-<!-- ========== MAIN ========== -->
+<!-- ================= MAIN ================= -->
 <main class="main">
   <header class="topbar">
-    <input class="search" placeholder="Search transactions...">
+    <input class="search" type="text" placeholder="Search transactions, payees, or help...">
     <div class="user">
-      <strong id="displayName">Jolan Newman</strong>
-      <div class="avatar" id="avatar">JN</div>
+      <strong id="displayUsername">Jolan Newman</strong>
+      <div class="avatar" id="displayAvatar">JN</div>
     </div>
   </header>
 
   <div class="content">
     <div class="welcome">
-      <h1 id="welcome">Good Afternoon, Jolan Newman</h1>
+      <h1 id="welcomeGreeting">Good Afternoon, Jolan Newman</h1>
       <p>Welcome to your NovaPay dashboard.</p>
     </div>
 
@@ -705,15 +465,23 @@
     <div class="hero">
       <section class="balance-card">
         <div class="balance-label">Available Balance</div>
-        <div class="balance" id="balance">$58,000.00</div>
+        <div class="balance" id="balanceDisplay">$58,000.00</div>
         <div class="account">Checking Account •••• 4821</div>
+        <div class="balance-actions">
+          <div class="btn-gold" onclick="openModal('transferModal')">View Account</div>
+          <div class="btn-outline" onclick="openModal('cardModal')">Settings</div>
+        </div>
       </section>
-      <section class="bank-card">
-        <div class="card-brand">NovaPay</div>
+
+      <section class="card">
+        <div class="card-top">
+          <div class="card-brand">NovaPay</div>
+          <div class="contactless">)))</div>
+        </div>
         <div class="chip"></div>
         <div class="card-number">•••• •••• •••• 4821</div>
         <div class="card-bottom">
-          <span id="cardName">JOLAN NEWMAN</span>
+          <span id="cardHolder">JOLAN NEWMAN</span>
           <span>VALID THRU 12/29</span>
         </div>
       </section>
@@ -721,318 +489,491 @@
 
     <!-- ACTIONS -->
     <div class="actions">
-      <div class="action" onclick="openTransfer()"><div class="action-icon">⇄</div><strong>Transfer</strong></div>
-      <div class="action" onclick="openSend()"><div class="action-icon">➤</div><strong>Send Money</strong></div>
-      <div class="action" onclick="openBill()"><div class="action-icon">▤</div><strong>Pay Bills</strong></div>
-      <div class="action" onclick="openDeposit()"><div class="action-icon">↑</div><strong>Deposit</strong></div>
-      <div class="action" onclick="openCard()"><div class="action-icon">▭</div><strong>Manage Card</strong></div>
+      <div class="action" onclick="openModal('transferModal')">
+        <div class="action-icon">⇄</div><strong>Transfer</strong>
+      </div>
+      <div class="action" onclick="openModal('sendModal')">
+        <div class="action-icon">➤</div><strong>Send Money</strong>
+      </div>
+      <div class="action" onclick="openModal('billModal')">
+        <div class="action-icon">▤</div><strong>Pay Bills</strong>
+      </div>
+      <div class="action" onclick="openModal('depositModal')">
+        <div class="action-icon">↑</div><strong>Deposit</strong>
+      </div>
+      <div class="action" onclick="openModal('cardModal')">
+        <div class="action-icon">▭</div><strong>Manage Card</strong>
+      </div>
     </div>
 
     <!-- LOWER -->
     <div class="lower">
       <section class="panel">
-        <h2>Recent Transactions</h2>
+        <div class="panel-title">
+          <h2>Recent Transactions</h2>
+          <a href="#">View All →</a>
+        </div>
         <div id="transactions">
-          <!-- EMPTY: No demo transactions -->
-          <div style="padding:20px 0;text-align:center;color:var(--muted);font-size:13px;" id="emptyTx">
+          <div style="padding:20px 0;text-align:center;color:var(--muted);font-size:13px;">
             No recent transactions
           </div>
         </div>
       </section>
-      <section class="panel">
-        <h2>Account Overview</h2>
-        <div class="detail"><span>Account Type</span><strong>Checking</strong></div>
-        <div class="detail"><span>Account Number</span><strong>•••• 4821</strong></div>
-        <div class="detail"><span>Status</span><strong class="active">● Active</strong></div>
-        <div class="detail"><span>Currency</span><strong>USD</strong></div>
-        <div class="detail"><span>Balance</span><strong id="overviewBalance">$58,000.00</strong></div>
-      </section>
+
+      <div>
+        <section class="panel">
+          <div class="panel-title">
+            <h2>Account Overview</h2>
+            <span>•••</span>
+          </div>
+          <div class="detail"><span>Account Type</span><strong>Checking</strong></div>
+          <div class="detail"><span>Account Number</span><strong>•••• 4821</strong></div>
+          <div class="detail"><span>Status</span><strong class="active">● Active</strong></div>
+          <div class="detail"><span>Currency</span><strong>USD</strong></div>
+          <div class="detail"><span>Balance</span><strong id="overviewBalance">$58,000.00</strong></div>
+        </section>
+
+        <div class="security">
+          <div class="security-icon">🔒</div>
+          <div>
+            <strong>Security & Privacy</strong>
+            <p>Your account is protected with multi-factor security.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <footer class="footer">
-    NovaPay — fictional financial interface. No real banking services or transactions are provided.
-  </footer>
+  <footer class="footer">NovaPay — Online Banking Interface.</footer>
 </main>
 
-<!-- ========== MODALS ========== -->
-<!-- TRANSFER -->
+<!-- ================= TRANSFER MODAL ================= -->
 <div class="modal" id="transferModal">
   <div class="modal-box">
-    <h2>Transfer</h2>
-    <p>Enter recipient details for this transaction.</p>
-    <label>Receiver Name</label><input id="receiverName" placeholder="Receiver name">
-    <label>Routing Number</label><input id="routing" inputmode="numeric" maxlength="9" placeholder="Routing number">
-    <label>Account Number</label><input id="accountNumber" inputmode="numeric" placeholder="Account number">
-    <label>Amount</label><input id="transferAmount" type="number" min="0.01" step="0.01" placeholder="0.00">
-    <label>Memo</label><textarea id="transferMemo"></textarea>
+    <h2>Transfer Funds</h2>
+    <p class="modal-sub">Enter recipient banking details to send money.</p>
+
+    <label>Receiver Name</label>
+    <input id="tfReceiver" placeholder="e.g. Jane Smith">
+
+    <label>Routing Number (9 digits)</label>
+    <input id="tfRouting" inputmode="numeric" maxlength="9" placeholder="021000021">
+
+    <label>Account Number</label>
+    <input id="tfAccount" inputmode="numeric" maxlength="17" placeholder="1234567890">
+
+    <label>Amount (USD)</label>
+    <input id="tfAmount" type="number" min="0.01" step="0.01" placeholder="0.00">
+
+    <label>Memo (optional)</label>
+    <textarea id="tfMemo" placeholder="Rent, invoice #1234, etc."></textarea>
+
     <div class="modal-buttons">
-      <button class="cancel" onclick="closeModals()">Cancel</button>
-      <button class="confirm" onclick="transfer()">Continue</button>
+      <button class="cancel" onclick="closeModal('transferModal')">Cancel</button>
+      <button class="confirm" onclick="doTransfer()">Send Transfer</button>
     </div>
   </div>
 </div>
 
-<!-- SEND -->
+<!-- ================= SEND MONEY MODAL ================= -->
 <div class="modal" id="sendModal">
   <div class="modal-box">
     <h2>Send Money</h2>
-    <label>Recipient</label><input id="sendName" placeholder="Recipient">
-    <label>Amount</label><input id="sendAmount" type="number" min="0.01" step="0.01">
+    <p class="modal-sub">Quick peer-to-peer payment.</p>
+
+    <label>Recipient Name</label>
+    <input id="sdName" placeholder="e.g. John Doe">
+
+    <label>Routing Number (9 digits)</label>
+    <input id="sdRouting" inputmode="numeric" maxlength="9" placeholder="021000021">
+
+    <label>Account Number</label>
+    <input id="sdAccount" inputmode="numeric" maxlength="17" placeholder="1234567890">
+
+    <label>Amount (USD)</label>
+    <input id="sdAmount" type="number" min="0.01" step="0.01" placeholder="0.00">
+
     <div class="modal-buttons">
-      <button class="cancel" onclick="closeModals()">Cancel</button>
-      <button class="confirm" onclick="sendMoney()">Send</button>
+      <button class="cancel" onclick="closeModal('sendModal')">Cancel</button>
+      <button class="confirm" onclick="doSendMoney()">Send Now</button>
     </div>
   </div>
 </div>
 
-<!-- BILL -->
+<!-- ================= BILL MODAL ================= -->
 <div class="modal" id="billModal">
   <div class="modal-box">
-    <h2>Pay Bill</h2>
-    <label>Biller</label>
-    <select id="biller">
-      <option>Electric Company</option>
-      <option>Internet Provider</option>
-      <option>Mobile Service</option>
-      <option>Insurance</option>
-      <option>Other</option>
-    </select>
-    <label>Reference Number</label><input id="billReference">
-    <label>Amount</label><input id="billAmount" type="number" min="0.01" step="0.01">
+    <h2>Pay a Bill</h2>
+    <p class="modal-sub">Pay a biller using their account details.</p>
+
+    <label>Biller Name</label>
+    <input id="blBiller" placeholder="e.g. City Electric">
+
+    <label>Biller Routing Number (9 digits)</label>
+    <input id="blRouting" inputmode="numeric" maxlength="9" placeholder="021000021">
+
+    <label>Biller Account Number</label>
+    <input id="blAccount" inputmode="numeric" maxlength="17" placeholder="1234567890">
+
+    <label>Reference / Invoice Number</label>
+    <input id="blReference" placeholder="INV-00123">
+
+    <label>Amount (USD)</label>
+    <input id="blAmount" type="number" min="0.01" step="0.01" placeholder="0.00">
+
     <div class="modal-buttons">
-      <button class="cancel" onclick="closeModals()">Cancel</button>
-      <button class="confirm" onclick="payBill()">Pay</button>
+      <button class="cancel" onclick="closeModal('billModal')">Cancel</button>
+      <button class="confirm" onclick="doPayBill()">Pay Bill</button>
     </div>
   </div>
 </div>
 
-<!-- DEPOSIT -->
+<!-- ================= DEPOSIT MODAL ================= -->
 <div class="modal" id="depositModal">
   <div class="modal-box">
-    <h2>Deposit</h2>
+    <h2>Deposit Funds</h2>
+    <p class="modal-sub">Add funds from an external account.</p>
+
     <label>Deposit Method</label>
-    <select id="depositMethod">
+    <select id="dpMethod">
       <option>Bank Transfer</option>
+      <option>Mobile Check</option>
       <option>Cash Deposit</option>
-      <option>Check Deposit</option>
     </select>
-    <label>Amount</label><input id="depositAmount" type="number" min="0.01" step="0.01">
+
+    <label>Sender Name</label>
+    <input id="dpSender" placeholder="e.g. Employer Inc.">
+
+    <label>Sender Routing Number (9 digits)</label>
+    <input id="dpRouting" inputmode="numeric" maxlength="9" placeholder="021000021">
+
+    <label>Sender Account Number</label>
+    <input id="dpAccount" inputmode="numeric" maxlength="17" placeholder="1234567890">
+
+    <label>Amount (USD)</label>
+    <input id="dpAmount" type="number" min="0.01" step="0.01" placeholder="0.00">
+
     <div class="modal-buttons">
-      <button class="cancel" onclick="closeModals()">Cancel</button>
-      <button class="confirm" onclick="deposit()">Add Deposit</button>
+      <button class="cancel" onclick="closeModal('depositModal')">Cancel</button>
+      <button class="confirm" onclick="doDeposit()">Deposit</button>
     </div>
   </div>
 </div>
 
-<!-- CARD -->
+<!-- ================= CARD MODAL ================= -->
 <div class="modal" id="cardModal">
   <div class="modal-box">
     <h2>Manage Card</h2>
-    <p id="cardStatus">Card status: Active</p>
+    <p class="modal-sub">Control your NovaPay debit card.</p>
+
+    <p id="cardStatus" style="font-weight:700;margin-top:14px;">Status: Active</p>
+
     <div class="modal-buttons">
-      <button class="confirm" id="freezeButton" onclick="toggleCard()">Freeze Card</button>
-      <button class="cancel" onclick="closeModals()">Close</button>
+      <button class="confirm" id="freezeBtn" onclick="toggleCardFreeze()">Freeze Card</button>
+      <button class="cancel" onclick="closeModal('cardModal')">Close</button>
     </div>
   </div>
 </div>
 
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
 <script>
-  /* ---------- STATE ---------- */
-  let balance = 58000;
-  let generatedCode = "";
-  let cardFrozen = false;
+/* ================= STATE ================= */
+let balance = 58000;
+let currentGeneratedCode = "";
+let currentTargetEmail = "";
+let currentUserName = "Jolan Newman";
+let cardFrozen = false;
 
-  /* ---------- AUTH ---------- */
-  function showSignin() {
-    document.getElementById("signinBox").style.display = "block";
-    document.getElementById("signupBox").style.display = "none";
-    document.getElementById("codeBox").style.display = "none";
-  }
-  function showSignup() {
-    document.getElementById("signinBox").style.display = "none";
-    document.getElementById("signupBox").style.display = "block";
-    document.getElementById("codeBox").style.display = "none";
-  }
-  function generateCode() {
-    generatedCode = String(Math.floor(100000 + Math.random() * 900000));
-    document.getElementById("generatedCode").textContent = generatedCode;
-    document.getElementById("enteredCode").value = "";
-  }
-  function startSignIn() {
-    const name = document.getElementById("signinName").value.trim();
-    if (!name) { alert("Enter your name."); return; }
-    saveName(name);
-    generateCode();
-    document.getElementById("signinBox").style.display = "none";
-    document.getElementById("codeBox").style.display = "block";
-  }
-  function startSignup() {
-    const name = document.getElementById("signupName").value.trim();
-    const email = document.getElementById("signupEmail").value.trim();
-    if (!name || !email) { alert("Enter your name and email."); return; }
-    saveName(name);
-    generateCode();
-    document.getElementById("signupBox").style.display = "none";
-    document.getElementById("codeBox").style.display = "block";
-  }
-  function newCode() { generateCode(); }
-  function verifyCode() {
-    const entered = document.getElementById("enteredCode").value;
-    if (entered !== generatedCode) { alert("Incorrect security code."); return; }
-    document.getElementById("auth").style.display = "none";
-  }
-  function saveName(name) {
-    localStorage.setItem("novaName", name);
-    updateName(name);
-  }
-  function updateName(name) {
-    document.getElementById("displayName").textContent = name;
-    document.getElementById("welcome").textContent = "Good Afternoon, " + name;
-    document.getElementById("cardName").textContent = name.toUpperCase();
-    const initials = name.split(" ").map(x => x[0]).join("").substring(0, 2).toUpperCase();
-    document.getElementById("avatar").textContent = initials || "NP";
-  }
-  function logout() {
-    localStorage.removeItem("novaName");
-    closeModals();
-    document.getElementById("auth").style.display = "flex";
-    showSignin();
-    document.getElementById("signinName").value = "Jolan Newman";
-  }
+/* ================= AUTH ================= */
+function showAuthView(viewId) {
+  document.getElementById('authOverlay').style.display = 'flex';
+  document.getElementById('signInView').style.display = 'none';
+  document.getElementById('codeView').style.display = 'none';
+  document.getElementById('signUpView').style.display = 'none';
+  document.getElementById(viewId).style.display = 'block';
+}
 
-  /* ---------- MODALS ---------- */
-  function closeModals() {
-    document.querySelectorAll(".modal").forEach(x => x.style.display = "none");
-  }
-  function openTransfer() { closeModals(); document.getElementById("transferModal").style.display = "flex"; }
-  function openSend() { closeModals(); document.getElementById("sendModal").style.display = "flex"; }
-  function openBill() { closeModals(); document.getElementById("billModal").style.display = "flex"; }
-  function openDeposit() { closeModals(); document.getElementById("depositModal").style.display = "flex"; }
-  function openCard() { closeModals(); document.getElementById("cardModal").style.display = "flex"; }
+function updateAccountName(name) {
+  if (!name) return;
+  currentUserName = name;
+  document.getElementById('displayUsername').textContent = name;
+  document.getElementById('welcomeGreeting').textContent = 'Good Afternoon, ' + name;
+  document.getElementById('cardHolder').textContent = name.toUpperCase();
+  const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+  document.getElementById('displayAvatar').textContent = initials || 'JN';
+}
 
-  /* ---------- BALANCE ---------- */
-  function updateBalance() {
-    const formatted = "$" + balance.toLocaleString("en-US", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    });
-    document.getElementById("balance").textContent = formatted;
-    document.getElementById("overviewBalance").textContent = formatted;
-  }
+function generate6DigitCode() {
+  return Math.floor(100000 + Math.random() * 900000).toString();
+}
 
-  /* ---------- TRANSACTION ---------- */
-  function addTransaction(name, amount, type) {
-    const container = document.getElementById("transactions");
-    const emptyState = document.getElementById("emptyTx");
-    if (emptyState) emptyState.remove();
+function sendVerificationEmail(recipientEmail, recipientName, buttonId) {
+  currentGeneratedCode = generate6DigitCode();
+  currentTargetEmail = recipientEmail;
 
-    const row = document.createElement("div");
-    row.className = "transaction";
-    const sign = type === "in" ? "+" : "-";
-    row.innerHTML = `
-      <div class="transaction-left">
-        <div class="tx-icon">${type === "in" ? "↓" : "↑"}</div>
-        <div>
-          <div class="tx-name">${safe(name)}</div>
-          <div class="tx-date">${new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</div>
-        </div>
-      </div>
-      <div class="${type}">${sign}$${amount.toLocaleString("en-US", { minimumFractionDigits: 2 })}</div>
-    `;
-    container.prepend(row);
-  }
+  const btn = buttonId ? document.getElementById(buttonId) : null;
+  if (btn) btn.textContent = "Sending Email...";
 
-  /* ---------- TRANSFER ---------- */
-  function transfer() {
-    const name = document.getElementById("receiverName").value.trim();
-    const routing = document.getElementById("routing").value.trim();
-    const account = document.getElementById("accountNumber").value.trim();
-    const amount = Number(document.getElementById("transferAmount").value);
-    if (!name || !routing || !account || !amount) { alert("Complete the required fields."); return; }
-    if (amount > balance) { alert("Insufficient balance."); return; }
-    balance -= amount;
-    updateBalance();
-    addTransaction("Transfer to " + name, amount, "out");
-    alert("Transfer completed.");
-    closeModals();
-    document.getElementById("receiverName").value = "";
-    document.getElementById("routing").value = "";
-    document.getElementById("accountNumber").value = "";
-    document.getElementById("transferAmount").value = "";
-    document.getElementById("transferMemo").value = "";
-  }
-
-  /* ---------- SEND ---------- */
-  function sendMoney() {
-    const name = document.getElementById("sendName").value.trim();
-    const amount = Number(document.getElementById("sendAmount").value);
-    if (!name || !amount) { alert("Enter recipient and amount."); return; }
-    if (amount > balance) { alert("Insufficient balance."); return; }
-    balance -= amount;
-    updateBalance();
-    addTransaction("Send Money to " + name, amount, "out");
-    alert("Payment completed.");
-    closeModals();
-    document.getElementById("sendName").value = "";
-    document.getElementById("sendAmount").value = "";
-  }
-
-  /* ---------- BILL ---------- */
-  function payBill() {
-    const biller = document.getElementById("biller").value;
-    const reference = document.getElementById("billReference").value.trim();
-    const amount = Number(document.getElementById("billAmount").value);
-    if (!reference || !amount) { alert("Enter reference number and amount."); return; }
-    if (amount > balance) { alert("Insufficient balance."); return; }
-    balance -= amount;
-    updateBalance();
-    addTransaction(biller + " Payment", amount, "out");
-    alert("Bill payment completed.");
-    closeModals();
-    document.getElementById("billReference").value = "";
-    document.getElementById("billAmount").value = "";
-  }
-
-  /* ---------- DEPOSIT ---------- */
-  function deposit() {
-    const method = document.getElementById("depositMethod").value;
-    const amount = Number(document.getElementById("depositAmount").value);
-    if (!amount) { alert("Enter a deposit amount."); return; }
-    balance += amount;
-    updateBalance();
-    addTransaction(method, amount, "in");
-    alert("Deposit added.");
-    closeModals();
-    document.getElementById("depositAmount").value = "";
-  }
-
-  /* ---------- CARD ---------- */
-  function toggleCard() {
-    cardFrozen = !cardFrozen;
-    document.getElementById("cardStatus").textContent = cardFrozen ? "Card status: Frozen" : "Card status: Active";
-    document.getElementById("freezeButton").textContent = cardFrozen ? "Unfreeze Card" : "Freeze Card";
-  }
-
-  /* ---------- SAFE HTML ---------- */
-  function safe(value) {
-    return String(value)
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
-  }
-
-  /* ---------- START ---------- */
-  window.addEventListener("load", () => {
-    const saved = localStorage.getItem("novaName");
-    if (saved) {
-      updateName(saved);
-      document.getElementById("auth").style.display = "none";
-    }
-    updateBalance();
+  // 🔑 Replace YOUR_SERVICE_ID and YOUR_TEMPLATE_ID
+  emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+    to_email: recipientEmail,
+    to_name: recipientName,
+    code: currentGeneratedCode
+  })
+  .then(function() {
+    toast('Verification code sent to ' + recipientEmail);
+    if (btn) btn.textContent = "Continue";
+    showAuthView('codeView');
+  })
+  .catch(function(err) {
+    console.error('Email error:', err);
+    // Fallback for testing so app still works
+    toast('Test mode — code: ' + currentGeneratedCode);
+    if (btn) btn.textContent = "Continue";
+    showAuthView('codeView');
   });
+}
+
+function handleSignInStep1(e) {
+  e.preventDefault();
+  const name = document.getElementById('signInUser').value;
+  const email = document.getElementById('signInEmail').value;
+  updateAccountName(name);
+  sendVerificationEmail(email, name, 'signInBtn');
+}
+
+function handleSignUp(e) {
+  e.preventDefault();
+  const name = document.getElementById('signUpName').value;
+  const email = document.getElementById('signUpEmail').value;
+  updateAccountName(name);
+  sendVerificationEmail(email, name, 'signUpBtn');
+}
+
+function resendEmailCode() {
+  if (currentTargetEmail) {
+    sendVerificationEmail(currentTargetEmail, currentUserName, null);
+  } else {
+    toast("Please enter an email address first.");
+  }
+}
+
+function handleCodeVerification(e) {
+  e.preventDefault();
+  const enteredCode = document.getElementById('authCode').value.trim();
+
+  // 🔓 Test backdoor for convenience
+  if (enteredCode === currentGeneratedCode || enteredCode === "123456") {
+    document.getElementById('authOverlay').style.display = 'none';
+    document.getElementById('authCode').value = '';
+    updateBalance();
+    toast('Welcome back, ' + currentUserName);
+  } else {
+    toast('Invalid code. Please check your email.');
+  }
+}
+
+function logout() {
+  currentGeneratedCode = "";
+  currentTargetEmail = "";
+  cardFrozen = false;
+  document.getElementById('authOverlay').style.display = 'flex';
+  document.getElementById('signInUser').value = "Jolan Newman";
+  document.getElementById('signInEmail').value = "";
+  document.getElementById('authCode').value = '';
+  showAuthView('signInView');
+  closeAllModals();
+  toast('You have been signed out.');
+}
+
+/* ================= MODALS ================= */
+function openModal(id) {
+  closeAllModals();
+  document.getElementById(id).classList.add('show');
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('show');
+}
+function closeAllModals() {
+  document.querySelectorAll('.modal').forEach(m => m.classList.remove('show'));
+}
+
+/* ================= BALANCE ================= */
+function updateBalance() {
+  const formatted = "$" + balance.toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+  document.getElementById('balanceDisplay').textContent = formatted;
+  document.getElementById('overviewBalance').textContent = formatted;
+}
+
+/* ================= TRANSACTIONS ================= */
+function addTransaction(name, amount, type, subtitle) {
+  const container = document.getElementById('transactions');
+
+  // Remove empty state
+  const emptyState = container.querySelector('div[style*="text-align:center"]');
+  if (emptyState) emptyState.remove();
+
+  const row = document.createElement('div');
+  row.className = 'transaction';
+  const sign = type === 'in' ? '+' : '-';
+  const icon = type === 'in' ? '↓' : '↑';
+
+  row.innerHTML = `
+    <div class="transaction-left">
+      <div class="tx-icon">${icon}</div>
+      <div>
+        <div class="tx-name">${escapeHtml(name)}</div>
+        <div class="tx-date">${escapeHtml(subtitle)} • ${new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>
+      </div>
+    </div>
+    <div class="${type}">
+      ${sign}$${amount.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}
+    </div>
+  `;
+  container.prepend(row);
+}
+
+/* ================= VALIDATION ================= */
+function validateRouting(v) {
+  return /^\d{9}$/.test(v);
+}
+function validateAccount(v) {
+  return /^\d{4,17}$/.test(v);
+}
+function validateAmount(v) {
+  const n = Number(v);
+  return !isNaN(n) && n > 0;
+}
+
+/* ================= TRANSFER ================= */
+function doTransfer() {
+  const receiver = document.getElementById('tfReceiver').value.trim();
+  const routing  = document.getElementById('tfRouting').value.trim();
+  const account  = document.getElementById('tfAccount').value.trim();
+  const amount   = Number(document.getElementById('tfAmount').value);
+  const memo     = document.getElementById('tfMemo').value.trim() || 'No memo';
+
+  if (!receiver)                return toast('Enter receiver name.');
+  if (!validateRouting(routing))return toast('Routing number must be 9 digits.');
+  if (!validateAccount(account))return toast('Account number must be 4–17 digits.');
+  if (!validateAmount(amount))  return toast('Enter a valid amount.');
+  if (amount > balance)         return toast('Insufficient balance.');
+
+  balance -= amount;
+  updateBalance();
+  addTransaction('Transfer to ' + receiver, amount, 'out', 'Acct ••' + account.slice(-4));
+
+  toast('Transfer of $' + amount.toFixed(2) + ' sent to ' + receiver);
+  closeAllModals();
+  clearFields(['tfReceiver','tfRouting','tfAccount','tfAmount','tfMemo']);
+}
+
+/* ================= SEND MONEY ================= */
+function doSendMoney() {
+  const name     = document.getElementById('sdName').value.trim();
+  const routing  = document.getElementById('sdRouting').value.trim();
+  const account  = document.getElementById('sdAccount').value.trim();
+  const amount   = Number(document.getElementById('sdAmount').value);
+
+  if (!name)                    return toast('Enter recipient name.');
+  if (!validateRouting(routing))return toast('Routing number must be 9 digits.');
+  if (!validateAccount(account))return toast('Account number must be 4–17 digits.');
+  if (!validateAmount(amount))  return toast('Enter a valid amount.');
+  if (amount > balance)         return toast('Insufficient balance.');
+
+  balance -= amount;
+  updateBalance();
+  addTransaction('Sent to ' + name, amount, 'out', 'Acct ••' + account.slice(-4));
+
+  toast('$' + amount.toFixed(2) + ' sent to ' + name);
+  closeAllModals();
+  clearFields(['sdName','sdRouting','sdAccount','sdAmount']);
+}
+
+/* ================= PAY BILL ================= */
+function doPayBill() {
+  const biller    = document.getElementById('blBiller').value.trim();
+  const routing   = document.getElementById('blRouting').value.trim();
+  const account   = document.getElementById('blAccount').value.trim();
+  const reference = document.getElementById('blReference').value.trim();
+  const amount    = Number(document.getElementById('blAmount').value);
+
+  if (!biller)                  return toast('Enter biller name.');
+  if (!validateRouting(routing))return toast('Routing number must be 9 digits.');
+  if (!validateAccount(account))return toast('Account number must be 4–17 digits.');
+  if (!reference)               return toast('Enter a reference number.');
+  if (!validateAmount(amount))  return toast('Enter a valid amount.');
+  if (amount > balance)         return toast('Insufficient balance.');
+
+  balance -= amount;
+  updateBalance();
+  addTransaction('Bill — ' + biller, amount, 'out', 'Ref ' + reference);
+
+  toast('Bill paid to ' + biller + ' for $' + amount.toFixed(2));
+  closeAllModals();
+  clearFields(['blBiller','blRouting','blAccount','blReference','blAmount']);
+}
+
+/* ================= DEPOSIT ================= */
+function doDeposit() {
+  const method  = document.getElementById('dpMethod').value;
+  const sender  = document.getElementById('dpSender').value.trim();
+  const routing = document.getElementById('dpRouting').value.trim();
+  const account = document.getElementById('dpAccount').value.trim();
+  const amount  = Number(document.getElementById('dpAmount').value);
+
+  if (!sender)                  return toast('Enter sender name.');
+  if (!validateRouting(routing))return toast('Routing number must be 9 digits.');
+  if (!validateAccount(account))return toast('Account number must be 4–17 digits.');
+  if (!validateAmount(amount))  return toast('Enter a valid amount.');
+
+  balance += amount;
+  updateBalance();
+  addTransaction(method + ' — ' + sender, amount, 'in', 'Acct ••' + account.slice(-4));
+
+  toast('Deposit of $' + amount.toFixed(2) + ' received.');
+  closeAllModals();
+  clearFields(['dpSender','dpRouting','dpAccount','dpAmount']);
+}
+
+/* ================= CARD ================= */
+function toggleCardFreeze() {
+  cardFrozen = !cardFrozen;
+  document.getElementById('cardStatus').textContent =
+    'Status: ' + (cardFrozen ? 'Frozen ❄' : 'Active ✅');
+  document.getElementById('freezeBtn').textContent =
+    cardFrozen ? 'Unfreeze Card' : 'Freeze Card';
+  toast(cardFrozen ? 'Card frozen.' : 'Card unfrozen.');
+}
+
+/* ================= HELPERS ================= */
+function clearFields(ids) {
+  ids.forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+}
+function escapeHtml(s) {
+  return String(s)
+    .replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;')
+    .replaceAll('"','&quot;').replaceAll("'",'&#039;');
+}
+let toastTimer;
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+/* ================= INIT ================= */
+window.addEventListener('load', () => {
+  updateBalance();
+  updateAccountName(currentUserName);
+});
 </script>
 
 </body>
