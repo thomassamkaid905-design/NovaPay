@@ -5,139 +5,109 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NovaPay — Banking</title>
 
-<!-- EMAILJS SDK -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script type="text/javascript">
-   (function(){
-      // 🔑 Replace with your EmailJS Public Key
-      emailjs.init("YOUR_PUBLIC_KEY");
-   })();
+   (function(){ emailjs.init("YOUR_PUBLIC_KEY"); })();
 </script>
 
 <style>
 *{box-sizing:border-box}
 :root{
-  --gold:#d4a83b;
-  --gold2:#f5d778;
-  --dark:#0b0b0a;
-  --dark2:#171510;
-  --cream:#fffaf0;
-  --text:#191714;
-  --muted:#777064;
-  --line:#eadfca;
-  --green:#168447;
-  --red:#c43b3b;
+  --gold:#d4a83b; --gold2:#f5d778;
+  --dark:#0b0b0a; --dark2:#171510;
+  --cream:#fffaf0; --text:#191714; --muted:#777064;
+  --line:#eadfca; --green:#168447; --red:#c43b3b;
+  --bg1:#f8edc9; --bg2:#e1bb58; --bg3:#fff8dd;
+  --panel:rgba(255,255,255,.78); --card-bg:linear-gradient(145deg,#211b0d,#050505 60%,#33250b);
+}
+body.dark{
+  --text:#f5efdf; --muted:#a8a094; --line:#2a2418;
+  --bg1:#0a0907; --bg2:#15120b; --bg3:#0a0907;
+  --panel:rgba(30,25,15,.75); --card-bg:linear-gradient(145deg,#1a1508,#050505 60%,#2a1e08);
 }
 body{
   margin:0;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
   color:var(--text);
-  background:
-    radial-gradient(circle at 75% 5%,#fff0ae 0,transparent 30%),
-    linear-gradient(135deg,#f8edc9,#e1bb58,#fff8dd);
+  background:radial-gradient(circle at 75% 5%,#fff0ae 0,transparent 30%),
+             linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));
+  min-height:100vh;
+  transition:background .3s,color .3s;
 }
+button,input,select,textarea{font:inherit;outline:none}
 
-/* ================= AUTH ================= */
-.auth-overlay{
-  position:fixed;inset:0;
-  background:rgba(11,11,10,0.85);
-  backdrop-filter:blur(8px);
-  z-index:9999;
-  display:flex;align-items:center;justify-content:center;
-  padding:20px;
-}
-.auth-card{
-  width:100%;max-width:420px;
+/* AUTH */
+.auth-overlay{position:fixed;inset:0;background:rgba(11,11,10,.88);
+  backdrop-filter:blur(8px);z-index:9999;display:flex;align-items:center;
+  justify-content:center;padding:20px;}
+.auth-card{width:100%;max-width:420px;
   background:linear-gradient(180deg,#171510,#070707);
-  border:1px solid rgba(239,199,73,.45);
-  border-radius:24px;padding:36px 30px;color:white;
-  box-shadow:0 25px 50px rgba(0,0,0,0.5);
-  text-align:center;
-}
+  border:1px solid rgba(239,199,73,.45);border-radius:24px;
+  padding:36px 30px;color:white;box-shadow:0 25px 50px rgba(0,0,0,.5);text-align:center;}
 .auth-brand{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:24px}
-.auth-brand .brand-logo{
-  width:48px;height:48px;border-radius:14px;
+.auth-brand .brand-logo{width:48px;height:48px;border-radius:14px;
   display:flex;align-items:center;justify-content:center;
   background:linear-gradient(135deg,var(--gold2),#a97919);
-  color:#111;font-size:26px;font-weight:900;
-}
+  color:#111;font-size:26px;font-weight:900;}
 .auth-brand .brand-name{font-size:26px;font-weight:800;color:var(--gold2)}
-.auth-card h2{margin:0 0 8px;font-size:22px;letter-spacing:-0.5px}
+.auth-card h2{margin:0 0 8px;font-size:22px;letter-spacing:-.5px}
 .auth-card p{color:#aaa49a;font-size:13px;margin:0 0 24px}
 .auth-form{display:flex;flex-direction:column;gap:16px;text-align:left}
 .auth-form label{font-size:12px;font-weight:600;color:#d4ccba;display:block;margin-bottom:6px}
-.auth-form input{
-  width:100%;padding:14px 16px;border-radius:12px;
-  border:1px solid #725515;background:#090909;color:white;
-  font-size:14px;outline:none;
-}
+.auth-form input{width:100%;padding:14px 16px;border-radius:12px;
+  border:1px solid #725515;background:#090909;color:white;font-size:14px}
 .auth-form input:focus{border-color:var(--gold2)}
-.btn-submit{
-  width:100%;padding:14px;margin-top:8px;border-radius:12px;border:0;
-  background:linear-gradient(135deg,#f8dc7a,#bd8c25);
-  color:#111;font-weight:800;font-size:15px;cursor:pointer;
-  transition:0.2s;
-}
+.btn-submit{width:100%;padding:14px;margin-top:8px;border-radius:12px;border:0;
+  background:linear-gradient(135deg,#f8dc7a,#bd8c25);color:#111;
+  font-weight:800;font-size:15px;cursor:pointer;transition:.2s;}
 .btn-submit:hover{filter:brightness(1.1)}
 .auth-toggle{margin-top:20px;font-size:13px;color:#aaa49a}
-.auth-toggle a{color:var(--gold2);text-decoration:none;font-weight:700}
+.auth-toggle a{color:var(--gold2);text-decoration:none;font-weight:700;cursor:pointer}
 
-/* ================= SIDEBAR ================= */
-.sidebar{
-  position:fixed;left:0;top:0;bottom:0;width:250px;
+/* SIDEBAR */
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:250px;
   background:linear-gradient(180deg,#070707,#19160e);
-  color:white;padding:28px 16px;z-index:20;
-}
+  color:white;padding:28px 16px;z-index:20;overflow-y:auto;}
 .brand{display:flex;align-items:center;gap:12px;padding:4px 12px 35px}
-.brand-logo{
-  width:44px;height:44px;border-radius:13px;
+.brand-logo{width:44px;height:44px;border-radius:13px;
   display:flex;align-items:center;justify-content:center;
   background:linear-gradient(135deg,var(--gold2),#a97919);
-  color:#111;font-size:25px;font-weight:900;
-}
+  color:#111;font-size:25px;font-weight:900;}
 .brand-name{font-size:23px;font-weight:800;color:var(--gold2)}
 .menu{display:flex;flex-direction:column;gap:5px}
-.menu a{
-  display:flex;align-items:center;gap:14px;
-  padding:13px 14px;border-radius:11px;
-  color:#aaa49a;text-decoration:none;font-size:14px;font-weight:600;
-  cursor:pointer;
-}
-.menu a:hover,.menu a.active{
-  color:#111;background:linear-gradient(135deg,#e8bd4d,#f6dc7b);
-}
+.menu a{display:flex;align-items:center;gap:14px;
+  padding:13px 14px;border-radius:11px;color:#aaa49a;
+  text-decoration:none;font-size:14px;font-weight:600;cursor:pointer;}
+.menu a:hover,.menu a.active{color:#111;background:linear-gradient(135deg,#e8bd4d,#f6dc7b)}
 .icon{width:21px;text-align:center;font-size:16px}
-.sidebar-card{
-  position:absolute;left:16px;right:16px;bottom:24px;
+.sidebar-card{position:absolute;left:16px;right:16px;bottom:24px;
   padding:18px;border-radius:16px;border:1px solid #725515;
-  background:linear-gradient(145deg,#211b0b,#090909);
-}
+  background:linear-gradient(145deg,#211b0b,#090909);}
 .sidebar-card h3{margin:0;color:var(--gold2);font-size:14px}
 .sidebar-card p{color:#aaa49a;font-size:11px;line-height:1.5}
-.sidebar-card button{
-  width:100%;border:0;padding:10px;border-radius:9px;
-  background:linear-gradient(135deg,#f8dc7a,#bd8c25);
-  font-weight:800;cursor:pointer;
-}
+.sidebar-card button{width:100%;border:0;padding:10px;border-radius:9px;
+  background:linear-gradient(135deg,#f8dc7a,#bd8c25);font-weight:800;cursor:pointer;}
 
-/* ================= MAIN ================= */
-.main{margin-left:250px;min-height:100vh}
-.topbar{
-  height:78px;display:flex;align-items:center;justify-content:space-between;
-  padding:0 34px;background:rgba(255,255,255,.55);
-  border-bottom:1px solid var(--line);backdrop-filter:blur(14px);
-}
-.search{
-  width:390px;padding:13px 18px;border-radius:30px;
+/* MAIN */
+.main{margin-left:250px;min-height:100vh;padding-bottom:80px}
+.topbar{height:78px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 34px;background:var(--panel);border-bottom:1px solid var(--line);
+  backdrop-filter:blur(14px);position:sticky;top:0;z-index:15;}
+.search{width:340px;padding:13px 18px;border-radius:30px;
   border:1px solid #d7c9aa;background:rgba(255,255,255,.7);
-  font-size:13px;outline:none;
-}
-.user{display:flex;align-items:center;gap:11px}
-.avatar{
-  width:42px;height:42px;border-radius:50%;
+  font-size:13px;color:var(--text);}
+body.dark .search{background:rgba(0,0,0,.4);border-color:#3a3220;color:#f5efdf}
+.topbar-right{display:flex;align-items:center;gap:14px}
+.icon-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);
+  background:var(--panel);cursor:pointer;display:flex;align-items:center;
+  justify-content:center;font-size:17px;position:relative;transition:.2s;color:var(--text);}
+.icon-btn:hover{transform:scale(1.06);border-color:var(--gold)}
+.badge{position:absolute;top:6px;right:6px;width:8px;height:8px;
+  background:#c43b3b;border-radius:50%;border:2px solid var(--panel);}
+.user{display:flex;align-items:center;gap:11px;cursor:pointer}
+.avatar{width:42px;height:42px;border-radius:50%;
   background:linear-gradient(135deg,#f5d875,#b78622);
-  display:flex;align-items:center;justify-content:center;font-weight:900;
-}
+  display:flex;align-items:center;justify-content:center;font-weight:900;color:#111}
 .content{max-width:1280px;margin:auto;padding:32px}
 .welcome{margin-bottom:24px}
 .welcome h1{margin:0 0 5px;font-size:30px;letter-spacing:-.8px}
@@ -145,182 +115,223 @@ body{
 
 /* HERO */
 .hero{display:grid;grid-template-columns:1.35fr .8fr;gap:20px}
-.balance-card{
-  min-height:245px;padding:31px;border-radius:24px;position:relative;overflow:hidden;
-  color:white;
-  background:
-    radial-gradient(circle at 85% 15%,rgba(239,203,91,.32),transparent 27%),
-    linear-gradient(135deg,#050505,#27200d,#080808);
-  border:1px solid rgba(239,199,73,.45);
-  box-shadow:0 22px 45px rgba(65,47,8,.18);
-}
-.balance-card:after{
-  content:"";position:absolute;width:300px;height:300px;
-  border:1px solid rgba(242,207,103,.22);border-radius:50%;
-  right:-125px;bottom:-175px;
-}
+.balance-card{min-height:245px;padding:31px;border-radius:24px;
+  position:relative;overflow:hidden;color:white;
+  background:radial-gradient(circle at 85% 15%,rgba(239,203,91,.32),transparent 27%),
+             linear-gradient(135deg,#050505,#27200d,#080808);
+  border:1px solid rgba(239,199,73,.45);box-shadow:0 22px 45px rgba(65,47,8,.18);}
+.balance-card:after{content:"";position:absolute;width:300px;height:300px;
+  border:1px solid rgba(242,207,103,.22);border-radius:50%;right:-125px;bottom:-175px;}
 .balance-label{color:#d8d1c1;font-size:13px}
 .balance{font-size:47px;font-weight:850;letter-spacing:-2px;margin:7px 0 5px}
 .account{color:#cbc3b1;font-size:13px}
 .balance-actions{display:flex;gap:10px;margin-top:26px}
-.btn-gold,.btn-outline{
-  padding:11px 17px;border-radius:10px;font-size:12px;font-weight:750;cursor:pointer;
-}
-.btn-gold{background:linear-gradient(135deg,#f9df82,#c28f26);color:#111}
-.btn-outline{border:1px solid #a98025;color:#f1d36d}
+.btn-gold,.btn-outline{padding:11px 17px;border-radius:10px;
+  font-size:12px;font-weight:750;cursor:pointer;}
+.btn-gold{background:linear-gradient(135deg,#f9df82,#c28f26);color:#111;border:0}
+.btn-outline{border:1px solid #a98025;color:#f1d36d;background:transparent}
 
 /* CARD */
-.card{
-  min-height:245px;padding:27px;border-radius:24px;color:white;
-  background:linear-gradient(145deg,#211b0d,#050505 60%,#33250b);
-  border:1px solid rgba(234,194,70,.48);
-  box-shadow:0 22px 45px rgba(65,47,8,.18);
-}
+.card{min-height:245px;padding:27px;border-radius:24px;color:white;
+  background:var(--card-bg);border:1px solid rgba(234,194,70,.48);
+  box-shadow:0 22px 45px rgba(65,47,8,.18);position:relative;}
 .card-top{display:flex;justify-content:space-between;align-items:center}
 .card-brand{color:#f3d36e;font-size:20px;font-weight:800}
 .contactless{font-size:22px}
-.chip{
-  width:43px;height:31px;margin-top:27px;border-radius:6px;
-  background:linear-gradient(135deg,#f5e29b,#a87d23);
-}
+.chip{width:43px;height:31px;margin-top:27px;border-radius:6px;
+  background:linear-gradient(135deg,#f5e29b,#a87d23);}
 .card-number{margin-top:25px;font-size:17px;letter-spacing:3px}
-.card-bottom{
-  display:flex;justify-content:space-between;margin-top:23px;
-  color:#d4ccba;font-size:10px;
-}
+.card-bottom{display:flex;justify-content:space-between;margin-top:23px;
+  color:#d4ccba;font-size:10px}
+.card-dots{display:flex;gap:6px;justify-content:center;margin-top:12px}
+.card-dot{width:8px;height:8px;border-radius:50%;background:#a98025;cursor:pointer;transition:.2s}
+.card-dot.active{background:var(--gold2);width:20px;border-radius:4px}
+
+/* ACCOUNT TABS */
+.acct-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.acct-tab{padding:8px 16px;border-radius:20px;border:1px solid var(--line);
+  background:var(--panel);font-size:12px;font-weight:700;cursor:pointer;color:var(--text);}
+.acct-tab.active{background:linear-gradient(135deg,#e8bd4d,#f6dc7b);border-color:transparent;color:#111}
 
 /* ACTIONS */
 .actions{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:20px 0}
-.action{
-  padding:17px 8px;text-align:center;border-radius:15px;
-  background:rgba(255,255,255,.78);
-  border:1px solid var(--line);transition:.2s;cursor:pointer;
-}
+.action{padding:17px 8px;text-align:center;border-radius:15px;
+  background:var(--panel);border:1px solid var(--line);transition:.2s;cursor:pointer;}
 .action:hover{transform:translateY(-3px);box-shadow:0 12px 25px rgba(80,57,10,.12)}
-.action-icon{
-  width:41px;height:41px;margin:auto auto 9px;border-radius:12px;
+.action-icon{width:41px;height:41px;margin:auto auto 9px;border-radius:12px;
   display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(135deg,#f7dc7a,#c18e25);
-  font-weight:900;
-}
+  background:linear-gradient(135deg,#f7dc7a,#c18e25);font-weight:900;font-size:18px;}
 .action strong{font-size:12px}
 
 /* LOWER */
 .lower{display:grid;grid-template-columns:1.35fr .8fr;gap:20px}
-.panel{
-  background:rgba(255,255,255,.78);
-  border:1px solid var(--line);border-radius:20px;padding:23px;
-  box-shadow:0 12px 28px rgba(72,51,9,.07);
-}
+.panel{background:var(--panel);border:1px solid var(--line);
+  border-radius:20px;padding:23px;box-shadow:0 12px 28px rgba(72,51,9,.07);}
 .panel-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}
 .panel-title h2{margin:0;font-size:18px}
-.panel-title a{color:#98701d;text-decoration:none;font-size:12px;font-weight:750}
+.panel-title a{color:#98701d;text-decoration:none;font-size:12px;font-weight:750;cursor:pointer}
+body.dark .panel-title a{color:var(--gold2)}
+
+/* CHART */
+.chart-bars{display:flex;align-items:flex-end;gap:10px;height:120px;margin:16px 0 8px}
+.chart-bar{flex:1;background:linear-gradient(180deg,var(--gold2),#a97919);
+  border-radius:6px 6px 0 0;position:relative;transition:.3s;min-height:4px}
+.chart-bar:hover{filter:brightness(1.15)}
+.chart-bar span{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);
+  font-size:10px;color:var(--muted);font-weight:700}
+.chart-legend{display:flex;justify-content:space-between;margin-top:26px;
+  padding-top:12px;border-top:1px solid var(--line);font-size:11px;color:var(--muted)}
 
 /* TRANSACTIONS */
-.transaction{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:15px 0;border-bottom:1px solid #eee5d4;
-}
+.transaction{display:flex;align-items:center;justify-content:space-between;
+  padding:15px 0;border-bottom:1px solid var(--line);}
 .transaction:last-child{border-bottom:0}
 .transaction-left{display:flex;align-items:center;gap:12px}
-.tx-icon{
-  width:40px;height:40px;border-radius:11px;
-  display:flex;align-items:center;justify-content:center;background:#fff2c9;
-}
+.tx-icon{width:40px;height:40px;border-radius:11px;
+  display:flex;align-items:center;justify-content:center;background:#fff2c9;font-size:16px;}
+body.dark .tx-icon{background:#3a2e10}
 .tx-name{font-size:13px;font-weight:700}
 .tx-date{font-size:10px;color:var(--muted);margin-top:3px}
 .in{color:var(--green);font-weight:800;font-size:13px}
 .out{color:var(--red);font-weight:800;font-size:13px}
 
-/* ACCOUNT DETAILS */
-.detail{
-  display:flex;justify-content:space-between;
-  padding:13px 0;border-bottom:1px solid #eee5d4;font-size:12px;
-}
+/* DETAILS */
+.detail{display:flex;justify-content:space-between;padding:13px 0;
+  border-bottom:1px solid var(--line);font-size:12px}
 .detail:last-child{border-bottom:0}
 .detail span{color:var(--muted)}
 .active{color:var(--green)}
 
 /* SECURITY */
-.security{
-  display:flex;align-items:center;gap:12px;margin-top:20px;
-  padding:17px;border-radius:15px;background:#fff5d5;
-  border:1px solid #e6cf88;
-}
-.security-icon{
-  width:42px;height:42px;border-radius:12px;
-  display:flex;align-items:center;justify-content:center;background:#e7c65d;
-}
+.security{display:flex;align-items:center;gap:12px;margin-top:20px;
+  padding:17px;border-radius:15px;background:#fff5d5;border:1px solid #e6cf88;}
+body.dark .security{background:#2a2110;border-color:#5a4518}
+.security-icon{width:42px;height:42px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;background:#e7c65d;}
 .security strong{font-size:13px}
 .security p{margin:3px 0 0;color:#756b55;font-size:10px}
+body.dark .security p{color:#b0a68a}
 
-/* FOOTER */
 .footer{text-align:center;padding:28px;color:#776d59;font-size:10px}
 
-/* ================= MODAL ================= */
-.modal{
-  position:fixed;inset:0;z-index:8000;
-  background:rgba(0,0,0,.65);backdrop-filter:blur(6px);
-  display:none;align-items:center;justify-content:center;padding:20px;
-}
+/* MODAL */
+.modal{position:fixed;inset:0;z-index:8000;background:rgba(0,0,0,.7);
+  backdrop-filter:blur(6px);display:none;align-items:center;
+  justify-content:center;padding:20px;}
 .modal.show{display:flex}
-.modal-box{
-  width:100%;max-width:480px;max-height:90vh;overflow:auto;
-  background:#fffaf0;border-radius:22px;padding:28px;
+.modal-box{width:100%;max-width:520px;max-height:90vh;overflow:auto;
+  background:var(--cream);border-radius:22px;padding:28px;
   box-shadow:0 25px 60px rgba(0,0,0,.4);
-  border:1px solid rgba(247,220,122,.4);
-}
+  border:1px solid rgba(247,220,122,.4);color:var(--text);}
+body.dark .modal-box{background:#1a1508;color:var(--text);border-color:#5a4518}
 .modal-box h2{margin:0 0 6px;font-size:22px;font-weight:800}
 .modal-box .modal-sub{color:var(--muted);font-size:13px;margin:0 0 16px}
-.modal-box label{
-  display:block;margin:13px 0 6px;
-  font-size:12px;font-weight:700;color:#3a352c;
-}
+.modal-box label{display:block;margin:13px 0 6px;
+  font-size:12px;font-weight:700;color:var(--text)}
 .modal-box input,.modal-box select,.modal-box textarea{
   width:100%;padding:13px 14px;border-radius:10px;
   border:1px solid #d8c8a6;background:white;
   outline:none;font-size:14px;transition:border .2s;
-  font-family:inherit;
-}
-.modal-box input:focus,.modal-box select:focus,.modal-box textarea:focus{
-  border-color:var(--gold);
-}
+  font-family:inherit;color:#191714;}
+body.dark .modal-box input,
+body.dark .modal-box select,
+body.dark .modal-box textarea{background:#0a0907;color:#f5efdf;border-color:#3a3220}
+.modal-box input:focus,.modal-box select:focus,.modal-box textarea:focus{border-color:var(--gold)}
 .modal-box textarea{min-height:70px;resize:vertical}
 .modal-buttons{display:flex;gap:10px;margin-top:22px}
-.modal-buttons button{
-  flex:1;padding:13px;border-radius:10px;font-weight:800;cursor:pointer;
-  transition:transform .1s;font-size:14px;
-}
+.modal-buttons button{flex:1;padding:13px;border-radius:10px;
+  font-weight:800;cursor:pointer;transition:transform .1s;font-size:14px}
 .modal-buttons button:hover{transform:translateY(-1px)}
 .cancel{border:1px solid #c9b98f;background:white;color:#3a352c}
-.cancel:hover{background:#f5efe0}
-.confirm{
-  border:0;background:linear-gradient(135deg,#f7dc7a,#bd8c25);color:#111;
-}
-.confirm:hover{background:linear-gradient(135deg,#f5d45a,#a87d1f)}
+body.dark .cancel{background:#0a0907;color:#f5efdf;border-color:#3a3220}
+.confirm{border:0;background:linear-gradient(135deg,#f7dc7a,#bd8c25);color:#111}
+
+/* QUICK AMOUNTS */
+.quick-amounts{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.quick-amounts button{padding:8px 14px;border-radius:20px;
+  border:1px solid var(--gold);background:transparent;
+  color:var(--gold);font-size:12px;font-weight:800;cursor:pointer;transition:.15s;}
+.quick-amounts button:hover{background:var(--gold);color:#111}
 
 /* TOAST */
-.toast{
-  position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);
   background:#111;color:#f7dc7a;padding:14px 22px;border-radius:12px;
-  font-size:13px;font-weight:700;z-index:10000;
-  border:1px solid #725515;opacity:0;transition:.3s;
-  box-shadow:0 10px 30px rgba(0,0,0,.4);
-}
+  font-size:13px;font-weight:700;z-index:10000;border:1px solid #725515;
+  opacity:0;transition:.3s;box-shadow:0 10px 30px rgba(0,0,0,.4);max-width:90%;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-/* MOBILE */
+/* NOTIF PANEL */
+.notif-panel{position:fixed;top:90px;right:30px;width:340px;max-height:70vh;
+  overflow-y:auto;background:var(--cream);border-radius:18px;padding:18px;
+  box-shadow:0 20px 50px rgba(0,0,0,.35);border:1px solid var(--line);
+  z-index:50;display:none;color:var(--text);}
+body.dark .notif-panel{background:#1a1508}
+.notif-panel.show{display:block;animation:slideIn .25s ease}
+@keyframes slideIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+.notif-panel h3{margin:0 0 12px;font-size:15px;color:var(--gold)}
+.notif-item{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.notif-item:last-child{border-bottom:0}
+.notif-dot{width:8px;height:8px;background:var(--gold);border-radius:50%;margin-top:6px;flex-shrink:0}
+.notif-text{font-size:12px}
+.notif-time{font-size:10px;color:var(--muted);margin-top:3px}
+
+/* PROFILE */
+.profile-avatar-lg{width:80px;height:80px;border-radius:50%;
+  background:linear-gradient(135deg,#f5d875,#b78622);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:32px;color:#111;margin:0 auto 16px;}
+
+/* MOBILE NAV */
+.mobile-nav{position:fixed;bottom:0;left:0;right:0;height:64px;
+  background:linear-gradient(180deg,#070707,#19160e);
+  border-top:1px solid rgba(247,220,122,.25);
+  display:none;justify-content:space-around;align-items:center;
+  z-index:9000;padding:0 8px;}
+.mobile-nav button{background:transparent;border:0;color:#aaa49a;
+  font-size:10px;font-weight:700;display:flex;flex-direction:column;
+  align-items:center;gap:3px;padding:8px 14px;border-radius:12px;cursor:pointer;}
+.mobile-nav button.active{color:var(--gold2)}
+.mobile-nav button span:first-child{font-size:20px}
+
+/* PIN */
+.pin-overlay{position:fixed;inset:0;background:rgba(0,0,0,.95);
+  z-index:99999;display:none;flex-direction:column;
+  align-items:center;justify-content:center;color:white;padding:20px;}
+.pin-overlay.show{display:flex}
+.pin-dots{display:flex;gap:14px;margin:30px 0}
+.pin-dot{width:16px;height:16px;border-radius:50%;
+  border:2px solid var(--gold2);transition:.2s}
+.pin-dot.filled{background:var(--gold2)}
+.pin-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:280px}
+.pin-pad button{width:70px;height:70px;border-radius:50%;
+  background:rgba(247,220,122,.1);border:1px solid rgba(247,220,122,.3);
+  color:var(--gold2);font-size:22px;font-weight:700;cursor:pointer;transition:.15s;}
+.pin-pad button:hover{background:rgba(247,220,122,.25)}
+
+/* STATEMENT */
+.statement-box{background:var(--cream);color:#191714;padding:30px;
+  border-radius:16px;max-width:600px;margin:auto;}
+body.dark .statement-box{background:#1a1508;color:#f5efdf}
+.statement-header{text-align:center;border-bottom:2px solid var(--gold);
+  padding-bottom:16px;margin-bottom:16px;}
+.statement-header h1{margin:0;color:var(--gold);font-size:22px}
+.statement-row{display:flex;justify-content:space-between;
+  padding:8px 0;font-size:12px;border-bottom:1px dashed var(--line)}
+
+/* RESPONSIVE */
 @media(max-width:950px){
   .sidebar{display:none}
-  .main{margin-left:0}
+  .main{margin-left:0;padding-bottom:80px}
   .hero,.lower{grid-template-columns:1fr}
   .actions{grid-template-columns:repeat(3,1fr)}
+  .mobile-nav{display:flex}
+  .notif-panel{width:calc(100% - 30px);right:15px}
 }
 @media(max-width:600px){
   .topbar{padding:0 15px}
   .search{display:none}
   .content{padding:22px 13px}
-  .welcome h1{font-size:25px}
+  .welcome h1{font-size:22px}
   .balance{font-size:36px}
   .balance-card,.card{min-height:220px;padding:24px}
   .actions{grid-template-columns:repeat(2,1fr)}
@@ -331,10 +342,8 @@ body{
 
 <body>
 
-<!-- ================= AUTH OVERLAY ================= -->
+<!-- AUTH OVERLAY -->
 <div class="auth-overlay" id="authOverlay">
-
-  <!-- SIGN IN -->
   <div class="auth-card" id="signInView">
     <div class="auth-brand">
       <div class="brand-logo">N</div>
@@ -342,7 +351,6 @@ body{
     </div>
     <h2>Welcome Back</h2>
     <p>Sign in to send a verification code to your email.</p>
-
     <form class="auth-form" onsubmit="handleSignInStep1(event)">
       <div>
         <label>Full Name</label>
@@ -358,36 +366,31 @@ body{
       </div>
       <button type="submit" class="btn-submit" id="signInBtn">Send Verification Code</button>
     </form>
-
     <div class="auth-toggle">
       Don't have an account? <a onclick="showAuthView('signUpView')">Sign Up</a>
     </div>
   </div>
 
-  <!-- CODE -->
   <div class="auth-card" id="codeView" style="display:none;">
     <div class="auth-brand">
       <div class="brand-logo">N</div>
       <div class="brand-name">NovaPay</div>
     </div>
     <h2>Security Verification</h2>
-    <p>Please enter the 6-digit authentication code sent to your email.</p>
-
+    <p>Enter the 6-digit code sent to your email.</p>
     <form class="auth-form" onsubmit="handleCodeVerification(event)">
       <div>
         <label>6-Digit Security Code</label>
         <input type="text" id="authCode" placeholder="123456" maxlength="6" pattern="[0-9]{6}" required
-               style="text-align:center; letter-spacing: 6px; font-size:20px;">
+               style="text-align:center;letter-spacing:6px;font-size:20px;">
       </div>
       <button type="submit" class="btn-submit">Verify & Access Dashboard</button>
     </form>
-
     <div class="auth-toggle">
       Didn't get a code? <a onclick="resendEmailCode()">Resend Code</a>
     </div>
   </div>
 
-  <!-- SIGN UP -->
   <div class="auth-card" id="signUpView" style="display:none;">
     <div class="auth-brand">
       <div class="brand-logo">N</div>
@@ -395,7 +398,6 @@ body{
     </div>
     <h2>Create Your Account</h2>
     <p>Join NovaPay for secure online banking.</p>
-
     <form class="auth-form" onsubmit="handleSignUp(event)">
       <div>
         <label>Full Name</label>
@@ -411,33 +413,29 @@ body{
       </div>
       <button type="submit" class="btn-submit" id="signUpBtn">Sign Up & Send Code</button>
     </form>
-
     <div class="auth-toggle">
       Already have an account? <a onclick="showAuthView('signInView')">Sign In</a>
     </div>
   </div>
-
 </div>
 
-<!-- ================= SIDEBAR ================= -->
+<!-- SIDEBAR -->
 <aside class="sidebar">
   <div class="brand">
     <div class="brand-logo">N</div>
     <div class="brand-name">NovaPay</div>
   </div>
-
   <nav class="menu">
-    <a class="active"><span class="icon">⌂</span> Dashboard</a>
+    <a class="active" onclick="showPage('dashboard')"><span class="icon">⌂</span> Dashboard</a>
+    <a onclick="showPage('history')"><span class="icon">☷</span> Transactions</a>
     <a onclick="openModal('transferModal')"><span class="icon">⇄</span> Transfers</a>
     <a onclick="openModal('billModal')"><span class="icon">▤</span> Pay Bills</a>
     <a onclick="openModal('depositModal')"><span class="icon">↑</span> Deposit</a>
+    <a onclick="showPage('statements')"><span class="icon">▤</span> Statements</a>
+    <a onclick="openModal('profileModal')"><span class="icon">⚙</span> Profile</a>
     <a onclick="openModal('cardModal')"><span class="icon">▭</span> Cards</a>
-    <a onclick="alert('Transaction history coming soon.')"><span class="icon">☷</span> Transactions</a>
-    <a onclick="alert('Statements coming soon.')"><span class="icon">▤</span> Statements</a>
-    <a onclick="alert('Settings coming soon.')"><span class="icon">⚙</span> Settings</a>
-    <a onclick="alert('Support: support@novapay.example')"><span class="icon">?</span> Support</a>
+    <a onclick="toast('Support: support@novapay.example')"><span class="icon">?</span> Support</a>
   </nav>
-
   <div class="sidebar-card">
     <h3>♛ Premium Banking</h3>
     <p>Manage your accounts and investments seamlessly.</p>
@@ -445,76 +443,78 @@ body{
   </div>
 </aside>
 
-<!-- ================= MAIN ================= -->
+<!-- MAIN -->
 <main class="main">
   <header class="topbar">
     <input class="search" type="text" placeholder="Search transactions, payees, or help...">
-    <div class="user">
-      <strong id="displayUsername">Jolan Newman</strong>
-      <div class="avatar" id="displayAvatar">JN</div>
+    <div class="topbar-right">
+      <button class="icon-btn" onclick="toggleDarkMode()" title="Toggle dark mode" id="darkBtn">🌙</button>
+      <button class="icon-btn" onclick="toggleNotifs()" title="Notifications">
+        🔔<span class="badge" id="notifBadge"></span>
+      </button>
+      <div class="user" onclick="openModal('profileModal')">
+        <strong id="displayUsername">Jolan Newman</strong>
+        <div class="avatar" id="displayAvatar">JN</div>
+      </div>
     </div>
   </header>
 
-  <div class="content">
+  <!-- DASHBOARD -->
+  <div class="content" id="dashboardPage">
     <div class="welcome">
       <h1 id="welcomeGreeting">Good Afternoon, Jolan Newman</h1>
       <p>Welcome to your NovaPay dashboard.</p>
     </div>
 
-    <!-- HERO -->
+    <div class="acct-tabs">
+      <button class="acct-tab active" onclick="switchAccount('checking', this)">💳 Checking ••4821</button>
+      <button class="acct-tab" onclick="switchAccount('savings', this)">🏦 Savings ••9910</button>
+    </div>
+
     <div class="hero">
       <section class="balance-card">
-        <div class="balance-label">Available Balance</div>
+        <div class="balance-label" id="acctLabel">Available Balance</div>
         <div class="balance" id="balanceDisplay">$58,000.00</div>
-        <div class="account">Checking Account •••• 4821</div>
+        <div class="account" id="acctNumber">Checking Account •••• 4821</div>
         <div class="balance-actions">
-          <div class="btn-gold" onclick="openModal('transferModal')">View Account</div>
-          <div class="btn-outline" onclick="openModal('cardModal')">Settings</div>
+          <div class="btn-gold" onclick="openModal('transferModal')">Transfer</div>
+          <div class="btn-outline" onclick="openModal('depositModal')">Deposit</div>
         </div>
       </section>
 
       <section class="card">
         <div class="card-top">
-          <div class="card-brand">NovaPay</div>
+          <div class="card-brand" id="cardBrand">NovaPay Debit</div>
           <div class="contactless">)))</div>
         </div>
         <div class="chip"></div>
-        <div class="card-number">•••• •••• •••• 4821</div>
+        <div class="card-number" id="cardNumber">•••• •••• •••• 4821</div>
         <div class="card-bottom">
           <span id="cardHolder">JOLAN NEWMAN</span>
-          <span>VALID THRU 12/29</span>
+          <span id="cardExpiry">VALID THRU 12/29</span>
+        </div>
+        <div class="card-dots">
+          <span class="card-dot active" onclick="switchCard(0)"></span>
+          <span class="card-dot" onclick="switchCard(1)"></span>
         </div>
       </section>
     </div>
 
-    <!-- ACTIONS -->
     <div class="actions">
-      <div class="action" onclick="openModal('transferModal')">
-        <div class="action-icon">⇄</div><strong>Transfer</strong>
-      </div>
-      <div class="action" onclick="openModal('sendModal')">
-        <div class="action-icon">➤</div><strong>Send Money</strong>
-      </div>
-      <div class="action" onclick="openModal('billModal')">
-        <div class="action-icon">▤</div><strong>Pay Bills</strong>
-      </div>
-      <div class="action" onclick="openModal('depositModal')">
-        <div class="action-icon">↑</div><strong>Deposit</strong>
-      </div>
-      <div class="action" onclick="openModal('cardModal')">
-        <div class="action-icon">▭</div><strong>Manage Card</strong>
-      </div>
+      <div class="action" onclick="openModal('transferModal')"><div class="action-icon">⇄</div><strong>Transfer</strong></div>
+      <div class="action" onclick="openModal('sendModal')"><div class="action-icon">➤</div><strong>Send Money</strong></div>
+      <div class="action" onclick="openModal('billModal')"><div class="action-icon">▤</div><strong>Pay Bills</strong></div>
+      <div class="action" onclick="openModal('depositModal')"><div class="action-icon">↑</div><strong>Deposit</strong></div>
+      <div class="action" onclick="openModal('cardModal')"><div class="action-icon">▭</div><strong>Manage Card</strong></div>
     </div>
 
-    <!-- LOWER -->
     <div class="lower">
       <section class="panel">
         <div class="panel-title">
           <h2>Recent Transactions</h2>
-          <a href="#">View All →</a>
+          <a onclick="showPage('history')">View All →</a>
         </div>
         <div id="transactions">
-          <!-- DEMO TRANSACTIONS -->
           <div class="transaction">
             <div class="transaction-left">
               <div class="tx-icon">↓</div>
@@ -525,7 +525,6 @@ body{
             </div>
             <div class="in">+$5,000.00</div>
           </div>
-
           <div class="transaction">
             <div class="transaction-left">
               <div class="tx-icon">↑</div>
@@ -536,7 +535,6 @@ body{
             </div>
             <div class="out">-$425.00</div>
           </div>
-
           <div class="transaction">
             <div class="transaction-left">
               <div class="tx-icon">↑</div>
@@ -547,7 +545,6 @@ body{
             </div>
             <div class="out">-$182.40</div>
           </div>
-
           <div class="transaction">
             <div class="transaction-left">
               <div class="tx-icon">↓</div>
@@ -558,39 +555,22 @@ body{
             </div>
             <div class="in">+$3,250.00</div>
           </div>
-
-          <div class="transaction">
-            <div class="transaction-left">
-              <div class="tx-icon">↑</div>
-              <div>
-                <div class="tx-name">Sent to Emma Rodriguez</div>
-                <div class="tx-date">Acct ••7723 • Sep 3, 2026</div>
-              </div>
-            </div>
-            <div class="out">-$150.00</div>
-          </div>
-
-          <div class="transaction">
-            <div class="transaction-left">
-              <div class="tx-icon">↑</div>
-              <div>
-                <div class="tx-name">Bill — FastNet Internet</div>
-                <div class="tx-date">Ref INV-77120 • Sep 1, 2026</div>
-              </div>
-            </div>
-            <div class="out">-$89.99</div>
-          </div>
         </div>
       </section>
 
       <div>
-        <section class="panel">
-          <div class="panel-title">
-            <h2>Account Overview</h2>
-            <span>•••</span>
+        <section class="panel" style="margin-bottom:20px">
+          <div class="panel-title"><h2>Spending This Month</h2></div>
+          <div class="chart-bars" id="chartBars"></div>
+          <div class="chart-legend">
+            <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
           </div>
-          <div class="detail"><span>Account Type</span><strong>Checking</strong></div>
-          <div class="detail"><span>Account Number</span><strong>•••• 4821</strong></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-title"><h2>Account Overview</h2><span>•••</span></div>
+          <div class="detail"><span>Account Type</span><strong id="ovType">Checking</strong></div>
+          <div class="detail"><span>Account Number</span><strong id="ovNumber">•••• 4821</strong></div>
           <div class="detail"><span>Status</span><strong class="active">● Active</strong></div>
           <div class="detail"><span>Currency</span><strong>USD</strong></div>
           <div class="detail"><span>Balance</span><strong id="overviewBalance">$58,000.00</strong></div>
@@ -607,30 +587,81 @@ body{
     </div>
   </div>
 
+  <!-- HISTORY PAGE -->
+  <div class="content" id="historyPage" style="display:none;">
+    <div class="welcome">
+      <h1>Transaction History</h1>
+      <p>All your activity in one place.</p>
+    </div>
+    <div class="panel">
+      <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;">
+        <button class="acct-tab active" onclick="filterTx('all',this)">All</button>
+        <button class="acct-tab" onclick="filterTx('in',this)">Money In</button>
+        <button class="acct-tab" onclick="filterTx('out',this)">Money Out</button>
+        <input type="text" id="txSearch" placeholder="Search..." oninput="filterTxSearch()"
+               style="flex:1;min-width:180px;padding:10px 14px;border-radius:10px;
+                      border:1px solid var(--line);background:var(--panel);color:var(--text)">
+      </div>
+      <div id="historyList"></div>
+    </div>
+  </div>
+
+  <!-- STATEMENTS PAGE -->
+  <div class="content" id="statementsPage" style="display:none;">
+    <div class="welcome">
+      <h1>Statements</h1>
+      <p>View and download your account statements.</p>
+    </div>
+    <div class="panel">
+      <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
+        <button class="acct-tab active" onclick="generateStatement('September 2026')">September 2026</button>
+        <button class="acct-tab" onclick="generateStatement('August 2026')">August 2026</button>
+        <button class="acct-tab" onclick="generateStatement('July 2026')">July 2026</button>
+      </div>
+      <div id="statementArea"></div>
+    </div>
+  </div>
+
   <footer class="footer">NovaPay — Online Banking Interface.</footer>
 </main>
 
-<!-- ================= TRANSFER MODAL ================= -->
+<!-- MOBILE NAV -->
+<nav class="mobile-nav">
+  <button class="active" onclick="showPage('dashboard')"><span>⌂</span><span>Home</span></button>
+  <button onclick="openModal('transferModal')"><span>⇄</span><span>Transfer</span></button>
+  <button onclick="openModal('billModal')"><span>▤</span><span>Bills</span></button>
+  <button onclick="showPage('history')"><span>☷</span><span>History</span></button>
+  <button onclick="openModal('profileModal')"><span>👤</span><span>Profile</span></button>
+</nav>
+
+<!-- NOTIF PANEL -->
+<div class="notif-panel" id="notifPanel">
+  <h3>🔔 Notifications</h3>
+  <div id="notifList"></div>
+</div>
+
+<!-- TRANSFER MODAL -->
 <div class="modal" id="transferModal">
   <div class="modal-box">
     <h2>Transfer Funds</h2>
-    <p class="modal-sub">Enter recipient banking details to send money.</p>
-
+    <p class="modal-sub">Enter recipient banking details.</p>
     <label>Receiver Name</label>
     <input id="tfReceiver" placeholder="e.g. Jane Smith">
-
     <label>Routing Number (9 digits)</label>
     <input id="tfRouting" inputmode="numeric" maxlength="9" placeholder="021000021">
-
     <label>Account Number</label>
     <input id="tfAccount" inputmode="numeric" maxlength="17" placeholder="1234567890">
-
     <label>Amount (USD)</label>
     <input id="tfAmount" type="number" min="0.01" step="0.01" placeholder="0.00">
-
+    <div class="quick-amounts">
+      <button onclick="setAmount('tfAmount',50)">$50</button>
+      <button onclick="setAmount('tfAmount',100)">$100</button>
+      <button onclick="setAmount('tfAmount',500)">$500</button>
+      <button onclick="setAmount('tfAmount',1000)">$1,000</button>
+      <button onclick="setAmount('tfAmount',5000)">$5,000</button>
+    </div>
     <label>Memo (optional)</label>
-    <textarea id="tfMemo" placeholder="Rent, invoice #1234, etc."></textarea>
-
+    <textarea id="tfMemo" placeholder="Rent, invoice #1234..."></textarea>
     <div class="modal-buttons">
       <button class="cancel" onclick="closeModal('transferModal')">Cancel</button>
       <button class="confirm" onclick="doTransfer()">Send Transfer</button>
@@ -638,24 +669,25 @@ body{
   </div>
 </div>
 
-<!-- ================= SEND MONEY MODAL ================= -->
+<!-- SEND MODAL -->
 <div class="modal" id="sendModal">
   <div class="modal-box">
     <h2>Send Money</h2>
     <p class="modal-sub">Quick peer-to-peer payment.</p>
-
     <label>Recipient Name</label>
     <input id="sdName" placeholder="e.g. John Doe">
-
     <label>Routing Number (9 digits)</label>
     <input id="sdRouting" inputmode="numeric" maxlength="9" placeholder="021000021">
-
     <label>Account Number</label>
     <input id="sdAccount" inputmode="numeric" maxlength="17" placeholder="1234567890">
-
     <label>Amount (USD)</label>
     <input id="sdAmount" type="number" min="0.01" step="0.01" placeholder="0.00">
-
+    <div class="quick-amounts">
+      <button onclick="setAmount('sdAmount',25)">$25</button>
+      <button onclick="setAmount('sdAmount',50)">$50</button>
+      <button onclick="setAmount('sdAmount',100)">$100</button>
+      <button onclick="setAmount('sdAmount',250)">$250</button>
+    </div>
     <div class="modal-buttons">
       <button class="cancel" onclick="closeModal('sendModal')">Cancel</button>
       <button class="confirm" onclick="doSendMoney()">Send Now</button>
@@ -663,27 +695,26 @@ body{
   </div>
 </div>
 
-<!-- ================= BILL MODAL ================= -->
+<!-- BILL MODAL -->
 <div class="modal" id="billModal">
   <div class="modal-box">
     <h2>Pay a Bill</h2>
     <p class="modal-sub">Pay a biller using their account details.</p>
-
     <label>Biller Name</label>
     <input id="blBiller" placeholder="e.g. City Electric">
-
     <label>Biller Routing Number (9 digits)</label>
     <input id="blRouting" inputmode="numeric" maxlength="9" placeholder="021000021">
-
     <label>Biller Account Number</label>
     <input id="blAccount" inputmode="numeric" maxlength="17" placeholder="1234567890">
-
     <label>Reference / Invoice Number</label>
     <input id="blReference" placeholder="INV-00123">
-
     <label>Amount (USD)</label>
     <input id="blAmount" type="number" min="0.01" step="0.01" placeholder="0.00">
-
+    <div class="quick-amounts">
+      <button onclick="setAmount('blAmount',50)">$50</button>
+      <button onclick="setAmount('blAmount',100)">$100</button>
+      <button onclick="setAmount('blAmount',200)">$200</button>
+    </div>
     <div class="modal-buttons">
       <button class="cancel" onclick="closeModal('billModal')">Cancel</button>
       <button class="confirm" onclick="doPayBill()">Pay Bill</button>
@@ -691,31 +722,31 @@ body{
   </div>
 </div>
 
-<!-- ================= DEPOSIT MODAL ================= -->
+<!-- DEPOSIT MODAL -->
 <div class="modal" id="depositModal">
   <div class="modal-box">
     <h2>Deposit Funds</h2>
     <p class="modal-sub">Add funds from an external account.</p>
-
     <label>Deposit Method</label>
     <select id="dpMethod">
       <option>Bank Transfer</option>
       <option>Mobile Check</option>
       <option>Cash Deposit</option>
     </select>
-
     <label>Sender Name</label>
     <input id="dpSender" placeholder="e.g. Employer Inc.">
-
     <label>Sender Routing Number (9 digits)</label>
     <input id="dpRouting" inputmode="numeric" maxlength="9" placeholder="021000021">
-
     <label>Sender Account Number</label>
     <input id="dpAccount" inputmode="numeric" maxlength="17" placeholder="1234567890">
-
     <label>Amount (USD)</label>
     <input id="dpAmount" type="number" min="0.01" step="0.01" placeholder="0.00">
-
+    <div class="quick-amounts">
+      <button onclick="setAmount('dpAmount',100)">$100</button>
+      <button onclick="setAmount('dpAmount',500)">$500</button>
+      <button onclick="setAmount('dpAmount',1000)">$1,000</button>
+      <button onclick="setAmount('dpAmount',5000)">$5,000</button>
+    </div>
     <div class="modal-buttons">
       <button class="cancel" onclick="closeModal('depositModal')">Cancel</button>
       <button class="confirm" onclick="doDeposit()">Deposit</button>
@@ -723,14 +754,14 @@ body{
   </div>
 </div>
 
-<!-- ================= CARD MODAL ================= -->
+<!-- CARD MODAL -->
 <div class="modal" id="cardModal">
   <div class="modal-box">
     <h2>Manage Card</h2>
     <p class="modal-sub">Control your NovaPay debit card.</p>
-
     <p id="cardStatus" style="font-weight:700;margin-top:14px;">Status: Active</p>
-
+    <label>Card Label</label>
+    <input id="cardLabel" placeholder="e.g. Personal Card">
     <div class="modal-buttons">
       <button class="confirm" id="freezeBtn" onclick="toggleCardFreeze()">Freeze Card</button>
       <button class="cancel" onclick="closeModal('cardModal')">Close</button>
@@ -738,26 +769,91 @@ body{
   </div>
 </div>
 
+<!-- PROFILE MODAL -->
+<div class="modal" id="profileModal">
+  <div class="modal-box">
+    <h2>Profile</h2>
+    <div class="profile-avatar-lg" id="profileAvatar">JN</div>
+    <label>Full Name</label>
+    <input id="profileName" value="Jolan Newman">
+    <label>Email</label>
+    <input id="profileEmail" value="jolan@example.com">
+    <label>Phone</label>
+    <input id="profilePhone" value="+1 (555) 000-0000">
+    <div class="modal-buttons">
+      <button class="cancel" onclick="closeModal('profileModal')">Cancel</button>
+      <button class="confirm" onclick="saveProfile()">Save Changes</button>
+    </div>
+    <button class="cancel" style="width:100%;margin-top:10px;padding:13px;border-radius:10px;cursor:pointer;font-weight:800;"
+            onclick="closeModal('profileModal');logout()">Sign Out</button>
+  </div>
+</div>
+
+<!-- PIN OVERLAY -->
+<div class="pin-overlay" id="pinOverlay">
+  <div class="auth-brand" style="margin-bottom:0">
+    <div class="brand-logo" style="width:60px;height:60px;font-size:32px">N</div>
+  </div>
+  <h2 style="margin:16px 0 4px;color:var(--gold2)">NovaPay Locked</h2>
+  <p style="color:#aaa49a;font-size:13px">Enter your 4-digit PIN to unlock</p>
+  <div class="pin-dots" id="pinDots">
+    <div class="pin-dot"></div><div class="pin-dot"></div>
+    <div class="pin-dot"></div><div class="pin-dot"></div>
+  </div>
+  <div class="pin-pad">
+    <button onclick="pinPress(1)">1</button>
+    <button onclick="pinPress(2)">2</button>
+    <button onclick="pinPress(3)">3</button>
+    <button onclick="pinPress(4)">4</button>
+    <button onclick="pinPress(5)">5</button>
+    <button onclick="pinPress(6)">6</button>
+    <button onclick="pinPress(7)">7</button>
+    <button onclick="pinPress(8)">8</button>
+    <button onclick="pinPress(9)">9</button>
+    <button onclick="pinClear()">✕</button>
+    <button onclick="pinPress(0)">0</button>
+    <button onclick="pinBack()">⌫</button>
+  </div>
+</div>
+
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
-/* ================= STATE ================= */
-let balance = 58000;
+/* ========== STATE ========== */
+const accounts = {
+  checking: { label: 'Available Balance', number: 'Checking Account •••• 4821', short: '•••• 4821', balance: 58000, type: 'Checking' },
+  savings:  { label: 'Savings Balance',   number: 'Savings Account •••• 9910',  short: '•••• 9910', balance: 12500, type: 'Savings' }
+};
+let activeAccount = 'checking';
+
+const cards = [
+  { brand: 'NovaPay Debit', number: '•••• •••• •••• 4821', holder: 'JOLAN NEWMAN', expiry: 'VALID THRU 12/29' },
+  { brand: 'NovaPay Gold',  number: '•••• •••• •••• 7412', holder: 'JOLAN NEWMAN', expiry: 'VALID THRU 06/30' }
+];
+let activeCard = 0;
+
 let currentGeneratedCode = "";
 let currentTargetEmail = "";
 let currentUserName = "Jolan Newman";
 let cardFrozen = false;
 
-/* ================= AUTH ================= */
+let notifications = [
+  { text: "Welcome to NovaPay! Your account is ready.", time: "Just now" },
+  { text: "Received $5,000.00 from Sarah Mitchell.", time: "Sep 10, 2026" },
+  { text: "Bill payment to City Electric was successful.", time: "Sep 6, 2026" }
+];
+
+let pin = "";
+const SET_PIN = "1234";
+let idleTimer;
+
+/* ========== AUTH ========== */
 function showAuthView(viewId) {
   document.getElementById('authOverlay').style.display = 'flex';
-  document.getElementById('signInView').style.display = 'none';
-  document.getElementById('codeView').style.display = 'none';
-  document.getElementById('signUpView').style.display = 'none';
+  ['signInView','codeView','signUpView'].forEach(v => document.getElementById(v).style.display = 'none');
   document.getElementById(viewId).style.display = 'block';
 }
-
 function updateAccountName(name) {
   if (!name) return;
   currentUserName = name;
@@ -766,38 +862,29 @@ function updateAccountName(name) {
   document.getElementById('cardHolder').textContent = name.toUpperCase();
   const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
   document.getElementById('displayAvatar').textContent = initials || 'JN';
+  document.getElementById('profileAvatar').textContent = initials || 'JN';
 }
-
 function generate6DigitCode() {
   return Math.floor(100000 + Math.random() * 900000).toString();
 }
-
 function sendVerificationEmail(recipientEmail, recipientName, buttonId) {
   currentGeneratedCode = generate6DigitCode();
   currentTargetEmail = recipientEmail;
-
   const btn = buttonId ? document.getElementById(buttonId) : null;
   if (btn) btn.textContent = "Sending Email...";
-
-  // 🔑 Replace YOUR_SERVICE_ID and YOUR_TEMPLATE_ID
   emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
-    to_email: recipientEmail,
-    to_name: recipientName,
-    code: currentGeneratedCode
-  })
-  .then(function() {
-    toast('Verification code sent to ' + recipientEmail);
+    to_email: recipientEmail, to_name: recipientName, code: currentGeneratedCode
+  }).then(function() {
+    toast('Code sent to ' + recipientEmail);
     if (btn) btn.textContent = "Continue";
     showAuthView('codeView');
-  })
-  .catch(function(err) {
+  }).catch(function(err) {
     console.error('Email error:', err);
     toast('Test mode — code: ' + currentGeneratedCode);
     if (btn) btn.textContent = "Continue";
     showAuthView('codeView');
   });
 }
-
 function handleSignInStep1(e) {
   e.preventDefault();
   const name = document.getElementById('signInUser').value;
@@ -805,7 +892,6 @@ function handleSignInStep1(e) {
   updateAccountName(name);
   sendVerificationEmail(email, name, 'signInBtn');
 }
-
 function handleSignUp(e) {
   e.preventDefault();
   const name = document.getElementById('signUpName').value;
@@ -813,197 +899,392 @@ function handleSignUp(e) {
   updateAccountName(name);
   sendVerificationEmail(email, name, 'signUpBtn');
 }
-
 function resendEmailCode() {
-  if (currentTargetEmail) {
-    sendVerificationEmail(currentTargetEmail, currentUserName, null);
-  } else {
-    toast("Please enter an email address first.");
-  }
+  if (currentTargetEmail) sendVerificationEmail(currentTargetEmail, currentUserName, null);
+  else toast("Please enter an email address first.");
 }
-
 function handleCodeVerification(e) {
   e.preventDefault();
   const enteredCode = document.getElementById('authCode').value.trim();
-
   if (enteredCode === currentGeneratedCode || enteredCode === "123456") {
     document.getElementById('authOverlay').style.display = 'none';
     document.getElementById('authCode').value = '';
-    updateBalance();
+    refreshAll();
+    startIdleTimer();
     toast('Welcome back, ' + currentUserName);
-  } else {
-    toast('Invalid code. Please check your email.');
-  }
+  } else toast('Invalid code. Please check your email.');
 }
-
 function logout() {
-  currentGeneratedCode = "";
-  currentTargetEmail = "";
-  cardFrozen = false;
+  currentGeneratedCode = ""; currentTargetEmail = "";
+  cardFrozen = false; clearTimeout(idleTimer);
   document.getElementById('authOverlay').style.display = 'flex';
   document.getElementById('signInUser').value = "Jolan Newman";
   document.getElementById('signInEmail').value = "";
   document.getElementById('authCode').value = '';
   showAuthView('signInView');
   closeAllModals();
+  document.getElementById('pinOverlay').classList.remove('show');
   toast('You have been signed out.');
 }
 
-/* ================= MODALS ================= */
-function openModal(id) {
-  closeAllModals();
-  document.getElementById(id).classList.add('show');
-}
-function closeModal(id) {
-  document.getElementById(id).classList.remove('show');
-}
-function closeAllModals() {
-  document.querySelectorAll('.modal').forEach(m => m.classList.remove('show'));
-}
-
-/* ================= BALANCE ================= */
-function updateBalance() {
-  const formatted = "$" + balance.toLocaleString("en-US", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
+/* ========== NAV ========== */
+function showPage(name) {
+  ['dashboardPage','historyPage','statementsPage'].forEach(p => {
+    document.getElementById(p).style.display = 'none';
   });
-  document.getElementById('balanceDisplay').textContent = formatted;
-  document.getElementById('overviewBalance').textContent = formatted;
+  if (name === 'dashboard') document.getElementById('dashboardPage').style.display = 'block';
+  if (name === 'history')   { document.getElementById('historyPage').style.display = 'block'; renderHistory(); }
+  if (name === 'statements') document.getElementById('statementsPage').style.display = 'block';
+  document.querySelectorAll('.mobile-nav button').forEach(b => b.classList.remove('active'));
+  if (name === 'dashboard') document.querySelector('.mobile-nav button').classList.add('active');
 }
 
-/* ================= TRANSACTIONS ================= */
-function addTransaction(name, amount, type, subtitle) {
-  const container = document.getElementById('transactions');
+/* ========== ACCOUNTS ========== */
+function switchAccount(key, btn) {
+  activeAccount = key;
+  document.querySelectorAll('.acct-tab').forEach(t => t.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  refreshAll();
+}
+function refreshAll() {
+  const a = accounts[activeAccount];
+  document.getElementById('acctLabel').textContent = a.label;
+  document.getElementById('acctNumber').textContent = a.number;
+  document.getElementById('balanceDisplay').textContent = fmt(a.balance);
+  document.getElementById('overviewBalance').textContent = fmt(a.balance);
+  document.getElementById('ovType').textContent = a.type;
+  document.getElementById('ovNumber').textContent = a.short;
+  renderChart();
+  renderHistory();
+}
+function fmt(n){ return "$" + n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}); }
 
+/* ========== CARDS ========== */
+function switchCard(i) {
+  activeCard = i;
+  const c = cards[i];
+  document.getElementById('cardBrand').textContent = c.brand;
+  document.getElementById('cardNumber').textContent = c.number;
+  document.getElementById('cardHolder').textContent = c.holder;
+  document.getElementById('cardExpiry').textContent = c.expiry;
+  document.querySelectorAll('.card-dot').forEach((d, idx) => d.classList.toggle('active', idx === i));
+}
+function toggleCardFreeze() {
+  cardFrozen = !cardFrozen;
+  document.getElementById('cardStatus').textContent = 'Status: ' + (cardFrozen ? 'Frozen ❄' : 'Active ✅');
+  document.getElementById('freezeBtn').textContent = cardFrozen ? 'Unfreeze Card' : 'Freeze Card';
+  toast(cardFrozen ? 'Card frozen.' : 'Card unfrozen.');
+}
+
+/* ========== MODALS ========== */
+function openModal(id) { closeAllModals(); document.getElementById(id).classList.add('show'); }
+function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+function closeAllModals() { document.querySelectorAll('.modal').forEach(m => m.classList.remove('show')); }
+
+/* ========== TRANSACTIONS ========== */
+let allTransactions = [
+  { name: 'Incoming Transfer — Sarah Mitchell', type: 'in', amount: 5000, subtitle: 'Acct ••8842', date: 'Sep 10, 2026', account: 'checking' },
+  { name: 'Transfer to Michael Chen', type: 'out', amount: 425, subtitle: 'Acct ••3317', date: 'Sep 8, 2026', account: 'checking' },
+  { name: 'Bill — City Electric', type: 'out', amount: 182.40, subtitle: 'Ref INV-20481', date: 'Sep 6, 2026', account: 'checking' },
+  { name: 'Deposit — Employer Inc.', type: 'in', amount: 3250, subtitle: 'Acct ••5590', date: 'Sep 5, 2026', account: 'checking' },
+  { name: 'Sent to Emma Rodriguez', type: 'out', amount: 150, subtitle: 'Acct ••7723', date: 'Sep 3, 2026', account: 'checking' },
+  { name: 'Bill — FastNet Internet', type: 'out', amount: 89.99, subtitle: 'Ref INV-77120', date: 'Sep 1, 2026', account: 'checking' }
+];
+
+function addTransaction(name, amount, type, subtitle) {
+  const tx = {
+    name, type, amount, subtitle,
+    date: new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),
+    account: activeAccount
+  };
+  allTransactions.unshift(tx);
+
+  const container = document.getElementById('transactions');
   const row = document.createElement('div');
   row.className = 'transaction';
   const sign = type === 'in' ? '+' : '-';
   const icon = type === 'in' ? '↓' : '↑';
-
   row.innerHTML = `
     <div class="transaction-left">
       <div class="tx-icon">${icon}</div>
       <div>
         <div class="tx-name">${escapeHtml(name)}</div>
-        <div class="tx-date">${escapeHtml(subtitle)} • ${new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>
+        <div class="tx-date">${escapeHtml(subtitle)} • ${tx.date}</div>
       </div>
     </div>
-    <div class="${type}">
-      ${sign}$${amount.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}
-    </div>
-  `;
+    <div class="${type}">${sign}${fmt(amount)}</div>`;
   container.prepend(row);
+
+  notifications.unshift({ text: (type === 'in' ? 'Received ' : 'Paid ') + fmt(amount) + ' — ' + name, time: 'Just now' });
+  renderNotifs();
+  renderHistory();
+  renderChart();
 }
 
-/* ================= VALIDATION ================= */
-function validateRouting(v) { return /^\d{9}$/.test(v); }
-function validateAccount(v) { return /^\d{4,17}$/.test(v); }
-function validateAmount(v) {
-  const n = Number(v);
-  return !isNaN(n) && n > 0;
+function renderHistory() {
+  const list = document.getElementById('historyList');
+  if (!list) return;
+  const filtered = allTransactions.filter(t => t.account === activeAccount);
+  if (!filtered.length) {
+    list.innerHTML = '<p style="text-align:center;color:var(--muted);padding:30px 0;">No transactions yet.</p>';
+    return;
+  }
+  list.innerHTML = filtered.map(t => `
+    <div class="transaction" data-type="${t.type}" data-name="${escapeHtml(t.name.toLowerCase())}">
+      <div class="transaction-left">
+        <div class="tx-icon">${t.type === 'in' ? '↓' : '↑'}</div>
+        <div>
+          <div class="tx-name">${escapeHtml(t.name)}</div>
+          <div class="tx-date">${escapeHtml(t.subtitle)} • ${t.date}</div>
+        </div>
+      </div>
+      <div class="${t.type}">${t.type === 'in' ? '+' : '-'}${fmt(t.amount)}</div>
+    </div>`).join('');
 }
 
-/* ================= TRANSFER ================= */
+let currentFilter = 'all';
+function filterTx(type, btn) {
+  currentFilter = type;
+  document.querySelectorAll('#historyPage .acct-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyTxFilters();
+}
+function filterTxSearch() { applyTxFilters(); }
+function applyTxFilters() {
+  const q = (document.getElementById('txSearch')?.value || '').toLowerCase();
+  document.querySelectorAll('#historyList .transaction').forEach(el => {
+    const typeOk = currentFilter === 'all' || el.dataset.type === currentFilter;
+    const searchOk = !q || el.dataset.name.includes(q);
+    el.style.display = (typeOk && searchOk) ? 'flex' : 'none';
+  });
+}
+
+/* ========== VALIDATION ========== */
+const vRoute = v => /^\d{9}$/.test(v);
+const vAcct  = v => /^\d{4,17}$/.test(v);
+const vAmt   = v => { const n = Number(v); return !isNaN(n) && n > 0; };
+
+/* ========== TRANSFER ========== */
 function doTransfer() {
   const receiver = document.getElementById('tfReceiver').value.trim();
   const routing  = document.getElementById('tfRouting').value.trim();
   const account  = document.getElementById('tfAccount').value.trim();
   const amount   = Number(document.getElementById('tfAmount').value);
+  const a = accounts[activeAccount];
 
-  if (!receiver)                 return toast('Enter receiver name.');
-  if (!validateRouting(routing)) return toast('Routing number must be 9 digits.');
-  if (!validateAccount(account)) return toast('Account number must be 4–17 digits.');
-  if (!validateAmount(amount))   return toast('Enter a valid amount.');
-  if (amount > balance)          return toast('Insufficient balance.');
+  if (!receiver)          return toast('Enter receiver name.');
+  if (!vRoute(routing))   return toast('Routing number must be 9 digits.');
+  if (!vAcct(account))    return toast('Account number must be 4–17 digits.');
+  if (!vAmt(amount))      return toast('Enter a valid amount.');
+  if (amount > a.balance) return toast('Insufficient balance.');
 
-  balance -= amount;
-  updateBalance();
+  a.balance -= amount;
+  refreshAll();
   addTransaction('Transfer to ' + receiver, amount, 'out', 'Acct ••' + account.slice(-4));
-
-  toast('Transfer of $' + amount.toFixed(2) + ' sent to ' + receiver);
+  toast('Sent ' + fmt(amount) + ' to ' + receiver);
   closeAllModals();
   clearFields(['tfReceiver','tfRouting','tfAccount','tfAmount','tfMemo']);
 }
 
-/* ================= SEND MONEY ================= */
+/* ========== SEND MONEY ========== */
 function doSendMoney() {
-  const name     = document.getElementById('sdName').value.trim();
-  const routing  = document.getElementById('sdRouting').value.trim();
-  const account  = document.getElementById('sdAccount').value.trim();
-  const amount   = Number(document.getElementById('sdAmount').value);
+  const name    = document.getElementById('sdName').value.trim();
+  const routing = document.getElementById('sdRouting').value.trim();
+  const account = document.getElementById('sdAccount').value.trim();
+  const amount  = Number(document.getElementById('sdAmount').value);
+  const a = accounts[activeAccount];
 
-  if (!name)                     return toast('Enter recipient name.');
-  if (!validateRouting(routing)) return toast('Routing number must be 9 digits.');
-  if (!validateAccount(account)) return toast('Account number must be 4–17 digits.');
-  if (!validateAmount(amount))   return toast('Enter a valid amount.');
-  if (amount > balance)          return toast('Insufficient balance.');
+  if (!name)              return toast('Enter recipient name.');
+  if (!vRoute(routing))   return toast('Routing number must be 9 digits.');
+  if (!vAcct(account))    return toast('Account number must be 4–17 digits.');
+  if (!vAmt(amount))      return toast('Enter a valid amount.');
+  if (amount > a.balance) return toast('Insufficient balance.');
 
-  balance -= amount;
-  updateBalance();
+  a.balance -= amount;
+  refreshAll();
   addTransaction('Sent to ' + name, amount, 'out', 'Acct ••' + account.slice(-4));
-
-  toast('$' + amount.toFixed(2) + ' sent to ' + name);
+  toast('Sent ' + fmt(amount) + ' to ' + name);
   closeAllModals();
   clearFields(['sdName','sdRouting','sdAccount','sdAmount']);
 }
 
-/* ================= PAY BILL ================= */
+/* ========== PAY BILL ========== */
 function doPayBill() {
   const biller    = document.getElementById('blBiller').value.trim();
   const routing   = document.getElementById('blRouting').value.trim();
   const account   = document.getElementById('blAccount').value.trim();
   const reference = document.getElementById('blReference').value.trim();
   const amount    = Number(document.getElementById('blAmount').value);
+  const a = accounts[activeAccount];
 
-  if (!biller)                   return toast('Enter biller name.');
-  if (!validateRouting(routing)) return toast('Routing number must be 9 digits.');
-  if (!validateAccount(account)) return toast('Account number must be 4–17 digits.');
-  if (!reference)                return toast('Enter a reference number.');
-  if (!validateAmount(amount))   return toast('Enter a valid amount.');
-  if (amount > balance)          return toast('Insufficient balance.');
+  if (!biller)            return toast('Enter biller name.');
+  if (!vRoute(routing))   return toast('Routing number must be 9 digits.');
+  if (!vAcct(account))    return toast('Account number must be 4–17 digits.');
+  if (!reference)         return toast('Enter a reference number.');
+  if (!vAmt(amount))      return toast('Enter a valid amount.');
+  if (amount > a.balance) return toast('Insufficient balance.');
 
-  balance -= amount;
-  updateBalance();
+  a.balance -= amount;
+  refreshAll();
   addTransaction('Bill — ' + biller, amount, 'out', 'Ref ' + reference);
-
-  toast('Bill paid to ' + biller + ' for $' + amount.toFixed(2));
+  toast('Paid ' + fmt(amount) + ' to ' + biller);
   closeAllModals();
   clearFields(['blBiller','blRouting','blAccount','blReference','blAmount']);
 }
 
-/* ================= DEPOSIT ================= */
+/* ========== DEPOSIT ========== */
 function doDeposit() {
   const method  = document.getElementById('dpMethod').value;
   const sender  = document.getElementById('dpSender').value.trim();
   const routing = document.getElementById('dpRouting').value.trim();
   const account = document.getElementById('dpAccount').value.trim();
   const amount  = Number(document.getElementById('dpAmount').value);
+  const a = accounts[activeAccount];
 
-  if (!sender)                   return toast('Enter sender name.');
-  if (!validateRouting(routing)) return toast('Routing number must be 9 digits.');
-  if (!validateAccount(account)) return toast('Account number must be 4–17 digits.');
-  if (!validateAmount(amount))   return toast('Enter a valid amount.');
+  if (!sender)          return toast('Enter sender name.');
+  if (!vRoute(routing)) return toast('Routing number must be 9 digits.');
+  if (!vAcct(account))  return toast('Account number must be 4–17 digits.');
+  if (!vAmt(amount))    return toast('Enter a valid amount.');
 
-  balance += amount;
-  updateBalance();
+  a.balance += amount;
+  refreshAll();
   addTransaction(method + ' — ' + sender, amount, 'in', 'Acct ••' + account.slice(-4));
-
-  toast('Deposit of $' + amount.toFixed(2) + ' received.');
+  toast('Received ' + fmt(amount));
   closeAllModals();
   clearFields(['dpSender','dpRouting','dpAccount','dpAmount']);
 }
 
-/* ================= CARD ================= */
-function toggleCardFreeze() {
-  cardFrozen = !cardFrozen;
-  document.getElementById('cardStatus').textContent =
-    'Status: ' + (cardFrozen ? 'Frozen ❄' : 'Active ✅');
-  document.getElementById('freezeBtn').textContent =
-    cardFrozen ? 'Unfreeze Card' : 'Freeze Card';
-  toast(cardFrozen ? 'Card frozen.' : 'Card unfrozen.');
+/* ========== QUICK AMOUNT ========== */
+function setAmount(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.value = value.toFixed(2);
 }
 
-/* ================= HELPERS ================= */
+/* ========== NOTIFICATIONS ========== */
+function toggleNotifs() { document.getElementById('notifPanel').classList.toggle('show'); }
+function renderNotifs() {
+  const list = document.getElementById('notifList');
+  list.innerHTML = notifications.slice(0, 10).map(n => `
+    <div class="notif-item">
+      <div class="notif-dot"></div>
+      <div>
+        <div class="notif-text">${escapeHtml(n.text)}</div>
+        <div class="notif-time">${escapeHtml(n.time)}</div>
+      </div>
+    </div>`).join('');
+  const badge = document.getElementById('notifBadge');
+  badge.style.display = notifications.length > 1 ? 'block' : 'none';
+}
+
+/* ========== DARK MODE ========== */
+function toggleDarkMode() {
+  document.body.classList.toggle('dark');
+  const isDark = document.body.classList.contains('dark');
+  document.getElementById('darkBtn').textContent = isDark ? '☀️' : '🌙';
+  localStorage.setItem('novaDark', isDark ? '1' : '0');
+}
+
+/* ========== CHART ========== */
+function renderChart() {
+  const bars = document.getElementById('chartBars');
+  if (!bars) return;
+  const spends = [120, 340, 85, 560, 210, 45, 390];
+  const max = Math.max(...spends);
+  bars.innerHTML = spends.map(v => {
+    const h = Math.max(8, (v / max) * 100);
+    return `<div class="chart-bar" style="height:${h}%"></div>`;
+  }).join('');
+}
+
+/* ========== PROFILE ========== */
+function saveProfile() {
+  const name = document.getElementById('profileName').value.trim();
+  if (!name) return toast('Name cannot be empty.');
+  updateAccountName(name);
+  toast('Profile updated.');
+  closeModal('profileModal');
+}
+
+/* ========== STATEMENTS ========== */
+function generateStatement(month) {
+  const a = accounts[activeAccount];
+  const rows = allTransactions.filter(t => t.account === activeAccount).slice(0, 8);
+  const totalIn = rows.filter(t => t.type === 'in').reduce((s, t) => s + t.amount, 0);
+  const totalOut = rows.filter(t => t.type === 'out').reduce((s, t) => s + t.amount, 0);
+  document.getElementById('statementArea').innerHTML = `
+    <div class="statement-box">
+      <div class="statement-header">
+        <h1>NovaPay — ${month}</h1>
+        <p style="margin:6px 0 0;font-size:12px;color:#777064">Statement for ${a.type} Account ${a.short}</p>
+      </div>
+      <p style="font-size:12px;margin:0 0 8px;"><strong>Account Holder:</strong> ${escapeHtml(currentUserName)}</p>
+      <p style="font-size:12px;margin:0 0 16px;"><strong>Closing Balance:</strong> ${fmt(a.balance)}</p>
+      <div class="statement-row" style="font-weight:800;border-bottom:2px solid #191714;">
+        <span>Description</span><span>Amount</span>
+      </div>
+      ${rows.map(t => `
+        <div class="statement-row">
+          <span>${escapeHtml(t.name)} • ${t.date}</span>
+          <span style="color:${t.type === 'in' ? '#168447' : '#c43b3b'};font-weight:700;">
+            ${t.type === 'in' ? '+' : '-'}${fmt(t.amount)}
+          </span>
+        </div>`).join('')}
+      <div class="statement-row" style="margin-top:12px;font-weight:800;">
+        <span>Total In</span><span style="color:#168447">+${fmt(totalIn)}</span>
+      </div>
+      <div class="statement-row" style="font-weight:800;">
+        <span>Total Out</span><span style="color:#c43b3b">-${fmt(totalOut)}</span>
+      </div>
+      <button class="btn-submit" style="margin-top:20px;" onclick="window.print()">🖨 Print / Save PDF</button>
+    </div>`;
+}
+
+/* ========== PIN LOCK ========== */
+function startIdleTimer() {
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(() => {
+    if (document.getElementById('authOverlay').style.display === 'none') {
+      document.getElementById('pinOverlay').classList.add('show');
+      pinClear();
+    }
+  }, 5 * 60 * 1000);
+}
+document.addEventListener('mousemove', () => {
+  if (document.getElementById('authOverlay').style.display === 'none') startIdleTimer();
+});
+document.addEventListener('keypress', () => {
+  if (document.getElementById('authOverlay').style.display === 'none') startIdleTimer();
+});
+
+function pinPress(d) {
+  if (pin.length >= 4) return;
+  pin += d;
+  updatePinDots();
+  if (pin.length === 4) {
+    setTimeout(() => {
+      if (pin === SET_PIN) {
+        document.getElementById('pinOverlay').classList.remove('show');
+        pin = '';
+        updatePinDots();
+        startIdleTimer();
+        toast('Unlocked.');
+      } else {
+        toast('Wrong PIN. Try 1234.');
+        pin = '';
+        updatePinDots();
+      }
+    }, 200);
+  }
+}
+function pinBack() { pin = pin.slice(0, -1); updatePinDots(); }
+function pinClear() { pin = ''; updatePinDots(); }
+function updatePinDots() {
+  document.querySelectorAll('#pinDots .pin-dot').forEach((d, i) => {
+    d.classList.toggle('filled', i < pin.length);
+  });
+}
+
+/* ========== HELPERS ========== */
 function clearFields(ids) {
   ids.forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
 }
@@ -1021,10 +1302,17 @@ function toast(msg) {
   toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
 }
 
-/* ================= INIT ================= */
+/* ========== INIT ========== */
 window.addEventListener('load', () => {
-  updateBalance();
+  refreshAll();
   updateAccountName(currentUserName);
+  renderNotifs();
+  if (localStorage.getItem('novaDark') === '1') {
+    document.body.classList.add('dark');
+    document.getElementById('darkBtn').textContent = '☀️';
+  }
+  // Show PIN hint on first visit
+  setTimeout(() => toast('Tip: PIN is 1234 for lock screen'), 1500);
 });
 </script>
 
