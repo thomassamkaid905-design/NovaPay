@@ -2,11 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0,
-               maximum-scale=1.0, user-scalable=no">
-
-<title>NovaPay — Demo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>NovaPay</title>
 
 <style>
 * {
@@ -22,11 +19,8 @@
   --gold-dark: #c9a84a;
   --bg: #0b0a08;
   --card: #171510;
-  --card2: #1f1c15;
   --text: #f7f1df;
   --muted: #aaa28f;
-  --green: #4ade80;
-  --red: #f87171;
 }
 
 html,
@@ -36,13 +30,8 @@ body {
 }
 
 body {
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Arial,
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Roboto, Arial, sans-serif;
   color: var(--text);
 }
 
@@ -55,44 +44,22 @@ button {
   cursor: pointer;
 }
 
-/* =========================
-   APP
-========================= */
-
 .app {
   width: 100%;
   max-width: 430px;
   min-height: 100vh;
   margin: auto;
-  background:
-    linear-gradient(
-      180deg,
-      #211e17 0%,
-      #11100c 45%,
-      #090807 100%
-    );
+  background: linear-gradient(
+    180deg,
+    #211e17 0%,
+    #11100c 45%,
+    #090807 100%
+  );
   position: relative;
   overflow: hidden;
 }
 
-/* =========================
-   DEMO LABEL
-========================= */
-
-.demo-label {
-  background: #705400;
-  color: #fff2bd;
-  text-align: center;
-  padding: 8px 10px;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: .5px;
-}
-
-/* =========================
-   SCREENS
-========================= */
-
+/* SCREENS */
 .screen {
   display: none;
   min-height: 100vh;
@@ -102,12 +69,9 @@ button {
   display: block;
 }
 
-/* =========================
-   AUTH
-========================= */
-
+/* AUTH */
 .auth {
-  min-height: calc(100vh - 30px);
+  min-height: 100vh;
   padding: 70px 28px 40px;
   display: flex;
   flex-direction: column;
@@ -119,13 +83,13 @@ button {
   font-weight: 900;
   letter-spacing: -2px;
   margin-bottom: 8px;
-  background:
-    linear-gradient(
-      135deg,
-      #fff4c9,
-      var(--gold)
-    );
+  background: linear-gradient(
+    135deg,
+    #fff4c9,
+    var(--gold)
+  );
   -webkit-background-clip: text;
+  background-clip: text;
   color: transparent;
 }
 
@@ -134,10 +98,6 @@ button {
   color: var(--muted);
   font-size: 17px;
   margin-bottom: 58px;
-}
-
-.auth-form {
-  width: 100%;
 }
 
 .field {
@@ -179,28 +139,15 @@ button {
   height: 64px;
   border: 0;
   border-radius: 18px;
-  background:
-    linear-gradient(
-      135deg,
-      var(--gold-light),
-      var(--gold)
-    );
+  background: linear-gradient(
+    135deg,
+    var(--gold-light),
+    var(--gold)
+  );
   color: #2b2208;
   font-size: 17px;
   font-weight: 900;
-  box-shadow:
-    0 10px 30px rgba(229,199,107,.25);
-}
-
-.secondary-button {
-  width: 100%;
-  height: 58px;
-  margin-top: 14px;
-  border-radius: 16px;
-  border: 1px solid rgba(229,199,107,.35);
-  background: transparent;
-  color: var(--gold-light);
-  font-weight: 800;
+  box-shadow: 0 10px 30px rgba(229,199,107,.25);
 }
 
 .auth-switch {
@@ -216,38 +163,9 @@ button {
   font-weight: 800;
 }
 
-.auth-note {
-  margin-top: auto;
-  padding-top: 50px;
-  text-align: center;
-  color: #716b5d;
-  font-size: 11px;
-  line-height: 1.5;
-}
-
-/* =========================
-   STATUS
-========================= */
-
-.status-bar {
-  padding: 14px 22px 6px;
-  display: flex;
-  justify-content: space-between;
-  font-size: 15px;
-  font-weight: 800;
-}
-
-.status-right {
-  display: flex;
-  gap: 7px;
-}
-
-/* =========================
-   DASHBOARD HEADER
-========================= */
-
+/* HEADER */
 .top-row {
-  padding: 10px 20px 18px;
+  padding: 24px 20px 18px;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -270,6 +188,9 @@ button {
   flex: 1;
   font-size: 19px;
   font-weight: 850;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .avatar {
@@ -283,10 +204,7 @@ button {
   font-weight: 900;
 }
 
-/* =========================
-   GREETING
-========================= */
-
+/* GREETING */
 .greeting {
   padding: 6px 22px 20px;
 }
@@ -302,10 +220,7 @@ button {
   margin-top: 7px;
 }
 
-/* =========================
-   ACCOUNT PILLS
-========================= */
-
+/* PILLS */
 .pills {
   display: flex;
   gap: 10px;
@@ -324,15 +239,15 @@ button {
   border-radius: 999px;
   font-size: 13px;
   font-weight: 800;
+  cursor: pointer;
 }
 
 .pill.active {
-  background:
-    linear-gradient(
-      135deg,
-      var(--gold-light),
-      var(--gold)
-    );
+  background: linear-gradient(
+    135deg,
+    var(--gold-light),
+    var(--gold)
+  );
   color: #2b2208;
 }
 
@@ -342,21 +257,17 @@ button {
   background: rgba(255,255,255,.05);
 }
 
-/* =========================
-   BALANCE
-========================= */
-
+/* BALANCE */
 .balance-card {
   margin: 0 18px 22px;
   padding: 27px 24px 24px;
   border-radius: 24px;
   border: 1px solid rgba(229,199,107,.16);
-  background:
-    linear-gradient(
-      140deg,
-      #1b1812,
-      #0d0c0a
-    );
+  background: linear-gradient(
+    140deg,
+    #1b1812,
+    #0d0c0a
+  );
   box-shadow: 0 18px 40px rgba(0,0,0,.5);
 }
 
@@ -388,16 +299,15 @@ button {
   height: 48px;
   border-radius: 12px;
   font-weight: 850;
-  border: 0;
 }
 
 .action-button.primary {
-  background:
-    linear-gradient(
-      135deg,
-      var(--gold-light),
-      var(--gold)
-    );
+  border: 0;
+  background: linear-gradient(
+    135deg,
+    var(--gold-light),
+    var(--gold)
+  );
   color: #2b2208;
 }
 
@@ -407,21 +317,17 @@ button {
   color: var(--gold-light);
 }
 
-/* =========================
-   CARD
-========================= */
-
+/* CARD */
 .debit-card {
   margin: 0 18px 22px;
   min-height: 235px;
   padding: 25px;
   border-radius: 24px;
-  background:
-    linear-gradient(
-      145deg,
-      #252117,
-      #0b0a08
-    );
+  background: linear-gradient(
+    145deg,
+    #252117,
+    #0b0a08
+  );
   border: 1px solid rgba(229,199,107,.18);
   box-shadow: 0 18px 40px rgba(0,0,0,.5);
 }
@@ -448,12 +354,11 @@ button {
   margin-top: 28px;
   margin-bottom: 23px;
   border-radius: 7px;
-  background:
-    linear-gradient(
-      135deg,
-      var(--gold-light),
-      var(--gold-dark)
-    );
+  background: linear-gradient(
+    135deg,
+    var(--gold-light),
+    var(--gold-dark)
+  );
 }
 
 .card-number {
@@ -480,27 +385,19 @@ button {
   font-weight: 800;
 }
 
-/* =========================
-   GENERATE
-========================= */
-
+/* GENERATE */
 .generate {
-  margin: 0 18px 22px;
+  margin: 0 18px 100px;
+  width: calc(100% - 36px);
   height: 58px;
   border-radius: 17px;
   border: 1px solid rgba(229,199,107,.35);
   background: rgba(229,199,107,.08);
   color: var(--gold-light);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-weight: 850;
 }
 
-/* =========================
-   NAV
-========================= */
-
+/* NAV */
 .bottom-nav {
   position: fixed;
   bottom: 0;
@@ -534,10 +431,7 @@ button {
   font-size: 20px;
 }
 
-/* =========================
-   MODAL
-========================= */
-
+/* MODAL */
 .modal {
   display: none;
   position: fixed;
@@ -582,23 +476,14 @@ button {
   font-weight: 900;
 }
 
-/* =========================
-   DESKTOP
-========================= */
-
 @media (min-width: 480px) {
   body {
     padding: 20px 0;
   }
 
   .app {
-    min-height: 900px;
-    max-height: 900px;
+    min-height: 100vh;
     border-radius: 40px;
-  }
-
-  .screen {
-    min-height: 900px;
   }
 
   .bottom-nav {
@@ -612,422 +497,355 @@ button {
 
 <div class="app">
 
-  <!-- ======================
-       CREATE ACCOUNT SCREEN
-  ======================= -->
+<!-- ================= SIGN UP ================= -->
 
-  <section id="signupScreen" class="screen active">
+<section id="signupScreen" class="screen active">
 
-    <div class="demo-label">
-      DEMO SOFTWARE — NOT A REAL BANK
+  <div class="auth">
+
+    <div class="logo">NovaPay</div>
+
+    <div class="tagline">
+      Create your account in seconds
     </div>
 
-    <div class="auth">
+    <form id="signupForm">
 
-      <div class="logo">
-        NovaPay
+      <div class="field">
+        <label>Email Address</label>
+
+        <input
+          id="signupEmail"
+          type="email"
+          placeholder="you@example.com"
+          autocomplete="email"
+          required>
       </div>
 
-      <div class="tagline">
-        Create your demo account in seconds
+      <div class="field">
+        <label>Password</label>
+
+        <input
+          id="signupPassword"
+          type="password"
+          placeholder="Create a password"
+          autocomplete="new-password"
+          required>
       </div>
-
-      <form id="signupForm" class="auth-form">
-
-        <div class="field">
-          <label>Full Name</label>
-
-          <input
-            id="signupName"
-            type="text"
-            placeholder="e.g. Cerji Colvin"
-            autocomplete="off"
-            required>
-        </div>
-
-        <div class="field">
-          <label>Password</label>
-
-          <input
-            id="signupPassword"
-            type="password"
-            placeholder="Create a demo password"
-            autocomplete="new-password"
-            required>
-        </div>
-
-        <button
-          type="submit"
-          class="primary-button">
-          Create Account
-        </button>
-
-      </form>
-
-      <div class="auth-switch">
-        Already have an account?
-
-        <button
-          type="button"
-          id="showLogin">
-          Sign in
-        </button>
-      </div>
-
-      <div class="auth-note">
-        This is a fictional demonstration interface.
-        Do not enter real banking passwords or financial
-        information.
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ======================
-       LOGIN SCREEN
-  ======================= -->
-
-  <section id="loginScreen" class="screen">
-
-    <div class="demo-label">
-      DEMO SOFTWARE — NOT A REAL BANK
-    </div>
-
-    <div class="auth">
-
-      <div class="logo">
-        NovaPay
-      </div>
-
-      <div class="tagline">
-        Sign in to your demo account
-      </div>
-
-      <form id="loginForm" class="auth-form">
-
-        <div class="field">
-          <label>Full Name</label>
-
-          <input
-            id="loginName"
-            type="text"
-            placeholder="Your demo name"
-            autocomplete="off"
-            required>
-        </div>
-
-        <div class="field">
-          <label>Password</label>
-
-          <input
-            id="loginPassword"
-            type="password"
-            placeholder="Your demo password"
-            autocomplete="off"
-            required>
-        </div>
-
-        <button
-          type="submit"
-          class="primary-button">
-          Sign In
-        </button>
-
-      </form>
-
-      <div class="auth-switch">
-        Don't have an account?
-
-        <button
-          type="button"
-          id="showSignup">
-          Create account
-        </button>
-      </div>
-
-      <div class="auth-note">
-        Demo credentials are stored only in this browser.
-        This page is not connected to a financial institution.
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- ======================
-       DASHBOARD
-  ======================= -->
-
-  <section id="dashboardScreen" class="screen">
-
-    <div class="demo-label">
-      DEMO ACCOUNT — NOT A REAL BANK ACCOUNT
-    </div>
-
-    <div class="status-bar">
-
-      <span id="clock">
-        12:00 PM
-      </span>
-
-      <div class="status-right">
-        <span>📶</span>
-        <span>▰</span>
-        <span>🔋</span>
-      </div>
-
-    </div>
-
-
-    <div class="top-row">
 
       <button
-        class="circle-button"
-        id="themeButton"
-        type="button">
-        ☀️
+        type="submit"
+        class="primary-button">
+        Create Account
       </button>
+
+    </form>
+
+    <div class="auth-switch">
+      Already have an account?
 
       <button
-        class="circle-button"
-        id="notificationButton"
-        type="button">
-        🔔
+        type="button"
+        id="showLogin">
+        Sign in
+      </button>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ================= LOGIN ================= -->
+
+<section id="loginScreen" class="screen">
+
+  <div class="auth">
+
+    <div class="logo">NovaPay</div>
+
+    <div class="tagline">
+      Sign in to your account
+    </div>
+
+    <form id="loginForm">
+
+      <div class="field">
+        <label>Email Address</label>
+
+        <input
+          id="loginEmail"
+          type="email"
+          placeholder="you@example.com"
+          autocomplete="email"
+          required>
+      </div>
+
+      <div class="field">
+        <label>Password</label>
+
+        <input
+          id="loginPassword"
+          type="password"
+          placeholder="Your password"
+          autocomplete="current-password"
+          required>
+      </div>
+
+      <button
+        type="submit"
+        class="primary-button">
+        Sign In
       </button>
 
-      <div
-        class="user-name"
-        id="dashboardName">
-        Cerji Colvin
-      </div>
+    </form>
 
-      <div
-        class="avatar"
-        id="avatar">
-        CC
-      </div>
+    <div class="auth-switch">
+      Don't have an account?
 
+      <button
+        type="button"
+        id="showSignup">
+        Create account
+      </button>
     </div>
 
-
-    <div class="greeting">
-
-      <h1 id="greeting">
-        Good Evening
-      </h1>
-
-      <p>
-        Welcome to your NovaPay demo dashboard.
-      </p>
-
-    </div>
+  </div>
+</section>
 
 
-    <div class="pills">
+<!-- ================= DASHBOARD ================= -->
 
-      <div class="pill active">
-        🏦 Checking •••• 4821
-      </div>
+<section id="dashboardScreen" class="screen">
 
-      <div class="pill inactive">
-        🏛️ Savings •••• 7732
-      </div>
-
-    </div>
-
-
-    <!-- BALANCE -->
-
-    <div class="balance-card">
-
-      <div class="balance-label">
-        Available Demo Balance
-      </div>
-
-      <div
-        class="balance"
-        id="balance">
-        $137,000
-      </div>
-
-      <div class="balance-sub">
-        Demo Checking Account •••• 4821
-      </div>
-
-      <div class="actions">
-
-        <button
-          class="action-button primary"
-          id="transferButton"
-          type="button">
-          Transfer
-        </button>
-
-        <button
-          class="action-button outline"
-          id="depositButton"
-          type="button">
-          Deposit
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- CARD -->
-
-    <div class="debit-card">
-
-      <div class="card-top">
-
-        <div class="card-title">
-          NovaPay Demo
-        </div>
-
-        <div class="contactless">
-          ))) 
-        </div>
-
-      </div>
-
-      <div class="chip"></div>
-
-      <div class="card-number">
-        •••• &nbsp; •••• &nbsp; •••• &nbsp;
-        <span style="color:#f3dfa2;">
-          4821
-        </span>
-      </div>
-
-      <div class="card-bottom">
-
-        <div>
-          <span class="card-label">
-            CARD HOLDER
-          </span>
-
-          <span
-            class="card-value"
-            id="cardHolder">
-            CERJI COLVIN
-          </span>
-        </div>
-
-        <div style="text-align:right;">
-
-          <span class="card-label">
-            VALID THRU
-          </span>
-
-          <span class="card-value">
-            12/29
-          </span>
-
-        </div>
-
-      </div>
-
-    </div>
-
+  <div class="top-row">
 
     <button
-      class="generate"
-      id="virtualCardButton"
+      class="circle-button"
+      id="themeButton"
       type="button">
-
-      ＋ Generate Virtual Card
-
+      ☀️
     </button>
 
+    <button
+      class="circle-button"
+      id="notificationButton"
+      type="button">
+      🔔
+    </button>
 
-    <nav class="bottom-nav">
+    <div class="user-name" id="dashboardEmail"></div>
+
+    <div class="avatar" id="avatar"></div>
+
+  </div>
+
+
+  <div class="greeting">
+
+    <h1 id="greeting">
+      Welcome
+    </h1>
+
+    <p>
+      Here is your account overview.
+    </p>
+
+  </div>
+
+
+  <div class="pills">
+
+    <div class="pill active" id="checkingPill">
+      🏦 Checking
+    </div>
+
+    <div class="pill inactive" id="savingsPill">
+      🏛️ Savings
+    </div>
+
+  </div>
+
+
+  <!-- BALANCE -->
+
+  <div class="balance-card">
+
+    <div class="balance-label">
+      Available Balance
+    </div>
+
+    <div class="balance" id="accountBalance">
+      $0.00
+    </div>
+
+    <div class="balance-sub" id="accountSub">
+      Checking Account
+    </div>
+
+    <div class="actions">
 
       <button
-        class="nav-button active"
-        type="button"
-        data-page="home">
-        <span class="nav-icon">🏠</span>
-        Home
-      </button>
-
-      <button
-        class="nav-button"
-        type="button"
-        data-page="transfer">
-        <span class="nav-icon">⇄</span>
+        class="action-button primary"
+        id="transferButton"
+        type="button">
         Transfer
       </button>
 
       <button
-        class="nav-button"
-        type="button"
-        data-page="bills">
-        <span class="nav-icon">📄</span>
-        Bills
-      </button>
-
-      <button
-        class="nav-button"
-        type="button"
-        data-page="history">
-        <span class="nav-icon">☰</span>
-        History
-      </button>
-
-      <button
-        class="nav-button"
-        type="button"
-        data-page="profile">
-        <span class="nav-icon">👤</span>
-        Profile
-      </button>
-
-    </nav>
-
-  </section>
-
-
-  <!-- ======================
-       MODAL
-  ======================= -->
-
-  <div
-    class="modal"
-    id="modal">
-
-    <div class="modal-box">
-
-      <h2 id="modalTitle">
-        Demo
-      </h2>
-
-      <p id="modalMessage">
-        Demo feature.
-      </p>
-
-      <button
-        class="modal-close"
-        id="modalClose"
+        class="action-button outline"
+        id="depositButton"
         type="button">
-        Close
+        Deposit
       </button>
 
     </div>
 
   </div>
 
+
+  <!-- CARD -->
+
+  <div class="debit-card">
+
+    <div class="card-top">
+
+      <div class="card-title">
+        NovaPay
+      </div>
+
+      <div class="contactless">
+        )))
+      </div>
+
+    </div>
+
+    <div class="chip"></div>
+
+    <div class="card-number">
+      •••• &nbsp; •••• &nbsp; •••• &nbsp;
+      <span style="color:#f3dfa2;" id="cardLastFour">
+        0000
+      </span>
+    </div>
+
+    <div class="card-bottom">
+
+      <div>
+        <span class="card-label">
+          ACCOUNT USER
+        </span>
+
+        <span
+          class="card-value"
+          id="cardEmail">
+        </span>
+      </div>
+
+      <div style="text-align:right;">
+
+        <span class="card-label">
+          VALID THRU
+        </span>
+
+        <span class="card-value" id="cardExpiry">
+          --/--
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <button
+    class="generate"
+    id="virtualCardButton"
+    type="button">
+    ＋ Generate Virtual Card
+  </button>
+
+
+  <!-- NAVIGATION -->
+
+  <nav class="bottom-nav">
+
+    <button
+      class="nav-button active"
+      data-page="home"
+      type="button">
+      <span class="nav-icon">🏠</span>
+      Home
+    </button>
+
+    <button
+      class="nav-button"
+      data-page="transfer"
+      type="button">
+      <span class="nav-icon">⇄</span>
+      Transfer
+    </button>
+
+    <button
+      class="nav-button"
+      data-page="bills"
+      type="button">
+      <span class="nav-icon">📄</span>
+      Bills
+    </button>
+
+    <button
+      class="nav-button"
+      data-page="history"
+      type="button">
+      <span class="nav-icon">☰</span>
+      History
+    </button>
+
+    <button
+      class="nav-button"
+      data-page="profile"
+      type="button">
+      <span class="nav-icon">👤</span>
+      Profile
+    </button>
+
+  </nav>
+
+</section>
+
+
+<!-- ================= MODAL ================= -->
+
+<div class="modal" id="modal">
+
+  <div class="modal-box">
+
+    <h2 id="modalTitle">
+      NovaPay
+    </h2>
+
+    <p id="modalMessage"></p>
+
+    <button
+      class="modal-close"
+      id="modalClose"
+      type="button">
+      Close
+    </button>
+
+  </div>
+
+</div>
+
 </div>
 
 
 <script>
 
-/* ==================================
-   ELEMENTS
-================================== */
+/* ===============================
+   SCREENS
+================================ */
 
 const signupScreen =
   document.getElementById("signupScreen");
@@ -1038,52 +856,6 @@ const loginScreen =
 const dashboardScreen =
   document.getElementById("dashboardScreen");
 
-const signupForm =
-  document.getElementById("signupForm");
-
-const loginForm =
-  document.getElementById("loginForm");
-
-const signupName =
-  document.getElementById("signupName");
-
-const signupPassword =
-  document.getElementById("signupPassword");
-
-const loginName =
-  document.getElementById("loginName");
-
-const loginPassword =
-  document.getElementById("loginPassword");
-
-const dashboardName =
-  document.getElementById("dashboardName");
-
-const cardHolder =
-  document.getElementById("cardHolder");
-
-const avatar =
-  document.getElementById("avatar");
-
-const greeting =
-  document.getElementById("greeting");
-
-const clock =
-  document.getElementById("clock");
-
-const modal =
-  document.getElementById("modal");
-
-const modalTitle =
-  document.getElementById("modalTitle");
-
-const modalMessage =
-  document.getElementById("modalMessage");
-
-
-/* ==================================
-   SCREEN CONTROL
-================================== */
 
 function showScreen(screen) {
 
@@ -1097,9 +869,19 @@ function showScreen(screen) {
 }
 
 
-/* ==================================
+/* ===============================
    MODAL
-================================== */
+================================ */
+
+const modal =
+  document.getElementById("modal");
+
+const modalTitle =
+  document.getElementById("modalTitle");
+
+const modalMessage =
+  document.getElementById("modalMessage");
+
 
 function showModal(title, message) {
 
@@ -1109,13 +891,15 @@ function showModal(title, message) {
   modal.classList.add("show");
 }
 
+
 document
   .getElementById("modalClose")
-  .addEventListener("click", function () {
+  .addEventListener("click", function() {
 
     modal.classList.remove("show");
 
   });
+
 
 modal.addEventListener("click", function(e) {
 
@@ -1126,120 +910,102 @@ modal.addEventListener("click", function(e) {
 });
 
 
-/* ==================================
-   CREATE ACCOUNT
-================================== */
+/* ===============================
+   SIGN UP
+================================ */
 
-signupForm.addEventListener("submit", function(e) {
+document
+  .getElementById("signupForm")
+  .addEventListener("submit", function(e) {
 
-  e.preventDefault();
+    e.preventDefault();
 
-  const name =
-    signupName.value.trim();
+    const email =
+      document
+        .getElementById("signupEmail")
+        .value
+        .trim()
+        .toLowerCase();
 
-  const password =
-    signupPassword.value;
+    const password =
+      document
+        .getElementById("signupPassword")
+        .value;
 
-  if (!name) {
+    if (!email) {
 
-    showModal(
-      "Name required",
-      "Please enter a name for this demo account."
+      showModal(
+        "Email required",
+        "Please enter an email address."
+      );
+
+      return;
+    }
+
+    if (password.length < 8) {
+
+      showModal(
+        "Password too short",
+        "Please use at least 8 characters."
+      );
+
+      return;
+    }
+
+    sessionStorage.setItem(
+      "novapayUserEmail",
+      email
     );
 
-    return;
-  }
+    loadDashboard();
 
-  if (password.length < 4) {
+    showScreen(dashboardScreen);
 
-    showModal(
-      "Password too short",
-      "For this demo, use at least 4 characters."
+  });
+
+
+/* ===============================
+   LOGIN
+================================ */
+
+document
+  .getElementById("loginForm")
+  .addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+    const email =
+      document
+        .getElementById("loginEmail")
+        .value
+        .trim()
+        .toLowerCase();
+
+    const password =
+      document
+        .getElementById("loginPassword")
+        .value;
+
+    if (!email || !password) {
+      showModal("Authentication Error", "Please provide valid credentials.");
+      return;
+    }
+
+    sessionStorage.setItem(
+      "novapayUserEmail",
+      email
     );
 
-    return;
-  }
+    loadDashboard();
 
-  /*
-    Demo-only browser storage.
-    Never use this approach for real authentication.
-  */
+    showScreen(dashboardScreen);
 
-  localStorage.setItem(
-    "novapayDemoName",
-    name
-  );
-
-  localStorage.setItem(
-    "novapayDemoPassword",
-    password
-  );
-
-  localStorage.setItem(
-    "novapayDemoCreated",
-    "true"
-  );
-
-  loadDashboard();
-
-  showScreen(dashboardScreen);
-
-});
+  });
 
 
-/* ==================================
-   SIGN IN
-================================== */
-
-loginForm.addEventListener("submit", function(e) {
-
-  e.preventDefault();
-
-  const savedName =
-    localStorage.getItem("novapayDemoName");
-
-  const savedPassword =
-    localStorage.getItem("novapayDemoPassword");
-
-  const enteredName =
-    loginName.value.trim();
-
-  const enteredPassword =
-    loginPassword.value;
-
-  if (!savedName) {
-
-    showModal(
-      "No demo account",
-      "Create a demo account first."
-    );
-
-    return;
-  }
-
-  if (
-    enteredName !== savedName ||
-    enteredPassword !== savedPassword
-  ) {
-
-    showModal(
-      "Sign in failed",
-      "The demo name or password does not match."
-    );
-
-    return;
-  }
-
-  loadDashboard();
-
-  showScreen(dashboardScreen);
-
-});
-
-
-/* ==================================
-   AUTH SWITCHING
-================================== */
+/* ===============================
+   SIGNUP / LOGIN SWITCH
+================================ */
 
 document
   .getElementById("showLogin")
@@ -1259,55 +1025,49 @@ document
   });
 
 
-/* ==================================
+/* ===============================
    DASHBOARD
-================================== */
+================================ */
 
-function getInitials(name) {
+function getInitials(email) {
 
-  const parts =
-    name.trim().split(/\s+/);
+  const first =
+    email.charAt(0).toUpperCase();
 
-  if (parts.length === 1) {
-
-    return parts[0]
-      .substring(0, 2)
-      .toUpperCase();
-
-  }
-
-  return (
-    parts[0][0] +
-    parts[parts.length - 1][0]
-  ).toUpperCase();
-
+  return first || "U";
 }
 
 
 function loadDashboard() {
 
-  const name =
-    localStorage.getItem(
-      "novapayDemoName"
-    ) || "Cerji Colvin";
+  const email =
+    sessionStorage.getItem(
+      "novapayUserEmail"
+    ) || "";
 
-  dashboardName.textContent =
-    name;
+  const upperEmail =
+    email.toUpperCase();
 
-  cardHolder.textContent =
-    name.toUpperCase();
+  document
+    .getElementById("dashboardEmail")
+    .textContent = email;
 
-  avatar.textContent =
-    getInitials(name);
+  document
+    .getElementById("cardEmail")
+    .textContent = upperEmail;
+
+  document
+    .getElementById("avatar")
+    .textContent = getInitials(email);
 
   updateGreeting();
 
 }
 
 
-/* ==================================
+/* ===============================
    GREETING
-================================== */
+================================ */
 
 function updateGreeting() {
 
@@ -1330,52 +1090,11 @@ function updateGreeting() {
 
   }
 
-  greeting.textContent =
-    text + ", " +
-    (
-      localStorage.getItem(
-        "novapayDemoName"
-      ) || "Cerji Colvin"
-    );
+  document
+    .getElementById("greeting")
+    .textContent = text;
 
 }
-
-
-/* ==================================
-   CLOCK
-================================== */
-
-function updateClock() {
-
-  const now = new Date();
-
-  let hour =
-    now.getHours();
-
-  const minute =
-    String(
-      now.getMinutes()
-    ).padStart(2, "0");
-
-  const ampm =
-    hour >= 12 ? "PM" : "AM";
-
-  hour =
-    hour % 12 || 12;
-
-  clock.textContent =
-    hour + ":" +
-    minute + " " +
-    ampm;
-
-}
-
-updateClock();
-
-setInterval(
-  updateClock,
-  30000
-);
 
 setInterval(
   updateGreeting,
@@ -1383,85 +1102,29 @@ setInterval(
 );
 
 
-/* ==================================
-   TRANSFER
-================================== */
+/* ===============================
+   ACCOUNT SWITCHING
+================================ */
 
-document
-  .getElementById("transferButton")
-  .addEventListener("click", function() {
+const checkingPill = document.getElementById("checkingPill");
+const savingsPill = document.getElementById("savingsPill");
 
-    showModal(
-      "Demo Transfer",
-      "This is a demonstration only. No money can be transferred from this page."
-    );
+checkingPill.addEventListener("click", function() {
+  checkingPill.className = "pill active";
+  savingsPill.className = "pill inactive";
+  document.getElementById("accountSub").textContent = "Checking Account";
+});
 
-  });
-
-
-/* ==================================
-   DEPOSIT
-================================== */
-
-document
-  .getElementById("depositButton")
-  .addEventListener("click", function() {
-
-    showModal(
-      "Demo Deposit",
-      "This is a demonstration only. No real deposits or payments are processed."
-    );
-
-  });
+savingsPill.addEventListener("click", function() {
+  savingsPill.className = "pill active";
+  checkingPill.className = "pill inactive";
+  document.getElementById("accountSub").textContent = "Savings Account";
+});
 
 
-/* ==================================
-   VIRTUAL CARD
-================================== */
-
-document
-  .getElementById("virtualCardButton")
-  .addEventListener("click", function() {
-
-    showModal(
-      "Virtual Card",
-      "Virtual card generation is available only as a visual demo."
-    );
-
-  });
-
-
-/* ==================================
-   TOP BUTTONS
-================================== */
-
-document
-  .getElementById("themeButton")
-  .addEventListener("click", function() {
-
-    showModal(
-      "Theme",
-      "Theme controls are part of this demo interface."
-    );
-
-  });
-
-
-document
-  .getElementById("notificationButton")
-  .addEventListener("click", function() {
-
-    showModal(
-      "Notifications",
-      "You have no demo notifications."
-    );
-
-  });
-
-
-/* ==================================
-   NAVIGATION
-================================== */
+/* ===============================
+   BOTTOM NAV
+================================ */
 
 document
   .querySelectorAll(".nav-button")
@@ -1479,74 +1142,9 @@ document
 
       button.classList.add("active");
 
-      const page =
-        button.dataset.page;
-
-      if (page === "home") {
-
-        showModal(
-          "Home",
-          "You are viewing the demo home dashboard."
-        );
-
-      } else if (page === "transfer") {
-
-        showModal(
-          "Transfer",
-          "Transfer functionality is disabled because this is a demo."
-        );
-
-      } else if (page === "bills") {
-
-        showModal(
-          "Bills",
-          "Bills functionality is available as a visual demo only."
-        );
-
-      } else if (page === "history") {
-
-        showModal(
-          "History",
-          "No real transactions exist in this demo account."
-        );
-
-      } else if (page === "profile") {
-
-        showModal(
-          "Profile",
-          "This is the demo profile for " +
-          (
-            localStorage.getItem(
-              "novapayDemoName"
-            ) || "Cerji Colvin"
-          ) +
-          "."
-        );
-
-      }
-
     });
 
   });
-
-
-/* ==================================
-   STARTUP
-================================== */
-
-const existingUser =
-  localStorage.getItem(
-    "novapayDemoName"
-  );
-
-if (existingUser) {
-
-  /*
-    Keep the signup screen initially visible
-    so the user can choose Sign In.
-  */
-
-}
 
 </script>
 
