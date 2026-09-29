@@ -25,11 +25,7 @@
   --red: #f87171;
 }
 
-html,
-body {
-  min-height: 100%;
-  background: #000;
-}
+html, body { min-height: 100%; background: #000; }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -37,40 +33,21 @@ body {
   color: var(--text);
 }
 
-button,
-input,
-select {
-  font: inherit;
-}
-
-button {
-  cursor: pointer;
-}
+button, input, select { font: inherit; }
+button { cursor: pointer; }
 
 .app {
   width: 100%;
   max-width: 430px;
   min-height: 100vh;
   margin: auto;
-  background: linear-gradient(
-    180deg,
-    #211e17 0%,
-    #11100c 45%,
-    #090807 100%
-  );
+  background: linear-gradient(180deg, #211e17 0%, #11100c 45%, #090807 100%);
   position: relative;
   overflow: hidden;
 }
 
-/* SCREENS */
-.screen {
-  display: none;
-  min-height: 100vh;
-}
-
-.screen.active {
-  display: block;
-}
+.screen { display: none; min-height: 100vh; }
+.screen.active { display: block; }
 
 /* AUTH */
 .auth {
@@ -99,9 +76,7 @@ button {
   margin-bottom: 58px;
 }
 
-.field {
-  margin-bottom: 25px;
-}
+.field { margin-bottom: 25px; }
 
 .field label {
   display: block;
@@ -139,13 +114,8 @@ button {
 }
 
 .field input:focus,
-.field select:focus {
-  border-color: var(--gold);
-}
-
-.field input::placeholder {
-  color: #706b5f;
-}
+.field select:focus { border-color: var(--gold); }
+.field input::placeholder { color: #706b5f; }
 
 .primary-button {
   width: 100%;
@@ -171,6 +141,19 @@ button {
   color: var(--gold-light);
   font-weight: 800;
 }
+
+.auth-hint {
+  margin-top: 18px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(229,199,107,.07);
+  border: 1px dashed rgba(229,199,107,.3);
+  color: rgba(200,190,160,.75);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.auth-hint b { color: var(--gold-light); }
 
 /* HEADER */
 .top-row {
@@ -214,20 +197,9 @@ button {
 }
 
 /* GREETING */
-.greeting {
-  padding: 6px 22px 20px;
-}
-
-.greeting h1 {
-  font-size: 30px;
-  line-height: 1.15;
-  letter-spacing: -.8px;
-}
-
-.greeting p {
-  color: rgba(200,190,160,.65);
-  margin-top: 7px;
-}
+.greeting { padding: 6px 22px 20px; }
+.greeting h1 { font-size: 30px; line-height: 1.15; letter-spacing: -.8px; }
+.greeting p { color: rgba(200,190,160,.65); margin-top: 7px; }
 
 /* PILLS */
 .pills {
@@ -238,9 +210,7 @@ button {
   padding: 0 22px 22px;
 }
 
-.pills::-webkit-scrollbar {
-  display: none;
-}
+.pills::-webkit-scrollbar { display: none; }
 
 .pill {
   flex-shrink: 0;
@@ -272,10 +242,7 @@ button {
   box-shadow: 0 18px 40px rgba(0,0,0,.5);
 }
 
-.balance-label {
-  color: rgba(200,190,160,.75);
-  font-size: 14px;
-}
+.balance-label { color: rgba(200,190,160,.75); font-size: 14px; }
 
 .balance {
   margin: 7px 0;
@@ -284,23 +251,11 @@ button {
   letter-spacing: -1.5px;
 }
 
-.balance-sub {
-  color: rgba(200,190,160,.6);
-  font-size: 14px;
-}
+.balance-sub { color: rgba(200,190,160,.6); font-size: 14px; }
 
-.actions {
-  display: flex;
-  gap: 12px;
-  margin-top: 22px;
-}
+.actions { display: flex; gap: 12px; margin-top: 22px; }
 
-.action-button {
-  flex: 1;
-  height: 48px;
-  border-radius: 12px;
-  font-weight: 850;
-}
+.action-button { flex: 1; height: 48px; border-radius: 12px; font-weight: 850; }
 
 .action-button.primary {
   border: 0;
@@ -315,11 +270,7 @@ button {
 }
 
 /* MINI STATS STRIP */
-.stats-strip {
-  display: flex;
-  gap: 12px;
-  margin: 0 18px 22px;
-}
+.stats-strip { display: flex; gap: 12px; margin: 0 18px 22px; }
 
 .stat-box {
   flex: 1;
@@ -339,12 +290,7 @@ button {
   font-weight: 800;
 }
 
-.stat-value {
-  font-size: 16px;
-  font-weight: 900;
-  letter-spacing: -.5px;
-}
-
+.stat-value { font-size: 16px; font-weight: 900; letter-spacing: -.5px; }
 .stat-value.income { color: var(--green); }
 .stat-value.expense { color: var(--red); }
 
@@ -356,17 +302,8 @@ button {
   padding: 0 22px 12px;
 }
 
-.section-title h2 {
-  font-size: 17px;
-  font-weight: 900;
-  letter-spacing: -.3px;
-}
-
-.section-title span {
-  font-size: 12px;
-  color: var(--gold-light);
-  font-weight: 800;
-}
+.section-title h2 { font-size: 17px; font-weight: 900; letter-spacing: -.3px; }
+.section-title span { font-size: 12px; color: var(--gold-light); font-weight: 800; }
 
 /* CARD */
 .debit-card {
@@ -379,21 +316,9 @@ button {
   box-shadow: 0 18px 40px rgba(0,0,0,.5);
 }
 
-.card-top {
-  display: flex;
-  justify-content: space-between;
-}
-
-.card-title {
-  font-size: 21px;
-  font-weight: 900;
-  color: var(--gold-light);
-}
-
-.contactless {
-  color: var(--gold-light);
-  font-size: 20px;
-}
+.card-top { display: flex; justify-content: space-between; }
+.card-title { font-size: 21px; font-weight: 900; color: var(--gold-light); }
+.contactless { color: var(--gold-light); font-size: 20px; }
 
 .chip {
   width: 47px;
@@ -404,29 +329,10 @@ button {
   background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
 }
 
-.card-number {
-  font-size: 19px;
-  letter-spacing: 4px;
-  font-weight: 700;
-  margin-bottom: 22px;
-}
-
-.card-bottom {
-  display: flex;
-  justify-content: space-between;
-}
-
-.card-label {
-  display: block;
-  font-size: 9px;
-  color: #827b6c;
-  margin-bottom: 4px;
-}
-
-.card-value {
-  font-size: 13px;
-  font-weight: 800;
-}
+.card-number { font-size: 19px; letter-spacing: 4px; font-weight: 700; margin-bottom: 22px; }
+.card-bottom { display: flex; justify-content: space-between; }
+.card-label { display: block; font-size: 9px; color: #827b6c; margin-bottom: 4px; }
+.card-value { font-size: 13px; font-weight: 800; }
 
 /* TRANSACTIONS */
 .tx-list {
@@ -445,9 +351,7 @@ button {
   border-bottom: 1px solid rgba(229,199,107,.08);
 }
 
-.tx-item:last-child {
-  border-bottom: 0;
-}
+.tx-item:last-child { border-bottom: 0; }
 
 .tx-icon {
   width: 42px;
@@ -461,10 +365,7 @@ button {
   flex-shrink: 0;
 }
 
-.tx-info {
-  flex: 1;
-  min-width: 0;
-}
+.tx-info { flex: 1; min-width: 0; }
 
 .tx-name {
   font-size: 14px;
@@ -474,18 +375,9 @@ button {
   text-overflow: ellipsis;
 }
 
-.tx-date {
-  font-size: 11px;
-  color: rgba(200,190,160,.55);
-  margin-top: 3px;
-}
+.tx-date { font-size: 11px; color: rgba(200,190,160,.55); margin-top: 3px; }
 
-.tx-amount {
-  font-size: 14px;
-  font-weight: 900;
-  white-space: nowrap;
-}
-
+.tx-amount { font-size: 14px; font-weight: 900; white-space: nowrap; }
 .tx-amount.credit { color: var(--green); }
 .tx-amount.debit { color: var(--text); }
 
@@ -503,7 +395,7 @@ button {
 
 /* RECIPIENT LIST */
 .recipient-list {
-  margin: 0 18px 22px;
+  margin: 0 0 22px;
   border-radius: 20px;
   border: 1px solid rgba(229,199,107,.12);
   background: rgba(255,255,255,.03);
@@ -522,17 +414,9 @@ button {
   transition: background .15s;
 }
 
-.recipient-item:last-child {
-  border-bottom: 0;
-}
-
-.recipient-item:active {
-  background: rgba(229,199,107,.08);
-}
-
-.recipient-item.selected {
-  background: rgba(229,199,107,.14);
-}
+.recipient-item:last-child { border-bottom: 0; }
+.recipient-item:active { background: rgba(229,199,107,.08); }
+.recipient-item.selected { background: rgba(229,199,107,.14); }
 
 .recipient-avatar {
   width: 42px;
@@ -547,10 +431,7 @@ button {
   flex-shrink: 0;
 }
 
-.recipient-info {
-  flex: 1;
-  min-width: 0;
-}
+.recipient-info { flex: 1; min-width: 0; }
 
 .recipient-name {
   font-size: 14px;
@@ -560,21 +441,9 @@ button {
   text-overflow: ellipsis;
 }
 
-.recipient-bank {
-  font-size: 11px;
-  color: rgba(200,190,160,.6);
-  margin-top: 3px;
-}
-
-.recipient-check {
-  font-size: 18px;
-  color: var(--gold-light);
-  opacity: 0;
-}
-
-.recipient-item.selected .recipient-check {
-  opacity: 1;
-}
+.recipient-bank { font-size: 11px; color: rgba(200,190,160,.6); margin-top: 3px; }
+.recipient-check { font-size: 18px; color: var(--gold-light); opacity: 0; }
+.recipient-item.selected .recipient-check { opacity: 1; }
 
 /* SUMMARY ROWS */
 .summary-row {
@@ -585,17 +454,9 @@ button {
   font-size: 14px;
 }
 
-.summary-row:last-child {
-  border-bottom: 0;
-}
-
-.summary-row .label {
-  color: rgba(200,190,160,.75);
-}
-
-.summary-row .value {
-  font-weight: 900;
-}
+.summary-row:last-child { border-bottom: 0; }
+.summary-row .label { color: rgba(200,190,160,.75); }
+.summary-row .value { font-weight: 900; }
 
 .summary-row.total {
   border-top: 2px solid rgba(229,199,107,.4);
@@ -604,38 +465,15 @@ button {
   font-size: 17px;
 }
 
-.summary-row.total .value {
-  color: var(--gold-light);
-  font-size: 20px;
-}
+.summary-row.total .value { color: var(--gold-light); font-size: 20px; }
 
-/* TRANSFER FORM WRAP */
-.transfer-wrap {
-  padding: 0 18px 120px;
-}
+/* TRANSFER / BILLS FORM WRAP */
+.transfer-wrap { padding: 0 18px 120px; }
+.transfer-header { padding: 0 4px 20px; }
+.transfer-header h1 { font-size: 28px; letter-spacing: -.8px; font-weight: 900; }
+.transfer-header p { color: rgba(200,190,160,.65); margin-top: 6px; font-size: 14px; }
 
-.transfer-header {
-  padding: 0 4px 20px;
-}
-
-.transfer-header h1 {
-  font-size: 28px;
-  letter-spacing: -.8px;
-  font-weight: 900;
-}
-
-.transfer-header p {
-  color: rgba(200,190,160,.65);
-  margin-top: 6px;
-  font-size: 14px;
-}
-
-.quick-amounts {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-top: 12px;
-}
+.quick-amounts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
 
 .quick-chip {
   padding: 10px 16px;
@@ -647,15 +485,137 @@ button {
   font-weight: 800;
 }
 
-.quick-chip:active {
-  background: rgba(229,199,107,.18);
-}
+.quick-chip:active { background: rgba(229,199,107,.18); }
 
 .info-note {
   margin-top: 12px;
   font-size: 12px;
   color: rgba(200,190,160,.6);
   line-height: 1.5;
+}
+
+/* BILL CATEGORIES GRID */
+.bill-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.bill-tile {
+  padding: 18px 8px;
+  border-radius: 18px;
+  border: 1px solid rgba(229,199,107,.18);
+  background: rgba(255,255,255,.04);
+  text-align: center;
+  cursor: pointer;
+  transition: all .15s;
+}
+
+.bill-tile:active { background: rgba(229,199,107,.12); }
+.bill-tile.selected {
+  background: rgba(229,199,107,.18);
+  border-color: var(--gold);
+}
+
+.bill-emoji { font-size: 26px; display: block; margin-bottom: 6px; }
+.bill-name { font-size: 11px; font-weight: 800; letter-spacing: .3px; }
+.bill-min { font-size: 10px; color: rgba(200,190,160,.55); margin-top: 3px; }
+
+/* HISTORY FILTERS */
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0 22px 16px;
+}
+
+.filter-bar::-webkit-scrollbar { display: none; }
+
+.filter-chip {
+  flex-shrink: 0;
+  padding: 9px 16px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  border: 1px solid rgba(229,199,107,.22);
+  background: rgba(255,255,255,.05);
+  color: var(--gold);
+  cursor: pointer;
+}
+
+.filter-chip.active {
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  color: #2b2208;
+  border-color: transparent;
+}
+
+/* PROFILE */
+.profile-card {
+  margin: 0 18px 22px;
+  padding: 25px;
+  border-radius: 24px;
+  border: 1px solid rgba(229,199,107,.16);
+  background: linear-gradient(140deg, #1b1812, #0d0c0a);
+  text-align: center;
+}
+
+.profile-avatar {
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  background: linear-gradient(135deg,#5b7cfa,#4a63e0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 32px;
+  margin: 0 auto 16px;
+}
+
+.profile-email {
+  font-size: 16px;
+  font-weight: 800;
+  word-break: break-all;
+  margin-bottom: 6px;
+}
+
+.profile-since {
+  font-size: 12px;
+  color: rgba(200,190,160,.6);
+}
+
+.profile-rows {
+  margin: 0 18px 22px;
+  border-radius: 20px;
+  border: 1px solid rgba(229,199,107,.12);
+  background: rgba(255,255,255,.03);
+  overflow: hidden;
+}
+
+.profile-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(229,199,107,.08);
+  font-size: 14px;
+}
+
+.profile-row:last-child { border-bottom: 0; }
+.profile-row .label { color: rgba(200,190,160,.75); }
+.profile-row .value { font-weight: 800; }
+
+.logout-button {
+  margin: 0 18px 100px;
+  width: calc(100% - 36px);
+  height: 58px;
+  border-radius: 17px;
+  border: 1px solid rgba(248,113,113,.5);
+  background: rgba(248,113,113,.1);
+  color: #f87171;
+  font-weight: 900;
+  font-size: 15px;
 }
 
 /* NAV */
@@ -684,13 +644,8 @@ button {
   gap: 4px;
 }
 
-.nav-button.active {
-  color: var(--gold-light);
-}
-
-.nav-icon {
-  font-size: 20px;
-}
+.nav-button.active { color: var(--gold-light); }
+.nav-icon { font-size: 20px; }
 
 /* MODAL */
 .modal {
@@ -704,9 +659,7 @@ button {
   padding: 25px;
 }
 
-.modal.show {
-  display: flex;
-}
+.modal.show { display: flex; }
 
 .modal-box {
   width: 100%;
@@ -719,15 +672,8 @@ button {
   overflow-y: auto;
 }
 
-.modal-box h2 {
-  margin-bottom: 10px;
-}
-
-.modal-box p {
-  color: var(--muted);
-  line-height: 1.5;
-  margin-bottom: 20px;
-}
+.modal-box h2 { margin-bottom: 10px; }
+.modal-box p { color: var(--muted); line-height: 1.5; margin-bottom: 20px; white-space: pre-line; }
 
 .modal-close {
   width: 100%;
@@ -740,7 +686,12 @@ button {
   margin-top: 6px;
 }
 
-.modal-close.alt {
+.modal-close.danger {
+  background: #ef4444;
+  color: #fff;
+}
+
+.modal-close.ghost {
   background: transparent;
   border: 1px solid rgba(229,199,107,.4);
   color: var(--gold-light);
@@ -766,19 +717,23 @@ button {
     <div class="logo">NovaPay</div>
     <div class="tagline">Create your account in seconds</div>
 
-    <form id="signupForm">
+    <form id="signupForm" autocomplete="on">
       <div class="field">
         <label>Email Address</label>
         <input id="signupEmail" type="email" placeholder="you@example.com" autocomplete="email" required>
       </div>
-
       <div class="field">
         <label>Password</label>
-        <input id="signupPassword" type="password" placeholder="Create a password" autocomplete="new-password" required>
+        <input id="signupPassword" type="password" placeholder="Create a password (min 8 chars)" autocomplete="new-password" required>
       </div>
-
       <button type="submit" class="primary-button">Create Account</button>
     </form>
+
+    <div class="auth-hint">
+      <b>Demo account ready:</b><br>
+      Email: <b>demo@novapay.com</b><br>
+      Password: <b>password123</b>
+    </div>
 
     <div class="auth-switch">
       Already have an account?
@@ -795,19 +750,23 @@ button {
     <div class="logo">NovaPay</div>
     <div class="tagline">Sign in to your account</div>
 
-    <form id="loginForm">
+    <form id="loginForm" autocomplete="on">
       <div class="field">
         <label>Email Address</label>
         <input id="loginEmail" type="email" placeholder="you@example.com" autocomplete="email" required>
       </div>
-
       <div class="field">
         <label>Password</label>
         <input id="loginPassword" type="password" placeholder="Your password" autocomplete="current-password" required>
       </div>
-
       <button type="submit" class="primary-button">Sign In</button>
     </form>
+
+    <div class="auth-hint">
+      <b>Demo login:</b><br>
+      Email: <b>demo@novapay.com</b><br>
+      Password: <b>password123</b>
+    </div>
 
     <div class="auth-switch">
       Don't have an account?
@@ -842,7 +801,6 @@ button {
     <div class="balance-label">Available Balance</div>
     <div class="balance" id="accountBalance">$134,290.00</div>
     <div class="balance-sub" id="accountSub">Checking Account</div>
-
     <div class="actions">
       <button class="action-button primary" id="transferButton" type="button">Transfer</button>
       <button class="action-button outline" id="depositButton" type="button">Deposit</button>
@@ -951,7 +909,7 @@ button {
     ＋ Generate Virtual Card
   </button>
 
-  <nav class="bottom-nav">
+  <nav class="bottom-nav" data-nav>
     <button class="nav-button active" data-page="home" type="button">
       <span class="nav-icon">🏠</span> Home
     </button>
@@ -983,7 +941,6 @@ button {
   </div>
 
   <div class="transfer-wrap">
-
     <div class="transfer-header">
       <h1>Send Money</h1>
       <p>Transfer to any NovaPay account or external bank.</p>
@@ -1001,9 +958,7 @@ button {
       <label>Select Recipient</label>
     </div>
 
-    <div class="recipient-list" id="recipientList">
-      <!-- injected by JS -->
-    </div>
+    <div class="recipient-list" id="recipientList"></div>
 
     <div class="field">
       <label>Amount (USD)</label>
@@ -1022,7 +977,6 @@ button {
       <input id="transferNote" type="text" placeholder="e.g. Rent, gift, invoice #4821">
     </div>
 
-    <!-- LIVE FEE SUMMARY -->
     <div class="balance-card" style="margin: 22px 0 20px;">
       <div class="balance-label" style="margin-bottom: 10px;">Transfer Summary</div>
 
@@ -1030,17 +984,14 @@ button {
         <span class="label">Amount</span>
         <span class="value" id="sumAmount">$0.00</span>
       </div>
-
       <div class="summary-row">
         <span class="label">Transfer Fee</span>
         <span class="value" id="sumFee">$0.00</span>
       </div>
-
       <div class="summary-row">
         <span class="label">Processing</span>
         <span class="value" id="sumSpeed">Instant</span>
       </div>
-
       <div class="summary-row total">
         <span class="label">Total Debit</span>
         <span class="value" id="sumTotal">$0.00</span>
@@ -1054,10 +1005,9 @@ button {
     <button class="primary-button" id="confirmTransfer" type="button">
       Confirm Transfer
     </button>
-
   </div>
 
-  <nav class="bottom-nav">
+  <nav class="bottom-nav" data-nav>
     <button class="nav-button" data-page="home" type="button">
       <span class="nav-icon">🏠</span> Home
     </button>
@@ -1078,6 +1028,281 @@ button {
 </section>
 
 
+<!-- ================= BILLS SCREEN ================= -->
+
+<section id="billsScreen" class="screen">
+
+  <div class="top-row">
+    <button class="circle-button" id="billsBack" type="button">←</button>
+    <div class="user-name">Pay Bills</div>
+    <div class="avatar" id="billsAvatar"></div>
+  </div>
+
+  <div class="transfer-wrap">
+    <div class="transfer-header">
+      <h1>Pay a Bill</h1>
+      <p>Choose a category, enter the amount, and pay instantly.</p>
+    </div>
+
+    <div class="bill-grid" id="billGrid">
+      <div class="bill-tile" data-bill="Electric" data-min="45">
+        <span class="bill-emoji">⚡</span>
+        <div class="bill-name">Electric</div>
+        <div class="bill-min">from $45.00</div>
+      </div>
+      <div class="bill-tile" data-bill="Water" data-min="28">
+        <span class="bill-emoji">💧</span>
+        <div class="bill-name">Water</div>
+        <div class="bill-min">from $28.00</div>
+      </div>
+      <div class="bill-tile" data-bill="Internet" data-min="60">
+        <span class="bill-emoji">📶</span>
+        <div class="bill-name">Internet</div>
+        <div class="bill-min">from $60.00</div>
+      </div>
+      <div class="bill-tile" data-bill="Phone" data-min="35">
+        <span class="bill-emoji">📱</span>
+        <div class="bill-name">Phone</div>
+        <div class="bill-min">from $35.00</div>
+      </div>
+      <div class="bill-tile" data-bill="Gas" data-min="40">
+        <span class="bill-emoji">🔥</span>
+        <div class="bill-name">Gas</div>
+        <div class="bill-min">from $40.00</div>
+      </div>
+      <div class="bill-tile" data-bill="Rent" data-min="800">
+        <span class="bill-emoji">🏠</span>
+        <div class="bill-name">Rent</div>
+        <div class="bill-min">from $800.00</div>
+      </div>
+      <div class="bill-tile" data-bill="Netflix" data-min="15">
+        <span class="bill-emoji">🎬</span>
+        <div class="bill-name">Streaming</div>
+        <div class="bill-min">from $15.00</div>
+      </div>
+      <div class="bill-tile" data-bill="Insurance" data-min="120">
+        <span class="bill-emoji">🛡️</span>
+        <div class="bill-name">Insurance</div>
+        <div class="bill-min">from $120.00</div>
+      </div>
+      <div class="bill-tile" data-bill="Gym" data-min="45">
+        <span class="bill-emoji">💪</span>
+        <div class="bill-name">Gym</div>
+        <div class="bill-min">from $45.00</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Paying From</label>
+      <select id="billFrom">
+        <option value="checking">Checking · $134,290.00</option>
+        <option value="savings">Savings · $89,250.75</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Bill Amount (USD)</label>
+      <input id="billAmount" type="number" placeholder="0.00" min="0" step="0.01" inputmode="decimal">
+      <div class="quick-amounts">
+        <button type="button" class="bill-chip" data-amt="25">$25</button>
+        <button type="button" class="bill-chip" data-amt="50">$50</button>
+        <button type="button" class="bill-chip" data-amt="100">$100</button>
+        <button type="button" class="bill-chip" data-amt="250">$250</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Account / Reference #</label>
+      <input id="billRef" type="text" placeholder="e.g. Account 8834912">
+    </div>
+
+    <div class="balance-card" style="margin: 22px 0 20px;">
+      <div class="balance-label" style="margin-bottom: 10px;">Payment Summary</div>
+
+      <div class="summary-row">
+        <span class="label">Bill</span>
+        <span class="value" id="billSumName">—</span>
+      </div>
+      <div class="summary-row">
+        <span class="label">Amount</span>
+        <span class="value" id="billSumAmount">$0.00</span>
+      </div>
+      <div class="summary-row">
+        <span class="label">Service Fee</span>
+        <span class="value" id="billSumFee">$1.00</span>
+      </div>
+      <div class="summary-row total">
+        <span class="label">Total</span>
+        <span class="value" id="billSumTotal">$0.00</span>
+      </div>
+
+      <div class="info-note" id="billLimitNote">
+        Bills are paid instantly. Reference numbers are stored in History.
+      </div>
+    </div>
+
+    <button class="primary-button" id="confirmBill" type="button">
+      Pay Bill
+    </button>
+  </div>
+
+  <nav class="bottom-nav" data-nav>
+    <button class="nav-button" data-page="home" type="button">
+      <span class="nav-icon">🏠</span> Home
+    </button>
+    <button class="nav-button" data-page="transfer" type="button">
+      <span class="nav-icon">⇄</span> Transfer
+    </button>
+    <button class="nav-button active" data-page="bills" type="button">
+      <span class="nav-icon">📄</span> Bills
+    </button>
+    <button class="nav-button" data-page="history" type="button">
+      <span class="nav-icon">☰</span> History
+    </button>
+    <button class="nav-button" data-page="profile" type="button">
+      <span class="nav-icon">👤</span> Profile
+    </button>
+  </nav>
+
+</section>
+
+
+<!-- ================= HISTORY SCREEN ================= -->
+
+<section id="historyScreen" class="screen">
+
+  <div class="top-row">
+    <button class="circle-button" id="historyBack" type="button">←</button>
+    <div class="user-name">Transaction History</div>
+    <div class="avatar" id="historyAvatar"></div>
+  </div>
+
+  <div class="greeting">
+    <h1>All Activity</h1>
+    <p id="historySummary">Showing all transactions</p>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-chip active" data-filter="all" type="button">All</button>
+    <button class="filter-chip" data-filter="credit" type="button">Money In</button>
+    <button class="filter-chip" data-filter="debit" type="button">Money Out</button>
+    <button class="filter-chip" data-filter="bills" type="button">Bills</button>
+    <button class="filter-chip" data-filter="transfer" type="button">Transfers</button>
+  </div>
+
+  <div class="balance-card" style="margin-bottom: 18px;">
+    <div class="balance-label">Total In / Out</div>
+    <div style="display:flex; gap: 22px; margin-top: 10px; align-items: baseline;">
+      <div>
+        <div style="font-size:12px; color: rgba(200,190,160,.6);">In</div>
+        <div style="font-size:20px; font-weight:900; color: var(--green);" id="histTotalIn">+$0.00</div>
+      </div>
+      <div>
+        <div style="font-size:12px; color: rgba(200,190,160,.6);">Out</div>
+        <div style="font-size:20px; font-weight:900; color: var(--red);" id="histTotalOut">-$0.00</div>
+      </div>
+      <div style="margin-left:auto; text-align:right;">
+        <div style="font-size:12px; color: rgba(200,190,160,.6);">Net</div>
+        <div style="font-size:20px; font-weight:900;" id="histNet">$0.00</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tx-list" id="historyList" style="margin-bottom: 100px;"></div>
+
+  <nav class="bottom-nav" data-nav>
+    <button class="nav-button" data-page="home" type="button">
+      <span class="nav-icon">🏠</span> Home
+    </button>
+    <button class="nav-button" data-page="transfer" type="button">
+      <span class="nav-icon">⇄</span> Transfer
+    </button>
+    <button class="nav-button" data-page="bills" type="button">
+      <span class="nav-icon">📄</span> Bills
+    </button>
+    <button class="nav-button active" data-page="history" type="button">
+      <span class="nav-icon">☰</span> History
+    </button>
+    <button class="nav-button" data-page="profile" type="button">
+      <span class="nav-icon">👤</span> Profile
+    </button>
+  </nav>
+
+</section>
+
+
+<!-- ================= PROFILE SCREEN ================= -->
+
+<section id="profileScreen" class="screen">
+
+  <div class="top-row">
+    <button class="circle-button" id="profileBack" type="button">←</button>
+    <div class="user-name">Profile</div>
+    <div class="avatar" id="profileAvatar"></div>
+  </div>
+
+  <div class="profile-card">
+    <div class="profile-avatar" id="profileBigAvatar">U</div>
+    <div class="profile-email" id="profileEmail"></div>
+    <div class="profile-since" id="profileSince"></div>
+  </div>
+
+  <div class="profile-rows">
+    <div class="profile-row">
+      <span class="label">Checking Balance</span>
+      <span class="value" id="profChecking">$0.00</span>
+    </div>
+    <div class="profile-row">
+      <span class="label">Savings Balance</span>
+      <span class="value" id="profSavings">$0.00</span>
+    </div>
+    <div class="profile-row">
+      <span class="label">Total Net Worth</span>
+      <span class="value" id="profTotal">$0.00</span>
+    </div>
+    <div class="profile-row">
+      <span class="label">Transactions</span>
+      <span class="value" id="profTxCount">0</span>
+    </div>
+    <div class="profile-row">
+      <span class="label">Account Tier</span>
+      <span class="value">Gold</span>
+    </div>
+    <div class="profile-row">
+      <span class="label">Daily Limit</span>
+      <span class="value">$10,000.00</span>
+    </div>
+    <div class="profile-row">
+      <span class="label">Monthly Limit</span>
+      <span class="value">$50,000.00</span>
+    </div>
+  </div>
+
+  <button class="logout-button" id="logoutButton" type="button">
+    Sign Out
+  </button>
+
+  <nav class="bottom-nav" data-nav>
+    <button class="nav-button" data-page="home" type="button">
+      <span class="nav-icon">🏠</span> Home
+    </button>
+    <button class="nav-button" data-page="transfer" type="button">
+      <span class="nav-icon">⇄</span> Transfer
+    </button>
+    <button class="nav-button" data-page="bills" type="button">
+      <span class="nav-icon">📄</span> Bills
+    </button>
+    <button class="nav-button" data-page="history" type="button">
+      <span class="nav-icon">☰</span> History
+    </button>
+    <button class="nav-button active" data-page="profile" type="button">
+      <span class="nav-icon">👤</span> Profile
+    </button>
+  </nav>
+
+</section>
+
+
 <!-- ================= MODAL ================= -->
 
 <div class="modal" id="modal">
@@ -1085,6 +1310,8 @@ button {
     <h2 id="modalTitle">NovaPay</h2>
     <p id="modalMessage"></p>
     <button class="modal-close" id="modalClose" type="button">Close</button>
+    <button class="modal-close danger" id="modalConfirm" type="button" style="display:none;">Confirm</button>
+    <button class="modal-close ghost" id="modalCancel" type="button" style="display:none;">Cancel</button>
   </div>
 </div>
 
@@ -1093,84 +1320,190 @@ button {
 
 <script>
 
-/* ===============================
-   SCREENS
-================================ */
+/* ============================================================
+   1. USER STORAGE
+   ============================================================ */
 
-const signupScreen = document.getElementById("signupScreen");
-const loginScreen = document.getElementById("loginScreen");
+const USERS_KEY   = "novapayUsers";
+const SESSION_KEY = "novapaySession";
+
+function getUsers() {
+  try { return JSON.parse(localStorage.getItem(USERS_KEY)) || {}; }
+  catch (e) { return {}; }
+}
+
+function saveUsers(users) {
+  localStorage.setItem(USERS_KEY, JSON.stringify(users));
+}
+
+function seedDemoUser() {
+  const users = getUsers();
+  if (!users["demo@novapay.com"]) {
+    users["demo@novapay.com"] = {
+      email: "demo@novapay.com",
+      password: "password123",
+      createdAt: new Date().toISOString()
+    };
+    saveUsers(users);
+  }
+}
+
+seedDemoUser();
+
+function setSession(email) {
+  sessionStorage.setItem(SESSION_KEY, email);
+  sessionStorage.setItem("novapayUserEmail", email);
+}
+
+function getSession() {
+  return sessionStorage.getItem(SESSION_KEY);
+}
+
+function clearSession() {
+  sessionStorage.removeItem(SESSION_KEY);
+  sessionStorage.removeItem("novapayUserEmail");
+}
+
+
+/* ============================================================
+   2. SCREENS
+   ============================================================ */
+
+const signupScreen    = document.getElementById("signupScreen");
+const loginScreen     = document.getElementById("loginScreen");
 const dashboardScreen = document.getElementById("dashboardScreen");
-const transferScreen = document.getElementById("transferScreen");
+const transferScreen  = document.getElementById("transferScreen");
+const billsScreen     = document.getElementById("billsScreen");
+const historyScreen   = document.getElementById("historyScreen");
+const profileScreen   = document.getElementById("profileScreen");
+
+const ALL_SCREENS = [
+  signupScreen, loginScreen, dashboardScreen,
+  transferScreen, billsScreen, historyScreen, profileScreen
+];
 
 function showScreen(screen) {
-  [signupScreen, loginScreen, dashboardScreen, transferScreen].forEach(function(s) {
-    s.classList.remove("active");
-  });
+  ALL_SCREENS.forEach(function(s) { s.classList.remove("active"); });
   screen.classList.add("active");
   window.scrollTo(0, 0);
 }
 
 
-/* ===============================
-   MODAL
-================================ */
+/* ============================================================
+   3. MODAL
+   ============================================================ */
 
-const modal = document.getElementById("modal");
-const modalTitle = document.getElementById("modalTitle");
+const modal        = document.getElementById("modal");
+const modalTitle   = document.getElementById("modalTitle");
 const modalMessage = document.getElementById("modalMessage");
+const modalConfirm = document.getElementById("modalConfirm");
+const modalCancel  = document.getElementById("modalCancel");
+
+let confirmCallback = null;
 
 function showModal(title, message) {
   modalTitle.textContent = title;
   modalMessage.textContent = message;
+  modalConfirm.style.display = "none";
+  modalCancel.style.display  = "none";
+  confirmCallback = null;
   modal.classList.add("show");
 }
 
-document.getElementById("modalClose").addEventListener("click", function() {
+function showConfirm(title, message, onConfirm) {
+  modalTitle.textContent = title;
+  modalMessage.textContent = message;
+  modalConfirm.style.display = "block";
+  modalCancel.style.display  = "block";
+  confirmCallback = onConfirm;
+  modal.classList.add("show");
+}
+
+function closeModal() {
   modal.classList.remove("show");
+  confirmCallback = null;
+}
+
+document.getElementById("modalClose").addEventListener("click", closeModal);
+modalCancel.addEventListener("click", closeModal);
+
+modalConfirm.addEventListener("click", function() {
+  if (typeof confirmCallback === "function") confirmCallback();
+  closeModal();
 });
 
 modal.addEventListener("click", function(e) {
-  if (e.target === modal) modal.classList.remove("show");
+  if (e.target === modal) closeModal();
 });
 
 
-/* ===============================
-   SIGN UP / LOGIN
-================================ */
+/* ============================================================
+   4. SIGN UP / LOGIN
+   ============================================================ */
 
 document.getElementById("signupForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
-  const email = document.getElementById("signupEmail").value.trim().toLowerCase();
+  const email    = document.getElementById("signupEmail").value.trim().toLowerCase();
   const password = document.getElementById("signupPassword").value;
 
-  if (!email) {
-    showModal("Email required", "Please enter an email address.");
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showModal("Invalid Email", "Please enter a valid email address.");
     return;
   }
 
   if (password.length < 8) {
-    showModal("Password too short", "Please use at least 8 characters.");
+    showModal("Password Too Short", "Please use at least 8 characters.");
     return;
   }
 
-  sessionStorage.setItem("novapayUserEmail", email);
+  const users = getUsers();
+
+  if (users[email]) {
+    showModal("Account Exists", "An account with this email already exists.\n\nPlease sign in instead.");
+    return;
+  }
+
+  users[email] = {
+    email: email,
+    password: password,
+    createdAt: new Date().toISOString()
+  };
+
+  saveUsers(users);
+  setSession(email);
+  document.getElementById("signupForm").reset();
   loadDashboard();
   showScreen(dashboardScreen);
+  showModal("Welcome to NovaPay!", "Your account has been created.\n\nEmail: " + email);
 });
 
 document.getElementById("loginForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
-  const email = document.getElementById("loginEmail").value.trim().toLowerCase();
+  const email    = document.getElementById("loginEmail").value.trim().toLowerCase();
   const password = document.getElementById("loginPassword").value;
 
   if (!email || !password) {
-    showModal("Authentication Error", "Please provide valid credentials.");
+    showModal("Missing Details", "Please enter both email and password.");
     return;
   }
 
-  sessionStorage.setItem("novapayUserEmail", email);
+  const users = getUsers();
+  const user  = users[email];
+
+  if (!user) {
+    showModal("Account Not Found", "No account exists for:\n" + email + "\n\nPlease create an account first.");
+    return;
+  }
+
+  if (user.password !== password) {
+    showModal("Wrong Password", "The password you entered is incorrect.\n\nPlease try again.");
+    return;
+  }
+
+  setSession(email);
+  document.getElementById("loginForm").reset();
   loadDashboard();
   showScreen(dashboardScreen);
 });
@@ -1184,56 +1517,657 @@ document.getElementById("showSignup").addEventListener("click", function() {
 });
 
 
-/* ===============================
-   DASHBOARD
-================================ */
+/* ============================================================
+   5. LOGOUT
+   ============================================================ */
+
+document.getElementById("logoutButton").addEventListener("click", function() {
+  showConfirm(
+    "Sign Out?",
+    "You will be returned to the sign-in screen.\n\nAre you sure you want to sign out?",
+    function() {
+      clearSession();
+      document.getElementById("loginEmail").value = "";
+      document.getElementById("loginPassword").value = "";
+      showScreen(loginScreen);
+      showModal("Signed Out", "You have been signed out successfully.");
+    }
+  );
+});
+
+
+/* ============================================================
+   6. HELPERS
+   ============================================================ */
 
 function getInitials(email) {
-  const first = email.charAt(0).toUpperCase();
+  const first = (email || "U").charAt(0).toUpperCase();
   return first || "U";
 }
 
-function loadDashboard() {
-  const email = sessionStorage.getItem("novapayUserEmail") || "";
-  const upperEmail = email.toUpperCase();
-
-  document.getElementById("dashboardEmail").textContent = email;
-  document.getElementById("cardEmail").textContent = upperEmail;
-  document.getElementById("avatar").textContent = getInitials(email);
-  document.getElementById("transferAvatar").textContent = getInitials(email);
-
-  updateGreeting();
+function formatMoney(amount) {
+  return "$" + Number(amount).toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
 }
 
 function updateGreeting() {
   const hour = new Date().getHours();
   let text;
-
   if (hour >= 5 && hour < 12) text = "Good Morning";
   else if (hour >= 12 && hour < 18) text = "Good Afternoon";
   else text = "Good Evening";
-
   document.getElementById("greeting").textContent = text;
 }
 
 setInterval(updateGreeting, 60000);
 
 
-/* ===============================
-   FORMATTER
-================================ */
+/* ============================================================
+   7. ACCOUNTS DATA
+   ============================================================ */
 
-function formatMoney(amount) {
-  return "$" + amount.toLocaleString("en-US", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
+const accounts = {
+  checking: {
+    label: "Checking Account",
+    balance: 134290.00,
+    income: 12450.00,
+    expense: 3215.80,
+    savings: 89250.75,
+    lastFour: "4291",
+    expiry: "08/29"
+  },
+  savings: {
+    label: "Savings Account",
+    balance: 89250.75,
+    income: 3400.00,
+    expense: 412.50,
+    savings: 25000.00,
+    lastFour: "7735",
+    expiry: "11/30"
+  }
+};
+
+let activeAccount = "checking";
+
+
+/* ============================================================
+   8. TRANSACTION STORE (shared across Home + History)
+   ============================================================ */
+
+const transactions = [
+  { id: 1, type: "credit",   category: "income",   icon: "💼", name: "Salary Deposit",       date: "Today · 09:14 AM",      amount: 8500.00 },
+  { id: 2, type: "debit",    category: "bills",    icon: "🏠", name: "Rent Payment",          date: "Today · 07:02 AM",      amount: 1850.00 },
+  { id: 3, type: "debit",    category: "purchase", icon: "🛒", name: "Whole Foods Market",    date: "Yesterday · 06:45 PM",  amount: 214.35 },
+  { id: 4, type: "debit",    category: "bills",    icon: "⚡", name: "Electric Bill",         date: "Yesterday · 11:20 AM",  amount: 142.60 },
+  { id: 5, type: "credit",   category: "income",   icon: "💰", name: "Freelance Payment",     date: "Sep 26 · 03:12 PM",     amount: 3950.00 },
+  { id: 6, type: "debit",    category: "bills",    icon: "📶", name: "Internet Subscription", date: "Sep 25 · 08:00 AM",     amount: 89.99 }
+];
+
+function renderTxList(target, list) {
+  target.innerHTML = "";
+  list.forEach(function(t) {
+    const item = document.createElement("div");
+    item.className = "tx-item";
+    item.innerHTML =
+      '<div class="tx-icon">' + t.icon + '</div>' +
+      '<div class="tx-info">' +
+        '<div class="tx-name">' + t.name + '</div>' +
+        '<div class="tx-date">' + t.date + '</div>' +
+      '</div>' +
+      '<div class="tx-amount ' + t.type + '">' +
+        (t.type === "credit" ? "+" : "-") + formatMoney(t.amount) +
+      '</div>';
+    target.appendChild(item);
   });
 }
 
+function renderHomeTransactions() {
+  const list = transactions.slice(0, 6);
+  renderTxList(document.getElementById("txList"), list);
+  document.getElementById("txCount").textContent =
+    document.querySelectorAll("#txList .tx-item").length + " transactions";
+}
 
-/* ===============================
-   ACCOUNT DATA
-================================ */
 
-const accounts = {
-  checking
+/* ============================================================
+   9. DASHBOARD
+   ============================================================ */
+
+const checkingPill   = document.getElementById("checkingPill");
+const savingsPill    = document.getElementById("savingsPill");
+const accountBalance = document.getElementById("accountBalance");
+const accountSub     = document.getElementById("accountSub");
+const statIncome     = document.getElementById("statIncome");
+const statExpense    = document.getElementById("statExpense");
+const statSavings    = document.getElementById("statSavings");
+const cardLastFour   = document.getElementById("cardLastFour");
+const cardExpiry     = document.getElementById("cardExpiry");
+
+function renderAccount(key) {
+  activeAccount = key;
+  const acc = accounts[key];
+
+  accountBalance.textContent = formatMoney(acc.balance);
+  accountSub.textContent     = acc.label;
+  statIncome.textContent     = "+" + formatMoney(acc.income);
+  statExpense.textContent    = "-" + formatMoney(acc.expense);
+  statSavings.textContent    = formatMoney(acc.savings);
+  cardLastFour.textContent   = acc.lastFour;
+  cardExpiry.textContent     = acc.expiry;
+
+  const fromSel = document.getElementById("fromAccount");
+  if (fromSel) fromSel.value = key;
+  const billFrom = document.getElementById("billFrom");
+  if (billFrom) billFrom.value = key;
+}
+
+checkingPill.addEventListener("click", function() {
+  checkingPill.className = "pill active";
+  savingsPill.className  = "pill inactive";
+  renderAccount("checking");
+});
+
+savingsPill.addEventListener("click", function() {
+  savingsPill.className  = "pill active";
+  checkingPill.className = "pill inactive";
+  renderAccount("savings");
+});
+
+function loadDashboard() {
+  const email = getSession() || "";
+  const upper = email.toUpperCase();
+  const initial = getInitials(email);
+
+  document.getElementById("dashboardEmail").textContent  = email;
+  document.getElementById("cardEmail").textContent       = upper;
+  document.getElementById("avatar").textContent          = initial;
+  document.getElementById("transferAvatar").textContent  = initial;
+  document.getElementById("billsAvatar").textContent     = initial;
+  document.getElementById("historyAvatar").textContent   = initial;
+  document.getElementById("profileAvatar").textContent   = initial;
+
+  document.getElementById("profileBigAvatar").textContent = initial;
+  document.getElementById("profileEmail").textContent     = email;
+
+  const users = getUsers();
+  const user  = users[email];
+  if (user && user.createdAt) {
+    document.getElementById("profileSince").textContent =
+      "Member since " + new Date(user.createdAt).toLocaleDateString("en-US", {
+        month: "long", day: "numeric", year: "numeric"
+      });
+  }
+
+  updateGreeting();
+  renderAccount(activeAccount);
+  renderHomeTransactions();
+  updateProfileStats();
+}
+
+function updateProfileStats() {
+  document.getElementById("profChecking").textContent = formatMoney(accounts.checking.balance);
+  document.getElementById("profSavings").textContent  = formatMoney(accounts.savings.balance);
+  document.getElementById("profTotal").textContent    =
+    formatMoney(accounts.checking.balance + accounts.savings.balance);
+  document.getElementById("profTxCount").textContent  = transactions.length;
+}
+
+
+/* ============================================================
+   10. RECIPIENTS + TRANSFER
+   ============================================================ */
+
+const recipients = [
+  { id: "r1", name: "Sarah Johnson",   bank: "NovaPay · ••7391",         color: "#5b7cfa", initials: "SJ" },
+  { id: "r2", name: "Michael Chen",    bank: "NovaPay · ••2048",         color: "#f97316", initials: "MC" },
+  { id: "r3", name: "Amara Okafor",    bank: "Chase Bank · ••5612",      color: "#22c55e", initials: "AO" },
+  { id: "r4", name: "David Williams",  bank: "Bank of America · ••8840", color: "#a855f7", initials: "DW" },
+  { id: "r5", name: "Elena Rodriguez", bank: "Wells Fargo · ••3927",     color: "#ef4444", initials: "ER" },
+  { id: "r6", name: "James Park",      bank: "NovaPay · ••1174",         color: "#06b6d4", initials: "JP" }
+];
+
+let selectedRecipient = null;
+
+function buildRecipientList() {
+  const list = document.getElementById("recipientList");
+  list.innerHTML = "";
+
+  recipients.forEach(function(r) {
+    const item = document.createElement("div");
+    item.className = "recipient-item";
+    item.dataset.id = r.id;
+    item.innerHTML =
+      '<div class="recipient-avatar" style="background:' + r.color + ';">' + r.initials + '</div>' +
+      '<div class="recipient-info">' +
+        '<div class="recipient-name">' + r.name + '</div>' +
+        '<div class="recipient-bank">' + r.bank + '</div>' +
+      '</div>' +
+      '<div class="recipient-check">✓</div>';
+
+    item.addEventListener("click", function() {
+      document.querySelectorAll("#recipientList .recipient-item").forEach(function(el) {
+        el.classList.remove("selected");
+      });
+      item.classList.add("selected");
+      selectedRecipient = r;
+      updateTransferSummary();
+    });
+
+    list.appendChild(item);
+  });
+}
+
+buildRecipientList();
+
+const transferAmountEl = document.getElementById("transferAmount");
+const sumAmountEl      = document.getElementById("sumAmount");
+const sumFeeEl         = document.getElementById("sumFee");
+const sumSpeedEl       = document.getElementById("sumSpeed");
+const sumTotalEl       = document.getElementById("sumTotal");
+const limitNoteEl      = document.getElementById("limitNote");
+
+function calcFee(amount) {
+  if (amount <= 0)    return 0;
+  if (amount <= 100)  return 0;
+  if (amount <= 1000) return 1.50;
+  return amount * 0.005;
+}
+
+function updateTransferSummary() {
+  const amount = parseFloat(transferAmountEl.value) || 0;
+  const fee    = calcFee(amount);
+  const total  = amount + fee;
+
+  sumAmountEl.textContent = formatMoney(amount);
+  sumFeeEl.textContent    = formatMoney(fee);
+  sumTotalEl.textContent  = formatMoney(total);
+
+  if (amount === 0)        sumSpeedEl.textContent = "—";
+  else if (amount <= 100)  sumSpeedEl.textContent = "Instant · Free";
+  else if (amount <= 1000) sumSpeedEl.textContent = "Instant";
+  else                     sumSpeedEl.textContent = "Same Day";
+
+  const fromKey = document.getElementById("fromAccount").value;
+  const avail   = accounts[fromKey].balance;
+  const remaining = avail - total;
+
+  limitNoteEl.textContent =
+    "Available: " + formatMoney(avail) +
+    " · Remaining: " + formatMoney(Math.max(remaining, 0));
+}
+
+transferAmountEl.addEventListener("input", updateTransferSummary);
+
+document.getElementById("fromAccount").addEventListener("change", function() {
+  renderAccount(this.value);
+  updateTransferSummary();
+});
+
+document.querySelectorAll(".quick-chip").forEach(function(chip) {
+  chip.addEventListener("click", function() {
+    transferAmountEl.value = chip.dataset.amt;
+    updateTransferSummary();
+  });
+});
+
+document.getElementById("confirmTransfer").addEventListener("click", function() {
+  const fromKey = document.getElementById("fromAccount").value;
+  const amount  = parseFloat(transferAmountEl.value) || 0;
+  const note    = document.getElementById("transferNote").value.trim();
+
+  if (!selectedRecipient) {
+    showModal("No Recipient", "Please select a recipient to send money to.");
+    return;
+  }
+
+  if (amount <= 0) {
+    showModal("Invalid Amount", "Please enter an amount greater than $0.00.");
+    return;
+  }
+
+  const fee   = calcFee(amount);
+  const total = amount + fee;
+  const fromAcc = accounts[fromKey];
+
+  if (total > fromAcc.balance) {
+    showModal("Insufficient Funds",
+      "You need " + formatMoney(total) + " but your " + fromAcc.label +
+      " only has " + formatMoney(fromAcc.balance) + ".");
+    return;
+  }
+
+  showConfirm(
+    "Confirm Transfer",
+    "Send " + formatMoney(amount) + " to " + selectedRecipient.name +
+    "?\n\nFee: " + formatMoney(fee) +
+    "\nTotal debit: " + formatMoney(total),
+    function() {
+      fromAcc.balance -= total;
+      fromAcc.expense += amount;
+
+      // Add to shared transactions
+      transactions.unshift({
+        id: Date.now(),
+        type: "debit",
+        category: "transfer",
+        icon: "➡️",
+        name: "To " + selectedRecipient.name,
+        date: "Just now · " + (note || "Transfer"),
+        amount: amount
+      });
+
+      renderAccount(fromKey);
+      renderHomeTransactions();
+      updateTransferSummary();
+      updateProfileStats();
+
+      showModal(
+        "Transfer Successful ✓",
+        "Sent " + formatMoney(amount) + " to " + selectedRecipient.name +
+        "\nBank: " + selectedRecipient.bank +
+        "\nFee: " + formatMoney(fee) +
+        "\nTotal debited: " + formatMoney(total) +
+        "\n\nNew balance: " + formatMoney(fromAcc.balance)
+      );
+
+      transferAmountEl.value = "";
+      document.getElementById("transferNote").value = "";
+      selectedRecipient = null;
+      document.querySelectorAll("#recipientList .recipient-item").forEach(function(el) {
+        el.classList.remove("selected");
+      });
+      updateTransferSummary();
+    }
+  );
+});
+
+
+/* ============================================================
+   11. BILLS
+   ============================================================ */
+
+let selectedBill = null;
+
+document.querySelectorAll("#billGrid .bill-tile").forEach(function(tile) {
+  tile.addEventListener("click", function() {
+    document.querySelectorAll("#billGrid .bill-tile").forEach(function(t) {
+      t.classList.remove("selected");
+    });
+    tile.classList.add("selected");
+    selectedBill = {
+      name: tile.dataset.bill,
+      min:  parseFloat(tile.dataset.min)
+    };
+    updateBillSummary();
+  });
+});
+
+const billAmountEl  = document.getElementById("billAmount");
+const billSumName   = document.getElementById("billSumName");
+const billSumAmount = document.getElementById("billSumAmount");
+const billSumFee    = document.getElementById("billSumFee");
+const billSumTotal  = document.getElementById("billSumTotal");
+const billLimitNote = document.getElementById("billLimitNote");
+
+function updateBillSummary() {
+  const amount = parseFloat(billAmountEl.value) || 0;
+  const fee = amount > 0 ? 1.00 : 0;
+  const total = amount + fee;
+
+  billSumName.textContent   = selectedBill ? selectedBill.name : "—";
+  billSumAmount.textContent = formatMoney(amount);
+  billSumFee.textContent    = formatMoney(fee);
+  billSumTotal.textContent  = formatMoney(total);
+
+  const fromKey = document.getElementById("billFrom").value;
+  const avail   = accounts[fromKey].balance;
+  billLimitNote.textContent =
+    "Available: " + formatMoney(avail) +
+    " · Remaining: " + formatMoney(Math.max(avail - total, 0));
+}
+
+billAmountEl.addEventListener("input", updateBillSummary);
+
+document.getElementById("billFrom").addEventListener("change", function() {
+  renderAccount(this.value);
+  updateBillSummary();
+});
+
+document.querySelectorAll(".bill-chip").forEach(function(chip) {
+  chip.addEventListener("click", function() {
+    billAmountEl.value = chip.dataset.amt;
+    updateBillSummary();
+  });
+});
+
+document.getElementById("confirmBill").addEventListener("click", function() {
+  const fromKey = document.getElementById("billFrom").value;
+  const amount  = parseFloat(billAmountEl.value) || 0;
+  const ref     = document.getElementById("billRef").value.trim();
+
+  if (!selectedBill) {
+    showModal("No Bill Selected", "Please choose a bill category above.");
+    return;
+  }
+
+  if (amount <= 0) {
+    showModal("Invalid Amount", "Please enter a bill amount greater than $0.00.");
+    return;
+  }
+
+  if (amount < selectedBill.min) {
+    showModal("Amount Too Low",
+      "Minimum payment for " + selectedBill.name + " is " + formatMoney(selectedBill.min) + ".");
+    return;
+  }
+
+  const fee   = 1.00;
+  const total = amount + fee;
+  const fromAcc = accounts[fromKey];
+
+  if (total > fromAcc.balance) {
+    showModal("Insufficient Funds",
+      "You need " + formatMoney(total) + " but your " + fromAcc.label +
+      " only has " + formatMoney(fromAcc.balance) + ".");
+    return;
+  }
+
+  showConfirm(
+    "Confirm Bill Payment",
+    "Pay " + selectedBill.name + " bill of " + formatMoney(amount) +
+    (ref ? "\nReference: " + ref : "") +
+    "\n\nFee: " + formatMoney(fee) +
+    "\nTotal: " + formatMoney(total),
+    function() {
+      fromAcc.balance -= total;
+      fromAcc.expense += amount;
+
+      transactions.unshift({
+        id: Date.now(),
+        type: "debit",
+        category: "bills",
+        icon: billEmoji(selectedBill.name),
+        name: selectedBill.name + " Bill" + (ref ? " · " + ref : ""),
+        date: "Just now",
+        amount: amount
+      });
+
+      renderAccount(fromKey);
+      renderHomeTransactions();
+      updateBillSummary();
+      updateProfileStats();
+
+      showModal(
+        "Bill Paid ✓",
+        "Successfully paid " + formatMoney(amount) + " to " + selectedBill.name + ".\n" +
+        (ref ? "Reference: " + ref + "\n" : "") +
+        "Fee: " + formatMoney(fee) +
+        "\nTotal debited: " + formatMoney(total) +
+        "\n\nNew balance: " + formatMoney(fromAcc.balance)
+      );
+
+      billAmountEl.value = "";
+      document.getElementById("billRef").value = "";
+      selectedBill = null;
+      document.querySelectorAll("#billGrid .bill-tile").forEach(function(t) {
+        t.classList.remove("selected");
+      });
+      updateBillSummary();
+    }
+  );
+});
+
+function billEmoji(name) {
+  const map = {
+    Electric: "⚡", Water: "💧", Internet: "📶", Phone: "📱",
+    Gas: "🔥", Rent: "🏠", Netflix: "🎬", Insurance: "🛡️", Gym: "💪"
+  };
+  return map[name] || "📄";
+}
+
+
+/* ============================================================
+   12. HISTORY
+   ============================================================ */
+
+let historyFilter = "all";
+
+function renderHistory() {
+  let list = transactions.slice();
+
+  if (historyFilter === "credit")        list = list.filter(t => t.type === "credit");
+  else if (historyFilter === "debit")    list = list.filter(t => t.type === "debit");
+  else if (historyFilter === "bills")    list = list.filter(t => t.category === "bills");
+  else if (historyFilter === "transfer") list = list.filter(t => t.category === "transfer");
+
+  renderTxList(document.getElementById("historyList"), list);
+
+  let totalIn = 0, totalOut = 0;
+  transactions.forEach(function(t) {
+    if (t.type === "credit") totalIn += t.amount;
+    else totalOut += t.amount;
+  });
+
+  document.getElementById("histTotalIn").textContent  = "+" + formatMoney(totalIn);
+  document.getElementById("histTotalOut").textContent = "-" + formatMoney(totalOut);
+  document.getElementById("histNet").textContent      = formatMoney(totalIn - totalOut);
+  document.getElementById("historySummary").textContent =
+    list.length + " transaction" + (list.length === 1 ? "" : "s") + " shown";
+}
+
+document.querySelectorAll(".filter-chip").forEach(function(chip) {
+  chip.addEventListener("click", function() {
+    document.querySelectorAll(".filter-chip").forEach(function(c) {
+      c.classList.remove("active");
+    });
+    chip.classList.add("active");
+    historyFilter = chip.dataset.filter;
+    renderHistory();
+  });
+});
+
+
+/* ============================================================
+   13. TOP-ROW BUTTONS
+   ============================================================ */
+
+document.getElementById("transferButton").addEventListener("click", function() {
+  showScreen(transferScreen);
+  updateTransferSummary();
+});
+
+document.getElementById("depositButton").addEventListener("click", function() {
+  showModal("Deposit Funds",
+    "Deposit checks or move money from an external account.\n\n" +
+    "Mobile check deposits up to $25,000.00 are credited instantly.\n" +
+    "ACH transfers up to $50,000.00 take 1–2 business days.");
+});
+
+document.getElementById("virtualCardButton").addEventListener("click", function() {
+  showModal("Virtual Card Generated",
+    "Your new virtual card ending in " + accounts.checking.lastFour + " is ready.\n\n" +
+    "Daily limit: $10,000.00\n" +
+    "Monthly limit: $50,000.00\n" +
+    "Online purchases: Enabled\n" +
+    "Contactless payments: Enabled");
+});
+
+document.getElementById("notificationButton").addEventListener("click", function() {
+  showModal("Notifications",
+    "You have 3 new alerts:\n\n" +
+    "• Salary Deposit  +$8,500.00\n" +
+    "• Rent Payment    -$1,850.00\n" +
+    "• Electric Bill   -$142.60");
+});
+
+document.getElementById("themeButton").addEventListener("click", function() {
+  showModal("Theme",
+    "NovaPay is currently in Midnight Gold mode.\n\nLight mode is coming in the next release.");
+});
+
+
+/* ============================================================
+   14. BACK BUTTONS
+   ============================================================ */
+
+document.getElementById("transferBack").addEventListener("click", function() {
+  showScreen(dashboardScreen);
+});
+document.getElementById("billsBack").addEventListener("click", function() {
+  showScreen(dashboardScreen);
+});
+document.getElementById("historyBack").addEventListener("click", function() {
+  showScreen(dashboardScreen);
+});
+document.getElementById("profileBack").addEventListener("click", function() {
+  showScreen(dashboardScreen);
+});
+
+
+/* ============================================================
+   15. NAVIGATION (all .bottom-nav instances)
+   ============================================================ */
+
+function navigateTo(page) {
+  if (page === "home")            showScreen(dashboardScreen);
+  else if (page === "transfer")   { showScreen(transferScreen); updateTransferSummary(); }
+  else if (page === "bills")      { showScreen(billsScreen);    updateBillSummary(); }
+  else if (page === "history")    { showScreen(historyScreen);  renderHistory(); }
+  else if (page === "profile")    { showScreen(profileScreen);  updateProfileStats(); }
+
+  // sync nav active state across all nav bars
+  document.querySelectorAll(".nav-button").forEach(function(btn) {
+    btn.classList.toggle("active", btn.dataset.page === page);
+  });
+}
+
+document.querySelectorAll(".nav-button").forEach(function(button) {
+  button.addEventListener("click", function() {
+    navigateTo(button.dataset.page);
+  });
+});
+
+
+/* ============================================================
+   16. INIT
+   ============================================================ */
+
+(function init() {
+  const existing = getSession();
+  if (existing) {
+    loadDashboard();
+    showScreen(dashboardScreen);
+  } else {
+    showScreen(signupScreen);
+  }
+  updateTransferSummary();
+  updateBillSummary();
+  renderHistory();
+})();
+
+</script>
+
+</body>
+</html>
