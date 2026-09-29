@@ -1,15 +1,16 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Premium Banking Demo</title>
+<title>Premium Banking Demo · NovaPay</title>
 
 <style>
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 :root {
@@ -30,10 +31,10 @@ body {
                Roboto, Arial, sans-serif;
   background: var(--light);
   color: var(--text);
+  line-height: 1.4;
 }
 
 /* DEMO LABEL */
-
 .demo-label {
   position: fixed;
   top: 12px;
@@ -46,17 +47,17 @@ body {
   border: 1px solid #f0d98a;
   font-size: 11px;
   font-weight: 700;
+  letter-spacing: 0.3px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
 }
 
 /* LAYOUT */
-
 .app {
   display: flex;
   min-height: 100vh;
 }
 
 /* SIDEBAR */
-
 .sidebar {
   width: 250px;
   background: var(--white);
@@ -66,6 +67,9 @@ body {
   top: 0;
   bottom: 0;
   left: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
 }
 
 .logo {
@@ -73,6 +77,7 @@ body {
   font-size: 22px;
   font-weight: 800;
   color: var(--navy);
+  letter-spacing: -0.3px;
 }
 
 .logo span {
@@ -92,6 +97,9 @@ body {
   border-radius: 10px;
   font-size: 14px;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  transition: 0.15s;
 }
 
 .nav a:hover,
@@ -101,10 +109,7 @@ body {
 }
 
 .sidebar-bottom {
-  position: absolute;
-  left: 18px;
-  right: 18px;
-  bottom: 25px;
+  margin-top: auto;
 }
 
 .help {
@@ -113,17 +118,23 @@ body {
   border-radius: 12px;
   font-size: 12px;
   color: var(--muted);
+  line-height: 1.5;
+}
+
+.help strong {
+  color: var(--text);
 }
 
 /* MAIN */
-
 .main {
   margin-left: 250px;
   width: calc(100% - 250px);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* TOPBAR */
-
 .topbar {
   height: 78px;
   background: white;
@@ -132,17 +143,24 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0 35px;
+  flex-shrink: 0;
 }
 
 .welcome {
   font-size: 14px;
   color: var(--muted);
+  font-weight: 500;
 }
 
 .profile {
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.profile strong {
+  font-size: 14px;
+  font-weight: 700;
 }
 
 .avatar {
@@ -155,14 +173,17 @@ body {
   align-items: center;
   justify-content: center;
   font-weight: 800;
+  font-size: 15px;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.12);
 }
 
 /* CONTENT */
-
 .content {
   max-width: 1250px;
-  margin: auto;
+  margin: 0 auto;
   padding: 35px;
+  width: 100%;
+  flex: 1;
 }
 
 .page-title {
@@ -172,15 +193,17 @@ body {
 .page-title h1 {
   margin: 0 0 5px;
   font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
 }
 
 .page-title p {
   margin: 0;
   color: var(--muted);
+  font-size: 15px;
 }
 
 /* BALANCE */
-
 .balance-card {
   position: relative;
   overflow: hidden;
@@ -188,7 +211,7 @@ body {
   padding: 32px;
   color: white;
   background: linear-gradient(135deg, #102a43, #1769aa);
-  box-shadow: 0 18px 35px rgba(16,42,67,.16);
+  box-shadow: 0 18px 35px rgba(16, 42, 67, 0.18);
   margin-bottom: 25px;
 }
 
@@ -200,19 +223,23 @@ body {
   border-radius: 50%;
   right: -90px;
   top: -100px;
-  background: rgba(255,255,255,.08);
+  background: rgba(255, 255, 255, 0.08);
+  pointer-events: none;
 }
 
 .balance-label {
   font-size: 13px;
-  opacity: .8;
+  opacity: 0.8;
+  font-weight: 500;
+  letter-spacing: 0.2px;
 }
 
 .balance {
   margin: 8px 0 22px;
   font-size: 43px;
   font-weight: 800;
-  letter-spacing: -1px;
+  letter-spacing: -1.2px;
+  line-height: 1.1;
 }
 
 .balance-info {
@@ -224,16 +251,17 @@ body {
 
 .balance-info small {
   display: block;
-  opacity: .7;
+  opacity: 0.7;
   margin-bottom: 3px;
+  font-size: 12px;
 }
 
 .balance-info strong {
   font-size: 15px;
+  font-weight: 700;
 }
 
 /* ACTIONS */
-
 .actions {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -244,22 +272,24 @@ body {
 .action {
   border: 1px solid var(--border);
   background: white;
-  padding: 18px;
+  padding: 18px 10px;
   border-radius: 14px;
   text-align: center;
   cursor: pointer;
-  transition: .2s;
+  transition: 0.2s ease;
+  user-select: none;
 }
 
 .action:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 22px rgba(0,0,0,.06);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
+  border-color: #d0ddeb;
 }
 
 .action-icon {
   width: 42px;
   height: 42px;
-  margin: auto auto 9px;
+  margin: 0 auto 9px;
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -267,18 +297,20 @@ body {
   background: #edf4ff;
   color: var(--blue);
   font-size: 19px;
+  font-weight: 500;
 }
 
 .action strong {
   display: block;
   font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
 }
 
 /* GRID */
-
 .grid {
   display: grid;
-  grid-template-columns: 1.4fr .8fr;
+  grid-template-columns: 1.4fr 0.8fr;
   gap: 22px;
 }
 
@@ -287,6 +319,7 @@ body {
   border: 1px solid var(--border);
   border-radius: 18px;
   padding: 23px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
 }
 
 .panel-header {
@@ -299,6 +332,8 @@ body {
 .panel-header h2 {
   margin: 0;
   font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -0.2px;
 }
 
 .panel-header a {
@@ -306,10 +341,14 @@ body {
   font-size: 12px;
   font-weight: 700;
   text-decoration: none;
+  letter-spacing: 0.2px;
+}
+
+.panel-header a:hover {
+  text-decoration: underline;
 }
 
 /* TRANSACTIONS */
-
 .transaction {
   display: flex;
   justify-content: space-between;
@@ -320,6 +359,11 @@ body {
 
 .transaction:last-child {
   border-bottom: none;
+  padding-bottom: 0;
+}
+
+.transaction:first-of-type {
+  padding-top: 0;
 }
 
 .transaction-left {
@@ -336,6 +380,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
 }
 
 .transaction-name {
@@ -352,6 +398,7 @@ body {
 .amount {
   font-size: 13px;
   font-weight: 750;
+  white-space: nowrap;
 }
 
 .positive {
@@ -362,8 +409,7 @@ body {
   color: var(--red);
 }
 
-/* CARD */
-
+/* BANK CARD */
 .bank-card {
   height: 205px;
   border-radius: 18px;
@@ -372,7 +418,10 @@ body {
   background: linear-gradient(135deg, #202f46, #0c1727);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 14px 28px rgba(0,0,0,.15);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .bank-card::before {
@@ -383,13 +432,15 @@ body {
   border-radius: 50%;
   right: -80px;
   bottom: -110px;
-  background: rgba(255,255,255,.08);
+  background: rgba(255, 255, 255, 0.08);
+  pointer-events: none;
 }
 
 .card-brand {
   font-size: 13px;
   font-weight: 700;
-  opacity: .85;
+  opacity: 0.85;
+  letter-spacing: 0.5px;
 }
 
 .chip {
@@ -397,25 +448,28 @@ body {
   height: 28px;
   border-radius: 6px;
   background: #d9c27a;
-  margin-top: 25px;
+  margin-top: 6px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .card-number {
-  margin-top: 20px;
+  margin-top: 10px;
   font-size: 17px;
   letter-spacing: 2px;
+  font-weight: 500;
 }
 
 .card-bottom {
   display: flex;
   justify-content: space-between;
-  margin-top: 17px;
+  margin-top: 6px;
   font-size: 11px;
-  opacity: .85;
+  opacity: 0.85;
+  font-weight: 500;
+  letter-spacing: 0.4px;
 }
 
-/* ACCOUNT */
-
+/* ACCOUNT ROWS */
 .account-row {
   display: flex;
   justify-content: space-between;
@@ -426,25 +480,35 @@ body {
 
 .account-row:last-child {
   border: none;
+  padding-bottom: 0;
+}
+
+.account-row:first-of-type {
+  padding-top: 0;
 }
 
 .account-row span {
   color: var(--muted);
+  font-weight: 500;
+}
+
+.account-row strong {
+  font-weight: 700;
 }
 
 /* FOOTER */
-
 .footer {
   text-align: center;
-  padding: 30px;
+  padding: 25px 30px 30px;
   color: #8793a3;
   font-size: 11px;
+  border-top: 1px solid var(--border);
+  background: white;
+  margin-top: 10px;
 }
 
-/* MOBILE */
-
-@media(max-width: 900px) {
-
+/* RESPONSIVE */
+@media (max-width: 900px) {
   .sidebar {
     display: none;
   }
@@ -456,6 +520,7 @@ body {
 
   .topbar {
     padding: 0 18px;
+    height: 70px;
   }
 
   .content {
@@ -469,20 +534,29 @@ body {
   .grid {
     grid-template-columns: 1fr;
   }
+
+  .balance {
+    font-size: 38px;
+  }
+
+  .footer {
+    padding: 20px 15px 25px;
+  }
 }
 
-@media(max-width: 500px) {
-
+@media (max-width: 500px) {
   .balance-card {
-    padding: 25px;
+    padding: 25px 20px;
   }
 
   .balance {
-    font-size: 35px;
+    font-size: 34px;
+    letter-spacing: -0.8px;
   }
 
   .balance-info {
     gap: 25px;
+    flex-wrap: wrap;
   }
 
   .page-title h1 {
@@ -498,7 +572,23 @@ body {
   }
 
   .bank-card {
-    height: 190px;
+    height: 185px;
+    padding: 20px;
+  }
+
+  .card-number {
+    font-size: 15px;
+    letter-spacing: 1.5px;
+  }
+
+  .transaction-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 14px;
+  }
+
+  .panel {
+    padding: 18px;
   }
 }
 </style>
@@ -513,120 +603,79 @@ body {
 <div class="app">
 
   <!-- SIDEBAR -->
-
   <aside class="sidebar">
-
     <div class="logo">
       Nova<span>Pay</span>
     </div>
 
     <nav class="nav">
-
-      <a href="#" class="active">
-        ◉ &nbsp; Dashboard
-      </a>
-
-      <a href="#">
-        ⇄ &nbsp; Transfers
-      </a>
-
-      <a href="#">
-        ↓ &nbsp; Deposits
-      </a>
-
-      <a href="#">
-        ▣ &nbsp; Cards
-      </a>
-
-      <a href="#">
-        ≡ &nbsp; Transactions
-      </a>
-
-      <a href="#">
-        ⚙ &nbsp; Settings
-      </a>
-
+      <a href="#" class="active">◉ &nbsp; Dashboard</a>
+      <a href="#">⇄ &nbsp; Transfers</a>
+      <a href="#">↓ &nbsp; Deposits</a>
+      <a href="#">▣ &nbsp; Cards</a>
+      <a href="#">≡ &nbsp; Transactions</a>
+      <a href="#">⚙ &nbsp; Settings</a>
     </nav>
 
     <div class="sidebar-bottom">
-
       <div class="help">
         <strong>Need help?</strong><br><br>
         This is a simulated banking interface for demonstration purposes.
       </div>
-
     </div>
-
   </aside>
 
   <!-- MAIN -->
-
   <main class="main">
 
     <header class="topbar">
-
       <div class="welcome">
         Welcome back
       </div>
 
       <div class="profile">
-
         <div>
-          <strong>Demo User</strong>
+          <strong>Cerji Colvin</strong>
         </div>
-
         <div class="avatar">
-          DU
+          CC
         </div>
-
       </div>
-
     </header>
 
     <div class="content">
 
       <div class="page-title">
-
-        <h1>Good afternoon</h1>
-
+        <h1 id="greeting">Good afternoon</h1>
         <p>
           Here's an overview of your account.
         </p>
-
       </div>
 
       <!-- BALANCE -->
-
       <section class="balance-card">
-
         <div class="balance-label">
           Available Balance
         </div>
 
         <div class="balance">
-          $58,000.00
+          $134,290.00
         </div>
 
         <div class="balance-info">
-
           <div>
             <small>Account</small>
             <strong>Checking •••• 4821</strong>
           </div>
-
           <div>
             <small>Status</small>
             <strong>Active</strong>
           </div>
-
         </div>
-
       </section>
 
       <!-- ACTIONS -->
-
       <div class="actions">
-
         <div class="action" onclick="showMessage('Transfer feature is available in this demo.')">
           <div class="action-icon">⇄</div>
           <strong>Transfer</strong>
@@ -646,138 +695,73 @@ body {
           <div class="action-icon">▣</div>
           <strong>Manage Card</strong>
         </div>
-
       </div>
 
-      <!-- CONTENT GRID -->
-
+      <!-- GRID -->
       <div class="grid">
 
         <!-- TRANSACTIONS -->
-
         <section class="panel">
-
           <div class="panel-header">
-
             <h2>Recent Transactions</h2>
-
             <a href="#">View all</a>
-
           </div>
 
           <div class="transaction">
-
             <div class="transaction-left">
-
               <div class="transaction-icon">↗</div>
-
               <div>
-                <div class="transaction-name">
-                  Incoming Transfer
-                </div>
-
-                <div class="transaction-date">
-                  Sep 10, 2026
-                </div>
+                <div class="transaction-name">Incoming Transfer</div>
+                <div class="transaction-date">Sep 10, 2026</div>
               </div>
-
             </div>
-
-            <div class="amount positive">
-              +$5,000.00
-            </div>
-
+            <div class="amount positive">+$5,000.00</div>
           </div>
 
           <div class="transaction">
-
             <div class="transaction-left">
-
               <div class="transaction-icon">🛒</div>
-
               <div>
-                <div class="transaction-name">
-                  Business Purchase
-                </div>
-
-                <div class="transaction-date">
-                  Sep 8, 2026
-                </div>
+                <div class="transaction-name">Business Purchase</div>
+                <div class="transaction-date">Sep 8, 2026</div>
               </div>
-
             </div>
-
-            <div class="amount negative">
-              -$425.00
-            </div>
-
+            <div class="amount negative">-$425.00</div>
           </div>
 
           <div class="transaction">
-
             <div class="transaction-left">
-
               <div class="transaction-icon">↗</div>
-
               <div>
-                <div class="transaction-name">
-                  Deposit
-                </div>
-
-                <div class="transaction-date">
-                  Sep 6, 2026
-                </div>
-
+                <div class="transaction-name">Deposit</div>
+                <div class="transaction-date">Sep 6, 2026</div>
               </div>
-
             </div>
-
-            <div class="amount positive">
-              +$2,500.00
-            </div>
-
+            <div class="amount positive">+$2,500.00</div>
           </div>
 
           <div class="transaction">
-
             <div class="transaction-left">
-
               <div class="transaction-icon">☕</div>
-
               <div>
-                <div class="transaction-name">
-                  Coffee Shop
-                </div>
-
-                <div class="transaction-date">
-                  Sep 5, 2026
-                </div>
-
+                <div class="transaction-name">Coffee Shop</div>
+                <div class="transaction-date">Sep 5, 2026</div>
               </div>
-
             </div>
-
-            <div class="amount negative">
-              -$8.50
-            </div>
-
+            <div class="amount negative">-$8.50</div>
           </div>
-
         </section>
 
         <!-- RIGHT COLUMN -->
-
         <div>
 
           <section class="panel">
-
             <div class="panel-header">
               <h2>My Card</h2>
               <a href="#">Manage</a>
             </div>
 
             <div class="bank-card">
-
               <div class="card-brand">
                 NOVA PAY
               </div>
@@ -789,21 +773,20 @@ body {
               </div>
 
               <div class="card-bottom">
-
-                <span>DEMO USER</span>
-
+                <span>CERJI COLVIN</span>
                 <span>12/29</span>
-
               </div>
-
             </div>
-
           </section>
 
           <section class="panel" style="margin-top:22px;">
-
             <div class="panel-header">
               <h2>Account Details</h2>
+            </div>
+
+            <div class="account-row">
+              <span>Account Holder</span>
+              <strong>Cerji Colvin</strong>
             </div>
 
             <div class="account-row">
@@ -825,7 +808,6 @@ body {
               <span>Status</span>
               <strong>Active</strong>
             </div>
-
           </section>
 
         </div>
@@ -843,9 +825,49 @@ body {
 </div>
 
 <script>
-function showMessage(message) {
-  alert(message);
-}
+  /* ---------------------------------------------------------
+     DYNAMIC GREETING
+     Updates automatically based on the current local time.
+     - 05:00 – 11:59 → "Good morning"
+     - 12:00 – 17:59 → "Good afternoon"
+     - 18:00 – 04:59 → "Good evening"
+     Refreshes on page load (login) and whenever the user
+     returns to the tab.
+  --------------------------------------------------------- */
+  function updateGreeting() {
+    const greetingEl = document.getElementById('greeting');
+    if (!greetingEl) return;
+
+    const hour = new Date().getHours();
+    let greeting;
+
+    if (hour >= 5 && hour < 12) {
+      greeting = 'Good morning';
+    } else if (hour >= 12 && hour < 18) {
+      greeting = 'Good afternoon';
+    } else {
+      greeting = 'Good evening';
+    }
+
+    greetingEl.textContent = greeting;
+  }
+
+  // Run on initial page load (login)
+  updateGreeting();
+
+  // Re-check when the user comes back to the tab/window
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) {
+      updateGreeting();
+    }
+  });
+
+  // Also refresh every minute so it stays current while open
+  setInterval(updateGreeting, 60000);
+
+  function showMessage(message) {
+    alert(message);
+  }
 </script>
 
 </body>
