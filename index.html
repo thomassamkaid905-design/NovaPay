@@ -2,894 +2,1553 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>NovaPay</title>
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0,
+               maximum-scale=1.0, user-scalable=no">
+
+<title>NovaPay — Demo</title>
+
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
 
 :root {
   --gold: #e5c76b;
+  --gold-light: #f3dfa2;
   --gold-dark: #c9a84a;
-  --gold-soft: #f3dfa2;
-  --bg: #0d0c0a;
-  --bg-2: #17150f;
-  --card: #1a1813;
-  --text: #f5f1e6;
-  --muted: #a39d8c;
+  --bg: #0b0a08;
+  --card: #171510;
+  --card2: #1f1c15;
+  --text: #f7f1df;
+  --muted: #aaa28f;
   --green: #4ade80;
   --red: #f87171;
 }
 
-html, body { height: 100%; background: #000; }
-
+html,
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-  color: var(--text);
-  line-height: 1.4;
-  display: flex;
-  justify-content: center;
-  min-height: 100vh;
+  min-height: 100%;
+  background: #000;
 }
 
-.phone {
+body {
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+  color: var(--text);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* =========================
+   APP
+========================= */
+
+.app {
   width: 100%;
   max-width: 430px;
   min-height: 100vh;
-  background: linear-gradient(180deg, #23201a 0%, #12110d 45%, #0a0908 100%);
+  margin: auto;
+  background:
+    linear-gradient(
+      180deg,
+      #211e17 0%,
+      #11100c 45%,
+      #090807 100%
+    );
   position: relative;
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
 }
 
-/* ============== SCREENS ============== */
+/* =========================
+   DEMO LABEL
+========================= */
+
+.demo-label {
+  background: #705400;
+  color: #fff2bd;
+  text-align: center;
+  padding: 8px 10px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .5px;
+}
+
+/* =========================
+   SCREENS
+========================= */
+
 .screen {
   display: none;
-  flex-direction: column;
-  width: 100%;
   min-height: 100vh;
-  padding-bottom: 90px;
-  position: relative;
-}
-.screen.active { display: flex; }
-
-/* ============== AUTH SCREENS ============== */
-.auth-screen {
-  padding: 60px 30px 40px;
-  justify-content: center;
-  align-items: center;
 }
 
-.brand {
-  font-size: 34px;
-  font-weight: 800;
-  letter-spacing: -1px;
-  color: #f3dfa2;
-  margin-bottom: 8px;
+.screen.active {
+  display: block;
+}
+
+/* =========================
+   AUTH
+========================= */
+
+.auth {
+  min-height: calc(100vh - 30px);
+  padding: 70px 28px 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
   text-align: center;
+  font-size: 48px;
+  font-weight: 900;
+  letter-spacing: -2px;
+  margin-bottom: 8px;
+  background:
+    linear-gradient(
+      135deg,
+      #fff4c9,
+      var(--gold)
+    );
+  -webkit-background-clip: text;
+  color: transparent;
 }
-.brand span { color: #fdf8ea; }
 
 .tagline {
-  font-size: 14px;
-  color: rgba(200,190,160,0.6);
-  margin-bottom: 40px;
   text-align: center;
+  color: var(--muted);
+  font-size: 17px;
+  margin-bottom: 58px;
 }
 
 .auth-form {
   width: 100%;
-  max-width: 340px;
 }
 
 .field {
-  margin-bottom: 18px;
+  margin-bottom: 25px;
 }
 
 .field label {
   display: block;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.6px;
-  color: rgba(200,190,160,0.75);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  color: #bdb49e;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
 }
 
 .field input {
   width: 100%;
-  padding: 15px 18px;
-  border-radius: 14px;
-  background: rgba(255,255,255,0.05);
-  border: 1.5px solid rgba(229,199,107,0.2);
-  color: #fdf8ea;
-  font-size: 15px;
-  font-family: inherit;
+  height: 62px;
+  padding: 0 20px;
+  border-radius: 18px;
   outline: none;
-  transition: 0.15s;
+  border: 2px solid rgba(229,199,107,.28);
+  background: rgba(255,255,255,.045);
+  color: var(--text);
+  font-size: 17px;
 }
 
 .field input:focus {
-  border-color: rgba(229,199,107,0.6);
-  background: rgba(255,255,255,0.07);
+  border-color: var(--gold);
 }
 
-.field input::placeholder { color: rgba(200,190,160,0.35); }
+.field input::placeholder {
+  color: #706b5f;
+}
 
-.btn-gold {
+.primary-button {
   width: 100%;
-  padding: 16px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, #f3dfa2, #e5c76b);
-  color: #2a2107;
-  font-size: 15px;
-  font-weight: 800;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 8px 22px rgba(229,199,107,0.3);
-  transition: 0.15s;
-  margin-top: 8px;
-  font-family: inherit;
+  height: 64px;
+  border: 0;
+  border-radius: 18px;
+  background:
+    linear-gradient(
+      135deg,
+      var(--gold-light),
+      var(--gold)
+    );
+  color: #2b2208;
+  font-size: 17px;
+  font-weight: 900;
+  box-shadow:
+    0 10px 30px rgba(229,199,107,.25);
 }
-.btn-gold:active { transform: scale(0.98); }
+
+.secondary-button {
+  width: 100%;
+  height: 58px;
+  margin-top: 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(229,199,107,.35);
+  background: transparent;
+  color: var(--gold-light);
+  font-weight: 800;
+}
 
 .auth-switch {
   text-align: center;
-  margin-top: 24px;
-  font-size: 13px;
-  color: rgba(200,190,160,0.6);
-}
-.auth-switch a {
-  color: #f3dfa2;
-  font-weight: 700;
-  cursor: pointer;
-  text-decoration: none;
+  margin-top: 34px;
+  color: #777163;
 }
 
-.error-msg {
-  color: #f87171;
-  font-size: 13px;
-  margin-top: 12px;
-  text-align: center;
-  min-height: 18px;
-  font-weight: 600;
-}
-
-.success-msg {
-  color: #4ade80;
-  font-size: 13px;
-  margin-top: 12px;
-  text-align: center;
-  min-height: 18px;
-  font-weight: 600;
-}
-
-/* ============== CODE DISPLAY ============== */
-.code-box {
-  margin-top: 24px;
-  padding: 22px;
-  border-radius: 18px;
-  background: linear-gradient(135deg, rgba(243,223,162,0.14), rgba(229,199,107,0.06));
-  border: 1.5px solid rgba(229,199,107,0.4);
-  text-align: center;
-}
-
-.code-box .label {
-  font-size: 12px;
-  letter-spacing: 1px;
-  color: rgba(200,190,160,0.75);
-  font-weight: 700;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-}
-
-.code-box .code {
-  font-size: 34px;
-  letter-spacing: 8px;
+.auth-switch button {
+  border: 0;
+  background: transparent;
+  color: var(--gold-light);
   font-weight: 800;
-  color: #f3dfa2;
-  font-family: "Courier New", monospace;
 }
 
-.code-box .hint {
-  font-size: 12px;
-  color: rgba(200,190,160,0.6);
-  margin-top: 12px;
+.auth-note {
+  margin-top: auto;
+  padding-top: 50px;
+  text-align: center;
+  color: #716b5d;
+  font-size: 11px;
   line-height: 1.5;
 }
 
-/* ============== STATUS BAR ============== */
+/* =========================
+   STATUS
+========================= */
+
 .status-bar {
   padding: 14px 22px 6px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
   font-size: 15px;
-  font-weight: 700;
-  color: #f5f1e6;
-  flex-shrink: 0;
+  font-weight: 800;
 }
-.status-bar .right { display: flex; align-items: center; gap: 7px; font-size: 13px; }
 
-/* ============== TOP ROW ============== */
+.status-right {
+  display: flex;
+  gap: 7px;
+}
+
+/* =========================
+   DASHBOARD HEADER
+========================= */
+
 .top-row {
+  padding: 10px 20px 18px;
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 20px 18px;
-  flex-shrink: 0;
 }
 
-.icon-btn {
+.circle-button {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(229,199,107,0.18);
+  border: 1px solid rgba(229,199,107,.2);
+  background: rgba(255,255,255,.06);
+  color: var(--gold-light);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 18px;
-  cursor: pointer;
-  position: relative;
-  color: var(--gold);
 }
 
-.icon-btn .dot {
-  position: absolute;
-  top: 8px; right: 9px;
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: #ef4444;
-  border: 1.5px solid #23201a;
-}
-
-.top-name {
+.user-name {
   flex: 1;
   font-size: 19px;
-  font-weight: 800;
-  letter-spacing: -0.3px;
-  color: #f5f1e6;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  font-weight: 850;
 }
 
 .avatar {
-  width: 44px; height: 44px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #5b7cfa, #4a63e0);
-  color: white;
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 800; font-size: 16px;
-  box-shadow: 0 4px 14px rgba(80,110,240,0.4);
-  flex-shrink: 0;
-  cursor: pointer;
-}
-
-/* ============== GREETING ============== */
-.greeting-block { padding: 6px 22px 20px; flex-shrink: 0; }
-
-.greeting-block h1 {
-  font-size: 28px;
-  font-weight: 800;
-  letter-spacing: -0.8px;
-  color: #fdf8ea;
-  line-height: 1.15;
-}
-
-.greeting-block p {
-  margin-top: 6px;
-  font-size: 15px;
-  color: rgba(200,190,160,0.65);
-  font-weight: 500;
-}
-
-/* ============== PILLS ============== */
-.account-pills {
+  background: linear-gradient(135deg,#5b7cfa,#4a63e0);
   display: flex;
-  gap: 12px;
-  padding: 0 22px 22px;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+}
+
+/* =========================
+   GREETING
+========================= */
+
+.greeting {
+  padding: 6px 22px 20px;
+}
+
+.greeting h1 {
+  font-size: 30px;
+  line-height: 1.15;
+  letter-spacing: -.8px;
+}
+
+.greeting p {
+  color: rgba(200,190,160,.65);
+  margin-top: 7px;
+}
+
+/* =========================
+   ACCOUNT PILLS
+========================= */
+
+.pills {
+  display: flex;
+  gap: 10px;
   overflow-x: auto;
   scrollbar-width: none;
-  flex-shrink: 0;
+  padding: 0 22px 22px;
 }
-.account-pills::-webkit-scrollbar { display: none; }
+
+.pills::-webkit-scrollbar {
+  display: none;
+}
 
 .pill {
   flex-shrink: 0;
-  padding: 12px 20px;
+  padding: 12px 18px;
   border-radius: 999px;
-  font-size: 14px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: 0.2s;
-  font-family: inherit;
-  border: none;
-}
-.pill.active {
-  background: linear-gradient(135deg, #f3dfa2, #e5c76b);
-  color: #2a2107;
-  box-shadow: 0 6px 18px rgba(229,199,107,0.3);
-}
-.pill.inactive {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(229,199,107,0.22);
-  color: #e5c76b;
+  font-size: 13px;
+  font-weight: 800;
 }
 
-/* ============== BALANCE CARD ============== */
+.pill.active {
+  background:
+    linear-gradient(
+      135deg,
+      var(--gold-light),
+      var(--gold)
+    );
+  color: #2b2208;
+}
+
+.pill.inactive {
+  border: 1px solid rgba(229,199,107,.22);
+  color: var(--gold);
+  background: rgba(255,255,255,.05);
+}
+
+/* =========================
+   BALANCE
+========================= */
+
 .balance-card {
   margin: 0 18px 22px;
-  padding: 26px 24px 24px;
+  padding: 27px 24px 24px;
   border-radius: 24px;
-  background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 60%);
-  border: 1px solid rgba(229,199,107,0.16);
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.5);
-  flex-shrink: 0;
-}
-.balance-card::after {
-  content: ""; position: absolute;
-  width: 320px; height: 320px; border-radius: 50%;
-  right: -160px; bottom: -180px;
-  background: radial-gradient(circle, rgba(229,199,107,0.14) 0%, transparent 65%);
-  pointer-events: none;
+  border: 1px solid rgba(229,199,107,.16);
+  background:
+    linear-gradient(
+      140deg,
+      #1b1812,
+      #0d0c0a
+    );
+  box-shadow: 0 18px 40px rgba(0,0,0,.5);
 }
 
 .balance-label {
+  color: rgba(200,190,160,.75);
   font-size: 14px;
-  color: rgba(200,190,160,0.75);
-  font-weight: 500;
-  position: relative; z-index: 2;
 }
-.balance-amount {
-  margin: 8px 0 6px;
-  font-size: 42px;
-  font-weight: 800;
+
+.balance {
+  margin: 7px 0;
+  font-size: 43px;
+  font-weight: 900;
   letter-spacing: -1.5px;
-  color: #fdf8ea;
-  position: relative; z-index: 2;
-  line-height: 1.05;
 }
+
 .balance-sub {
+  color: rgba(200,190,160,.6);
   font-size: 14px;
-  color: rgba(200,190,160,0.6);
-  font-weight: 500;
-  position: relative; z-index: 2;
 }
-.balance-actions {
-  margin-top: 22px;
+
+.actions {
   display: flex;
   gap: 12px;
-  position: relative; z-index: 2;
+  margin-top: 22px;
 }
 
-.btn-primary {
-  padding: 13px 26px;
+.action-button {
+  flex: 1;
+  height: 48px;
   border-radius: 12px;
-  background: linear-gradient(135deg, #f3dfa2, #e5c76b);
-  color: #2a2107;
-  font-size: 14px;
-  font-weight: 800;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 6px 18px rgba(229,199,107,0.28);
-  transition: 0.15s;
-  font-family: inherit;
+  font-weight: 850;
+  border: 0;
 }
-.btn-primary:active { transform: scale(0.97); }
 
-.btn-outline {
-  padding: 13px 26px;
-  border-radius: 12px;
+.action-button.primary {
+  background:
+    linear-gradient(
+      135deg,
+      var(--gold-light),
+      var(--gold)
+    );
+  color: #2b2208;
+}
+
+.action-button.outline {
   background: transparent;
-  color: #e5c76b;
-  font-size: 14px;
-  font-weight: 800;
-  border: 1.5px solid rgba(229,199,107,0.45);
-  cursor: pointer;
-  transition: 0.15s;
-  font-family: inherit;
+  border: 1px solid rgba(229,199,107,.4);
+  color: var(--gold-light);
 }
-.btn-outline:active { transform: scale(0.97); }
 
-/* ============== DEBIT CARD ============== */
-.debit-wrap {
+/* =========================
+   CARD
+========================= */
+
+.debit-card {
   margin: 0 18px 22px;
-  padding: 26px 24px 22px;
+  min-height: 235px;
+  padding: 25px;
   border-radius: 24px;
-  background: linear-gradient(150deg, #1a1813 0%, #0a0908 70%);
-  border: 1px solid rgba(229,199,107,0.16);
-  box-shadow: 0 18px 40px rgba(0,0,0,0.5);
-  position: relative;
-  overflow: hidden;
-  flex-shrink: 0;
+  background:
+    linear-gradient(
+      145deg,
+      #252117,
+      #0b0a08
+    );
+  border: 1px solid rgba(229,199,107,.18);
+  box-shadow: 0 18px 40px rgba(0,0,0,.5);
 }
 
-.debit-head {
+.card-top {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 22px;
-}
-.debit-head h2 {
-  font-size: 22px;
-  font-weight: 800;
-  color: #f3dfa2;
-  letter-spacing: -0.4px;
 }
 
-.wifi-icon {
-  color: #f3dfa2;
-  font-size: 22px;
-  transform: rotate(90deg);
-  opacity: 0.9;
+.card-title {
+  font-size: 21px;
+  font-weight: 900;
+  color: var(--gold-light);
+}
+
+.contactless {
+  color: var(--gold-light);
+  font-size: 20px;
 }
 
 .chip {
-  width: 46px; height: 34px;
+  width: 47px;
+  height: 34px;
+  margin-top: 28px;
+  margin-bottom: 23px;
   border-radius: 7px;
-  background: linear-gradient(135deg, #f3dfa2, #c9a84a);
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.35), 0 2px 6px rgba(229,199,107,0.25);
-  margin-bottom: 24px;
-  position: relative;
-}
-.chip::after {
-  content: ""; position: absolute;
-  inset: 6px 8px;
-  border: 1px solid rgba(42,33,7,0.35);
-  border-radius: 3px;
+  background:
+    linear-gradient(
+      135deg,
+      var(--gold-light),
+      var(--gold-dark)
+    );
 }
 
 .card-number {
-  font-size: 20px;
-  letter-spacing: 5px;
+  font-size: 19px;
+  letter-spacing: 4px;
   font-weight: 700;
-  color: #fdf8ea;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
-.card-number .last { letter-spacing: 4px; color: #f3dfa2; }
 
 .card-bottom {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  font-size: 12px;
-  letter-spacing: 0.8px;
-  font-weight: 600;
-  color: rgba(220,210,180,0.85);
 }
-.card-bottom .label {
-  font-size: 10px;
-  color: rgba(180,170,140,0.55);
-  letter-spacing: 0.6px;
-  font-weight: 500;
-  margin-bottom: 3px;
+
+.card-label {
   display: block;
+  font-size: 9px;
+  color: #827b6c;
+  margin-bottom: 4px;
 }
-.card-bottom .name {
+
+.card-value {
   font-size: 13px;
-  color: #fdf8ea;
-  font-weight: 700;
-  letter-spacing: 0.6px;
-}
-
-/* ============== GENERATE BUTTON ============== */
-.generate-btn {
-  margin: 0 18px 26px;
-  padding: 18px;
-  border-radius: 18px;
-  background: linear-gradient(135deg, rgba(243,223,162,0.14), rgba(229,199,107,0.08));
-  border: 1.5px solid rgba(229,199,107,0.35);
-  color: #f3dfa2;
-  font-size: 15px;
   font-weight: 800;
-  text-align: center;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: 0.15s;
-  flex-shrink: 0;
-  font-family: inherit;
 }
-.generate-btn:active { transform: scale(0.98); }
-.generate-btn .plus { font-size: 18px; font-weight: 900; }
 
-/* ============== BOTTOM NAV ============== */
+/* =========================
+   GENERATE
+========================= */
+
+.generate {
+  margin: 0 18px 22px;
+  height: 58px;
+  border-radius: 17px;
+  border: 1px solid rgba(229,199,107,.35);
+  background: rgba(229,199,107,.08);
+  color: var(--gold-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 850;
+}
+
+/* =========================
+   NAV
+========================= */
+
 .bottom-nav {
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  background: rgba(10,9,8,0.96);
-  backdrop-filter: blur(14px);
-  border-top: 1px solid rgba(229,199,107,0.14);
+  position: fixed;
+  bottom: 0;
+  width: min(100%,430px);
   display: flex;
   justify-content: space-around;
-  padding: 12px 8px 20px;
-  z-index: 40;
+  padding: 12px 5px 19px;
+  background: rgba(10,9,8,.96);
+  backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(229,199,107,.14);
+  z-index: 20;
 }
 
-.nav-item {
+.nav-button {
+  border: 0;
+  background: transparent;
+  color: #716c60;
+  font-size: 10px;
+  font-weight: 800;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  color: rgba(180,170,140,0.6);
-  font-size: 11px;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 4px 10px;
-  transition: 0.15s;
-  background: none;
-  border: none;
-  font-family: inherit;
-}
-.nav-item.active { color: #f3dfa2; }
-.nav-item .nav-icon { font-size: 20px; }
-
-/* ============== GENERIC PANEL ============== */
-.panel {
-  margin: 0 18px 18px;
-  padding: 22px;
-  border-radius: 20px;
-  background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 60%);
-  border: 1px solid rgba(229,199,107,0.16);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
 }
 
-.panel h2 {
-  font-size: 18px;
-  font-weight: 800;
-  color: #f3dfa2;
-  margin-bottom: 18px;
-  letter-spacing: -0.3px;
+.nav-button.active {
+  color: var(--gold-light);
 }
 
-.form-group { margin-bottom: 16px; }
-.form-group label {
-  display: block;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  color: rgba(200,190,160,0.75);
-  margin-bottom: 6px;
-  text-transform: uppercase;
+.nav-icon {
+  font-size: 20px;
 }
-.form-group input {
+
+/* =========================
+   MODAL
+========================= */
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.72);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-box {
   width: 100%;
-  padding: 14px 16px;
+  max-width: 380px;
+  padding: 25px;
+  border-radius: 22px;
+  background: #191711;
+  border: 1px solid rgba(229,199,107,.25);
+}
+
+.modal-box h2 {
+  margin-bottom: 10px;
+}
+
+.modal-box p {
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.modal-close {
+  width: 100%;
+  height: 48px;
+  border: 0;
   border-radius: 12px;
-  background: rgba(255,255,255,0.05);
-  border: 1.5px solid rgba(229,199,107,0.2);
-  color: #fdf8ea;
-  font-size: 15px;
-  font-family: inherit;
-  outline: none;
-  transition: 0.15s;
-}
-.form-group input:focus { border-color: rgba(229,199,107,0.6); }
-
-.row-btns {
-  display: flex;
-  gap: 10px;
-  margin-top: 6px;
-}
-.row-btns .btn-gold { flex: 1; }
-.row-btns .btn-outline { flex: 1; padding: 16px; border-radius: 14px; font-size: 15px; font-weight: 800; }
-
-/* ============== TRANSACTIONS ============== */
-.tx-list { display: flex; flex-direction: column; gap: 2px; max-height: 60vh; overflow-y: auto; }
-
-.tx {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 0;
-  border-bottom: 1px solid rgba(229,199,107,0.08);
-}
-.tx:last-child { border-bottom: none; }
-
-.tx-left { display: flex; align-items: center; gap: 12px; }
-
-.tx-icon {
-  width: 42px; height: 42px;
-  border-radius: 12px;
-  background: rgba(229,199,107,0.1);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px;
-  flex-shrink: 0;
+  background: var(--gold);
+  color: #251d06;
+  font-weight: 900;
 }
 
-.tx-name { font-size: 14px; font-weight: 700; color: #fdf8ea; }
-.tx-date { font-size: 11px; color: rgba(200,190,160,0.55); margin-top: 3px; }
+/* =========================
+   DESKTOP
+========================= */
 
-.tx-amount { font-size: 14px; font-weight: 800; white-space: nowrap; }
-.tx-amount.positive { color: #4ade80; }
-.tx-amount.negative { color: #f87171; }
+@media (min-width: 480px) {
+  body {
+    padding: 20px 0;
+  }
 
-.empty-state {
-  text-align: center;
-  padding: 30px 10px;
-  color: rgba(200,190,160,0.5);
-  font-size: 14px;
-}
+  .app {
+    min-height: 900px;
+    max-height: 900px;
+    border-radius: 40px;
+  }
 
-/* ============== PROFILE ROWS ============== */
-.row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 0;
-  border-bottom: 1px solid rgba(229,199,107,0.08);
-  font-size: 14px;
-}
-.row:last-child { border-bottom: none; }
-.row .lbl { color: rgba(200,190,160,0.65); font-weight: 500; }
-.row .val { color: #fdf8ea; font-weight: 700; text-align: right; }
+  .screen {
+    min-height: 900px;
+  }
 
-/* ============== BOTTOM BANNER ============== */
-.section-title {
-  padding: 0 22px 12px;
-  font-size: 15px;
-  font-weight: 800;
-  color: #f3dfa2;
-  letter-spacing: -0.2px;
+  .bottom-nav {
+    position: absolute;
+  }
 }
 </style>
 </head>
+
 <body>
 
-<div class="phone">
+<div class="app">
 
-  <!-- ============= SIGN UP SCREEN ============= -->
-  <section id="screen-signup" class="screen auth-screen active">
-    <div class="brand">Nova<span>Pay</span></div>
-    <div class="tagline">Create your account in seconds</div>
+  <!-- ======================
+       CREATE ACCOUNT SCREEN
+  ======================= -->
 
-    <div class="auth-form">
-      <div class="field">
-        <label for="su-name">Full Name</label>
-        <input id="su-name" type="text" placeholder="e.g. Cerji Colvin" autocomplete="name">
-      </div>
-      <div class="field">
-        <label for="su-pass">Password</label>
-        <input id="su-pass" type="password" placeholder="At least 4 characters" autocomplete="new-password">
-      </div>
+  <section id="signupScreen" class="screen active">
 
-      <button class="btn-gold" onclick="handleSignUp()">Create Account</button>
-
-      <div class="error-msg" id="su-error"></div>
-
-      <div class="auth-switch">
-        Already have an account? <a onclick="showScreen('screen-signin')">Sign in</a>
-      </div>
+    <div class="demo-label">
+      DEMO SOFTWARE — NOT A REAL BANK
     </div>
-  </section>
 
-  <!-- ============= SHOW CODE SCREEN ============= -->
-  <section id="screen-code" class="screen auth-screen">
-    <div class="brand">You're in 🎉</div>
-    <div class="tagline">Save this 6-digit access code</div>
+    <div class="auth">
 
-    <div class="auth-form">
-      <div class="code-box">
-        <div class="label">Your Access Code</div>
-        <div class="code" id="code-display">------</div>
-        <div class="hint">
-          You'll need this code to sign in.<br>
-          Write it down somewhere safe.
+      <div class="logo">
+        NovaPay
+      </div>
+
+      <div class="tagline">
+        Create your demo account in seconds
+      </div>
+
+      <form id="signupForm" class="auth-form">
+
+        <div class="field">
+          <label>Full Name</label>
+
+          <input
+            id="signupName"
+            type="text"
+            placeholder="e.g. Cerji Colvin"
+            autocomplete="off"
+            required>
         </div>
-      </div>
 
-      <button class="btn-gold" style="margin-top:24px;" onclick="showScreen('screen-signin')">
-        Continue to Sign In
-      </button>
-    </div>
-  </section>
+        <div class="field">
+          <label>Password</label>
 
-  <!-- ============= SIGN IN SCREEN ============= -->
-  <section id="screen-signin" class="screen auth-screen">
-    <div class="brand">Welcome <span>Back</span></div>
-    <div class="tagline">Sign in to your NovaPay account</div>
+          <input
+            id="signupPassword"
+            type="password"
+            placeholder="Create a demo password"
+            autocomplete="new-password"
+            required>
+        </div>
 
-    <div class="auth-form">
-      <div class="field">
-        <label for="si-name">Full Name</label>
-        <input id="si-name" type="text" placeholder="Your full name" autocomplete="name">
-      </div>
-      <div class="field">
-        <label for="si-code">6-Digit Access Code</label>
-        <input id="si-code" type="text" inputmode="numeric" maxlength="6" placeholder="••••••" autocomplete="one-time-code">
-      </div>
+        <button
+          type="submit"
+          class="primary-button">
+          Create Account
+        </button>
 
-      <button class="btn-gold" onclick="handleSignIn()">Sign In</button>
-
-      <div class="error-msg" id="si-error"></div>
+      </form>
 
       <div class="auth-switch">
-        Don't have an account? <a onclick="showScreen('screen-signup')">Sign up</a>
+        Already have an account?
+
+        <button
+          type="button"
+          id="showLogin">
+          Sign in
+        </button>
       </div>
+
+      <div class="auth-note">
+        This is a fictional demonstration interface.
+        Do not enter real banking passwords or financial
+        information.
+      </div>
+
     </div>
+
   </section>
 
-  <!-- ============= HOME SCREEN ============= -->
-  <section id="screen-home" class="screen">
-    <div class="status-bar">
-      <span id="clock">9:43</span>
-      <div class="right"><span>📶</span><span>🔋</span></div>
+
+  <!-- ======================
+       LOGIN SCREEN
+  ======================= -->
+
+  <section id="loginScreen" class="screen">
+
+    <div class="demo-label">
+      DEMO SOFTWARE — NOT A REAL BANK
     </div>
+
+    <div class="auth">
+
+      <div class="logo">
+        NovaPay
+      </div>
+
+      <div class="tagline">
+        Sign in to your demo account
+      </div>
+
+      <form id="loginForm" class="auth-form">
+
+        <div class="field">
+          <label>Full Name</label>
+
+          <input
+            id="loginName"
+            type="text"
+            placeholder="Your demo name"
+            autocomplete="off"
+            required>
+        </div>
+
+        <div class="field">
+          <label>Password</label>
+
+          <input
+            id="loginPassword"
+            type="password"
+            placeholder="Your demo password"
+            autocomplete="off"
+            required>
+        </div>
+
+        <button
+          type="submit"
+          class="primary-button">
+          Sign In
+        </button>
+
+      </form>
+
+      <div class="auth-switch">
+        Don't have an account?
+
+        <button
+          type="button"
+          id="showSignup">
+          Create account
+        </button>
+      </div>
+
+      <div class="auth-note">
+        Demo credentials are stored only in this browser.
+        This page is not connected to a financial institution.
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ======================
+       DASHBOARD
+  ======================= -->
+
+  <section id="dashboardScreen" class="screen">
+
+    <div class="demo-label">
+      DEMO ACCOUNT — NOT A REAL BANK ACCOUNT
+    </div>
+
+    <div class="status-bar">
+
+      <span id="clock">
+        12:00 PM
+      </span>
+
+      <div class="status-right">
+        <span>📶</span>
+        <span>▰</span>
+        <span>🔋</span>
+      </div>
+
+    </div>
+
 
     <div class="top-row">
-      <div class="icon-btn" title="Theme">☀️</div>
-      <div class="icon-btn" title="Notifications">🔔<span class="dot"></span></div>
-      <div class="top-name" id="home-name">—</div>
-      <div class="avatar" id="home-avatar" onclick="showScreen('screen-profile')">--</div>
+
+      <button
+        class="circle-button"
+        id="themeButton"
+        type="button">
+        ☀️
+      </button>
+
+      <button
+        class="circle-button"
+        id="notificationButton"
+        type="button">
+        🔔
+      </button>
+
+      <div
+        class="user-name"
+        id="dashboardName">
+        Cerji Colvin
+      </div>
+
+      <div
+        class="avatar"
+        id="avatar">
+        CC
+      </div>
+
     </div>
 
-    <div class="greeting-block">
-      <h1 id="greeting">Good Afternoon</h1>
-      <p>Welcome to your NovaPay dashboard.</p>
+
+    <div class="greeting">
+
+      <h1 id="greeting">
+        Good Evening
+      </h1>
+
+      <p>
+        Welcome to your NovaPay demo dashboard.
+      </p>
+
     </div>
 
-    <div class="account-pills">
-      <button class="pill active">🏦 Checking •••• 4821</button>
-      <button class="pill inactive">🏛️ Savings •••• 7732</button>
+
+    <div class="pills">
+
+      <div class="pill active">
+        🏦 Checking •••• 4821
+      </div>
+
+      <div class="pill inactive">
+        🏛️ Savings •••• 7732
+      </div>
+
     </div>
+
+
+    <!-- BALANCE -->
 
     <div class="balance-card">
-      <div class="balance-label">Available Balance</div>
-      <div class="balance-amount" id="balance-display">$0</div>
-      <div class="balance-sub">Checking Account •••• 4821</div>
-      <div class="balance-actions">
-        <button class="btn-primary" onclick="showScreen('screen-transfer')">Transfer</button>
-        <button class="btn-outline" onclick="showScreen('screen-deposit')">Deposit</button>
+
+      <div class="balance-label">
+        Available Demo Balance
       </div>
+
+      <div
+        class="balance"
+        id="balance">
+        $137,000
+      </div>
+
+      <div class="balance-sub">
+        Demo Checking Account •••• 4821
+      </div>
+
+      <div class="actions">
+
+        <button
+          class="action-button primary"
+          id="transferButton"
+          type="button">
+          Transfer
+        </button>
+
+        <button
+          class="action-button outline"
+          id="depositButton"
+          type="button">
+          Deposit
+        </button>
+
+      </div>
+
     </div>
 
-    <div class="debit-wrap">
-      <div class="debit-head">
-        <h2>NovaPay Debit</h2>
-        <div class="wifi-icon">)))</div>
+
+    <!-- CARD -->
+
+    <div class="debit-card">
+
+      <div class="card-top">
+
+        <div class="card-title">
+          NovaPay Demo
+        </div>
+
+        <div class="contactless">
+          ))) 
+        </div>
+
       </div>
+
       <div class="chip"></div>
-      <div class="card-number">•••• &nbsp; •••• &nbsp; •••• &nbsp; <span class="last">4821</span></div>
+
+      <div class="card-number">
+        •••• &nbsp; •••• &nbsp; •••• &nbsp;
+        <span style="color:#f3dfa2;">
+          4821
+        </span>
+      </div>
+
       <div class="card-bottom">
+
         <div>
-          <span class="label">CARD HOLDER</span>
-          <span class="name" id="card-holder">—</span>
+          <span class="card-label">
+            CARD HOLDER
+          </span>
+
+          <span
+            class="card-value"
+            id="cardHolder">
+            CERJI COLVIN
+          </span>
         </div>
+
         <div style="text-align:right;">
-          <span class="label">VALID THRU</span>
-          <span class="name">12/29</span>
+
+          <span class="card-label">
+            VALID THRU
+          </span>
+
+          <span class="card-value">
+            12/29
+          </span>
+
         </div>
+
       </div>
+
     </div>
 
-    <div class="generate-btn" onclick="generateVirtualCard()">
-      <span class="plus">+</span> Generate Virtual Card
-    </div>
 
-    <div class="section-title">Recent Activity</div>
-    <div class="panel">
-      <div class="tx-list" id="home-tx-list">
-        <div class="empty-state">No transactions yet.</div>
-      </div>
-    </div>
+    <button
+      class="generate"
+      id="virtualCardButton"
+      type="button">
+
+      ＋ Generate Virtual Card
+
+    </button>
+
 
     <nav class="bottom-nav">
-      <button class="nav-item active" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
-      <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
-      <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
-      <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
-      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
+
+      <button
+        class="nav-button active"
+        type="button"
+        data-page="home">
+        <span class="nav-icon">🏠</span>
+        Home
+      </button>
+
+      <button
+        class="nav-button"
+        type="button"
+        data-page="transfer">
+        <span class="nav-icon">⇄</span>
+        Transfer
+      </button>
+
+      <button
+        class="nav-button"
+        type="button"
+        data-page="bills">
+        <span class="nav-icon">📄</span>
+        Bills
+      </button>
+
+      <button
+        class="nav-button"
+        type="button"
+        data-page="history">
+        <span class="nav-icon">☰</span>
+        History
+      </button>
+
+      <button
+        class="nav-button"
+        type="button"
+        data-page="profile">
+        <span class="nav-icon">👤</span>
+        Profile
+      </button>
+
     </nav>
+
   </section>
 
-  <!-- ============= TRANSFER SCREEN ============= -->
-  <section id="screen-transfer" class="screen">
-    <div class="status-bar"><span id="clock2">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
 
-    <div class="top-row">
-      <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
-      <div class="top-name">Transfer</div>
-      <div class="avatar" id="transfer-avatar">--</div>
+  <!-- ======================
+       MODAL
+  ======================= -->
+
+  <div
+    class="modal"
+    id="modal">
+
+    <div class="modal-box">
+
+      <h2 id="modalTitle">
+        Demo
+      </h2>
+
+      <p id="modalMessage">
+        Demo feature.
+      </p>
+
+      <button
+        class="modal-close"
+        id="modalClose"
+        type="button">
+        Close
+      </button>
+
     </div>
 
-    <div class="panel">
-      <h2>Send Money</h2>
+  </div>
 
-      <div class="form-group">
-        <label for="tr-recipient">Recipient Name</label>
-        <input id="tr-recipient" type="text" placeholder="e.g. John Doe">
-      </div>
+</div>
 
-      <div class="form-group">
-        <label for="tr-amount">Amount (USD)</label>
-        <input id="tr-amount" type="number" inputmode="decimal" placeholder="0.00" min="0" step="0.01">
-      </div>
 
-      <div class="form-group">
-        <label for="tr-note">Note (optional)</label>
-        <input id="tr-note" type="text" placeholder="What's this for?">
-      </div>
+<script>
 
-      <button class="btn-gold" onclick="handleTransfer()">Send Transfer</button>
-      <div class="error-msg" id="tr-msg"></div>
-    </div>
+/* ==================================
+   ELEMENTS
+================================== */
 
-    <nav class="bottom-nav">
-      <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
-      <button class="nav-item active"><span class="nav-icon">⇄</span>Transfer</button>
-      <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
-      <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
-      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
-    </nav>
-  </section>
+const signupScreen =
+  document.getElementById("signupScreen");
 
-  <!-- ============= DEPOSIT SCREEN ============= -->
-  <section id="screen-deposit" class="screen">
-    <div class="status-bar"><span id="clock3">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
+const loginScreen =
+  document.getElementById("loginScreen");
 
-    <div class="top-row">
-      <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
-      <div class="top-name">Deposit</div>
-      <div class="avatar" id="deposit-avatar">--</div>
-    </div>
+const dashboardScreen =
+  document.getElementById("dashboardScreen");
 
-    <div class="panel">
-      <h2>Add Funds</h2>
+const signupForm =
+  document.getElementById("signupForm");
 
-      <div class="form-group">
-        <label for="dp-amount">Amount (USD)</label>
-        <input id="dp-amount" type="number" inputmode="decimal" placeholder="0.00" min="0" step="0.01">
-      </div>
+const loginForm =
+  document.getElementById("loginForm");
 
-      <div class="form-group">
-        <label for="dp-source">Source</label>
-        <input id="dp-source" type="text" placeholder="e.g. Paycheck, Cash, Refund">
-      </div>
+const signupName =
+  document.getElementById("signupName");
 
-      <button class="btn-gold" onclick="handleDeposit()">Deposit</button>
-      <div class="error-msg" id="dp-msg"></div>
-    </div>
+const signupPassword =
+  document.getElementById("signupPassword");
 
-    <nav class="bottom-nav">
-      <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
-      <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
-      <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
-      <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
-      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
-    </nav>
-  </section>
+const loginName =
+  document.getElementById("loginName");
 
-  <!-- ============= BILLS SCREEN ============= -->
-  <section id="screen-bills" class="screen">
-    <div class="status-bar"><span id="clock4">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
+const loginPassword =
+  document.getElementById("loginPassword");
 
-    <div class="top-row">
-      <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
-      <div class="top-name">Bills</div>
-      <div class="avatar" id="bills-avatar">--</div>
-    </div>
+const dashboardName =
+  document.getElementById("dashboardName");
 
-    <div class="panel">
-      <h2>Pay a Bill</h2>
+const cardHolder =
+  document.getElementById("cardHolder");
 
-      <div class="form-group">
-        <label for="bl-name">Biller Name</label>
-        <input id="bl-name" type="text" placeholder="e.g. Electric Company">
-      </div>
+const avatar =
+  document.getElementById("avatar");
 
-      <div class="form-group">
-        <label for="bl-amount">Amount (USD)</label>
-        <input id="bl-amount" type="number" inputmode="decimal" placeholder="0.00" min="0" step="0.01">
-      </div>
+const greeting =
+  document.getElementById("greeting");
 
-      <button class="btn-gold" onclick="handleBill
+const clock =
+  document.getElementById("clock");
+
+const modal =
+  document.getElementById("modal");
+
+const modalTitle =
+  document.getElementById("modalTitle");
+
+const modalMessage =
+  document.getElementById("modalMessage");
+
+
+/* ==================================
+   SCREEN CONTROL
+================================== */
+
+function showScreen(screen) {
+
+  signupScreen.classList.remove("active");
+  loginScreen.classList.remove("active");
+  dashboardScreen.classList.remove("active");
+
+  screen.classList.add("active");
+
+  window.scrollTo(0, 0);
+}
+
+
+/* ==================================
+   MODAL
+================================== */
+
+function showModal(title, message) {
+
+  modalTitle.textContent = title;
+  modalMessage.textContent = message;
+
+  modal.classList.add("show");
+}
+
+document
+  .getElementById("modalClose")
+  .addEventListener("click", function () {
+
+    modal.classList.remove("show");
+
+  });
+
+modal.addEventListener("click", function(e) {
+
+  if (e.target === modal) {
+    modal.classList.remove("show");
+  }
+
+});
+
+
+/* ==================================
+   CREATE ACCOUNT
+================================== */
+
+signupForm.addEventListener("submit", function(e) {
+
+  e.preventDefault();
+
+  const name =
+    signupName.value.trim();
+
+  const password =
+    signupPassword.value;
+
+  if (!name) {
+
+    showModal(
+      "Name required",
+      "Please enter a name for this demo account."
+    );
+
+    return;
+  }
+
+  if (password.length < 4) {
+
+    showModal(
+      "Password too short",
+      "For this demo, use at least 4 characters."
+    );
+
+    return;
+  }
+
+  /*
+    Demo-only browser storage.
+    Never use this approach for real authentication.
+  */
+
+  localStorage.setItem(
+    "novapayDemoName",
+    name
+  );
+
+  localStorage.setItem(
+    "novapayDemoPassword",
+    password
+  );
+
+  localStorage.setItem(
+    "novapayDemoCreated",
+    "true"
+  );
+
+  loadDashboard();
+
+  showScreen(dashboardScreen);
+
+});
+
+
+/* ==================================
+   SIGN IN
+================================== */
+
+loginForm.addEventListener("submit", function(e) {
+
+  e.preventDefault();
+
+  const savedName =
+    localStorage.getItem("novapayDemoName");
+
+  const savedPassword =
+    localStorage.getItem("novapayDemoPassword");
+
+  const enteredName =
+    loginName.value.trim();
+
+  const enteredPassword =
+    loginPassword.value;
+
+  if (!savedName) {
+
+    showModal(
+      "No demo account",
+      "Create a demo account first."
+    );
+
+    return;
+  }
+
+  if (
+    enteredName !== savedName ||
+    enteredPassword !== savedPassword
+  ) {
+
+    showModal(
+      "Sign in failed",
+      "The demo name or password does not match."
+    );
+
+    return;
+  }
+
+  loadDashboard();
+
+  showScreen(dashboardScreen);
+
+});
+
+
+/* ==================================
+   AUTH SWITCHING
+================================== */
+
+document
+  .getElementById("showLogin")
+  .addEventListener("click", function() {
+
+    showScreen(loginScreen);
+
+  });
+
+
+document
+  .getElementById("showSignup")
+  .addEventListener("click", function() {
+
+    showScreen(signupScreen);
+
+  });
+
+
+/* ==================================
+   DASHBOARD
+================================== */
+
+function getInitials(name) {
+
+  const parts =
+    name.trim().split(/\s+/);
+
+  if (parts.length === 1) {
+
+    return parts[0]
+      .substring(0, 2)
+      .toUpperCase();
+
+  }
+
+  return (
+    parts[0][0] +
+    parts[parts.length - 1][0]
+  ).toUpperCase();
+
+}
+
+
+function loadDashboard() {
+
+  const name =
+    localStorage.getItem(
+      "novapayDemoName"
+    ) || "Cerji Colvin";
+
+  dashboardName.textContent =
+    name;
+
+  cardHolder.textContent =
+    name.toUpperCase();
+
+  avatar.textContent =
+    getInitials(name);
+
+  updateGreeting();
+
+}
+
+
+/* ==================================
+   GREETING
+================================== */
+
+function updateGreeting() {
+
+  const hour =
+    new Date().getHours();
+
+  let text;
+
+  if (hour >= 5 && hour < 12) {
+
+    text = "Good Morning";
+
+  } else if (hour >= 12 && hour < 18) {
+
+    text = "Good Afternoon";
+
+  } else {
+
+    text = "Good Evening";
+
+  }
+
+  greeting.textContent =
+    text + ", " +
+    (
+      localStorage.getItem(
+        "novapayDemoName"
+      ) || "Cerji Colvin"
+    );
+
+}
+
+
+/* ==================================
+   CLOCK
+================================== */
+
+function updateClock() {
+
+  const now = new Date();
+
+  let hour =
+    now.getHours();
+
+  const minute =
+    String(
+      now.getMinutes()
+    ).padStart(2, "0");
+
+  const ampm =
+    hour >= 12 ? "PM" : "AM";
+
+  hour =
+    hour % 12 || 12;
+
+  clock.textContent =
+    hour + ":" +
+    minute + " " +
+    ampm;
+
+}
+
+updateClock();
+
+setInterval(
+  updateClock,
+  30000
+);
+
+setInterval(
+  updateGreeting,
+  60000
+);
+
+
+/* ==================================
+   TRANSFER
+================================== */
+
+document
+  .getElementById("transferButton")
+  .addEventListener("click", function() {
+
+    showModal(
+      "Demo Transfer",
+      "This is a demonstration only. No money can be transferred from this page."
+    );
+
+  });
+
+
+/* ==================================
+   DEPOSIT
+================================== */
+
+document
+  .getElementById("depositButton")
+  .addEventListener("click", function() {
+
+    showModal(
+      "Demo Deposit",
+      "This is a demonstration only. No real deposits or payments are processed."
+    );
+
+  });
+
+
+/* ==================================
+   VIRTUAL CARD
+================================== */
+
+document
+  .getElementById("virtualCardButton")
+  .addEventListener("click", function() {
+
+    showModal(
+      "Virtual Card",
+      "Virtual card generation is available only as a visual demo."
+    );
+
+  });
+
+
+/* ==================================
+   TOP BUTTONS
+================================== */
+
+document
+  .getElementById("themeButton")
+  .addEventListener("click", function() {
+
+    showModal(
+      "Theme",
+      "Theme controls are part of this demo interface."
+    );
+
+  });
+
+
+document
+  .getElementById("notificationButton")
+  .addEventListener("click", function() {
+
+    showModal(
+      "Notifications",
+      "You have no demo notifications."
+    );
+
+  });
+
+
+/* ==================================
+   NAVIGATION
+================================== */
+
+document
+  .querySelectorAll(".nav-button")
+  .forEach(function(button) {
+
+    button.addEventListener("click", function() {
+
+      document
+        .querySelectorAll(".nav-button")
+        .forEach(function(item) {
+
+          item.classList.remove("active");
+
+        });
+
+      button.classList.add("active");
+
+      const page =
+        button.dataset.page;
+
+      if (page === "home") {
+
+        showModal(
+          "Home",
+          "You are viewing the demo home dashboard."
+        );
+
+      } else if (page === "transfer") {
+
+        showModal(
+          "Transfer",
+          "Transfer functionality is disabled because this is a demo."
+        );
+
+      } else if (page === "bills") {
+
+        showModal(
+          "Bills",
+          "Bills functionality is available as a visual demo only."
+        );
+
+      } else if (page === "history") {
+
+        showModal(
+          "History",
+          "No real transactions exist in this demo account."
+        );
+
+      } else if (page === "profile") {
+
+        showModal(
+          "Profile",
+          "This is the demo profile for " +
+          (
+            localStorage.getItem(
+              "novapayDemoName"
+            ) || "Cerji Colvin"
+          ) +
+          "."
+        );
+
+      }
+
+    });
+
+  });
+
+
+/* ==================================
+   STARTUP
+================================== */
+
+const existingUser =
+  localStorage.getItem(
+    "novapayDemoName"
+  );
+
+if (existingUser) {
+
+  /*
+    Keep the signup screen initially visible
+    so the user can choose Sign In.
+  */
+
+}
+
+</script>
+
+</body>
+</html>
