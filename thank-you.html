@@ -2,838 +2,617 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Premium Banking Demo · NovaPay</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>NovaPay · Cerji Colvin</title>
 
 <style>
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 :root {
-  --navy: #102a43;
-  --blue: #2563eb;
-  --light: #f5f8fc;
-  --text: #172b4d;
-  --muted: #718096;
-  --border: #e6ebf2;
-  --white: #ffffff;
-  --green: #149447;
-  --red: #d64545;
+  --gold: #e5c76b;
+  --gold-dark: #c9a84a;
+  --gold-soft: #f3dfa2;
+  --bg: #0d0c0a;
+  --bg-2: #17150f;
+  --bg-3: #1f1c14;
+  --card: #131210;
+  --text: #f5f1e6;
+  --muted: #a39d8c;
+  --green: #4ade80;
+  --red: #f87171;
+}
+
+html, body {
+  height: 100%;
+  background: #000;
 }
 
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-               Roboto, Arial, sans-serif;
-  background: var(--light);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   color: var(--text);
   line-height: 1.4;
-}
-
-/* DEMO LABEL */
-.demo-label {
-  position: fixed;
-  top: 12px;
-  right: 12px;
-  z-index: 9999;
-  padding: 7px 12px;
-  border-radius: 999px;
-  background: #fff3cd;
-  color: #765800;
-  border: 1px solid #f0d98a;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.3px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
-}
-
-/* LAYOUT */
-.app {
   display: flex;
+  justify-content: center;
   min-height: 100vh;
 }
 
-/* SIDEBAR */
-.sidebar {
-  width: 250px;
-  background: var(--white);
-  border-right: 1px solid var(--border);
-  padding: 28px 18px;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  z-index: 100;
-}
-
-.logo {
-  padding: 0 14px 35px;
-  font-size: 22px;
-  font-weight: 800;
-  color: var(--navy);
-  letter-spacing: -0.3px;
-}
-
-.logo span {
-  color: var(--blue);
-}
-
-.nav {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-.nav a {
-  text-decoration: none;
-  color: #66758a;
-  padding: 13px 14px;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  transition: 0.15s;
-}
-
-.nav a:hover,
-.nav a.active {
-  background: #edf4ff;
-  color: var(--blue);
-}
-
-.sidebar-bottom {
-  margin-top: auto;
-}
-
-.help {
-  background: #f5f8fc;
-  padding: 16px;
-  border-radius: 12px;
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.5;
-}
-
-.help strong {
-  color: var(--text);
-}
-
-/* MAIN */
-.main {
-  margin-left: 250px;
-  width: calc(100% - 250px);
-  display: flex;
-  flex-direction: column;
+/* phone frame on desktop, fullscreen on mobile */
+.phone {
+  width: 100%;
+  max-width: 430px;
   min-height: 100vh;
+  background: linear-gradient(180deg, #23201a 0%, #12110d 45%, #0a0908 100%);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-/* TOPBAR */
-.topbar {
-  height: 78px;
-  background: white;
-  border-bottom: 1px solid var(--border);
+/* ===== STATUS BAR ===== */
+.status-bar {
+  padding: 14px 22px 6px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 0 35px;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: #f5f1e6;
   flex-shrink: 0;
 }
 
-.welcome {
-  font-size: 14px;
-  color: var(--muted);
-  font-weight: 500;
+.status-bar .right {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
 }
 
-.profile {
+/* ===== TOP ROW (sun / bell / name / avatar) ===== */
+.top-row {
   display: flex;
   align-items: center;
   gap: 12px;
+  padding: 10px 20px 18px;
+  flex-shrink: 0;
 }
 
-.profile strong {
-  font-size: 14px;
-  font-weight: 700;
+.icon-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(229,199,107,0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  position: relative;
+  color: var(--gold);
+}
+
+.icon-btn .dot {
+  position: absolute;
+  top: 8px;
+  right: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ef4444;
+  border: 1.5px solid #23201a;
+}
+
+.top-name {
+  flex: 1;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: #f5f1e6;
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: #dce9ff;
-  color: var(--blue);
+  background: linear-gradient(135deg, #5b7cfa, #4a63e0);
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  font-size: 15px;
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.12);
+  font-size: 16px;
+  box-shadow: 0 4px 14px rgba(80,110,240,0.4);
+  flex-shrink: 0;
 }
 
-/* CONTENT */
-.content {
-  max-width: 1250px;
-  margin: 0 auto;
-  padding: 35px;
-  width: 100%;
-  flex: 1;
+/* ===== GREETING ===== */
+.greeting-block {
+  padding: 6px 22px 20px;
+  flex-shrink: 0;
 }
 
-.page-title {
-  margin-bottom: 25px;
-}
-
-.page-title h1 {
-  margin: 0 0 5px;
-  font-size: 28px;
+.greeting-block h1 {
+  font-size: 30px;
   font-weight: 800;
-  letter-spacing: -0.4px;
+  letter-spacing: -0.8px;
+  color: #fdf8ea;
+  line-height: 1.15;
 }
 
-.page-title p {
-  margin: 0;
-  color: var(--muted);
+.greeting-block p {
+  margin-top: 6px;
   font-size: 15px;
+  color: rgba(200,190,160,0.65);
+  font-weight: 500;
 }
 
-/* BALANCE */
+/* ===== ACCOUNT PILLS ===== */
+.account-pills {
+  display: flex;
+  gap: 12px;
+  padding: 0 22px 22px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex-shrink: 0;
+}
+
+.account-pills::-webkit-scrollbar { display: none; }
+
+.pill {
+  flex-shrink: 0;
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.pill.active {
+  background: linear-gradient(135deg, #f3dfa2, #e5c76b);
+  color: #2a2107;
+  box-shadow: 0 6px 18px rgba(229,199,107,0.3);
+}
+
+.pill.inactive {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(229,199,107,0.22);
+  color: #e5c76b;
+}
+
+/* ===== BALANCE CARD ===== */
 .balance-card {
+  margin: 0 18px 22px;
+  padding: 26px 24px 24px;
+  border-radius: 24px;
+  background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 60%);
+  border: 1px solid rgba(229,199,107,0.16);
   position: relative;
   overflow: hidden;
-  border-radius: 22px;
-  padding: 32px;
-  color: white;
-  background: linear-gradient(135deg, #102a43, #1769aa);
-  box-shadow: 0 18px 35px rgba(16, 42, 67, 0.18);
-  margin-bottom: 25px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.5);
+  flex-shrink: 0;
 }
 
 .balance-card::after {
   content: "";
   position: absolute;
-  width: 250px;
-  height: 250px;
+  width: 320px;
+  height: 320px;
   border-radius: 50%;
-  right: -90px;
-  top: -100px;
-  background: rgba(255, 255, 255, 0.08);
+  right: -160px;
+  bottom: -180px;
+  background: radial-gradient(circle, rgba(229,199,107,0.14) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.balance-card::before {
+  content: "";
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  left: -140px;
+  top: -140px;
+  background: radial-gradient(circle, rgba(229,199,107,0.08) 0%, transparent 65%);
   pointer-events: none;
 }
 
 .balance-label {
-  font-size: 13px;
-  opacity: 0.8;
+  font-size: 14px;
+  color: rgba(200,190,160,0.75);
   font-weight: 500;
-  letter-spacing: 0.2px;
-}
-
-.balance {
-  margin: 8px 0 22px;
-  font-size: 43px;
-  font-weight: 800;
-  letter-spacing: -1.2px;
-  line-height: 1.1;
-}
-
-.balance-info {
-  display: flex;
-  gap: 45px;
   position: relative;
   z-index: 2;
 }
 
-.balance-info small {
-  display: block;
-  opacity: 0.7;
-  margin-bottom: 3px;
-  font-size: 12px;
-}
-
-.balance-info strong {
-  font-size: 15px;
-  font-weight: 700;
-}
-
-/* ACTIONS */
-.actions {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-  margin-bottom: 30px;
-}
-
-.action {
-  border: 1px solid var(--border);
-  background: white;
-  padding: 18px 10px;
-  border-radius: 14px;
-  text-align: center;
-  cursor: pointer;
-  transition: 0.2s ease;
-  user-select: none;
-}
-
-.action:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);
-  border-color: #d0ddeb;
-}
-
-.action-icon {
-  width: 42px;
-  height: 42px;
-  margin: 0 auto 9px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #edf4ff;
-  color: var(--blue);
-  font-size: 19px;
-  font-weight: 500;
-}
-
-.action strong {
-  display: block;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text);
-}
-
-/* GRID */
-.grid {
-  display: grid;
-  grid-template-columns: 1.4fr 0.8fr;
-  gap: 22px;
-}
-
-.panel {
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 23px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
-}
-
-.panel-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 18px;
-}
-
-.panel-header h2 {
-  margin: 0;
-  font-size: 17px;
+.balance-amount {
+  margin: 8px 0 6px;
+  font-size: 44px;
   font-weight: 800;
-  letter-spacing: -0.2px;
+  letter-spacing: -1.5px;
+  color: #fdf8ea;
+  position: relative;
+  z-index: 2;
+  line-height: 1.05;
 }
 
-.panel-header a {
-  color: var(--blue);
-  font-size: 12px;
-  font-weight: 700;
-  text-decoration: none;
-  letter-spacing: 0.2px;
+.balance-sub {
+  font-size: 14px;
+  color: rgba(200,190,160,0.6);
+  font-weight: 500;
+  position: relative;
+  z-index: 2;
 }
 
-.panel-header a:hover {
-  text-decoration: underline;
-}
-
-/* TRANSACTIONS */
-.transaction {
+.balance-actions {
+  margin-top: 22px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 0;
-  border-bottom: 1px solid #edf0f4;
-}
-
-.transaction:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.transaction:first-of-type {
-  padding-top: 0;
-}
-
-.transaction-left {
-  display: flex;
-  align-items: center;
   gap: 12px;
+  position: relative;
+  z-index: 2;
 }
 
-.transaction-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 11px;
-  background: #f0f4f9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
+.btn-primary {
+  padding: 13px 26px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f3dfa2, #e5c76b);
+  color: #2a2107;
+  font-size: 14px;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(229,199,107,0.28);
+  transition: 0.15s;
+}
+
+.btn-primary:active { transform: scale(0.97); }
+
+.btn-outline {
+  padding: 13px 26px;
+  border-radius: 12px;
+  background: transparent;
+  color: #e5c76b;
+  font-size: 14px;
+  font-weight: 800;
+  border: 1.5px solid rgba(229,199,107,0.45);
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.btn-outline:active { transform: scale(0.97); }
+
+/* ===== DEBIT CARD ===== */
+.debit-wrap {
+  margin: 0 18px 22px;
+  padding: 26px 24px 22px;
+  border-radius: 24px;
+  background: linear-gradient(150deg, #1a1813 0%, #0a0908 70%);
+  border: 1px solid rgba(229,199,107,0.16);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.5);
+  position: relative;
+  overflow: hidden;
   flex-shrink: 0;
 }
 
-.transaction-name {
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.transaction-date {
-  font-size: 11px;
-  color: var(--muted);
-  margin-top: 2px;
-}
-
-.amount {
-  font-size: 13px;
-  font-weight: 750;
-  white-space: nowrap;
-}
-
-.positive {
-  color: var(--green);
-}
-
-.negative {
-  color: var(--red);
-}
-
-/* BANK CARD */
-.bank-card {
-  height: 205px;
-  border-radius: 18px;
-  padding: 25px;
-  color: white;
-  background: linear-gradient(135deg, #202f46, #0c1727);
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.15);
+.debit-head {
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 22px;
 }
 
-.bank-card::before {
-  content: "";
-  position: absolute;
-  width: 210px;
-  height: 210px;
-  border-radius: 50%;
-  right: -80px;
-  bottom: -110px;
-  background: rgba(255, 255, 255, 0.08);
-  pointer-events: none;
+.debit-head h2 {
+  font-size: 22px;
+  font-weight: 800;
+  color: #f3dfa2;
+  letter-spacing: -0.4px;
 }
 
-.card-brand {
-  font-size: 13px;
-  font-weight: 700;
-  opacity: 0.85;
-  letter-spacing: 0.5px;
+.wifi-icon {
+  color: #f3dfa2;
+  font-size: 22px;
+  transform: rotate(90deg);
+  opacity: 0.9;
 }
 
 .chip {
-  width: 38px;
-  height: 28px;
-  border-radius: 6px;
-  background: #d9c27a;
-  margin-top: 6px;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+  width: 46px;
+  height: 34px;
+  border-radius: 7px;
+  background: linear-gradient(135deg, #f3dfa2, #c9a84a);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.35), 0 2px 6px rgba(229,199,107,0.25);
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.chip::after {
+  content: "";
+  position: absolute;
+  inset: 6px 8px;
+  border: 1px solid rgba(42,33,7,0.35);
+  border-radius: 3px;
 }
 
 .card-number {
-  margin-top: 10px;
-  font-size: 17px;
-  letter-spacing: 2px;
-  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: 5px;
+  font-weight: 700;
+  color: #fdf8ea;
+  margin-bottom: 20px;
+}
+
+.card-number .last {
+  letter-spacing: 4px;
+  color: #f3dfa2;
 }
 
 .card-bottom {
   display: flex;
   justify-content: space-between;
-  margin-top: 6px;
-  font-size: 11px;
-  opacity: 0.85;
-  font-weight: 500;
-  letter-spacing: 0.4px;
+  align-items: flex-end;
+  font-size: 12px;
+  letter-spacing: 0.8px;
+  font-weight: 600;
+  color: rgba(220,210,180,0.85);
 }
 
-/* ACCOUNT ROWS */
-.account-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 13px 0;
-  border-bottom: 1px solid #edf0f4;
+.card-bottom .label {
+  font-size: 10px;
+  color: rgba(180,170,140,0.55);
+  letter-spacing: 0.6px;
+  font-weight: 500;
+  margin-bottom: 3px;
+  display: block;
+}
+
+.card-bottom .name {
   font-size: 13px;
-}
-
-.account-row:last-child {
-  border: none;
-  padding-bottom: 0;
-}
-
-.account-row:first-of-type {
-  padding-top: 0;
-}
-
-.account-row span {
-  color: var(--muted);
-  font-weight: 500;
-}
-
-.account-row strong {
+  color: #fdf8ea;
   font-weight: 700;
+  letter-spacing: 0.6px;
 }
 
-/* FOOTER */
-.footer {
+/* ===== GENERATE VIRTUAL CARD ===== */
+.generate-btn {
+  margin: 0 18px 26px;
+  padding: 18px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(243,223,162,0.14), rgba(229,199,107,0.08));
+  border: 1.5px solid rgba(229,199,107,0.35);
+  color: #f3dfa2;
+  font-size: 15px;
+  font-weight: 800;
   text-align: center;
-  padding: 25px 30px 30px;
-  color: #8793a3;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: 0.15s;
+  flex-shrink: 0;
+}
+
+.generate-btn:active {
+  transform: scale(0.98);
+  background: linear-gradient(135deg, rgba(243,223,162,0.2), rgba(229,199,107,0.12));
+}
+
+.generate-btn .plus {
+  font-size: 18px;
+  font-weight: 900;
+}
+
+/* ===== SPACER + FLOATING ROBOT ===== */
+.spacer { flex: 1; min-height: 100px; }
+
+.robot-fab {
+  position: absolute;
+  right: 20px;
+  bottom: 96px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f3dfa2, #e5c76b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  box-shadow: 0 8px 22px rgba(229,199,107,0.45);
+  cursor: pointer;
+  z-index: 50;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* ===== BOTTOM NAV ===== */
+.bottom-nav {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(10,9,8,0.96);
+  backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(229,199,107,0.14);
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 8px 20px;
+  z-index: 40;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: rgba(180,170,140,0.6);
   font-size: 11px;
-  border-top: 1px solid var(--border);
-  background: white;
-  margin-top: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 10px;
+  transition: 0.15s;
 }
 
-/* RESPONSIVE */
-@media (max-width: 900px) {
-  .sidebar {
-    display: none;
-  }
-
-  .main {
-    margin-left: 0;
-    width: 100%;
-  }
-
-  .topbar {
-    padding: 0 18px;
-    height: 70px;
-  }
-
-  .content {
-    padding: 25px 15px;
-  }
-
-  .actions {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .grid {
-    grid-template-columns: 1fr;
-  }
-
-  .balance {
-    font-size: 38px;
-  }
-
-  .footer {
-    padding: 20px 15px 25px;
-  }
+.nav-item.active {
+  color: #f3dfa2;
 }
 
-@media (max-width: 500px) {
-  .balance-card {
-    padding: 25px 20px;
-  }
+.nav-item .nav-icon {
+  font-size: 20px;
+}
 
-  .balance {
-    font-size: 34px;
-    letter-spacing: -0.8px;
+/* ===== DESKTOP ===== */
+@media (min-width: 480px) {
+  body {
+    padding: 20px 0;
+    background: #000;
   }
-
-  .balance-info {
-    gap: 25px;
-    flex-wrap: wrap;
-  }
-
-  .page-title h1 {
-    font-size: 24px;
-  }
-
-  .actions {
-    gap: 10px;
-  }
-
-  .action {
-    padding: 15px 8px;
-  }
-
-  .bank-card {
-    height: 185px;
-    padding: 20px;
-  }
-
-  .card-number {
-    font-size: 15px;
-    letter-spacing: 1.5px;
-  }
-
-  .transaction-icon {
-    width: 34px;
-    height: 34px;
-    font-size: 14px;
-  }
-
-  .panel {
-    padding: 18px;
+  .phone {
+    border-radius: 42px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+    min-height: 900px;
+    max-height: 900px;
   }
 }
 </style>
 </head>
-
 <body>
 
-<div class="demo-label">
-  DEMO • SIMULATED
-</div>
+<div class="phone">
 
-<div class="app">
+  <!-- STATUS BAR (visual only) -->
+  <div class="status-bar">
+    <span id="clock">9:43</span>
+    <div class="right">
+      <span>📶</span>
+      <span>📶</span>
+      <span>🔋</span>
+    </div>
+  </div>
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="logo">
-      Nova<span>Pay</span>
+  <!-- TOP ROW -->
+  <div class="top-row">
+    <div class="icon-btn" title="Theme">☀️</div>
+    <div class="icon-btn" title="Notifications">
+      🔔
+      <span class="dot"></span>
+    </div>
+    <div class="top-name">Cerji Colvin</div>
+    <div class="avatar">CC</div>
+  </div>
+
+  <!-- GREETING -->
+  <div class="greeting-block">
+    <h1 id="greeting">Good Afternoon, Cerji Colvin</h1>
+    <p>Welcome to your NovaPay dashboard.</p>
+  </div>
+
+  <!-- ACCOUNT PILLS -->
+  <div class="account-pills">
+    <div class="pill active">🏦 Checking •••• 4821</div>
+    <div class="pill inactive">🏛️ Savings •••• 7732</div>
+  </div>
+
+  <!-- BALANCE CARD -->
+  <div class="balance-card">
+    <div class="balance-label">Available Balance</div>
+    <div class="balance-amount">$134,290</div>
+    <div class="balance-sub">Checking Account •••• 4821</div>
+
+    <div class="balance-actions">
+      <button class="btn-primary" onclick="showMessage('Transfer feature is available in this demo.')">Transfer</button>
+      <button class="btn-outline" onclick="showMessage('Deposit feature is available in this demo.')">Deposit</button>
+    </div>
+  </div>
+
+  <!-- DEBIT CARD -->
+  <div class="debit-wrap">
+    <div class="debit-head">
+      <h2>NovaPay Debit</h2>
+      <div class="wifi-icon">)))</div>
     </div>
 
-    <nav class="nav">
-      <a href="#" class="active">◉ &nbsp; Dashboard</a>
-      <a href="#">⇄ &nbsp; Transfers</a>
-      <a href="#">↓ &nbsp; Deposits</a>
-      <a href="#">▣ &nbsp; Cards</a>
-      <a href="#">≡ &nbsp; Transactions</a>
-      <a href="#">⚙ &nbsp; Settings</a>
-    </nav>
+    <div class="chip"></div>
 
-    <div class="sidebar-bottom">
-      <div class="help">
-        <strong>Need help?</strong><br><br>
-        This is a simulated banking interface for demonstration purposes.
-      </div>
-    </div>
-  </aside>
-
-  <!-- MAIN -->
-  <main class="main">
-
-    <header class="topbar">
-      <div class="welcome">
-        Welcome back
-      </div>
-
-      <div class="profile">
-        <div>
-          <strong>Cerji Colvin</strong>
-        </div>
-        <div class="avatar">
-          CC
-        </div>
-      </div>
-    </header>
-
-    <div class="content">
-
-      <div class="page-title">
-        <h1 id="greeting">Good afternoon</h1>
-        <p>
-          Here's an overview of your account.
-        </p>
-      </div>
-
-      <!-- BALANCE -->
-      <section class="balance-card">
-        <div class="balance-label">
-          Available Balance
-        </div>
-
-        <div class="balance">
-          $134,290
-        </div>
-
-        <div class="balance-info">
-          <div>
-            <small>Account</small>
-            <strong>Checking •••• 4821</strong>
-          </div>
-          <div>
-            <small>Status</small>
-            <strong>Active</strong>
-          </div>
-        </div>
-      </section>
-
-      <!-- ACTIONS -->
-      <div class="actions">
-        <div class="action" onclick="showMessage('Transfer feature is available in this demo.')">
-          <div class="action-icon">⇄</div>
-          <strong>Transfer</strong>
-        </div>
-
-        <div class="action" onclick="showMessage('Send money feature is available in this demo.')">
-          <div class="action-icon">↑</div>
-          <strong>Send Money</strong>
-        </div>
-
-        <div class="action" onclick="showMessage('Deposit feature is available in this demo.')">
-          <div class="action-icon">↓</div>
-          <strong>Deposit</strong>
-        </div>
-
-        <div class="action" onclick="showMessage('Card management is available in this demo.')">
-          <div class="action-icon">▣</div>
-          <strong>Manage Card</strong>
-        </div>
-      </div>
-
-      <!-- GRID -->
-      <div class="grid">
-
-        <!-- TRANSACTIONS -->
-        <section class="panel">
-          <div class="panel-header">
-            <h2>Recent Transactions</h2>
-            <a href="#">View all</a>
-          </div>
-
-          <div class="transaction">
-            <div class="transaction-left">
-              <div class="transaction-icon">↗</div>
-              <div>
-                <div class="transaction-name">Incoming Transfer</div>
-                <div class="transaction-date">Sep 10, 2026</div>
-              </div>
-            </div>
-            <div class="amount positive">+$5,000.00</div>
-          </div>
-
-          <div class="transaction">
-            <div class="transaction-left">
-              <div class="transaction-icon">🛒</div>
-              <div>
-                <div class="transaction-name">Business Purchase</div>
-                <div class="transaction-date">Sep 8, 2026</div>
-              </div>
-            </div>
-            <div class="amount negative">-$425.00</div>
-          </div>
-
-          <div class="transaction">
-            <div class="transaction-left">
-              <div class="transaction-icon">↗</div>
-              <div>
-                <div class="transaction-name">Deposit</div>
-                <div class="transaction-date">Sep 6, 2026</div>
-              </div>
-            </div>
-            <div class="amount positive">+$2,500.00</div>
-          </div>
-
-          <div class="transaction">
-            <div class="transaction-left">
-              <div class="transaction-icon">☕</div>
-              <div>
-                <div class="transaction-name">Coffee Shop</div>
-                <div class="transaction-date">Sep 5, 2026</div>
-              </div>
-            </div>
-            <div class="amount negative">-$8.50</div>
-          </div>
-        </section>
-
-        <!-- RIGHT COLUMN -->
-        <div>
-
-          <section class="panel">
-            <div class="panel-header">
-              <h2>My Card</h2>
-              <a href="#">Manage</a>
-            </div>
-
-            <div class="bank-card">
-              <div class="card-brand">
-                NOVA PAY
-              </div>
-
-              <div class="chip"></div>
-
-              <div class="card-number">
-                •••• &nbsp; •••• &nbsp; •••• &nbsp; 4821
-              </div>
-
-              <div class="card-bottom">
-                <span>CERJI COLVIN</span>
-                <span>12/29</span>
-              </div>
-            </div>
-          </section>
-
-          <section class="panel" style="margin-top:22px;">
-            <div class="panel-header">
-              <h2>Account Details</h2>
-            </div>
-
-            <div class="account-row">
-              <span>Account Holder</span>
-              <strong>Cerji Colvin</strong>
-            </div>
-
-            <div class="account-row">
-              <span>Account Type</span>
-              <strong>Checking</strong>
-            </div>
-
-            <div class="account-row">
-              <span>Account Number</span>
-              <strong>••••4821</strong>
-            </div>
-
-            <div class="account-row">
-              <span>Currency</span>
-              <strong>USD</strong>
-            </div>
-
-            <div class="account-row">
-              <span>Status</span>
-              <strong>Active</strong>
-            </div>
-          </section>
-
-        </div>
-
-      </div>
-
+    <div class="card-number">
+      •••• &nbsp; •••• &nbsp; •••• &nbsp; <span class="last">4821</span>
     </div>
 
-    <footer class="footer">
-      Demo / Simulated Banking Interface — No real banking or financial transactions are processed.
-    </footer>
+    <div class="card-bottom">
+      <div>
+        <span class="label">CARD HOLDER</span>
+        <span class="name">CERJI COLVIN</span>
+      </div>
+      <div style="text-align:right;">
+        <span class="label">VALID THRU</span>
+        <span class="name">12/29</span>
+      </div>
+    </div>
+  </div>
 
-  </main>
+  <!-- GENERATE VIRTUAL CARD -->
+  <div class="generate-btn" onclick="showMessage('Virtual card generation is available in this demo.')">
+    <span class="plus">+</span> Generate Virtual Card
+  </div>
+
+  <div class="spacer"></div>
+
+  <!-- FLOATING ROBOT -->
+  <div class="robot-fab" onclick="showMessage('Hi Cerji! I\'m your NovaPay assistant. (Demo only)')">🤖</div>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <div class="nav-item active">
+      <span class="nav-icon">🏠</span>
+      Home
+    </div>
+    <div class="nav-item" onclick="showMessage('Transfer page is available in this demo.')">
+      <span class="nav-icon">⇄</span>
+      Transfer
+    </div>
+    <div class="nav-item" onclick="showMessage('Bills page is available in this demo.')">
+      <span class="nav-icon">📄</span>
+      Bills
+    </div>
+    <div class="nav-item" onclick="showMessage('History page is available in this demo.')">
+      <span class="nav-icon">☰</span>
+      History
+    </div>
+    <div class="nav-item" onclick="showMessage('Profile page is available in this demo.')">
+      <span class="nav-icon">👤</span>
+      Profile
+    </div>
+  </nav>
 
 </div>
 
 <script>
-  /* ---------------------------------------------------------
-     DYNAMIC GREETING
-     Updates automatically based on the current local time.
-     - 05:00 – 11:59 → "Good morning"
-     - 12:00 – 17:59 → "Good afternoon"
-     - 18:00 – 04:59 → "Good evening"
-     Refreshes on page load (login) and whenever the user
-     returns to the tab.
-  --------------------------------------------------------- */
+  /* ---------- LIVE CLOCK ---------- */
+  function updateClock() {
+    const now = new Date();
+    let h = now.getHours();
+    let m = now.getMinutes();
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12;
+    if (h === 0) h = 12;
+    m = m < 10 ? '0' + m : m;
+    const clock = document.getElementById('clock');
+    if (clock) clock.textContent = h + ':' + m;
+  }
+
+  /* ---------- DYNAMIC GREETING ---------- */
   function updateGreeting() {
     const greetingEl = document.getElementById('greeting');
     if (!greetingEl) return;
@@ -842,29 +621,30 @@ body {
     let greeting;
 
     if (hour >= 5 && hour < 12) {
-      greeting = 'Good morning';
+      greeting = 'Good Morning, Cerji Colvin';
     } else if (hour >= 12 && hour < 18) {
-      greeting = 'Good afternoon';
+      greeting = 'Good Afternoon, Cerji Colvin';
     } else {
-      greeting = 'Good evening';
+      greeting = 'Good Evening, Cerji Colvin';
     }
 
     greetingEl.textContent = greeting;
   }
 
-  // Run on initial page load (login)
+  updateClock();
   updateGreeting();
 
-  // Re-check when the user comes back to the tab/window
+  setInterval(updateClock, 30000);
+  setInterval(updateGreeting, 60000);
+
   document.addEventListener('visibilitychange', function () {
     if (!document.hidden) {
+      updateClock();
       updateGreeting();
     }
   });
 
-  // Also refresh every minute so it stays current while open
-  setInterval(updateGreeting, 60000);
-
+  /* ---------- DEMO ALERTS ---------- */
   function showMessage(message) {
     alert(message);
   }
