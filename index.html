@@ -38,7 +38,8 @@ body {
 }
 
 button,
-input {
+input,
+select {
   font: inherit;
 }
 
@@ -85,11 +86,7 @@ button {
   font-weight: 900;
   letter-spacing: -2px;
   margin-bottom: 8px;
-  background: linear-gradient(
-    135deg,
-    #fff4c9,
-    var(--gold)
-  );
+  background: linear-gradient(135deg, #fff4c9, var(--gold));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -116,7 +113,8 @@ button {
   text-transform: uppercase;
 }
 
-.field input {
+.field input,
+.field select {
   width: 100%;
   height: 62px;
   padding: 0 20px;
@@ -126,9 +124,22 @@ button {
   background: rgba(255,255,255,.045);
   color: var(--text);
   font-size: 17px;
+  appearance: none;
 }
 
-.field input:focus {
+.field select {
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--gold) 50%),
+    linear-gradient(135deg, var(--gold) 50%, transparent 50%);
+  background-position:
+    calc(100% - 22px) calc(50% - 2px),
+    calc(100% - 16px) calc(50% - 2px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+}
+
+.field input:focus,
+.field select:focus {
   border-color: var(--gold);
 }
 
@@ -141,11 +152,7 @@ button {
   height: 64px;
   border: 0;
   border-radius: 18px;
-  background: linear-gradient(
-    135deg,
-    var(--gold-light),
-    var(--gold)
-  );
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
   color: #2b2208;
   font-size: 17px;
   font-weight: 900;
@@ -245,11 +252,7 @@ button {
 }
 
 .pill.active {
-  background: linear-gradient(
-    135deg,
-    var(--gold-light),
-    var(--gold)
-  );
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
   color: #2b2208;
 }
 
@@ -265,11 +268,7 @@ button {
   padding: 27px 24px 24px;
   border-radius: 24px;
   border: 1px solid rgba(229,199,107,.16);
-  background: linear-gradient(
-    140deg,
-    #1b1812,
-    #0d0c0a
-  );
+  background: linear-gradient(140deg, #1b1812, #0d0c0a);
   box-shadow: 0 18px 40px rgba(0,0,0,.5);
 }
 
@@ -305,11 +304,7 @@ button {
 
 .action-button.primary {
   border: 0;
-  background: linear-gradient(
-    135deg,
-    var(--gold-light),
-    var(--gold)
-  );
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
   color: #2b2208;
 }
 
@@ -379,11 +374,7 @@ button {
   min-height: 235px;
   padding: 25px;
   border-radius: 24px;
-  background: linear-gradient(
-    145deg,
-    #252117,
-    #0b0a08
-  );
+  background: linear-gradient(145deg, #252117, #0b0a08);
   border: 1px solid rgba(229,199,107,.18);
   box-shadow: 0 18px 40px rgba(0,0,0,.5);
 }
@@ -410,11 +401,7 @@ button {
   margin-top: 28px;
   margin-bottom: 23px;
   border-radius: 7px;
-  background: linear-gradient(
-    135deg,
-    var(--gold-light),
-    var(--gold-dark)
-  );
+  background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
 }
 
 .card-number {
@@ -514,6 +501,163 @@ button {
   font-weight: 850;
 }
 
+/* RECIPIENT LIST */
+.recipient-list {
+  margin: 0 18px 22px;
+  border-radius: 20px;
+  border: 1px solid rgba(229,199,107,.12);
+  background: rgba(255,255,255,.03);
+  overflow: hidden;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.recipient-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(229,199,107,.08);
+  cursor: pointer;
+  transition: background .15s;
+}
+
+.recipient-item:last-child {
+  border-bottom: 0;
+}
+
+.recipient-item:active {
+  background: rgba(229,199,107,.08);
+}
+
+.recipient-item.selected {
+  background: rgba(229,199,107,.14);
+}
+
+.recipient-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 15px;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.recipient-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.recipient-name {
+  font-size: 14px;
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.recipient-bank {
+  font-size: 11px;
+  color: rgba(200,190,160,.6);
+  margin-top: 3px;
+}
+
+.recipient-check {
+  font-size: 18px;
+  color: var(--gold-light);
+  opacity: 0;
+}
+
+.recipient-item.selected .recipient-check {
+  opacity: 1;
+}
+
+/* SUMMARY ROWS */
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px dashed rgba(229,199,107,.15);
+  font-size: 14px;
+}
+
+.summary-row:last-child {
+  border-bottom: 0;
+}
+
+.summary-row .label {
+  color: rgba(200,190,160,.75);
+}
+
+.summary-row .value {
+  font-weight: 900;
+}
+
+.summary-row.total {
+  border-top: 2px solid rgba(229,199,107,.4);
+  margin-top: 8px;
+  padding-top: 16px;
+  font-size: 17px;
+}
+
+.summary-row.total .value {
+  color: var(--gold-light);
+  font-size: 20px;
+}
+
+/* TRANSFER FORM WRAP */
+.transfer-wrap {
+  padding: 0 18px 120px;
+}
+
+.transfer-header {
+  padding: 0 4px 20px;
+}
+
+.transfer-header h1 {
+  font-size: 28px;
+  letter-spacing: -.8px;
+  font-weight: 900;
+}
+
+.transfer-header p {
+  color: rgba(200,190,160,.65);
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+.quick-amounts {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.quick-chip {
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(229,199,107,.28);
+  background: rgba(255,255,255,.05);
+  color: var(--gold-light);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.quick-chip:active {
+  background: rgba(229,199,107,.18);
+}
+
+.info-note {
+  margin-top: 12px;
+  font-size: 12px;
+  color: rgba(200,190,160,.6);
+  line-height: 1.5;
+}
+
 /* NAV */
 .bottom-nav {
   position: fixed;
@@ -571,6 +715,8 @@ button {
   border-radius: 22px;
   background: #191711;
   border: 1px solid rgba(229,199,107,.25);
+  max-height: 85vh;
+  overflow-y: auto;
 }
 
 .modal-box h2 {
@@ -591,21 +737,20 @@ button {
   background: var(--gold);
   color: #251d06;
   font-weight: 900;
+  margin-top: 6px;
+}
+
+.modal-close.alt {
+  background: transparent;
+  border: 1px solid rgba(229,199,107,.4);
+  color: var(--gold-light);
+  margin-top: 10px;
 }
 
 @media (min-width: 480px) {
-  body {
-    padding: 20px 0;
-  }
-
-  .app {
-    min-height: 100vh;
-    border-radius: 40px;
-  }
-
-  .bottom-nav {
-    position: absolute;
-  }
+  body { padding: 20px 0; }
+  .app { min-height: 100vh; border-radius: 40px; }
+  .bottom-nav { position: absolute; }
 }
 </style>
 </head>
@@ -617,17 +762,11 @@ button {
 <!-- ================= SIGN UP ================= -->
 
 <section id="signupScreen" class="screen active">
-
   <div class="auth">
-
     <div class="logo">NovaPay</div>
-
-    <div class="tagline">
-      Create your account in seconds
-    </div>
+    <div class="tagline">Create your account in seconds</div>
 
     <form id="signupForm">
-
       <div class="field">
         <label>Email Address</label>
         <input id="signupEmail" type="email" placeholder="you@example.com" autocomplete="email" required>
@@ -638,17 +777,13 @@ button {
         <input id="signupPassword" type="password" placeholder="Create a password" autocomplete="new-password" required>
       </div>
 
-      <button type="submit" class="primary-button">
-        Create Account
-      </button>
-
+      <button type="submit" class="primary-button">Create Account</button>
     </form>
 
     <div class="auth-switch">
       Already have an account?
       <button type="button" id="showLogin">Sign in</button>
     </div>
-
   </div>
 </section>
 
@@ -656,17 +791,11 @@ button {
 <!-- ================= LOGIN ================= -->
 
 <section id="loginScreen" class="screen">
-
   <div class="auth">
-
     <div class="logo">NovaPay</div>
-
-    <div class="tagline">
-      Sign in to your account
-    </div>
+    <div class="tagline">Sign in to your account</div>
 
     <form id="loginForm">
-
       <div class="field">
         <label>Email Address</label>
         <input id="loginEmail" type="email" placeholder="you@example.com" autocomplete="email" required>
@@ -677,17 +806,13 @@ button {
         <input id="loginPassword" type="password" placeholder="Your password" autocomplete="current-password" required>
       </div>
 
-      <button type="submit" class="primary-button">
-        Sign In
-      </button>
-
+      <button type="submit" class="primary-button">Sign In</button>
     </form>
 
     <div class="auth-switch">
       Don't have an account?
       <button type="button" id="showSignup">Create account</button>
     </div>
-
   </div>
 </section>
 
@@ -713,23 +838,17 @@ button {
     <div class="pill inactive" id="savingsPill">🏛️ Savings</div>
   </div>
 
-  <!-- BALANCE -->
   <div class="balance-card">
-
     <div class="balance-label">Available Balance</div>
-
     <div class="balance" id="accountBalance">$134,290.00</div>
-
     <div class="balance-sub" id="accountSub">Checking Account</div>
 
     <div class="actions">
       <button class="action-button primary" id="transferButton" type="button">Transfer</button>
       <button class="action-button outline" id="depositButton" type="button">Deposit</button>
     </div>
-
   </div>
 
-  <!-- MINI STATS STRIP -->
   <div class="stats-strip">
     <div class="stat-box">
       <span class="stat-label">Income</span>
@@ -745,21 +864,16 @@ button {
     </div>
   </div>
 
-  <!-- CARD -->
   <div class="debit-card">
-
     <div class="card-top">
       <div class="card-title">NovaPay</div>
       <div class="contactless">)))</div>
     </div>
-
     <div class="chip"></div>
-
     <div class="card-number">
       •••• &nbsp; •••• &nbsp; •••• &nbsp;
       <span style="color:#f3dfa2;" id="cardLastFour">0000</span>
     </div>
-
     <div class="card-bottom">
       <div>
         <span class="card-label">ACCOUNT USER</span>
@@ -770,17 +884,14 @@ button {
         <span class="card-value" id="cardExpiry">--/--</span>
       </div>
     </div>
-
   </div>
 
-  <!-- RECENT TRANSACTIONS -->
   <div class="section-title">
     <h2>Recent Activity</h2>
     <span id="txCount">6 transactions</span>
   </div>
 
   <div class="tx-list" id="txList">
-
     <div class="tx-item">
       <div class="tx-icon">💼</div>
       <div class="tx-info">
@@ -834,36 +945,134 @@ button {
       </div>
       <div class="tx-amount debit">-$89.99</div>
     </div>
-
   </div>
 
   <button class="generate" id="virtualCardButton" type="button">
     ＋ Generate Virtual Card
   </button>
 
-  <!-- NAVIGATION -->
   <nav class="bottom-nav">
-
     <button class="nav-button active" data-page="home" type="button">
       <span class="nav-icon">🏠</span> Home
     </button>
-
     <button class="nav-button" data-page="transfer" type="button">
       <span class="nav-icon">⇄</span> Transfer
     </button>
-
     <button class="nav-button" data-page="bills" type="button">
       <span class="nav-icon">📄</span> Bills
     </button>
-
     <button class="nav-button" data-page="history" type="button">
       <span class="nav-icon">☰</span> History
     </button>
-
     <button class="nav-button" data-page="profile" type="button">
       <span class="nav-icon">👤</span> Profile
     </button>
+  </nav>
 
+</section>
+
+
+<!-- ================= TRANSFER SCREEN ================= -->
+
+<section id="transferScreen" class="screen">
+
+  <div class="top-row">
+    <button class="circle-button" id="transferBack" type="button">←</button>
+    <div class="user-name">Transfer Funds</div>
+    <div class="avatar" id="transferAvatar"></div>
+  </div>
+
+  <div class="transfer-wrap">
+
+    <div class="transfer-header">
+      <h1>Send Money</h1>
+      <p>Transfer to any NovaPay account or external bank.</p>
+    </div>
+
+    <div class="field">
+      <label>From Account</label>
+      <select id="fromAccount">
+        <option value="checking">Checking · $134,290.00</option>
+        <option value="savings">Savings · $89,250.75</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Select Recipient</label>
+    </div>
+
+    <div class="recipient-list" id="recipientList">
+      <!-- injected by JS -->
+    </div>
+
+    <div class="field">
+      <label>Amount (USD)</label>
+      <input id="transferAmount" type="number" placeholder="0.00" min="0" step="0.01" inputmode="decimal">
+      <div class="quick-amounts">
+        <button type="button" class="quick-chip" data-amt="50">$50</button>
+        <button type="button" class="quick-chip" data-amt="100">$100</button>
+        <button type="button" class="quick-chip" data-amt="500">$500</button>
+        <button type="button" class="quick-chip" data-amt="1000">$1,000</button>
+        <button type="button" class="quick-chip" data-amt="5000">$5,000</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Note (Optional)</label>
+      <input id="transferNote" type="text" placeholder="e.g. Rent, gift, invoice #4821">
+    </div>
+
+    <!-- LIVE FEE SUMMARY -->
+    <div class="balance-card" style="margin: 22px 0 20px;">
+      <div class="balance-label" style="margin-bottom: 10px;">Transfer Summary</div>
+
+      <div class="summary-row">
+        <span class="label">Amount</span>
+        <span class="value" id="sumAmount">$0.00</span>
+      </div>
+
+      <div class="summary-row">
+        <span class="label">Transfer Fee</span>
+        <span class="value" id="sumFee">$0.00</span>
+      </div>
+
+      <div class="summary-row">
+        <span class="label">Processing</span>
+        <span class="value" id="sumSpeed">Instant</span>
+      </div>
+
+      <div class="summary-row total">
+        <span class="label">Total Debit</span>
+        <span class="value" id="sumTotal">$0.00</span>
+      </div>
+
+      <div class="info-note" id="limitNote">
+        Daily limit remaining: $10,000.00 · Monthly limit remaining: $50,000.00
+      </div>
+    </div>
+
+    <button class="primary-button" id="confirmTransfer" type="button">
+      Confirm Transfer
+    </button>
+
+  </div>
+
+  <nav class="bottom-nav">
+    <button class="nav-button" data-page="home" type="button">
+      <span class="nav-icon">🏠</span> Home
+    </button>
+    <button class="nav-button active" data-page="transfer" type="button">
+      <span class="nav-icon">⇄</span> Transfer
+    </button>
+    <button class="nav-button" data-page="bills" type="button">
+      <span class="nav-icon">📄</span> Bills
+    </button>
+    <button class="nav-button" data-page="history" type="button">
+      <span class="nav-icon">☰</span> History
+    </button>
+    <button class="nav-button" data-page="profile" type="button">
+      <span class="nav-icon">👤</span> Profile
+    </button>
   </nav>
 
 </section>
@@ -891,11 +1100,12 @@ button {
 const signupScreen = document.getElementById("signupScreen");
 const loginScreen = document.getElementById("loginScreen");
 const dashboardScreen = document.getElementById("dashboardScreen");
+const transferScreen = document.getElementById("transferScreen");
 
 function showScreen(screen) {
-  signupScreen.classList.remove("active");
-  loginScreen.classList.remove("active");
-  dashboardScreen.classList.remove("active");
+  [signupScreen, loginScreen, dashboardScreen, transferScreen].forEach(function(s) {
+    s.classList.remove("active");
+  });
   screen.classList.add("active");
   window.scrollTo(0, 0);
 }
@@ -920,14 +1130,12 @@ document.getElementById("modalClose").addEventListener("click", function() {
 });
 
 modal.addEventListener("click", function(e) {
-  if (e.target === modal) {
-    modal.classList.remove("show");
-  }
+  if (e.target === modal) modal.classList.remove("show");
 });
 
 
 /* ===============================
-   SIGN UP
+   SIGN UP / LOGIN
 ================================ */
 
 document.getElementById("signupForm").addEventListener("submit", function(e) {
@@ -951,11 +1159,6 @@ document.getElementById("signupForm").addEventListener("submit", function(e) {
   showScreen(dashboardScreen);
 });
 
-
-/* ===============================
-   LOGIN
-================================ */
-
 document.getElementById("loginForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
@@ -971,11 +1174,6 @@ document.getElementById("loginForm").addEventListener("submit", function(e) {
   loadDashboard();
   showScreen(dashboardScreen);
 });
-
-
-/* ===============================
-   SIGNUP / LOGIN SWITCH
-================================ */
 
 document.getElementById("showLogin").addEventListener("click", function() {
   showScreen(loginScreen);
@@ -1002,26 +1200,18 @@ function loadDashboard() {
   document.getElementById("dashboardEmail").textContent = email;
   document.getElementById("cardEmail").textContent = upperEmail;
   document.getElementById("avatar").textContent = getInitials(email);
+  document.getElementById("transferAvatar").textContent = getInitials(email);
 
   updateGreeting();
 }
-
-
-/* ===============================
-   GREETING
-================================ */
 
 function updateGreeting() {
   const hour = new Date().getHours();
   let text;
 
-  if (hour >= 5 && hour < 12) {
-    text = "Good Morning";
-  } else if (hour >= 12 && hour < 18) {
-    text = "Good Afternoon";
-  } else {
-    text = "Good Evening";
-  }
+  if (hour >= 5 && hour < 12) text = "Good Morning";
+  else if (hour >= 12 && hour < 18) text = "Good Afternoon";
+  else text = "Good Evening";
 
   document.getElementById("greeting").textContent = text;
 }
@@ -1030,7 +1220,7 @@ setInterval(updateGreeting, 60000);
 
 
 /* ===============================
-   MONEY FORMATTER
+   FORMATTER
 ================================ */
 
 function formatMoney(amount) {
@@ -1046,138 +1236,4 @@ function formatMoney(amount) {
 ================================ */
 
 const accounts = {
-  checking: {
-    label: "Checking Account",
-    balance: 134290.00,
-    income: 12450.00,
-    expense: 3215.80,
-    savings: 89250.75,
-    lastFour: "4291",
-    expiry: "08/29"
-  },
-  savings: {
-    label: "Savings Account",
-    balance: 89250.75,
-    income: 3400.00,
-    expense: 412.50,
-    savings: 25000.00,
-    lastFour: "7735",
-    expiry: "11/30"
-  }
-};
-
-const checkingPill = document.getElementById("checkingPill");
-const savingsPill = document.getElementById("savingsPill");
-const accountBalance = document.getElementById("accountBalance");
-const accountSub = document.getElementById("accountSub");
-const statIncome = document.getElementById("statIncome");
-const statExpense = document.getElementById("statExpense");
-const statSavings = document.getElementById("statSavings");
-const cardLastFour = document.getElementById("cardLastFour");
-const cardExpiry = document.getElementById("cardExpiry");
-
-function renderAccount(key) {
-  const acc = accounts[key];
-
-  accountBalance.textContent = formatMoney(acc.balance);
-  accountSub.textContent = acc.label;
-
-  statIncome.textContent = "+" + formatMoney(acc.income);
-  statExpense.textContent = "-" + formatMoney(acc.expense);
-  statSavings.textContent = formatMoney(acc.savings);
-
-  cardLastFour.textContent = acc.lastFour;
-  cardExpiry.textContent = acc.expiry;
-}
-
-checkingPill.addEventListener("click", function() {
-  checkingPill.className = "pill active";
-  savingsPill.className = "pill inactive";
-  renderAccount("checking");
-});
-
-savingsPill.addEventListener("click", function() {
-  savingsPill.className = "pill active";
-  checkingPill.className = "pill inactive";
-  renderAccount("savings");
-});
-
-
-/* ===============================
-   TRANSFER / DEPOSIT / CARD BUTTONS
-================================ */
-
-document.getElementById("transferButton").addEventListener("click", function() {
-  showModal(
-    "Transfer Funds",
-    "You can transfer up to $134,290.00 from your Checking Account. Wire and ACH transfers settle within 1–2 business days."
-  );
-});
-
-document.getElementById("depositButton").addEventListener("click", function() {
-  showModal(
-    "Deposit Funds",
-    "Deposit checks or move money in from an external account. Mobile check deposits up to $25,000.00 are credited instantly."
-  );
-});
-
-document.getElementById("virtualCardButton").addEventListener("click", function() {
-  showModal(
-    "Virtual Card Generated",
-    "Your new virtual card ending in " + accounts.checking.lastFour +
-    " is ready. Daily limit: $10,000.00. Monthly limit: $50,000.00."
-  );
-});
-
-
-/* ===============================
-   TOP BUTTONS
-================================ */
-
-document.getElementById("notificationButton").addEventListener("click", function() {
-  showModal(
-    "Notifications",
-    "You have 3 new alerts: Salary Deposit (+$8,500.00), Rent Payment (-$1,850.00), and Electric Bill (-$142.60)."
-  );
-});
-
-document.getElementById("themeButton").addEventListener("click", function() {
-  showModal(
-    "Theme",
-    "NovaPay is currently in Midnight Gold mode. Light mode is coming in the next release."
-  );
-});
-
-
-/* ===============================
-   TRANSACTION COUNT
-================================ */
-
-document.getElementById("txCount").textContent =
-  document.querySelectorAll(".tx-item").length + " transactions";
-
-
-/* ===============================
-   BOTTOM NAV
-================================ */
-
-document.querySelectorAll(".nav-button").forEach(function(button) {
-  button.addEventListener("click", function() {
-    document.querySelectorAll(".nav-button").forEach(function(item) {
-      item.classList.remove("active");
-    });
-    button.classList.add("active");
-  });
-});
-
-
-/* ===============================
-   INIT
-================================ */
-
-loadDashboard();
-
-</script>
-
-</body>
-</html>
+  checking
