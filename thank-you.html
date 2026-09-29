@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>NovaPay · Cerji Colvin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NovaPay — Demo Account</title>
 
 <style>
 * {
@@ -15,45 +15,51 @@
 
 :root {
   --gold: #e5c76b;
-  --gold-dark: #c9a84a;
   --gold-soft: #f3dfa2;
   --bg: #0d0c0a;
-  --bg-2: #17150f;
-  --bg-3: #1f1c14;
-  --card: #131210;
   --text: #f5f1e6;
   --muted: #a39d8c;
-  --green: #4ade80;
-  --red: #f87171;
 }
 
 html, body {
-  height: 100%;
+  min-height: 100%;
   background: #000;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Roboto, Arial, sans-serif;
   color: var(--text);
-  line-height: 1.4;
   display: flex;
   justify-content: center;
-  min-height: 100vh;
 }
 
-/* phone frame on desktop, fullscreen on mobile */
 .phone {
   width: 100%;
   max-width: 430px;
   min-height: 100vh;
-  background: linear-gradient(180deg, #23201a 0%, #12110d 45%, #0a0908 100%);
+  background: linear-gradient(
+    180deg,
+    #23201a 0%,
+    #12110d 45%,
+    #0a0908 100%
+  );
   position: relative;
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
 }
 
-/* ===== STATUS BAR ===== */
+/* DEMO NOTICE */
+.demo-banner {
+  background: #6b4f00;
+  color: #fff4c2;
+  text-align: center;
+  padding: 9px 12px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .5px;
+}
+
+/* STATUS BAR */
 .status-bar {
   padding: 14px 22px 6px;
   display: flex;
@@ -61,58 +67,38 @@ body {
   align-items: center;
   font-size: 15px;
   font-weight: 700;
-  color: #f5f1e6;
-  flex-shrink: 0;
 }
 
-.status-bar .right {
+.status-right {
   display: flex;
-  align-items: center;
   gap: 7px;
   font-size: 13px;
 }
 
-/* ===== TOP ROW (sun / bell / name / avatar) ===== */
+/* TOP ROW */
 .top-row {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 10px 20px 18px;
-  flex-shrink: 0;
 }
 
 .icon-btn {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(229,199,107,0.18);
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(229,199,107,.18);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 18px;
-  cursor: pointer;
-  position: relative;
-  color: var(--gold);
-}
-
-.icon-btn .dot {
-  position: absolute;
-  top: 8px;
-  right: 9px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #ef4444;
-  border: 1.5px solid #23201a;
 }
 
 .top-name {
   flex: 1;
   font-size: 19px;
   font-weight: 800;
-  letter-spacing: -0.3px;
-  color: #f5f1e6;
 }
 
 .avatar {
@@ -120,48 +106,41 @@ body {
   height: 44px;
   border-radius: 50%;
   background: linear-gradient(135deg, #5b7cfa, #4a63e0);
-  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  font-size: 16px;
-  box-shadow: 0 4px 14px rgba(80,110,240,0.4);
-  flex-shrink: 0;
 }
 
-/* ===== GREETING ===== */
+/* GREETING */
 .greeting-block {
   padding: 6px 22px 20px;
-  flex-shrink: 0;
 }
 
 .greeting-block h1 {
   font-size: 30px;
   font-weight: 800;
-  letter-spacing: -0.8px;
-  color: #fdf8ea;
   line-height: 1.15;
 }
 
 .greeting-block p {
   margin-top: 6px;
   font-size: 15px;
-  color: rgba(200,190,160,0.65);
-  font-weight: 500;
+  color: rgba(200,190,160,.65);
 }
 
-/* ===== ACCOUNT PILLS ===== */
+/* ACCOUNT PILLS */
 .account-pills {
   display: flex;
   gap: 12px;
   padding: 0 22px 22px;
   overflow-x: auto;
   scrollbar-width: none;
-  flex-shrink: 0;
 }
 
-.account-pills::-webkit-scrollbar { display: none; }
+.account-pills::-webkit-scrollbar {
+  display: none;
+}
 
 .pill {
   flex-shrink: 0;
@@ -169,69 +148,41 @@ body {
   border-radius: 999px;
   font-size: 14px;
   font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 8px;
   white-space: nowrap;
-  cursor: pointer;
-  transition: 0.2s;
 }
 
 .pill.active {
-  background: linear-gradient(135deg, #f3dfa2, #e5c76b);
+  background: linear-gradient(
+    135deg,
+    var(--gold-soft),
+    var(--gold)
+  );
   color: #2a2107;
-  box-shadow: 0 6px 18px rgba(229,199,107,0.3);
 }
 
 .pill.inactive {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(229,199,107,0.22);
-  color: #e5c76b;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(229,199,107,.22);
+  color: var(--gold);
 }
 
-/* ===== BALANCE CARD ===== */
+/* BALANCE */
 .balance-card {
   margin: 0 18px 22px;
   padding: 26px 24px 24px;
   border-radius: 24px;
-  background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 60%);
-  border: 1px solid rgba(229,199,107,0.16);
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.5);
-  flex-shrink: 0;
-}
-
-.balance-card::after {
-  content: "";
-  position: absolute;
-  width: 320px;
-  height: 320px;
-  border-radius: 50%;
-  right: -160px;
-  bottom: -180px;
-  background: radial-gradient(circle, rgba(229,199,107,0.14) 0%, transparent 65%);
-  pointer-events: none;
-}
-
-.balance-card::before {
-  content: "";
-  position: absolute;
-  width: 280px;
-  height: 280px;
-  border-radius: 50%;
-  left: -140px;
-  top: -140px;
-  background: radial-gradient(circle, rgba(229,199,107,0.08) 0%, transparent 65%);
-  pointer-events: none;
+  background: linear-gradient(
+    140deg,
+    #1a1813 0%,
+    #0d0c0a 60%
+  );
+  border: 1px solid rgba(229,199,107,.16);
+  box-shadow: 0 18px 40px rgba(0,0,0,.5);
 }
 
 .balance-label {
   font-size: 14px;
-  color: rgba(200,190,160,0.75);
-  font-weight: 500;
-  position: relative;
-  z-index: 2;
+  color: rgba(200,190,160,.75);
 }
 
 .balance-amount {
@@ -239,217 +190,152 @@ body {
   font-size: 44px;
   font-weight: 800;
   letter-spacing: -1.5px;
-  color: #fdf8ea;
-  position: relative;
-  z-index: 2;
-  line-height: 1.05;
 }
 
 .balance-sub {
   font-size: 14px;
-  color: rgba(200,190,160,0.6);
-  font-weight: 500;
-  position: relative;
-  z-index: 2;
+  color: rgba(200,190,160,.6);
 }
 
 .balance-actions {
   margin-top: 22px;
   display: flex;
   gap: 12px;
-  position: relative;
-  z-index: 2;
 }
 
-.btn-primary {
-  padding: 13px 26px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #f3dfa2, #e5c76b);
-  color: #2a2107;
-  font-size: 14px;
-  font-weight: 800;
-  border: none;
+button {
   cursor: pointer;
-  box-shadow: 0 6px 18px rgba(229,199,107,0.28);
-  transition: 0.15s;
 }
 
-.btn-primary:active { transform: scale(0.97); }
-
+.btn-primary,
 .btn-outline {
   padding: 13px 26px;
   border-radius: 12px;
-  background: transparent;
-  color: #e5c76b;
   font-size: 14px;
   font-weight: 800;
-  border: 1.5px solid rgba(229,199,107,0.45);
-  cursor: pointer;
-  transition: 0.15s;
 }
 
-.btn-outline:active { transform: scale(0.97); }
+.btn-primary {
+  background: linear-gradient(
+    135deg,
+    var(--gold-soft),
+    var(--gold)
+  );
+  color: #2a2107;
+  border: none;
+}
 
-/* ===== DEBIT CARD ===== */
+.btn-outline {
+  background: transparent;
+  color: var(--gold);
+  border: 1.5px solid rgba(229,199,107,.45);
+}
+
+/* CARD */
 .debit-wrap {
   margin: 0 18px 22px;
   padding: 26px 24px 22px;
   border-radius: 24px;
-  background: linear-gradient(150deg, #1a1813 0%, #0a0908 70%);
-  border: 1px solid rgba(229,199,107,0.16);
-  box-shadow: 0 18px 40px rgba(0,0,0,0.5);
-  position: relative;
-  overflow: hidden;
-  flex-shrink: 0;
+  background: linear-gradient(
+    150deg,
+    #1a1813 0%,
+    #0a0908 70%
+  );
+  border: 1px solid rgba(229,199,107,.16);
+  box-shadow: 0 18px 40px rgba(0,0,0,.5);
 }
 
 .debit-head {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
   margin-bottom: 22px;
 }
 
 .debit-head h2 {
   font-size: 22px;
-  font-weight: 800;
-  color: #f3dfa2;
-  letter-spacing: -0.4px;
+  color: var(--gold-soft);
 }
 
 .wifi-icon {
-  color: #f3dfa2;
+  color: var(--gold-soft);
   font-size: 22px;
-  transform: rotate(90deg);
-  opacity: 0.9;
 }
 
 .chip {
   width: 46px;
   height: 34px;
   border-radius: 7px;
-  background: linear-gradient(135deg, #f3dfa2, #c9a84a);
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.35), 0 2px 6px rgba(229,199,107,0.25);
+  background: linear-gradient(
+    135deg,
+    var(--gold-soft),
+    #c9a84a
+  );
   margin-bottom: 24px;
-  position: relative;
-}
-
-.chip::after {
-  content: "";
-  position: absolute;
-  inset: 6px 8px;
-  border: 1px solid rgba(42,33,7,0.35);
-  border-radius: 3px;
 }
 
 .card-number {
   font-size: 20px;
   letter-spacing: 5px;
   font-weight: 700;
-  color: #fdf8ea;
   margin-bottom: 20px;
 }
 
 .card-number .last {
-  letter-spacing: 4px;
-  color: #f3dfa2;
+  color: var(--gold-soft);
 }
 
 .card-bottom {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  font-size: 12px;
-  letter-spacing: 0.8px;
-  font-weight: 600;
-  color: rgba(220,210,180,0.85);
 }
 
-.card-bottom .label {
-  font-size: 10px;
-  color: rgba(180,170,140,0.55);
-  letter-spacing: 0.6px;
-  font-weight: 500;
-  margin-bottom: 3px;
+.label {
   display: block;
+  font-size: 10px;
+  color: rgba(180,170,140,.55);
+  margin-bottom: 3px;
 }
 
-.card-bottom .name {
+.name {
   font-size: 13px;
-  color: #fdf8ea;
   font-weight: 700;
-  letter-spacing: 0.6px;
 }
 
-/* ===== GENERATE VIRTUAL CARD ===== */
+/* VIRTUAL CARD */
 .generate-btn {
   margin: 0 18px 26px;
   padding: 18px;
   border-radius: 18px;
-  background: linear-gradient(135deg, rgba(243,223,162,0.14), rgba(229,199,107,0.08));
-  border: 1.5px solid rgba(229,199,107,0.35);
-  color: #f3dfa2;
+  background: rgba(229,199,107,.08);
+  border: 1.5px solid rgba(229,199,107,.35);
+  color: var(--gold-soft);
   font-size: 15px;
   font-weight: 800;
   text-align: center;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: 0.15s;
-  flex-shrink: 0;
 }
 
-.generate-btn:active {
-  transform: scale(0.98);
-  background: linear-gradient(135deg, rgba(243,223,162,0.2), rgba(229,199,107,0.12));
+/* DEMO FOOTER */
+.demo-footer {
+  text-align: center;
+  padding: 0 25px 110px;
+  color: #8e8879;
+  font-size: 11px;
+  line-height: 1.5;
 }
 
-.generate-btn .plus {
-  font-size: 18px;
-  font-weight: 900;
-}
-
-/* ===== SPACER + FLOATING ROBOT ===== */
-.spacer { flex: 1; min-height: 100px; }
-
-.robot-fab {
-  position: absolute;
-  right: 20px;
-  bottom: 96px;
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #f3dfa2, #e5c76b);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 26px;
-  box-shadow: 0 8px 22px rgba(229,199,107,0.45);
-  cursor: pointer;
-  z-index: 50;
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-
-/* ===== BOTTOM NAV ===== */
+/* BOTTOM NAV */
 .bottom-nav {
-  position: absolute;
-  left: 0;
-  right: 0;
+  position: fixed;
   bottom: 0;
-  background: rgba(10,9,8,0.96);
+  width: min(100%, 430px);
+  background: rgba(10,9,8,.96);
   backdrop-filter: blur(14px);
-  border-top: 1px solid rgba(229,199,107,0.14);
+  border-top: 1px solid rgba(229,199,107,.14);
   display: flex;
   justify-content: space-around;
   padding: 12px 8px 20px;
-  z-index: 40;
 }
 
 .nav-item {
@@ -457,197 +343,257 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  color: rgba(180,170,140,0.6);
+  color: rgba(180,170,140,.6);
   font-size: 11px;
   font-weight: 600;
-  cursor: pointer;
-  padding: 4px 10px;
-  transition: 0.15s;
 }
 
 .nav-item.active {
-  color: #f3dfa2;
+  color: var(--gold-soft);
 }
 
-.nav-item .nav-icon {
+.nav-icon {
   font-size: 20px;
 }
 
-/* ===== DESKTOP ===== */
 @media (min-width: 480px) {
   body {
     padding: 20px 0;
-    background: #000;
   }
+
   .phone {
     border-radius: 42px;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.8);
     min-height: 900px;
     max-height: 900px;
+  }
+
+  .bottom-nav {
+    position: absolute;
+    bottom: 0;
   }
 }
 </style>
 </head>
+
 <body>
 
 <div class="phone">
 
-  <!-- STATUS BAR (visual only) -->
+  <div class="demo-banner">
+    DEMO ACCOUNT · NOT A REAL BANK ACCOUNT
+  </div>
+
   <div class="status-bar">
     <span id="clock">9:43</span>
-    <div class="right">
+
+    <div class="status-right">
       <span>📶</span>
       <span>📶</span>
       <span>🔋</span>
     </div>
   </div>
 
-  <!-- TOP ROW -->
   <div class="top-row">
-    <div class="icon-btn" title="Theme">☀️</div>
-    <div class="icon-btn" title="Notifications">
-      🔔
-      <span class="dot"></span>
+    <div class="icon-btn">☀️</div>
+    <div class="icon-btn">🔔</div>
+
+    <div class="top-name">
+      Cerji Colvin
     </div>
-    <div class="top-name">Cerji Colvin</div>
-    <div class="avatar">CC</div>
+
+    <div class="avatar">
+      CC
+    </div>
   </div>
 
-  <!-- GREETING -->
   <div class="greeting-block">
-    <h1 id="greeting">Good Afternoon, Cerji Colvin</h1>
-    <p>Welcome to your NovaPay dashboard.</p>
+    <h1 id="greeting">
+      Good Evening, Cerji Colvin
+    </h1>
+
+    <p>
+      Welcome to your NovaPay demo dashboard.
+    </p>
   </div>
 
-  <!-- ACCOUNT PILLS -->
   <div class="account-pills">
-    <div class="pill active">🏦 Checking •••• 4821</div>
-    <div class="pill inactive">🏛️ Savings •••• 7732</div>
+    <div class="pill active">
+      🏦 Checking •••• 4821
+    </div>
+
+    <div class="pill inactive">
+      🏛️ Savings •••• 7732
+    </div>
   </div>
 
-  <!-- BALANCE CARD -->
+  <!-- DEMO BALANCE -->
   <div class="balance-card">
-    <div class="balance-label">Available Balance</div>
-    <div class="balance-amount">$134,290</div>
-    <div class="balance-sub">Checking Account •••• 4821</div>
+
+    <div class="balance-label">
+      Available Demo Balance
+    </div>
+
+    <div class="balance-amount">
+      $137,000
+    </div>
+
+    <div class="balance-sub">
+      Demo Checking Account •••• 4821
+    </div>
 
     <div class="balance-actions">
-      <button class="btn-primary" onclick="showMessage('Transfer feature is available in this demo.')">Transfer</button>
-      <button class="btn-outline" onclick="showMessage('Deposit feature is available in this demo.')">Deposit</button>
+
+      <button
+        class="btn-primary"
+        onclick="showMessage('Transfer feature — demo only.')">
+        Transfer
+      </button>
+
+      <button
+        class="btn-outline"
+        onclick="showMessage('Deposit feature — demo only.')">
+        Deposit
+      </button>
+
     </div>
   </div>
 
-  <!-- DEBIT CARD -->
   <div class="debit-wrap">
+
     <div class="debit-head">
-      <h2>NovaPay Debit</h2>
+      <h2>NovaPay Demo Card</h2>
       <div class="wifi-icon">)))</div>
     </div>
 
     <div class="chip"></div>
 
     <div class="card-number">
-      •••• &nbsp; •••• &nbsp; •••• &nbsp; <span class="last">4821</span>
+      •••• &nbsp; •••• &nbsp; •••• &nbsp;
+      <span class="last">4821</span>
     </div>
 
     <div class="card-bottom">
+
       <div>
         <span class="label">CARD HOLDER</span>
         <span class="name">CERJI COLVIN</span>
       </div>
+
       <div style="text-align:right;">
         <span class="label">VALID THRU</span>
         <span class="name">12/29</span>
       </div>
+
     </div>
   </div>
 
-  <!-- GENERATE VIRTUAL CARD -->
-  <div class="generate-btn" onclick="showMessage('Virtual card generation is available in this demo.')">
-    <span class="plus">+</span> Generate Virtual Card
+  <div
+    class="generate-btn"
+    onclick="showMessage('Virtual card generation — demo only.')">
+
+    + Generate Virtual Card
+
   </div>
 
-  <div class="spacer"></div>
+  <div class="demo-footer">
+    This interface is a fictional software demonstration.
+    It is not connected to a bank, payment processor,
+    financial institution, or real account.
+  </div>
 
-  <!-- FLOATING ROBOT -->
-  <div class="robot-fab" onclick="showMessage('Hi Cerji! I\'m your NovaPay assistant. (Demo only)')">🤖</div>
-
-  <!-- BOTTOM NAV -->
   <nav class="bottom-nav">
+
     <div class="nav-item active">
       <span class="nav-icon">🏠</span>
       Home
     </div>
-    <div class="nav-item" onclick="showMessage('Transfer page is available in this demo.')">
+
+    <div
+      class="nav-item"
+      onclick="showMessage('Transfer page — demo only.')">
       <span class="nav-icon">⇄</span>
       Transfer
     </div>
-    <div class="nav-item" onclick="showMessage('Bills page is available in this demo.')">
+
+    <div
+      class="nav-item"
+      onclick="showMessage('Bills page — demo only.')">
       <span class="nav-icon">📄</span>
       Bills
     </div>
-    <div class="nav-item" onclick="showMessage('History page is available in this demo.')">
+
+    <div
+      class="nav-item"
+      onclick="showMessage('History page — demo only.')">
       <span class="nav-icon">☰</span>
       History
     </div>
-    <div class="nav-item" onclick="showMessage('Profile page is available in this demo.')">
+
+    <div
+      class="nav-item"
+      onclick="showMessage('Profile page — demo only.')">
       <span class="nav-icon">👤</span>
       Profile
     </div>
+
   </nav>
 
 </div>
 
 <script>
-  /* ---------- LIVE CLOCK ---------- */
-  function updateClock() {
-    const now = new Date();
-    let h = now.getHours();
-    let m = now.getMinutes();
-    const ampm = h >= 12 ? 'PM' : 'AM';
-    h = h % 12;
-    if (h === 0) h = 12;
-    m = m < 10 ? '0' + m : m;
-    const clock = document.getElementById('clock');
-    if (clock) clock.textContent = h + ':' + m;
+
+function updateClock() {
+
+  const now = new Date();
+
+  let h = now.getHours();
+  let m = now.getMinutes();
+
+  const ampm = h >= 12 ? "PM" : "AM";
+
+  h = h % 12;
+
+  if (h === 0) h = 12;
+
+  m = m < 10 ? "0" + m : m;
+
+  document.getElementById("clock").textContent =
+    h + ":" + m + " " + ampm;
+}
+
+function updateGreeting() {
+
+  const hour = new Date().getHours();
+
+  let greeting;
+
+  if (hour >= 5 && hour < 12) {
+
+    greeting = "Good Morning, Cerji Colvin";
+
+  } else if (hour >= 12 && hour < 18) {
+
+    greeting = "Good Afternoon, Cerji Colvin";
+
+  } else {
+
+    greeting = "Good Evening, Cerji Colvin";
   }
 
-  /* ---------- DYNAMIC GREETING ---------- */
-  function updateGreeting() {
-    const greetingEl = document.getElementById('greeting');
-    if (!greetingEl) return;
+  document.getElementById("greeting").textContent =
+    greeting;
+}
 
-    const hour = new Date().getHours();
-    let greeting;
+function showMessage(message) {
+  alert(message);
+}
 
-    if (hour >= 5 && hour < 12) {
-      greeting = 'Good Morning, Cerji Colvin';
-    } else if (hour >= 12 && hour < 18) {
-      greeting = 'Good Afternoon, Cerji Colvin';
-    } else {
-      greeting = 'Good Evening, Cerji Colvin';
-    }
+updateClock();
+updateGreeting();
 
-    greetingEl.textContent = greeting;
-  }
+setInterval(updateClock, 30000);
+setInterval(updateGreeting, 60000);
 
-  updateClock();
-  updateGreeting();
-
-  setInterval(updateClock, 30000);
-  setInterval(updateGreeting, 60000);
-
-  document.addEventListener('visibilitychange', function () {
-    if (!document.hidden) {
-      updateClock();
-      updateGreeting();
-    }
-  });
-
-  /* ---------- DEMO ALERTS ---------- */
-  function showMessage(message) {
-    alert(message);
-  }
 </script>
 
 </body>
