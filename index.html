@@ -73,7 +73,7 @@ button { cursor: pointer; }
   text-align: center;
   color: var(--muted);
   font-size: 17px;
-  margin-bottom: 58px;
+  margin-bottom: 45px;
 }
 
 .field { margin-bottom: 25px; }
@@ -154,6 +154,30 @@ button { cursor: pointer; }
 }
 
 .auth-hint b { color: var(--gold-light); }
+
+/* ACCESS CODE SCREEN */
+.access-badge {
+  text-align: center;
+  font-size: 64px;
+  margin-bottom: 12px;
+}
+
+.access-title {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: -.6px;
+  margin-bottom: 10px;
+}
+
+.access-sub {
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 40px;
+  line-height: 1.6;
+  padding: 0 10px;
+}
 
 /* HEADER */
 .top-row {
@@ -381,6 +405,16 @@ button { cursor: pointer; }
 .tx-amount.credit { color: var(--green); }
 .tx-amount.debit { color: var(--text); }
 
+.tx-empty {
+  padding: 40px 20px;
+  text-align: center;
+  color: rgba(200,190,160,.55);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.tx-empty-emoji { font-size: 32px; display: block; margin-bottom: 10px; opacity: .6; }
+
 /* GENERATE */
 .generate {
   margin: 0 18px 100px;
@@ -574,11 +608,18 @@ button { cursor: pointer; }
   margin: 0 auto 16px;
 }
 
+.profile-name {
+  font-size: 20px;
+  font-weight: 900;
+  margin-bottom: 4px;
+}
+
 .profile-email {
-  font-size: 16px;
-  font-weight: 800;
+  font-size: 14px;
+  font-weight: 700;
   word-break: break-all;
   margin-bottom: 6px;
+  color: rgba(200,190,160,.8);
 }
 
 .profile-since {
@@ -710,30 +751,58 @@ button { cursor: pointer; }
 
 <div class="app">
 
+<!-- ================= ACCESS CODE SCREEN ================= -->
+
+<section id="codeScreen" class="screen active">
+  <div class="auth">
+    <div class="access-badge">🔐</div>
+    <div class="access-title">NovaPay Access</div>
+    <div class="access-sub">
+      This account is protected.<br>
+      Please enter your access code to continue.
+    </div>
+
+    <form id="codeForm">
+      <div class="field">
+        <label>Access Code</label>
+        <input id="accessCode" type="password" placeholder="Enter access code" autocomplete="off" required>
+      </div>
+
+      <button type="submit" class="primary-button">Unlock</button>
+    </form>
+
+    <div class="auth-hint" style="margin-top: 30px;">
+      <b>Authorized user:</b> Cerji Colvin
+    </div>
+  </div>
+</section>
+
+
 <!-- ================= SIGN UP ================= -->
 
-<section id="signupScreen" class="screen active">
+<section id="signupScreen" class="screen">
   <div class="auth">
     <div class="logo">NovaPay</div>
     <div class="tagline">Create your account in seconds</div>
 
     <form id="signupForm" autocomplete="on">
       <div class="field">
-        <label>Email Address</label>
-        <input id="signupEmail" type="email" placeholder="you@example.com" autocomplete="email" required>
+        <label>Full Name</label>
+        <input id="signupName" type="text" placeholder="Cerji Colvin" autocomplete="name" required>
       </div>
+
+      <div class="field">
+        <label>Email Address</label>
+        <input id="signupEmail" type="email" placeholder="cerji@example.com" autocomplete="email" required>
+      </div>
+
       <div class="field">
         <label>Password</label>
         <input id="signupPassword" type="password" placeholder="Create a password (min 8 chars)" autocomplete="new-password" required>
       </div>
+
       <button type="submit" class="primary-button">Create Account</button>
     </form>
-
-    <div class="auth-hint">
-      <b>Demo account ready:</b><br>
-      Email: <b>demo@novapay.com</b><br>
-      Password: <b>password123</b>
-    </div>
 
     <div class="auth-switch">
       Already have an account?
@@ -753,20 +822,16 @@ button { cursor: pointer; }
     <form id="loginForm" autocomplete="on">
       <div class="field">
         <label>Email Address</label>
-        <input id="loginEmail" type="email" placeholder="you@example.com" autocomplete="email" required>
+        <input id="loginEmail" type="email" placeholder="cerji@example.com" autocomplete="email" required>
       </div>
+
       <div class="field">
         <label>Password</label>
         <input id="loginPassword" type="password" placeholder="Your password" autocomplete="current-password" required>
       </div>
+
       <button type="submit" class="primary-button">Sign In</button>
     </form>
-
-    <div class="auth-hint">
-      <b>Demo login:</b><br>
-      Email: <b>demo@novapay.com</b><br>
-      Password: <b>password123</b>
-    </div>
 
     <div class="auth-switch">
       Don't have an account?
@@ -789,7 +854,7 @@ button { cursor: pointer; }
 
   <div class="greeting">
     <h1 id="greeting">Welcome</h1>
-    <p>Here is your account overview.</p>
+    <p id="greetingName">Cerji Colvin</p>
   </div>
 
   <div class="pills">
@@ -799,7 +864,7 @@ button { cursor: pointer; }
 
   <div class="balance-card">
     <div class="balance-label">Available Balance</div>
-    <div class="balance" id="accountBalance">$134,290.00</div>
+    <div class="balance" id="accountBalance">$0.00</div>
     <div class="balance-sub" id="accountSub">Checking Account</div>
     <div class="actions">
       <button class="action-button primary" id="transferButton" type="button">Transfer</button>
@@ -810,15 +875,15 @@ button { cursor: pointer; }
   <div class="stats-strip">
     <div class="stat-box">
       <span class="stat-label">Income</span>
-      <span class="stat-value income" id="statIncome">+$12,450.00</span>
+      <span class="stat-value income" id="statIncome">+$0.00</span>
     </div>
     <div class="stat-box">
       <span class="stat-label">Expenses</span>
-      <span class="stat-value expense" id="statExpense">-$3,215.80</span>
+      <span class="stat-value expense" id="statExpense">-$0.00</span>
     </div>
     <div class="stat-box">
       <span class="stat-label">Savings</span>
-      <span class="stat-value" id="statSavings">$89,250.75</span>
+      <span class="stat-value" id="statSavings">$0.00</span>
     </div>
   </div>
 
@@ -846,64 +911,10 @@ button { cursor: pointer; }
 
   <div class="section-title">
     <h2>Recent Activity</h2>
-    <span id="txCount">6 transactions</span>
+    <span id="txCount">0 transactions</span>
   </div>
 
-  <div class="tx-list" id="txList">
-    <div class="tx-item">
-      <div class="tx-icon">💼</div>
-      <div class="tx-info">
-        <div class="tx-name">Salary Deposit</div>
-        <div class="tx-date">Today · 09:14 AM</div>
-      </div>
-      <div class="tx-amount credit">+$8,500.00</div>
-    </div>
-
-    <div class="tx-item">
-      <div class="tx-icon">🏠</div>
-      <div class="tx-info">
-        <div class="tx-name">Rent Payment</div>
-        <div class="tx-date">Today · 07:02 AM</div>
-      </div>
-      <div class="tx-amount debit">-$1,850.00</div>
-    </div>
-
-    <div class="tx-item">
-      <div class="tx-icon">🛒</div>
-      <div class="tx-info">
-        <div class="tx-name">Whole Foods Market</div>
-        <div class="tx-date">Yesterday · 06:45 PM</div>
-      </div>
-      <div class="tx-amount debit">-$214.35</div>
-    </div>
-
-    <div class="tx-item">
-      <div class="tx-icon">⚡</div>
-      <div class="tx-info">
-        <div class="tx-name">Electric Bill</div>
-        <div class="tx-date">Yesterday · 11:20 AM</div>
-      </div>
-      <div class="tx-amount debit">-$142.60</div>
-    </div>
-
-    <div class="tx-item">
-      <div class="tx-icon">💰</div>
-      <div class="tx-info">
-        <div class="tx-name">Freelance Payment</div>
-        <div class="tx-date">Sep 26 · 03:12 PM</div>
-      </div>
-      <div class="tx-amount credit">+$3,950.00</div>
-    </div>
-
-    <div class="tx-item">
-      <div class="tx-icon">📶</div>
-      <div class="tx-info">
-        <div class="tx-name">Internet Subscription</div>
-        <div class="tx-date">Sep 25 · 08:00 AM</div>
-      </div>
-      <div class="tx-amount debit">-$89.99</div>
-    </div>
-  </div>
+  <div class="tx-list" id="txList"></div>
 
   <button class="generate" id="virtualCardButton" type="button">
     ＋ Generate Virtual Card
@@ -949,8 +960,8 @@ button { cursor: pointer; }
     <div class="field">
       <label>From Account</label>
       <select id="fromAccount">
-        <option value="checking">Checking · $134,290.00</option>
-        <option value="savings">Savings · $89,250.75</option>
+        <option value="checking">Checking · $0.00</option>
+        <option value="savings">Savings · $0.00</option>
       </select>
     </div>
 
@@ -1095,8 +1106,8 @@ button { cursor: pointer; }
     <div class="field">
       <label>Paying From</label>
       <select id="billFrom">
-        <option value="checking">Checking · $134,290.00</option>
-        <option value="savings">Savings · $89,250.75</option>
+        <option value="checking">Checking · $0.00</option>
+        <option value="savings">Savings · $0.00</option>
       </select>
     </div>
 
@@ -1242,7 +1253,8 @@ button { cursor: pointer; }
   </div>
 
   <div class="profile-card">
-    <div class="profile-avatar" id="profileBigAvatar">U</div>
+    <div class="profile-avatar" id="profileBigAvatar">C</div>
+    <div class="profile-name" id="profileName">Cerji Colvin</div>
     <div class="profile-email" id="profileEmail"></div>
     <div class="profile-since" id="profileSince"></div>
   </div>
@@ -1321,7 +1333,15 @@ button { cursor: pointer; }
 <script>
 
 /* ============================================================
-   1. USER STORAGE
+   0. ACCESS CODE — REQUIRED BEFORE LOGIN
+   ============================================================ */
+
+const ACCESS_CODE = "CERJI2024";
+const ACCESS_KEY  = "novapayAccessGranted";
+
+
+/* ============================================================
+   1. USER STORAGE — Cerji Colvin
    ============================================================ */
 
 const USERS_KEY   = "novapayUsers";
@@ -1336,19 +1356,21 @@ function saveUsers(users) {
   localStorage.setItem(USERS_KEY, JSON.stringify(users));
 }
 
-function seedDemoUser() {
+function seedCerjiUser() {
   const users = getUsers();
-  if (!users["demo@novapay.com"]) {
-    users["demo@novapay.com"] = {
-      email: "demo@novapay.com",
-      password: "password123",
+  // Fresh start — Cerji Colvin is the only real user
+  if (!users["cerji@novapay.com"]) {
+    users["cerji@novapay.com"] = {
+      name: "Cerji Colvin",
+      email: "cerji@novapay.com",
+      password: "Cerji2024!",
       createdAt: new Date().toISOString()
     };
     saveUsers(users);
   }
 }
 
-seedDemoUser();
+seedCerjiUser();
 
 function setSession(email) {
   sessionStorage.setItem(SESSION_KEY, email);
@@ -1369,6 +1391,7 @@ function clearSession() {
    2. SCREENS
    ============================================================ */
 
+const codeScreen      = document.getElementById("codeScreen");
 const signupScreen    = document.getElementById("signupScreen");
 const loginScreen     = document.getElementById("loginScreen");
 const dashboardScreen = document.getElementById("dashboardScreen");
@@ -1378,7 +1401,7 @@ const historyScreen   = document.getElementById("historyScreen");
 const profileScreen   = document.getElementById("profileScreen");
 
 const ALL_SCREENS = [
-  signupScreen, loginScreen, dashboardScreen,
+  codeScreen, signupScreen, loginScreen, dashboardScreen,
   transferScreen, billsScreen, historyScreen, profileScreen
 ];
 
@@ -1438,14 +1461,41 @@ modal.addEventListener("click", function(e) {
 
 
 /* ============================================================
-   4. SIGN UP / LOGIN
+   4. ACCESS CODE GATE
+   ============================================================ */
+
+document.getElementById("codeForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const entered = document.getElementById("accessCode").value.trim();
+
+  if (entered === ACCESS_CODE) {
+    sessionStorage.setItem(ACCESS_KEY, "true");
+    document.getElementById("accessCode").value = "";
+    showScreen(signupScreen);
+  } else {
+    showModal("Invalid Access Code",
+      "The code you entered is incorrect.\n\nPlease try again.");
+    document.getElementById("accessCode").value = "";
+  }
+});
+
+
+/* ============================================================
+   5. SIGN UP
    ============================================================ */
 
 document.getElementById("signupForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
+  const name     = document.getElementById("signupName").value.trim();
   const email    = document.getElementById("signupEmail").value.trim().toLowerCase();
   const password = document.getElementById("signupPassword").value;
+
+  if (!name) {
+    showModal("Name Required", "Please enter your full name.");
+    return;
+  }
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     showModal("Invalid Email", "Please enter a valid email address.");
@@ -1465,6 +1515,7 @@ document.getElementById("signupForm").addEventListener("submit", function(e) {
   }
 
   users[email] = {
+    name: name,
     email: email,
     password: password,
     createdAt: new Date().toISOString()
@@ -1475,8 +1526,13 @@ document.getElementById("signupForm").addEventListener("submit", function(e) {
   document.getElementById("signupForm").reset();
   loadDashboard();
   showScreen(dashboardScreen);
-  showModal("Welcome to NovaPay!", "Your account has been created.\n\nEmail: " + email);
+  showModal("Welcome to NovaPay!", "Your account has been created.\n\nName: " + name + "\nEmail: " + email);
 });
+
+
+/* ============================================================
+   6. LOGIN
+   ============================================================ */
 
 document.getElementById("loginForm").addEventListener("submit", function(e) {
   e.preventDefault();
@@ -1508,17 +1564,9 @@ document.getElementById("loginForm").addEventListener("submit", function(e) {
   showScreen(dashboardScreen);
 });
 
-document.getElementById("showLogin").addEventListener("click", function() {
-  showScreen(loginScreen);
-});
-
-document.getElementById("showSignup").addEventListener("click", function() {
-  showScreen(signupScreen);
-});
-
 
 /* ============================================================
-   5. LOGOUT
+   7. LOGOUT
    ============================================================ */
 
 document.getElementById("logoutButton").addEventListener("click", function() {
@@ -1537,12 +1585,14 @@ document.getElementById("logoutButton").addEventListener("click", function() {
 
 
 /* ============================================================
-   6. HELPERS
+   8. HELPERS
    ============================================================ */
 
-function getInitials(email) {
-  const first = (email || "U").charAt(0).toUpperCase();
-  return first || "U";
+function getInitials(name) {
+  if (!name) return "C";
+  const parts = name.trim().split(" ");
+  if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
+  return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
 }
 
 function formatMoney(amount) {
@@ -1565,25 +1615,25 @@ setInterval(updateGreeting, 60000);
 
 
 /* ============================================================
-   7. ACCOUNTS DATA
+   9. ACCOUNTS DATA — Empty starting balances for Cerji
    ============================================================ */
 
 const accounts = {
   checking: {
     label: "Checking Account",
-    balance: 134290.00,
-    income: 12450.00,
-    expense: 3215.80,
-    savings: 89250.75,
+    balance: 0.00,
+    income: 0.00,
+    expense: 0.00,
+    savings: 0.00,
     lastFour: "4291",
     expiry: "08/29"
   },
   savings: {
     label: "Savings Account",
-    balance: 89250.75,
-    income: 3400.00,
-    expense: 412.50,
-    savings: 25000.00,
+    balance: 0.00,
+    income: 0.00,
+    expense: 0.00,
+    savings: 0.00,
     lastFour: "7735",
     expiry: "11/30"
   }
@@ -1593,20 +1643,28 @@ let activeAccount = "checking";
 
 
 /* ============================================================
-   8. TRANSACTION STORE (shared across Home + History)
+   10. TRANSACTION STORE — Empty for Cerji
    ============================================================ */
 
-const transactions = [
-  { id: 1, type: "credit",   category: "income",   icon: "💼", name: "Salary Deposit",       date: "Today · 09:14 AM",      amount: 8500.00 },
-  { id: 2, type: "debit",    category: "bills",    icon: "🏠", name: "Rent Payment",          date: "Today · 07:02 AM",      amount: 1850.00 },
-  { id: 3, type: "debit",    category: "purchase", icon: "🛒", name: "Whole Foods Market",    date: "Yesterday · 06:45 PM",  amount: 214.35 },
-  { id: 4, type: "debit",    category: "bills",    icon: "⚡", name: "Electric Bill",         date: "Yesterday · 11:20 AM",  amount: 142.60 },
-  { id: 5, type: "credit",   category: "income",   icon: "💰", name: "Freelance Payment",     date: "Sep 26 · 03:12 PM",     amount: 3950.00 },
-  { id: 6, type: "debit",    category: "bills",    icon: "📶", name: "Internet Subscription", date: "Sep 25 · 08:00 AM",     amount: 89.99 }
-];
+const transactions = [];
 
-function renderTxList(target, list) {
+
+/* ============================================================
+   11. RENDER TRANSACTIONS
+   ============================================================ */
+
+function renderTxList(target, list, emptyMessage) {
   target.innerHTML = "";
+
+  if (list.length === 0) {
+    target.innerHTML =
+      '<div class="tx-empty">' +
+        '<span class="tx-empty-emoji">📭</span>' +
+        (emptyMessage || "No transactions yet.") +
+      '</div>';
+    return;
+  }
+
   list.forEach(function(t) {
     const item = document.createElement("div");
     item.className = "tx-item";
@@ -1625,14 +1683,14 @@ function renderTxList(target, list) {
 
 function renderHomeTransactions() {
   const list = transactions.slice(0, 6);
-  renderTxList(document.getElementById("txList"), list);
+  renderTxList(document.getElementById("txList"), list, "No recent activity.\nYour transactions will appear here.");
   document.getElementById("txCount").textContent =
-    document.querySelectorAll("#txList .tx-item").length + " transactions";
+    transactions.length + " transaction" + (transactions.length === 1 ? "" : "s");
 }
 
 
 /* ============================================================
-   9. DASHBOARD
+   12. DASHBOARD
    ============================================================ */
 
 const checkingPill   = document.getElementById("checkingPill");
@@ -1658,9 +1716,18 @@ function renderAccount(key) {
   cardExpiry.textContent     = acc.expiry;
 
   const fromSel = document.getElementById("fromAccount");
-  if (fromSel) fromSel.value = key;
+  if (fromSel) {
+    fromSel.value = key;
+    fromSel.options[0].text = "Checking · " + formatMoney(accounts.checking.balance);
+    fromSel.options[1].text = "Savings · " + formatMoney(accounts.savings.balance);
+  }
+
   const billFrom = document.getElementById("billFrom");
-  if (billFrom) billFrom.value = key;
+  if (billFrom) {
+    billFrom.value = key;
+    billFrom.options[0].text = "Checking · " + formatMoney(accounts.checking.balance);
+    billFrom.options[1].text = "Savings · " + formatMoney(accounts.savings.balance);
+  }
 }
 
 checkingPill.addEventListener("click", function() {
@@ -1675,13 +1742,24 @@ savingsPill.addEventListener("click", function() {
   renderAccount("savings");
 });
 
+
+/* ============================================================
+   13. LOAD DASHBOARD
+   ============================================================ */
+
 function loadDashboard() {
   const email = getSession() || "";
-  const upper = email.toUpperCase();
-  const initial = getInitials(email);
+  const users = getUsers();
+  const user  = users[email];
+  const name  = (user && user.name) ? user.name : "Cerji Colvin";
 
-  document.getElementById("dashboardEmail").textContent  = email;
-  document.getElementById("cardEmail").textContent       = upper;
+  const initial = getInitials(name);
+  const upper   = email.toUpperCase();
+
+  document.getElementById("dashboardEmail").textContent = email;
+  document.getElementById("cardEmail").textContent      = upper;
+  document.getElementById("greetingName").textContent   = name;
+
   document.getElementById("avatar").textContent          = initial;
   document.getElementById("transferAvatar").textContent  = initial;
   document.getElementById("billsAvatar").textContent     = initial;
@@ -1689,15 +1767,16 @@ function loadDashboard() {
   document.getElementById("profileAvatar").textContent   = initial;
 
   document.getElementById("profileBigAvatar").textContent = initial;
+  document.getElementById("profileName").textContent      = name;
   document.getElementById("profileEmail").textContent     = email;
 
-  const users = getUsers();
-  const user  = users[email];
   if (user && user.createdAt) {
     document.getElementById("profileSince").textContent =
       "Member since " + new Date(user.createdAt).toLocaleDateString("en-US", {
         month: "long", day: "numeric", year: "numeric"
       });
+  } else {
+    document.getElementById("profileSince").textContent = "Member since today";
   }
 
   updateGreeting();
@@ -1716,7 +1795,7 @@ function updateProfileStats() {
 
 
 /* ============================================================
-   10. RECIPIENTS + TRANSFER
+   14. RECIPIENTS + TRANSFER
    ============================================================ */
 
 const recipients = [
@@ -1847,7 +1926,6 @@ document.getElementById("confirmTransfer").addEventListener("click", function() 
       fromAcc.balance -= total;
       fromAcc.expense += amount;
 
-      // Add to shared transactions
       transactions.unshift({
         id: Date.now(),
         type: "debit",
@@ -1885,7 +1963,7 @@ document.getElementById("confirmTransfer").addEventListener("click", function() 
 
 
 /* ============================================================
-   11. BILLS
+   15. BILLS
    ============================================================ */
 
 let selectedBill = null;
@@ -2029,7 +2107,7 @@ function billEmoji(name) {
 
 
 /* ============================================================
-   12. HISTORY
+   16. HISTORY
    ============================================================ */
 
 let historyFilter = "all";
@@ -2042,7 +2120,7 @@ function renderHistory() {
   else if (historyFilter === "bills")    list = list.filter(t => t.category === "bills");
   else if (historyFilter === "transfer") list = list.filter(t => t.category === "transfer");
 
-  renderTxList(document.getElementById("historyList"), list);
+  renderTxList(document.getElementById("historyList"), list, "No transactions match this filter.");
 
   let totalIn = 0, totalOut = 0;
   transactions.forEach(function(t) {
@@ -2070,7 +2148,7 @@ document.querySelectorAll(".filter-chip").forEach(function(chip) {
 
 
 /* ============================================================
-   13. TOP-ROW BUTTONS
+   17. TOP-ROW BUTTONS
    ============================================================ */
 
 document.getElementById("transferButton").addEventListener("click", function() {
@@ -2095,11 +2173,18 @@ document.getElementById("virtualCardButton").addEventListener("click", function(
 });
 
 document.getElementById("notificationButton").addEventListener("click", function() {
-  showModal("Notifications",
-    "You have 3 new alerts:\n\n" +
-    "• Salary Deposit  +$8,500.00\n" +
-    "• Rent Payment    -$1,850.00\n" +
-    "• Electric Bill   -$142.60");
+  if (transactions.length === 0) {
+    showModal("Notifications", "No new notifications.\n\nYou're all caught up.");
+  } else {
+    const recent = transactions.slice(0, 3);
+    let msg = "You have " + transactions.length + " transaction" +
+      (transactions.length === 1 ? "" : "s") + ":\n\n";
+    recent.forEach(function(t) {
+      msg += "• " + t.name + "  " +
+        (t.type === "credit" ? "+" : "-") + formatMoney(t.amount) + "\n";
+    });
+    showModal("Notifications", msg);
+  }
 });
 
 document.getElementById("themeButton").addEventListener("click", function() {
@@ -2109,7 +2194,7 @@ document.getElementById("themeButton").addEventListener("click", function() {
 
 
 /* ============================================================
-   14. BACK BUTTONS
+   18. BACK BUTTONS
    ============================================================ */
 
 document.getElementById("transferBack").addEventListener("click", function() {
@@ -2127,7 +2212,7 @@ document.getElementById("profileBack").addEventListener("click", function() {
 
 
 /* ============================================================
-   15. NAVIGATION (all .bottom-nav instances)
+   19. NAVIGATION
    ============================================================ */
 
 function navigateTo(page) {
@@ -2137,7 +2222,6 @@ function navigateTo(page) {
   else if (page === "history")    { showScreen(historyScreen);  renderHistory(); }
   else if (page === "profile")    { showScreen(profileScreen);  updateProfileStats(); }
 
-  // sync nav active state across all nav bars
   document.querySelectorAll(".nav-button").forEach(function(btn) {
     btn.classList.toggle("active", btn.dataset.page === page);
   });
@@ -2151,17 +2235,22 @@ document.querySelectorAll(".nav-button").forEach(function(button) {
 
 
 /* ============================================================
-   16. INIT
+   20. INIT
    ============================================================ */
 
 (function init() {
+  const accessGranted = sessionStorage.getItem(ACCESS_KEY) === "true";
   const existing = getSession();
-  if (existing) {
+
+  if (!accessGranted) {
+    showScreen(codeScreen);
+  } else if (existing) {
     loadDashboard();
     showScreen(dashboardScreen);
   } else {
     showScreen(signupScreen);
   }
+
   updateTransferSummary();
   updateBillSummary();
   renderHistory();
