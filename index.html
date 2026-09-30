@@ -53,8 +53,6 @@ body.light { background: #e2e8f0; }
   max-height: 100vh;
   background: linear-gradient(180deg, #23201a 0%, #12110d 45%, #0a0908 100%);
   position: relative;
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
   transition: background 0.3s;
 }
@@ -63,7 +61,11 @@ body.light .phone {
   background: linear-gradient(180deg, #eef2f7 0%, #f5f8fc 45%, #ffffff 100%);
 }
 
-/* ============== SCREENS ============== */
+/* ============================================================
+   SCREENS — only ONE visible at a time.
+   Default: display none.
+   Active: display flex (so children lay out correctly).
+   ============================================================ */
 .screen {
   display: none;
   flex-direction: column;
@@ -78,11 +80,17 @@ body.light .phone {
   scrollbar-width: none;
 }
 .screen::-webkit-scrollbar { display: none; }
-.screen.active { display: block; }
+
+.screen.active {
+  display: flex;
+}
 
 /* ============== AUTH ============== */
-.auth-screen { padding: 60px 30px 40px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-.screen.auth-screen.active { display: flex; overflow-y: auto; }
+.auth-screen {
+  padding: 60px 30px 40px;
+  justify-content: center;
+  align-items: center;
+}
 
 .brand {
   font-size: 34px; font-weight: 800; letter-spacing: -1px;
@@ -1218,8 +1226,6 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
     </nav>
   </section>
 
-  <!-- OTHER SCREENS (same as before, abbreviated for space) -->
-
   <!-- NOTIFICATIONS -->
   <section id="screen-notifications" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
@@ -1678,7 +1684,7 @@ const LS_USERS = 'novapay_users';
 const LS_SESSION = 'novapay_session';
 const LS_VERSION = 'novapay_version';
 const LS_THEME = 'novapay_theme';
-const APP_VERSION = 6;
+const APP_VERSION = 7;
 const STARTING_BALANCE = 134290.00;
 const STARTING_SAVINGS = 42000.00;
 const STARTING_CREDIT = -1250.00;
@@ -1951,11 +1957,10 @@ function switchAccountType(type) {
   renderAll(user);
 }
 
-/* ---------- FIXED GREETING LOGIC ----------
-   5:00 AM  – 11:59 AM → Good Morning
-   12:00 PM – 5:59 PM  → Good Afternoon
-   6:00 PM  – 4:59 AM  → Good Evening
---------------------------------------------- */
+/* Greeting rules:
+   5 AM – 11:59 AM → Good Morning
+   12 PM – 5:59 PM → Good Afternoon
+   6 PM – 4:59 AM → Good Evening */
 function greetingText() {
   const h = new Date().getHours();
   if (h >= 5 && h < 12) return 'Good Morning';
@@ -1982,7 +1987,6 @@ function updateClocks() {
     if (el) el.textContent = dateStr;
   });
 
-  // Live-update the greeting text if on home
   const greetingEl = document.getElementById('greeting');
   if (greetingEl && getSession()) {
     const user = getUsers()[getSession()];
@@ -2412,7 +2416,6 @@ function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
-/* ---------- transfer/deposit/etc (same as before) ---------- */
 function handleTransfer() {
   const key = getSession(); const user = getUsers()[key]; if (!user) return;
   const name = document.getElementById('tr-recipient').value.trim();
@@ -2667,7 +2670,7 @@ document.addEventListener('click', function (e) {
 document.addEventListener('DOMContentLoaded', function () {
   runMigrations();
   updateClocks();
-  setInterval(updateClocks, 1000);   // every second — greeting + clock stay current
+  setInterval(updateClocks, 1000);
 
   const isLight = document.body.classList.contains('light');
   const btn = document.getElementById('theme-btn');
