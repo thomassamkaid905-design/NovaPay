@@ -34,7 +34,8 @@ body {
 .phone {
   width: 100%;
   max-width: 430px;
-  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
   background: linear-gradient(180deg, #23201a 0%, #12110d 45%, #0a0908 100%);
   position: relative;
   display: flex;
@@ -47,14 +48,17 @@ body {
   display: none;
   flex-direction: column;
   width: 100%;
-  min-height: 100vh;
-  padding-bottom: 90px;
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 100px;
   position: relative;
 }
 .screen.active { display: flex; }
 
 /* ============== AUTH ============== */
 .auth-screen { padding: 60px 30px 40px; justify-content: center; align-items: center; }
+.screen.auth-screen.active { overflow-y: auto; }
 
 .brand {
   font-size: 34px; font-weight: 800; letter-spacing: -1px;
@@ -158,6 +162,7 @@ body {
   display: flex; align-items: center; justify-content: center;
   font-size: 18px; cursor: pointer; position: relative;
   color: var(--gold);
+  flex-shrink: 0;
 }
 .icon-btn .dot {
   position: absolute; top: 8px; right: 9px;
@@ -178,6 +183,16 @@ body {
   justify-content: center; font-weight: 800; font-size: 16px;
   box-shadow: 0 4px 14px rgba(80,110,240,0.4);
   flex-shrink: 0; cursor: pointer;
+}
+
+/* ============== DATE / TIME LIVE ============== */
+.date-line {
+  padding: 0 22px 12px;
+  font-size: 12px;
+  color: rgba(200,190,160,0.65);
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
 }
 
 /* ============== GREETING ============== */
@@ -375,8 +390,7 @@ body {
 
 /* ============== TX LIST ============== */
 .tx-list {
-  display: flex; flex-direction: column;
-  gap: 2px; max-height: 60vh; overflow-y: auto;
+  display: flex; flex-direction: column; gap: 2px;
 }
 .tx {
   display: flex; justify-content: space-between;
@@ -384,16 +398,19 @@ body {
   border-bottom: 1px solid rgba(229,199,107,0.08);
 }
 .tx:last-child { border-bottom: none; }
-.tx-left { display: flex; align-items: center; gap: 12px; }
+.tx-left { display: flex; align-items: center; gap: 12px; min-width: 0; flex: 1; }
 .tx-icon {
   width: 42px; height: 42px; border-radius: 12px;
   background: rgba(229,199,107,0.1);
   display: flex; align-items: center;
   justify-content: center; font-size: 18px; flex-shrink: 0;
 }
-.tx-name { font-size: 14px; font-weight: 700; color: #fdf8ea; }
+.tx-name {
+  font-size: 14px; font-weight: 700; color: #fdf8ea;
+  overflow: hidden; text-overflow: ellipsis;
+}
 .tx-date { font-size: 11px; color: rgba(200,190,160,0.55); margin-top: 3px; }
-.tx-amount { font-size: 14px; font-weight: 800; white-space: nowrap; }
+.tx-amount { font-size: 14px; font-weight: 800; white-space: nowrap; margin-left: 8px; }
 .tx-amount.positive { color: #4ade80; }
 .tx-amount.negative { color: #f87171; }
 
@@ -418,7 +435,7 @@ body {
   color: #f3dfa2; letter-spacing: -0.2px;
 }
 
-/* ============== RECEIVE INFO BOX ============== */
+/* ============== INFO BOX ============== */
 .info-box {
   padding: 16px; border-radius: 14px;
   background: rgba(96,165,250,0.08);
@@ -445,7 +462,7 @@ body {
   font-family: inherit;
 }
 
-/* ============== ACCOUNT SWITCHER MODAL ============== */
+/* ============== MODAL ============== */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -561,7 +578,8 @@ body {
   .phone {
     border-radius: 42px;
     box-shadow: 0 30px 80px rgba(0,0,0,0.8);
-    min-height: 900px; max-height: 900px;
+    height: 900px;
+    max-height: 90vh;
   }
 }
 </style>
@@ -579,6 +597,10 @@ body {
       <div class="field">
         <label for="su-name">Full Name</label>
         <input id="su-name" type="text" placeholder="e.g. Cerji Colvin" autocomplete="name">
+      </div>
+      <div class="field">
+        <label for="su-user">Username</label>
+        <input id="su-user" type="text" placeholder="e.g. cerji" autocomplete="username">
       </div>
       <div class="field">
         <label for="su-pass">Password</label>
@@ -603,8 +625,8 @@ body {
         <div class="label">Your Access Code</div>
         <div class="code" id="code-display">------</div>
         <div class="hint">
-          You'll need this code to sign in.<br>
-          Write it down somewhere safe.
+          You'll need this code to reset your password.<br>
+          Your username is: <strong id="code-username">—</strong>
         </div>
       </div>
       <button class="btn-gold" style="margin-top:24px;" onclick="showScreen('screen-signin')">
@@ -619,12 +641,12 @@ body {
     <div class="tagline">Sign in to your NovaPay account</div>
     <div class="auth-form">
       <div class="field">
-        <label for="si-name">Full Name</label>
-        <input id="si-name" type="text" placeholder="Your full name" autocomplete="name">
+        <label for="si-user">Username</label>
+        <input id="si-user" type="text" placeholder="Your username" autocomplete="username">
       </div>
       <div class="field">
-        <label for="si-code">6-Digit Access Code</label>
-        <input id="si-code" type="text" inputmode="numeric" maxlength="6" placeholder="••••••" autocomplete="one-time-code">
+        <label for="si-pass">Password</label>
+        <input id="si-pass" type="password" placeholder="Your password" autocomplete="current-password">
       </div>
       <button class="btn-gold" onclick="handleSignIn()">Sign In</button>
       <div class="error-msg" id="si-error"></div>
@@ -648,20 +670,22 @@ body {
       <div class="avatar" id="home-avatar" onclick="openSwitcher()">--</div>
     </div>
 
+    <div class="date-line" id="date-line-home">—</div>
+
     <div class="greeting-block">
       <h1 id="greeting">Good Afternoon</h1>
       <p>Welcome to your NovaPay dashboard.</p>
     </div>
 
     <div class="account-pills">
-      <button class="pill active">🏦 Checking •••• 4821</button>
-      <button class="pill inactive">🏛️ Savings •••• 7732</button>
+      <button class="pill active" id="pill-checking" onclick="switchAccountType('checking')">🏦 Checking •••• 4821</button>
+      <button class="pill inactive" id="pill-savings" onclick="switchAccountType('savings')">🏛️ Savings •••• 7732</button>
     </div>
 
     <div class="balance-card">
       <div class="balance-label">Available Balance</div>
       <div class="balance-amount" id="balance-display">$134,290.00</div>
-      <div class="balance-sub">Checking Account •••• 4821</div>
+      <div class="balance-sub" id="balance-sub">Checking Account •••• 4821</div>
       <div class="balance-actions">
         <button class="btn-primary" onclick="showScreen('screen-transfer')">Transfer</button>
         <button class="btn-outline" onclick="showScreen('screen-deposit')">Deposit</button>
@@ -1024,6 +1048,8 @@ body {
       <div class="avatar" id="history-avatar" onclick="openSwitcher()">--</div>
     </div>
 
+    <div class="date-line" id="date-line-history">—</div>
+
     <div class="panel">
       <h2>All Transactions</h2>
       <div class="tx-list" id="history-tx-list">
@@ -1051,12 +1077,13 @@ body {
 
     <div class="greeting-block">
       <h1 id="profile-name">—</h1>
-      <p id="profile-code-line">Access code: ••••••</p>
+      <p id="profile-code-line">Username: —</p>
     </div>
 
     <div class="panel">
       <h2>Account</h2>
       <div class="row"><span class="lbl">Account Holder</span><span class="val" id="pf-holder">—</span></div>
+      <div class="row"><span class="lbl">Username</span><span class="val" id="pf-username">—</span></div>
       <div class="row"><span class="lbl">Account Type</span><span class="val">Checking</span></div>
       <div class="row"><span class="lbl">Account Number</span><span class="val">•••• 4821</span></div>
       <div class="row"><span class="lbl">Routing Number</span><span class="val">021000021</span></div>
@@ -1066,13 +1093,30 @@ body {
     </div>
 
     <div class="panel">
+      <h2>Reset Password</h2>
+      <div class="info-box">
+        Enter your access code and a new password to reset.
+      </div>
+      <div class="form-group">
+        <label for="pf-reset-code">6-Digit Access Code</label>
+        <input id="pf-reset-code" type="text" inputmode="numeric" maxlength="6" placeholder="••••••">
+      </div>
+      <div class="form-group">
+        <label for="pf-new-pass">New Password</label>
+        <input id="pf-new-pass" type="password" placeholder="At least 4 characters">
+      </div>
+      <button class="btn-gold" onclick="handleResetPassword()">Reset Password</button>
+      <div class="success-msg" id="pf-msg"></div>
+    </div>
+
+    <div class="panel">
       <h2>Change Name</h2>
       <div class="form-group">
         <label for="pf-new-name">New Full Name</label>
         <input id="pf-new-name" type="text" placeholder="Enter new name">
       </div>
       <button class="btn-gold" onclick="handleChangeName()">Save Name</button>
-      <div class="success-msg" id="pf-msg"></div>
+      <div class="success-msg" id="pf-name-msg"></div>
     </div>
 
     <div class="panel">
@@ -1120,7 +1164,7 @@ body {
 const LS_USERS = 'novapay_users';
 const LS_SESSION = 'novapay_session';
 const LS_VERSION = 'novapay_version';
-const APP_VERSION = 3;
+const APP_VERSION = 4;
 const STARTING_BALANCE = 134290.00;
 
 /* ---------- storage ---------- */
@@ -1130,34 +1174,72 @@ function getUsers() {
 }
 function saveUsers(u) { localStorage.setItem(LS_USERS, JSON.stringify(u)); }
 function getSession() { return localStorage.getItem(LS_SESSION); }
-function setSession(name) { localStorage.setItem(LS_SESSION, name); }
+function setSession(username) { localStorage.setItem(LS_SESSION, username); }
 function clearSession() { localStorage.removeItem(LS_SESSION); }
 
-/* ---------- one-time upgrade ---------- */
+/* ---------- migration: seed Ifundwomen grant ---------- */
+function seedIfundwomen(user) {
+  if (!user.transactions) user.transactions = [];
+  const hasGrant = user.transactions.some(t =>
+    t.label && t.label.toLowerCase().includes('ifundwomen')
+  );
+  if (!hasGrant) {
+    user.transactions.unshift({
+      type: 'receive',
+      label: 'Ifundwomen Grant Received',
+      amount: 134290.00,
+      date: Date.now() - 1000 * 60 * 60 * 24, // yesterday
+      account: 'checking'
+    });
+  }
+}
+
 function runMigrations() {
   const storedVersion = parseInt(localStorage.getItem(LS_VERSION) || '0', 10);
-  if (storedVersion >= APP_VERSION) return;
-
   const users = getUsers();
+  let changed = false;
+
   Object.keys(users).forEach(k => {
     const u = users[k];
     if (!u || typeof u !== 'object') return;
-    if (u.balance !== STARTING_BALANCE && (!u.transactions || u.transactions.length === 0)) {
+
+    if (storedVersion < APP_VERSION) {
+      // First time on new version: force starting balance
       u.balance = STARTING_BALANCE;
+      u.savingsBalance = u.savingsBalance || 0;
+      u.transactions = u.transactions || [];
+      if (!u.username) u.username = (u.name || 'user').toLowerCase().replace(/\s+/g,'');
+      if (!u.email) u.email = u.username + '@novapay.demo';
+      if (!u.phone) u.phone = '(555) ' + Math.floor(100+Math.random()*900) + '-' + Math.floor(1000+Math.random()*9000);
+      if (!u.activeAccount) u.activeAccount = 'checking';
+      seedIfundwomen(u);
+      changed = true;
     }
-    u.transactions = u.transactions || [];
-    if (!u.email) u.email = u.name.toLowerCase().replace(/\s+/g,'.') + '@novapay.demo';
-    if (!u.phone) u.phone = '(555) ' + Math.floor(100+Math.random()*900) + '-' + Math.floor(1000+Math.random()*9000);
+
+    // Always ensure the grant exists for every user
+    if (!u.transactions || !u.transactions.some(t => t.label && t.label.toLowerCase().includes('ifundwomen'))) {
+      seedIfundwomen(u);
+      changed = true;
+    }
+    if (u.savingsBalance === undefined) { u.savingsBalance = 0; changed = true; }
+    if (!u.activeAccount) { u.activeAccount = 'checking'; changed = true; }
+    if (!u.username) { u.username = (u.name || 'user').toLowerCase().replace(/\s+/g,''); changed = true; }
   });
-  saveUsers(users);
-  localStorage.setItem(LS_VERSION, APP_VERSION);
+
+  if (changed || storedVersion < APP_VERSION) {
+    saveUsers(users);
+    localStorage.setItem(LS_VERSION, APP_VERSION);
+  }
 }
 
 /* ---------- screen routing ---------- */
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   const target = document.getElementById(id);
-  if (target) target.classList.add('active');
+  if (target) {
+    target.classList.add('active');
+    target.scrollTop = 0;
+  }
   window.scrollTo(0, 0);
 
   const protectedScreens = ['screen-home','screen-transfer','screen-deposit',
@@ -1178,41 +1260,53 @@ function showScreen(id) {
 /* ---------- sign up ---------- */
 function handleSignUp() {
   const nameEl = document.getElementById('su-name');
+  const userEl = document.getElementById('su-user');
   const passEl = document.getElementById('su-pass');
   const errEl  = document.getElementById('su-error');
 
   const name = nameEl.value.trim();
+  const username = userEl.value.trim().toLowerCase().replace(/\s+/g,'');
   const pass = passEl.value;
   errEl.textContent = '';
 
   if (!name) { errEl.textContent = 'Please enter your full name.'; return; }
   if (name.length < 3) { errEl.textContent = 'Name must be at least 3 characters.'; return; }
+  if (!username) { errEl.textContent = 'Please choose a username.'; return; }
+  if (username.length < 3) { errEl.textContent = 'Username must be at least 3 characters.'; return; }
+  if (!/^[a-z0-9._-]+$/.test(username)) { errEl.textContent = 'Username: letters, numbers, . _ - only.'; return; }
   if (!pass || pass.length < 4) { errEl.textContent = 'Password must be at least 4 characters.'; return; }
 
   const users = getUsers();
-  const key = name.toLowerCase();
-  if (users[key]) {
-    errEl.textContent = 'An account with that name already exists. Try signing in.';
+  if (users[username]) {
+    errEl.textContent = 'That username is already taken.';
     return;
   }
 
   const code = generateCode();
-  users[key] = {
+  const user = {
     name: name,
+    username: username,
     pass: pass,
     code: code,
     balance: STARTING_BALANCE,
+    savingsBalance: 0,
+    activeAccount: 'checking',
     transactions: [],
-    email: name.toLowerCase().replace(/\s+/g,'.') + '@novapay.demo',
+    email: username + '@novapay.demo',
     phone: '(555) ' + Math.floor(100+Math.random()*900) + '-' + Math.floor(1000+Math.random()*9000),
     createdAt: Date.now()
   };
+  seedIfundwomen(user);
+  users[username] = user;
   saveUsers(users);
 
   document.getElementById('code-display').textContent = code;
+  document.getElementById('code-username').textContent = username;
   showScreen('screen-code');
-  document.getElementById('si-name').value = name;
+
+  document.getElementById('si-user').value = username;
   nameEl.value = '';
+  userEl.value = '';
   passEl.value = '';
 }
 
@@ -1224,34 +1318,32 @@ function generateCode() {
 
 /* ---------- sign in ---------- */
 function handleSignIn() {
-  const nameEl = document.getElementById('si-name');
-  const codeEl = document.getElementById('si-code');
+  const userEl = document.getElementById('si-user');
+  const passEl = document.getElementById('si-pass');
   const errEl  = document.getElementById('si-error');
 
-  const name = nameEl.value.trim();
-  const code = codeEl.value.trim();
+  const username = userEl.value.trim().toLowerCase().replace(/\s+/g,'');
+  const pass = passEl.value;
   errEl.textContent = '';
 
-  if (!name || !code) { errEl.textContent = 'Enter your name and access code.'; return; }
-  if (code.length !== 6) { errEl.textContent = 'Access code must be 6 digits.'; return; }
+  if (!username || !pass) { errEl.textContent = 'Enter your username and password.'; return; }
 
   const users = getUsers();
-  const key = name.toLowerCase();
-  const user = users[key];
+  const user = users[username];
 
-  if (!user) { errEl.textContent = 'No account found for that name.'; return; }
-  if (user.code !== code) { errEl.textContent = 'Incorrect access code. Try again.'; return; }
+  if (!user) { errEl.textContent = 'No account found with that username.'; return; }
+  if (user.pass !== pass) { errEl.textContent = 'Incorrect password. Try again.'; return; }
 
-  setSession(key);
-  codeEl.value = '';
+  setSession(username);
+  passEl.value = '';
   showScreen('screen-home');
 }
 
 /* ---------- sign out ---------- */
 function handleSignOut() {
   clearSession();
-  document.getElementById('si-name').value = '';
-  document.getElementById('si-code').value = '';
+  document.getElementById('si-user').value = '';
+  document.getElementById('si-pass').value = '';
   showScreen('screen-signin');
 }
 
@@ -1269,12 +1361,13 @@ function openSwitcher() {
       const u = users[k];
       const initials = u.name.split(' ').map(s => s[0]).join('').slice(0,2).toUpperCase();
       const isCurrent = (k === session);
+      const bal = (u.activeAccount === 'savings' ? (u.savingsBalance || 0) : u.balance);
       return `
         <div class="account-item ${isCurrent ? 'current' : ''}" onclick="switchToAccount('${escapeAttr(k)}')">
           <div class="ac-avatar">${initials}</div>
           <div class="ac-info">
             <div class="ac-name">${escapeHtml(u.name)}</div>
-            <div class="ac-bal">${fmt(u.balance)}</div>
+            <div class="ac-bal">@${escapeHtml(u.username)} · ${fmt(bal)}</div>
           </div>
           ${isCurrent ? '<div class="ac-check">✓</div>' : ''}
         </div>`;
@@ -1301,7 +1394,33 @@ function escapeAttr(s) {
   return String(s).replace(/'/g, "\\'").replace(/"/g, '&quot;');
 }
 
-/* ---------- greeting / clock ---------- */
+/* ---------- checking vs savings ---------- */
+function switchAccountType(type) {
+  const key = getSession();
+  const user = getUsers()[key];
+  if (!user) return;
+  user.activeAccount = type;
+  persistUser(key, user);
+
+  const pillChecking = document.getElementById('pill-checking');
+  const pillSavings  = document.getElementById('pill-savings');
+  if (pillChecking && pillSavings) {
+    if (type === 'savings') {
+      pillSavings.classList.remove('inactive');
+      pillSavings.classList.add('active');
+      pillChecking.classList.remove('active');
+      pillChecking.classList.add('inactive');
+    } else {
+      pillChecking.classList.remove('inactive');
+      pillChecking.classList.add('active');
+      pillSavings.classList.remove('active');
+      pillSavings.classList.add('inactive');
+    }
+  }
+  renderAll(user);
+}
+
+/* ---------- greeting / clock / date ---------- */
 function greetingText() {
   const h = new Date().getHours();
   if (h >= 5 && h < 12) return 'Good Morning';
@@ -1311,13 +1430,23 @@ function greetingText() {
 
 function updateClocks() {
   const now = new Date();
-  let h = now.getHours(), m = now.getMinutes();
+  let h = now.getHours(), m = now.getMinutes(), s = now.getSeconds();
   h = h % 12; if (h === 0) h = 12;
   m = m < 10 ? '0' + m : m;
+  s = s < 10 ? '0' + s : s;
   const t = h + ':' + m;
   ['clock','clock2','clock3','clock4','clock5','clock6','clock7','clock8','clock9'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.textContent = t;
+  });
+
+  const dateStr = now.toLocaleDateString(undefined, {
+    weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'
+  }) + ' · ' + h + ':' + m + ':' + s + (now.getHours() >= 12 ? ' PM' : ' AM');
+
+  ['date-line-home','date-line-history'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = dateStr;
   });
 }
 
@@ -1348,13 +1477,35 @@ function renderAll(user) {
   const homeAvatar  = document.getElementById('home-avatar');
   const greeting    = document.getElementById('greeting');
   const balance     = document.getElementById('balance-display');
-  const cardHolder  = document.querySelector('.card-bottom .name');
+  const balanceSub  = document.getElementById('balance-sub');
 
   if (homeName)   homeName.textContent   = user.name;
   if (homeAvatar) homeAvatar.textContent = initials;
   if (greeting)   greeting.textContent   = greetingText() + ', ' + user.name;
-  if (balance)    balance.textContent    = fmt(user.balance);
-  if (cardHolder) cardHolder.textContent = user.name.toUpperCase();
+
+  const activeType = user.activeAccount || 'checking';
+  const activeBal = (activeType === 'savings')
+    ? (user.savingsBalance || 0)
+    : user.balance;
+  if (balance)    balance.textContent    = fmt(activeBal);
+  if (balanceSub) balanceSub.textContent = (activeType === 'savings' ? 'Savings Account •••• 7732' : 'Checking Account •••• 4821');
+
+  // pill state
+  const pillChecking = document.getElementById('pill-checking');
+  const pillSavings  = document.getElementById('pill-savings');
+  if (pillChecking && pillSavings) {
+    if (activeType === 'savings') {
+      pillSavings.classList.add('active');
+      pillSavings.classList.remove('inactive');
+      pillChecking.classList.remove('active');
+      pillChecking.classList.add('inactive');
+    } else {
+      pillChecking.classList.add('active');
+      pillChecking.classList.remove('inactive');
+      pillSavings.classList.remove('active');
+      pillSavings.classList.add('inactive');
+    }
+  }
 
   ['transfer-avatar','deposit-avatar','bills-avatar','history-avatar',
    'profile-avatar','receive-avatar','wire-avatar','zelle-avatar'].forEach(id => {
@@ -1366,10 +1517,12 @@ function renderAll(user) {
   const pfHolder  = document.getElementById('pf-holder');
   const pfCode    = document.getElementById('profile-code-line');
   const pfBalance = document.getElementById('pf-balance');
+  const pfUser    = document.getElementById('pf-username');
   if (pfName)    pfName.textContent    = user.name;
   if (pfHolder)  pfHolder.textContent  = user.name;
-  if (pfCode)    pfCode.textContent    = 'Access code: ' + user.code;
-  if (pfBalance) pfBalance.textContent = fmt(user.balance);
+  if (pfCode)    pfCode.textContent    = 'Username: @' + user.username;
+  if (pfBalance) pfBalance.textContent = fmt(activeBal);
+  if (pfUser)    pfUser.textContent    = '@' + user.username;
 
   const rcvHolder = document.getElementById('rcv-holder');
   if (rcvHolder) rcvHolder.textContent = user.name;
@@ -1379,7 +1532,7 @@ function renderAll(user) {
   if (zEmail) zEmail.textContent = user.email || '—';
   if (zPhone) zPhone.textContent = user.phone || '—';
 
-  // stats
+  // stats (based on all transactions)
   const txs = user.transactions || [];
   const income = txs.filter(t => t.amount > 0).reduce((s, t) => s + t.amount, 0);
   const spent  = txs.filter(t => t.amount < 0).reduce((s, t) => s + Math.abs(t.amount), 0);
@@ -1408,13 +1561,15 @@ function renderTransactions(user) {
                  : tx.type === 'receive'  ? '↓'
                  : '↗';
       const cls = tx.amount >= 0 ? 'positive' : 'negative';
-      const date = new Date(tx.date).toLocaleDateString(undefined,
-        { month:'short', day:'numeric', year:'numeric' });
+      const d = new Date(tx.date);
+      const date = d.toLocaleDateString(undefined,
+        { month:'short', day:'numeric', year:'numeric' }) + ' · ' +
+        d.toLocaleTimeString(undefined, { hour:'numeric', minute:'2-digit' });
       return `
         <div class="tx">
           <div class="tx-left">
             <div class="tx-icon">${icon}</div>
-            <div>
+            <div style="min-width:0;">
               <div class="tx-name">${escapeHtml(tx.label)}</div>
               <div class="tx-date">${date}</div>
             </div>
@@ -1447,6 +1602,19 @@ function persistUser(key, user) {
   saveUsers(users);
 }
 
+function currentBalance(user) {
+  return (user.activeAccount === 'savings')
+    ? (user.savingsBalance || 0)
+    : user.balance;
+}
+function applyBalance(user, delta) {
+  if (user.activeAccount === 'savings') {
+    user.savingsBalance = (user.savingsBalance || 0) + delta;
+  } else {
+    user.balance += delta;
+  }
+}
+
 /* ---------- transfer ---------- */
 function handleTransfer() {
   const key = getSession();
@@ -1464,13 +1632,14 @@ function handleTransfer() {
   const amount = parseFloat(amountStr);
   if (!name) { msg.textContent = 'Enter recipient name.'; return; }
   if (!amount || amount <= 0) { msg.textContent = 'Enter a valid amount.'; return; }
-  if (amount > user.balance) { msg.textContent = 'Insufficient balance.'; return; }
+  if (amount > currentBalance(user)) { msg.textContent = 'Insufficient balance.'; return; }
 
-  user.balance -= amount;
+  applyBalance(user, -amount);
   addTransaction(user, {
     type: 'transfer',
     label: 'Transfer to ' + name + (note ? ' — ' + note : ''),
-    amount: -amount, date: Date.now()
+    amount: -amount, date: Date.now(),
+    account: user.activeAccount
   });
   persistUser(key, user);
 
@@ -1501,11 +1670,12 @@ function handleDeposit() {
   const amount = parseFloat(amountStr);
   if (!amount || amount <= 0) { msg.textContent = 'Enter a valid amount.'; return; }
 
-  user.balance += amount;
+  applyBalance(user, amount);
   addTransaction(user, {
     type: 'deposit',
     label: 'Deposit — ' + source,
-    amount: amount, date: Date.now()
+    amount: amount, date: Date.now(),
+    account: user.activeAccount
   });
   persistUser(key, user);
 
@@ -1536,11 +1706,12 @@ function handleReceive() {
   if (!from) { msg.textContent = 'Enter sender name.'; return; }
   if (!amount || amount <= 0) { msg.textContent = 'Enter a valid amount.'; return; }
 
-  user.balance += amount;
+  applyBalance(user, amount);
   addTransaction(user, {
     type: 'receive',
     label: 'Received from ' + from,
-    amount: amount, date: Date.now()
+    amount: amount, date: Date.now(),
+    account: user.activeAccount
   });
   persistUser(key, user);
 
@@ -1579,18 +1750,20 @@ function handleWire() {
   if (!/^\d{9}$/.test(routing)) { msg.textContent = 'Routing number must be 9 digits.'; return; }
   if (!account) { msg.textContent = 'Enter recipient account number.'; return; }
   if (!amount || amount <= 0) { msg.textContent = 'Enter a valid amount.'; return; }
-  if (amount + FEE > user.balance) { msg.textContent = 'Insufficient balance (amount + $15 fee).'; return; }
+  if (amount + FEE > currentBalance(user)) { msg.textContent = 'Insufficient balance (amount + $15 fee).'; return; }
 
-  user.balance -= (amount + FEE);
+  applyBalance(user, -(amount + FEE));
   addTransaction(user, {
     type: 'wire',
     label: 'Wire to ' + name + ' (' + bank + ')' + (note ? ' — ' + note : ''),
-    amount: -amount, date: Date.now()
+    amount: -amount, date: Date.now(),
+    account: user.activeAccount
   });
   addTransaction(user, {
     type: 'wire',
     label: 'Wire fee',
-    amount: -FEE, date: Date.now()
+    amount: -FEE, date: Date.now(),
+    account: user.activeAccount
   });
   persistUser(key, user);
 
@@ -1629,13 +1802,14 @@ function handleZelle() {
     msg.textContent = 'Enter a valid phone number.'; return;
   }
   if (!amount || amount <= 0) { msg.textContent = 'Enter a valid amount.'; return; }
-  if (amount > user.balance) { msg.textContent = 'Insufficient balance.'; return; }
+  if (amount > currentBalance(user)) { msg.textContent = 'Insufficient balance.'; return; }
 
-  user.balance -= amount;
+  applyBalance(user, -amount);
   addTransaction(user, {
     type: 'zelle',
     label: 'Zelle to ' + recipient + (memo ? ' — ' + memo : ''),
-    amount: -amount, date: Date.now()
+    amount: -amount, date: Date.now(),
+    account: user.activeAccount
   });
   persistUser(key, user);
 
@@ -1666,13 +1840,14 @@ function handleBill() {
   const amount = parseFloat(amountStr);
   if (!name) { msg.textContent = 'Enter biller name.'; return; }
   if (!amount || amount <= 0) { msg.textContent = 'Enter a valid amount.'; return; }
-  if (amount > user.balance) { msg.textContent = 'Insufficient balance.'; return; }
+  if (amount > currentBalance(user)) { msg.textContent = 'Insufficient balance.'; return; }
 
-  user.balance -= amount;
+  applyBalance(user, -amount);
   addTransaction(user, {
     type: 'bill',
     label: 'Bill — ' + name,
-    amount: -amount, date: Date.now()
+    amount: -amount, date: Date.now(),
+    account: user.activeAccount
   });
   persistUser(key, user);
 
@@ -1686,6 +1861,48 @@ function handleBill() {
   setTimeout(() => { msg.textContent = ''; }, 1800);
 }
 
+/* ---------- reset password ---------- */
+function handleResetPassword() {
+  const key = getSession();
+  const users = getUsers();
+  const user = users[key];
+  if (!user) { showScreen('screen-signin'); return; }
+
+  const codeEl = document.getElementById('pf-reset-code');
+  const passEl = document.getElementById('pf-new-pass');
+  const msg = document.getElementById('pf-msg');
+
+  msg.textContent = '';
+
+  const code = codeEl.value.trim();
+  const newPass = passEl.value;
+
+  if (!code || code.length !== 6) {
+    msg.textContent = 'Enter your 6-digit access code.';
+    msg.style.color = '#f87171';
+    return;
+  }
+  if (code !== user.code) {
+    msg.textContent = 'Incorrect access code.';
+    msg.style.color = '#f87171';
+    return;
+  }
+  if (!newPass || newPass.length < 4) {
+    msg.textContent = 'New password must be at least 4 characters.';
+    msg.style.color = '#f87171';
+    return;
+  }
+
+  user.pass = newPass;
+  persistUser(key, user);
+
+  codeEl.value = '';
+  passEl.value = '';
+  msg.textContent = 'Password reset successfully.';
+  msg.style.color = '#4ade80';
+  setTimeout(() => { msg.textContent = ''; }, 2400);
+}
+
 /* ---------- change name ---------- */
 function handleChangeName() {
   const key = getSession();
@@ -1694,7 +1911,7 @@ function handleChangeName() {
   if (!user) { showScreen('screen-signin'); return; }
 
   const newName = document.getElementById('pf-new-name').value.trim();
-  const msg = document.getElementById('pf-msg');
+  const msg = document.getElementById('pf-name-msg');
   msg.textContent = '';
 
   if (!newName || newName.length < 3) {
@@ -1703,18 +1920,8 @@ function handleChangeName() {
     return;
   }
 
-  const newKey = newName.toLowerCase();
-  if (newKey !== key && users[newKey]) {
-    msg.textContent = 'That name is already taken.';
-    msg.style.color = '#f87171';
-    return;
-  }
-
-  delete users[key];
   user.name = newName;
-  users[newKey] = user;
-  saveUsers(users);
-  setSession(newKey);
+  persistUser(key, user);
 
   document.getElementById('pf-new-name').value = '';
   msg.textContent = 'Name updated successfully.';
@@ -1790,7 +1997,7 @@ document.addEventListener('click', function (e) {
 document.addEventListener('DOMContentLoaded', function () {
   runMigrations();
   updateClocks();
-  setInterval(updateClocks, 30000);
+  setInterval(updateClocks, 1000);    // updates every second
 
   const session = getSession();
   if (session && getUsers()[session]) {
