@@ -237,6 +237,7 @@ body {
   margin: 8px 0 6px; font-size: 42px; font-weight: 800;
   letter-spacing: -1.5px; color: #fdf8ea;
   position: relative; z-index: 2; line-height: 1.05;
+  word-break: break-all;
 }
 .balance-sub {
   font-size: 14px; color: rgba(200,190,160,0.6);
@@ -266,71 +267,26 @@ body {
 }
 .btn-outline:active { transform: scale(0.97); }
 
-/* ============== DEBIT CARD ============== */
-.debit-wrap {
-  margin: 0 18px 22px; padding: 26px 24px 22px;
-  border-radius: 24px;
-  background: linear-gradient(150deg, #1a1813 0%, #0a0908 70%);
+/* ============== STATS ============== */
+.stats-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 10px; margin: 0 18px 22px; flex-shrink: 0;
+}
+.stat-card {
+  background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 70%);
   border: 1px solid rgba(229,199,107,0.16);
-  box-shadow: 0 18px 40px rgba(0,0,0,0.5);
-  position: relative; overflow: hidden; flex-shrink: 0;
+  border-radius: 14px; padding: 14px 10px;
+  text-align: center;
 }
-
-.debit-head {
-  display: flex; justify-content: space-between;
-  align-items: flex-start; margin-bottom: 22px;
+.stat-card .stat-label {
+  font-size: 10.5px; color: rgba(200,190,160,0.6);
+  font-weight: 600; letter-spacing: 0.4px;
+  text-transform: uppercase; margin-bottom: 6px;
 }
-.debit-head h2 {
-  font-size: 22px; font-weight: 800;
-  color: #f3dfa2; letter-spacing: -0.4px;
+.stat-card .stat-value {
+  font-size: 15px; color: #f3dfa2;
+  font-weight: 800; word-break: break-all;
 }
-.wifi-icon { color: #f3dfa2; font-size: 22px; transform: rotate(90deg); opacity: 0.9; }
-
-.chip {
-  width: 46px; height: 34px; border-radius: 7px;
-  background: linear-gradient(135deg, #f3dfa2, #c9a84a);
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.35), 0 2px 6px rgba(229,199,107,0.25);
-  margin-bottom: 24px; position: relative;
-}
-.chip::after {
-  content: ""; position: absolute; inset: 6px 8px;
-  border: 1px solid rgba(42,33,7,0.35); border-radius: 3px;
-}
-
-.card-number {
-  font-size: 20px; letter-spacing: 5px; font-weight: 700;
-  color: #fdf8ea; margin-bottom: 20px;
-}
-.card-number .last { letter-spacing: 4px; color: #f3dfa2; }
-
-.card-bottom {
-  display: flex; justify-content: space-between;
-  align-items: flex-end; font-size: 12px;
-  letter-spacing: 0.8px; font-weight: 600;
-  color: rgba(220,210,180,0.85);
-}
-.card-bottom .label {
-  font-size: 10px; color: rgba(180,170,140,0.55);
-  letter-spacing: 0.6px; font-weight: 500;
-  margin-bottom: 3px; display: block;
-}
-.card-bottom .name {
-  font-size: 13px; color: #fdf8ea;
-  font-weight: 700; letter-spacing: 0.6px;
-}
-
-/* ============== GENERATE BUTTON ============== */
-.generate-btn {
-  margin: 0 18px 26px; padding: 18px; border-radius: 18px;
-  background: linear-gradient(135deg, rgba(243,223,162,0.14), rgba(229,199,107,0.08));
-  border: 1.5px solid rgba(229,199,107,0.35);
-  color: #f3dfa2; font-size: 15px; font-weight: 800;
-  text-align: center; cursor: pointer; display: flex;
-  align-items: center; justify-content: center; gap: 8px;
-  transition: 0.15s; flex-shrink: 0; font-family: inherit;
-}
-.generate-btn:active { transform: scale(0.98); }
-.generate-btn .plus { font-size: 18px; font-weight: 900; }
 
 /* ============== SERVICE GRID ============== */
 .service-grid {
@@ -489,6 +445,116 @@ body {
   font-family: inherit;
 }
 
+/* ============== ACCOUNT SWITCHER MODAL ============== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  padding: 20px;
+}
+.modal-overlay.show { display: flex; }
+
+.modal {
+  width: 100%;
+  max-width: 380px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 70%);
+  border: 1.5px solid rgba(229,199,107,0.3);
+  border-radius: 22px;
+  padding: 24px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+}
+
+.modal h2 {
+  font-size: 20px;
+  font-weight: 800;
+  color: #f3dfa2;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.modal .modal-sub {
+  font-size: 13px;
+  color: rgba(200,190,160,0.6);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.account-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.04);
+  border: 1.5px solid rgba(229,199,107,0.1);
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: 0.15s;
+}
+.account-item:hover {
+  background: rgba(229,199,107,0.08);
+  border-color: rgba(229,199,107,0.35);
+}
+.account-item.current {
+  border-color: rgba(229,199,107,0.6);
+  background: rgba(229,199,107,0.1);
+}
+
+.account-item .ac-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: linear-gradient(135deg, #5b7cfa, #4a63e0);
+  color: white; display: flex; align-items: center;
+  justify-content: center; font-weight: 800; font-size: 15px;
+  flex-shrink: 0;
+}
+.account-item .ac-info { flex: 1; min-width: 0; }
+.account-item .ac-name {
+  font-size: 15px; font-weight: 800; color: #fdf8ea;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.account-item .ac-bal {
+  font-size: 12px; color: rgba(200,190,160,0.7);
+  margin-top: 3px;
+}
+.account-item .ac-check {
+  font-size: 18px; color: #f3dfa2;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.modal-btn {
+  flex: 1;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: 0.15s;
+}
+.modal-btn.gold {
+  background: linear-gradient(135deg, #f3dfa2, #e5c76b);
+  color: #2a2107;
+}
+.modal-btn.ghost {
+  background: transparent;
+  color: #e5c76b;
+  border: 1.5px solid rgba(229,199,107,0.4);
+}
+.modal-btn:active { transform: scale(0.97); }
+
 /* ============== DESKTOP ============== */
 @media (min-width: 480px) {
   body { padding: 20px 0; background: #000; }
@@ -579,7 +645,7 @@ body {
       <div class="icon-btn" title="Theme">☀️</div>
       <div class="icon-btn" title="Notifications">🔔<span class="dot"></span></div>
       <div class="top-name" id="home-name">—</div>
-      <div class="avatar" id="home-avatar" onclick="showScreen('screen-profile')">--</div>
+      <div class="avatar" id="home-avatar" onclick="openSwitcher()">--</div>
     </div>
 
     <div class="greeting-block">
@@ -599,6 +665,22 @@ body {
       <div class="balance-actions">
         <button class="btn-primary" onclick="showScreen('screen-transfer')">Transfer</button>
         <button class="btn-outline" onclick="showScreen('screen-deposit')">Deposit</button>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Income</div>
+        <div class="stat-value" id="stat-income">$0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Spent</div>
+        <div class="stat-value" id="stat-spent">$0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Txns</div>
+        <div class="stat-value" id="stat-count">0</div>
       </div>
     </div>
 
@@ -640,7 +722,7 @@ body {
     <div class="top-row">
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">Transfer</div>
-      <div class="avatar" id="transfer-avatar">--</div>
+      <div class="avatar" id="transfer-avatar" onclick="openSwitcher()">--</div>
     </div>
 
     <div class="panel">
@@ -676,7 +758,7 @@ body {
     <div class="top-row">
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">Deposit</div>
-      <div class="avatar" id="deposit-avatar">--</div>
+      <div class="avatar" id="deposit-avatar" onclick="openSwitcher()">--</div>
     </div>
 
     <div class="panel">
@@ -708,7 +790,7 @@ body {
     <div class="top-row">
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">Receive Money</div>
-      <div class="avatar" id="receive-avatar">--</div>
+      <div class="avatar" id="receive-avatar" onclick="openSwitcher()">--</div>
     </div>
 
     <div class="panel">
@@ -778,7 +860,7 @@ body {
     <div class="top-row">
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">Wire Transfer</div>
-      <div class="avatar" id="wire-avatar">--</div>
+      <div class="avatar" id="wire-avatar" onclick="openSwitcher()">--</div>
     </div>
 
     <div class="panel">
@@ -836,7 +918,7 @@ body {
     <div class="top-row">
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">Zelle®</div>
-      <div class="avatar" id="zelle-avatar">--</div>
+      <div class="avatar" id="zelle-avatar" onclick="openSwitcher()">--</div>
     </div>
 
     <div class="panel">
@@ -907,7 +989,7 @@ body {
     <div class="top-row">
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">Bills</div>
-      <div class="avatar" id="bills-avatar">--</div>
+      <div class="avatar" id="bills-avatar" onclick="openSwitcher()">--</div>
     </div>
 
     <div class="panel">
@@ -939,7 +1021,7 @@ body {
     <div class="top-row">
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">History</div>
-      <div class="avatar" id="history-avatar">--</div>
+      <div class="avatar" id="history-avatar" onclick="openSwitcher()">--</div>
     </div>
 
     <div class="panel">
@@ -964,7 +1046,7 @@ body {
     <div class="top-row">
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">Profile</div>
-      <div class="avatar" id="profile-avatar">--</div>
+      <div class="avatar" id="profile-avatar" onclick="openSwitcher()">--</div>
     </div>
 
     <div class="greeting-block">
@@ -979,6 +1061,7 @@ body {
       <div class="row"><span class="lbl">Account Number</span><span class="val">•••• 4821</span></div>
       <div class="row"><span class="lbl">Routing Number</span><span class="val">021000021</span></div>
       <div class="row"><span class="lbl">Currency</span><span class="val">USD</span></div>
+      <div class="row"><span class="lbl">Balance</span><span class="val" id="pf-balance">$134,290.00</span></div>
       <div class="row"><span class="lbl">Status</span><span class="val" style="color:#4ade80;">Active</span></div>
     </div>
 
@@ -994,7 +1077,10 @@ body {
 
     <div class="panel">
       <h2>Security</h2>
-      <button class="btn-outline" style="width:100%;padding:16px;border-radius:14px;font-size:15px;font-weight:800;" onclick="handleSignOut()">
+      <button class="btn-outline" style="width:100%;padding:16px;border-radius:14px;font-size:15px;font-weight:800;" onclick="openSwitcher()">
+        Switch Account
+      </button>
+      <button class="btn-outline" style="width:100%;padding:16px;border-radius:14px;font-size:15px;font-weight:800;margin-top:10px;" onclick="handleSignOut()">
         Sign Out
       </button>
     </div>
@@ -1010,6 +1096,21 @@ body {
 
 </div>
 
+<!-- ============= ACCOUNT SWITCHER MODAL ============= -->
+<div class="modal-overlay" id="switcher-modal">
+  <div class="modal">
+    <h2>Switch Account</h2>
+    <div class="modal-sub">Pick another saved account to sign in</div>
+
+    <div id="switcher-list"></div>
+
+    <div class="modal-actions">
+      <button class="modal-btn ghost" onclick="closeSwitcher()">Cancel</button>
+      <button class="modal-btn gold" onclick="closeSwitcher(); handleSignOut();">Sign Out</button>
+    </div>
+  </div>
+</div>
+
 <script>
 /* =========================================================
    NovaPay — local browser app
@@ -1019,8 +1120,8 @@ body {
 const LS_USERS = 'novapay_users';
 const LS_SESSION = 'novapay_session';
 const LS_VERSION = 'novapay_version';
-const APP_VERSION = 2;                 // <-- bump to force balance reset
-const STARTING_BALANCE = 134290.00;    // <-- your requested starting balance
+const APP_VERSION = 3;
+const STARTING_BALANCE = 134290.00;
 
 /* ---------- storage ---------- */
 function getUsers() {
@@ -1032,28 +1133,19 @@ function getSession() { return localStorage.getItem(LS_SESSION); }
 function setSession(name) { localStorage.setItem(LS_SESSION, name); }
 function clearSession() { localStorage.removeItem(LS_SESSION); }
 
-/* ---------- one-time upgrade: force balance to correct value on old accounts ---------- */
+/* ---------- one-time upgrade ---------- */
 function runMigrations() {
   const storedVersion = parseInt(localStorage.getItem(LS_VERSION) || '0', 10);
   if (storedVersion >= APP_VERSION) return;
 
   const users = getUsers();
-  const keys = Object.keys(users);
-  if (keys.length === 0) {
-    localStorage.setItem(LS_VERSION, APP_VERSION);
-    return;
-  }
-
-  // Old accounts didn't have the correct balance — reset them to the new starting balance.
-  // (Transactions are preserved so history isn't lost.)
-  keys.forEach(k => {
+  Object.keys(users).forEach(k => {
     const u = users[k];
     if (!u || typeof u !== 'object') return;
-    if (u.balance !== STARTING_BALANCE) {
+    if (u.balance !== STARTING_BALANCE && (!u.transactions || u.transactions.length === 0)) {
       u.balance = STARTING_BALANCE;
-      u.transactions = u.transactions || [];
     }
-    // Backfill email / phone for older accounts
+    u.transactions = u.transactions || [];
     if (!u.email) u.email = u.name.toLowerCase().replace(/\s+/g,'.') + '@novapay.demo';
     if (!u.phone) u.phone = '(555) ' + Math.floor(100+Math.random()*900) + '-' + Math.floor(1000+Math.random()*9000);
   });
@@ -1163,6 +1255,52 @@ function handleSignOut() {
   showScreen('screen-signin');
 }
 
+/* ---------- account switcher ---------- */
+function openSwitcher() {
+  const users = getUsers();
+  const session = getSession();
+  const list = document.getElementById('switcher-list');
+  const keys = Object.keys(users);
+
+  if (keys.length === 0) {
+    list.innerHTML = '<div class="empty-state">No saved accounts. Sign up to add one.</div>';
+  } else {
+    list.innerHTML = keys.map(k => {
+      const u = users[k];
+      const initials = u.name.split(' ').map(s => s[0]).join('').slice(0,2).toUpperCase();
+      const isCurrent = (k === session);
+      return `
+        <div class="account-item ${isCurrent ? 'current' : ''}" onclick="switchToAccount('${escapeAttr(k)}')">
+          <div class="ac-avatar">${initials}</div>
+          <div class="ac-info">
+            <div class="ac-name">${escapeHtml(u.name)}</div>
+            <div class="ac-bal">${fmt(u.balance)}</div>
+          </div>
+          ${isCurrent ? '<div class="ac-check">✓</div>' : ''}
+        </div>`;
+    }).join('');
+  }
+
+  document.getElementById('switcher-modal').classList.add('show');
+}
+
+function closeSwitcher() {
+  document.getElementById('switcher-modal').classList.remove('show');
+}
+
+function switchToAccount(key) {
+  const users = getUsers();
+  const user = users[key];
+  if (!user) { closeSwitcher(); return; }
+  setSession(key);
+  closeSwitcher();
+  showScreen('screen-home');
+}
+
+function escapeAttr(s) {
+  return String(s).replace(/'/g, "\\'").replace(/"/g, '&quot;');
+}
+
 /* ---------- greeting / clock ---------- */
 function greetingText() {
   const h = new Date().getHours();
@@ -1224,12 +1362,14 @@ function renderAll(user) {
     if (el) el.textContent = initials;
   });
 
-  const pfName   = document.getElementById('profile-name');
-  const pfHolder = document.getElementById('pf-holder');
-  const pfCode   = document.getElementById('profile-code-line');
-  if (pfName)   pfName.textContent   = user.name;
-  if (pfHolder) pfHolder.textContent = user.name;
-  if (pfCode)   pfCode.textContent   = 'Access code: ' + user.code;
+  const pfName    = document.getElementById('profile-name');
+  const pfHolder  = document.getElementById('pf-holder');
+  const pfCode    = document.getElementById('profile-code-line');
+  const pfBalance = document.getElementById('pf-balance');
+  if (pfName)    pfName.textContent    = user.name;
+  if (pfHolder)  pfHolder.textContent  = user.name;
+  if (pfCode)    pfCode.textContent    = 'Access code: ' + user.code;
+  if (pfBalance) pfBalance.textContent = fmt(user.balance);
 
   const rcvHolder = document.getElementById('rcv-holder');
   if (rcvHolder) rcvHolder.textContent = user.name;
@@ -1238,6 +1378,17 @@ function renderAll(user) {
   const zPhone = document.getElementById('zl-my-phone');
   if (zEmail) zEmail.textContent = user.email || '—';
   if (zPhone) zPhone.textContent = user.phone || '—';
+
+  // stats
+  const txs = user.transactions || [];
+  const income = txs.filter(t => t.amount > 0).reduce((s, t) => s + t.amount, 0);
+  const spent  = txs.filter(t => t.amount < 0).reduce((s, t) => s + Math.abs(t.amount), 0);
+  const sInc = document.getElementById('stat-income');
+  const sSpe = document.getElementById('stat-spent');
+  const sCnt = document.getElementById('stat-count');
+  if (sInc) sInc.textContent = fmt(income);
+  if (sSpe) sSpe.textContent = fmt(spent);
+  if (sCnt) sCnt.textContent = txs.length;
 
   renderTransactions(user);
 }
@@ -1629,9 +1780,15 @@ document.addEventListener('change', function (e) {
   }
 });
 
+/* ---------- click-outside modal close ---------- */
+document.addEventListener('click', function (e) {
+  const modal = document.getElementById('switcher-modal');
+  if (e.target === modal) closeSwitcher();
+});
+
 /* ---------- boot ---------- */
 document.addEventListener('DOMContentLoaded', function () {
-  runMigrations();          // <-- fixes old accounts to show $134,290
+  runMigrations();
   updateClocks();
   setInterval(updateClocks, 30000);
 
