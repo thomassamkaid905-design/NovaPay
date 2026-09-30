@@ -8,34 +8,22 @@
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
 :root {
-  --gold: #e5c76b;
-  --gold-dark: #c9a84a;
-  --gold-soft: #f3dfa2;
-  --bg: #0d0c0a;
-  --card: #1a1813;
-  --text: #f5f1e6;
-  --muted: #a39d8c;
-  --green: #4ade80;
-  --red: #f87171;
-  --blue: #60a5fa;
-  --purple: #a78bfa;
-}
-
-body.light {
-  --bg: #f5f8fc;
+  --gold: #c9a84a;
+  --gold-dark: #a8892e;
+  --gold-soft: #f5e6b3;
+  --gold-light: #fdf8e6;
+  --bg: #ffffff;
   --card: #ffffff;
-  --text: #172b4d;
-  --muted: #718096;
-  --gold: #b8860b;
-  --gold-dark: #8b6508;
-  --gold-soft: #fef3c7;
-  --green: #16a34a;
-  --red: #dc2626;
+  --text: #2a2107;
+  --muted: #8b7d55;
+  --border: #efe3b8;
+  --green: #15803d;
+  --red: #b91c1c;
   --blue: #2563eb;
   --purple: #7c3aed;
 }
 
-html, body { height: 100%; background: #000; overflow: hidden; }
+html, body { height: 100%; background: #fdf8e6; overflow: hidden; }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
@@ -46,22 +34,16 @@ body {
   height: 100vh;
 }
 
-body.light { background: #e2e8f0; }
-
 .phone {
   width: 100%;
   max-width: 430px;
   height: 100vh;
   max-height: 100vh;
-  background: linear-gradient(180deg, #23201a 0%, #12110d 45%, #0a0908 100%);
+  background: linear-gradient(180deg, #fffdf7 0%, #fdf8e6 55%, #f8ecc4 100%);
   position: relative;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-}
-
-body.light .phone {
-  background: linear-gradient(180deg, #eef2f7 0%, #f5f8fc 45%, #ffffff 100%);
 }
 
 .screen {
@@ -81,36 +63,36 @@ body.light .phone {
 
 /* AUTH */
 .auth-screen { padding: 60px 30px 40px; justify-content: center; align-items: center; }
-.brand { font-size: 34px; font-weight: 800; letter-spacing: -1px; color: var(--gold-soft); margin-bottom: 8px; text-align: center; }
+.brand { font-size: 34px; font-weight: 800; letter-spacing: -1px; color: var(--gold-dark); margin-bottom: 8px; text-align: center; }
 .brand span { color: var(--text); }
 .tagline { font-size: 14px; color: var(--muted); margin-bottom: 40px; text-align: center; }
 .auth-form { width: 100%; max-width: 340px; }
 .field { margin-bottom: 18px; }
 .field label { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.6px; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; }
-.field input { width: 100%; padding: 15px 18px; border-radius: 14px; background: rgba(255,255,255,0.05); border: 1.5px solid rgba(229,199,107,0.2); color: var(--text); font-size: 15px; font-family: inherit; outline: none; transition: 0.15s; }
-.field input:focus { border-color: var(--gold); }
-.field input::placeholder { color: rgba(200,190,160,0.35); }
+.field input { width: 100%; padding: 15px 18px; border-radius: 14px; background: #ffffff; border: 1.5px solid var(--border); color: var(--text); font-size: 15px; font-family: inherit; outline: none; transition: 0.15s; }
+.field input:focus { border-color: var(--gold); box-shadow: 0 0 0 4px rgba(201, 168, 74, 0.12); }
+.field input::placeholder { color: #b8a97a; }
 
-.btn-gold { width: 100%; padding: 16px; border-radius: 14px; background: linear-gradient(135deg, var(--gold-soft), var(--gold)); color: #2a2107; font-size: 15px; font-weight: 800; border: none; cursor: pointer; box-shadow: 0 8px 22px rgba(229,199,107,0.3); transition: 0.15s; margin-top: 8px; font-family: inherit; }
+.btn-gold { width: 100%; padding: 16px; border-radius: 14px; background: linear-gradient(135deg, var(--gold-soft), var(--gold)); color: #2a2107; font-size: 15px; font-weight: 800; border: none; cursor: pointer; box-shadow: 0 8px 22px rgba(201, 168, 74, 0.3); transition: 0.15s; margin-top: 8px; font-family: inherit; }
 .btn-gold:active { transform: scale(0.98); }
 .auth-switch { text-align: center; margin-top: 24px; font-size: 13px; color: var(--muted); }
-.auth-switch a { color: var(--gold); font-weight: 700; cursor: pointer; text-decoration: none; }
+.auth-switch a { color: var(--gold-dark); font-weight: 700; cursor: pointer; text-decoration: none; }
 .error-msg { color: var(--red); font-size: 13px; margin-top: 12px; text-align: center; min-height: 18px; font-weight: 600; }
 .success-msg { color: var(--green); font-size: 13px; margin-top: 12px; text-align: center; min-height: 18px; font-weight: 600; }
 
-.code-box { margin-top: 24px; padding: 22px; border-radius: 18px; background: linear-gradient(135deg, rgba(243,223,162,0.14), rgba(229,199,107,0.06)); border: 1.5px solid rgba(229,199,107,0.4); text-align: center; }
+.code-box { margin-top: 24px; padding: 22px; border-radius: 18px; background: linear-gradient(135deg, #fffdf7, #fdf8e6); border: 1.5px solid var(--gold); text-align: center; }
 .code-box .label { font-size: 12px; letter-spacing: 1px; color: var(--muted); font-weight: 700; margin-bottom: 10px; text-transform: uppercase; }
-.code-box .code { font-size: 34px; letter-spacing: 8px; font-weight: 800; color: var(--gold); font-family: "Courier New", monospace; }
+.code-box .code { font-size: 34px; letter-spacing: 8px; font-weight: 800; color: var(--gold-dark); font-family: "Courier New", monospace; }
 .code-box .hint { font-size: 12px; color: var(--muted); margin-top: 12px; line-height: 1.5; }
 
-/* STATUS BAR + TOP ROW */
+/* STATUS + TOP ROW */
 .status-bar { padding: 14px 22px 6px; display: flex; justify-content: space-between; align-items: center; font-size: 15px; font-weight: 700; color: var(--text); flex-shrink: 0; }
 .status-bar .right { display: flex; align-items: center; gap: 7px; font-size: 13px; }
 .top-row { display: flex; align-items: center; gap: 12px; padding: 10px 20px 18px; flex-shrink: 0; }
-.icon-btn { width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,0.06); border: 1px solid rgba(229,199,107,0.18); display: flex; align-items: center; justify-content: center; font-size: 18px; cursor: pointer; position: relative; color: var(--gold); flex-shrink: 0; }
-.icon-btn .dot { position: absolute; top: 8px; right: 9px; width: 8px; height: 8px; border-radius: 50%; background: #ef4444; border: 1.5px solid var(--bg); }
+.icon-btn { width: 42px; height: 42px; border-radius: 50%; background: #ffffff; border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 18px; cursor: pointer; position: relative; color: var(--gold-dark); flex-shrink: 0; box-shadow: 0 2px 6px rgba(201,168,74,0.08); }
+.icon-btn .dot { position: absolute; top: 8px; right: 9px; width: 8px; height: 8px; border-radius: 50%; background: #ef4444; border: 1.5px solid #ffffff; }
 .top-name { flex: 1; font-size: 19px; font-weight: 800; letter-spacing: -0.3px; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #5b7cfa, #4a63e0); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; box-shadow: 0 4px 14px rgba(80,110,240,0.4); flex-shrink: 0; cursor: pointer; }
+.avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; box-shadow: 0 4px 14px rgba(201,168,74,0.4); flex-shrink: 0; cursor: pointer; }
 .date-line { padding: 0 22px 12px; font-size: 12px; color: var(--muted); font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; }
 .greeting-block { padding: 6px 22px 20px; flex-shrink: 0; }
 .greeting-block h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.8px; color: var(--text); line-height: 1.15; }
@@ -119,90 +101,46 @@ body.light .phone {
 /* PILLS */
 .account-pills { display: flex; gap: 10px; padding: 0 22px 22px; overflow-x: auto; scrollbar-width: none; flex-shrink: 0; }
 .account-pills::-webkit-scrollbar { display: none; }
-.pill { flex-shrink: 0; padding: 11px 18px; border-radius: 999px; font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 8px; white-space: nowrap; cursor: pointer; transition: 0.2s; font-family: inherit; border: none; }
-.pill.active { background: linear-gradient(135deg, var(--gold-soft), var(--gold)); color: #2a2107; box-shadow: 0 6px 18px rgba(229,199,107,0.3); }
-.pill.inactive { background: rgba(255,255,255,0.06); border: 1px solid rgba(229,199,107,0.22); color: var(--gold); }
+.pill { flex-shrink: 0; padding: 11px 18px; border-radius: 999px; font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 8px; white-space: nowrap; cursor: pointer; transition: 0.2s; font-family: inherit; border: 1.5px solid var(--border); background: #ffffff; color: var(--text); }
+.pill.active { background: linear-gradient(135deg, var(--gold-soft), var(--gold)); color: #2a2107; border-color: transparent; box-shadow: 0 6px 18px rgba(201,168,74,0.3); }
+.pill.inactive { background: #ffffff; color: var(--muted); }
 
 /* BALANCE CARD */
-.balance-card { margin: 0 18px 16px; padding: 26px 24px 24px; border-radius: 24px; background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 60%); border: 1px solid rgba(229,199,107,0.16); position: relative; overflow: hidden; box-shadow: 0 18px 40px rgba(0,0,0,0.5); flex-shrink: 0; }
-.balance-card::after { content: ""; position: absolute; width: 320px; height: 320px; border-radius: 50%; right: -160px; bottom: -180px; background: radial-gradient(circle, rgba(229,199,107,0.14) 0%, transparent 65%); pointer-events: none; }
+.balance-card { margin: 0 18px 16px; padding: 26px 24px 24px; border-radius: 24px; background: linear-gradient(140deg, #ffffff 0%, #fdf8e6 100%); border: 1.5px solid var(--border); position: relative; overflow: hidden; box-shadow: 0 8px 24px rgba(201,168,74,0.1); flex-shrink: 0; }
+.balance-card::after { content: ""; position: absolute; width: 320px; height: 320px; border-radius: 50%; right: -160px; bottom: -180px; background: radial-gradient(circle, rgba(201,168,74,0.15) 0%, transparent 65%); pointer-events: none; }
 .balance-label { font-size: 14px; color: var(--muted); font-weight: 500; position: relative; z-index: 2; }
 .balance-amount { margin: 8px 0 6px; font-size: 40px; font-weight: 800; letter-spacing: -1.5px; color: var(--text); position: relative; z-index: 2; line-height: 1.05; word-break: break-all; transition: 0.3s; }
 .balance-sub { font-size: 14px; color: var(--muted); font-weight: 500; position: relative; z-index: 2; }
 .balance-actions { margin-top: 20px; display: flex; gap: 12px; position: relative; z-index: 2; flex-wrap: wrap; }
-.btn-primary { padding: 12px 22px; border-radius: 12px; background: linear-gradient(135deg, var(--gold-soft), var(--gold)); color: #2a2107; font-size: 14px; font-weight: 800; border: none; cursor: pointer; box-shadow: 0 6px 18px rgba(229,199,107,0.28); transition: 0.15s; font-family: inherit; }
-.btn-outline { padding: 12px 22px; border-radius: 12px; background: transparent; color: var(--gold); font-size: 14px; font-weight: 800; border: 1.5px solid rgba(229,199,107,0.45); cursor: pointer; transition: 0.15s; font-family: inherit; }
-.pending-row { display: flex; justify-content: space-between; margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(229,199,107,0.1); position: relative; z-index: 2; font-size: 12px; }
+.btn-primary { padding: 12px 22px; border-radius: 12px; background: linear-gradient(135deg, var(--gold-soft), var(--gold)); color: #2a2107; font-size: 14px; font-weight: 800; border: none; cursor: pointer; box-shadow: 0 6px 18px rgba(201,168,74,0.28); transition: 0.15s; font-family: inherit; }
+.btn-outline { padding: 12px 22px; border-radius: 12px; background: #ffffff; color: var(--gold-dark); font-size: 14px; font-weight: 800; border: 1.5px solid var(--gold); cursor: pointer; transition: 0.15s; font-family: inherit; }
+.pending-row { display: flex; justify-content: space-between; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); position: relative; z-index: 2; font-size: 12px; }
 .pending-row .pending-item { display: flex; flex-direction: column; }
 .pending-row .pending-label { color: var(--muted); font-weight: 600; font-size: 10.5px; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 4px; }
 .pending-row .pending-value { color: var(--text); font-weight: 800; font-size: 13px; }
 
-/* QUICK ACTIONS (freeze card + schedule) */
-.quick-actions-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin: 0 18px 16px;
-  flex-shrink: 0;
-}
-.quick-action {
-  padding: 14px;
-  border-radius: 14px;
-  background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 70%);
-  border: 1px solid rgba(229,199,107,0.16);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  transition: 0.15s;
-  font-family: inherit;
-  color: var(--text);
-  text-align: left;
-}
+/* QUICK ACTIONS */
+.quick-actions-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 18px 16px; flex-shrink: 0; }
+.quick-action { padding: 14px; border-radius: 14px; background: #ffffff; border: 1.5px solid var(--border); display: flex; align-items: center; gap: 10px; cursor: pointer; transition: 0.15s; font-family: inherit; color: var(--text); text-align: left; box-shadow: 0 2px 6px rgba(201,168,74,0.06); }
 .quick-action:active { transform: scale(0.97); }
-.quick-action .qa-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: rgba(229,199,107,0.14);
-  color: var(--gold);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  flex-shrink: 0;
-}
-.quick-action.frozen .qa-icon {
-  background: rgba(248,113,113,0.15);
-  color: #f87171;
-}
-.quick-action .qa-label {
-  font-size: 10.5px;
-  color: var(--muted);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-}
-.quick-action .qa-value {
-  font-size: 13px;
-  color: var(--text);
-  font-weight: 800;
-  margin-top: 2px;
-}
+.quick-action .qa-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--gold-light); color: var(--gold-dark); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.quick-action.frozen .qa-icon { background: #fee2e2; color: var(--red); }
+.quick-action .qa-label { font-size: 10.5px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
+.quick-action .qa-value { font-size: 13px; color: var(--text); font-weight: 800; margin-top: 2px; }
 
 /* STATS */
 .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 0 18px 16px; flex-shrink: 0; }
-.stat-card { background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 70%); border: 1px solid rgba(229,199,107,0.16); border-radius: 14px; padding: 12px 6px; text-align: center; }
+.stat-card { background: #ffffff; border: 1.5px solid var(--border); border-radius: 14px; padding: 12px 6px; text-align: center; }
 .stat-card .stat-label { font-size: 9.5px; color: var(--muted); font-weight: 600; letter-spacing: 0.3px; text-transform: uppercase; margin-bottom: 6px; }
-.stat-card .stat-value { font-size: 13px; color: var(--gold); font-weight: 800; word-break: break-all; }
+.stat-card .stat-value { font-size: 13px; color: var(--gold-dark); font-weight: 800; word-break: break-all; }
 
 .quick-info-row { display: flex; gap: 8px; margin: 0 18px 16px; flex-wrap: wrap; flex-shrink: 0; }
-.info-chip { padding: 6px 12px; border-radius: 999px; background: rgba(229,199,107,0.1); border: 1px solid rgba(229,199,107,0.22); font-size: 11px; font-weight: 700; color: var(--gold); display: flex; align-items: center; gap: 5px; }
-.info-chip.green { background: rgba(74,222,128,0.1); border-color: rgba(74,222,128,0.3); color: var(--green); }
+.info-chip { padding: 6px 12px; border-radius: 999px; background: var(--gold-light); border: 1.5px solid var(--border); font-size: 11px; font-weight: 700; color: var(--gold-dark); display: flex; align-items: center; gap: 5px; }
+.info-chip.green { background: #dcfce7; border-color: #86efac; color: #166534; }
 
 /* CHART */
-.chart-card { margin: 0 18px 16px; padding: 18px; border-radius: 18px; background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 70%); border: 1px solid rgba(229,199,107,0.16); flex-shrink: 0; }
-.chart-card h3 { font-size: 13px; font-weight: 800; color: var(--gold); margin-bottom: 14px; letter-spacing: -0.2px; }
+.chart-card { margin: 0 18px 16px; padding: 18px; border-radius: 18px; background: #ffffff; border: 1.5px solid var(--border); flex-shrink: 0; }
+.chart-card h3 { font-size: 13px; font-weight: 800; color: var(--gold-dark); margin-bottom: 14px; letter-spacing: -0.2px; }
 .chart-bars { display: flex; align-items: flex-end; justify-content: space-between; height: 90px; gap: 4px; }
 .chart-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end; }
 .chart-bar { width: 100%; border-radius: 4px; background: linear-gradient(180deg, var(--gold), var(--gold-dark)); min-height: 4px; transition: 0.3s; }
@@ -215,25 +153,8 @@ body.light .phone {
 
 /* DONUT */
 .donut-wrap { display: flex; align-items: center; gap: 16px; margin-top: 4px; }
-.donut {
-  width: 110px; height: 110px; border-radius: 50%; flex-shrink: 0;
-  position: relative;
-  background: conic-gradient(
-    #e5c76b 0% var(--p1, 0%),
-    #60a5fa var(--p1, 0%) var(--p2, 0%),
-    #4ade80 var(--p2, 0%) var(--p3, 0%),
-    #f87171 var(--p3, 0%) var(--p4, 0%),
-    #a78bfa var(--p4, 0%) var(--p5, 0%),
-    #a39d8c var(--p5, 0%) 100%
-  );
-}
-.donut::after {
-  content: ""; position: absolute;
-  inset: 14px;
-  background: var(--card);
-  border-radius: 50%;
-}
-body.light .donut::after { background: #ffffff; }
+.donut { width: 110px; height: 110px; border-radius: 50%; flex-shrink: 0; position: relative; background: conic-gradient(#c9a84a 0% var(--p1, 0%), #2563eb var(--p1, 0%) var(--p2, 0%), #15803d var(--p2, 0%) var(--p3, 0%), #b91c1c var(--p3, 0%) var(--p4, 0%), #7c3aed var(--p4, 0%) var(--p5, 0%), #8b7d55 var(--p5, 0%) 100%); }
+.donut::after { content: ""; position: absolute; inset: 14px; background: #ffffff; border-radius: 50%; }
 .donut-legend { flex: 1; display: flex; flex-direction: column; gap: 6px; font-size: 12px; }
 .donut-legend .item { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .donut-legend .item .name { display: flex; align-items: center; gap: 6px; color: var(--muted); font-weight: 600; }
@@ -242,44 +163,44 @@ body.light .donut::after { background: #ffffff; }
 
 /* SERVICE GRID */
 .service-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 0 18px 22px; flex-shrink: 0; }
-.service-tile { background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 70%); border: 1px solid rgba(229,199,107,0.18); border-radius: 16px; padding: 14px 6px; display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; transition: 0.15s; font-family: inherit; }
+.service-tile { background: #ffffff; border: 1.5px solid var(--border); border-radius: 16px; padding: 14px 6px; display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; transition: 0.15s; font-family: inherit; box-shadow: 0 2px 6px rgba(201,168,74,0.05); }
 .service-tile:active { transform: scale(0.97); }
-.service-tile .ico { width: 36px; height: 36px; border-radius: 11px; background: rgba(229,199,107,0.12); display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--gold); }
+.service-tile .ico { width: 36px; height: 36px; border-radius: 11px; background: var(--gold-light); display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--gold-dark); }
 .service-tile .lbl { font-size: 10.5px; font-weight: 700; color: var(--text); text-align: center; line-height: 1.2; }
 
 /* BOTTOM NAV */
-.bottom-nav { position: absolute; left: 0; right: 0; bottom: 0; background: rgba(10,9,8,0.98); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-top: 1px solid rgba(229,199,107,0.14); display: flex; justify-content: space-around; align-items: center; padding: 10px 6px 22px; z-index: 200; }
+.bottom-nav { position: absolute; left: 0; right: 0; bottom: 0; background: #ffffff; border-top: 1.5px solid var(--border); display: flex; justify-content: space-around; align-items: center; padding: 10px 6px 22px; z-index: 200; box-shadow: 0 -6px 24px rgba(201,168,74,0.08); }
 .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--muted); font-size: 11px; font-weight: 600; cursor: pointer; padding: 6px 8px; transition: 0.15s; background: none; border: none; font-family: inherit; flex: 1; }
-.nav-item.active { color: var(--gold); }
+.nav-item.active { color: var(--gold-dark); }
 .nav-item .nav-icon { font-size: 20px; }
 
 /* PANEL */
-.panel { margin: 0 18px 18px; padding: 22px; border-radius: 20px; background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 60%); border: 1px solid rgba(229,199,107,0.16); box-shadow: 0 12px 30px rgba(0,0,0,0.4); }
-.panel h2 { font-size: 18px; font-weight: 800; color: var(--gold); margin-bottom: 18px; letter-spacing: -0.3px; }
+.panel { margin: 0 18px 18px; padding: 22px; border-radius: 20px; background: #ffffff; border: 1.5px solid var(--border); box-shadow: 0 4px 12px rgba(201,168,74,0.06); }
+.panel h2 { font-size: 18px; font-weight: 800; color: var(--gold-dark); margin-bottom: 18px; letter-spacing: -0.3px; }
 .form-group { margin-bottom: 16px; }
 .form-group label { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; }
-.form-group input, .form-group select { width: 100%; padding: 14px 16px; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1.5px solid rgba(229,199,107,0.2); color: var(--text); font-size: 15px; font-family: inherit; outline: none; transition: 0.15s; }
-.form-group input:focus, .form-group select:focus { border-color: var(--gold); }
-.form-group select option { background: var(--card); color: var(--text); }
+.form-group input, .form-group select { width: 100%; padding: 14px 16px; border-radius: 12px; background: #fdf8e6; border: 1.5px solid var(--border); color: var(--text); font-size: 15px; font-family: inherit; outline: none; transition: 0.15s; }
+.form-group input:focus, .form-group select:focus { border-color: var(--gold); background: #ffffff; box-shadow: 0 0 0 4px rgba(201,168,74,0.1); }
+.form-group select option { background: #ffffff; color: var(--text); }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
-/* TOGGLE SWITCH */
+/* SWITCH */
 .toggle-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; }
 .toggle-row .toggle-label { font-size: 14px; font-weight: 700; color: var(--text); }
 .toggle-row .toggle-sub { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
 .switch { position: relative; width: 48px; height: 28px; flex-shrink: 0; }
 .switch input { opacity: 0; width: 0; height: 0; }
-.switch .slider { position: absolute; cursor: pointer; inset: 0; background: rgba(255,255,255,0.12); border-radius: 999px; transition: 0.3s; }
-.switch .slider::before { content: ""; position: absolute; height: 22px; width: 22px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: 0.3s; }
+.switch .slider { position: absolute; cursor: pointer; inset: 0; background: #e5dfc7; border-radius: 999px; transition: 0.3s; }
+.switch .slider::before { content: ""; position: absolute; height: 22px; width: 22px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: 0.3s; box-shadow: 0 1px 3px rgba(0,0,0,0.15); }
 .switch input:checked + .slider { background: linear-gradient(135deg, var(--gold-soft), var(--gold)); }
 .switch input:checked + .slider::before { transform: translateX(20px); }
 
 /* TX */
 .tx-list { display: flex; flex-direction: column; gap: 2px; }
-.tx { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(229,199,107,0.08); }
+.tx { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--border); }
 .tx:last-child { border-bottom: none; }
 .tx-left { display: flex; align-items: center; gap: 12px; min-width: 0; flex: 1; }
-.tx-icon { width: 42px; height: 42px; border-radius: 12px; background: rgba(229,199,107,0.1); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.tx-icon { width: 42px; height: 42px; border-radius: 12px; background: var(--gold-light); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
 .tx-name { font-size: 14px; font-weight: 700; color: var(--text); overflow: hidden; text-overflow: ellipsis; }
 .tx-date { font-size: 11px; color: var(--muted); margin-top: 3px; }
 .tx-amount { font-size: 14px; font-weight: 800; white-space: nowrap; margin-left: 8px; }
@@ -288,141 +209,87 @@ body.light .donut::after { background: #ffffff; }
 
 .empty-state { text-align: center; padding: 30px 10px; color: var(--muted); font-size: 14px; }
 
-.row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(229,199,107,0.08); font-size: 14px; }
+.row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
 .row:last-child { border-bottom: none; }
 .row .lbl { color: var(--muted); font-weight: 500; }
 .row .val { color: var(--text); font-weight: 700; text-align: right; }
 
-.section-title { padding: 0 22px 12px; font-size: 15px; font-weight: 800; color: var(--gold); letter-spacing: -0.2px; }
+.section-title { padding: 0 22px 12px; font-size: 15px; font-weight: 800; color: var(--gold-dark); letter-spacing: -0.2px; }
 
-.info-box { padding: 16px; border-radius: 14px; background: rgba(96,165,250,0.08); border: 1.5px solid rgba(96,165,250,0.3); margin-bottom: 16px; font-size: 13px; color: var(--text); line-height: 1.6; }
+.info-box { padding: 16px; border-radius: 14px; background: #eff6ff; border: 1.5px solid #bfdbfe; margin-bottom: 16px; font-size: 13px; color: #1e40af; line-height: 1.6; }
 
-.copy-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; background: rgba(255,255,255,0.04); border-radius: 10px; margin-bottom: 8px; border: 1px solid rgba(229,199,107,0.1); }
+.copy-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; background: #fdf8e6; border-radius: 10px; margin-bottom: 8px; border: 1.5px solid var(--border); }
 .copy-row .key { font-size: 12px; color: var(--muted); font-weight: 600; }
 .copy-row .value { font-size: 14px; color: var(--text); font-weight: 700; font-family: "Courier New", monospace; }
-.copy-row .copy-btn { background: rgba(229,199,107,0.15); color: var(--gold); border: none; padding: 6px 12px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer; font-family: inherit; }
+.copy-row .copy-btn { background: var(--gold-light); color: var(--gold-dark); border: none; padding: 6px 12px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer; font-family: inherit; }
 
 /* SEARCH / FILTER */
-.search-bar { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 14px; background: rgba(255,255,255,0.05); border: 1.5px solid rgba(229,199,107,0.2); margin-bottom: 12px; }
+.search-bar { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 14px; background: #fdf8e6; border: 1.5px solid var(--border); margin-bottom: 12px; }
 .search-bar input { flex: 1; background: transparent; border: none; color: var(--text); font-size: 14px; font-family: inherit; outline: none; }
-.search-bar input::placeholder { color: rgba(200,190,160,0.35); }
-.search-bar .search-icon { color: var(--gold); font-size: 16px; }
+.search-bar input::placeholder { color: #b8a97a; }
+.search-bar .search-icon { color: var(--gold-dark); font-size: 16px; }
 .filter-chips { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-bottom: 4px; margin-bottom: 14px; }
 .filter-chips::-webkit-scrollbar { display: none; }
-.filter-chip { flex-shrink: 0; padding: 8px 14px; border-radius: 999px; font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.15s; border: 1.5px solid rgba(229,199,107,0.22); background: transparent; color: var(--gold); font-family: inherit; }
+.filter-chip { flex-shrink: 0; padding: 8px 14px; border-radius: 999px; font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.15s; border: 1.5px solid var(--border); background: #ffffff; color: var(--gold-dark); font-family: inherit; }
 .filter-chip.active { background: linear-gradient(135deg, var(--gold-soft), var(--gold)); color: #2a2107; border-color: transparent; }
 
 /* MODAL */
-.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center; z-index: 999; padding: 20px; }
+.modal-overlay { position: fixed; inset: 0; background: rgba(42,33,7,0.4); backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center; z-index: 999; padding: 20px; }
 .modal-overlay.show { display: flex; }
-.modal { width: 100%; max-width: 380px; max-height: 80vh; overflow-y: auto; background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 70%); border: 1.5px solid rgba(229,199,107,0.3); border-radius: 22px; padding: 24px; }
-.modal h2 { font-size: 20px; font-weight: 800; color: var(--gold); margin-bottom: 6px; text-align: center; }
+.modal { width: 100%; max-width: 380px; max-height: 80vh; overflow-y: auto; background: #ffffff; border: 1.5px solid var(--gold); border-radius: 22px; padding: 24px; box-shadow: 0 30px 80px rgba(42,33,7,0.25); }
+.modal h2 { font-size: 20px; font-weight: 800; color: var(--gold-dark); margin-bottom: 6px; text-align: center; }
 .modal .modal-sub { font-size: 13px; color: var(--muted); text-align: center; margin-bottom: 20px; }
-.account-item { display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: 14px; background: rgba(255,255,255,0.04); border: 1.5px solid rgba(229,199,107,0.1); margin-bottom: 10px; cursor: pointer; }
-.account-item.current { border-color: rgba(229,199,107,0.6); background: rgba(229,199,107,0.1); }
-.account-item .ac-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #5b7cfa, #4a63e0); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 15px; flex-shrink: 0; }
+.account-item { display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: 14px; background: #fdf8e6; border: 1.5px solid var(--border); margin-bottom: 10px; cursor: pointer; }
+.account-item.current { border-color: var(--gold); background: var(--gold-light); }
+.account-item .ac-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 15px; flex-shrink: 0; }
 .account-item .ac-info { flex: 1; min-width: 0; }
 .account-item .ac-name { font-size: 15px; font-weight: 800; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .account-item .ac-bal { font-size: 12px; color: var(--muted); margin-top: 3px; }
-.account-item .ac-check { font-size: 18px; color: var(--gold); }
+.account-item .ac-check { font-size: 18px; color: var(--gold-dark); }
 .modal-actions { display: flex; gap: 10px; margin-top: 18px; }
 .modal-btn { flex: 1; padding: 14px; border-radius: 12px; font-size: 14px; font-weight: 800; border: none; cursor: pointer; font-family: inherit; }
 .modal-btn.gold { background: linear-gradient(135deg, var(--gold-soft), var(--gold)); color: #2a2107; }
-.modal-btn.ghost { background: transparent; color: var(--gold); border: 1.5px solid rgba(229,199,107,0.4); }
+.modal-btn.ghost { background: #ffffff; color: var(--gold-dark); border: 1.5px solid var(--gold); }
 
 /* NOTIFICATIONS */
-.notif-item { display: flex; gap: 12px; padding: 14px; border-radius: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(229,199,107,0.1); margin-bottom: 10px; }
-.notif-icon { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 17px; background: rgba(229,199,107,0.14); color: var(--gold); flex-shrink: 0; }
+.notif-item { display: flex; gap: 12px; padding: 14px; border-radius: 12px; background: #fdf8e6; border: 1.5px solid var(--border); margin-bottom: 10px; }
+.notif-icon { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 17px; background: var(--gold-light); color: var(--gold-dark); flex-shrink: 0; }
 .notif-info { flex: 1; min-width: 0; }
 .notif-title { font-size: 13.5px; font-weight: 800; color: var(--text); margin-bottom: 3px; }
 .notif-text { font-size: 12px; color: var(--muted); line-height: 1.4; }
 .notif-time { font-size: 10.5px; color: var(--muted); margin-top: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
 
 /* CONTACTS */
-.contact-item { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid rgba(229,199,107,0.08); }
+.contact-item { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
 .contact-item:last-child { border-bottom: none; }
-.contact-item .co-avatar { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, #5b7cfa, #4a63e0); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; flex-shrink: 0; }
+.contact-item .co-avatar { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; flex-shrink: 0; }
 .contact-item .co-name { font-size: 14px; font-weight: 700; color: var(--text); }
 .contact-item .co-info { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
-.contact-item .co-action { background: rgba(229,199,107,0.15); color: var(--gold); border: none; padding: 6px 12px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer; font-family: inherit; }
+.contact-item .co-action { background: var(--gold-light); color: var(--gold-dark); border: none; padding: 6px 12px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer; font-family: inherit; }
 
 /* PAYEE CARD */
-.payee-card {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px;
-  border-radius: 14px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(229,199,107,0.12);
-  margin-bottom: 10px;
-}
-.payee-avatar {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
-  background: rgba(229,199,107,0.15);
-  color: var(--gold);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  flex-shrink: 0;
-}
+.payee-card { display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: 14px; background: #fdf8e6; border: 1.5px solid var(--border); margin-bottom: 10px; }
+.payee-avatar { width: 42px; height: 42px; border-radius: 12px; background: var(--gold-light); color: var(--gold-dark); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
 .payee-info { flex: 1; min-width: 0; }
 .payee-name { font-size: 14px; font-weight: 800; color: var(--text); }
 .payee-meta { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
 .payee-actions { display: flex; gap: 6px; flex-shrink: 0; }
-.payee-btn {
-  background: rgba(229,199,107,0.15);
-  color: var(--gold);
-  border: none;
-  padding: 6px 12px;
-  border-radius: 8px;
-  font-size: 11px;
-  font-weight: 700;
-  cursor: pointer;
-  font-family: inherit;
-}
-.payee-btn.danger {
-  background: rgba(248,113,113,0.12);
-  color: #f87171;
-}
+.payee-btn { background: var(--gold-light); color: var(--gold-dark); border: none; padding: 6px 12px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer; font-family: inherit; }
+.payee-btn.danger { background: #fee2e2; color: var(--red); }
 
 /* FROZEN OVERLAY */
-.frozen-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(3px); display: none; align-items: center; justify-content: center; flex-direction: column; gap: 12px; z-index: 10; border-radius: 24px; }
+.frozen-overlay { position: absolute; inset: 0; background: rgba(255,255,255,0.9); backdrop-filter: blur(3px); display: none; align-items: center; justify-content: center; flex-direction: column; gap: 12px; z-index: 10; border-radius: 24px; }
 .frozen-overlay.show { display: flex; }
 .frozen-badge { background: linear-gradient(135deg, #f87171, #dc2626); color: white; padding: 8px 20px; border-radius: 999px; font-size: 12px; font-weight: 800; letter-spacing: 1.5px; }
-.frozen-text { color: white; font-size: 13px; font-weight: 600; opacity: 0.85; }
+.frozen-text { color: var(--text); font-size: 13px; font-weight: 600; opacity: 0.75; }
 
 /* TOAST */
-.toast {
-  position: fixed;
-  bottom: 110px;
-  left: 50%;
-  transform: translateX(-50%) translateY(20px);
-  background: linear-gradient(135deg, var(--gold-soft), var(--gold));
-  color: #2a2107;
-  padding: 12px 22px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 800;
-  box-shadow: 0 12px 30px rgba(229,199,107,0.4);
-  z-index: 9999;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s, transform 0.3s;
-  max-width: 340px;
-  text-align: center;
-}
-.toast.show {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
+.toast { position: fixed; bottom: 110px; left: 50%; transform: translateX(-50%) translateY(20px); background: linear-gradient(135deg, var(--gold-soft), var(--gold)); color: #2a2107; padding: 12px 22px; border-radius: 999px; font-size: 13px; font-weight: 800; box-shadow: 0 12px 30px rgba(201,168,74,0.4); z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.3s, transform 0.3s; max-width: 340px; text-align: center; }
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
 @media (min-width: 480px) {
-  body { padding: 20px 0; background: #000; }
-  .phone { border-radius: 42px; box-shadow: 0 30px 80px rgba(0,0,0,0.8); height: 900px; max-height: 90vh; }
+  body { padding: 20px 0; background: #fdf8e6; }
+  .phone { border-radius: 42px; box-shadow: 0 30px 80px rgba(42,33,7,0.2); height: 900px; max-height: 90vh; }
 }
 </style>
 </head>
@@ -430,7 +297,6 @@ body.light .donut::after { background: #ffffff; }
 
 <div class="phone">
 
-  <!-- SIGN UP -->
   <section id="screen-signup" class="screen auth-screen active">
     <div class="brand">Nova<span>Pay</span></div>
     <div class="tagline">Create your account in seconds</div>
@@ -449,7 +315,6 @@ body.light .donut::after { background: #ffffff; }
     </div>
   </section>
 
-  <!-- CODE -->
   <section id="screen-code" class="screen auth-screen">
     <div class="brand">You're in 🎉</div>
     <div class="tagline">Save this 6-digit access code</div>
@@ -463,7 +328,6 @@ body.light .donut::after { background: #ffffff; }
     </div>
   </section>
 
-  <!-- SIGN IN -->
   <section id="screen-signin" class="screen auth-screen">
     <div class="brand">Welcome <span>Back</span></div>
     <div class="tagline">Sign in to your NovaPay account</div>
@@ -478,7 +342,6 @@ body.light .donut::after { background: #ffffff; }
     </div>
   </section>
 
-  <!-- HOME -->
   <section id="screen-home" class="screen">
     <div class="status-bar"><span id="clock">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
 
@@ -523,7 +386,6 @@ body.light .donut::after { background: #ffffff; }
       </div>
     </div>
 
-    <!-- QUICK ACTIONS: FREEZE + SCHEDULE -->
     <div class="quick-actions-row">
       <button class="quick-action" id="quick-freeze" onclick="quickToggleFreeze()">
         <div class="qa-icon" id="freeze-icon">❄</div>
@@ -554,7 +416,6 @@ body.light .donut::after { background: #ffffff; }
       <div class="stat-card"><div class="stat-label">Txns</div><div class="stat-value" id="stat-count">0</div></div>
     </div>
 
-    <!-- 7-day chart -->
     <div class="chart-card">
       <h3>Last 7 Days</h3>
       <div class="chart-bars" id="chart-bars"></div>
@@ -564,7 +425,6 @@ body.light .donut::after { background: #ffffff; }
       </div>
     </div>
 
-    <!-- Spending breakdown donut -->
     <div class="chart-card">
       <h3>Spending Breakdown</h3>
       <div class="donut-wrap">
@@ -590,14 +450,12 @@ body.light .donut::after { background: #ffffff; }
     </div>
   </section>
 
-  <!-- NOTIFICATIONS -->
   <section id="screen-notifications" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Notifications</div><div class="avatar" id="notif-avatar" onclick="openSwitcher()">--</div></div>
     <div class="panel"><h2>Recent Alerts</h2><div id="notif-list"><div class="empty-state">No notifications.</div></div></div>
   </section>
 
-  <!-- MANAGE CARD -->
   <section id="screen-manage-card" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Manage Card</div><div class="avatar" id="card-mgmt-avatar" onclick="openSwitcher()">--</div></div>
@@ -612,11 +470,9 @@ body.light .donut::after { background: #ffffff; }
     <div class="panel"><h2>Virtual Card Gallery</h2><div id="vcard-gallery"><div class="empty-state">No virtual cards generated yet.</div></div></div>
   </section>
 
-  <!-- SCHEDULED / RECURRING -->
   <section id="screen-scheduled" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Scheduled Transfers</div><div class="avatar" id="sched-avatar" onclick="openSwitcher()">--</div></div>
-
     <div class="panel">
       <h2>New Recurring Transfer</h2>
       <div class="form-group"><label for="sc-name">Recipient</label><input id="sc-name" type="text" placeholder="e.g. Mom"></div>
@@ -639,14 +495,12 @@ body.light .donut::after { background: #ffffff; }
       <button class="btn-gold" onclick="addScheduled()">Schedule Transfer</button>
       <div class="error-msg" id="sc-msg"></div>
     </div>
-
     <div class="panel">
       <h2>Active Schedules</h2>
       <div id="scheduled-list"><div class="empty-state">No scheduled transfers yet.</div></div>
     </div>
   </section>
 
-  <!-- CONTACTS -->
   <section id="screen-contacts" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Contacts</div><div class="avatar" id="contacts-avatar" onclick="openSwitcher()">--</div></div>
@@ -660,7 +514,6 @@ body.light .donut::after { background: #ffffff; }
     <div class="panel"><h2>Saved Contacts</h2><div id="contacts-list"><div class="empty-state">No contacts yet.</div></div></div>
   </section>
 
-  <!-- BUDGET -->
   <section id="screen-budget" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Budget</div><div class="avatar" id="budget-avatar" onclick="openSwitcher()">--</div></div>
@@ -682,14 +535,12 @@ body.light .donut::after { background: #ffffff; }
     </div>
   </section>
 
-  <!-- STATEMENTS -->
   <section id="screen-statements" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Statements</div><div class="avatar" id="stmt-avatar" onclick="openSwitcher()">--</div></div>
     <div class="panel"><h2>Monthly Statements</h2><div id="statements-list"></div></div>
   </section>
 
-  <!-- CURRENCY -->
   <section id="screen-currency" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Currency</div><div class="avatar" id="curr-avatar" onclick="openSwitcher()">--</div></div>
@@ -710,7 +561,6 @@ body.light .donut::after { background: #ffffff; }
     </div>
   </section>
 
-  <!-- SPLIT -->
   <section id="screen-split" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Split Bill</div><div class="avatar" id="split-avatar" onclick="openSwitcher()">--</div></div>
@@ -724,7 +574,6 @@ body.light .donut::after { background: #ffffff; }
     </div>
   </section>
 
-  <!-- TRANSFER -->
   <section id="screen-transfer" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Transfer</div><div class="avatar" id="transfer-avatar" onclick="openSwitcher()">--</div></div>
@@ -747,7 +596,6 @@ body.light .donut::after { background: #ffffff; }
     </div>
   </section>
 
-  <!-- DEPOSIT -->
   <section id="screen-deposit" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Deposit</div><div class="avatar" id="deposit-avatar" onclick="openSwitcher()">--</div></div>
@@ -767,7 +615,6 @@ body.light .donut::after { background: #ffffff; }
     </div>
   </section>
 
-  <!-- RECEIVE -->
   <section id="screen-receive" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Receive Money</div><div class="avatar" id="receive-avatar" onclick="openSwitcher()">--</div></div>
@@ -785,7 +632,6 @@ body.light .donut::after { background: #ffffff; }
     </div>
   </section>
 
-  <!-- WIRE -->
   <section id="screen-wire" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Wire Transfer</div><div class="avatar" id="wire-avatar" onclick="openSwitcher()">--</div></div>
@@ -801,7 +647,6 @@ body.light .donut::after { background: #ffffff; }
     </div>
   </section>
 
-  <!-- ZELLE -->
   <section id="screen-zelle" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Zelle®</div><div class="avatar" id="zelle-avatar" onclick="openSwitcher()">--</div></div>
@@ -814,16 +659,13 @@ body.light .donut::after { background: #ffffff; }
     </div>
   </section>
 
-  <!-- BILLS -->
   <section id="screen-bills" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Bills</div><div class="avatar" id="bills-avatar" onclick="openSwitcher()">--</div></div>
-
     <div class="panel">
       <h2>Saved Payees</h2>
       <div id="payees-list"><div class="empty-state">No saved payees yet.</div></div>
     </div>
-
     <div class="panel">
       <h2>Add a Payee</h2>
       <div class="form-group"><label for="py-name">Biller Name</label><input id="py-name" type="text" placeholder="e.g. Electric Company"></div>
@@ -841,7 +683,6 @@ body.light .donut::after { background: #ffffff; }
       <button class="btn-gold" onclick="addPayee()">Save Payee</button>
       <div class="success-msg" id="py-msg"></div>
     </div>
-
     <div class="panel">
       <h2>One-time Payment</h2>
       <div class="form-group"><label for="bl-name">Biller</label><input id="bl-name" type="text" placeholder="Electric Company"></div>
@@ -851,12 +692,10 @@ body.light .donut::after { background: #ffffff; }
     </div>
   </section>
 
-  <!-- HISTORY -->
   <section id="screen-history" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">History</div><div class="avatar" id="history-avatar" onclick="openSwitcher()">--</div></div>
     <div class="date-line" id="date-line-history">—</div>
-
     <div class="panel">
       <div class="search-bar">
         <span class="search-icon">🔍</span>
@@ -876,7 +715,6 @@ body.light .donut::after { background: #ffffff; }
     </div>
   </section>
 
-  <!-- PROFILE -->
   <section id="screen-profile" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Profile</div><div class="avatar" id="profile-avatar" onclick="openSwitcher()">--</div></div>
@@ -920,7 +758,6 @@ body.light .donut::after { background: #ffffff; }
     </div>
   </section>
 
-  <!-- BOTTOM NAV -->
   <nav class="bottom-nav" id="main-nav" style="display: none;">
     <button class="nav-item active" data-target="screen-home" onclick="showScreen('screen-home')">
       <span class="nav-icon">🏠</span>Home
@@ -941,7 +778,6 @@ body.light .donut::after { background: #ffffff; }
 
 </div>
 
-<!-- SWITCHER MODAL -->
 <div class="modal-overlay" id="switcher-modal">
   <div class="modal">
     <h2>Switch Account</h2>
@@ -954,15 +790,13 @@ body.light .donut::after { background: #ffffff; }
   </div>
 </div>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
 const LS_USERS = 'novapay_users';
 const LS_SESSION = 'novapay_session';
 const LS_VERSION = 'novapay_version';
-const LS_THEME = 'novapay_theme';
-const APP_VERSION = 10;
+const APP_VERSION = 12;
 const STARTING_BALANCE = 134290.00;
 const STARTING_CREDIT = -1250.00;
 const STARTING_BUSINESS = 8500.00;
@@ -1034,8 +868,6 @@ function runMigrations() {
     saveUsers(users);
     localStorage.setItem(LS_VERSION, APP_VERSION);
   }
-  const t = localStorage.getItem(LS_THEME);
-  if (t === 'light') document.body.classList.add('light');
 }
 
 function updateNav(target) {
@@ -1062,13 +894,8 @@ function showScreen(id) {
     showScreen('screen-signin');
     return;
   }
-
-  if (protectedScreens.includes(id)) {
-    showNav(true);
-    updateNav(id);
-  } else {
-    showNav(false);
-  }
+  if (protectedScreens.includes(id)) { showNav(true); updateNav(id); }
+  else { showNav(false); }
 
   if (getSession()) {
     const user = getUsers()[getSession()];
@@ -1085,7 +912,6 @@ function toast(msg) {
   window._toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
 }
 
-/* === SIGN UP / SIGN IN / OUT === */
 function handleSignUp() {
   const name = document.getElementById('su-name').value.trim();
   const username = document.getElementById('su-user').value.trim().toLowerCase().replace(/\s+/g,'');
@@ -1160,7 +986,6 @@ function handleSignOut() {
   showScreen('screen-signin');
 }
 
-/* === SWITCHER === */
 function openSwitcher() {
   const users = getUsers();
   const session = getSession();
@@ -1203,10 +1028,7 @@ function switchToAccount(key) {
 function escapeAttr(s) { return String(s).replace(/'/g, "\\'").replace(/"/g, '&quot;'); }
 
 function toggleTheme() {
-  document.body.classList.toggle('light');
-  const isLight = document.body.classList.contains('light');
-  localStorage.setItem(LS_THEME, isLight ? 'light' : 'dark');
-  document.getElementById('theme-btn').textContent = isLight ? '🌙' : '☀️';
+  toast('Gold & White theme');
 }
 
 function switchAccountType(type) {
@@ -1250,7 +1072,6 @@ function updateClocks() {
     const user = getUsers()[getSession()];
     if (user) greetingEl.textContent = greetingText() + ', ' + user.name.split(' ')[0];
   }
-  // Process any scheduled transfers due
   checkScheduledTransfers();
 }
 
@@ -1290,7 +1111,6 @@ function totalNetWorth(user) {
        + (user.investBalance || 0) + (user.creditBalance || 0);
 }
 
-/* === QUICK FREEZE === */
 function quickToggleFreeze() {
   const key = getSession();
   const user = getUsers()[key];
@@ -1302,7 +1122,6 @@ function quickToggleFreeze() {
 }
 function toggleFreeze() { quickToggleFreeze(); }
 
-/* === SCHEDULED TRANSFERS === */
 function addScheduled() {
   const key = getSession();
   const user = getUsers()[key];
@@ -1313,22 +1132,16 @@ function addScheduled() {
   const start = document.getElementById('sc-start').value;
   const msg = document.getElementById('sc-msg');
   msg.textContent = '';
-  if (!name) { msg.textContent = 'Enter recipient.'; msg.style.color = '#f87171'; return; }
-  if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; msg.style.color = '#f87171'; return; }
+  if (!name) { msg.textContent = 'Enter recipient.'; return; }
+  if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; return; }
   const startTime = start ? new Date(start).getTime() : Date.now();
   user.scheduled = user.scheduled || [];
-  user.scheduled.push({
-    id: 'sch_' + Date.now(),
-    name, amount, frequency,
-    nextDate: startTime,
-    createdAt: Date.now()
-  });
+  user.scheduled.push({ id: 'sch_' + Date.now(), name, amount, frequency, nextDate: startTime, createdAt: Date.now() });
   persistUser(key, user);
   ['sc-name','sc-amount','sc-start'].forEach(id => document.getElementById(id).value = '');
   toast('Scheduled transfer created');
   renderAll(user);
 }
-
 function deleteScheduled(id) {
   const key = getSession();
   const user = getUsers()[key];
@@ -1338,7 +1151,6 @@ function deleteScheduled(id) {
   toast('Schedule removed');
   renderAll(user);
 }
-
 function checkScheduledTransfers() {
   const key = getSession();
   if (!key) return;
@@ -1351,17 +1163,9 @@ function checkScheduledTransfers() {
     while (s.nextDate <= now) {
       if (s.amount <= (user.balance || 0)) {
         user.balance -= s.amount;
-        addTransaction(user, {
-          type: 'transfer',
-          label: 'Scheduled → ' + s.name,
-          amount: -s.amount,
-          date: now,
-          account: 'checking',
-          category: 'Other'
-        });
+        addTransaction(user, { type: 'transfer', label: 'Scheduled → ' + s.name, amount: -s.amount, date: now, account: 'checking', category: 'Other' });
         addNotification(user, '⏰', 'Scheduled transfer sent', fmt(s.amount) + ' to ' + s.name);
       }
-      // advance nextDate
       const d = new Date(s.nextDate);
       if (s.frequency === 'daily') d.setDate(d.getDate() + 1);
       else if (s.frequency === 'weekly') d.setDate(d.getDate() + 7);
@@ -1371,20 +1175,13 @@ function checkScheduledTransfers() {
       changed = true;
     }
   });
-  if (changed) {
-    users[key] = user;
-    saveUsers(users);
-  }
+  if (changed) { users[key] = user; saveUsers(users); }
 }
-
 function renderScheduled(user) {
   const el = document.getElementById('scheduled-list');
   if (!el) return;
   const list = user.scheduled || [];
-  if (list.length === 0) {
-    el.innerHTML = '<div class="empty-state">No scheduled transfers yet.</div>';
-    return;
-  }
+  if (list.length === 0) { el.innerHTML = '<div class="empty-state">No scheduled transfers yet.</div>'; return; }
   el.innerHTML = list.map(s => {
     const d = new Date(s.nextDate);
     const next = d.toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'});
@@ -1397,12 +1194,10 @@ function renderScheduled(user) {
         <button class="payee-btn danger" onclick="deleteScheduled('${s.id}')">Delete</button>
       </div>`;
   }).join('');
-  // Update count on home
   const c = document.getElementById('scheduled-count');
   if (c) c.textContent = list.length === 0 ? 'None' : (list.length + ' active');
 }
 
-/* === PAYEES / BILLS === */
 function addPayee() {
   const key = getSession();
   const user = getUsers()[key];
@@ -1412,7 +1207,7 @@ function addPayee() {
   const autopay = document.getElementById('py-autopay').checked;
   const msg = document.getElementById('py-msg');
   msg.textContent = '';
-  if (!name) { msg.textContent = 'Enter biller name.'; msg.style.color = '#f87171'; return; }
+  if (!name) { msg.textContent = 'Enter biller name.'; return; }
   user.payees = user.payees || [];
   user.payees.push({ id: 'py_' + Date.now(), name, amount, autopay });
   persistUser(key, user);
@@ -1422,7 +1217,6 @@ function addPayee() {
   toast('Payee saved');
   renderAll(user);
 }
-
 function deletePayee(id) {
   const key = getSession();
   const user = getUsers()[key];
@@ -1432,7 +1226,6 @@ function deletePayee(id) {
   toast('Payee removed');
   renderAll(user);
 }
-
 function togglePayeeAutopay(id) {
   const key = getSession();
   const user = getUsers()[key];
@@ -1444,7 +1237,6 @@ function togglePayeeAutopay(id) {
   toast(p.autopay ? 'Autopay on for ' + p.name : 'Autopay off for ' + p.name);
   renderAll(user);
 }
-
 function payPayee(id) {
   const key = getSession();
   const user = getUsers()[key];
@@ -1455,24 +1247,17 @@ function payPayee(id) {
   if (!amount || amount <= 0) { toast('Set a default amount first'); return; }
   if (amount > activeBalance(user)) { toast('Insufficient balance'); return; }
   applyBalance(user, -amount);
-  addTransaction(user, {
-    type: 'bill', label: 'Bill — ' + p.name, amount: -amount,
-    date: Date.now(), account: user.activeAccount, category: 'Bills'
-  });
+  addTransaction(user, { type: 'bill', label: 'Bill — ' + p.name, amount: -amount, date: Date.now(), account: user.activeAccount, category: 'Bills' });
   addNotification(user, '📄', 'Bill paid', fmt(amount) + ' to ' + p.name);
   persistUser(key, user);
   toast('Paid ' + p.name);
   renderAll(user);
 }
-
 function renderPayees(user) {
   const el = document.getElementById('payees-list');
   if (!el) return;
   const payees = user.payees || [];
-  if (payees.length === 0) {
-    el.innerHTML = '<div class="empty-state">No saved payees yet.</div>';
-    return;
-  }
+  if (payees.length === 0) { el.innerHTML = '<div class="empty-state">No saved payees yet.</div>'; return; }
   el.innerHTML = payees.map(p => `
     <div class="payee-card">
       <div class="payee-avatar">🏢</div>
@@ -1482,13 +1267,12 @@ function renderPayees(user) {
       </div>
       <div class="payee-actions">
         <button class="payee-btn" onclick="payPayee('${p.id}')">Pay</button>
-        <button class="payee-btn" onclick="togglePayeeAutopay('${p.id}')">${p.autopay ? '🔁' : '🔁'}</button>
+        <button class="payee-btn" onclick="togglePayeeAutopay('${p.id}')">🔁</button>
         <button class="payee-btn danger" onclick="deletePayee('${p.id}')">✕</button>
       </div>
     </div>`).join('');
 }
 
-/* === HISTORY SEARCH & FILTER === */
 let historyFilter = 'all';
 function setHistoryFilter(f) {
   historyFilter = f;
@@ -1504,31 +1288,23 @@ function renderHistoryFiltered() {
   if (!user) return;
   const q = (document.getElementById('history-search').value || '').toLowerCase().trim();
   let list = user.transactions || [];
-
   if (historyFilter === 'income') list = list.filter(t => t.amount > 0);
   else if (historyFilter === 'spending') list = list.filter(t => t.amount < 0);
   else if (historyFilter !== 'all') list = list.filter(t => t.category === historyFilter);
-
   if (q) list = list.filter(t => (t.label || '').toLowerCase().includes(q));
-
   const el = document.getElementById('history-tx-list');
   if (!el) return;
-  if (list.length === 0) {
-    el.innerHTML = '<div class="empty-state">No matching transactions.</div>';
-    return;
-  }
+  if (list.length === 0) { el.innerHTML = '<div class="empty-state">No matching transactions.</div>'; return; }
   el.innerHTML = list.slice().reverse().map(tx => txHTML(tx)).join('');
 }
 
-/* === DONUT CHART === */
 function renderDonut(user) {
   const donutEl = document.getElementById('donut-chart');
   const legendEl = document.getElementById('donut-legend');
   if (!donutEl || !legendEl) return;
-
   const txs = (user.transactions || []).filter(t => t.amount < 0);
   const cats = ['Food', 'Shopping', 'Bills', 'Transport', 'Entertainment', 'Other'];
-  const colors = ['#e5c76b', '#60a5fa', '#4ade80', '#f87171', '#a78bfa', '#a39d8c'];
+  const colors = ['#c9a84a', '#2563eb', '#15803d', '#b91c1c', '#7c3aed', '#8b7d55'];
   const totals = {};
   let total = 0;
   cats.forEach(c => totals[c] = 0);
@@ -1537,13 +1313,11 @@ function renderDonut(user) {
     totals[c] += Math.abs(t.amount);
     total += Math.abs(t.amount);
   });
-
   if (total === 0) {
-    donutEl.style.background = 'conic-gradient(rgba(229,199,107,0.15) 0% 100%)';
+    donutEl.style.background = 'conic-gradient(rgba(201,168,74,0.15) 0% 100%)';
     legendEl.innerHTML = '<div style="color:var(--muted);font-size:12px;">No spending yet.</div>';
     return;
   }
-
   let cumulative = 0;
   const stops = [];
   const legend = [];
@@ -1553,28 +1327,21 @@ function renderDonut(user) {
     cumulative += pct;
     stops.push(`${colors[i]} ${start}% ${cumulative}%`);
     if (totals[c] > 0) {
-      legend.push(`
-        <div class="item">
-          <span class="name"><span class="swatch" style="background:${colors[i]}"></span>${c}</span>
-          <span class="pct">${pct.toFixed(0)}%</span>
-        </div>`);
+      legend.push(`<div class="item"><span class="name"><span class="swatch" style="background:${colors[i]}"></span>${c}</span><span class="pct">${pct.toFixed(0)}%</span></div>`);
     }
   });
   donutEl.style.background = `conic-gradient(${stops.join(', ')})`;
   legendEl.innerHTML = legend.join('');
 }
 
-/* === RENDER ALL === */
 function renderAll(user) {
   const initials = user.name.split(' ').map(s => s[0]).join('').slice(0,2).toUpperCase();
-
   const homeName = document.getElementById('home-name');
   const homeAvatar = document.getElementById('home-avatar');
   const greeting = document.getElementById('greeting');
   const lastLogin = document.getElementById('last-login');
   const balance = document.getElementById('balance-display');
   const balanceSub = document.getElementById('balance-sub');
-
   if (homeName) homeName.textContent = user.name;
   if (homeAvatar) homeAvatar.textContent = initials;
   if (greeting) greeting.textContent = greetingText() + ', ' + user.name.split(' ')[0];
@@ -1582,17 +1349,9 @@ function renderAll(user) {
 
   const activeType = user.activeAccount || 'checking';
   const activeBal = activeBalance(user);
-  if (balance) {
-    // number animation
-    animateNumber(balance, activeBal);
-  }
+  if (balance) animateNumber(balance, activeBal);
 
-  const labels = {
-    checking: 'Checking Account •••• 4821',
-    credit: 'Credit Card •••• 9024',
-    business: 'Business Account •••• 3310',
-    investment: 'Investment •••• 5567'
-  };
+  const labels = { checking: 'Checking Account •••• 4821', credit: 'Credit Card •••• 9024', business: 'Business Account •••• 3310', investment: 'Investment •••• 5567' };
   if (balanceSub) balanceSub.textContent = labels[activeType] || labels.checking;
 
   ['checking','credit','business','investment'].forEach(t => {
@@ -1609,7 +1368,6 @@ function renderAll(user) {
   if (av) av.textContent = fmt(activeBal);
   if (iv) iv.textContent = fmt(user.interestYTD || 0);
 
-  // Quick freeze button
   const freezeEl = document.getElementById('quick-freeze');
   const freezeIcon = document.getElementById('freeze-icon');
   const freezeLbl = document.getElementById('freeze-label');
@@ -1695,7 +1453,6 @@ function renderAll(user) {
   renderHistoryFiltered();
 }
 
-/* number animation */
 function animateNumber(el, target) {
   const start = parseFloat((el.dataset.value || '0').replace(/,/g,'')) || 0;
   const duration = 400;
@@ -1727,53 +1484,23 @@ function renderChart(user) {
   bars.innerHTML = days.map(d => {
     const incH = Math.round((d.inc / maxVal) * 100);
     const spdH = Math.round((d.spd / maxVal) * 100);
-    return `
-      <div class="chart-bar-wrap">
-        <div style="display:flex;gap:2px;width:100%;height:100%;align-items:flex-end;">
-          <div class="chart-bar" style="height:${Math.max(4, incH)}%"></div>
-          <div class="chart-bar spend" style="height:${Math.max(4, spdH)}%"></div>
-        </div>
-        <div class="chart-label">${d.label}</div>
-      </div>`;
+    return `<div class="chart-bar-wrap"><div style="display:flex;gap:2px;width:100%;height:100%;align-items:flex-end;"><div class="chart-bar" style="height:${Math.max(4, incH)}%"></div><div class="chart-bar spend" style="height:${Math.max(4, spdH)}%"></div></div><div class="chart-label">${d.label}</div></div>`;
   }).join('');
 }
 
 function txHTML(tx) {
-  const icon = tx.type === 'deposit' ? '↓'
-             : tx.type === 'bill' ? '📄'
-             : tx.type === 'wire' ? '🌐'
-             : tx.type === 'zelle' ? '⚡'
-             : tx.type === 'receive' ? '↓'
-             : tx.type === 'check' ? '📷'
-             : '↗';
+  const icon = tx.type === 'deposit' ? '↓' : tx.type === 'bill' ? '📄' : tx.type === 'wire' ? '🌐' : tx.type === 'zelle' ? '⚡' : tx.type === 'receive' ? '↓' : tx.type === 'check' ? '📷' : '↗';
   const cls = tx.amount >= 0 ? 'positive' : 'negative';
   const d = new Date(tx.date);
-  const date = d.toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'})
-    + ' · ' + d.toLocaleTimeString(undefined, {hour:'numeric', minute:'2-digit'});
-  return `
-    <div class="tx">
-      <div class="tx-left">
-        <div class="tx-icon">${icon}</div>
-        <div style="min-width:0;">
-          <div class="tx-name">${escapeHtml(tx.label)}</div>
-          <div class="tx-date">${date}</div>
-        </div>
-      </div>
-      <div class="tx-amount ${cls}">${fmtSigned(tx.amount)}</div>
-    </div>`;
+  const date = d.toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'}) + ' · ' + d.toLocaleTimeString(undefined, {hour:'numeric', minute:'2-digit'});
+  return `<div class="tx"><div class="tx-left"><div class="tx-icon">${icon}</div><div style="min-width:0;"><div class="tx-name">${escapeHtml(tx.label)}</div><div class="tx-date">${date}</div></div></div><div class="tx-amount ${cls}">${fmtSigned(tx.amount)}</div></div>`;
 }
 
 function renderTransactions(user) {
   const list = user.transactions || [];
   const homeList = document.getElementById('home-tx-list');
-  const histList = document.getElementById('history-tx-list');
   if (homeList) {
-    homeList.innerHTML = list.length === 0
-      ? '<div class="empty-state">No transactions yet.</div>'
-      : list.slice(-5).reverse().map(txHTML).join('');
-  }
-  if (histList) {
-    // history is handled by renderHistoryFiltered
+    homeList.innerHTML = list.length === 0 ? '<div class="empty-state">No transactions yet.</div>' : list.slice(-5).reverse().map(txHTML).join('');
   }
 }
 
@@ -1784,17 +1511,8 @@ function renderNotifications(user) {
   if (notifs.length === 0) { el.innerHTML = '<div class="empty-state">No notifications.</div>'; return; }
   el.innerHTML = notifs.map(n => {
     const d = new Date(n.date);
-    const time = d.toLocaleDateString(undefined, {month:'short', day:'numeric'}) + ' · ' +
-                 d.toLocaleTimeString(undefined, {hour:'numeric', minute:'2-digit'});
-    return `
-      <div class="notif-item">
-        <div class="notif-icon">${n.icon || '🔔'}</div>
-        <div class="notif-info">
-          <div class="notif-title">${escapeHtml(n.title)}</div>
-          <div class="notif-text">${escapeHtml(n.text)}</div>
-          <div class="notif-time">${time}</div>
-        </div>
-      </div>`;
+    const time = d.toLocaleDateString(undefined, {month:'short', day:'numeric'}) + ' · ' + d.toLocaleTimeString(undefined, {hour:'numeric', minute:'2-digit'});
+    return `<div class="notif-item"><div class="notif-icon">${n.icon || '🔔'}</div><div class="notif-info"><div class="notif-title">${escapeHtml(n.title)}</div><div class="notif-text">${escapeHtml(n.text)}</div><div class="notif-time">${time}</div></div></div>`;
   }).join('');
 }
 
@@ -1805,15 +1523,7 @@ function renderContacts(user) {
   if (contacts.length === 0) { el.innerHTML = '<div class="empty-state">No contacts yet.</div>'; return; }
   el.innerHTML = contacts.map((c, i) => {
     const initials = c.name.split(' ').map(s => s[0]).join('').slice(0,2).toUpperCase();
-    return `
-      <div class="contact-item">
-        <div class="co-avatar">${initials}</div>
-        <div style="flex:1;min-width:0;">
-          <div class="co-name">${escapeHtml(c.name)}</div>
-          <div class="co-info">${escapeHtml(c.info)}</div>
-        </div>
-        <button class="co-action" onclick="quickSend(${i})">Send</button>
-      </div>`;
+    return `<div class="contact-item"><div class="co-avatar">${initials}</div><div style="flex:1;min-width:0;"><div class="co-name">${escapeHtml(c.name)}</div><div class="co-info">${escapeHtml(c.info)}</div></div><button class="co-action" onclick="quickSend(${i})">Send</button></div>`;
   }).join('');
 }
 function quickSend(index) {
@@ -1836,19 +1546,9 @@ function renderBudgets(user) {
   const monthStart = new Date(); monthStart.setDate(1); monthStart.setHours(0,0,0,0);
   el.innerHTML = cats.map(c => {
     const limit = budgets[c];
-    const spent = txs.filter(t => t.amount < 0 && t.category === c && t.date >= monthStart.getTime())
-      .reduce((s,t) => s + Math.abs(t.amount), 0);
+    const spent = txs.filter(t => t.amount < 0 && t.category === c && t.date >= monthStart.getTime()).reduce((s,t) => s + Math.abs(t.amount), 0);
     const pct = Math.min(100, Math.round((spent / limit) * 100));
-    return `
-      <div style="margin-bottom:14px;">
-        <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px;">
-          <span>${escapeHtml(c)}</span>
-          <span>${fmt(spent)} / ${fmt(limit)}</span>
-        </div>
-        <div class="goal-progress-bg">
-          <div class="goal-progress-fill" style="width:${pct}%;background:${pct > 90 ? 'linear-gradient(90deg,#f87171,#dc2626)' : 'linear-gradient(90deg,var(--gold-soft),var(--gold))'};"></div>
-        </div>
-      </div>`;
+    return `<div style="margin-bottom:14px;"><div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px;"><span>${escapeHtml(c)}</span><span>${fmt(spent)} / ${fmt(limit)}</span></div><div style="width:100%;height:10px;border-radius:999px;background:#f5ecd0;overflow:hidden;"><div style="height:100%;width:${pct}%;background:${pct > 90 ? 'linear-gradient(90deg,#f87171,#dc2626)' : 'linear-gradient(90deg,var(--gold-soft),var(--gold))'};border-radius:999px;"></div></div></div>`;
   }).join('');
 }
 
@@ -1863,11 +1563,7 @@ function renderStatements(user) {
     const next = new Date(d.getFullYear(), d.getMonth() + 1, 1).getTime();
     const txs = (user.transactions || []).filter(t => t.date >= start && t.date < next);
     const label = d.toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
-    return `
-      <div class="row" style="cursor:pointer;" onclick="viewStatement(${start}, ${next}, '${label}')">
-        <span class="lbl">📄 ${label}</span>
-        <span class="val">${txs.length} txns</span>
-      </div>`;
+    return `<div class="row" style="cursor:pointer;" onclick="viewStatement(${start}, ${next}, '${label}')"><span class="lbl">📄 ${label}</span><span class="val">${txs.length} txns</span></div>`;
   }).join('');
 }
 function viewStatement(start, end, label) {
@@ -1906,11 +1602,7 @@ function renderUpcomingBills(user) {
   const el = document.getElementById('upcoming-bills');
   if (!el) return;
   const now = new Date();
-  const bills = [
-    { name: 'Electric Company', amount: 145.00, days: 3 },
-    { name: 'Internet Provider', amount: 79.99, days: 7 },
-    { name: 'Phone Bill', amount: 55.00, days: 12 }
-  ];
+  const bills = [{ name: 'Electric Company', amount: 145.00, days: 3 }, { name: 'Internet Provider', amount: 79.99, days: 7 }, { name: 'Phone Bill', amount: 55.00, days: 12 }];
   el.innerHTML = bills.map(b => {
     const due = new Date(now); due.setDate(now.getDate() + b.days);
     const label = due.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
@@ -1923,14 +1615,7 @@ function renderVirtualCards(user) {
   if (!el) return;
   const cards = user.virtualCards || [];
   if (cards.length === 0) { el.innerHTML = '<div class="empty-state">No virtual cards generated yet.</div>'; return; }
-  el.innerHTML = cards.map((c, i) => `
-    <div class="copy-row">
-      <div>
-        <div class="key">Card ${i+1} · Exp ${c.expiry}</div>
-        <div class="value">${c.number}</div>
-      </div>
-      <button class="copy-btn" onclick="copyText('${c.number}')">COPY</button>
-    </div>`).join('');
+  el.innerHTML = cards.map((c, i) => `<div class="copy-row"><div><div class="key">Card ${i+1} · Exp ${c.expiry}</div><div class="value">${c.number}</div></div><button class="copy-btn" onclick="copyText('${c.number}')">COPY</button></div>`).join('');
 }
 
 function addTransaction(user, tx) {
@@ -1952,15 +1637,13 @@ function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
-/* === MONEY OPERATIONS === */
 function handleTransfer() {
   const key = getSession(); const user = getUsers()[key]; if (!user) return;
   const name = document.getElementById('tr-recipient').value.trim();
   const amountStr = document.getElementById('tr-amount').value;
   const category = document.getElementById('tr-category').value;
   const note = document.getElementById('tr-note').value.trim();
-  const msg = document.getElementById('tr-msg');
-  msg.textContent = ''; msg.classList.remove('success-msg'); msg.classList.add('error-msg');
+  const msg = document.getElementById('tr-msg'); msg.textContent = '';
   const amount = parseFloat(amountStr);
   if (!name) { msg.textContent = 'Enter recipient.'; return; }
   if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; return; }
@@ -1978,8 +1661,7 @@ function handleDeposit() {
   const key = getSession(); const user = getUsers()[key]; if (!user) return;
   const amountStr = document.getElementById('dp-amount').value;
   const source = document.getElementById('dp-source').value.trim() || 'Deposit';
-  const msg = document.getElementById('dp-msg');
-  msg.textContent = ''; msg.classList.remove('success-msg'); msg.classList.add('error-msg');
+  const msg = document.getElementById('dp-msg'); msg.textContent = '';
   const amount = parseFloat(amountStr);
   if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; return; }
   applyBalance(user, amount);
@@ -1996,7 +1678,7 @@ function handleCheckDeposit() {
   const from = document.getElementById('ck-from').value.trim() || 'Unknown';
   const msg = document.getElementById('ck-msg'); msg.textContent = '';
   const amount = parseFloat(amountStr);
-  if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; msg.style.color = '#f87171'; return; }
+  if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; return; }
   applyBalance(user, amount);
   addTransaction(user, { type: 'check', label: 'Mobile Check — ' + from, amount, date: Date.now(), account: user.activeAccount, category: 'Other' });
   addNotification(user, '📷', 'Check deposited', fmt(amount) + ' from ' + from);
@@ -2009,8 +1691,7 @@ function handleReceive() {
   const key = getSession(); const user = getUsers()[key]; if (!user) return;
   const from = document.getElementById('rcv-from').value.trim();
   const amountStr = document.getElementById('rcv-amount').value;
-  const msg = document.getElementById('rcv-msg');
-  msg.textContent = ''; msg.classList.remove('success-msg'); msg.classList.add('error-msg');
+  const msg = document.getElementById('rcv-msg'); msg.textContent = '';
   const amount = parseFloat(amountStr);
   if (!from) { msg.textContent = 'Enter sender.'; return; }
   if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; return; }
@@ -2029,8 +1710,7 @@ function handleWire() {
   const routing = document.getElementById('wr-routing').value.trim();
   const account = document.getElementById('wr-account').value.trim();
   const amountStr = document.getElementById('wr-amount').value;
-  const msg = document.getElementById('wr-msg');
-  msg.textContent = ''; msg.classList.remove('success-msg'); msg.classList.add('error-msg');
+  const msg = document.getElementById('wr-msg'); msg.textContent = '';
   const amount = parseFloat(amountStr);
   const FEE = 15.00;
   if (!name) { msg.textContent = 'Enter recipient.'; return; }
@@ -2052,8 +1732,7 @@ function handleZelle() {
   const key = getSession(); const user = getUsers()[key]; if (!user) return;
   const recipient = document.getElementById('zl-recipient').value.trim();
   const amountStr = document.getElementById('zl-amount').value;
-  const msg = document.getElementById('zl-msg');
-  msg.textContent = ''; msg.classList.remove('success-msg'); msg.classList.add('error-msg');
+  const msg = document.getElementById('zl-msg'); msg.textContent = '';
   const amount = parseFloat(amountStr);
   if (!recipient) { msg.textContent = 'Enter recipient.'; return; }
   if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; return; }
@@ -2070,8 +1749,7 @@ function handleBill() {
   const key = getSession(); const user = getUsers()[key]; if (!user) return;
   const name = document.getElementById('bl-name').value.trim();
   const amountStr = document.getElementById('bl-amount').value;
-  const msg = document.getElementById('bl-msg');
-  msg.textContent = ''; msg.classList.remove('success-msg'); msg.classList.add('error-msg');
+  const msg = document.getElementById('bl-msg'); msg.textContent = '';
   const amount = parseFloat(amountStr);
   if (!name) { msg.textContent = 'Enter biller.'; return; }
   if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; return; }
@@ -2096,9 +1774,9 @@ function handleSplit() {
   const total = parseFloat(document.getElementById('sp-total').value) || 0;
   const count = parseInt(document.getElementById('sp-count').value) || 0;
   const msg = document.getElementById('sp-msg'); msg.textContent = '';
-  if (total <= 0 || count < 2) { msg.textContent = 'Enter total and 2+ people.'; msg.style.color = '#f87171'; return; }
+  if (total <= 0 || count < 2) { msg.textContent = 'Enter total and 2+ people.'; return; }
   const each = total / count;
-  if (each > activeBalance(user)) { msg.textContent = 'Insufficient balance.'; msg.style.color = '#f87171'; return; }
+  if (each > activeBalance(user)) { msg.textContent = 'Insufficient balance.'; return; }
   applyBalance(user, -each);
   addTransaction(user, { type: 'transfer', label: 'Split bill (' + count + ' people)', amount: -each, date: Date.now(), account: user.activeAccount, category: 'Other' });
   addNotification(user, '🧾', 'Split bill paid', 'Your share: ' + fmt(each));
@@ -2112,8 +1790,8 @@ function addContact() {
   const name = document.getElementById('ct-name').value.trim();
   const info = document.getElementById('ct-info').value.trim();
   const msg = document.getElementById('ct-msg'); msg.textContent = '';
-  if (!name) { msg.textContent = 'Enter name.'; msg.style.color = '#f87171'; return; }
-  if (!info) { msg.textContent = 'Enter email/phone.'; msg.style.color = '#f87171'; return; }
+  if (!name) { msg.textContent = 'Enter name.'; return; }
+  if (!info) { msg.textContent = 'Enter email/phone.'; return; }
   user.contacts = user.contacts || [];
   user.contacts.push({ name, info });
   persistUser(key, user);
@@ -2126,7 +1804,7 @@ function saveBudget() {
   const cat = document.getElementById('bd-cat').value;
   const amount = parseFloat(document.getElementById('bd-amount').value);
   const msg = document.getElementById('bd-msg'); msg.textContent = '';
-  if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; msg.style.color = '#f87171'; return; }
+  if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; return; }
   user.budgets = user.budgets || {};
   user.budgets[cat] = amount;
   persistUser(key, user);
@@ -2155,9 +1833,9 @@ function handleResetPassword() {
   const code = document.getElementById('pf-reset-code').value.trim();
   const newPass = document.getElementById('pf-new-pass').value;
   const msg = document.getElementById('pf-msg'); msg.textContent = '';
-  if (!code || code.length !== 6) { msg.textContent = 'Enter 6-digit code.'; msg.style.color = '#f87171'; return; }
-  if (code !== user.code) { msg.textContent = 'Incorrect code.'; msg.style.color = '#f87171'; return; }
-  if (!newPass || newPass.length < 4) { msg.textContent = 'Password must be 4+ chars.'; msg.style.color = '#f87171'; return; }
+  if (!code || code.length !== 6) { msg.textContent = 'Enter 6-digit code.'; return; }
+  if (code !== user.code) { msg.textContent = 'Incorrect code.'; return; }
+  if (!newPass || newPass.length < 4) { msg.textContent = 'Password must be 4+ chars.'; return; }
   user.pass = newPass;
   persistUser(key, user);
   document.getElementById('pf-reset-code').value = ''; document.getElementById('pf-new-pass').value = '';
@@ -2167,7 +1845,7 @@ function handleChangeName() {
   const key = getSession(); const users = getUsers(); const user = users[key]; if (!user) return;
   const newName = document.getElementById('pf-new-name').value.trim();
   const msg = document.getElementById('pf-name-msg'); msg.textContent = '';
-  if (!newName || newName.length < 3) { msg.textContent = 'Name must be 3+ chars.'; msg.style.color = '#f87171'; return; }
+  if (!newName || newName.length < 3) { msg.textContent = 'Name must be 3+ chars.'; return; }
   user.name = newName;
   persistUser(key, user);
   document.getElementById('pf-new-name').value = '';
@@ -2188,15 +1866,11 @@ document.addEventListener('DOMContentLoaded', function () {
   runMigrations();
   updateClocks();
   setInterval(updateClocks, 30000);
-  // Set default start date
   const sc = document.getElementById('sc-start');
   if (sc && !sc.value) {
     const d = new Date(); d.setDate(d.getDate() + 1);
     sc.value = d.toISOString().split('T')[0];
   }
-  const isLight = document.body.classList.contains('light');
-  const btn = document.getElementById('theme-btn');
-  if (btn) btn.textContent = isLight ? '🌙' : '☀️';
   const session = getSession();
   if (session && getUsers()[session]) showScreen('screen-home');
   else { clearSession(); showScreen('screen-signup'); }
