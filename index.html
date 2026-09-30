@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>NovaPay</title>
 
@@ -12,8 +15,6 @@
   --gold: #e5c76b;
   --gold-light: #f3dfa2;
   --gold-dark: #c9a84a;
-  --bg: #0b0a08;
-  --card: #171510;
   --text: #f7f1df;
   --muted: #aaa28f;
   --green: #4ade80;
@@ -59,7 +60,6 @@ button { cursor: pointer; }
 }
 
 .tagline { text-align: center; color: var(--muted); font-size: 17px; margin-bottom: 45px; }
-
 .field { margin-bottom: 25px; }
 
 .field label {
@@ -112,7 +112,15 @@ button { cursor: pointer; }
 }
 
 .auth-switch { text-align: center; margin-top: 34px; color: #777163; }
-.auth-switch button { border: 0; background: transparent; color: var(--gold-light); font-weight: 800; }
+
+.auth-switch button {
+  border: 0;
+  background: transparent;
+  color: var(--gold-light);
+  font-weight: 800;
+  padding: 6px 8px;
+  text-decoration: underline;
+}
 
 .auth-hint {
   margin-top: 18px;
@@ -157,19 +165,16 @@ button { cursor: pointer; }
   font-weight: 900;
 }
 
-/* GREETING */
 .greeting { padding: 6px 22px 20px; }
 .greeting h1 { font-size: 30px; line-height: 1.15; letter-spacing: -.8px; }
 .greeting p { color: rgba(200,190,160,.65); margin-top: 7px; }
 
-/* PILLS */
 .pills { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; padding: 0 22px 22px; }
 .pills::-webkit-scrollbar { display: none; }
 .pill { flex-shrink: 0; padding: 12px 18px; border-radius: 999px; font-size: 13px; font-weight: 800; cursor: pointer; }
 .pill.active { background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: #2b2208; }
 .pill.inactive { border: 1px solid rgba(229,199,107,.22); color: var(--gold); background: rgba(255,255,255,.05); }
 
-/* BALANCE */
 .balance-card {
   margin: 0 18px 22px;
   padding: 27px 24px 24px;
@@ -187,7 +192,6 @@ button { cursor: pointer; }
 .action-button.primary { border: 0; background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: #2b2208; }
 .action-button.outline { background: transparent; border: 1px solid rgba(229,199,107,.4); color: var(--gold-light); }
 
-/* STATS */
 .stats-strip { display: flex; gap: 12px; margin: 0 18px 22px; }
 .stat-box { flex: 1; padding: 16px 14px; border-radius: 18px; border: 1px solid rgba(229,199,107,.14); background: rgba(255,255,255,.04); }
 .stat-label { display: block; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: rgba(200,190,160,.6); margin-bottom: 6px; font-weight: 800; }
@@ -195,12 +199,10 @@ button { cursor: pointer; }
 .stat-value.income { color: var(--green); }
 .stat-value.expense { color: var(--red); }
 
-/* SECTION TITLES */
 .section-title { display: flex; justify-content: space-between; align-items: baseline; padding: 0 22px 12px; }
 .section-title h2 { font-size: 17px; font-weight: 900; letter-spacing: -.3px; }
 .section-title span { font-size: 12px; color: var(--gold-light); font-weight: 800; }
 
-/* CARD */
 .debit-card {
   margin: 0 18px 22px;
   min-height: 235px;
@@ -220,7 +222,6 @@ button { cursor: pointer; }
 .card-label { display: block; font-size: 9px; color: #827b6c; margin-bottom: 4px; }
 .card-value { font-size: 13px; font-weight: 800; }
 
-/* TRANSACTIONS */
 .tx-list { margin: 0 18px 22px; border-radius: 20px; border: 1px solid rgba(229,199,107,.12); background: rgba(255,255,255,.03); overflow: hidden; }
 .tx-item { display: flex; align-items: center; gap: 14px; padding: 14px 18px; border-bottom: 1px solid rgba(229,199,107,.08); }
 .tx-item:last-child { border-bottom: 0; }
@@ -234,7 +235,6 @@ button { cursor: pointer; }
 .tx-empty { padding: 40px 20px; text-align: center; color: rgba(200,190,160,.55); font-size: 13px; line-height: 1.6; }
 .tx-empty-emoji { font-size: 32px; display: block; margin-bottom: 10px; opacity: .6; }
 
-/* GENERATE */
 .generate {
   margin: 0 18px 100px;
   width: calc(100% - 36px);
@@ -246,7 +246,6 @@ button { cursor: pointer; }
   font-weight: 850;
 }
 
-/* RECIPIENT LIST */
 .recipient-list { margin: 0 0 22px; border-radius: 20px; border: 1px solid rgba(229,199,107,.12); background: rgba(255,255,255,.03); overflow: hidden; max-height: 320px; overflow-y: auto; }
 .recipient-item { display: flex; align-items: center; gap: 14px; padding: 14px 18px; border-bottom: 1px solid rgba(229,199,107,.08); cursor: pointer; transition: background .15s; }
 .recipient-item:last-child { border-bottom: 0; }
@@ -259,7 +258,6 @@ button { cursor: pointer; }
 .recipient-check { font-size: 18px; color: var(--gold-light); opacity: 0; }
 .recipient-item.selected .recipient-check { opacity: 1; }
 
-/* SUMMARY ROWS */
 .summary-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px dashed rgba(229,199,107,.15); font-size: 14px; }
 .summary-row:last-child { border-bottom: 0; }
 .summary-row .label { color: rgba(200,190,160,.75); }
@@ -267,7 +265,6 @@ button { cursor: pointer; }
 .summary-row.total { border-top: 2px solid rgba(229,199,107,.4); margin-top: 8px; padding-top: 16px; font-size: 17px; }
 .summary-row.total .value { color: var(--gold-light); font-size: 20px; }
 
-/* WRAP */
 .transfer-wrap { padding: 0 18px 120px; }
 .transfer-header { padding: 0 4px 20px; }
 .transfer-header h1 { font-size: 28px; letter-spacing: -.8px; font-weight: 900; }
@@ -277,7 +274,6 @@ button { cursor: pointer; }
 .quick-chip:active { background: rgba(229,199,107,.18); }
 .info-note { margin-top: 12px; font-size: 12px; color: rgba(200,190,160,.6); line-height: 1.5; }
 
-/* BILLS GRID */
 .bill-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
 .bill-tile { padding: 18px 8px; border-radius: 18px; border: 1px solid rgba(229,199,107,.18); background: rgba(255,255,255,.04); text-align: center; cursor: pointer; transition: all .15s; }
 .bill-tile:active { background: rgba(229,199,107,.12); }
@@ -286,13 +282,11 @@ button { cursor: pointer; }
 .bill-name { font-size: 11px; font-weight: 800; letter-spacing: .3px; }
 .bill-min { font-size: 10px; color: rgba(200,190,160,.55); margin-top: 3px; }
 
-/* FILTERS */
 .filter-bar { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 0 22px 16px; }
 .filter-bar::-webkit-scrollbar { display: none; }
 .filter-chip { flex-shrink: 0; padding: 9px 16px; border-radius: 999px; font-size: 12px; font-weight: 800; border: 1px solid rgba(229,199,107,.22); background: rgba(255,255,255,.05); color: var(--gold); cursor: pointer; }
 .filter-chip.active { background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: #2b2208; border-color: transparent; }
 
-/* PROFILE */
 .profile-card { margin: 0 18px 22px; padding: 25px; border-radius: 24px; border: 1px solid rgba(229,199,107,.16); background: linear-gradient(140deg, #1b1812, #0d0c0a); text-align: center; }
 .profile-avatar { width: 82px; height: 82px; border-radius: 50%; background: linear-gradient(135deg,#5b7cfa,#4a63e0); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 32px; margin: 0 auto 16px; }
 .profile-name { font-size: 20px; font-weight: 900; margin-bottom: 4px; }
@@ -307,13 +301,11 @@ button { cursor: pointer; }
 
 .logout-button { margin: 0 18px 100px; width: calc(100% - 36px); height: 58px; border-radius: 17px; border: 1px solid rgba(248,113,113,.5); background: rgba(248,113,113,.1); color: #f87171; font-weight: 900; font-size: 15px; }
 
-/* NAV */
 .bottom-nav { position: fixed; bottom: 0; width: min(100%,430px); display: flex; justify-content: space-around; padding: 12px 5px 19px; background: rgba(10,9,8,.96); backdrop-filter: blur(14px); border-top: 1px solid rgba(229,199,107,.14); z-index: 20; }
 .nav-button { border: 0; background: transparent; color: #716c60; font-size: 10px; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 4px; }
 .nav-button.active { color: var(--gold-light); }
 .nav-icon { font-size: 20px; }
 
-/* MODAL */
 .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.72); z-index: 100; align-items: center; justify-content: center; padding: 25px; }
 .modal.show { display: flex; }
 .modal-box { width: 100%; max-width: 380px; padding: 25px; border-radius: 22px; background: #191711; border: 1px solid rgba(229,199,107,.25); max-height: 85vh; overflow-y: auto; }
@@ -425,7 +417,6 @@ button { cursor: pointer; }
 
 <!-- ============ DASHBOARD ============ -->
 <section id="dashboardScreen" class="screen">
-
   <div class="top-row">
     <button class="circle-button" id="themeButton" type="button">☀️</button>
     <button class="circle-button" id="notificationButton" type="button">🔔</button>
@@ -497,9 +488,7 @@ button { cursor: pointer; }
 
   <div class="tx-list" id="txList"></div>
 
-  <button class="generate" id="virtualCardButton" type="button">
-    ＋ Generate Virtual Card
-  </button>
+  <button class="generate" id="virtualCardButton" type="button">＋ Generate Virtual Card</button>
 
   <nav class="bottom-nav" data-nav>
     <button class="nav-button active" data-page="home" type="button"><span class="nav-icon">🏠</span> Home</button>
@@ -508,7 +497,6 @@ button { cursor: pointer; }
     <button class="nav-button" data-page="history" type="button"><span class="nav-icon">☰</span> History</button>
     <button class="nav-button" data-page="profile" type="button"><span class="nav-icon">👤</span> Profile</button>
   </nav>
-
 </section>
 
 
@@ -535,7 +523,6 @@ button { cursor: pointer; }
     </div>
 
     <div class="field"><label>Select Recipient</label></div>
-
     <div class="recipient-list" id="recipientList"></div>
 
     <div class="field">
@@ -754,20 +741,19 @@ button { cursor: pointer; }
 <script>
 
 /* ============================================================
-   0. ACCESS CODE
+   0. CONSTANTS
    ============================================================ */
 
 const ACCESS_CODE = "CERJI2024";
 const ACCESS_KEY  = "novapayAccessGranted";
-
-
-/* ============================================================
-   1. USER STORAGE — Cerji Colvin
-   ============================================================ */
-
 const USERS_KEY   = "novapayUsers";
 const SESSION_KEY = "novapaySession";
 const PRIMARY_EMAIL = "cerji@oceanstatearchery.com";
+
+
+/* ============================================================
+   1. STORAGE HELPERS
+   ============================================================ */
 
 function getUsers() {
   try { return JSON.parse(localStorage.getItem(USERS_KEY)) || {}; }
@@ -807,26 +793,25 @@ function clearSession() {
 
 
 /* ============================================================
-   2. SCREENS
+   2. SCREEN ROUTER
    ============================================================ */
 
-const codeScreen      = document.getElementById("codeScreen");
-const signupScreen    = document.getElementById("signupScreen");
-const loginScreen     = document.getElementById("loginScreen");
-const dashboardScreen = document.getElementById("dashboardScreen");
-const transferScreen  = document.getElementById("transferScreen");
-const billsScreen     = document.getElementById("billsScreen");
-const historyScreen   = document.getElementById("historyScreen");
-const profileScreen   = document.getElementById("profileScreen");
-
-const ALL_SCREENS = [
-  codeScreen, signupScreen, loginScreen, dashboardScreen,
-  transferScreen, billsScreen, historyScreen, profileScreen
+const SCREEN_IDS = [
+  "codeScreen", "signupScreen", "loginScreen",
+  "dashboardScreen", "transferScreen", "billsScreen",
+  "historyScreen", "profileScreen"
 ];
 
-function showScreen(screen) {
-  ALL_SCREENS.forEach(function(s) { s.classList.remove("active"); });
-  screen.classList.add("active");
+function showScreen(idOrEl) {
+  const id = (typeof idOrEl === "string") ? idOrEl : idOrEl.id;
+
+  SCREEN_IDS.forEach(function(sid) {
+    const el = document.getElementById(sid);
+    if (el) el.classList.remove("active");
+  });
+
+  const target = document.getElementById(id);
+  if (target) target.classList.add("active");
   window.scrollTo(0, 0);
 }
 
@@ -868,17 +853,190 @@ function closeModal() {
 
 document.getElementById("modalClose").addEventListener("click", closeModal);
 modalCancel.addEventListener("click", closeModal);
+
 modalConfirm.addEventListener("click", function() {
   if (typeof confirmCallback === "function") confirmCallback();
   closeModal();
 });
-modal.addEventListener("click", function(e) { if (e.target === modal) closeModal(); });
+
+modal.addEventListener("click", function(e) {
+  if (e.target === modal) closeModal();
+});
 
 
 /* ============================================================
-   4. ACCESS CODE GATE
+   4. EVENT DELEGATION — GUARANTEED CLICK HANDLING
+   ------------------------------------------------------------
+   Every clickable element uses data-action. This means even
+   dynamically added buttons work, and nothing gets missed.
    ============================================================ */
 
+document.addEventListener("click", function(e) {
+
+  const target = e.target.closest("[data-action]");
+  if (!target) return;
+
+  const action = target.dataset.action;
+
+  // --- AUTH SWITCH ---
+  if (action === "show-login") {
+    showScreen("loginScreen");
+    return;
+  }
+
+  if (action === "show-signup") {
+    showScreen("signupScreen");
+    return;
+  }
+
+  // --- NAVIGATION ---
+  if (action === "nav") {
+    const page = target.dataset.page;
+    navigateTo(page);
+    return;
+  }
+
+  // --- BACK ---
+  if (action === "back-home") {
+    showScreen("dashboardScreen");
+    return;
+  }
+
+  // --- ACCOUNT PILLS ---
+  if (action === "pill-checking") {
+    document.getElementById("checkingPill").className = "pill active";
+    document.getElementById("savingsPill").className  = "pill inactive";
+    renderAccount("checking");
+    return;
+  }
+
+  if (action === "pill-savings") {
+    document.getElementById("savingsPill").className  = "pill active";
+    document.getElementById("checkingPill").className = "pill inactive";
+    renderAccount("savings");
+    return;
+  }
+
+  // --- TOP ACTIONS ---
+  if (action === "go-transfer") {
+    showScreen("transferScreen");
+    updateTransferSummary();
+    return;
+  }
+
+  if (action === "deposit-info") {
+    showModal("Deposit Funds",
+      "Deposit checks or move money from an external account.\n\n" +
+      "Mobile check deposits up to $25,000.00 are credited instantly.\n" +
+      "ACH transfers up to $50,000.00 take 1–2 business days.");
+    return;
+  }
+
+  if (action === "virtual-card") {
+    showModal("Virtual Card Generated",
+      "Your new virtual card ending in " + accounts.checking.lastFour + " is ready.\n\n" +
+      "Daily limit: $10,000.00\n" +
+      "Monthly limit: $50,000.00\n" +
+      "Online purchases: Enabled\n" +
+      "Contactless payments: Enabled");
+    return;
+  }
+
+  if (action === "notifications") {
+    showModal("Notifications",
+      "🏆 iFundWomen Grant  +$134,290.00\n\n" +
+      "Your grant has been credited to your Checking account.");
+    return;
+  }
+
+  if (action === "theme") {
+    showModal("Theme", "NovaPay is currently in Midnight Gold mode.\n\nLight mode is coming in the next release.");
+    return;
+  }
+
+  // --- QUICK AMOUNTS ---
+  if (action === "quick-amount") {
+    const field = target.dataset.field;
+    const amt   = target.dataset.amt;
+    const input = document.getElementById(field);
+    if (input) {
+      input.value = amt;
+      if (field === "transferAmount") updateTransferSummary();
+      if (field === "billAmount")     updateBillSummary();
+    }
+    return;
+  }
+
+  // --- FILTERS ---
+  if (action === "filter") {
+    document.querySelectorAll(".filter-chip").forEach(function(c) {
+      c.classList.remove("active");
+    });
+    target.classList.add("active");
+    historyFilter = target.dataset.filter;
+    renderHistory();
+    return;
+  }
+
+  // --- BILL TILE ---
+  if (action === "bill-tile") {
+    document.querySelectorAll("#billGrid .bill-tile").forEach(function(t) {
+      t.classList.remove("selected");
+    });
+    target.classList.add("selected");
+    selectedBill = {
+      name: target.dataset.bill,
+      min:  parseFloat(target.dataset.min)
+    };
+    updateBillSummary();
+    return;
+  }
+
+  // --- RECIPIENT ---
+  if (action === "recipient") {
+    document.querySelectorAll("#recipientList .recipient-item").forEach(function(el) {
+      el.classList.remove("selected");
+    });
+    target.classList.add("selected");
+    const rid = target.dataset.id;
+    selectedRecipient = recipients.find(function(r) { return r.id === rid; }) || null;
+    updateTransferSummary();
+    return;
+  }
+
+  // --- LOGOUT ---
+  if (action === "logout") {
+    showConfirm("Sign Out?",
+      "You will be returned to the sign-in screen.\n\nAre you sure you want to sign out?",
+      function() {
+        clearSession();
+        document.getElementById("loginEmail").value = "";
+        document.getElementById("loginPassword").value = "";
+        showScreen("loginScreen");
+        showModal("Signed Out", "You have been signed out successfully.");
+      });
+    return;
+  }
+
+  // --- CONFIRM TRANSFER ---
+  if (action === "confirm-transfer") {
+    handleTransfer();
+    return;
+  }
+
+  // --- CONFIRM BILL ---
+  if (action === "confirm-bill") {
+    handleBill();
+    return;
+  }
+});
+
+
+/* ============================================================
+   5. FORM SUBMISSIONS
+   ============================================================ */
+
+// --- ACCESS CODE ---
 document.getElementById("codeForm").addEventListener("submit", function(e) {
   e.preventDefault();
   const entered = document.getElementById("accessCode").value.trim();
@@ -886,7 +1044,7 @@ document.getElementById("codeForm").addEventListener("submit", function(e) {
   if (entered === ACCESS_CODE) {
     sessionStorage.setItem(ACCESS_KEY, "true");
     document.getElementById("accessCode").value = "";
-    showScreen(signupScreen);
+    showScreen("signupScreen");
   } else {
     showModal("Invalid Access Code", "The code you entered is incorrect.\n\nPlease try again.");
     document.getElementById("accessCode").value = "";
@@ -894,10 +1052,7 @@ document.getElementById("codeForm").addEventListener("submit", function(e) {
 });
 
 
-/* ============================================================
-   5. SIGN UP
-   ============================================================ */
-
+// --- SIGN UP ---
 document.getElementById("signupForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
@@ -915,7 +1070,8 @@ document.getElementById("signupForm").addEventListener("submit", function(e) {
 
   const users = getUsers();
   if (users[email]) {
-    showModal("Account Exists", "An account with this email already exists.\n\nPlease sign in instead.");
+    showModal("Account Exists",
+      "An account with this email already exists.\n\nPlease sign in instead.");
     return;
   }
 
@@ -927,53 +1083,49 @@ document.getElementById("signupForm").addEventListener("submit", function(e) {
   setSession(email);
   document.getElementById("signupForm").reset();
   loadDashboard();
-  showScreen(dashboardScreen);
-  showModal("Welcome to NovaPay!", "Your account has been created.\n\nName: " + name + "\nEmail: " + email);
+  showScreen("dashboardScreen");
+  showModal("Welcome to NovaPay!",
+    "Your account has been created.\n\nName: " + name + "\nEmail: " + email);
 });
 
 
-/* ============================================================
-   6. LOGIN
-   ============================================================ */
-
+// --- LOGIN ---
 document.getElementById("loginForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
   const email    = document.getElementById("loginEmail").value.trim().toLowerCase();
   const password = document.getElementById("loginPassword").value;
 
-  if (!email || !password) { showModal("Missing Details", "Please enter both email and password."); return; }
+  if (!email || !password) {
+    showModal("Missing Details", "Please enter both email and password.");
+    return;
+  }
 
   const users = getUsers();
   const user  = users[email];
 
-  if (!user) { showModal("Account Not Found", "No account exists for:\n" + email + "\n\nPlease create an account first."); return; }
-  if (user.password !== password) { showModal("Wrong Password", "The password you entered is incorrect.\n\nPlease try again."); return; }
+  if (!user) {
+    showModal("Account Not Found",
+      "No account exists for:\n" + email +
+      "\n\nPlease create an account first.");
+    return;
+  }
+
+  if (user.password !== password) {
+    showModal("Wrong Password",
+      "The password you entered is incorrect.\n\nPlease try again.");
+    return;
+  }
 
   setSession(email);
   document.getElementById("loginForm").reset();
   loadDashboard();
-  showScreen(dashboardScreen);
+  showScreen("dashboardScreen");
 });
 
 
 /* ============================================================
-   7. LOGOUT
-   ============================================================ */
-
-document.getElementById("logoutButton").addEventListener("click", function() {
-  showConfirm("Sign Out?", "You will be returned to the sign-in screen.\n\nAre you sure you want to sign out?", function() {
-    clearSession();
-    document.getElementById("loginEmail").value = "";
-    document.getElementById("loginPassword").value = "";
-    showScreen(loginScreen);
-    showModal("Signed Out", "You have been signed out successfully.");
-  });
-});
-
-
-/* ============================================================
-   8. HELPERS
+   6. HELPERS
    ============================================================ */
 
 function getInitials(name) {
@@ -995,16 +1147,15 @@ function updateGreeting() {
   if (hour >= 5 && hour < 12) text = "Good Morning";
   else if (hour >= 12 && hour < 18) text = "Good Afternoon";
   else text = "Good Evening";
-  document.getElementById("greeting").textContent = text;
+  const g = document.getElementById("greeting");
+  if (g) g.textContent = text;
 }
 
 setInterval(updateGreeting, 60000);
 
 
 /* ============================================================
-   9. ACCOUNTS DATA
-   ------------------------------------------------------------
-   Cerji Colvin receives a $134,290.00 iFundWomen grant.
+   7. ACCOUNTS DATA
    ============================================================ */
 
 const IFUNDWOMEN_GRANT = 134290.00;
@@ -1034,7 +1185,7 @@ let activeAccount = "checking";
 
 
 /* ============================================================
-   10. TRANSACTION STORE
+   8. TRANSACTION STORE
    ============================================================ */
 
 const transactions = [
@@ -1051,7 +1202,25 @@ const transactions = [
 
 
 /* ============================================================
-   11. RENDER TRANSACTIONS
+   9. RECIPIENTS
+   ============================================================ */
+
+const recipients = [
+  { id: "r1", name: "Sarah Johnson",   bank: "NovaPay · ••7391",         color: "#5b7cfa", initials: "SJ" },
+  { id: "r2", name: "Michael Chen",    bank: "NovaPay · ••2048",         color: "#f97316", initials: "MC" },
+  { id: "r3", name: "Amara Okafor",    bank: "Chase Bank · ••5612",      color: "#22c55e", initials: "AO" },
+  { id: "r4", name: "David Williams",  bank: "Bank of America · ••8840", color: "#a855f7", initials: "DW" },
+  { id: "r5", name: "Elena Rodriguez", bank: "Wells Fargo · ••3927",     color: "#ef4444", initials: "ER" },
+  { id: "r6", name: "James Park",      bank: "NovaPay · ••1174",         color: "#06b6d4", initials: "JP" }
+];
+
+let selectedRecipient = null;
+let selectedBill = null;
+let historyFilter = "all";
+
+
+/* ============================================================
+   10. RENDER TRANSACTIONS
    ============================================================ */
 
 function renderTxList(target, list, emptyMessage) {
@@ -1091,30 +1260,46 @@ function renderHomeTransactions() {
 
 
 /* ============================================================
-   12. DASHBOARD
+   11. RENDER RECIPIENT LIST
    ============================================================ */
 
-const checkingPill   = document.getElementById("checkingPill");
-const savingsPill    = document.getElementById("savingsPill");
-const accountBalance = document.getElementById("accountBalance");
-const accountSub     = document.getElementById("accountSub");
-const statIncome     = document.getElementById("statIncome");
-const statExpense    = document.getElementById("statExpense");
-const statSavings    = document.getElementById("statSavings");
-const cardLastFour   = document.getElementById("cardLastFour");
-const cardExpiry     = document.getElementById("cardExpiry");
+function buildRecipientList() {
+  const list = document.getElementById("recipientList");
+  list.innerHTML = "";
+
+  recipients.forEach(function(r) {
+    const item = document.createElement("div");
+    item.className = "recipient-item";
+    item.dataset.action = "recipient";
+    item.dataset.id = r.id;
+    item.innerHTML =
+      '<div class="recipient-avatar" style="background:' + r.color + ';">' + r.initials + '</div>' +
+      '<div class="recipient-info">' +
+        '<div class="recipient-name">' + r.name + '</div>' +
+        '<div class="recipient-bank">' + r.bank + '</div>' +
+      '</div>' +
+      '<div class="recipient-check">✓</div>';
+
+    list.appendChild(item);
+  });
+}
+
+
+/* ============================================================
+   12. RENDER ACCOUNT
+   ============================================================ */
 
 function renderAccount(key) {
   activeAccount = key;
   const acc = accounts[key];
 
-  accountBalance.textContent = formatMoney(acc.balance);
-  accountSub.textContent     = acc.label;
-  statIncome.textContent     = "+" + formatMoney(acc.income);
-  statExpense.textContent    = "-" + formatMoney(acc.expense);
-  statSavings.textContent    = formatMoney(acc.savings);
-  cardLastFour.textContent   = acc.lastFour;
-  cardExpiry.textContent     = acc.expiry;
+  document.getElementById("accountBalance").textContent = formatMoney(acc.balance);
+  document.getElementById("accountSub").textContent     = acc.label;
+  document.getElementById("statIncome").textContent     = "+" + formatMoney(acc.income);
+  document.getElementById("statExpense").textContent    = "-" + formatMoney(acc.expense);
+  document.getElementById("statSavings").textContent    = formatMoney(acc.savings);
+  document.getElementById("cardLastFour").textContent   = acc.lastFour;
+  document.getElementById("cardExpiry").textContent     = acc.expiry;
 
   const fromSel = document.getElementById("fromAccount");
   if (fromSel) {
@@ -1130,18 +1315,6 @@ function renderAccount(key) {
     billFrom.options[1].text = "Savings · " + formatMoney(accounts.savings.balance);
   }
 }
-
-checkingPill.addEventListener("click", function() {
-  checkingPill.className = "pill active";
-  savingsPill.className  = "pill inactive";
-  renderAccount("checking");
-});
-
-savingsPill.addEventListener("click", function() {
-  savingsPill.className  = "pill active";
-  checkingPill.className = "pill inactive";
-  renderAccount("savings");
-});
 
 
 /* ============================================================
@@ -1161,11 +1334,10 @@ function loadDashboard() {
   document.getElementById("cardEmail").textContent      = upper;
   document.getElementById("greetingName").textContent   = name;
 
-  document.getElementById("avatar").textContent          = initial;
-  document.getElementById("transferAvatar").textContent  = initial;
-  document.getElementById("billsAvatar").textContent     = initial;
-  document.getElementById("historyAvatar").textContent   = initial;
-  document.getElementById("profileAvatar").textContent   = initial;
+  ["avatar", "transferAvatar", "billsAvatar", "historyAvatar", "profileAvatar"].forEach(function(id) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = initial;
+  });
 
   document.getElementById("profileBigAvatar").textContent = initial;
   document.getElementById("profileName").textContent      = name;
@@ -1196,57 +1368,8 @@ function updateProfileStats() {
 
 
 /* ============================================================
-   14. RECIPIENTS + TRANSFER
+   14. TRANSFER SUMMARY
    ============================================================ */
-
-const recipients = [
-  { id: "r1", name: "Sarah Johnson",   bank: "NovaPay · ••7391",         color: "#5b7cfa", initials: "SJ" },
-  { id: "r2", name: "Michael Chen",    bank: "NovaPay · ••2048",         color: "#f97316", initials: "MC" },
-  { id: "r3", name: "Amara Okafor",    bank: "Chase Bank · ••5612",      color: "#22c55e", initials: "AO" },
-  { id: "r4", name: "David Williams",  bank: "Bank of America · ••8840", color: "#a855f7", initials: "DW" },
-  { id: "r5", name: "Elena Rodriguez", bank: "Wells Fargo · ••3927",     color: "#ef4444", initials: "ER" },
-  { id: "r6", name: "James Park",      bank: "NovaPay · ••1174",         color: "#06b6d4", initials: "JP" }
-];
-
-let selectedRecipient = null;
-
-function buildRecipientList() {
-  const list = document.getElementById("recipientList");
-  list.innerHTML = "";
-
-  recipients.forEach(function(r) {
-    const item = document.createElement("div");
-    item.className = "recipient-item";
-    item.dataset.id = r.id;
-    item.innerHTML =
-      '<div class="recipient-avatar" style="background:' + r.color + ';">' + r.initials + '</div>' +
-      '<div class="recipient-info">' +
-        '<div class="recipient-name">' + r.name + '</div>' +
-        '<div class="recipient-bank">' + r.bank + '</div>' +
-      '</div>' +
-      '<div class="recipient-check">✓</div>';
-
-    item.addEventListener("click", function() {
-      document.querySelectorAll("#recipientList .recipient-item").forEach(function(el) {
-        el.classList.remove("selected");
-      });
-      item.classList.add("selected");
-      selectedRecipient = r;
-      updateTransferSummary();
-    });
-
-    list.appendChild(item);
-  });
-}
-
-buildRecipientList();
-
-const transferAmountEl = document.getElementById("transferAmount");
-const sumAmountEl      = document.getElementById("sumAmount");
-const sumFeeEl         = document.getElementById("sumFee");
-const sumSpeedEl       = document.getElementById("sumSpeed");
-const sumTotalEl       = document.getElementById("sumTotal");
-const limitNoteEl      = document.getElementById("limitNote");
 
 function calcFee(amount) {
   if (amount <= 0)    return 0;
@@ -1256,49 +1379,53 @@ function calcFee(amount) {
 }
 
 function updateTransferSummary() {
-  const amount = parseFloat(transferAmountEl.value) || 0;
+  const input  = document.getElementById("transferAmount");
+  const amount = parseFloat(input.value) || 0;
   const fee    = calcFee(amount);
   const total  = amount + fee;
 
-  sumAmountEl.textContent = formatMoney(amount);
-  sumFeeEl.textContent    = formatMoney(fee);
-  sumTotalEl.textContent  = formatMoney(total);
+  document.getElementById("sumAmount").textContent = formatMoney(amount);
+  document.getElementById("sumFee").textContent    = formatMoney(fee);
+  document.getElementById("sumTotal").textContent  = formatMoney(total);
 
-  if (amount === 0)        sumSpeedEl.textContent = "—";
-  else if (amount <= 100)  sumSpeedEl.textContent = "Instant · Free";
-  else if (amount <= 1000) sumSpeedEl.textContent = "Instant";
-  else                     sumSpeedEl.textContent = "Same Day";
+  const speedEl = document.getElementById("sumSpeed");
+  if (amount === 0)        speedEl.textContent = "—";
+  else if (amount <= 100)  speedEl.textContent = "Instant · Free";
+  else if (amount <= 1000) speedEl.textContent = "Instant";
+  else                     speedEl.textContent = "Same Day";
 
-  const fromKey = document.getElementById("fromAccount").value;
-  const avail   = accounts[fromKey].balance;
+  const fromKey   = document.getElementById("fromAccount").value;
+  const avail     = accounts[fromKey].balance;
   const remaining = avail - total;
-
-  limitNoteEl.textContent =
+  document.getElementById("limitNote").textContent =
     "Available: " + formatMoney(avail) +
     " · Remaining: " + formatMoney(Math.max(remaining, 0));
 }
 
-transferAmountEl.addEventListener("input", updateTransferSummary);
-
+document.getElementById("transferAmount").addEventListener("input", updateTransferSummary);
 document.getElementById("fromAccount").addEventListener("change", function() {
   renderAccount(this.value);
   updateTransferSummary();
 });
 
-document.querySelectorAll(".quick-chip").forEach(function(chip) {
-  chip.addEventListener("click", function() {
-    transferAmountEl.value = chip.dataset.amt;
-    updateTransferSummary();
-  });
-});
 
-document.getElementById("confirmTransfer").addEventListener("click", function() {
+/* ============================================================
+   15. HANDLE TRANSFER
+   ============================================================ */
+
+function handleTransfer() {
   const fromKey = document.getElementById("fromAccount").value;
-  const amount  = parseFloat(transferAmountEl.value) || 0;
+  const amount  = parseFloat(document.getElementById("transferAmount").value) || 0;
   const note    = document.getElementById("transferNote").value.trim();
 
-  if (!selectedRecipient) { showModal("No Recipient", "Please select a recipient to send money to."); return; }
-  if (amount <= 0)        { showModal("Invalid Amount", "Please enter an amount greater than $0.00."); return; }
+  if (!selectedRecipient) {
+    showModal("No Recipient", "Please select a recipient to send money to.");
+    return;
+  }
+  if (amount <= 0) {
+    showModal("Invalid Amount", "Please enter an amount greater than $0.00.");
+    return;
+  }
 
   const fee   = calcFee(amount);
   const total = amount + fee;
@@ -1341,7 +1468,7 @@ document.getElementById("confirmTransfer").addEventListener("click", function() 
         "\nTotal debited: " + formatMoney(total) +
         "\n\nNew balance: " + formatMoney(fromAcc.balance));
 
-      transferAmountEl.value = "";
+      document.getElementById("transferAmount").value = "";
       document.getElementById("transferNote").value = "";
       selectedRecipient = null;
       document.querySelectorAll("#recipientList .recipient-item").forEach(function(el) {
@@ -1349,73 +1476,62 @@ document.getElementById("confirmTransfer").addEventListener("click", function() 
       });
       updateTransferSummary();
     });
-});
+}
 
 
 /* ============================================================
-   15. BILLS
+   16. BILL SUMMARY
    ============================================================ */
 
-let selectedBill = null;
-
-document.querySelectorAll("#billGrid .bill-tile").forEach(function(tile) {
-  tile.addEventListener("click", function() {
-    document.querySelectorAll("#billGrid .bill-tile").forEach(function(t) {
-      t.classList.remove("selected");
-    });
-    tile.classList.add("selected");
-    selectedBill = { name: tile.dataset.bill, min: parseFloat(tile.dataset.min) };
-    updateBillSummary();
-  });
-});
-
-const billAmountEl  = document.getElementById("billAmount");
-const billSumName   = document.getElementById("billSumName");
-const billSumAmount = document.getElementById("billSumAmount");
-const billSumFee    = document.getElementById("billSumFee");
-const billSumTotal  = document.getElementById("billSumTotal");
-const billLimitNote = document.getElementById("billLimitNote");
-
 function updateBillSummary() {
-  const amount = parseFloat(billAmountEl.value) || 0;
+  const amount = parseFloat(document.getElementById("billAmount").value) || 0;
   const fee = amount > 0 ? 1.00 : 0;
   const total = amount + fee;
 
-  billSumName.textContent   = selectedBill ? selectedBill.name : "—";
-  billSumAmount.textContent = formatMoney(amount);
-  billSumFee.textContent    = formatMoney(fee);
-  billSumTotal.textContent  = formatMoney(total);
+  document.getElementById("billSumName").textContent   = selectedBill ? selectedBill.name : "—";
+  document.getElementById("billSumAmount").textContent = formatMoney(amount);
+  document.getElementById("billSumFee").textContent    = formatMoney(fee);
+  document.getElementById("billSumTotal").textContent  = formatMoney(total);
 
   const fromKey = document.getElementById("billFrom").value;
   const avail   = accounts[fromKey].balance;
-  billLimitNote.textContent =
+  document.getElementById("billLimitNote").textContent =
     "Available: " + formatMoney(avail) +
     " · Remaining: " + formatMoney(Math.max(avail - total, 0));
 }
 
-billAmountEl.addEventListener("input", updateBillSummary);
-
+document.getElementById("billAmount").addEventListener("input", updateBillSummary);
 document.getElementById("billFrom").addEventListener("change", function() {
   renderAccount(this.value);
   updateBillSummary();
 });
 
-document.querySelectorAll(".bill-chip").forEach(function(chip) {
-  chip.addEventListener("click", function() {
-    billAmountEl.value = chip.dataset.amt;
-    updateBillSummary();
-  });
-});
 
-document.getElementById("confirmBill").addEventListener("click", function() {
+/* ============================================================
+   17. HANDLE BILL
+   ============================================================ */
+
+function billEmoji(name) {
+  const map = { Electric:"⚡", Water:"💧", Internet:"📶", Phone:"📱", Gas:"🔥", Rent:"🏠", Netflix:"🎬", Insurance:"🛡️", Gym:"💪" };
+  return map[name] || "📄";
+}
+
+function handleBill() {
   const fromKey = document.getElementById("billFrom").value;
-  const amount  = parseFloat(billAmountEl.value) || 0;
+  const amount  = parseFloat(document.getElementById("billAmount").value) || 0;
   const ref     = document.getElementById("billRef").value.trim();
 
-  if (!selectedBill) { showModal("No Bill Selected", "Please choose a bill category above."); return; }
-  if (amount <= 0)   { showModal("Invalid Amount", "Please enter a bill amount greater than $0.00."); return; }
+  if (!selectedBill) {
+    showModal("No Bill Selected", "Please choose a bill category above.");
+    return;
+  }
+  if (amount <= 0) {
+    showModal("Invalid Amount", "Please enter a bill amount greater than $0.00.");
+    return;
+  }
   if (amount < selectedBill.min) {
-    showModal("Amount Too Low", "Minimum payment for " + selectedBill.name + " is " + formatMoney(selectedBill.min) + ".");
+    showModal("Amount Too Low",
+      "Minimum payment for " + selectedBill.name + " is " + formatMoney(selectedBill.min) + ".");
     return;
   }
 
@@ -1461,7 +1577,7 @@ document.getElementById("confirmBill").addEventListener("click", function() {
         "\nTotal debited: " + formatMoney(total) +
         "\n\nNew balance: " + formatMoney(fromAcc.balance));
 
-      billAmountEl.value = "";
+      document.getElementById("billAmount").value = "";
       document.getElementById("billRef").value = "";
       selectedBill = null;
       document.querySelectorAll("#billGrid .bill-tile").forEach(function(t) {
@@ -1469,19 +1585,12 @@ document.getElementById("confirmBill").addEventListener("click", function() {
       });
       updateBillSummary();
     });
-});
-
-function billEmoji(name) {
-  const map = { Electric:"⚡", Water:"💧", Internet:"📶", Phone:"📱", Gas:"🔥", Rent:"🏠", Netflix:"🎬", Insurance:"🛡️", Gym:"💪" };
-  return map[name] || "📄";
 }
 
 
 /* ============================================================
-   16. HISTORY
+   18. HISTORY
    ============================================================ */
-
-let historyFilter = "all";
 
 function renderHistory() {
   let list = transactions.slice();
@@ -1506,98 +1615,41 @@ function renderHistory() {
     list.length + " transaction" + (list.length === 1 ? "" : "s") + " shown";
 }
 
-document.querySelectorAll(".filter-chip").forEach(function(chip) {
-  chip.addEventListener("click", function() {
-    document.querySelectorAll(".filter-chip").forEach(function(c) { c.classList.remove("active"); });
-    chip.classList.add("active");
-    historyFilter = chip.dataset.filter;
-    renderHistory();
-  });
-});
-
-
-/* ============================================================
-   17. TOP-ROW BUTTONS
-   ============================================================ */
-
-document.getElementById("transferButton").addEventListener("click", function() {
-  showScreen(transferScreen);
-  updateTransferSummary();
-});
-
-document.getElementById("depositButton").addEventListener("click", function() {
-  showModal("Deposit Funds",
-    "Deposit checks or move money from an external account.\n\n" +
-    "Mobile check deposits up to $25,000.00 are credited instantly.\n" +
-    "ACH transfers up to $50,000.00 take 1–2 business days.");
-});
-
-document.getElementById("virtualCardButton").addEventListener("click", function() {
-  showModal("Virtual Card Generated",
-    "Your new virtual card ending in " + accounts.checking.lastFour + " is ready.\n\n" +
-    "Daily limit: $10,000.00\n" +
-    "Monthly limit: $50,000.00\n" +
-    "Online purchases: Enabled\n" +
-    "Contactless payments: Enabled");
-});
-
-document.getElementById("notificationButton").addEventListener("click", function() {
-  showModal("Notifications",
-    "🏆 iFundWomen Grant  +$134,290.00\n\n" +
-    "Your grant has been credited to your Checking account.");
-});
-
-document.getElementById("themeButton").addEventListener("click", function() {
-  showModal("Theme", "NovaPay is currently in Midnight Gold mode.\n\nLight mode is coming in the next release.");
-});
-
-
-/* ============================================================
-   18. BACK BUTTONS
-   ============================================================ */
-
-document.getElementById("transferBack").addEventListener("click", function() { showScreen(dashboardScreen); });
-document.getElementById("billsBack").addEventListener("click", function() { showScreen(dashboardScreen); });
-document.getElementById("historyBack").addEventListener("click", function() { showScreen(dashboardScreen); });
-document.getElementById("profileBack").addEventListener("click", function() { showScreen(dashboardScreen); });
-
 
 /* ============================================================
    19. NAVIGATION
    ============================================================ */
 
 function navigateTo(page) {
-  if (page === "home")            showScreen(dashboardScreen);
-  else if (page === "transfer")   { showScreen(transferScreen); updateTransferSummary(); }
-  else if (page === "bills")      { showScreen(billsScreen);    updateBillSummary(); }
-  else if (page === "history")    { showScreen(historyScreen);  renderHistory(); }
-  else if (page === "profile")    { showScreen(profileScreen);  updateProfileStats(); }
+  if (page === "home")          showScreen("dashboardScreen");
+  else if (page === "transfer") { showScreen("transferScreen"); updateTransferSummary(); }
+  else if (page === "bills")    { showScreen("billsScreen");    updateBillSummary(); }
+  else if (page === "history")  { showScreen("historyScreen");  renderHistory(); }
+  else if (page === "profile")  { showScreen("profileScreen");  updateProfileStats(); }
 
   document.querySelectorAll(".nav-button").forEach(function(btn) {
     btn.classList.toggle("active", btn.dataset.page === page);
   });
 }
 
-document.querySelectorAll(".nav-button").forEach(function(button) {
-  button.addEventListener("click", function() { navigateTo(button.dataset.page); });
-});
-
 
 /* ============================================================
-   20. INIT
+   20. INIT — runs on page load
    ============================================================ */
 
 (function init() {
+  buildRecipientList();
+
   const accessGranted = sessionStorage.getItem(ACCESS_KEY) === "true";
   const existing = getSession();
 
   if (!accessGranted) {
-    showScreen(codeScreen);
+    showScreen("codeScreen");
   } else if (existing) {
     loadDashboard();
-    showScreen(dashboardScreen);
+    showScreen("dashboardScreen");
   } else {
-    showScreen(signupScreen);
+    showScreen("signupScreen");
   }
 
   updateTransferSummary();
