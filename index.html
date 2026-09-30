@@ -2,50 +2,80 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>NovaPay</title>
 
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
 
 :root {
   --gold: #e5c76b;
   --gold-light: #f3dfa2;
   --gold-dark: #c9a84a;
+  --bg: #0b0a08;
+  --card: #171510;
   --text: #f7f1df;
   --muted: #aaa28f;
-  --green: #4ade80;
-  --red: #f87171;
 }
 
-html, body { min-height: 100%; background: #000; }
+html,
+body {
+  min-height: 100%;
+  background: #000;
+}
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Roboto, Arial, sans-serif;
   color: var(--text);
 }
 
-button, input, select { font: inherit; }
-button { cursor: pointer; }
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
 
 .app {
   width: 100%;
   max-width: 430px;
   min-height: 100vh;
   margin: auto;
-  background: linear-gradient(180deg, #211e17 0%, #11100c 45%, #090807 100%);
+  background: linear-gradient(
+    180deg,
+    #211e17 0%,
+    #11100c 45%,
+    #090807 100%
+  );
   position: relative;
   overflow: hidden;
 }
 
-.screen { display: none; min-height: 100vh; }
-.screen.active { display: block; }
+/* SCREENS */
+.screen {
+  display: none;
+  min-height: 100vh;
+}
+
+.screen.active {
+  display: block;
+}
 
 /* AUTH */
-.auth { min-height: 100vh; padding: 70px 28px 40px; display: flex; flex-direction: column; }
+.auth {
+  min-height: 100vh;
+  padding: 70px 28px 40px;
+  display: flex;
+  flex-direction: column;
+}
 
 .logo {
   text-align: center;
@@ -53,14 +83,26 @@ button { cursor: pointer; }
   font-weight: 900;
   letter-spacing: -2px;
   margin-bottom: 8px;
-  background: linear-gradient(135deg, #fff4c9, var(--gold));
+  background: linear-gradient(
+    135deg,
+    #fff4c9,
+    var(--gold)
+  );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-.tagline { text-align: center; color: var(--muted); font-size: 17px; margin-bottom: 45px; }
-.field { margin-bottom: 25px; }
+.tagline {
+  text-align: center;
+  color: var(--muted);
+  font-size: 17px;
+  margin-bottom: 58px;
+}
+
+.field {
+  margin-bottom: 25px;
+}
 
 .field label {
   display: block;
@@ -72,7 +114,7 @@ button { cursor: pointer; }
   text-transform: uppercase;
 }
 
-.field input, .field select {
+.field input {
   width: 100%;
   height: 62px;
   padding: 0 20px;
@@ -82,159 +124,268 @@ button { cursor: pointer; }
   background: rgba(255,255,255,.045);
   color: var(--text);
   font-size: 17px;
-  appearance: none;
 }
 
-.field select {
-  background-image:
-    linear-gradient(45deg, transparent 50%, var(--gold) 50%),
-    linear-gradient(135deg, var(--gold) 50%, transparent 50%);
-  background-position:
-    calc(100% - 22px) calc(50% - 2px),
-    calc(100% - 16px) calc(50% - 2px);
-  background-size: 6px 6px, 6px 6px;
-  background-repeat: no-repeat;
+.field input:focus {
+  border-color: var(--gold);
 }
 
-.field input:focus, .field select:focus { border-color: var(--gold); }
-.field input::placeholder { color: #706b5f; }
+.field input::placeholder {
+  color: #706b5f;
+}
 
 .primary-button {
   width: 100%;
   height: 64px;
   border: 0;
   border-radius: 18px;
-  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  background: linear-gradient(
+    135deg,
+    var(--gold-light),
+    var(--gold)
+  );
   color: #2b2208;
   font-size: 17px;
   font-weight: 900;
   box-shadow: 0 10px 30px rgba(229,199,107,.25);
 }
 
-.auth-switch { text-align: center; margin-top: 34px; color: #777163; }
+.auth-switch {
+  text-align: center;
+  margin-top: 34px;
+  color: #777163;
+}
 
 .auth-switch button {
   border: 0;
   background: transparent;
   color: var(--gold-light);
   font-weight: 800;
-  padding: 6px 8px;
-  text-decoration: underline;
 }
-
-.auth-hint {
-  margin-top: 18px;
-  padding: 14px 16px;
-  border-radius: 14px;
-  background: rgba(229,199,107,.07);
-  border: 1px dashed rgba(229,199,107,.3);
-  color: rgba(200,190,160,.75);
-  font-size: 12px;
-  line-height: 1.55;
-}
-.auth-hint b { color: var(--gold-light); }
-
-/* ACCESS CODE */
-.access-badge { text-align: center; font-size: 64px; margin-bottom: 12px; }
-.access-title { text-align: center; font-size: 26px; font-weight: 900; letter-spacing: -.6px; margin-bottom: 10px; }
-.access-sub { text-align: center; color: var(--muted); font-size: 14px; margin-bottom: 40px; line-height: 1.6; padding: 0 10px; }
 
 /* HEADER */
-.top-row { padding: 24px 20px 18px; display: flex; align-items: center; gap: 12px; }
+.top-row {
+  padding: 24px 20px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
 .circle-button {
-  width: 42px; height: 42px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   border: 1px solid rgba(229,199,107,.2);
   background: rgba(255,255,255,.06);
   color: var(--gold-light);
-  display: flex; align-items: center; justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 18px;
 }
 
 .user-name {
-  flex: 1; font-size: 19px; font-weight: 850;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  flex: 1;
+  font-size: 19px;
+  font-weight: 850;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .avatar {
-  width: 44px; height: 44px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: linear-gradient(135deg,#5b7cfa,#4a63e0);
-  display: flex; align-items: center; justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: 900;
 }
 
-.greeting { padding: 6px 22px 20px; }
-.greeting h1 { font-size: 30px; line-height: 1.15; letter-spacing: -.8px; }
-.greeting p { color: rgba(200,190,160,.65); margin-top: 7px; }
+/* GREETING */
+.greeting {
+  padding: 6px 22px 20px;
+}
 
-.pills { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; padding: 0 22px 22px; }
-.pills::-webkit-scrollbar { display: none; }
-.pill { flex-shrink: 0; padding: 12px 18px; border-radius: 999px; font-size: 13px; font-weight: 800; cursor: pointer; }
-.pill.active { background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: #2b2208; }
-.pill.inactive { border: 1px solid rgba(229,199,107,.22); color: var(--gold); background: rgba(255,255,255,.05); }
+.greeting h1 {
+  font-size: 30px;
+  line-height: 1.15;
+  letter-spacing: -.8px;
+}
 
+.greeting p {
+  color: rgba(200,190,160,.65);
+  margin-top: 7px;
+}
+
+/* PILLS */
+.pills {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0 22px 22px;
+}
+
+.pills::-webkit-scrollbar {
+  display: none;
+}
+
+.pill {
+  flex-shrink: 0;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.pill.active {
+  background: linear-gradient(
+    135deg,
+    var(--gold-light),
+    var(--gold)
+  );
+  color: #2b2208;
+}
+
+.pill.inactive {
+  border: 1px solid rgba(229,199,107,.22);
+  color: var(--gold);
+  background: rgba(255,255,255,.05);
+}
+
+/* BALANCE */
 .balance-card {
   margin: 0 18px 22px;
   padding: 27px 24px 24px;
   border-radius: 24px;
   border: 1px solid rgba(229,199,107,.16);
-  background: linear-gradient(140deg, #1b1812, #0d0c0a);
+  background: linear-gradient(
+    140deg,
+    #1b1812,
+    #0d0c0a
+  );
   box-shadow: 0 18px 40px rgba(0,0,0,.5);
 }
 
-.balance-label { color: rgba(200,190,160,.75); font-size: 14px; }
-.balance { margin: 7px 0; font-size: 43px; font-weight: 900; letter-spacing: -1.5px; }
-.balance-sub { color: rgba(200,190,160,.6); font-size: 14px; }
-.actions { display: flex; gap: 12px; margin-top: 22px; }
-.action-button { flex: 1; height: 48px; border-radius: 12px; font-weight: 850; }
-.action-button.primary { border: 0; background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: #2b2208; }
-.action-button.outline { background: transparent; border: 1px solid rgba(229,199,107,.4); color: var(--gold-light); }
+.balance-label {
+  color: rgba(200,190,160,.75);
+  font-size: 14px;
+}
 
-.stats-strip { display: flex; gap: 12px; margin: 0 18px 22px; }
-.stat-box { flex: 1; padding: 16px 14px; border-radius: 18px; border: 1px solid rgba(229,199,107,.14); background: rgba(255,255,255,.04); }
-.stat-label { display: block; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: rgba(200,190,160,.6); margin-bottom: 6px; font-weight: 800; }
-.stat-value { font-size: 16px; font-weight: 900; letter-spacing: -.5px; }
-.stat-value.income { color: var(--green); }
-.stat-value.expense { color: var(--red); }
+.balance {
+  margin: 7px 0;
+  font-size: 43px;
+  font-weight: 900;
+  letter-spacing: -1.5px;
+}
 
-.section-title { display: flex; justify-content: space-between; align-items: baseline; padding: 0 22px 12px; }
-.section-title h2 { font-size: 17px; font-weight: 900; letter-spacing: -.3px; }
-.section-title span { font-size: 12px; color: var(--gold-light); font-weight: 800; }
+.balance-sub {
+  color: rgba(200,190,160,.6);
+  font-size: 14px;
+}
 
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.action-button {
+  flex: 1;
+  height: 48px;
+  border-radius: 12px;
+  font-weight: 850;
+}
+
+.action-button.primary {
+  border: 0;
+  background: linear-gradient(
+    135deg,
+    var(--gold-light),
+    var(--gold)
+  );
+  color: #2b2208;
+}
+
+.action-button.outline {
+  background: transparent;
+  border: 1px solid rgba(229,199,107,.4);
+  color: var(--gold-light);
+}
+
+/* CARD */
 .debit-card {
   margin: 0 18px 22px;
   min-height: 235px;
   padding: 25px;
   border-radius: 24px;
-  background: linear-gradient(145deg, #252117, #0b0a08);
+  background: linear-gradient(
+    145deg,
+    #252117,
+    #0b0a08
+  );
   border: 1px solid rgba(229,199,107,.18);
   box-shadow: 0 18px 40px rgba(0,0,0,.5);
 }
 
-.card-top { display: flex; justify-content: space-between; }
-.card-title { font-size: 21px; font-weight: 900; color: var(--gold-light); }
-.contactless { color: var(--gold-light); font-size: 20px; }
-.chip { width: 47px; height: 34px; margin-top: 28px; margin-bottom: 23px; border-radius: 7px; background: linear-gradient(135deg, var(--gold-light), var(--gold-dark)); }
-.card-number { font-size: 19px; letter-spacing: 4px; font-weight: 700; margin-bottom: 22px; }
-.card-bottom { display: flex; justify-content: space-between; }
-.card-label { display: block; font-size: 9px; color: #827b6c; margin-bottom: 4px; }
-.card-value { font-size: 13px; font-weight: 800; }
+.card-top {
+  display: flex;
+  justify-content: space-between;
+}
 
-.tx-list { margin: 0 18px 22px; border-radius: 20px; border: 1px solid rgba(229,199,107,.12); background: rgba(255,255,255,.03); overflow: hidden; }
-.tx-item { display: flex; align-items: center; gap: 14px; padding: 14px 18px; border-bottom: 1px solid rgba(229,199,107,.08); }
-.tx-item:last-child { border-bottom: 0; }
-.tx-icon { width: 42px; height: 42px; border-radius: 12px; background: rgba(229,199,107,.1); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-.tx-info { flex: 1; min-width: 0; }
-.tx-name { font-size: 14px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.tx-date { font-size: 11px; color: rgba(200,190,160,.55); margin-top: 3px; }
-.tx-amount { font-size: 14px; font-weight: 900; white-space: nowrap; }
-.tx-amount.credit { color: var(--green); }
-.tx-amount.debit { color: var(--text); }
-.tx-empty { padding: 40px 20px; text-align: center; color: rgba(200,190,160,.55); font-size: 13px; line-height: 1.6; }
-.tx-empty-emoji { font-size: 32px; display: block; margin-bottom: 10px; opacity: .6; }
+.card-title {
+  font-size: 21px;
+  font-weight: 900;
+  color: var(--gold-light);
+}
 
+.contactless {
+  color: var(--gold-light);
+  font-size: 20px;
+}
+
+.chip {
+  width: 47px;
+  height: 34px;
+  margin-top: 28px;
+  margin-bottom: 23px;
+  border-radius: 7px;
+  background: linear-gradient(
+    135deg,
+    var(--gold-light),
+    var(--gold-dark)
+  );
+}
+
+.card-number {
+  font-size: 19px;
+  letter-spacing: 4px;
+  font-weight: 700;
+  margin-bottom: 22px;
+}
+
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-label {
+  display: block;
+  font-size: 9px;
+  color: #827b6c;
+  margin-bottom: 4px;
+}
+
+.card-value {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+/* GENERATE */
 .generate {
   margin: 0 18px 100px;
   width: calc(100% - 36px);
@@ -246,79 +397,98 @@ button { cursor: pointer; }
   font-weight: 850;
 }
 
-.recipient-list { margin: 0 0 22px; border-radius: 20px; border: 1px solid rgba(229,199,107,.12); background: rgba(255,255,255,.03); overflow: hidden; max-height: 320px; overflow-y: auto; }
-.recipient-item { display: flex; align-items: center; gap: 14px; padding: 14px 18px; border-bottom: 1px solid rgba(229,199,107,.08); cursor: pointer; transition: background .15s; }
-.recipient-item:last-child { border-bottom: 0; }
-.recipient-item:active { background: rgba(229,199,107,.08); }
-.recipient-item.selected { background: rgba(229,199,107,.14); }
-.recipient-avatar { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 15px; color: #fff; flex-shrink: 0; }
-.recipient-info { flex: 1; min-width: 0; }
-.recipient-name { font-size: 14px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.recipient-bank { font-size: 11px; color: rgba(200,190,160,.6); margin-top: 3px; }
-.recipient-check { font-size: 18px; color: var(--gold-light); opacity: 0; }
-.recipient-item.selected .recipient-check { opacity: 1; }
+/* NAV */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: min(100%,430px);
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 5px 19px;
+  background: rgba(10,9,8,.96);
+  backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(229,199,107,.14);
+  z-index: 20;
+}
 
-.summary-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px dashed rgba(229,199,107,.15); font-size: 14px; }
-.summary-row:last-child { border-bottom: 0; }
-.summary-row .label { color: rgba(200,190,160,.75); }
-.summary-row .value { font-weight: 900; }
-.summary-row.total { border-top: 2px solid rgba(229,199,107,.4); margin-top: 8px; padding-top: 16px; font-size: 17px; }
-.summary-row.total .value { color: var(--gold-light); font-size: 20px; }
+.nav-button {
+  border: 0;
+  background: transparent;
+  color: #716c60;
+  font-size: 10px;
+  font-weight: 800;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
 
-.transfer-wrap { padding: 0 18px 120px; }
-.transfer-header { padding: 0 4px 20px; }
-.transfer-header h1 { font-size: 28px; letter-spacing: -.8px; font-weight: 900; }
-.transfer-header p { color: rgba(200,190,160,.65); margin-top: 6px; font-size: 14px; }
-.quick-amounts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
-.quick-chip { padding: 10px 16px; border-radius: 999px; border: 1px solid rgba(229,199,107,.28); background: rgba(255,255,255,.05); color: var(--gold-light); font-size: 13px; font-weight: 800; }
-.quick-chip:active { background: rgba(229,199,107,.18); }
-.info-note { margin-top: 12px; font-size: 12px; color: rgba(200,190,160,.6); line-height: 1.5; }
+.nav-button.active {
+  color: var(--gold-light);
+}
 
-.bill-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
-.bill-tile { padding: 18px 8px; border-radius: 18px; border: 1px solid rgba(229,199,107,.18); background: rgba(255,255,255,.04); text-align: center; cursor: pointer; transition: all .15s; }
-.bill-tile:active { background: rgba(229,199,107,.12); }
-.bill-tile.selected { background: rgba(229,199,107,.18); border-color: var(--gold); }
-.bill-emoji { font-size: 26px; display: block; margin-bottom: 6px; }
-.bill-name { font-size: 11px; font-weight: 800; letter-spacing: .3px; }
-.bill-min { font-size: 10px; color: rgba(200,190,160,.55); margin-top: 3px; }
+.nav-icon {
+  font-size: 20px;
+}
 
-.filter-bar { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 0 22px 16px; }
-.filter-bar::-webkit-scrollbar { display: none; }
-.filter-chip { flex-shrink: 0; padding: 9px 16px; border-radius: 999px; font-size: 12px; font-weight: 800; border: 1px solid rgba(229,199,107,.22); background: rgba(255,255,255,.05); color: var(--gold); cursor: pointer; }
-.filter-chip.active { background: linear-gradient(135deg, var(--gold-light), var(--gold)); color: #2b2208; border-color: transparent; }
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.72);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+}
 
-.profile-card { margin: 0 18px 22px; padding: 25px; border-radius: 24px; border: 1px solid rgba(229,199,107,.16); background: linear-gradient(140deg, #1b1812, #0d0c0a); text-align: center; }
-.profile-avatar { width: 82px; height: 82px; border-radius: 50%; background: linear-gradient(135deg,#5b7cfa,#4a63e0); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 32px; margin: 0 auto 16px; }
-.profile-name { font-size: 20px; font-weight: 900; margin-bottom: 4px; }
-.profile-email { font-size: 14px; font-weight: 700; word-break: break-all; margin-bottom: 6px; color: rgba(200,190,160,.8); }
-.profile-since { font-size: 12px; color: rgba(200,190,160,.6); }
+.modal.show {
+  display: flex;
+}
 
-.profile-rows { margin: 0 18px 22px; border-radius: 20px; border: 1px solid rgba(229,199,107,.12); background: rgba(255,255,255,.03); overflow: hidden; }
-.profile-row { display: flex; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid rgba(229,199,107,.08); font-size: 14px; }
-.profile-row:last-child { border-bottom: 0; }
-.profile-row .label { color: rgba(200,190,160,.75); }
-.profile-row .value { font-weight: 800; }
+.modal-box {
+  width: 100%;
+  max-width: 380px;
+  padding: 25px;
+  border-radius: 22px;
+  background: #191711;
+  border: 1px solid rgba(229,199,107,.25);
+}
 
-.logout-button { margin: 0 18px 100px; width: calc(100% - 36px); height: 58px; border-radius: 17px; border: 1px solid rgba(248,113,113,.5); background: rgba(248,113,113,.1); color: #f87171; font-weight: 900; font-size: 15px; }
+.modal-box h2 {
+  margin-bottom: 10px;
+}
 
-.bottom-nav { position: fixed; bottom: 0; width: min(100%,430px); display: flex; justify-content: space-around; padding: 12px 5px 19px; background: rgba(10,9,8,.96); backdrop-filter: blur(14px); border-top: 1px solid rgba(229,199,107,.14); z-index: 20; }
-.nav-button { border: 0; background: transparent; color: #716c60; font-size: 10px; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 4px; }
-.nav-button.active { color: var(--gold-light); }
-.nav-icon { font-size: 20px; }
+.modal-box p {
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
 
-.modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.72); z-index: 100; align-items: center; justify-content: center; padding: 25px; }
-.modal.show { display: flex; }
-.modal-box { width: 100%; max-width: 380px; padding: 25px; border-radius: 22px; background: #191711; border: 1px solid rgba(229,199,107,.25); max-height: 85vh; overflow-y: auto; }
-.modal-box h2 { margin-bottom: 10px; }
-.modal-box p { color: var(--muted); line-height: 1.5; margin-bottom: 20px; white-space: pre-line; }
-.modal-close { width: 100%; height: 48px; border: 0; border-radius: 12px; background: var(--gold); color: #251d06; font-weight: 900; margin-top: 6px; }
-.modal-close.danger { background: #ef4444; color: #fff; }
-.modal-close.ghost { background: transparent; border: 1px solid rgba(229,199,107,.4); color: var(--gold-light); margin-top: 10px; }
+.modal-close {
+  width: 100%;
+  height: 48px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--gold);
+  color: #251d06;
+  font-weight: 900;
+}
 
 @media (min-width: 480px) {
-  body { padding: 20px 0; }
-  .app { min-height: 100vh; border-radius: 40px; }
-  .bottom-nav { position: absolute; }
+  body {
+    padding: 20px 0;
+  }
+
+  .app {
+    min-height: 100vh;
+    border-radius: 40px;
+  }
+
+  .bottom-nav {
+    position: absolute;
+  }
 }
 </style>
 </head>
@@ -327,412 +497,345 @@ button { cursor: pointer; }
 
 <div class="app">
 
-<!-- ============ ACCESS CODE SCREEN ============ -->
-<section id="codeScreen" class="screen active">
+<!-- ================= SIGN UP ================= -->
+
+<section id="signupScreen" class="screen active">
+
   <div class="auth">
-    <div class="access-badge">🔐</div>
-    <div class="access-title">NovaPay Access</div>
-    <div class="access-sub">
-      This account is protected.<br>
-      Please enter your access code to continue.
-    </div>
 
-    <form id="codeForm">
-      <div class="field">
-        <label>Access Code</label>
-        <input id="accessCode" type="password" placeholder="Enter access code" autocomplete="off" required>
-      </div>
-      <button type="submit" class="primary-button">Unlock</button>
-    </form>
-
-    <div class="auth-hint" style="margin-top: 30px;">
-      <b>Authorized user:</b> Cerji Colvin<br>
-      <b>Email:</b> cerji@oceanstatearchery.com
-    </div>
-  </div>
-</section>
-
-
-<!-- ============ SIGN UP ============ -->
-<section id="signupScreen" class="screen">
-  <div class="auth">
     <div class="logo">NovaPay</div>
-    <div class="tagline">Create your account in seconds</div>
 
-    <form id="signupForm" autocomplete="on">
-      <div class="field">
-        <label>Full Name</label>
-        <input id="signupName" type="text" placeholder="Cerji Colvin" autocomplete="name" required>
-      </div>
+    <div class="tagline">
+      Create your account in seconds
+    </div>
+
+    <form id="signupForm">
+
       <div class="field">
         <label>Email Address</label>
-        <input id="signupEmail" type="email" placeholder="cerji@oceanstatearchery.com" autocomplete="email" required>
+
+        <input
+          id="signupEmail"
+          type="email"
+          placeholder="you@example.com"
+          autocomplete="email"
+          required>
       </div>
+
       <div class="field">
         <label>Password</label>
-        <input id="signupPassword" type="password" placeholder="Create a password (min 8 chars)" autocomplete="new-password" required>
+
+        <input
+          id="signupPassword"
+          type="password"
+          placeholder="Create a password"
+          autocomplete="new-password"
+          required>
       </div>
-      <button type="submit" class="primary-button">Create Account</button>
+
+      <button
+        type="submit"
+        class="primary-button">
+        Create Account
+      </button>
+
     </form>
 
     <div class="auth-switch">
       Already have an account?
-      <button type="button" id="showLogin">Sign in</button>
+
+      <button
+        type="button"
+        id="showLogin">
+        Sign in
+      </button>
     </div>
+
   </div>
 </section>
 
 
-<!-- ============ LOGIN ============ -->
-<section id="loginScreen" class="screen">
-  <div class="auth">
-    <div class="logo">NovaPay</div>
-    <div class="tagline">Sign in to your account</div>
+<!-- ================= LOGIN ================= -->
 
-    <form id="loginForm" autocomplete="on">
+<section id="loginScreen" class="screen">
+
+  <div class="auth">
+
+    <div class="logo">NovaPay</div>
+
+    <div class="tagline">
+      Sign in to your account
+    </div>
+
+    <form id="loginForm">
+
       <div class="field">
         <label>Email Address</label>
-        <input id="loginEmail" type="email" placeholder="cerji@oceanstatearchery.com" autocomplete="email" required>
+
+        <input
+          id="loginEmail"
+          type="email"
+          placeholder="you@example.com"
+          autocomplete="email"
+          required>
       </div>
+
       <div class="field">
         <label>Password</label>
-        <input id="loginPassword" type="password" placeholder="Your password" autocomplete="current-password" required>
-      </div>
-      <button type="submit" class="primary-button">Sign In</button>
-    </form>
 
-    <div class="auth-hint">
-      <b>Cerji's account:</b><br>
-      Email: <b>cerji@oceanstatearchery.com</b><br>
-      Password: <b>Cerji2024!</b>
-    </div>
+        <input
+          id="loginPassword"
+          type="password"
+          placeholder="Your password"
+          autocomplete="current-password"
+          required>
+      </div>
+
+      <button
+        type="submit"
+        class="primary-button">
+        Sign In
+      </button>
+
+    </form>
 
     <div class="auth-switch">
       Don't have an account?
-      <button type="button" id="showSignup">Create account</button>
+
+      <button
+        type="button"
+        id="showSignup">
+        Create account
+      </button>
     </div>
+
   </div>
 </section>
 
 
-<!-- ============ DASHBOARD ============ -->
+<!-- ================= DASHBOARD ================= -->
+
 <section id="dashboardScreen" class="screen">
+
   <div class="top-row">
-    <button class="circle-button" id="themeButton" type="button">☀️</button>
-    <button class="circle-button" id="notificationButton" type="button">🔔</button>
+
+    <button
+      class="circle-button"
+      id="themeButton"
+      type="button">
+      ☀️
+    </button>
+
+    <button
+      class="circle-button"
+      id="notificationButton"
+      type="button">
+      🔔
+    </button>
+
     <div class="user-name" id="dashboardEmail"></div>
+
     <div class="avatar" id="avatar"></div>
+
   </div>
 
+
   <div class="greeting">
-    <h1 id="greeting">Welcome</h1>
-    <p id="greetingName">Cerji Colvin</p>
+
+    <h1 id="greeting">
+      Welcome
+    </h1>
+
+    <p>
+      Here is your account overview.
+    </p>
+
   </div>
+
 
   <div class="pills">
-    <div class="pill active" id="checkingPill">🏦 Checking</div>
-    <div class="pill inactive" id="savingsPill">🏛️ Savings</div>
+
+    <div class="pill active" id="checkingPill">
+      🏦 Checking
+    </div>
+
+    <div class="pill inactive" id="savingsPill">
+      🏛️ Savings
+    </div>
+
   </div>
+
+
+  <!-- BALANCE -->
 
   <div class="balance-card">
-    <div class="balance-label">Available Balance</div>
-    <div class="balance" id="accountBalance">$134,290.00</div>
-    <div class="balance-sub" id="accountSub">Checking Account · iFundWomen Grant</div>
-    <div class="actions">
-      <button class="action-button primary" id="transferButton" type="button">Transfer</button>
-      <button class="action-button outline" id="depositButton" type="button">Deposit</button>
+
+    <div class="balance-label">
+      Available Balance
     </div>
+
+    <div class="balance" id="accountBalance">
+      $0.00
+    </div>
+
+    <div class="balance-sub" id="accountSub">
+      Checking Account
+    </div>
+
+    <div class="actions">
+
+      <button
+        class="action-button primary"
+        id="transferButton"
+        type="button">
+        Transfer
+      </button>
+
+      <button
+        class="action-button outline"
+        id="depositButton"
+        type="button">
+        Deposit
+      </button>
+
+    </div>
+
   </div>
 
-  <div class="stats-strip">
-    <div class="stat-box">
-      <span class="stat-label">Income</span>
-      <span class="stat-value income" id="statIncome">+$134,290.00</span>
-    </div>
-    <div class="stat-box">
-      <span class="stat-label">Expenses</span>
-      <span class="stat-value expense" id="statExpense">-$0.00</span>
-    </div>
-    <div class="stat-box">
-      <span class="stat-label">Savings</span>
-      <span class="stat-value" id="statSavings">$89,250.75</span>
-    </div>
-  </div>
+
+  <!-- CARD -->
 
   <div class="debit-card">
+
     <div class="card-top">
-      <div class="card-title">NovaPay</div>
-      <div class="contactless">)))</div>
+
+      <div class="card-title">
+        NovaPay
+      </div>
+
+      <div class="contactless">
+        )))
+      </div>
+
     </div>
+
     <div class="chip"></div>
+
     <div class="card-number">
       •••• &nbsp; •••• &nbsp; •••• &nbsp;
-      <span style="color:#f3dfa2;" id="cardLastFour">4291</span>
+      <span style="color:#f3dfa2;" id="cardLastFour">
+        0000
+      </span>
     </div>
+
     <div class="card-bottom">
+
       <div>
-        <span class="card-label">ACCOUNT USER</span>
-        <span class="card-value" id="cardEmail"></span>
+        <span class="card-label">
+          ACCOUNT USER
+        </span>
+
+        <span
+          class="card-value"
+          id="cardEmail">
+        </span>
       </div>
+
       <div style="text-align:right;">
-        <span class="card-label">VALID THRU</span>
-        <span class="card-value" id="cardExpiry">08/29</span>
+
+        <span class="card-label">
+          VALID THRU
+        </span>
+
+        <span class="card-value" id="cardExpiry">
+          --/--
+        </span>
+
       </div>
+
     </div>
+
   </div>
 
-  <div class="section-title">
-    <h2>Recent Activity</h2>
-    <span id="txCount">1 transaction</span>
-  </div>
 
-  <div class="tx-list" id="txList"></div>
+  <button
+    class="generate"
+    id="virtualCardButton"
+    type="button">
+    ＋ Generate Virtual Card
+  </button>
 
-  <button class="generate" id="virtualCardButton" type="button">＋ Generate Virtual Card</button>
 
-  <nav class="bottom-nav" data-nav>
-    <button class="nav-button active" data-page="home" type="button"><span class="nav-icon">🏠</span> Home</button>
-    <button class="nav-button" data-page="transfer" type="button"><span class="nav-icon">⇄</span> Transfer</button>
-    <button class="nav-button" data-page="bills" type="button"><span class="nav-icon">📄</span> Bills</button>
-    <button class="nav-button" data-page="history" type="button"><span class="nav-icon">☰</span> History</button>
-    <button class="nav-button" data-page="profile" type="button"><span class="nav-icon">👤</span> Profile</button>
+  <!-- NAVIGATION -->
+
+  <nav class="bottom-nav">
+
+    <button
+      class="nav-button active"
+      data-page="home"
+      type="button">
+      <span class="nav-icon">🏠</span>
+      Home
+    </button>
+
+    <button
+      class="nav-button"
+      data-page="transfer"
+      type="button">
+      <span class="nav-icon">⇄</span>
+      Transfer
+    </button>
+
+    <button
+      class="nav-button"
+      data-page="bills"
+      type="button">
+      <span class="nav-icon">📄</span>
+      Bills
+    </button>
+
+    <button
+      class="nav-button"
+      data-page="history"
+      type="button">
+      <span class="nav-icon">☰</span>
+      History
+    </button>
+
+    <button
+      class="nav-button"
+      data-page="profile"
+      type="button">
+      <span class="nav-icon">👤</span>
+      Profile
+    </button>
+
   </nav>
+
 </section>
 
 
-<!-- ============ TRANSFER ============ -->
-<section id="transferScreen" class="screen">
-  <div class="top-row">
-    <button class="circle-button" id="transferBack" type="button">←</button>
-    <div class="user-name">Transfer Funds</div>
-    <div class="avatar" id="transferAvatar"></div>
-  </div>
+<!-- ================= MODAL ================= -->
 
-  <div class="transfer-wrap">
-    <div class="transfer-header">
-      <h1>Send Money</h1>
-      <p>Transfer to any NovaPay account or external bank.</p>
-    </div>
-
-    <div class="field">
-      <label>From Account</label>
-      <select id="fromAccount">
-        <option value="checking">Checking · $134,290.00</option>
-        <option value="savings">Savings · $89,250.75</option>
-      </select>
-    </div>
-
-    <div class="field"><label>Select Recipient</label></div>
-    <div class="recipient-list" id="recipientList"></div>
-
-    <div class="field">
-      <label>Amount (USD)</label>
-      <input id="transferAmount" type="number" placeholder="0.00" min="0" step="0.01" inputmode="decimal">
-      <div class="quick-amounts">
-        <button type="button" class="quick-chip" data-amt="50">$50</button>
-        <button type="button" class="quick-chip" data-amt="100">$100</button>
-        <button type="button" class="quick-chip" data-amt="500">$500</button>
-        <button type="button" class="quick-chip" data-amt="1000">$1,000</button>
-        <button type="button" class="quick-chip" data-amt="5000">$5,000</button>
-      </div>
-    </div>
-
-    <div class="field">
-      <label>Note (Optional)</label>
-      <input id="transferNote" type="text" placeholder="e.g. Rent, gift, invoice #4821">
-    </div>
-
-    <div class="balance-card" style="margin: 22px 0 20px;">
-      <div class="balance-label" style="margin-bottom: 10px;">Transfer Summary</div>
-      <div class="summary-row"><span class="label">Amount</span><span class="value" id="sumAmount">$0.00</span></div>
-      <div class="summary-row"><span class="label">Transfer Fee</span><span class="value" id="sumFee">$0.00</span></div>
-      <div class="summary-row"><span class="label">Processing</span><span class="value" id="sumSpeed">—</span></div>
-      <div class="summary-row total"><span class="label">Total Debit</span><span class="value" id="sumTotal">$0.00</span></div>
-      <div class="info-note" id="limitNote">Daily limit remaining: $10,000.00 · Monthly limit remaining: $50,000.00</div>
-    </div>
-
-    <button class="primary-button" id="confirmTransfer" type="button">Confirm Transfer</button>
-  </div>
-
-  <nav class="bottom-nav" data-nav>
-    <button class="nav-button" data-page="home" type="button"><span class="nav-icon">🏠</span> Home</button>
-    <button class="nav-button active" data-page="transfer" type="button"><span class="nav-icon">⇄</span> Transfer</button>
-    <button class="nav-button" data-page="bills" type="button"><span class="nav-icon">📄</span> Bills</button>
-    <button class="nav-button" data-page="history" type="button"><span class="nav-icon">☰</span> History</button>
-    <button class="nav-button" data-page="profile" type="button"><span class="nav-icon">👤</span> Profile</button>
-  </nav>
-</section>
-
-
-<!-- ============ BILLS ============ -->
-<section id="billsScreen" class="screen">
-  <div class="top-row">
-    <button class="circle-button" id="billsBack" type="button">←</button>
-    <div class="user-name">Pay Bills</div>
-    <div class="avatar" id="billsAvatar"></div>
-  </div>
-
-  <div class="transfer-wrap">
-    <div class="transfer-header">
-      <h1>Pay a Bill</h1>
-      <p>Choose a category, enter the amount, and pay instantly.</p>
-    </div>
-
-    <div class="bill-grid" id="billGrid">
-      <div class="bill-tile" data-bill="Electric" data-min="45"><span class="bill-emoji">⚡</span><div class="bill-name">Electric</div><div class="bill-min">from $45.00</div></div>
-      <div class="bill-tile" data-bill="Water" data-min="28"><span class="bill-emoji">💧</span><div class="bill-name">Water</div><div class="bill-min">from $28.00</div></div>
-      <div class="bill-tile" data-bill="Internet" data-min="60"><span class="bill-emoji">📶</span><div class="bill-name">Internet</div><div class="bill-min">from $60.00</div></div>
-      <div class="bill-tile" data-bill="Phone" data-min="35"><span class="bill-emoji">📱</span><div class="bill-name">Phone</div><div class="bill-min">from $35.00</div></div>
-      <div class="bill-tile" data-bill="Gas" data-min="40"><span class="bill-emoji">🔥</span><div class="bill-name">Gas</div><div class="bill-min">from $40.00</div></div>
-      <div class="bill-tile" data-bill="Rent" data-min="800"><span class="bill-emoji">🏠</span><div class="bill-name">Rent</div><div class="bill-min">from $800.00</div></div>
-      <div class="bill-tile" data-bill="Netflix" data-min="15"><span class="bill-emoji">🎬</span><div class="bill-name">Streaming</div><div class="bill-min">from $15.00</div></div>
-      <div class="bill-tile" data-bill="Insurance" data-min="120"><span class="bill-emoji">🛡️</span><div class="bill-name">Insurance</div><div class="bill-min">from $120.00</div></div>
-      <div class="bill-tile" data-bill="Gym" data-min="45"><span class="bill-emoji">💪</span><div class="bill-name">Gym</div><div class="bill-min">from $45.00</div></div>
-    </div>
-
-    <div class="field">
-      <label>Paying From</label>
-      <select id="billFrom">
-        <option value="checking">Checking · $134,290.00</option>
-        <option value="savings">Savings · $89,250.75</option>
-      </select>
-    </div>
-
-    <div class="field">
-      <label>Bill Amount (USD)</label>
-      <input id="billAmount" type="number" placeholder="0.00" min="0" step="0.01" inputmode="decimal">
-      <div class="quick-amounts">
-        <button type="button" class="bill-chip" data-amt="25">$25</button>
-        <button type="button" class="bill-chip" data-amt="50">$50</button>
-        <button type="button" class="bill-chip" data-amt="100">$100</button>
-        <button type="button" class="bill-chip" data-amt="250">$250</button>
-      </div>
-    </div>
-
-    <div class="field">
-      <label>Account / Reference #</label>
-      <input id="billRef" type="text" placeholder="e.g. Account 8834912">
-    </div>
-
-    <div class="balance-card" style="margin: 22px 0 20px;">
-      <div class="balance-label" style="margin-bottom: 10px;">Payment Summary</div>
-      <div class="summary-row"><span class="label">Bill</span><span class="value" id="billSumName">—</span></div>
-      <div class="summary-row"><span class="label">Amount</span><span class="value" id="billSumAmount">$0.00</span></div>
-      <div class="summary-row"><span class="label">Service Fee</span><span class="value" id="billSumFee">$1.00</span></div>
-      <div class="summary-row total"><span class="label">Total</span><span class="value" id="billSumTotal">$0.00</span></div>
-      <div class="info-note" id="billLimitNote">Bills are paid instantly. Reference numbers are stored in History.</div>
-    </div>
-
-    <button class="primary-button" id="confirmBill" type="button">Pay Bill</button>
-  </div>
-
-  <nav class="bottom-nav" data-nav>
-    <button class="nav-button" data-page="home" type="button"><span class="nav-icon">🏠</span> Home</button>
-    <button class="nav-button" data-page="transfer" type="button"><span class="nav-icon">⇄</span> Transfer</button>
-    <button class="nav-button active" data-page="bills" type="button"><span class="nav-icon">📄</span> Bills</button>
-    <button class="nav-button" data-page="history" type="button"><span class="nav-icon">☰</span> History</button>
-    <button class="nav-button" data-page="profile" type="button"><span class="nav-icon">👤</span> Profile</button>
-  </nav>
-</section>
-
-
-<!-- ============ HISTORY ============ -->
-<section id="historyScreen" class="screen">
-  <div class="top-row">
-    <button class="circle-button" id="historyBack" type="button">←</button>
-    <div class="user-name">Transaction History</div>
-    <div class="avatar" id="historyAvatar"></div>
-  </div>
-
-  <div class="greeting">
-    <h1>All Activity</h1>
-    <p id="historySummary">Showing all transactions</p>
-  </div>
-
-  <div class="filter-bar">
-    <button class="filter-chip active" data-filter="all" type="button">All</button>
-    <button class="filter-chip" data-filter="credit" type="button">Money In</button>
-    <button class="filter-chip" data-filter="debit" type="button">Money Out</button>
-    <button class="filter-chip" data-filter="bills" type="button">Bills</button>
-    <button class="filter-chip" data-filter="transfer" type="button">Transfers</button>
-  </div>
-
-  <div class="balance-card" style="margin-bottom: 18px;">
-    <div class="balance-label">Total In / Out</div>
-    <div style="display:flex; gap: 22px; margin-top: 10px; align-items: baseline;">
-      <div>
-        <div style="font-size:12px; color: rgba(200,190,160,.6);">In</div>
-        <div style="font-size:20px; font-weight:900; color: var(--green);" id="histTotalIn">+$0.00</div>
-      </div>
-      <div>
-        <div style="font-size:12px; color: rgba(200,190,160,.6);">Out</div>
-        <div style="font-size:20px; font-weight:900; color: var(--red);" id="histTotalOut">-$0.00</div>
-      </div>
-      <div style="margin-left:auto; text-align:right;">
-        <div style="font-size:12px; color: rgba(200,190,160,.6);">Net</div>
-        <div style="font-size:20px; font-weight:900;" id="histNet">$0.00</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="tx-list" id="historyList" style="margin-bottom: 100px;"></div>
-
-  <nav class="bottom-nav" data-nav>
-    <button class="nav-button" data-page="home" type="button"><span class="nav-icon">🏠</span> Home</button>
-    <button class="nav-button" data-page="transfer" type="button"><span class="nav-icon">⇄</span> Transfer</button>
-    <button class="nav-button" data-page="bills" type="button"><span class="nav-icon">📄</span> Bills</button>
-    <button class="nav-button active" data-page="history" type="button"><span class="nav-icon">☰</span> History</button>
-    <button class="nav-button" data-page="profile" type="button"><span class="nav-icon">👤</span> Profile</button>
-  </nav>
-</section>
-
-
-<!-- ============ PROFILE ============ -->
-<section id="profileScreen" class="screen">
-  <div class="top-row">
-    <button class="circle-button" id="profileBack" type="button">←</button>
-    <div class="user-name">Profile</div>
-    <div class="avatar" id="profileAvatar"></div>
-  </div>
-
-  <div class="profile-card">
-    <div class="profile-avatar" id="profileBigAvatar">CC</div>
-    <div class="profile-name" id="profileName">Cerji Colvin</div>
-    <div class="profile-email" id="profileEmail"></div>
-    <div class="profile-since" id="profileSince"></div>
-  </div>
-
-  <div class="profile-rows">
-    <div class="profile-row"><span class="label">Checking Balance</span><span class="value" id="profChecking">$134,290.00</span></div>
-    <div class="profile-row"><span class="label">Savings Balance</span><span class="value" id="profSavings">$89,250.75</span></div>
-    <div class="profile-row"><span class="label">Total Net Worth</span><span class="value" id="profTotal">$223,540.75</span></div>
-    <div class="profile-row"><span class="label">Transactions</span><span class="value" id="profTxCount">1</span></div>
-    <div class="profile-row"><span class="label">Account Tier</span><span class="value">Gold</span></div>
-    <div class="profile-row"><span class="label">Daily Limit</span><span class="value">$10,000.00</span></div>
-    <div class="profile-row"><span class="label">Monthly Limit</span><span class="value">$50,000.00</span></div>
-  </div>
-
-  <button class="logout-button" id="logoutButton" type="button">Sign Out</button>
-
-  <nav class="bottom-nav" data-nav>
-    <button class="nav-button" data-page="home" type="button"><span class="nav-icon">🏠</span> Home</button>
-    <button class="nav-button" data-page="transfer" type="button"><span class="nav-icon">⇄</span> Transfer</button>
-    <button class="nav-button" data-page="bills" type="button"><span class="nav-icon">📄</span> Bills</button>
-    <button class="nav-button" data-page="history" type="button"><span class="nav-icon">☰</span> History</button>
-    <button class="nav-button active" data-page="profile" type="button"><span class="nav-icon">👤</span> Profile</button>
-  </nav>
-</section>
-
-
-<!-- ============ MODAL ============ -->
 <div class="modal" id="modal">
+
   <div class="modal-box">
-    <h2 id="modalTitle">NovaPay</h2>
+
+    <h2 id="modalTitle">
+      NovaPay
+    </h2>
+
     <p id="modalMessage"></p>
-    <button class="modal-close" id="modalClose" type="button">Close</button>
-    <button class="modal-close danger" id="modalConfirm" type="button" style="display:none;">Confirm</button>
-    <button class="modal-close ghost" id="modalCancel" type="button" style="display:none;">Cancel</button>
+
+    <button
+      class="modal-close"
+      id="modalClose"
+      type="button">
+      Close
+    </button>
+
   </div>
+
 </div>
 
 </div>
@@ -740,922 +843,308 @@ button { cursor: pointer; }
 
 <script>
 
-/* ============================================================
-   0. CONSTANTS
-   ============================================================ */
+/* ===============================
+   SCREENS
+================================ */
 
-const ACCESS_CODE = "CERJI2024";
-const ACCESS_KEY  = "novapayAccessGranted";
-const USERS_KEY   = "novapayUsers";
-const SESSION_KEY = "novapaySession";
-const PRIMARY_EMAIL = "cerji@oceanstatearchery.com";
+const signupScreen =
+  document.getElementById("signupScreen");
 
+const loginScreen =
+  document.getElementById("loginScreen");
 
-/* ============================================================
-   1. STORAGE HELPERS
-   ============================================================ */
-
-function getUsers() {
-  try { return JSON.parse(localStorage.getItem(USERS_KEY)) || {}; }
-  catch (e) { return {}; }
-}
-
-function saveUsers(users) {
-  localStorage.setItem(USERS_KEY, JSON.stringify(users));
-}
-
-function seedCerjiUser() {
-  const users = getUsers();
-  if (!users[PRIMARY_EMAIL]) {
-    users[PRIMARY_EMAIL] = {
-      name: "Cerji Colvin",
-      email: PRIMARY_EMAIL,
-      password: "Cerji2024!",
-      createdAt: new Date("2023-03-15").toISOString()
-    };
-    saveUsers(users);
-  }
-}
-
-seedCerjiUser();
-
-function setSession(email) {
-  sessionStorage.setItem(SESSION_KEY, email);
-  sessionStorage.setItem("novapayUserEmail", email);
-}
-
-function getSession() { return sessionStorage.getItem(SESSION_KEY); }
-
-function clearSession() {
-  sessionStorage.removeItem(SESSION_KEY);
-  sessionStorage.removeItem("novapayUserEmail");
-}
+const dashboardScreen =
+  document.getElementById("dashboardScreen");
 
 
-/* ============================================================
-   2. SCREEN ROUTER
-   ============================================================ */
+function showScreen(screen) {
 
-const SCREEN_IDS = [
-  "codeScreen", "signupScreen", "loginScreen",
-  "dashboardScreen", "transferScreen", "billsScreen",
-  "historyScreen", "profileScreen"
-];
+  signupScreen.classList.remove("active");
+  loginScreen.classList.remove("active");
+  dashboardScreen.classList.remove("active");
 
-function showScreen(idOrEl) {
-  const id = (typeof idOrEl === "string") ? idOrEl : idOrEl.id;
+  screen.classList.add("active");
 
-  SCREEN_IDS.forEach(function(sid) {
-    const el = document.getElementById(sid);
-    if (el) el.classList.remove("active");
-  });
-
-  const target = document.getElementById(id);
-  if (target) target.classList.add("active");
   window.scrollTo(0, 0);
 }
 
 
-/* ============================================================
-   3. MODAL
-   ============================================================ */
+/* ===============================
+   MODAL
+================================ */
 
-const modal        = document.getElementById("modal");
-const modalTitle   = document.getElementById("modalTitle");
-const modalMessage = document.getElementById("modalMessage");
-const modalConfirm = document.getElementById("modalConfirm");
-const modalCancel  = document.getElementById("modalCancel");
+const modal =
+  document.getElementById("modal");
 
-let confirmCallback = null;
+const modalTitle =
+  document.getElementById("modalTitle");
+
+const modalMessage =
+  document.getElementById("modalMessage");
+
 
 function showModal(title, message) {
+
   modalTitle.textContent = title;
   modalMessage.textContent = message;
-  modalConfirm.style.display = "none";
-  modalCancel.style.display  = "none";
-  confirmCallback = null;
+
   modal.classList.add("show");
 }
 
-function showConfirm(title, message, onConfirm) {
-  modalTitle.textContent = title;
-  modalMessage.textContent = message;
-  modalConfirm.style.display = "block";
-  modalCancel.style.display  = "block";
-  confirmCallback = onConfirm;
-  modal.classList.add("show");
-}
 
-function closeModal() {
-  modal.classList.remove("show");
-  confirmCallback = null;
-}
+document
+  .getElementById("modalClose")
+  .addEventListener("click", function() {
 
-document.getElementById("modalClose").addEventListener("click", closeModal);
-modalCancel.addEventListener("click", closeModal);
+    modal.classList.remove("show");
 
-modalConfirm.addEventListener("click", function() {
-  if (typeof confirmCallback === "function") confirmCallback();
-  closeModal();
-});
+  });
+
 
 modal.addEventListener("click", function(e) {
-  if (e.target === modal) closeModal();
+
+  if (e.target === modal) {
+    modal.classList.remove("show");
+  }
+
 });
 
 
-/* ============================================================
-   4. EVENT DELEGATION — GUARANTEED CLICK HANDLING
-   ------------------------------------------------------------
-   Every clickable element uses data-action. This means even
-   dynamically added buttons work, and nothing gets missed.
-   ============================================================ */
+/* ===============================
+   SIGN UP
+================================ */
 
-document.addEventListener("click", function(e) {
+document
+  .getElementById("signupForm")
+  .addEventListener("submit", function(e) {
 
-  const target = e.target.closest("[data-action]");
-  if (!target) return;
+    e.preventDefault();
 
-  const action = target.dataset.action;
+    const email =
+      document
+        .getElementById("signupEmail")
+        .value
+        .trim()
+        .toLowerCase();
 
-  // --- AUTH SWITCH ---
-  if (action === "show-login") {
-    showScreen("loginScreen");
-    return;
-  }
+    const password =
+      document
+        .getElementById("signupPassword")
+        .value;
 
-  if (action === "show-signup") {
-    showScreen("signupScreen");
-    return;
-  }
+    if (!email) {
 
-  // --- NAVIGATION ---
-  if (action === "nav") {
-    const page = target.dataset.page;
-    navigateTo(page);
-    return;
-  }
+      showModal(
+        "Email required",
+        "Please enter an email address."
+      );
 
-  // --- BACK ---
-  if (action === "back-home") {
-    showScreen("dashboardScreen");
-    return;
-  }
-
-  // --- ACCOUNT PILLS ---
-  if (action === "pill-checking") {
-    document.getElementById("checkingPill").className = "pill active";
-    document.getElementById("savingsPill").className  = "pill inactive";
-    renderAccount("checking");
-    return;
-  }
-
-  if (action === "pill-savings") {
-    document.getElementById("savingsPill").className  = "pill active";
-    document.getElementById("checkingPill").className = "pill inactive";
-    renderAccount("savings");
-    return;
-  }
-
-  // --- TOP ACTIONS ---
-  if (action === "go-transfer") {
-    showScreen("transferScreen");
-    updateTransferSummary();
-    return;
-  }
-
-  if (action === "deposit-info") {
-    showModal("Deposit Funds",
-      "Deposit checks or move money from an external account.\n\n" +
-      "Mobile check deposits up to $25,000.00 are credited instantly.\n" +
-      "ACH transfers up to $50,000.00 take 1–2 business days.");
-    return;
-  }
-
-  if (action === "virtual-card") {
-    showModal("Virtual Card Generated",
-      "Your new virtual card ending in " + accounts.checking.lastFour + " is ready.\n\n" +
-      "Daily limit: $10,000.00\n" +
-      "Monthly limit: $50,000.00\n" +
-      "Online purchases: Enabled\n" +
-      "Contactless payments: Enabled");
-    return;
-  }
-
-  if (action === "notifications") {
-    showModal("Notifications",
-      "🏆 iFundWomen Grant  +$134,290.00\n\n" +
-      "Your grant has been credited to your Checking account.");
-    return;
-  }
-
-  if (action === "theme") {
-    showModal("Theme", "NovaPay is currently in Midnight Gold mode.\n\nLight mode is coming in the next release.");
-    return;
-  }
-
-  // --- QUICK AMOUNTS ---
-  if (action === "quick-amount") {
-    const field = target.dataset.field;
-    const amt   = target.dataset.amt;
-    const input = document.getElementById(field);
-    if (input) {
-      input.value = amt;
-      if (field === "transferAmount") updateTransferSummary();
-      if (field === "billAmount")     updateBillSummary();
+      return;
     }
-    return;
-  }
 
-  // --- FILTERS ---
-  if (action === "filter") {
-    document.querySelectorAll(".filter-chip").forEach(function(c) {
-      c.classList.remove("active");
-    });
-    target.classList.add("active");
-    historyFilter = target.dataset.filter;
-    renderHistory();
-    return;
-  }
+    if (password.length < 8) {
 
-  // --- BILL TILE ---
-  if (action === "bill-tile") {
-    document.querySelectorAll("#billGrid .bill-tile").forEach(function(t) {
-      t.classList.remove("selected");
-    });
-    target.classList.add("selected");
-    selectedBill = {
-      name: target.dataset.bill,
-      min:  parseFloat(target.dataset.min)
-    };
-    updateBillSummary();
-    return;
-  }
+      showModal(
+        "Password too short",
+        "Please use at least 8 characters."
+      );
 
-  // --- RECIPIENT ---
-  if (action === "recipient") {
-    document.querySelectorAll("#recipientList .recipient-item").forEach(function(el) {
-      el.classList.remove("selected");
-    });
-    target.classList.add("selected");
-    const rid = target.dataset.id;
-    selectedRecipient = recipients.find(function(r) { return r.id === rid; }) || null;
-    updateTransferSummary();
-    return;
-  }
+      return;
+    }
 
-  // --- LOGOUT ---
-  if (action === "logout") {
-    showConfirm("Sign Out?",
-      "You will be returned to the sign-in screen.\n\nAre you sure you want to sign out?",
-      function() {
-        clearSession();
-        document.getElementById("loginEmail").value = "";
-        document.getElementById("loginPassword").value = "";
-        showScreen("loginScreen");
-        showModal("Signed Out", "You have been signed out successfully.");
-      });
-    return;
-  }
+    sessionStorage.setItem(
+      "novapayUserEmail",
+      email
+    );
 
-  // --- CONFIRM TRANSFER ---
-  if (action === "confirm-transfer") {
-    handleTransfer();
-    return;
-  }
+    loadDashboard();
 
-  // --- CONFIRM BILL ---
-  if (action === "confirm-bill") {
-    handleBill();
-    return;
-  }
-});
+    showScreen(dashboardScreen);
 
-
-/* ============================================================
-   5. FORM SUBMISSIONS
-   ============================================================ */
-
-// --- ACCESS CODE ---
-document.getElementById("codeForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-  const entered = document.getElementById("accessCode").value.trim();
-
-  if (entered === ACCESS_CODE) {
-    sessionStorage.setItem(ACCESS_KEY, "true");
-    document.getElementById("accessCode").value = "";
-    showScreen("signupScreen");
-  } else {
-    showModal("Invalid Access Code", "The code you entered is incorrect.\n\nPlease try again.");
-    document.getElementById("accessCode").value = "";
-  }
-});
-
-
-// --- SIGN UP ---
-document.getElementById("signupForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-
-  const name     = document.getElementById("signupName").value.trim();
-  const email    = document.getElementById("signupEmail").value.trim().toLowerCase();
-  const password = document.getElementById("signupPassword").value;
-
-  if (!name) { showModal("Name Required", "Please enter your full name."); return; }
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    showModal("Invalid Email", "Please enter a valid email address."); return;
-  }
-  if (password.length < 8) {
-    showModal("Password Too Short", "Please use at least 8 characters."); return;
-  }
-
-  const users = getUsers();
-  if (users[email]) {
-    showModal("Account Exists",
-      "An account with this email already exists.\n\nPlease sign in instead.");
-    return;
-  }
-
-  users[email] = {
-    name: name, email: email, password: password,
-    createdAt: new Date().toISOString()
-  };
-  saveUsers(users);
-  setSession(email);
-  document.getElementById("signupForm").reset();
-  loadDashboard();
-  showScreen("dashboardScreen");
-  showModal("Welcome to NovaPay!",
-    "Your account has been created.\n\nName: " + name + "\nEmail: " + email);
-});
-
-
-// --- LOGIN ---
-document.getElementById("loginForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-
-  const email    = document.getElementById("loginEmail").value.trim().toLowerCase();
-  const password = document.getElementById("loginPassword").value;
-
-  if (!email || !password) {
-    showModal("Missing Details", "Please enter both email and password.");
-    return;
-  }
-
-  const users = getUsers();
-  const user  = users[email];
-
-  if (!user) {
-    showModal("Account Not Found",
-      "No account exists for:\n" + email +
-      "\n\nPlease create an account first.");
-    return;
-  }
-
-  if (user.password !== password) {
-    showModal("Wrong Password",
-      "The password you entered is incorrect.\n\nPlease try again.");
-    return;
-  }
-
-  setSession(email);
-  document.getElementById("loginForm").reset();
-  loadDashboard();
-  showScreen("dashboardScreen");
-});
-
-
-/* ============================================================
-   6. HELPERS
-   ============================================================ */
-
-function getInitials(name) {
-  if (!name) return "C";
-  const parts = name.trim().split(" ");
-  if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
-  return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
-}
-
-function formatMoney(amount) {
-  return "$" + Number(amount).toLocaleString("en-US", {
-    minimumFractionDigits: 2, maximumFractionDigits: 2
   });
-}
-
-function updateGreeting() {
-  const hour = new Date().getHours();
-  let text;
-  if (hour >= 5 && hour < 12) text = "Good Morning";
-  else if (hour >= 12 && hour < 18) text = "Good Afternoon";
-  else text = "Good Evening";
-  const g = document.getElementById("greeting");
-  if (g) g.textContent = text;
-}
-
-setInterval(updateGreeting, 60000);
 
 
-/* ============================================================
-   7. ACCOUNTS DATA
-   ============================================================ */
+/* ===============================
+   LOGIN
+================================ */
 
-const IFUNDWOMEN_GRANT = 134290.00;
+document
+  .getElementById("loginForm")
+  .addEventListener("submit", function(e) {
 
-const accounts = {
-  checking: {
-    label: "Checking Account · iFundWomen Grant",
-    balance: IFUNDWOMEN_GRANT,
-    income:  IFUNDWOMEN_GRANT,
-    expense: 0.00,
-    savings: 89250.75,
-    lastFour: "4291",
-    expiry: "08/29"
-  },
-  savings: {
-    label: "Savings Account",
-    balance: 89250.75,
-    income: 3400.00,
-    expense: 412.50,
-    savings: 25000.00,
-    lastFour: "7735",
-    expiry: "11/30"
-  }
-};
+    e.preventDefault();
 
-let activeAccount = "checking";
+    const email =
+      document
+        .getElementById("loginEmail")
+        .value
+        .trim()
+        .toLowerCase();
 
+    const password =
+      document
+        .getElementById("loginPassword")
+        .value;
 
-/* ============================================================
-   8. TRANSACTION STORE
-   ============================================================ */
+    if (!email || !password) {
+      showModal("Authentication Error", "Please provide valid credentials.");
+      return;
+    }
 
-const transactions = [
-  {
-    id: 1,
-    type: "credit",
-    category: "grant",
-    icon: "🏆",
-    name: "iFundWomen Grant",
-    date: "Today · 10:32 AM",
-    amount: IFUNDWOMEN_GRANT
-  }
-];
+    sessionStorage.setItem(
+      "novapayUserEmail",
+      email
+    );
 
+    loadDashboard();
 
-/* ============================================================
-   9. RECIPIENTS
-   ============================================================ */
+    showScreen(dashboardScreen);
 
-const recipients = [
-  { id: "r1", name: "Sarah Johnson",   bank: "NovaPay · ••7391",         color: "#5b7cfa", initials: "SJ" },
-  { id: "r2", name: "Michael Chen",    bank: "NovaPay · ••2048",         color: "#f97316", initials: "MC" },
-  { id: "r3", name: "Amara Okafor",    bank: "Chase Bank · ••5612",      color: "#22c55e", initials: "AO" },
-  { id: "r4", name: "David Williams",  bank: "Bank of America · ••8840", color: "#a855f7", initials: "DW" },
-  { id: "r5", name: "Elena Rodriguez", bank: "Wells Fargo · ••3927",     color: "#ef4444", initials: "ER" },
-  { id: "r6", name: "James Park",      bank: "NovaPay · ••1174",         color: "#06b6d4", initials: "JP" }
-];
-
-let selectedRecipient = null;
-let selectedBill = null;
-let historyFilter = "all";
-
-
-/* ============================================================
-   10. RENDER TRANSACTIONS
-   ============================================================ */
-
-function renderTxList(target, list, emptyMessage) {
-  target.innerHTML = "";
-
-  if (list.length === 0) {
-    target.innerHTML =
-      '<div class="tx-empty">' +
-        '<span class="tx-empty-emoji">📭</span>' +
-        (emptyMessage || "No transactions yet.") +
-      '</div>';
-    return;
-  }
-
-  list.forEach(function(t) {
-    const item = document.createElement("div");
-    item.className = "tx-item";
-    item.innerHTML =
-      '<div class="tx-icon">' + t.icon + '</div>' +
-      '<div class="tx-info">' +
-        '<div class="tx-name">' + t.name + '</div>' +
-        '<div class="tx-date">' + t.date + '</div>' +
-      '</div>' +
-      '<div class="tx-amount ' + t.type + '">' +
-        (t.type === "credit" ? "+" : "-") + formatMoney(t.amount) +
-      '</div>';
-    target.appendChild(item);
   });
-}
-
-function renderHomeTransactions() {
-  const list = transactions.slice(0, 6);
-  renderTxList(document.getElementById("txList"), list, "No recent activity.");
-  document.getElementById("txCount").textContent =
-    transactions.length + " transaction" + (transactions.length === 1 ? "" : "s");
-}
 
 
-/* ============================================================
-   11. RENDER RECIPIENT LIST
-   ============================================================ */
+/* ===============================
+   SIGNUP / LOGIN SWITCH
+================================ */
 
-function buildRecipientList() {
-  const list = document.getElementById("recipientList");
-  list.innerHTML = "";
+document
+  .getElementById("showLogin")
+  .addEventListener("click", function() {
 
-  recipients.forEach(function(r) {
-    const item = document.createElement("div");
-    item.className = "recipient-item";
-    item.dataset.action = "recipient";
-    item.dataset.id = r.id;
-    item.innerHTML =
-      '<div class="recipient-avatar" style="background:' + r.color + ';">' + r.initials + '</div>' +
-      '<div class="recipient-info">' +
-        '<div class="recipient-name">' + r.name + '</div>' +
-        '<div class="recipient-bank">' + r.bank + '</div>' +
-      '</div>' +
-      '<div class="recipient-check">✓</div>';
+    showScreen(loginScreen);
 
-    list.appendChild(item);
   });
+
+
+document
+  .getElementById("showSignup")
+  .addEventListener("click", function() {
+
+    showScreen(signupScreen);
+
+  });
+
+
+/* ===============================
+   DASHBOARD
+================================ */
+
+function getInitials(email) {
+
+  const first =
+    email.charAt(0).toUpperCase();
+
+  return first || "U";
 }
 
-
-/* ============================================================
-   12. RENDER ACCOUNT
-   ============================================================ */
-
-function renderAccount(key) {
-  activeAccount = key;
-  const acc = accounts[key];
-
-  document.getElementById("accountBalance").textContent = formatMoney(acc.balance);
-  document.getElementById("accountSub").textContent     = acc.label;
-  document.getElementById("statIncome").textContent     = "+" + formatMoney(acc.income);
-  document.getElementById("statExpense").textContent    = "-" + formatMoney(acc.expense);
-  document.getElementById("statSavings").textContent    = formatMoney(acc.savings);
-  document.getElementById("cardLastFour").textContent   = acc.lastFour;
-  document.getElementById("cardExpiry").textContent     = acc.expiry;
-
-  const fromSel = document.getElementById("fromAccount");
-  if (fromSel) {
-    fromSel.value = key;
-    fromSel.options[0].text = "Checking · " + formatMoney(accounts.checking.balance);
-    fromSel.options[1].text = "Savings · " + formatMoney(accounts.savings.balance);
-  }
-
-  const billFrom = document.getElementById("billFrom");
-  if (billFrom) {
-    billFrom.value = key;
-    billFrom.options[0].text = "Checking · " + formatMoney(accounts.checking.balance);
-    billFrom.options[1].text = "Savings · " + formatMoney(accounts.savings.balance);
-  }
-}
-
-
-/* ============================================================
-   13. LOAD DASHBOARD
-   ============================================================ */
 
 function loadDashboard() {
-  const email = getSession() || "";
-  const users = getUsers();
-  const user  = users[email];
-  const name  = (user && user.name) ? user.name : "Cerji Colvin";
 
-  const initial = getInitials(name);
-  const upper   = email.toUpperCase();
+  const email =
+    sessionStorage.getItem(
+      "novapayUserEmail"
+    ) || "";
 
-  document.getElementById("dashboardEmail").textContent = email;
-  document.getElementById("cardEmail").textContent      = upper;
-  document.getElementById("greetingName").textContent   = name;
+  const upperEmail =
+    email.toUpperCase();
 
-  ["avatar", "transferAvatar", "billsAvatar", "historyAvatar", "profileAvatar"].forEach(function(id) {
-    const el = document.getElementById(id);
-    if (el) el.textContent = initial;
-  });
+  document
+    .getElementById("dashboardEmail")
+    .textContent = email;
 
-  document.getElementById("profileBigAvatar").textContent = initial;
-  document.getElementById("profileName").textContent      = name;
-  document.getElementById("profileEmail").textContent     = email;
+  document
+    .getElementById("cardEmail")
+    .textContent = upperEmail;
 
-  if (user && user.createdAt) {
-    document.getElementById("profileSince").textContent =
-      "Member since " + new Date(user.createdAt).toLocaleDateString("en-US", {
-        month: "long", day: "numeric", year: "numeric"
-      });
-  } else {
-    document.getElementById("profileSince").textContent = "Member since March 15, 2023";
-  }
+  document
+    .getElementById("avatar")
+    .textContent = getInitials(email);
 
   updateGreeting();
-  renderAccount(activeAccount);
-  renderHomeTransactions();
-  updateProfileStats();
-}
 
-function updateProfileStats() {
-  document.getElementById("profChecking").textContent = formatMoney(accounts.checking.balance);
-  document.getElementById("profSavings").textContent  = formatMoney(accounts.savings.balance);
-  document.getElementById("profTotal").textContent    =
-    formatMoney(accounts.checking.balance + accounts.savings.balance);
-  document.getElementById("profTxCount").textContent  = transactions.length;
 }
 
 
-/* ============================================================
-   14. TRANSFER SUMMARY
-   ============================================================ */
+/* ===============================
+   GREETING
+================================ */
 
-function calcFee(amount) {
-  if (amount <= 0)    return 0;
-  if (amount <= 100)  return 0;
-  if (amount <= 1000) return 1.50;
-  return amount * 0.005;
-}
+function updateGreeting() {
 
-function updateTransferSummary() {
-  const input  = document.getElementById("transferAmount");
-  const amount = parseFloat(input.value) || 0;
-  const fee    = calcFee(amount);
-  const total  = amount + fee;
+  const hour =
+    new Date().getHours();
 
-  document.getElementById("sumAmount").textContent = formatMoney(amount);
-  document.getElementById("sumFee").textContent    = formatMoney(fee);
-  document.getElementById("sumTotal").textContent  = formatMoney(total);
+  let text;
 
-  const speedEl = document.getElementById("sumSpeed");
-  if (amount === 0)        speedEl.textContent = "—";
-  else if (amount <= 100)  speedEl.textContent = "Instant · Free";
-  else if (amount <= 1000) speedEl.textContent = "Instant";
-  else                     speedEl.textContent = "Same Day";
+  if (hour >= 5 && hour < 12) {
 
-  const fromKey   = document.getElementById("fromAccount").value;
-  const avail     = accounts[fromKey].balance;
-  const remaining = avail - total;
-  document.getElementById("limitNote").textContent =
-    "Available: " + formatMoney(avail) +
-    " · Remaining: " + formatMoney(Math.max(remaining, 0));
-}
+    text = "Good Morning";
 
-document.getElementById("transferAmount").addEventListener("input", updateTransferSummary);
-document.getElementById("fromAccount").addEventListener("change", function() {
-  renderAccount(this.value);
-  updateTransferSummary();
-});
+  } else if (hour >= 12 && hour < 18) {
 
+    text = "Good Afternoon";
 
-/* ============================================================
-   15. HANDLE TRANSFER
-   ============================================================ */
-
-function handleTransfer() {
-  const fromKey = document.getElementById("fromAccount").value;
-  const amount  = parseFloat(document.getElementById("transferAmount").value) || 0;
-  const note    = document.getElementById("transferNote").value.trim();
-
-  if (!selectedRecipient) {
-    showModal("No Recipient", "Please select a recipient to send money to.");
-    return;
-  }
-  if (amount <= 0) {
-    showModal("Invalid Amount", "Please enter an amount greater than $0.00.");
-    return;
-  }
-
-  const fee   = calcFee(amount);
-  const total = amount + fee;
-  const fromAcc = accounts[fromKey];
-
-  if (total > fromAcc.balance) {
-    showModal("Insufficient Funds",
-      "You need " + formatMoney(total) + " but your " + fromAcc.label +
-      " only has " + formatMoney(fromAcc.balance) + ".");
-    return;
-  }
-
-  showConfirm("Confirm Transfer",
-    "Send " + formatMoney(amount) + " to " + selectedRecipient.name +
-    "?\n\nFee: " + formatMoney(fee) +
-    "\nTotal debit: " + formatMoney(total),
-    function() {
-      fromAcc.balance -= total;
-      fromAcc.expense += amount;
-
-      transactions.unshift({
-        id: Date.now(),
-        type: "debit",
-        category: "transfer",
-        icon: "➡️",
-        name: "To " + selectedRecipient.name,
-        date: "Just now · " + (note || "Transfer"),
-        amount: amount
-      });
-
-      renderAccount(fromKey);
-      renderHomeTransactions();
-      updateTransferSummary();
-      updateProfileStats();
-
-      showModal("Transfer Successful ✓",
-        "Sent " + formatMoney(amount) + " to " + selectedRecipient.name +
-        "\nBank: " + selectedRecipient.bank +
-        "\nFee: " + formatMoney(fee) +
-        "\nTotal debited: " + formatMoney(total) +
-        "\n\nNew balance: " + formatMoney(fromAcc.balance));
-
-      document.getElementById("transferAmount").value = "";
-      document.getElementById("transferNote").value = "";
-      selectedRecipient = null;
-      document.querySelectorAll("#recipientList .recipient-item").forEach(function(el) {
-        el.classList.remove("selected");
-      });
-      updateTransferSummary();
-    });
-}
-
-
-/* ============================================================
-   16. BILL SUMMARY
-   ============================================================ */
-
-function updateBillSummary() {
-  const amount = parseFloat(document.getElementById("billAmount").value) || 0;
-  const fee = amount > 0 ? 1.00 : 0;
-  const total = amount + fee;
-
-  document.getElementById("billSumName").textContent   = selectedBill ? selectedBill.name : "—";
-  document.getElementById("billSumAmount").textContent = formatMoney(amount);
-  document.getElementById("billSumFee").textContent    = formatMoney(fee);
-  document.getElementById("billSumTotal").textContent  = formatMoney(total);
-
-  const fromKey = document.getElementById("billFrom").value;
-  const avail   = accounts[fromKey].balance;
-  document.getElementById("billLimitNote").textContent =
-    "Available: " + formatMoney(avail) +
-    " · Remaining: " + formatMoney(Math.max(avail - total, 0));
-}
-
-document.getElementById("billAmount").addEventListener("input", updateBillSummary);
-document.getElementById("billFrom").addEventListener("change", function() {
-  renderAccount(this.value);
-  updateBillSummary();
-});
-
-
-/* ============================================================
-   17. HANDLE BILL
-   ============================================================ */
-
-function billEmoji(name) {
-  const map = { Electric:"⚡", Water:"💧", Internet:"📶", Phone:"📱", Gas:"🔥", Rent:"🏠", Netflix:"🎬", Insurance:"🛡️", Gym:"💪" };
-  return map[name] || "📄";
-}
-
-function handleBill() {
-  const fromKey = document.getElementById("billFrom").value;
-  const amount  = parseFloat(document.getElementById("billAmount").value) || 0;
-  const ref     = document.getElementById("billRef").value.trim();
-
-  if (!selectedBill) {
-    showModal("No Bill Selected", "Please choose a bill category above.");
-    return;
-  }
-  if (amount <= 0) {
-    showModal("Invalid Amount", "Please enter a bill amount greater than $0.00.");
-    return;
-  }
-  if (amount < selectedBill.min) {
-    showModal("Amount Too Low",
-      "Minimum payment for " + selectedBill.name + " is " + formatMoney(selectedBill.min) + ".");
-    return;
-  }
-
-  const fee   = 1.00;
-  const total = amount + fee;
-  const fromAcc = accounts[fromKey];
-
-  if (total > fromAcc.balance) {
-    showModal("Insufficient Funds",
-      "You need " + formatMoney(total) + " but your " + fromAcc.label +
-      " only has " + formatMoney(fromAcc.balance) + ".");
-    return;
-  }
-
-  showConfirm("Confirm Bill Payment",
-    "Pay " + selectedBill.name + " bill of " + formatMoney(amount) +
-    (ref ? "\nReference: " + ref : "") +
-    "\n\nFee: " + formatMoney(fee) +
-    "\nTotal: " + formatMoney(total),
-    function() {
-      fromAcc.balance -= total;
-      fromAcc.expense += amount;
-
-      transactions.unshift({
-        id: Date.now(),
-        type: "debit",
-        category: "bills",
-        icon: billEmoji(selectedBill.name),
-        name: selectedBill.name + " Bill" + (ref ? " · " + ref : ""),
-        date: "Just now",
-        amount: amount
-      });
-
-      renderAccount(fromKey);
-      renderHomeTransactions();
-      updateBillSummary();
-      updateProfileStats();
-
-      showModal("Bill Paid ✓",
-        "Successfully paid " + formatMoney(amount) + " to " + selectedBill.name + ".\n" +
-        (ref ? "Reference: " + ref + "\n" : "") +
-        "Fee: " + formatMoney(fee) +
-        "\nTotal debited: " + formatMoney(total) +
-        "\n\nNew balance: " + formatMoney(fromAcc.balance));
-
-      document.getElementById("billAmount").value = "";
-      document.getElementById("billRef").value = "";
-      selectedBill = null;
-      document.querySelectorAll("#billGrid .bill-tile").forEach(function(t) {
-        t.classList.remove("selected");
-      });
-      updateBillSummary();
-    });
-}
-
-
-/* ============================================================
-   18. HISTORY
-   ============================================================ */
-
-function renderHistory() {
-  let list = transactions.slice();
-
-  if (historyFilter === "credit")        list = list.filter(t => t.type === "credit");
-  else if (historyFilter === "debit")    list = list.filter(t => t.type === "debit");
-  else if (historyFilter === "bills")    list = list.filter(t => t.category === "bills");
-  else if (historyFilter === "transfer") list = list.filter(t => t.category === "transfer");
-
-  renderTxList(document.getElementById("historyList"), list, "No transactions match this filter.");
-
-  let totalIn = 0, totalOut = 0;
-  transactions.forEach(function(t) {
-    if (t.type === "credit") totalIn += t.amount;
-    else totalOut += t.amount;
-  });
-
-  document.getElementById("histTotalIn").textContent  = "+" + formatMoney(totalIn);
-  document.getElementById("histTotalOut").textContent = "-" + formatMoney(totalOut);
-  document.getElementById("histNet").textContent      = formatMoney(totalIn - totalOut);
-  document.getElementById("historySummary").textContent =
-    list.length + " transaction" + (list.length === 1 ? "" : "s") + " shown";
-}
-
-
-/* ============================================================
-   19. NAVIGATION
-   ============================================================ */
-
-function navigateTo(page) {
-  if (page === "home")          showScreen("dashboardScreen");
-  else if (page === "transfer") { showScreen("transferScreen"); updateTransferSummary(); }
-  else if (page === "bills")    { showScreen("billsScreen");    updateBillSummary(); }
-  else if (page === "history")  { showScreen("historyScreen");  renderHistory(); }
-  else if (page === "profile")  { showScreen("profileScreen");  updateProfileStats(); }
-
-  document.querySelectorAll(".nav-button").forEach(function(btn) {
-    btn.classList.toggle("active", btn.dataset.page === page);
-  });
-}
-
-
-/* ============================================================
-   20. INIT — runs on page load
-   ============================================================ */
-
-(function init() {
-  buildRecipientList();
-
-  const accessGranted = sessionStorage.getItem(ACCESS_KEY) === "true";
-  const existing = getSession();
-
-  if (!accessGranted) {
-    showScreen("codeScreen");
-  } else if (existing) {
-    loadDashboard();
-    showScreen("dashboardScreen");
   } else {
-    showScreen("signupScreen");
+
+    text = "Good Evening";
+
   }
 
-  updateTransferSummary();
-  updateBillSummary();
-  renderHistory();
-})();
+  document
+    .getElementById("greeting")
+    .textContent = text;
+
+}
+
+setInterval(
+  updateGreeting,
+  60000
+);
+
+
+/* ===============================
+   ACCOUNT SWITCHING
+================================ */
+
+const checkingPill = document.getElementById("checkingPill");
+const savingsPill = document.getElementById("savingsPill");
+
+checkingPill.addEventListener("click", function() {
+  checkingPill.className = "pill active";
+  savingsPill.className = "pill inactive";
+  document.getElementById("accountSub").textContent = "Checking Account";
+});
+
+savingsPill.addEventListener("click", function() {
+  savingsPill.className = "pill active";
+  checkingPill.className = "pill inactive";
+  document.getElementById("accountSub").textContent = "Savings Account";
+});
+
+
+/* ===============================
+   BOTTOM NAV
+================================ */
+
+document
+  .querySelectorAll(".nav-button")
+  .forEach(function(button) {
+
+    button.addEventListener("click", function() {
+
+      document
+        .querySelectorAll(".nav-button")
+        .forEach(function(item) {
+
+          item.classList.remove("active");
+
+        });
+
+      button.classList.add("active");
+
+    });
+
+  });
 
 </script>
 
