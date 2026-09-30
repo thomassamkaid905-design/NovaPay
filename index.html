@@ -332,7 +332,7 @@ body {
 .generate-btn:active { transform: scale(0.98); }
 .generate-btn .plus { font-size: 18px; font-weight: 900; }
 
-/* ============== SERVICE GRID (Receive / Wire / Zelle) ============== */
+/* ============== SERVICE GRID ============== */
 .service-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
   gap: 10px; padding: 0 18px 22px; flex-shrink: 0;
@@ -1018,7 +1018,9 @@ body {
 
 const LS_USERS = 'novapay_users';
 const LS_SESSION = 'novapay_session';
-const STARTING_BALANCE = 134290.00;   // <-- your requested starting balance
+const LS_VERSION = 'novapay_version';
+const APP_VERSION = 2;                 // <-- bump to force balance reset
+const STARTING_BALANCE = 134290.00;    // <-- your requested starting balance
 
 /* ---------- storage ---------- */
 function getUsers() {
@@ -1029,6 +1031,35 @@ function saveUsers(u) { localStorage.setItem(LS_USERS, JSON.stringify(u)); }
 function getSession() { return localStorage.getItem(LS_SESSION); }
 function setSession(name) { localStorage.setItem(LS_SESSION, name); }
 function clearSession() { localStorage.removeItem(LS_SESSION); }
+
+/* ---------- one-time upgrade: force balance to correct value on old accounts ---------- */
+function runMigrations() {
+  const storedVersion = parseInt(localStorage.getItem(LS_VERSION) || '0', 10);
+  if (storedVersion >= APP_VERSION) return;
+
+  const users = getUsers();
+  const keys = Object.keys(users);
+  if (keys.length === 0) {
+    localStorage.setItem(LS_VERSION, APP_VERSION);
+    return;
+  }
+
+  // Old accounts didn't have the correct balance — reset them to the new starting balance.
+  // (Transactions are preserved so history isn't lost.)
+  keys.forEach(k => {
+    const u = users[k];
+    if (!u || typeof u !== 'object') return;
+    if (u.balance !== STARTING_BALANCE) {
+      u.balance = STARTING_BALANCE;
+      u.transactions = u.transactions || [];
+    }
+    // Backfill email / phone for older accounts
+    if (!u.email) u.email = u.name.toLowerCase().replace(/\s+/g,'.') + '@novapay.demo';
+    if (!u.phone) u.phone = '(555) ' + Math.floor(100+Math.random()*900) + '-' + Math.floor(1000+Math.random()*9000);
+  });
+  saveUsers(users);
+  localStorage.setItem(LS_VERSION, APP_VERSION);
+}
 
 /* ---------- screen routing ---------- */
 function showScreen(id) {
@@ -1200,11 +1231,9 @@ function renderAll(user) {
   if (pfHolder) pfHolder.textContent = user.name;
   if (pfCode)   pfCode.textContent   = 'Access code: ' + user.code;
 
-  // receive screen holder
   const rcvHolder = document.getElementById('rcv-holder');
   if (rcvHolder) rcvHolder.textContent = user.name;
 
-  // zelle contact info
   const zEmail = document.getElementById('zl-my-email');
   const zPhone = document.getElementById('zl-my-phone');
   if (zEmail) zEmail.textContent = user.email || '—';
@@ -1602,6 +1631,7 @@ document.addEventListener('change', function (e) {
 
 /* ---------- boot ---------- */
 document.addEventListener('DOMContentLoaded', function () {
+  runMigrations();          // <-- fixes old accounts to show $134,290
   updateClocks();
   setInterval(updateClocks, 30000);
 
