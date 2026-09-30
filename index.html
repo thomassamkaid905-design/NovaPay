@@ -31,6 +31,7 @@ body {
   line-height: 1.4;
   display: flex;
   justify-content: center;
+  align-items: stretch;
   height: 100vh;
 }
 
@@ -85,7 +86,7 @@ body {
 .code-box .code { font-size: 34px; letter-spacing: 8px; font-weight: 800; color: var(--gold-dark); font-family: "Courier New", monospace; }
 .code-box .hint { font-size: 12px; color: var(--muted); margin-top: 12px; line-height: 1.5; }
 
-/* STATUS + TOP ROW */
+/* STATUS + TOP */
 .status-bar { padding: 14px 22px 6px; display: flex; justify-content: space-between; align-items: center; font-size: 15px; font-weight: 700; color: var(--text); flex-shrink: 0; }
 .status-bar .right { display: flex; align-items: center; gap: 7px; font-size: 13px; }
 .top-row { display: flex; align-items: center; gap: 12px; padding: 10px 20px 18px; flex-shrink: 0; }
@@ -287,9 +288,19 @@ body {
 .toast { position: fixed; bottom: 110px; left: 50%; transform: translateX(-50%) translateY(20px); background: linear-gradient(135deg, var(--gold-soft), var(--gold)); color: #2a2107; padding: 12px 22px; border-radius: 999px; font-size: 13px; font-weight: 800; box-shadow: 0 12px 30px rgba(201,168,74,0.4); z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.3s, transform 0.3s; max-width: 340px; text-align: center; }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+/* DESKTOP: keep phone frame centered and non-squished */
 @media (min-width: 480px) {
-  body { padding: 20px 0; background: #fdf8e6; }
-  .phone { border-radius: 42px; box-shadow: 0 30px 80px rgba(42,33,7,0.2); height: 900px; max-height: 90vh; }
+  body {
+    padding: 20px 0;
+    background: #fdf8e6;
+    align-items: center;
+  }
+  .phone {
+    border-radius: 42px;
+    box-shadow: 0 30px 80px rgba(42,33,7,0.2);
+    height: calc(100vh - 40px);
+    max-height: 900px;
+  }
 }
 </style>
 </head>
@@ -344,28 +355,23 @@ body {
 
   <section id="screen-home" class="screen">
     <div class="status-bar"><span id="clock">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
-
     <div class="top-row">
       <div class="icon-btn" id="theme-btn" onclick="toggleTheme()">☀️</div>
       <div class="icon-btn" onclick="showScreen('screen-notifications')">🔔<span class="dot" id="notif-dot"></span></div>
       <div class="top-name" id="home-name">—</div>
       <div class="avatar" id="home-avatar" onclick="openSwitcher()">--</div>
     </div>
-
     <div class="date-line" id="date-line-home">—</div>
-
     <div class="greeting-block">
       <h1 id="greeting">Good Afternoon</h1>
       <p id="last-login">Last login: —</p>
     </div>
-
     <div class="account-pills">
       <button class="pill active" id="pill-checking" onclick="switchAccountType('checking')">🏦 Checking •••• 4821</button>
       <button class="pill inactive" id="pill-credit" onclick="switchAccountType('credit')">💳 Credit •••• 9024</button>
       <button class="pill inactive" id="pill-business" onclick="switchAccountType('business')">🏢 Business •••• 3310</button>
       <button class="pill inactive" id="pill-invest" onclick="switchAccountType('investment')">📈 Invest •••• 5567</button>
     </div>
-
     <div class="balance-card" id="main-balance-card">
       <div class="frozen-overlay" id="frozen-overlay">
         <div class="frozen-badge">❄ CARD FROZEN</div>
@@ -385,7 +391,6 @@ body {
         <div class="pending-item"><div class="pending-label">Interest YTD</div><div class="pending-value" id="interest-value">$0.00</div></div>
       </div>
     </div>
-
     <div class="quick-actions-row">
       <button class="quick-action" id="quick-freeze" onclick="quickToggleFreeze()">
         <div class="qa-icon" id="freeze-icon">❄</div>
@@ -402,20 +407,17 @@ body {
         </div>
       </button>
     </div>
-
     <div class="quick-info-row">
       <div class="info-chip" id="chip-cashback">💵 Cashback: $0.00</div>
       <div class="info-chip green" id="chip-streak">🔥 12-day streak</div>
       <div class="info-chip" id="chip-member">⭐ Member since —</div>
     </div>
-
     <div class="stats-grid">
       <div class="stat-card"><div class="stat-label">Income</div><div class="stat-value" id="stat-income">$0</div></div>
       <div class="stat-card"><div class="stat-label">Spent</div><div class="stat-value" id="stat-spent">$0</div></div>
       <div class="stat-card"><div class="stat-label">Saved</div><div class="stat-value" id="stat-saved">$0</div></div>
       <div class="stat-card"><div class="stat-label">Txns</div><div class="stat-value" id="stat-count">0</div></div>
     </div>
-
     <div class="chart-card">
       <h3>Last 7 Days</h3>
       <div class="chart-bars" id="chart-bars"></div>
@@ -424,7 +426,6 @@ body {
         <span><span class="dot spd"></span>Spending</span>
       </div>
     </div>
-
     <div class="chart-card">
       <h3>Spending Breakdown</h3>
       <div class="donut-wrap">
@@ -432,7 +433,6 @@ body {
         <div class="donut-legend" id="donut-legend"></div>
       </div>
     </div>
-
     <div class="service-grid">
       <button class="service-tile" onclick="showScreen('screen-receive')"><div class="ico">↓</div><div class="lbl">Receive</div></button>
       <button class="service-tile" onclick="showScreen('screen-wire')"><div class="ico">🌐</div><div class="lbl">Wire</div></button>
@@ -443,7 +443,6 @@ body {
       <button class="service-tile" onclick="showScreen('screen-currency')"><div class="ico">💱</div><div class="lbl">Currency</div></button>
       <button class="service-tile" onclick="showScreen('screen-split')"><div class="ico">🧾</div><div class="lbl">Split</div></button>
     </div>
-
     <div class="section-title">Recent Activity</div>
     <div class="panel">
       <div class="tx-list" id="home-tx-list"><div class="empty-state">No transactions yet.</div></div>
@@ -759,21 +758,11 @@ body {
   </section>
 
   <nav class="bottom-nav" id="main-nav" style="display: none;">
-    <button class="nav-item active" data-target="screen-home" onclick="showScreen('screen-home')">
-      <span class="nav-icon">🏠</span>Home
-    </button>
-    <button class="nav-item" data-target="screen-transfer" onclick="showScreen('screen-transfer')">
-      <span class="nav-icon">⇄</span>Transfer
-    </button>
-    <button class="nav-item" data-target="screen-bills" onclick="showScreen('screen-bills')">
-      <span class="nav-icon">📄</span>Bills
-    </button>
-    <button class="nav-item" data-target="screen-history" onclick="showScreen('screen-history')">
-      <span class="nav-icon">☰</span>History
-    </button>
-    <button class="nav-item" data-target="screen-profile" onclick="showScreen('screen-profile')">
-      <span class="nav-icon">👤</span>Profile
-    </button>
+    <button class="nav-item active" data-target="screen-home" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
+    <button class="nav-item" data-target="screen-transfer" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
+    <button class="nav-item" data-target="screen-bills" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
+    <button class="nav-item" data-target="screen-history" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
+    <button class="nav-item" data-target="screen-profile" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
   </nav>
 
 </div>
@@ -796,16 +785,13 @@ body {
 const LS_USERS = 'novapay_users';
 const LS_SESSION = 'novapay_session';
 const LS_VERSION = 'novapay_version';
-const APP_VERSION = 12;
+const APP_VERSION = 13;
 const STARTING_BALANCE = 134290.00;
 const STARTING_CREDIT = -1250.00;
 const STARTING_BUSINESS = 8500.00;
 const STARTING_INVEST = 22500.00;
 
-function getUsers() {
-  try { return JSON.parse(localStorage.getItem(LS_USERS)) || {}; }
-  catch (e) { return {}; }
-}
+function getUsers() { try { return JSON.parse(localStorage.getItem(LS_USERS)) || {}; } catch(e) { return {}; } }
 function saveUsers(u) { localStorage.setItem(LS_USERS, JSON.stringify(u)); }
 function getSession() { return localStorage.getItem(LS_SESSION); }
 function setSession(u) { localStorage.setItem(LS_SESSION, u); }
@@ -816,11 +802,7 @@ function seedTrustWallet(user) {
   user.transactions = user.transactions.filter(t => !(t.label && t.label.toLowerCase().includes('ifundwomen')));
   const has = user.transactions.some(t => t.label && t.label.toLowerCase().includes('trust wallet'));
   if (!has) {
-    user.transactions.unshift({
-      type: 'receive', label: 'Received from Trust Wallet',
-      amount: 134290.00, date: Date.now() - 86400000,
-      account: 'checking', category: 'Other'
-    });
+    user.transactions.unshift({ type: 'receive', label: 'Received from Trust Wallet', amount: 134290.00, date: Date.now() - 86400000, account: 'checking', category: 'Other' });
   }
 }
 
@@ -828,7 +810,6 @@ function runMigrations() {
   const storedVersion = parseInt(localStorage.getItem(LS_VERSION) || '0', 10);
   const users = getUsers();
   let changed = false;
-
   Object.keys(users).forEach(k => {
     const u = users[k];
     if (!u || typeof u !== 'object') return;
@@ -863,7 +844,6 @@ function runMigrations() {
     if (u.savingsBalance !== undefined) { delete u.savingsBalance; changed = true; }
     if (u.activeAccount === 'savings') { u.activeAccount = 'checking'; changed = true; }
   });
-
   if (changed || storedVersion < APP_VERSION) {
     saveUsers(users);
     localStorage.setItem(LS_VERSION, APP_VERSION);
@@ -871,9 +851,7 @@ function runMigrations() {
 }
 
 function updateNav(target) {
-  document.querySelectorAll('.nav-item').forEach(n => {
-    n.classList.toggle('active', n.dataset.target === target);
-  });
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.toggle('active', n.dataset.target === target));
 }
 function showNav(show) {
   const nav = document.getElementById('main-nav');
@@ -884,19 +862,9 @@ function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   const target = document.getElementById(id);
   if (target) { target.classList.add('active'); target.scrollTop = 0; }
-
-  const protectedScreens = ['screen-home','screen-transfer','screen-deposit',
-    'screen-bills','screen-history','screen-profile','screen-receive',
-    'screen-wire','screen-zelle','screen-notifications','screen-manage-card',
-    'screen-contacts','screen-budget','screen-statements','screen-currency',
-    'screen-split','screen-scheduled'];
-  if (protectedScreens.includes(id) && !getSession()) {
-    showScreen('screen-signin');
-    return;
-  }
-  if (protectedScreens.includes(id)) { showNav(true); updateNav(id); }
-  else { showNav(false); }
-
+  const protectedScreens = ['screen-home','screen-transfer','screen-deposit','screen-bills','screen-history','screen-profile','screen-receive','screen-wire','screen-zelle','screen-notifications','screen-manage-card','screen-contacts','screen-budget','screen-statements','screen-currency','screen-split','screen-scheduled'];
+  if (protectedScreens.includes(id) && !getSession()) { showScreen('screen-signin'); return; }
+  if (protectedScreens.includes(id)) { showNav(true); updateNav(id); } else { showNav(false); }
   if (getSession()) {
     const user = getUsers()[getSession()];
     if (!user) { clearSession(); showScreen('screen-signin'); return; }
@@ -916,8 +884,7 @@ function handleSignUp() {
   const name = document.getElementById('su-name').value.trim();
   const username = document.getElementById('su-user').value.trim().toLowerCase().replace(/\s+/g,'');
   const pass = document.getElementById('su-pass').value;
-  const err = document.getElementById('su-error');
-  err.textContent = '';
+  const err = document.getElementById('su-error'); err.textContent = '';
   if (!name || name.length < 3) { err.textContent = 'Name must be 3+ chars.'; return; }
   if (!username || username.length < 3) { err.textContent = 'Username must be 3+ chars.'; return; }
   if (!/^[a-z0-9._-]+$/.test(username)) { err.textContent = 'Username: letters/numbers/._- only.'; return; }
@@ -925,23 +892,7 @@ function handleSignUp() {
   const users = getUsers();
   if (users[username]) { err.textContent = 'Username already taken.'; return; }
   const code = generateCode();
-  const user = {
-    name, username, pass, code,
-    balance: STARTING_BALANCE,
-    creditBalance: STARTING_CREDIT,
-    businessBalance: STARTING_BUSINESS,
-    investBalance: STARTING_INVEST,
-    activeAccount: 'checking',
-    transactions: [], notifications: [{ icon: '🏦', title: 'Welcome to NovaPay', text: 'Account ready.', date: Date.now() }],
-    contacts: [], virtualCards: [], budgets: {},
-    scheduled: [], payees: [],
-    cashback: 0, interestYTD: 0, frozen: false,
-    memberId: 'NP-' + Math.floor(1000+Math.random()*9000) + '-' + username.slice(0,2).toUpperCase(),
-    streak: 12,
-    email: username + '@novapay.demo',
-    phone: '(555) ' + Math.floor(100+Math.random()*900) + '-' + Math.floor(1000+Math.random()*9000),
-    createdAt: Date.now(), lastLogin: Date.now()
-  };
+  const user = { name, username, pass, code, balance: STARTING_BALANCE, creditBalance: STARTING_CREDIT, businessBalance: STARTING_BUSINESS, investBalance: STARTING_INVEST, activeAccount: 'checking', transactions: [], notifications: [{ icon: '🏦', title: 'Welcome to NovaPay', text: 'Account ready.', date: Date.now() }], contacts: [], virtualCards: [], budgets: {}, scheduled: [], payees: [], cashback: 0, interestYTD: 0, frozen: false, memberId: 'NP-' + Math.floor(1000+Math.random()*9000) + '-' + username.slice(0,2).toUpperCase(), streak: 12, email: username + '@novapay.demo', phone: '(555) ' + Math.floor(100+Math.random()*900) + '-' + Math.floor(1000+Math.random()*9000), createdAt: Date.now(), lastLogin: Date.now() };
   seedTrustWallet(user);
   users[username] = user;
   saveUsers(users);
@@ -949,30 +900,21 @@ function handleSignUp() {
   document.getElementById('code-username').textContent = username;
   showScreen('screen-code');
   document.getElementById('si-user').value = username;
-  document.getElementById('su-name').value = '';
-  document.getElementById('su-user').value = '';
-  document.getElementById('su-pass').value = '';
+  document.getElementById('su-name').value = ''; document.getElementById('su-user').value = ''; document.getElementById('su-pass').value = '';
 }
-
-function generateCode() {
-  let c = '';
-  for (let i = 0; i < 6; i++) c += Math.floor(Math.random() * 10);
-  return c;
-}
+function generateCode() { let c = ''; for (let i = 0; i < 6; i++) c += Math.floor(Math.random() * 10); return c; }
 
 function handleSignIn() {
   const username = document.getElementById('si-user').value.trim().toLowerCase().replace(/\s+/g,'');
   const pass = document.getElementById('si-pass').value;
-  const err = document.getElementById('si-error');
-  err.textContent = '';
+  const err = document.getElementById('si-error'); err.textContent = '';
   if (!username || !pass) { err.textContent = 'Enter username and password.'; return; }
   const users = getUsers();
   const user = users[username];
   if (!user) { err.textContent = 'No account with that username.'; return; }
   if (user.pass !== pass) { err.textContent = 'Incorrect password.'; return; }
   user.lastLogin = Date.now();
-  users[username] = user;
-  saveUsers(users);
+  users[username] = user; saveUsers(users);
   setSession(username);
   document.getElementById('si-pass').value = '';
   showScreen('screen-home');
@@ -981,8 +923,7 @@ function handleSignIn() {
 
 function handleSignOut() {
   clearSession();
-  document.getElementById('si-user').value = '';
-  document.getElementById('si-pass').value = '';
+  document.getElementById('si-user').value = ''; document.getElementById('si-pass').value = '';
   showScreen('screen-signin');
 }
 
@@ -991,23 +932,14 @@ function openSwitcher() {
   const session = getSession();
   const list = document.getElementById('switcher-list');
   const keys = Object.keys(users);
-  if (keys.length === 0) {
-    list.innerHTML = '<div class="empty-state">No saved accounts.</div>';
-  } else {
+  if (keys.length === 0) { list.innerHTML = '<div class="empty-state">No saved accounts.</div>'; }
+  else {
     list.innerHTML = keys.map(k => {
       const u = users[k];
       const initials = u.name.split(' ').map(s => s[0]).join('').slice(0,2).toUpperCase();
       const isCurrent = (k === session);
       const bal = activeBalance(u);
-      return `
-        <div class="account-item ${isCurrent ? 'current' : ''}" onclick="switchToAccount('${escapeAttr(k)}')">
-          <div class="ac-avatar">${initials}</div>
-          <div class="ac-info">
-            <div class="ac-name">${escapeHtml(u.name)}</div>
-            <div class="ac-bal">@${escapeHtml(u.username)} · ${fmt(bal)}</div>
-          </div>
-          ${isCurrent ? '<div class="ac-check">✓</div>' : ''}
-        </div>`;
+      return `<div class="account-item ${isCurrent ? 'current' : ''}" onclick="switchToAccount('${escapeAttr(k)}')"><div class="ac-avatar">${initials}</div><div class="ac-info"><div class="ac-name">${escapeHtml(u.name)}</div><div class="ac-bal">@${escapeHtml(u.username)} · ${fmt(bal)}</div></div>${isCurrent ? '<div class="ac-check">✓</div>' : ''}</div>`;
     }).join('');
   }
   document.getElementById('switcher-modal').classList.add('show');
@@ -1018,18 +950,14 @@ function switchToAccount(key) {
   const user = users[key];
   if (!user) { closeSwitcher(); return; }
   user.lastLogin = Date.now();
-  users[key] = user;
-  saveUsers(users);
-  setSession(key);
-  closeSwitcher();
+  users[key] = user; saveUsers(users);
+  setSession(key); closeSwitcher();
   showScreen('screen-home');
   toast('Switched to ' + user.name.split(' ')[0]);
 }
 function escapeAttr(s) { return String(s).replace(/'/g, "\\'").replace(/"/g, '&quot;'); }
 
-function toggleTheme() {
-  toast('Gold & White theme');
-}
+function toggleTheme() { toast('Gold & White theme'); }
 
 function switchAccountType(type) {
   const key = getSession();
@@ -1061,12 +989,9 @@ function updateClocks() {
   h = h % 12; if (h === 0) h = 12;
   m = m < 10 ? '0' + m : m;
   const t = h + ':' + m;
-  document.querySelectorAll('.clk, #clock').forEach(el => { el.textContent = t; });
+  document.querySelectorAll('.clk, #clock').forEach(el => el.textContent = t);
   const dateStr = now.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
-  ['date-line-home','date-line-history'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.textContent = dateStr;
-  });
+  ['date-line-home','date-line-history'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = dateStr; });
   const greetingEl = document.getElementById('greeting');
   if (greetingEl && getSession()) {
     const user = getUsers()[getSession()];
@@ -1091,7 +1016,6 @@ function fmtSigned(amount) {
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   return sign + '$' + parts.join('.');
 }
-
 function activeBalance(user) {
   const t = user.activeAccount || 'checking';
   if (t === 'credit') return user.creditBalance || 0;
@@ -1106,15 +1030,10 @@ function applyBalance(user, delta) {
   else if (t === 'investment') user.investBalance = (user.investBalance || 0) + delta;
   else user.balance += delta;
 }
-function totalNetWorth(user) {
-  return (user.balance || 0) + (user.businessBalance || 0)
-       + (user.investBalance || 0) + (user.creditBalance || 0);
-}
+function totalNetWorth(user) { return (user.balance || 0) + (user.businessBalance || 0) + (user.investBalance || 0) + (user.creditBalance || 0); }
 
 function quickToggleFreeze() {
-  const key = getSession();
-  const user = getUsers()[key];
-  if (!user) return;
+  const key = getSession(); const user = getUsers()[key]; if (!user) return;
   user.frozen = !user.frozen;
   persistUser(key, user);
   toast(user.frozen ? '❄ Card frozen' : '🔥 Card unfrozen');
@@ -1123,15 +1042,12 @@ function quickToggleFreeze() {
 function toggleFreeze() { quickToggleFreeze(); }
 
 function addScheduled() {
-  const key = getSession();
-  const user = getUsers()[key];
-  if (!user) return;
+  const key = getSession(); const user = getUsers()[key]; if (!user) return;
   const name = document.getElementById('sc-name').value.trim();
   const amount = parseFloat(document.getElementById('sc-amount').value);
   const frequency = document.getElementById('sc-frequency').value;
   const start = document.getElementById('sc-start').value;
-  const msg = document.getElementById('sc-msg');
-  msg.textContent = '';
+  const msg = document.getElementById('sc-msg'); msg.textContent = '';
   if (!name) { msg.textContent = 'Enter recipient.'; return; }
   if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; return; }
   const startTime = start ? new Date(start).getTime() : Date.now();
@@ -1143,22 +1059,17 @@ function addScheduled() {
   renderAll(user);
 }
 function deleteScheduled(id) {
-  const key = getSession();
-  const user = getUsers()[key];
-  if (!user) return;
+  const key = getSession(); const user = getUsers()[key]; if (!user) return;
   user.scheduled = (user.scheduled || []).filter(s => s.id !== id);
   persistUser(key, user);
   toast('Schedule removed');
   renderAll(user);
 }
 function checkScheduledTransfers() {
-  const key = getSession();
-  if (!key) return;
-  const users = getUsers();
-  const user = users[key];
+  const key = getSession(); if (!key) return;
+  const users = getUsers(); const user = users[key];
   if (!user || !user.scheduled) return;
-  let changed = false;
-  const now = Date.now();
+  let changed = false; const now = Date.now();
   user.scheduled.forEach(s => {
     while (s.nextDate <= now) {
       if (s.amount <= (user.balance || 0)) {
@@ -1178,71 +1089,50 @@ function checkScheduledTransfers() {
   if (changed) { users[key] = user; saveUsers(users); }
 }
 function renderScheduled(user) {
-  const el = document.getElementById('scheduled-list');
-  if (!el) return;
+  const el = document.getElementById('scheduled-list'); if (!el) return;
   const list = user.scheduled || [];
   if (list.length === 0) { el.innerHTML = '<div class="empty-state">No scheduled transfers yet.</div>'; return; }
   el.innerHTML = list.map(s => {
     const d = new Date(s.nextDate);
     const next = d.toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'});
-    return `
-      <div class="row">
-        <div>
-          <div class="lbl" style="color:var(--text);font-weight:800;">→ ${escapeHtml(s.name)}</div>
-          <div style="font-size:11.5px;color:var(--muted);margin-top:4px;">${fmt(s.amount)} · ${s.frequency} · next ${next}</div>
-        </div>
-        <button class="payee-btn danger" onclick="deleteScheduled('${s.id}')">Delete</button>
-      </div>`;
+    return `<div class="row"><div><div class="lbl" style="color:var(--text);font-weight:800;">→ ${escapeHtml(s.name)}</div><div style="font-size:11.5px;color:var(--muted);margin-top:4px;">${fmt(s.amount)} · ${s.frequency} · next ${next}</div></div><button class="payee-btn danger" onclick="deleteScheduled('${s.id}')">Delete</button></div>`;
   }).join('');
   const c = document.getElementById('scheduled-count');
   if (c) c.textContent = list.length === 0 ? 'None' : (list.length + ' active');
 }
 
 function addPayee() {
-  const key = getSession();
-  const user = getUsers()[key];
-  if (!user) return;
+  const key = getSession(); const user = getUsers()[key]; if (!user) return;
   const name = document.getElementById('py-name').value.trim();
   const amount = parseFloat(document.getElementById('py-amount').value) || 0;
   const autopay = document.getElementById('py-autopay').checked;
-  const msg = document.getElementById('py-msg');
-  msg.textContent = '';
+  const msg = document.getElementById('py-msg'); msg.textContent = '';
   if (!name) { msg.textContent = 'Enter biller name.'; return; }
   user.payees = user.payees || [];
   user.payees.push({ id: 'py_' + Date.now(), name, amount, autopay });
   persistUser(key, user);
-  document.getElementById('py-name').value = '';
-  document.getElementById('py-amount').value = '';
-  document.getElementById('py-autopay').checked = false;
+  document.getElementById('py-name').value = ''; document.getElementById('py-amount').value = ''; document.getElementById('py-autopay').checked = false;
   toast('Payee saved');
   renderAll(user);
 }
 function deletePayee(id) {
-  const key = getSession();
-  const user = getUsers()[key];
-  if (!user) return;
+  const key = getSession(); const user = getUsers()[key]; if (!user) return;
   user.payees = (user.payees || []).filter(p => p.id !== id);
   persistUser(key, user);
   toast('Payee removed');
   renderAll(user);
 }
 function togglePayeeAutopay(id) {
-  const key = getSession();
-  const user = getUsers()[key];
-  if (!user) return;
-  const p = (user.payees || []).find(x => x.id === id);
-  if (!p) return;
+  const key = getSession(); const user = getUsers()[key]; if (!user) return;
+  const p = (user.payees || []).find(x => x.id === id); if (!p) return;
   p.autopay = !p.autopay;
   persistUser(key, user);
   toast(p.autopay ? 'Autopay on for ' + p.name : 'Autopay off for ' + p.name);
   renderAll(user);
 }
 function payPayee(id) {
-  const key = getSession();
-  const user = getUsers()[key];
-  if (!user) return;
-  const p = (user.payees || []).find(x => x.id === id);
-  if (!p) return;
+  const key = getSession(); const user = getUsers()[key]; if (!user) return;
+  const p = (user.payees || []).find(x => x.id === id); if (!p) return;
   const amount = p.amount || 0;
   if (!amount || amount <= 0) { toast('Set a default amount first'); return; }
   if (amount > activeBalance(user)) { toast('Insufficient balance'); return; }
@@ -1254,46 +1144,28 @@ function payPayee(id) {
   renderAll(user);
 }
 function renderPayees(user) {
-  const el = document.getElementById('payees-list');
-  if (!el) return;
+  const el = document.getElementById('payees-list'); if (!el) return;
   const payees = user.payees || [];
   if (payees.length === 0) { el.innerHTML = '<div class="empty-state">No saved payees yet.</div>'; return; }
-  el.innerHTML = payees.map(p => `
-    <div class="payee-card">
-      <div class="payee-avatar">🏢</div>
-      <div class="payee-info">
-        <div class="payee-name">${escapeHtml(p.name)}</div>
-        <div class="payee-meta">${p.amount > 0 ? fmt(p.amount) + ' · ' : ''}${p.autopay ? '🔁 Autopay ON' : 'Manual'}</div>
-      </div>
-      <div class="payee-actions">
-        <button class="payee-btn" onclick="payPayee('${p.id}')">Pay</button>
-        <button class="payee-btn" onclick="togglePayeeAutopay('${p.id}')">🔁</button>
-        <button class="payee-btn danger" onclick="deletePayee('${p.id}')">✕</button>
-      </div>
-    </div>`).join('');
+  el.innerHTML = payees.map(p => `<div class="payee-card"><div class="payee-avatar">🏢</div><div class="payee-info"><div class="payee-name">${escapeHtml(p.name)}</div><div class="payee-meta">${p.amount > 0 ? fmt(p.amount) + ' · ' : ''}${p.autopay ? '🔁 Autopay ON' : 'Manual'}</div></div><div class="payee-actions"><button class="payee-btn" onclick="payPayee('${p.id}')">Pay</button><button class="payee-btn" onclick="togglePayeeAutopay('${p.id}')">🔁</button><button class="payee-btn danger" onclick="deletePayee('${p.id}')">✕</button></div></div>`).join('');
 }
 
 let historyFilter = 'all';
 function setHistoryFilter(f) {
   historyFilter = f;
-  document.querySelectorAll('#history-filters .filter-chip').forEach(c => {
-    c.classList.toggle('active', c.dataset.filter === f);
-  });
+  document.querySelectorAll('#history-filters .filter-chip').forEach(c => c.classList.toggle('active', c.dataset.filter === f));
   renderHistoryFiltered();
 }
 function renderHistoryFiltered() {
-  const key = getSession();
-  if (!key) return;
-  const user = getUsers()[key];
-  if (!user) return;
+  const key = getSession(); if (!key) return;
+  const user = getUsers()[key]; if (!user) return;
   const q = (document.getElementById('history-search').value || '').toLowerCase().trim();
   let list = user.transactions || [];
   if (historyFilter === 'income') list = list.filter(t => t.amount > 0);
   else if (historyFilter === 'spending') list = list.filter(t => t.amount < 0);
   else if (historyFilter !== 'all') list = list.filter(t => t.category === historyFilter);
   if (q) list = list.filter(t => (t.label || '').toLowerCase().includes(q));
-  const el = document.getElementById('history-tx-list');
-  if (!el) return;
+  const el = document.getElementById('history-tx-list'); if (!el) return;
   if (list.length === 0) { el.innerHTML = '<div class="empty-state">No matching transactions.</div>'; return; }
   el.innerHTML = list.slice().reverse().map(tx => txHTML(tx)).join('');
 }
@@ -1305,30 +1177,16 @@ function renderDonut(user) {
   const txs = (user.transactions || []).filter(t => t.amount < 0);
   const cats = ['Food', 'Shopping', 'Bills', 'Transport', 'Entertainment', 'Other'];
   const colors = ['#c9a84a', '#2563eb', '#15803d', '#b91c1c', '#7c3aed', '#8b7d55'];
-  const totals = {};
-  let total = 0;
+  const totals = {}; let total = 0;
   cats.forEach(c => totals[c] = 0);
-  txs.forEach(t => {
-    const c = cats.includes(t.category) ? t.category : 'Other';
-    totals[c] += Math.abs(t.amount);
-    total += Math.abs(t.amount);
-  });
-  if (total === 0) {
-    donutEl.style.background = 'conic-gradient(rgba(201,168,74,0.15) 0% 100%)';
-    legendEl.innerHTML = '<div style="color:var(--muted);font-size:12px;">No spending yet.</div>';
-    return;
-  }
-  let cumulative = 0;
-  const stops = [];
-  const legend = [];
+  txs.forEach(t => { const c = cats.includes(t.category) ? t.category : 'Other'; totals[c] += Math.abs(t.amount); total += Math.abs(t.amount); });
+  if (total === 0) { donutEl.style.background = 'conic-gradient(rgba(201,168,74,0.15) 0% 100%)'; legendEl.innerHTML = '<div style="color:var(--muted);font-size:12px;">No spending yet.</div>'; return; }
+  let cumulative = 0; const stops = []; const legend = [];
   cats.forEach((c, i) => {
     const pct = (totals[c] / total) * 100;
-    const start = cumulative;
-    cumulative += pct;
+    const start = cumulative; cumulative += pct;
     stops.push(`${colors[i]} ${start}% ${cumulative}%`);
-    if (totals[c] > 0) {
-      legend.push(`<div class="item"><span class="name"><span class="swatch" style="background:${colors[i]}"></span>${c}</span><span class="pct">${pct.toFixed(0)}%</span></div>`);
-    }
+    if (totals[c] > 0) legend.push(`<div class="item"><span class="name"><span class="swatch" style="background:${colors[i]}"></span>${c}</span><span class="pct">${pct.toFixed(0)}%</span></div>`);
   });
   donutEl.style.background = `conic-gradient(${stops.join(', ')})`;
   legendEl.innerHTML = legend.join('');
@@ -1346,75 +1204,43 @@ function renderAll(user) {
   if (homeAvatar) homeAvatar.textContent = initials;
   if (greeting) greeting.textContent = greetingText() + ', ' + user.name.split(' ')[0];
   if (lastLogin) lastLogin.textContent = 'Last login: ' + new Date(user.lastLogin || Date.now()).toLocaleString();
-
   const activeType = user.activeAccount || 'checking';
   const activeBal = activeBalance(user);
   if (balance) animateNumber(balance, activeBal);
-
   const labels = { checking: 'Checking Account •••• 4821', credit: 'Credit Card •••• 9024', business: 'Business Account •••• 3310', investment: 'Investment •••• 5567' };
   if (balanceSub) balanceSub.textContent = labels[activeType] || labels.checking;
-
   ['checking','credit','business','investment'].forEach(t => {
     const el = document.getElementById('pill-' + (t === 'investment' ? 'invest' : t));
     if (!el) return;
     if (t === activeType) { el.classList.add('active'); el.classList.remove('inactive'); }
     else { el.classList.remove('active'); el.classList.add('inactive'); }
   });
-
-  const pv = document.getElementById('pending-value');
-  const av = document.getElementById('available-value');
-  const iv = document.getElementById('interest-value');
+  const pv = document.getElementById('pending-value'); const av = document.getElementById('available-value'); const iv = document.getElementById('interest-value');
   if (pv) pv.textContent = fmt(0);
   if (av) av.textContent = fmt(activeBal);
   if (iv) iv.textContent = fmt(user.interestYTD || 0);
-
   const freezeEl = document.getElementById('quick-freeze');
   const freezeIcon = document.getElementById('freeze-icon');
   const freezeLbl = document.getElementById('freeze-label');
   if (freezeEl) freezeEl.classList.toggle('frozen', !!user.frozen);
   if (freezeIcon) freezeIcon.textContent = user.frozen ? '🔥' : '❄';
   if (freezeLbl) freezeLbl.textContent = user.frozen ? 'Unfreeze' : 'Freeze';
-
-  const chipCash = document.getElementById('chip-cashback');
-  const chipStreak = document.getElementById('chip-streak');
-  const chipMember = document.getElementById('chip-member');
+  const chipCash = document.getElementById('chip-cashback'); const chipStreak = document.getElementById('chip-streak'); const chipMember = document.getElementById('chip-member');
   if (chipCash) chipCash.textContent = '💵 Cashback: ' + fmt(user.cashback || 0);
   if (chipStreak) chipStreak.textContent = '🔥 ' + (user.streak || 12) + '-day streak';
   if (chipMember) chipMember.textContent = '⭐ Member since ' + new Date(user.createdAt).toLocaleDateString(undefined, {month:'short', year:'numeric'});
-
   const txs = user.transactions || [];
   const income = txs.filter(t => t.amount > 0).reduce((s, t) => s + t.amount, 0);
   const spent = txs.filter(t => t.amount < 0).reduce((s, t) => s + Math.abs(t.amount), 0);
-  const sInc = document.getElementById('stat-income');
-  const sSpe = document.getElementById('stat-spent');
-  const sSav = document.getElementById('stat-saved');
-  const sCnt = document.getElementById('stat-count');
+  const sInc = document.getElementById('stat-income'); const sSpe = document.getElementById('stat-spent'); const sSav = document.getElementById('stat-saved'); const sCnt = document.getElementById('stat-count');
   if (sInc) sInc.textContent = fmt(income);
   if (sSpe) sSpe.textContent = fmt(spent);
   if (sSav) sSav.textContent = fmt(user.investBalance || 0);
   if (sCnt) sCnt.textContent = txs.length;
-
   renderChart(user);
   renderDonut(user);
-
-  ['transfer-avatar','deposit-avatar','bills-avatar','history-avatar',
-   'profile-avatar','receive-avatar','wire-avatar','zelle-avatar',
-   'notif-avatar','card-mgmt-avatar','contacts-avatar','budget-avatar',
-   'stmt-avatar','curr-avatar','split-avatar','sched-avatar'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.textContent = initials;
-  });
-
-  const pfName = document.getElementById('profile-name');
-  const pfHolder = document.getElementById('pf-holder');
-  const pfCode = document.getElementById('profile-code-line');
-  const pfUser = document.getElementById('pf-username');
-  const pfMember = document.getElementById('pf-member-id');
-  const pfNetW = document.getElementById('pf-net-worth');
-  const pfChk = document.getElementById('pf-checking');
-  const pfCred = document.getElementById('pf-credit');
-  const pfBus = document.getElementById('pf-business');
-  const pfInv = document.getElementById('pf-invest');
+  ['transfer-avatar','deposit-avatar','bills-avatar','history-avatar','profile-avatar','receive-avatar','wire-avatar','zelle-avatar','notif-avatar','card-mgmt-avatar','contacts-avatar','budget-avatar','stmt-avatar','curr-avatar','split-avatar','sched-avatar'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = initials; });
+  const pfName = document.getElementById('profile-name'); const pfHolder = document.getElementById('pf-holder'); const pfCode = document.getElementById('profile-code-line'); const pfUser = document.getElementById('pf-username'); const pfMember = document.getElementById('pf-member-id'); const pfNetW = document.getElementById('pf-net-worth'); const pfChk = document.getElementById('pf-checking'); const pfCred = document.getElementById('pf-credit'); const pfBus = document.getElementById('pf-business'); const pfInv = document.getElementById('pf-invest');
   if (pfName) pfName.textContent = user.name;
   if (pfHolder) pfHolder.textContent = user.name;
   if (pfCode) pfCode.textContent = 'Username: @' + user.username;
@@ -1425,10 +1251,7 @@ function renderAll(user) {
   if (pfCred) pfCred.textContent = fmt(user.creditBalance || 0);
   if (pfBus) pfBus.textContent = fmt(user.businessBalance || 0);
   if (pfInv) pfInv.textContent = fmt(user.investBalance || 0);
-
-  const rcvHolder = document.getElementById('rcv-holder');
-  if (rcvHolder) rcvHolder.textContent = user.name;
-
+  const rcvHolder = document.getElementById('rcv-holder'); if (rcvHolder) rcvHolder.textContent = user.name;
   renderNotifications(user);
   renderContacts(user);
   renderBudgets(user);
@@ -1438,25 +1261,19 @@ function renderAll(user) {
   renderVirtualCards(user);
   renderScheduled(user);
   renderPayees(user);
-
-  const cardLabel = document.getElementById('card-status-label');
-  const freezeBtn = document.getElementById('freeze-btn');
-  const frozenOv = document.getElementById('frozen-overlay');
+  const cardLabel = document.getElementById('card-status-label'); const freezeBtn = document.getElementById('freeze-btn'); const frozenOv = document.getElementById('frozen-overlay');
   if (cardLabel) cardLabel.textContent = user.frozen ? '❄ Frozen' : 'Active';
   if (freezeBtn) freezeBtn.textContent = user.frozen ? '🔥 Unfreeze Card' : '❄ Freeze Card';
   if (frozenOv) frozenOv.classList.toggle('show', !!user.frozen);
-
   const dot = document.getElementById('notif-dot');
   if (dot) dot.style.display = (user.notifications && user.notifications.length > 0) ? 'block' : 'none';
-
   renderTransactions(user);
   renderHistoryFiltered();
 }
 
 function animateNumber(el, target) {
   const start = parseFloat((el.dataset.value || '0').replace(/,/g,'')) || 0;
-  const duration = 400;
-  const t0 = performance.now();
+  const duration = 400; const t0 = performance.now();
   function step(now) {
     const p = Math.min(1, (now - t0) / duration);
     const val = start + (target - start) * p;
@@ -1468,8 +1285,7 @@ function animateNumber(el, target) {
 }
 
 function renderChart(user) {
-  const bars = document.getElementById('chart-bars');
-  if (!bars) return;
+  const bars = document.getElementById('chart-bars'); if (!bars) return;
   const txs = user.transactions || [];
   const now = new Date();
   const days = [];
@@ -1482,8 +1298,7 @@ function renderChart(user) {
   }
   const maxVal = Math.max(1, ...days.map(d => Math.max(d.inc, d.spd)));
   bars.innerHTML = days.map(d => {
-    const incH = Math.round((d.inc / maxVal) * 100);
-    const spdH = Math.round((d.spd / maxVal) * 100);
+    const incH = Math.round((d.inc / maxVal) * 100); const spdH = Math.round((d.spd / maxVal) * 100);
     return `<div class="chart-bar-wrap"><div style="display:flex;gap:2px;width:100%;height:100%;align-items:flex-end;"><div class="chart-bar" style="height:${Math.max(4, incH)}%"></div><div class="chart-bar spend" style="height:${Math.max(4, spdH)}%"></div></div><div class="chart-label">${d.label}</div></div>`;
   }).join('');
 }
@@ -1499,14 +1314,11 @@ function txHTML(tx) {
 function renderTransactions(user) {
   const list = user.transactions || [];
   const homeList = document.getElementById('home-tx-list');
-  if (homeList) {
-    homeList.innerHTML = list.length === 0 ? '<div class="empty-state">No transactions yet.</div>' : list.slice(-5).reverse().map(txHTML).join('');
-  }
+  if (homeList) homeList.innerHTML = list.length === 0 ? '<div class="empty-state">No transactions yet.</div>' : list.slice(-5).reverse().map(txHTML).join('');
 }
 
 function renderNotifications(user) {
-  const el = document.getElementById('notif-list');
-  if (!el) return;
+  const el = document.getElementById('notif-list'); if (!el) return;
   const notifs = (user.notifications || []).slice().reverse();
   if (notifs.length === 0) { el.innerHTML = '<div class="empty-state">No notifications.</div>'; return; }
   el.innerHTML = notifs.map(n => {
@@ -1517,8 +1329,7 @@ function renderNotifications(user) {
 }
 
 function renderContacts(user) {
-  const el = document.getElementById('contacts-list');
-  if (!el) return;
+  const el = document.getElementById('contacts-list'); if (!el) return;
   const contacts = user.contacts || [];
   if (contacts.length === 0) { el.innerHTML = '<div class="empty-state">No contacts yet.</div>'; return; }
   el.innerHTML = contacts.map((c, i) => {
@@ -1527,18 +1338,14 @@ function renderContacts(user) {
   }).join('');
 }
 function quickSend(index) {
-  const key = getSession();
-  const user = getUsers()[key];
-  if (!user) return;
-  const c = (user.contacts || [])[index];
-  if (!c) return;
+  const key = getSession(); const user = getUsers()[key]; if (!user) return;
+  const c = (user.contacts || [])[index]; if (!c) return;
   document.getElementById('tr-recipient').value = c.name;
   showScreen('screen-transfer');
 }
 
 function renderBudgets(user) {
-  const el = document.getElementById('budget-list');
-  if (!el) return;
+  const el = document.getElementById('budget-list'); if (!el) return;
   const budgets = user.budgets || {};
   const cats = Object.keys(budgets);
   if (cats.length === 0) { el.innerHTML = '<div class="empty-state">No budgets set yet.</div>'; return; }
@@ -1553,10 +1360,8 @@ function renderBudgets(user) {
 }
 
 function renderStatements(user) {
-  const el = document.getElementById('statements-list');
-  if (!el) return;
-  const months = [];
-  const now = new Date();
+  const el = document.getElementById('statements-list'); if (!el) return;
+  const months = []; const now = new Date();
   for (let i = 0; i < 6; i++) months.push(new Date(now.getFullYear(), now.getMonth() - i, 1));
   el.innerHTML = months.map(d => {
     const start = d.getTime();
@@ -1567,9 +1372,7 @@ function renderStatements(user) {
   }).join('');
 }
 function viewStatement(start, end, label) {
-  const key = getSession();
-  const user = getUsers()[key];
-  if (!user) return;
+  const key = getSession(); const user = getUsers()[key]; if (!user) return;
   const txs = (user.transactions || []).filter(t => t.date >= start && t.date < end);
   const inc = txs.filter(t => t.amount > 0).reduce((s,t) => s + t.amount, 0);
   const spd = txs.filter(t => t.amount < 0).reduce((s,t) => s + Math.abs(t.amount), 0);
@@ -1579,11 +1382,7 @@ function viewStatement(start, end, label) {
 function renderCurrency(user) {
   const bal = activeBalance(user);
   const rates = { EUR: 0.92, GBP: 0.79, NGN: 1550, JPY: 155 };
-  const usd = document.getElementById('cur-usd');
-  const eur = document.getElementById('cur-eur');
-  const gbp = document.getElementById('cur-gbp');
-  const ngn = document.getElementById('cur-ngn');
-  const jpy = document.getElementById('cur-jpy');
+  const usd = document.getElementById('cur-usd'); const eur = document.getElementById('cur-eur'); const gbp = document.getElementById('cur-gbp'); const ngn = document.getElementById('cur-ngn'); const jpy = document.getElementById('cur-jpy');
   if (usd) usd.textContent = fmt(bal);
   if (eur) eur.textContent = '€' + (bal * rates.EUR).toFixed(2);
   if (gbp) gbp.textContent = '£' + (bal * rates.GBP).toFixed(2);
@@ -1599,8 +1398,7 @@ function updateConverter() {
 }
 
 function renderUpcomingBills(user) {
-  const el = document.getElementById('upcoming-bills');
-  if (!el) return;
+  const el = document.getElementById('upcoming-bills'); if (!el) return;
   const now = new Date();
   const bills = [{ name: 'Electric Company', amount: 145.00, days: 3 }, { name: 'Internet Provider', amount: 79.99, days: 7 }, { name: 'Phone Bill', amount: 55.00, days: 12 }];
   el.innerHTML = bills.map(b => {
@@ -1611,8 +1409,7 @@ function renderUpcomingBills(user) {
 }
 
 function renderVirtualCards(user) {
-  const el = document.getElementById('vcard-gallery');
-  if (!el) return;
+  const el = document.getElementById('vcard-gallery'); if (!el) return;
   const cards = user.virtualCards || [];
   if (cards.length === 0) { el.innerHTML = '<div class="empty-state">No virtual cards generated yet.</div>'; return; }
   el.innerHTML = cards.map((c, i) => `<div class="copy-row"><div><div class="key">Card ${i+1} · Exp ${c.expiry}</div><div class="value">${c.number}</div></div><button class="copy-btn" onclick="copyText('${c.number}')">COPY</button></div>`).join('');
@@ -1623,19 +1420,13 @@ function addTransaction(user, tx) {
   user.transactions.push(tx);
   if (user.transactions.length > 500) user.transactions = user.transactions.slice(-500);
 }
-function persistUser(key, user) {
-  const users = getUsers();
-  users[key] = user;
-  saveUsers(users);
-}
+function persistUser(key, user) { const users = getUsers(); users[key] = user; saveUsers(users); }
 function addNotification(user, icon, title, text) {
   user.notifications = user.notifications || [];
   user.notifications.push({ icon, title, text, date: Date.now() });
   if (user.notifications.length > 50) user.notifications = user.notifications.slice(-50);
 }
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
+function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
 function handleTransfer() {
   const key = getSession(); const user = getUsers()[key]; if (!user) return;
@@ -1812,14 +1603,10 @@ function saveBudget() {
   toast('Budget saved for ' + cat);
   renderAll(user);
 }
-function revealPin() {
-  const pin = String(Math.floor(1000 + Math.random() * 9000));
-  alert('Your demo PIN: ' + pin + '\n(Demo only)');
-}
+function revealPin() { const pin = String(Math.floor(1000 + Math.random() * 9000)); alert('Your demo PIN: ' + pin + '\n(Demo only)'); }
 function generateVirtualCard() {
   const key = getSession(); const user = getUsers()[key]; if (!user) return;
-  let num = '';
-  for (let i = 0; i < 16; i++) num += Math.floor(Math.random() * 10);
+  let num = ''; for (let i = 0; i < 16; i++) num += Math.floor(Math.random() * 10);
   const grouped = num.match(/.{1,4}/g).join(' ');
   const expiry = String(Math.floor(Math.random()*12)+1).padStart(2,'0') + '/' + String((new Date().getFullYear()+3)%100);
   user.virtualCards = user.virtualCards || [];
@@ -1842,7 +1629,7 @@ function handleResetPassword() {
   toast('Password reset');
 }
 function handleChangeName() {
-  const key = getSession(); const users = getUsers(); const user = users[key]; if (!user) return;
+  const key = getSession(); const user = getUsers()[key]; if (!user) return;
   const newName = document.getElementById('pf-new-name').value.trim();
   const msg = document.getElementById('pf-name-msg'); msg.textContent = '';
   if (!newName || newName.length < 3) { msg.textContent = 'Name must be 3+ chars.'; return; }
@@ -1861,21 +1648,16 @@ document.addEventListener('click', function (e) {
   const modal = document.getElementById('switcher-modal');
   if (e.target === modal) closeSwitcher();
 });
-
 document.addEventListener('DOMContentLoaded', function () {
   runMigrations();
   updateClocks();
   setInterval(updateClocks, 30000);
   const sc = document.getElementById('sc-start');
-  if (sc && !sc.value) {
-    const d = new Date(); d.setDate(d.getDate() + 1);
-    sc.value = d.toISOString().split('T')[0];
-  }
+  if (sc && !sc.value) { const d = new Date(); d.setDate(d.getDate() + 1); sc.value = d.toISOString().split('T')[0]; }
   const session = getSession();
   if (session && getUsers()[session]) showScreen('screen-home');
   else { clearSession(); showScreen('screen-signup'); }
 });
-
 document.addEventListener('visibilitychange', function () {
   if (!document.hidden) {
     updateClocks();
