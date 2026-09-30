@@ -350,9 +350,7 @@ body {
       <p id="last-login">Last login: —</p>
     </div>
     <div class="account-pills">
-      <button class="pill active" id="pill-checking" onclick="switchAccountType('checking')">🏦 Checking •••• 4821</button>
-      <button class="pill inactive" id="pill-business" onclick="switchAccountType('business')">🏢 Business •••• 3310</button>
-      <button class="pill inactive" id="pill-invest" onclick="switchAccountType('investment')">📈 Invest •••• 5567</button>
+      <button class="pill active" id="pill-checking">🏦 Checking •••• 4821</button>
     </div>
     <div class="balance-card" id="main-balance-card">
       <div class="frozen-overlay" id="frozen-overlay">
@@ -725,14 +723,8 @@ body {
       <div class="row"><span class="lbl">Username</span><span class="val" id="pf-username">—</span></div>
       <div class="row"><span class="lbl">Member ID</span><span class="val" id="pf-member-id">—</span></div>
       <div class="row"><span class="lbl">Routing</span><span class="val">021000021</span></div>
-      <div class="row"><span class="lbl">Net Worth</span><span class="val" id="pf-net-worth">$0.00</span></div>
+      <div class="row"><span class="lbl">Balance</span><span class="val" id="pf-net-worth">$0.00</span></div>
       <div class="row"><span class="lbl">Status</span><span class="val" style="color:var(--green);">Active</span></div>
-    </div>
-    <div class="panel">
-      <h2>All Accounts</h2>
-      <div class="row"><span class="lbl">🏦 Checking</span><span class="val" id="pf-checking">$0.00</span></div>
-      <div class="row"><span class="lbl">🏢 Business</span><span class="val" id="pf-business">$0.00</span></div>
-      <div class="row"><span class="lbl">📈 Invest</span><span class="val" id="pf-invest">$0.00</span></div>
     </div>
     <div class="panel">
       <h2>Change Name</h2>
@@ -766,8 +758,6 @@ const FIXED_EMAIL = 'cerji7272@novapay.app';
 const LS_KEY = 'novapay_account_v1';
 
 const STARTING_BALANCE = 134290.00;
-const STARTING_BUSINESS = 8500.00;
-const STARTING_INVEST = 22500.00;
 
 let pendingUsername = null;
 
@@ -780,8 +770,10 @@ function getAccount() {
   }
   try {
     const u = JSON.parse(raw);
-    // Remove credit card fields
+    // Remove credit/business/invest fields
     delete u.creditBalance;
+    delete u.businessBalance;
+    delete u.investBalance;
     if (!u.transactions) u.transactions = [];
     if (!u.scheduled) u.scheduled = [];
     if (!u.payees) u.payees = [];
@@ -790,15 +782,13 @@ function getAccount() {
     if (!u.notifications) u.notifications = [];
     if (!u.budgets) u.budgets = {};
     if (u.frozen === undefined) u.frozen = false;
-    if (!u.activeAccount || u.activeAccount === 'savings' || u.activeAccount === 'credit') u.activeAccount = 'checking';
+    u.activeAccount = 'checking';
     if (!u.memberId) u.memberId = 'NP-4821-CC';
     if (!u.streak) u.streak = 12;
     if (u.cashback === undefined) u.cashback = 0;
     if (u.interestYTD === undefined) u.interestYTD = 0;
     if (!u.createdAt) u.createdAt = Date.now();
     if (u.balance === undefined) u.balance = STARTING_BALANCE;
-    if (u.businessBalance === undefined) u.businessBalance = STARTING_BUSINESS;
-    if (u.investBalance === undefined) u.investBalance = STARTING_INVEST;
     seedTrustWallet(u);
     return u;
   } catch (e) {
@@ -815,8 +805,6 @@ function makeFreshAccount() {
     pass: FIXED_PASSWORD,
     email: FIXED_EMAIL,
     balance: STARTING_BALANCE,
-    businessBalance: STARTING_BUSINESS,
-    investBalance: STARTING_INVEST,
     activeAccount: 'checking',
     transactions: [],
     notifications: [{ icon: '🏦', title: 'Welcome to NovaPay', text: 'Your account is ready.', date: Date.now() }],
@@ -952,21 +940,6 @@ function generateCode() { let c = ''; for (let i = 0; i < 6; i++) c += Math.floo
 
 function toggleTheme() { toast('Gold & White theme'); }
 
-function switchAccountType(type) {
-  const user = getAccount();
-  if (type === 'savings' || type === 'credit') type = 'checking';
-  user.activeAccount = type;
-  saveAccount(user);
-  ['checking','business','investment'].forEach(t => {
-    const el = document.getElementById('pill-' + (t === 'investment' ? 'invest' : t));
-    if (el) {
-      if (t === type) { el.classList.add('active'); el.classList.remove('inactive'); }
-      else { el.classList.remove('active'); el.classList.add('inactive'); }
-    }
-  });
-  renderAll(user);
-}
-
 function greetingText() {
   const h = new Date().getHours();
   if (h >= 5 && h < 12) return 'Good Morning';
@@ -1007,19 +980,8 @@ function fmtSigned(amount) {
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   return sign + '$' + parts.join('.');
 }
-function activeBalance(user) {
-  const t = user.activeAccount || 'checking';
-  if (t === 'business') return user.businessBalance || 0;
-  if (t === 'investment') return user.investBalance || 0;
-  return user.balance;
-}
-function applyBalance(user, delta) {
-  const t = user.activeAccount || 'checking';
-  if (t === 'business') user.businessBalance = (user.businessBalance || 0) + delta;
-  else if (t === 'investment') user.investBalance = (user.investBalance || 0) + delta;
-  else user.balance += delta;
-}
-function totalNetWorth(user) { return (user.balance || 0) + (user.businessBalance || 0) + (user.investBalance || 0); }
+function activeBalance(user) { return user.balance || 0; }
+function applyBalance(user, delta) { user.balance = (user.balance || 0) + delta; }
 
 function quickToggleFreeze() {
   const user = getAccount();
@@ -1126,7 +1088,7 @@ function payPayee(id) {
   if (!amount || amount <= 0) { toast('Set a default amount first'); return; }
   if (amount > activeBalance(user)) { toast('Insufficient balance'); return; }
   applyBalance(user, -amount);
-  addTransaction(user, { type: 'bill', label: 'Bill — ' + p.name, amount: -amount, date: Date.now(), account: user.activeAccount, category: 'Bills' });
+  addTransaction(user, { type: 'bill', label: 'Bill — ' + p.name, amount: -amount, date: Date.now(), account: 'checking', category: 'Bills' });
   addNotification(user, '📄', 'Bill paid', fmt(amount) + ' to ' + p.name);
   saveAccount(user);
   toast('Paid ' + p.name);
@@ -1193,17 +1155,9 @@ function renderAll(user) {
   if (homeAvatar) homeAvatar.textContent = initials;
   if (greeting) greeting.textContent = greetingText() + ', ' + user.name.split(' ')[0];
   if (lastLogin) lastLogin.textContent = 'Last login: ' + new Date(user.lastLogin || Date.now()).toLocaleString();
-  const activeType = user.activeAccount || 'checking';
   const activeBal = activeBalance(user);
   if (balance) animateNumber(balance, activeBal);
-  const labels = { checking: 'Checking Account •••• 4821', business: 'Business Account •••• 3310', investment: 'Investment •••• 5567' };
-  if (balanceSub) balanceSub.textContent = labels[activeType] || labels.checking;
-  ['checking','business','investment'].forEach(t => {
-    const el = document.getElementById('pill-' + (t === 'investment' ? 'invest' : t));
-    if (!el) return;
-    if (t === activeType) { el.classList.add('active'); el.classList.remove('inactive'); }
-    else { el.classList.remove('active'); el.classList.add('inactive'); }
-  });
+  if (balanceSub) balanceSub.textContent = 'Checking Account •••• 4821';
   const pv = document.getElementById('pending-value'); const av = document.getElementById('available-value'); const iv = document.getElementById('interest-value');
   if (pv) pv.textContent = fmt(0);
   if (av) av.textContent = fmt(activeBal);
@@ -1224,21 +1178,18 @@ function renderAll(user) {
   const sInc = document.getElementById('stat-income'); const sSpe = document.getElementById('stat-spent'); const sSav = document.getElementById('stat-saved'); const sCnt = document.getElementById('stat-count');
   if (sInc) sInc.textContent = fmt(income);
   if (sSpe) sSpe.textContent = fmt(spent);
-  if (sSav) sSav.textContent = fmt(user.investBalance || 0);
+  if (sSav) sSav.textContent = fmt(0);
   if (sCnt) sCnt.textContent = txs.length;
   renderChart(user);
   renderDonut(user);
   ['transfer-avatar','deposit-avatar','bills-avatar','history-avatar','profile-avatar','receive-avatar','wire-avatar','zelle-avatar','notif-avatar','card-mgmt-avatar','contacts-avatar','budget-avatar','stmt-avatar','curr-avatar','split-avatar','sched-avatar'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = initials; });
-  const pfName = document.getElementById('profile-name'); const pfHolder = document.getElementById('pf-holder'); const pfCode = document.getElementById('profile-code-line'); const pfUser = document.getElementById('pf-username'); const pfMember = document.getElementById('pf-member-id'); const pfNetW = document.getElementById('pf-net-worth'); const pfChk = document.getElementById('pf-checking'); const pfBus = document.getElementById('pf-business'); const pfInv = document.getElementById('pf-invest');
+  const pfName = document.getElementById('profile-name'); const pfHolder = document.getElementById('pf-holder'); const pfCode = document.getElementById('profile-code-line'); const pfUser = document.getElementById('pf-username'); const pfMember = document.getElementById('pf-member-id'); const pfBal = document.getElementById('pf-net-worth');
   if (pfName) pfName.textContent = user.name;
   if (pfHolder) pfHolder.textContent = user.name;
   if (pfCode) pfCode.textContent = 'Username: @' + user.username;
   if (pfUser) pfUser.textContent = '@' + user.username;
   if (pfMember) pfMember.textContent = user.memberId;
-  if (pfNetW) pfNetW.textContent = fmt(totalNetWorth(user));
-  if (pfChk) pfChk.textContent = fmt(user.balance || 0);
-  if (pfBus) pfBus.textContent = fmt(user.businessBalance || 0);
-  if (pfInv) pfInv.textContent = fmt(user.investBalance || 0);
+  if (pfBal) pfBal.textContent = fmt(activeBalance(user));
   const rcvHolder = document.getElementById('rcv-holder'); if (rcvHolder) rcvHolder.textContent = user.name;
   renderNotifications(user);
   renderContacts(user);
@@ -1427,7 +1378,7 @@ function handleTransfer() {
   if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; return; }
   if (amount > activeBalance(user)) { msg.textContent = 'Insufficient balance.'; return; }
   applyBalance(user, -amount);
-  addTransaction(user, { type: 'transfer', label: 'Transfer to ' + name + (note ? ' — ' + note : ''), amount: -amount, date: Date.now(), account: user.activeAccount, category });
+  addTransaction(user, { type: 'transfer', label: 'Transfer to ' + name + (note ? ' — ' + note : ''), amount: -amount, date: Date.now(), account: 'checking', category });
   addNotification(user, '↗', 'Transfer sent', 'You sent ' + fmt(amount) + ' to ' + name);
   user.cashback = (user.cashback || 0) + amount * 0.01;
   saveAccount(user);
@@ -1443,7 +1394,7 @@ function handleDeposit() {
   const amount = parseFloat(amountStr);
   if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; return; }
   applyBalance(user, amount);
-  addTransaction(user, { type: 'deposit', label: 'Deposit — ' + source, amount, date: Date.now(), account: user.activeAccount, category: 'Other' });
+  addTransaction(user, { type: 'deposit', label: 'Deposit — ' + source, amount, date: Date.now(), account: 'checking', category: 'Other' });
   addNotification(user, '↓', 'Deposit received', fmt(amount) + ' from ' + source);
   saveAccount(user);
   document.getElementById('dp-amount').value = ''; document.getElementById('dp-source').value = '';
@@ -1458,7 +1409,7 @@ function handleCheckDeposit() {
   const amount = parseFloat(amountStr);
   if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; return; }
   applyBalance(user, amount);
-  addTransaction(user, { type: 'check', label: 'Mobile Check — ' + from, amount, date: Date.now(), account: user.activeAccount, category: 'Other' });
+  addTransaction(user, { type: 'check', label: 'Mobile Check — ' + from, amount, date: Date.now(), account: 'checking', category: 'Other' });
   addNotification(user, '📷', 'Check deposited', fmt(amount) + ' from ' + from);
   saveAccount(user);
   document.getElementById('ck-amount').value = ''; document.getElementById('ck-from').value = '';
@@ -1474,7 +1425,7 @@ function handleReceive() {
   if (!from) { msg.textContent = 'Enter sender.'; return; }
   if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; return; }
   applyBalance(user, amount);
-  addTransaction(user, { type: 'receive', label: 'Received from ' + from, amount, date: Date.now(), account: user.activeAccount, category: 'Other' });
+  addTransaction(user, { type: 'receive', label: 'Received from ' + from, amount, date: Date.now(), account: 'checking', category: 'Other' });
   addNotification(user, '↓', 'Payment received', fmt(amount) + ' from ' + from);
   saveAccount(user);
   document.getElementById('rcv-from').value = ''; document.getElementById('rcv-amount').value = '';
@@ -1498,8 +1449,8 @@ function handleWire() {
   if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; return; }
   if (amount + FEE > activeBalance(user)) { msg.textContent = 'Insufficient balance.'; return; }
   applyBalance(user, -(amount + FEE));
-  addTransaction(user, { type: 'wire', label: 'Wire to ' + name + ' (' + bank + ')', amount: -amount, date: Date.now(), account: user.activeAccount, category: 'Bills' });
-  addTransaction(user, { type: 'wire', label: 'Wire fee', amount: -FEE, date: Date.now(), account: user.activeAccount, category: 'Bills' });
+  addTransaction(user, { type: 'wire', label: 'Wire to ' + name + ' (' + bank + ')', amount: -amount, date: Date.now(), account: 'checking', category: 'Bills' });
+  addTransaction(user, { type: 'wire', label: 'Wire fee', amount: -FEE, date: Date.now(), account: 'checking', category: 'Bills' });
   addNotification(user, '🌐', 'Wire sent', fmt(amount) + ' to ' + name);
   saveAccount(user);
   ['wr-name','wr-bank','wr-routing','wr-account','wr-amount'].forEach(id => document.getElementById(id).value = '');
@@ -1516,7 +1467,7 @@ function handleZelle() {
   if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; return; }
   if (amount > activeBalance(user)) { msg.textContent = 'Insufficient balance.'; return; }
   applyBalance(user, -amount);
-  addTransaction(user, { type: 'zelle', label: 'Zelle to ' + recipient, amount: -amount, date: Date.now(), account: user.activeAccount, category: 'Other' });
+  addTransaction(user, { type: 'zelle', label: 'Zelle to ' + recipient, amount: -amount, date: Date.now(), account: 'checking', category: 'Other' });
   addNotification(user, '⚡', 'Zelle sent', fmt(amount) + ' to ' + recipient);
   saveAccount(user);
   document.getElementById('zl-recipient').value = ''; document.getElementById('zl-amount').value = '';
@@ -1533,7 +1484,7 @@ function handleBill() {
   if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; return; }
   if (amount > activeBalance(user)) { msg.textContent = 'Insufficient balance.'; return; }
   applyBalance(user, -amount);
-  addTransaction(user, { type: 'bill', label: 'Bill — ' + name, amount: -amount, date: Date.now(), account: user.activeAccount, category: 'Bills' });
+  addTransaction(user, { type: 'bill', label: 'Bill — ' + name, amount: -amount, date: Date.now(), account: 'checking', category: 'Bills' });
   addNotification(user, '📄', 'Bill paid', fmt(amount) + ' to ' + name);
   saveAccount(user);
   document.getElementById('bl-name').value = ''; document.getElementById('bl-amount').value = '';
@@ -1556,7 +1507,7 @@ function handleSplit() {
   const each = total / count;
   if (each > activeBalance(user)) { msg.textContent = 'Insufficient balance.'; return; }
   applyBalance(user, -each);
-  addTransaction(user, { type: 'transfer', label: 'Split bill (' + count + ' people)', amount: -each, date: Date.now(), account: user.activeAccount, category: 'Other' });
+  addTransaction(user, { type: 'transfer', label: 'Split bill (' + count + ' people)', amount: -each, date: Date.now(), account: 'checking', category: 'Other' });
   addNotification(user, '🧾', 'Split bill paid', 'Your share: ' + fmt(each));
   saveAccount(user);
   document.getElementById('sp-total').value = ''; document.getElementById('sp-count').value = '';
