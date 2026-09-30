@@ -20,6 +20,20 @@
   --blue: #60a5fa;
 }
 
+/* LIGHT THEME */
+body.light {
+  --bg: #f5f8fc;
+  --card: #ffffff;
+  --text: #172b4d;
+  --muted: #718096;
+  --gold: #b8860b;
+  --gold-dark: #8b6508;
+  --gold-soft: #fef3c7;
+  --green: #16a34a;
+  --red: #dc2626;
+  --blue: #2563eb;
+}
+
 html, body { height: 100%; background: #000; }
 
 body {
@@ -31,6 +45,8 @@ body {
   min-height: 100vh;
 }
 
+body.light { background: #e2e8f0; }
+
 .phone {
   width: 100%;
   max-width: 430px;
@@ -41,6 +57,11 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  transition: background 0.3s;
+}
+
+body.light .phone {
+  background: linear-gradient(180deg, #eef2f7 0%, #f5f8fc 45%, #ffffff 100%);
 }
 
 /* ============== SCREENS ============== */
@@ -62,12 +83,12 @@ body {
 
 .brand {
   font-size: 34px; font-weight: 800; letter-spacing: -1px;
-  color: #f3dfa2; margin-bottom: 8px; text-align: center;
+  color: var(--gold-soft); margin-bottom: 8px; text-align: center;
 }
-.brand span { color: #fdf8ea; }
+.brand span { color: var(--text); }
 
 .tagline {
-  font-size: 14px; color: rgba(200,190,160,0.6);
+  font-size: 14px; color: var(--muted);
   margin-bottom: 40px; text-align: center;
 }
 
@@ -77,7 +98,7 @@ body {
 
 .field label {
   display: block; font-size: 12px; font-weight: 700;
-  letter-spacing: 0.6px; color: rgba(200,190,160,0.75);
+  letter-spacing: 0.6px; color: var(--muted);
   margin-bottom: 8px; text-transform: uppercase;
 }
 
@@ -85,18 +106,27 @@ body {
   width: 100%; padding: 15px 18px; border-radius: 14px;
   background: rgba(255,255,255,0.05);
   border: 1.5px solid rgba(229,199,107,0.2);
-  color: #fdf8ea; font-size: 15px; font-family: inherit;
+  color: var(--text); font-size: 15px; font-family: inherit;
   outline: none; transition: 0.15s;
 }
+body.light .field input {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
 .field input:focus {
-  border-color: rgba(229,199,107,0.6);
+  border-color: var(--gold);
   background: rgba(255,255,255,0.07);
 }
+body.light .field input:focus {
+  background: #ffffff;
+  border-color: var(--gold);
+}
 .field input::placeholder { color: rgba(200,190,160,0.35); }
+body.light .field input::placeholder { color: #94a3b8; }
 
 .btn-gold {
   width: 100%; padding: 16px; border-radius: 14px;
-  background: linear-gradient(135deg, #f3dfa2, #e5c76b);
+  background: linear-gradient(135deg, var(--gold-soft), var(--gold));
   color: #2a2107; font-size: 15px; font-weight: 800;
   border: none; cursor: pointer;
   box-shadow: 0 8px 22px rgba(229,199,107,0.3);
@@ -106,18 +136,18 @@ body {
 
 .auth-switch {
   text-align: center; margin-top: 24px; font-size: 13px;
-  color: rgba(200,190,160,0.6);
+  color: var(--muted);
 }
 .auth-switch a {
-  color: #f3dfa2; font-weight: 700; cursor: pointer; text-decoration: none;
+  color: var(--gold); font-weight: 700; cursor: pointer; text-decoration: none;
 }
 
 .error-msg {
-  color: #f87171; font-size: 13px; margin-top: 12px;
+  color: var(--red); font-size: 13px; margin-top: 12px;
   text-align: center; min-height: 18px; font-weight: 600;
 }
 .success-msg {
-  color: #4ade80; font-size: 13px; margin-top: 12px;
+  color: var(--green); font-size: 13px; margin-top: 12px;
   text-align: center; min-height: 18px; font-weight: 600;
 }
 
@@ -127,17 +157,21 @@ body {
   background: linear-gradient(135deg, rgba(243,223,162,0.14), rgba(229,199,107,0.06));
   border: 1.5px solid rgba(229,199,107,0.4); text-align: center;
 }
+body.light .code-box {
+  background: linear-gradient(135deg, #fef3c7, #fef9e7);
+  border-color: var(--gold);
+}
 .code-box .label {
   font-size: 12px; letter-spacing: 1px;
-  color: rgba(200,190,160,0.75); font-weight: 700;
+  color: var(--muted); font-weight: 700;
   margin-bottom: 10px; text-transform: uppercase;
 }
 .code-box .code {
   font-size: 34px; letter-spacing: 8px; font-weight: 800;
-  color: #f3dfa2; font-family: "Courier New", monospace;
+  color: var(--gold); font-family: "Courier New", monospace;
 }
 .code-box .hint {
-  font-size: 12px; color: rgba(200,190,160,0.6);
+  font-size: 12px; color: var(--muted);
   margin-top: 12px; line-height: 1.5;
 }
 
@@ -145,7 +179,7 @@ body {
 .status-bar {
   padding: 14px 22px 6px; display: flex;
   justify-content: space-between; align-items: center;
-  font-size: 15px; font-weight: 700; color: #f5f1e6; flex-shrink: 0;
+  font-size: 15px; font-weight: 700; color: var(--text); flex-shrink: 0;
 }
 .status-bar .right { display: flex; align-items: center; gap: 7px; font-size: 13px; }
 
@@ -164,15 +198,19 @@ body {
   color: var(--gold);
   flex-shrink: 0;
 }
+body.light .icon-btn {
+  background: #ffffff;
+  border-color: #e2e8f0;
+}
 .icon-btn .dot {
   position: absolute; top: 8px; right: 9px;
   width: 8px; height: 8px; border-radius: 50%;
-  background: #ef4444; border: 1.5px solid #23201a;
+  background: #ef4444; border: 1.5px solid var(--bg);
 }
 
 .top-name {
   flex: 1; font-size: 19px; font-weight: 800;
-  letter-spacing: -0.3px; color: #f5f1e6;
+  letter-spacing: -0.3px; color: var(--text);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 
@@ -189,7 +227,7 @@ body {
 .date-line {
   padding: 0 22px 12px;
   font-size: 12px;
-  color: rgba(200,190,160,0.65);
+  color: var(--muted);
   font-weight: 600;
   letter-spacing: 0.4px;
   text-transform: uppercase;
@@ -199,43 +237,53 @@ body {
 .greeting-block { padding: 6px 22px 20px; flex-shrink: 0; }
 .greeting-block h1 {
   font-size: 28px; font-weight: 800; letter-spacing: -0.8px;
-  color: #fdf8ea; line-height: 1.15;
+  color: var(--text); line-height: 1.15;
 }
 .greeting-block p {
   margin-top: 6px; font-size: 15px;
-  color: rgba(200,190,160,0.65); font-weight: 500;
+  color: var(--muted); font-weight: 500;
 }
 
 /* ============== PILLS ============== */
 .account-pills {
-  display: flex; gap: 12px; padding: 0 22px 22px;
+  display: flex; gap: 10px; padding: 0 22px 22px;
   overflow-x: auto; scrollbar-width: none; flex-shrink: 0;
 }
 .account-pills::-webkit-scrollbar { display: none; }
 
 .pill {
-  flex-shrink: 0; padding: 12px 20px; border-radius: 999px;
-  font-size: 14px; font-weight: 700; display: flex;
+  flex-shrink: 0; padding: 11px 18px; border-radius: 999px;
+  font-size: 13px; font-weight: 700; display: flex;
   align-items: center; gap: 8px; white-space: nowrap;
   cursor: pointer; transition: 0.2s; font-family: inherit; border: none;
 }
 .pill.active {
-  background: linear-gradient(135deg, #f3dfa2, #e5c76b);
+  background: linear-gradient(135deg, var(--gold-soft), var(--gold));
   color: #2a2107; box-shadow: 0 6px 18px rgba(229,199,107,0.3);
 }
 .pill.inactive {
   background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(229,199,107,0.22); color: #e5c76b;
+  border: 1px solid rgba(229,199,107,0.22); color: var(--gold);
+}
+body.light .pill.inactive {
+  background: #ffffff;
+  border-color: #e2e8f0;
+  color: var(--text);
 }
 
 /* ============== BALANCE CARD ============== */
 .balance-card {
-  margin: 0 18px 22px; padding: 26px 24px 24px;
+  margin: 0 18px 16px; padding: 26px 24px 24px;
   border-radius: 24px;
   background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 60%);
   border: 1px solid rgba(229,199,107,0.16);
   position: relative; overflow: hidden;
   box-shadow: 0 18px 40px rgba(0,0,0,0.5); flex-shrink: 0;
+}
+body.light .balance-card {
+  background: linear-gradient(140deg, #ffffff 0%, #f8fafc 60%);
+  border-color: #e2e8f0;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
 }
 .balance-card::after {
   content: ""; position: absolute;
@@ -244,28 +292,31 @@ body {
   background: radial-gradient(circle, rgba(229,199,107,0.14) 0%, transparent 65%);
   pointer-events: none;
 }
+body.light .balance-card::after {
+  background: radial-gradient(circle, rgba(37,99,235,0.08) 0%, transparent 65%);
+}
 .balance-label {
-  font-size: 14px; color: rgba(200,190,160,0.75);
+  font-size: 14px; color: var(--muted);
   font-weight: 500; position: relative; z-index: 2;
 }
 .balance-amount {
-  margin: 8px 0 6px; font-size: 42px; font-weight: 800;
-  letter-spacing: -1.5px; color: #fdf8ea;
+  margin: 8px 0 6px; font-size: 40px; font-weight: 800;
+  letter-spacing: -1.5px; color: var(--text);
   position: relative; z-index: 2; line-height: 1.05;
   word-break: break-all;
 }
 .balance-sub {
-  font-size: 14px; color: rgba(200,190,160,0.6);
+  font-size: 14px; color: var(--muted);
   font-weight: 500; position: relative; z-index: 2;
 }
 .balance-actions {
-  margin-top: 22px; display: flex; gap: 12px;
-  position: relative; z-index: 2;
+  margin-top: 20px; display: flex; gap: 12px;
+  position: relative; z-index: 2; flex-wrap: wrap;
 }
 
 .btn-primary {
-  padding: 13px 26px; border-radius: 12px;
-  background: linear-gradient(135deg, #f3dfa2, #e5c76b);
+  padding: 12px 22px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--gold-soft), var(--gold));
   color: #2a2107; font-size: 14px; font-weight: 800;
   border: none; cursor: pointer;
   box-shadow: 0 6px 18px rgba(229,199,107,0.28);
@@ -274,62 +325,316 @@ body {
 .btn-primary:active { transform: scale(0.97); }
 
 .btn-outline {
-  padding: 13px 26px; border-radius: 12px;
-  background: transparent; color: #e5c76b;
+  padding: 12px 22px; border-radius: 12px;
+  background: transparent; color: var(--gold);
   font-size: 14px; font-weight: 800;
   border: 1.5px solid rgba(229,199,107,0.45);
   cursor: pointer; transition: 0.15s; font-family: inherit;
 }
 .btn-outline:active { transform: scale(0.97); }
 
+/* ============== PENDING ROW ============== */
+.pending-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(229,199,107,0.1);
+  position: relative;
+  z-index: 2;
+  font-size: 12px;
+}
+body.light .pending-row { border-top-color: #f1f5f9; }
+.pending-row .pending-item {
+  display: flex;
+  flex-direction: column;
+}
+.pending-row .pending-label {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 10.5px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.pending-row .pending-value {
+  color: var(--text);
+  font-weight: 800;
+  font-size: 13px;
+}
+
 /* ============== STATS ============== */
 .stats-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 10px; margin: 0 18px 22px; flex-shrink: 0;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 8px; margin: 0 18px 16px; flex-shrink: 0;
 }
 .stat-card {
   background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 70%);
   border: 1px solid rgba(229,199,107,0.16);
-  border-radius: 14px; padding: 14px 10px;
+  border-radius: 14px; padding: 12px 6px;
   text-align: center;
 }
+body.light .stat-card {
+  background: #ffffff;
+  border-color: #e2e8f0;
+}
 .stat-card .stat-label {
-  font-size: 10.5px; color: rgba(200,190,160,0.6);
-  font-weight: 600; letter-spacing: 0.4px;
+  font-size: 9.5px; color: var(--muted);
+  font-weight: 600; letter-spacing: 0.3px;
   text-transform: uppercase; margin-bottom: 6px;
 }
 .stat-card .stat-value {
-  font-size: 15px; color: #f3dfa2;
+  font-size: 13px; color: var(--gold);
   font-weight: 800; word-break: break-all;
 }
 
+/* ============== QUICK INFO ROW ============== */
+.quick-info-row {
+  display: flex;
+  gap: 8px;
+  margin: 0 18px 16px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+.info-chip {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(229,199,107,0.1);
+  border: 1px solid rgba(229,199,107,0.22);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+body.light .info-chip {
+  background: #fef3c7;
+  border-color: #fde68a;
+  color: #92400e;
+}
+.info-chip.green {
+  background: rgba(74,222,128,0.1);
+  border-color: rgba(74,222,128,0.3);
+  color: var(--green);
+}
+body.light .info-chip.green {
+  background: #dcfce7;
+  border-color: #bbf7d0;
+  color: #166534;
+}
+
+/* ============== CREDIT SCORE CARD ============== */
+.credit-card {
+  margin: 0 18px 16px;
+  padding: 18px;
+  border-radius: 18px;
+  background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 70%);
+  border: 1px solid rgba(229,199,107,0.16);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+body.light .credit-card {
+  background: #ffffff;
+  border-color: #e2e8f0;
+}
+.credit-ring {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: conic-gradient(var(--green) 0% 78%, rgba(74,222,128,0.15) 78% 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+.credit-ring::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  background: var(--card);
+}
+body.light .credit-ring::after {
+  background: #ffffff;
+}
+.credit-ring .ring-value {
+  position: relative;
+  z-index: 2;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--green);
+}
+.credit-info {
+  flex: 1;
+  min-width: 0;
+}
+.credit-info .credit-label {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 3px;
+}
+.credit-info .credit-status {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.credit-info .credit-sub {
+  font-size: 11.5px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* ============== SPENDING CHART ============== */
+.chart-card {
+  margin: 0 18px 16px;
+  padding: 18px;
+  border-radius: 18px;
+  background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 70%);
+  border: 1px solid rgba(229,199,107,0.16);
+  flex-shrink: 0;
+}
+body.light .chart-card {
+  background: #ffffff;
+  border-color: #e2e8f0;
+}
+.chart-card h3 {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--gold);
+  margin-bottom: 14px;
+  letter-spacing: -0.2px;
+}
+.chart-bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 90px;
+  gap: 4px;
+}
+.chart-bar-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+  justify-content: flex-end;
+}
+.chart-bar {
+  width: 100%;
+  border-radius: 4px;
+  background: linear-gradient(180deg, var(--gold), var(--gold-dark));
+  min-height: 4px;
+  transition: 0.3s;
+}
+.chart-bar.spend { background: linear-gradient(180deg, #f87171, #dc2626); }
+.chart-label {
+  font-size: 9px;
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.chart-legend {
+  display: flex;
+  gap: 14px;
+  margin-top: 10px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.chart-legend .dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+.chart-legend .dot.inc { background: var(--gold); }
+.chart-legend .dot.spd { background: #ef4444; }
+
+/* ============== SAVINGS GOAL ============== */
+.goal-card {
+  margin: 0 18px 16px;
+  padding: 18px;
+  border-radius: 18px;
+  background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 70%);
+  border: 1px solid rgba(229,199,107,0.16);
+  flex-shrink: 0;
+}
+body.light .goal-card {
+  background: #ffffff;
+  border-color: #e2e8f0;
+}
+.goal-card h3 {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.goal-progress-bg {
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(229,199,107,0.12);
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+body.light .goal-progress-bg { background: #f1f5f9; }
+.goal-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold-soft), var(--gold));
+  border-radius: 999px;
+  transition: width 0.4s;
+}
+.goal-numbers {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11.5px;
+  color: var(--muted);
+  font-weight: 600;
+}
+.goal-numbers strong { color: var(--text); }
+
 /* ============== SERVICE GRID ============== */
 .service-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
+  display: grid; grid-template-columns: repeat(4, 1fr);
   gap: 10px; padding: 0 18px 22px; flex-shrink: 0;
 }
 .service-tile {
   background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 70%);
   border: 1px solid rgba(229,199,107,0.18);
-  border-radius: 16px; padding: 16px 8px;
+  border-radius: 16px; padding: 14px 6px;
   display: flex; flex-direction: column;
-  align-items: center; gap: 8px; cursor: pointer;
+  align-items: center; gap: 6px; cursor: pointer;
   transition: 0.15s; font-family: inherit;
+}
+body.light .service-tile {
+  background: #ffffff;
+  border-color: #e2e8f0;
 }
 .service-tile:active {
   transform: scale(0.97);
   background: linear-gradient(140deg, #221f18 0%, #131110 70%);
 }
+body.light .service-tile:active { background: #f8fafc; }
 .service-tile .ico {
-  width: 40px; height: 40px; border-radius: 12px;
+  width: 36px; height: 36px; border-radius: 11px;
   background: rgba(229,199,107,0.12);
   display: flex; align-items: center;
-  justify-content: center; font-size: 20px;
-  color: #f3dfa2;
+  justify-content: center; font-size: 18px;
+  color: var(--gold);
 }
+body.light .service-tile .ico { background: #fef3c7; }
 .service-tile .lbl {
-  font-size: 11.5px; font-weight: 700;
-  color: #f5f1e6; text-align: center; line-height: 1.2;
+  font-size: 10.5px; font-weight: 700;
+  color: var(--text); text-align: center; line-height: 1.2;
 }
 
 /* ============== BOTTOM NAV ============== */
@@ -341,16 +646,20 @@ body {
   display: flex; justify-content: space-around;
   padding: 12px 8px 20px; z-index: 40;
 }
+body.light .bottom-nav {
+  background: rgba(255,255,255,0.96);
+  border-top-color: #e2e8f0;
+}
 .nav-item {
   display: flex; flex-direction: column;
   align-items: center; gap: 4px;
-  color: rgba(180,170,140,0.6);
+  color: var(--muted);
   font-size: 11px; font-weight: 600;
   cursor: pointer; padding: 4px 10px;
   transition: 0.15s; background: none;
   border: none; font-family: inherit;
 }
-.nav-item.active { color: #f3dfa2; }
+.nav-item.active { color: var(--gold); }
 .nav-item .nav-icon { font-size: 20px; }
 
 /* ============== PANEL ============== */
@@ -360,33 +669,38 @@ body {
   border: 1px solid rgba(229,199,107,0.16);
   box-shadow: 0 12px 30px rgba(0,0,0,0.4);
 }
+body.light .panel {
+  background: #ffffff;
+  border-color: #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
 .panel h2 {
   font-size: 18px; font-weight: 800;
-  color: #f3dfa2; margin-bottom: 18px;
+  color: var(--gold); margin-bottom: 18px;
   letter-spacing: -0.3px;
 }
 
 .form-group { margin-bottom: 16px; }
 .form-group label {
   display: block; font-size: 12px; font-weight: 700;
-  letter-spacing: 0.5px; color: rgba(200,190,160,0.75);
+  letter-spacing: 0.5px; color: var(--muted);
   margin-bottom: 6px; text-transform: uppercase;
 }
 .form-group input, .form-group select {
   width: 100%; padding: 14px 16px; border-radius: 12px;
   background: rgba(255,255,255,0.05);
   border: 1.5px solid rgba(229,199,107,0.2);
-  color: #fdf8ea; font-size: 15px;
+  color: var(--text); font-size: 15px;
   font-family: inherit; outline: none; transition: 0.15s;
 }
-.form-group input:focus, .form-group select:focus {
-  border-color: rgba(229,199,107,0.6);
+body.light .form-group input, body.light .form-group select {
+  background: #f8fafc;
+  border-color: #cbd5e1;
 }
-.form-group select option { background: #1a1813; color: #fdf8ea; }
-
-.row-btns { display: flex; gap: 10px; margin-top: 6px; }
-.row-btns .btn-gold { flex: 1; }
-.row-btns .btn-outline { flex: 1; padding: 16px; border-radius: 14px; font-size: 15px; font-weight: 800; }
+.form-group input:focus, .form-group select:focus {
+  border-color: var(--gold);
+}
+.form-group select option { background: var(--card); color: var(--text); }
 
 /* ============== TX LIST ============== */
 .tx-list {
@@ -397,6 +711,7 @@ body {
   align-items: center; padding: 14px 0;
   border-bottom: 1px solid rgba(229,199,107,0.08);
 }
+body.light .tx { border-bottom-color: #f1f5f9; }
 .tx:last-child { border-bottom: none; }
 .tx-left { display: flex; align-items: center; gap: 12px; min-width: 0; flex: 1; }
 .tx-icon {
@@ -405,18 +720,19 @@ body {
   display: flex; align-items: center;
   justify-content: center; font-size: 18px; flex-shrink: 0;
 }
+body.light .tx-icon { background: #f1f5f9; }
 .tx-name {
-  font-size: 14px; font-weight: 700; color: #fdf8ea;
+  font-size: 14px; font-weight: 700; color: var(--text);
   overflow: hidden; text-overflow: ellipsis;
 }
-.tx-date { font-size: 11px; color: rgba(200,190,160,0.55); margin-top: 3px; }
+.tx-date { font-size: 11px; color: var(--muted); margin-top: 3px; }
 .tx-amount { font-size: 14px; font-weight: 800; white-space: nowrap; margin-left: 8px; }
-.tx-amount.positive { color: #4ade80; }
-.tx-amount.negative { color: #f87171; }
+.tx-amount.positive { color: var(--green); }
+.tx-amount.negative { color: var(--red); }
 
 .empty-state {
   text-align: center; padding: 30px 10px;
-  color: rgba(200,190,160,0.5); font-size: 14px;
+  color: var(--muted); font-size: 14px;
 }
 
 /* ============== INFO ROWS ============== */
@@ -426,13 +742,14 @@ body {
   border-bottom: 1px solid rgba(229,199,107,0.08);
   font-size: 14px;
 }
+body.light .row { border-bottom-color: #f1f5f9; }
 .row:last-child { border-bottom: none; }
-.row .lbl { color: rgba(200,190,160,0.65); font-weight: 500; }
-.row .val { color: #fdf8ea; font-weight: 700; text-align: right; }
+.row .lbl { color: var(--muted); font-weight: 500; }
+.row .val { color: var(--text); font-weight: 700; text-align: right; }
 
 .section-title {
   padding: 0 22px 12px; font-size: 15px; font-weight: 800;
-  color: #f3dfa2; letter-spacing: -0.2px;
+  color: var(--gold); letter-spacing: -0.2px;
 }
 
 /* ============== INFO BOX ============== */
@@ -441,10 +758,15 @@ body {
   background: rgba(96,165,250,0.08);
   border: 1.5px solid rgba(96,165,250,0.3);
   margin-bottom: 16px;
-  font-size: 13px; color: rgba(230,240,255,0.9);
+  font-size: 13px; color: var(--text);
   line-height: 1.6;
 }
-.info-box strong { color: #93c5fd; }
+body.light .info-box {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  color: #1e40af;
+}
+.info-box strong { color: var(--blue); }
 
 .copy-row {
   display: flex; justify-content: space-between;
@@ -453,10 +775,14 @@ body {
   border-radius: 10px; margin-bottom: 8px;
   border: 1px solid rgba(229,199,107,0.1);
 }
-.copy-row .key { font-size: 12px; color: rgba(200,190,160,0.7); font-weight: 600; }
-.copy-row .value { font-size: 14px; color: #fdf8ea; font-weight: 700; font-family: "Courier New", monospace; }
+body.light .copy-row {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+}
+.copy-row .key { font-size: 12px; color: var(--muted); font-weight: 600; }
+.copy-row .value { font-size: 14px; color: var(--text); font-weight: 700; font-family: "Courier New", monospace; }
 .copy-row .copy-btn {
-  background: rgba(229,199,107,0.15); color: #f3dfa2;
+  background: rgba(229,199,107,0.15); color: var(--gold);
   border: none; padding: 6px 12px; border-radius: 8px;
   font-size: 11px; font-weight: 700; cursor: pointer;
   font-family: inherit;
@@ -464,56 +790,46 @@ body {
 
 /* ============== MODAL ============== */
 .modal-overlay {
-  position: fixed;
-  inset: 0;
+  position: fixed; inset: 0;
   background: rgba(0,0,0,0.75);
   backdrop-filter: blur(6px);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
+  display: none; align-items: center;
+  justify-content: center; z-index: 999;
   padding: 20px;
 }
 .modal-overlay.show { display: flex; }
 
 .modal {
-  width: 100%;
-  max-width: 380px;
-  max-height: 80vh;
+  width: 100%; max-width: 380px; max-height: 80vh;
   overflow-y: auto;
   background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 70%);
   border: 1.5px solid rgba(229,199,107,0.3);
-  border-radius: 22px;
-  padding: 24px;
+  border-radius: 22px; padding: 24px;
   box-shadow: 0 30px 80px rgba(0,0,0,0.8);
 }
-
-.modal h2 {
-  font-size: 20px;
-  font-weight: 800;
-  color: #f3dfa2;
-  margin-bottom: 6px;
-  text-align: center;
+body.light .modal {
+  background: #ffffff;
+  border-color: #e2e8f0;
 }
-
+.modal h2 {
+  font-size: 20px; font-weight: 800;
+  color: var(--gold); margin-bottom: 6px; text-align: center;
+}
 .modal .modal-sub {
-  font-size: 13px;
-  color: rgba(200,190,160,0.6);
-  text-align: center;
-  margin-bottom: 20px;
+  font-size: 13px; color: var(--muted);
+  text-align: center; margin-bottom: 20px;
 }
 
 .account-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px;
-  border-radius: 14px;
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px; border-radius: 14px;
   background: rgba(255,255,255,0.04);
   border: 1.5px solid rgba(229,199,107,0.1);
-  margin-bottom: 10px;
-  cursor: pointer;
-  transition: 0.15s;
+  margin-bottom: 10px; cursor: pointer; transition: 0.15s;
+}
+body.light .account-item {
+  background: #f8fafc;
+  border-color: #e2e8f0;
 }
 .account-item:hover {
   background: rgba(229,199,107,0.08);
@@ -523,7 +839,6 @@ body {
   border-color: rgba(229,199,107,0.6);
   background: rgba(229,199,107,0.1);
 }
-
 .account-item .ac-avatar {
   width: 44px; height: 44px; border-radius: 50%;
   background: linear-gradient(135deg, #5b7cfa, #4a63e0);
@@ -533,48 +848,150 @@ body {
 }
 .account-item .ac-info { flex: 1; min-width: 0; }
 .account-item .ac-name {
-  font-size: 15px; font-weight: 800; color: #fdf8ea;
+  font-size: 15px; font-weight: 800; color: var(--text);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 .account-item .ac-bal {
-  font-size: 12px; color: rgba(200,190,160,0.7);
-  margin-top: 3px;
+  font-size: 12px; color: var(--muted); margin-top: 3px;
 }
-.account-item .ac-check {
-  font-size: 18px; color: #f3dfa2;
-}
+.account-item .ac-check { font-size: 18px; color: var(--gold); }
 
 .modal-actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 18px;
+  display: flex; gap: 10px; margin-top: 18px;
 }
-
 .modal-btn {
-  flex: 1;
-  padding: 14px;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 800;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-  transition: 0.15s;
+  flex: 1; padding: 14px; border-radius: 12px;
+  font-size: 14px; font-weight: 800;
+  border: none; cursor: pointer;
+  font-family: inherit; transition: 0.15s;
 }
 .modal-btn.gold {
-  background: linear-gradient(135deg, #f3dfa2, #e5c76b);
+  background: linear-gradient(135deg, var(--gold-soft), var(--gold));
   color: #2a2107;
 }
 .modal-btn.ghost {
-  background: transparent;
-  color: #e5c76b;
+  background: transparent; color: var(--gold);
   border: 1.5px solid rgba(229,199,107,0.4);
 }
 .modal-btn:active { transform: scale(0.97); }
 
+/* ============== NOTIFICATIONS ============== */
+.notif-item {
+  display: flex; gap: 12px;
+  padding: 14px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(229,199,107,0.1);
+  margin-bottom: 10px;
+}
+body.light .notif-item {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+}
+.notif-icon {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  display: flex; align-items: center;
+  justify-content: center; font-size: 17px;
+  background: rgba(229,199,107,0.14);
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.notif-info { flex: 1; min-width: 0; }
+.notif-title {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+.notif-text {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+.notif-time {
+  font-size: 10.5px;
+  color: var(--muted);
+  margin-top: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* ============== CONTACT ITEM ============== */
+.contact-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(229,199,107,0.08);
+}
+body.light .contact-item { border-bottom-color: #f1f5f9; }
+.contact-item:last-child { border-bottom: none; }
+.contact-item .co-avatar {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #5b7cfa, #4a63e0);
+  color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 13px;
+  flex-shrink: 0;
+}
+.contact-item .co-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+.contact-item .co-info {
+  font-size: 11.5px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.contact-item .co-action {
+  background: rgba(229,199,107,0.15);
+  color: var(--gold);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* ============== FROZEN OVERLAY ============== */
+.frozen-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(3px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 10;
+  border-radius: 24px;
+}
+.frozen-overlay.show { display: flex; }
+.frozen-badge {
+  background: linear-gradient(135deg, #f87171, #dc2626);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+.frozen-text {
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
 /* ============== DESKTOP ============== */
 @media (min-width: 480px) {
   body { padding: 20px 0; background: #000; }
+  body.light { background: #e2e8f0; }
   .phone {
     border-radius: 42px;
     box-shadow: 0 30px 80px rgba(0,0,0,0.8);
@@ -664,8 +1081,8 @@ body {
     </div>
 
     <div class="top-row">
-      <div class="icon-btn" title="Theme">☀️</div>
-      <div class="icon-btn" title="Notifications">🔔<span class="dot"></span></div>
+      <div class="icon-btn" id="theme-btn" title="Theme" onclick="toggleTheme()">☀️</div>
+      <div class="icon-btn" title="Notifications" onclick="showScreen('screen-notifications')">🔔<span class="dot" id="notif-dot"></span></div>
       <div class="top-name" id="home-name">—</div>
       <div class="avatar" id="home-avatar" onclick="openSwitcher()">--</div>
     </div>
@@ -674,22 +1091,51 @@ body {
 
     <div class="greeting-block">
       <h1 id="greeting">Good Afternoon</h1>
-      <p>Welcome to your NovaPay dashboard.</p>
+      <p id="last-login">Last login: —</p>
     </div>
 
     <div class="account-pills">
       <button class="pill active" id="pill-checking" onclick="switchAccountType('checking')">🏦 Checking •••• 4821</button>
       <button class="pill inactive" id="pill-savings" onclick="switchAccountType('savings')">🏛️ Savings •••• 7732</button>
+      <button class="pill inactive" id="pill-credit" onclick="switchAccountType('credit')">💳 Credit •••• 9024</button>
+      <button class="pill inactive" id="pill-business" onclick="switchAccountType('business')">🏢 Business •••• 3310</button>
+      <button class="pill inactive" id="pill-invest" onclick="switchAccountType('investment')">📈 Invest •••• 5567</button>
     </div>
 
-    <div class="balance-card">
+    <div class="balance-card" id="main-balance-card">
+      <div class="frozen-overlay" id="frozen-overlay">
+        <div class="frozen-badge">❄ CARD FROZEN</div>
+        <div class="frozen-text">Tap Manage Card to unfreeze</div>
+      </div>
       <div class="balance-label">Available Balance</div>
       <div class="balance-amount" id="balance-display">$134,290.00</div>
       <div class="balance-sub" id="balance-sub">Checking Account •••• 4821</div>
       <div class="balance-actions">
         <button class="btn-primary" onclick="showScreen('screen-transfer')">Transfer</button>
         <button class="btn-outline" onclick="showScreen('screen-deposit')">Deposit</button>
+        <button class="btn-outline" onclick="showScreen('screen-manage-card')">Manage Card</button>
       </div>
+      <div class="pending-row">
+        <div class="pending-item">
+          <div class="pending-label">Pending</div>
+          <div class="pending-value" id="pending-value">$0.00</div>
+        </div>
+        <div class="pending-item">
+          <div class="pending-label">Available</div>
+          <div class="pending-value" id="available-value">$134,290.00</div>
+        </div>
+        <div class="pending-item">
+          <div class="pending-label">Interest YTD</div>
+          <div class="pending-value" id="interest-value">$0.00</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUICK CHIPS -->
+    <div class="quick-info-row">
+      <div class="info-chip" id="chip-cashback">💵 Cashback: $0.00</div>
+      <div class="info-chip green" id="chip-streak">🔥 12-day streak</div>
+      <div class="info-chip" id="chip-member">⭐ Member since —</div>
     </div>
 
     <!-- STATS -->
@@ -703,8 +1149,49 @@ body {
         <div class="stat-value" id="stat-spent">$0</div>
       </div>
       <div class="stat-card">
+        <div class="stat-label">Saved</div>
+        <div class="stat-value" id="stat-saved">$0</div>
+      </div>
+      <div class="stat-card">
         <div class="stat-label">Txns</div>
         <div class="stat-value" id="stat-count">0</div>
+      </div>
+    </div>
+
+    <!-- CREDIT SCORE -->
+    <div class="credit-card">
+      <div class="credit-ring">
+        <span class="ring-value" id="credit-score">782</span>
+      </div>
+      <div class="credit-info">
+        <div class="credit-label">Credit Score</div>
+        <div class="credit-status" id="credit-status">Excellent</div>
+        <div class="credit-sub">Updated Sep 30, 2026</div>
+      </div>
+    </div>
+
+    <!-- SPENDING CHART -->
+    <div class="chart-card">
+      <h3>Last 7 Days</h3>
+      <div class="chart-bars" id="chart-bars">
+        <!-- filled by JS -->
+      </div>
+      <div class="chart-legend">
+        <span><span class="dot inc"></span>Income</span>
+        <span><span class="dot spd"></span>Spending</span>
+      </div>
+    </div>
+
+    <!-- SAVINGS GOAL -->
+    <div class="goal-card">
+      <h3>🎯 Savings Goal — $500,000</h3>
+      <div class="goal-progress-bg">
+        <div class="goal-progress-fill" id="goal-fill" style="width: 26%;"></div>
+      </div>
+      <div class="goal-numbers">
+        <span id="goal-current">$134,290</span>
+        <span id="goal-percent">26%</span>
+        <span>$500,000</span>
       </div>
     </div>
 
@@ -716,11 +1203,31 @@ body {
       </button>
       <button class="service-tile" onclick="showScreen('screen-wire')">
         <div class="ico">🌐</div>
-        <div class="lbl">Wire Transfer</div>
+        <div class="lbl">Wire</div>
       </button>
       <button class="service-tile" onclick="showScreen('screen-zelle')">
         <div class="ico">⚡</div>
         <div class="lbl">Zelle</div>
+      </button>
+      <button class="service-tile" onclick="showScreen('screen-budget')">
+        <div class="ico">📊</div>
+        <div class="lbl">Budget</div>
+      </button>
+      <button class="service-tile" onclick="showScreen('screen-contacts')">
+        <div class="ico">👥</div>
+        <div class="lbl">Contacts</div>
+      </button>
+      <button class="service-tile" onclick="showScreen('screen-statements')">
+        <div class="ico">📄</div>
+        <div class="lbl">Statements</div>
+      </button>
+      <button class="service-tile" onclick="showScreen('screen-currency')">
+        <div class="ico">💱</div>
+        <div class="lbl">Currency</div>
+      </button>
+      <button class="service-tile" onclick="showScreen('screen-split')">
+        <div class="ico">🧾</div>
+        <div class="lbl">Split</div>
       </button>
     </div>
 
@@ -733,6 +1240,257 @@ body {
 
     <nav class="bottom-nav">
       <button class="nav-item active" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
+      <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
+      <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
+      <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
+      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
+    </nav>
+  </section>
+
+  <!-- ============= NOTIFICATIONS ============= -->
+  <section id="screen-notifications" class="screen">
+    <div class="status-bar"><span id="clock10">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
+    <div class="top-row">
+      <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
+      <div class="top-name">Notifications</div>
+      <div class="avatar" id="notif-avatar" onclick="openSwitcher()">--</div>
+    </div>
+
+    <div class="panel">
+      <h2>Recent Alerts</h2>
+      <div id="notif-list">
+        <div class="empty-state">No notifications.</div>
+      </div>
+    </div>
+
+    <nav class="bottom-nav">
+      <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
+      <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
+      <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
+      <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
+      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
+    </nav>
+  </section>
+
+  <!-- ============= MANAGE CARD ============= -->
+  <section id="screen-manage-card" class="screen">
+    <div class="status-bar"><span id="clock11">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
+    <div class="top-row">
+      <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
+      <div class="top-name">Manage Card</div>
+      <div class="avatar" id="card-mgmt-avatar" onclick="openSwitcher()">--</div>
+    </div>
+
+    <div class="panel">
+      <h2>Card Controls</h2>
+      <div class="row">
+        <span class="lbl">Card Status</span>
+        <span class="val" id="card-status-label">Active</span>
+      </div>
+      <button class="btn-outline" style="width:100%;padding:16px;border-radius:14px;font-size:15px;font-weight:800;margin-top:14px;" onclick="toggleFreeze()" id="freeze-btn">
+        ❄ Freeze Card
+      </button>
+      <button class="btn-gold" style="margin-top:10px;" onclick="revealPin()">
+        Reveal PIN
+      </button>
+      <button class="btn-outline" style="width:100%;padding:16px;border-radius:14px;font-size:15px;font-weight:800;margin-top:10px;" onclick="generateVirtualCard()">
+        + Generate Virtual Card
+      </button>
+      <div class="success-msg" id="card-msg"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Virtual Card Gallery</h2>
+      <div id="vcard-gallery">
+        <div class="empty-state">No virtual cards generated yet.</div>
+      </div>
+    </div>
+
+    <nav class="bottom-nav">
+      <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
+      <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
+      <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
+      <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
+      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
+    </nav>
+  </section>
+
+  <!-- ============= CONTACTS ============= -->
+  <section id="screen-contacts" class="screen">
+    <div class="status-bar"><span id="clock12">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
+    <div class="top-row">
+      <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
+      <div class="top-name">Contacts</div>
+      <div class="avatar" id="contacts-avatar" onclick="openSwitcher()">--</div>
+    </div>
+
+    <div class="panel">
+      <h2>Add Contact</h2>
+      <div class="form-group">
+        <label for="ct-name">Name</label>
+        <input id="ct-name" type="text" placeholder="e.g. Jane Smith">
+      </div>
+      <div class="form-group">
+        <label for="ct-info">Email or Phone</label>
+        <input id="ct-info" type="text" placeholder="jane@example.com">
+      </div>
+      <button class="btn-gold" onclick="addContact()">Save Contact</button>
+      <div class="success-msg" id="ct-msg"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Saved Contacts</h2>
+      <div id="contacts-list">
+        <div class="empty-state">No contacts yet.</div>
+      </div>
+    </div>
+
+    <nav class="bottom-nav">
+      <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
+      <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
+      <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
+      <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
+      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
+    </nav>
+  </section>
+
+  <!-- ============= BUDGET ============= -->
+  <section id="screen-budget" class="screen">
+    <div class="status-bar"><span id="clock13">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
+    <div class="top-row">
+      <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
+      <div class="top-name">Budget</div>
+      <div class="avatar" id="budget-avatar" onclick="openSwitcher()">--</div>
+    </div>
+
+    <div class="panel">
+      <h2>Monthly Budgets</h2>
+      <div id="budget-list">
+        <!-- filled by JS -->
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Set a Category Budget</h2>
+      <div class="form-group">
+        <label for="bd-cat">Category</label>
+        <select id="bd-cat">
+          <option value="Food">Food & Dining</option>
+          <option value="Shopping">Shopping</option>
+          <option value="Bills">Bills & Utilities</option>
+          <option value="Transport">Transport</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="bd-amount">Monthly Limit (USD)</label>
+        <input id="bd-amount" type="number" inputmode="decimal" placeholder="0.00" min="0" step="0.01">
+      </div>
+      <button class="btn-gold" onclick="saveBudget()">Save Budget</button>
+      <div class="success-msg" id="bd-msg"></div>
+    </div>
+
+    <nav class="bottom-nav">
+      <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
+      <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
+      <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
+      <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
+      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
+    </nav>
+  </section>
+
+  <!-- ============= STATEMENTS ============= -->
+  <section id="screen-statements" class="screen">
+    <div class="status-bar"><span id="clock14">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
+    <div class="top-row">
+      <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
+      <div class="top-name">Statements</div>
+      <div class="avatar" id="stmt-avatar" onclick="openSwitcher()">--</div>
+    </div>
+
+    <div class="panel">
+      <h2>Monthly Statements</h2>
+      <div id="statements-list">
+        <!-- filled by JS -->
+      </div>
+    </div>
+
+    <nav class="bottom-nav">
+      <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
+      <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
+      <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
+      <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
+      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
+    </nav>
+  </section>
+
+  <!-- ============= CURRENCY ============= -->
+  <section id="screen-currency" class="screen">
+    <div class="status-bar"><span id="clock15">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
+    <div class="top-row">
+      <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
+      <div class="top-name">Currency</div>
+      <div class="avatar" id="curr-avatar" onclick="openSwitcher()">--</div>
+    </div>
+
+    <div class="panel">
+      <h2>Your Balance In</h2>
+      <div class="row"><span class="lbl">🇺🇸 USD</span><span class="val" id="cur-usd">$0.00</span></div>
+      <div class="row"><span class="lbl">🇪🇺 EUR</span><span class="val" id="cur-eur">€0.00</span></div>
+      <div class="row"><span class="lbl">🇬🇧 GBP</span><span class="val" id="cur-gbp">£0.00</span></div>
+      <div class="row"><span class="lbl">🇳🇬 NGN</span><span class="val" id="cur-ngn">₦0.00</span></div>
+      <div class="row"><span class="lbl">🇯🇵 JPY</span><span class="val" id="cur-jpy">¥0</span></div>
+    </div>
+
+    <div class="panel">
+      <h2>Quick Converter</h2>
+      <div class="form-group">
+        <label for="cv-amount">Amount (USD)</label>
+        <input id="cv-amount" type="number" inputmode="decimal" placeholder="100" min="0" step="0.01" oninput="updateConverter()">
+      </div>
+      <div class="row"><span class="lbl">EUR</span><span class="val" id="cv-eur">€0.00</span></div>
+      <div class="row"><span class="lbl">GBP</span><span class="val" id="cv-gbp">£0.00</span></div>
+      <div class="row"><span class="lbl">NGN</span><span class="val" id="cv-ngn">₦0.00</span></div>
+    </div>
+
+    <nav class="bottom-nav">
+      <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
+      <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
+      <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
+      <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
+      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
+    </nav>
+  </section>
+
+  <!-- ============= SPLIT BILL ============= -->
+  <section id="screen-split" class="screen">
+    <div class="status-bar"><span id="clock16">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
+    <div class="top-row">
+      <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
+      <div class="top-name">Split Bill</div>
+      <div class="avatar" id="split-avatar" onclick="openSwitcher()">--</div>
+    </div>
+
+    <div class="panel">
+      <h2>Split a Bill</h2>
+      <div class="form-group">
+        <label for="sp-total">Total Amount (USD)</label>
+        <input id="sp-total" type="number" inputmode="decimal" placeholder="0.00" min="0" step="0.01" oninput="calcSplit()">
+      </div>
+      <div class="form-group">
+        <label for="sp-count">Split Between (people)</label>
+        <input id="sp-count" type="number" inputmode="numeric" placeholder="2" min="2" max="20" step="1" oninput="calcSplit()">
+      </div>
+      <div class="info-box" id="split-result">
+        Enter total and number of people.
+      </div>
+      <button class="btn-gold" onclick="handleSplit()">Pay My Share</button>
+      <div class="success-msg" id="sp-msg"></div>
+    </div>
+
+    <nav class="bottom-nav">
+      <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
       <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
       <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
       <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
@@ -758,6 +1516,17 @@ body {
       <div class="form-group">
         <label for="tr-amount">Amount (USD)</label>
         <input id="tr-amount" type="number" inputmode="decimal" placeholder="0.00" min="0" step="0.01">
+      </div>
+      <div class="form-group">
+        <label for="tr-category">Category</label>
+        <select id="tr-category">
+          <option value="Other">Other</option>
+          <option value="Food">Food & Dining</option>
+          <option value="Shopping">Shopping</option>
+          <option value="Bills">Bills</option>
+          <option value="Transport">Transport</option>
+          <option value="Entertainment">Entertainment</option>
+        </select>
       </div>
       <div class="form-group">
         <label for="tr-note">Note (optional)</label>
@@ -799,6 +1568,23 @@ body {
       <div class="error-msg" id="dp-msg"></div>
     </div>
 
+    <div class="panel">
+      <h2>📷 Mobile Check Deposit</h2>
+      <div class="info-box">
+        Simulate depositing a check by entering the amount below.
+      </div>
+      <div class="form-group">
+        <label for="ck-amount">Check Amount (USD)</label>
+        <input id="ck-amount" type="number" inputmode="decimal" placeholder="0.00" min="0" step="0.01">
+      </div>
+      <div class="form-group">
+        <label for="ck-from">From (Payer)</label>
+        <input id="ck-from" type="text" placeholder="e.g. Acme Corp">
+      </div>
+      <button class="btn-gold" onclick="handleCheckDeposit()">Deposit Check</button>
+      <div class="success-msg" id="ck-msg"></div>
+    </div>
+
     <nav class="bottom-nav">
       <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
       <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
@@ -819,18 +1605,15 @@ body {
 
     <div class="panel">
       <h2>Receive Funds</h2>
-
       <div class="info-box">
-        Share the details below to receive money into your NovaPay Checking account.
+        Share the details below to receive money into your NovaPay account.
       </div>
-
       <div class="copy-row">
         <div>
           <div class="key">Account Holder</div>
           <div class="value" id="rcv-holder">—</div>
         </div>
       </div>
-
       <div class="copy-row">
         <div>
           <div class="key">Routing Number</div>
@@ -838,7 +1621,6 @@ body {
         </div>
         <button class="copy-btn" onclick="copyText('021000021')">COPY</button>
       </div>
-
       <div class="copy-row">
         <div>
           <div class="key">Account Number</div>
@@ -847,15 +1629,8 @@ body {
         <button class="copy-btn" onclick="copyText('00001234821')">COPY</button>
       </div>
 
-      <div class="copy-row">
-        <div>
-          <div class="key">Account Type</div>
-          <div class="value">Checking</div>
-        </div>
-      </div>
-
       <div style="margin-top:18px;">
-        <h2 style="font-size:15px; color:#f3dfa2; margin-bottom:12px;">Simulate an Incoming Payment</h2>
+        <h2 style="font-size:15px; color:var(--gold); margin-bottom:12px;">Simulate Incoming Payment</h2>
         <div class="form-group">
           <label for="rcv-from">From (Name)</label>
           <input id="rcv-from" type="text" placeholder="e.g. Ifundwomen">
@@ -878,7 +1653,7 @@ body {
     </nav>
   </section>
 
-  <!-- ============= WIRE TRANSFER ============= -->
+  <!-- ============= WIRE ============= -->
   <section id="screen-wire" class="screen">
     <div class="status-bar"><span id="clock8">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row">
@@ -890,40 +1665,29 @@ body {
     <div class="panel">
       <h2>Send a Wire</h2>
       <div class="info-box">
-        Wire transfers are typically processed within 1 business day. A <strong>$15.00</strong> wire fee applies.
+        Wire transfers processed within 1 business day. <strong>$15</strong> fee applies.
       </div>
-
       <div class="form-group">
         <label for="wr-name">Recipient Full Name</label>
         <input id="wr-name" type="text" placeholder="e.g. Jane Smith">
       </div>
-
       <div class="form-group">
         <label for="wr-bank">Recipient Bank</label>
-        <input id="wr-bank" type="text" placeholder="e.g. Chase, Wells Fargo">
+        <input id="wr-bank" type="text" placeholder="e.g. Chase">
       </div>
-
       <div class="form-group">
         <label for="wr-routing">Routing Number (9 digits)</label>
         <input id="wr-routing" type="text" inputmode="numeric" maxlength="9" placeholder="021000021">
       </div>
-
       <div class="form-group">
         <label for="wr-account">Recipient Account Number</label>
         <input id="wr-account" type="text" inputmode="numeric" placeholder="Account number">
       </div>
-
       <div class="form-group">
         <label for="wr-amount">Amount (USD)</label>
         <input id="wr-amount" type="number" inputmode="decimal" placeholder="0.00" min="0" step="0.01">
       </div>
-
-      <div class="form-group">
-        <label for="wr-note">Reference / Note</label>
-        <input id="wr-note" type="text" placeholder="Optional">
-      </div>
-
-      <button class="btn-gold" onclick="handleWire()">Send Wire Transfer</button>
+      <button class="btn-gold" onclick="handleWire()">Send Wire</button>
       <div class="error-msg" id="wr-msg"></div>
     </div>
 
@@ -947,10 +1711,6 @@ body {
 
     <div class="panel">
       <h2>Send with Zelle®</h2>
-      <div class="info-box">
-        Send money fast to friends and family using their email or U.S. mobile number.
-      </div>
-
       <div class="form-group">
         <label for="zl-type">Send To</label>
         <select id="zl-type">
@@ -958,41 +1718,29 @@ body {
           <option value="phone">Mobile Number</option>
         </select>
       </div>
-
       <div class="form-group">
         <label for="zl-recipient" id="zl-recipient-label">Recipient Email</label>
         <input id="zl-recipient" type="text" placeholder="name@example.com">
       </div>
-
       <div class="form-group">
         <label for="zl-amount">Amount (USD)</label>
         <input id="zl-amount" type="number" inputmode="decimal" placeholder="0.00" min="0" step="0.01">
       </div>
-
-      <div class="form-group">
-        <label for="zl-memo">Memo (optional)</label>
-        <input id="zl-memo" type="text" placeholder="What's this for?">
-      </div>
-
-      <button class="btn-gold" onclick="handleZelle()">Send Zelle Payment</button>
+      <button class="btn-gold" onclick="handleZelle()">Send Zelle</button>
       <div class="error-msg" id="zl-msg"></div>
     </div>
 
     <div class="panel">
-      <h2>Receive with Zelle®</h2>
-      <div class="info-box">
-        Your Zelle® contact info — share this so others can send you money instantly.
-      </div>
+      <h2>Your Zelle® Info</h2>
       <div class="copy-row">
         <div>
-          <div class="key">Zelle® Email</div>
+          <div class="key">Email</div>
           <div class="value" id="zl-my-email">—</div>
         </div>
-        <button class="copy-btn" onclick="copyZelleEmail()">COPY</button>
       </div>
       <div class="copy-row">
         <div>
-          <div class="key">Zelle® Phone</div>
+          <div class="key">Phone</div>
           <div class="value" id="zl-my-phone">—</div>
         </div>
       </div>
@@ -1014,6 +1762,13 @@ body {
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">Bills</div>
       <div class="avatar" id="bills-avatar" onclick="openSwitcher()">--</div>
+    </div>
+
+    <div class="panel">
+      <h2>Upcoming Bills</h2>
+      <div id="upcoming-bills">
+        <!-- filled by JS -->
+      </div>
     </div>
 
     <div class="panel">
@@ -1084,19 +1839,24 @@ body {
       <h2>Account</h2>
       <div class="row"><span class="lbl">Account Holder</span><span class="val" id="pf-holder">—</span></div>
       <div class="row"><span class="lbl">Username</span><span class="val" id="pf-username">—</span></div>
-      <div class="row"><span class="lbl">Account Type</span><span class="val">Checking</span></div>
-      <div class="row"><span class="lbl">Account Number</span><span class="val">•••• 4821</span></div>
+      <div class="row"><span class="lbl">Member ID</span><span class="val" id="pf-member-id">—</span></div>
       <div class="row"><span class="lbl">Routing Number</span><span class="val">021000021</span></div>
       <div class="row"><span class="lbl">Currency</span><span class="val">USD</span></div>
-      <div class="row"><span class="lbl">Balance</span><span class="val" id="pf-balance">$134,290.00</span></div>
-      <div class="row"><span class="lbl">Status</span><span class="val" style="color:#4ade80;">Active</span></div>
+      <div class="row"><span class="lbl">Total Net Worth</span><span class="val" id="pf-net-worth">$0.00</span></div>
+      <div class="row"><span class="lbl">Status</span><span class="val" style="color:var(--green);">Active</span></div>
+    </div>
+
+    <div class="panel">
+      <h2>All Accounts</h2>
+      <div class="row"><span class="lbl">🏦 Checking •••• 4821</span><span class="val" id="pf-checking">$0.00</span></div>
+      <div class="row"><span class="lbl">🏛️ Savings •••• 7732</span><span class="val" id="pf-savings">$0.00</span></div>
+      <div class="row"><span class="lbl">💳 Credit •••• 9024</span><span class="val" id="pf-credit">$0.00</span></div>
+      <div class="row"><span class="lbl">🏢 Business •••• 3310</span><span class="val" id="pf-business">$0.00</span></div>
+      <div class="row"><span class="lbl">📈 Invest •••• 5567</span><span class="val" id="pf-invest">$0.00</span></div>
     </div>
 
     <div class="panel">
       <h2>Reset Password</h2>
-      <div class="info-box">
-        Enter your access code and a new password to reset.
-      </div>
       <div class="form-group">
         <label for="pf-reset-code">6-Digit Access Code</label>
         <input id="pf-reset-code" type="text" inputmode="numeric" maxlength="6" placeholder="••••••">
@@ -1140,14 +1900,12 @@ body {
 
 </div>
 
-<!-- ============= ACCOUNT SWITCHER MODAL ============= -->
+<!-- ============= MODAL ============= -->
 <div class="modal-overlay" id="switcher-modal">
   <div class="modal">
     <h2>Switch Account</h2>
     <div class="modal-sub">Pick another saved account to sign in</div>
-
     <div id="switcher-list"></div>
-
     <div class="modal-actions">
       <button class="modal-btn ghost" onclick="closeSwitcher()">Cancel</button>
       <button class="modal-btn gold" onclick="closeSwitcher(); handleSignOut();">Sign Out</button>
@@ -1157,15 +1915,21 @@ body {
 
 <script>
 /* =========================================================
-   NovaPay — local browser app
+   NovaPay — local browser app (ALL features)
    All data is stored in localStorage. NOT a real bank.
 ========================================================= */
 
 const LS_USERS = 'novapay_users';
 const LS_SESSION = 'novapay_session';
 const LS_VERSION = 'novapay_version';
-const APP_VERSION = 4;
+const LS_THEME = 'novapay_theme';
+const APP_VERSION = 5;
 const STARTING_BALANCE = 134290.00;
+const STARTING_SAVINGS = 42000.00;
+const STARTING_CREDIT = -1250.00;   // negative = owed
+const STARTING_CREDIT_LIMIT = 10000.00;
+const STARTING_BUSINESS = 8500.00;
+const STARTING_INVEST = 22500.00;
 
 /* ---------- storage ---------- */
 function getUsers() {
@@ -1177,19 +1941,18 @@ function getSession() { return localStorage.getItem(LS_SESSION); }
 function setSession(username) { localStorage.setItem(LS_SESSION, username); }
 function clearSession() { localStorage.removeItem(LS_SESSION); }
 
-/* ---------- migration: seed Ifundwomen grant ---------- */
+/* ---------- seed ---------- */
 function seedIfundwomen(user) {
   if (!user.transactions) user.transactions = [];
-  const hasGrant = user.transactions.some(t =>
-    t.label && t.label.toLowerCase().includes('ifundwomen')
-  );
-  if (!hasGrant) {
+  const has = user.transactions.some(t => t.label && t.label.toLowerCase().includes('ifundwomen'));
+  if (!has) {
     user.transactions.unshift({
       type: 'receive',
       label: 'Ifundwomen Grant Received',
       amount: 134290.00,
-      date: Date.now() - 1000 * 60 * 60 * 24, // yesterday
-      account: 'checking'
+      date: Date.now() - 1000 * 60 * 60 * 24,
+      account: 'checking',
+      category: 'Other'
     });
   }
 }
@@ -1204,32 +1967,75 @@ function runMigrations() {
     if (!u || typeof u !== 'object') return;
 
     if (storedVersion < APP_VERSION) {
-      // First time on new version: force starting balance
       u.balance = STARTING_BALANCE;
-      u.savingsBalance = u.savingsBalance || 0;
+      u.savingsBalance = u.savingsBalance === undefined ? STARTING_SAVINGS : u.savingsBalance;
+      u.creditBalance = u.creditBalance === undefined ? STARTING_CREDIT : u.creditBalance;
+      u.creditLimit = u.creditLimit || STARTING_CREDIT_LIMIT;
+      u.businessBalance = u.businessBalance === undefined ? STARTING_BUSINESS : u.businessBalance;
+      u.investBalance = u.investBalance === undefined ? STARTING_INVEST : u.investBalance;
+      u.cashback = u.cashback || 0;
+      u.interestYTD = u.interestYTD || 0;
+      u.frozen = u.frozen || false;
+      u.virtualCards = u.virtualCards || [];
+      u.contacts = u.contacts || [];
+      u.notifications = u.notifications || [];
+      u.budgets = u.budgets || {};
       u.transactions = u.transactions || [];
       if (!u.username) u.username = (u.name || 'user').toLowerCase().replace(/\s+/g,'');
       if (!u.email) u.email = u.username + '@novapay.demo';
       if (!u.phone) u.phone = '(555) ' + Math.floor(100+Math.random()*900) + '-' + Math.floor(1000+Math.random()*9000);
       if (!u.activeAccount) u.activeAccount = 'checking';
+      if (!u.memberId) u.memberId = 'NP-' + Math.floor(1000+Math.random()*9000) + '-' + u.username.slice(0,2).toUpperCase();
+      if (!u.creditScore) u.creditScore = 782 + Math.floor(Math.random()*30) - 15;
+      if (!u.createdAt) u.createdAt = Date.now();
+      if (!u.lastLogin) u.lastLogin = Date.now();
+      if (!u.streak) u.streak = 12;
       seedIfundwomen(u);
+
+      // Seed a few notifications
+      if (u.notifications.length === 0) {
+        u.notifications = [
+          { icon: '↓', title: 'Ifundwomen Grant', text: 'You received $134,290.00', date: Date.now() - 1000*60*60*24 },
+          { icon: '🏦', title: 'Welcome to NovaPay', text: 'Your account is ready.', date: Date.now() - 1000*60*60*24*2 }
+        ];
+      }
       changed = true;
     }
 
-    // Always ensure the grant exists for every user
+    // Always ensure fields exist
+    ['balance','savingsBalance','creditBalance','businessBalance','investBalance'].forEach(f => {
+      if (u[f] === undefined) {
+        u[f] = f === 'balance' ? STARTING_BALANCE : 0;
+        changed = true;
+      }
+    });
+    if (!u.creditLimit) { u.creditLimit = STARTING_CREDIT_LIMIT; changed = true; }
+    if (u.cashback === undefined) { u.cashback = 0; changed = true; }
+    if (u.interestYTD === undefined) { u.interestYTD = 0; changed = true; }
+    if (u.frozen === undefined) { u.frozen = false; changed = true; }
+    if (!u.virtualCards) { u.virtualCards = []; changed = true; }
+    if (!u.contacts) { u.contacts = []; changed = true; }
+    if (!u.notifications) { u.notifications = []; changed = true; }
+    if (!u.budgets) { u.budgets = {}; changed = true; }
+    if (!u.memberId) { u.memberId = 'NP-' + Math.floor(1000+Math.random()*9000) + '-' + (u.username || 'XX').slice(0,2).toUpperCase(); changed = true; }
+    if (!u.creditScore) { u.creditScore = 782; changed = true; }
+    if (!u.streak) { u.streak = 12; changed = true; }
+    if (!u.activeAccount) { u.activeAccount = 'checking'; changed = true; }
+    if (!u.lastLogin) { u.lastLogin = Date.now(); changed = true; }
     if (!u.transactions || !u.transactions.some(t => t.label && t.label.toLowerCase().includes('ifundwomen'))) {
       seedIfundwomen(u);
       changed = true;
     }
-    if (u.savingsBalance === undefined) { u.savingsBalance = 0; changed = true; }
-    if (!u.activeAccount) { u.activeAccount = 'checking'; changed = true; }
-    if (!u.username) { u.username = (u.name || 'user').toLowerCase().replace(/\s+/g,''); changed = true; }
   });
 
   if (changed || storedVersion < APP_VERSION) {
     saveUsers(users);
     localStorage.setItem(LS_VERSION, APP_VERSION);
   }
+
+  // Theme
+  const t = localStorage.getItem(LS_THEME);
+  if (t === 'light') document.body.classList.add('light');
 }
 
 /* ---------- screen routing ---------- */
@@ -1244,7 +2050,9 @@ function showScreen(id) {
 
   const protectedScreens = ['screen-home','screen-transfer','screen-deposit',
     'screen-bills','screen-history','screen-profile','screen-receive',
-    'screen-wire','screen-zelle'];
+    'screen-wire','screen-zelle','screen-notifications','screen-manage-card',
+    'screen-contacts','screen-budget','screen-statements','screen-currency',
+    'screen-split'];
   if (protectedScreens.includes(id) && !getSession()) {
     showScreen('screen-signin');
     return;
@@ -1269,18 +2077,13 @@ function handleSignUp() {
   const pass = passEl.value;
   errEl.textContent = '';
 
-  if (!name) { errEl.textContent = 'Please enter your full name.'; return; }
-  if (name.length < 3) { errEl.textContent = 'Name must be at least 3 characters.'; return; }
-  if (!username) { errEl.textContent = 'Please choose a username.'; return; }
-  if (username.length < 3) { errEl.textContent = 'Username must be at least 3 characters.'; return; }
+  if (!name || name.length < 3) { errEl.textContent = 'Name must be at least 3 characters.'; return; }
+  if (!username || username.length < 3) { errEl.textContent = 'Username must be at least 3 characters.'; return; }
   if (!/^[a-z0-9._-]+$/.test(username)) { errEl.textContent = 'Username: letters, numbers, . _ - only.'; return; }
   if (!pass || pass.length < 4) { errEl.textContent = 'Password must be at least 4 characters.'; return; }
 
   const users = getUsers();
-  if (users[username]) {
-    errEl.textContent = 'That username is already taken.';
-    return;
-  }
+  if (users[username]) { errEl.textContent = 'That username is already taken.'; return; }
 
   const code = generateCode();
   const user = {
@@ -1289,12 +2092,29 @@ function handleSignUp() {
     pass: pass,
     code: code,
     balance: STARTING_BALANCE,
-    savingsBalance: 0,
+    savingsBalance: STARTING_SAVINGS,
+    creditBalance: STARTING_CREDIT,
+    creditLimit: STARTING_CREDIT_LIMIT,
+    businessBalance: STARTING_BUSINESS,
+    investBalance: STARTING_INVEST,
     activeAccount: 'checking',
     transactions: [],
+    notifications: [
+      { icon: '🏦', title: 'Welcome to NovaPay', text: 'Your account is ready.', date: Date.now() }
+    ],
+    contacts: [],
+    virtualCards: [],
+    budgets: {},
+    cashback: 0,
+    interestYTD: 0,
+    frozen: false,
+    memberId: 'NP-' + Math.floor(1000+Math.random()*9000) + '-' + username.slice(0,2).toUpperCase(),
+    creditScore: 782 + Math.floor(Math.random()*30) - 15,
+    streak: 12,
     email: username + '@novapay.demo',
     phone: '(555) ' + Math.floor(100+Math.random()*900) + '-' + Math.floor(1000+Math.random()*9000),
-    createdAt: Date.now()
+    createdAt: Date.now(),
+    lastLogin: Date.now()
   };
   seedIfundwomen(user);
   users[username] = user;
@@ -1303,7 +2123,6 @@ function handleSignUp() {
   document.getElementById('code-display').textContent = code;
   document.getElementById('code-username').textContent = username;
   showScreen('screen-code');
-
   document.getElementById('si-user').value = username;
   nameEl.value = '';
   userEl.value = '';
@@ -1334,6 +2153,10 @@ function handleSignIn() {
   if (!user) { errEl.textContent = 'No account found with that username.'; return; }
   if (user.pass !== pass) { errEl.textContent = 'Incorrect password. Try again.'; return; }
 
+  user.lastLogin = Date.now();
+  users[username] = user;
+  saveUsers(users);
+
   setSession(username);
   passEl.value = '';
   showScreen('screen-home');
@@ -1347,7 +2170,7 @@ function handleSignOut() {
   showScreen('screen-signin');
 }
 
-/* ---------- account switcher ---------- */
+/* ---------- switcher ---------- */
 function openSwitcher() {
   const users = getUsers();
   const session = getSession();
@@ -1361,7 +2184,11 @@ function openSwitcher() {
       const u = users[k];
       const initials = u.name.split(' ').map(s => s[0]).join('').slice(0,2).toUpperCase();
       const isCurrent = (k === session);
-      const bal = (u.activeAccount === 'savings' ? (u.savingsBalance || 0) : u.balance);
+      const bal = (u.activeAccount === 'savings') ? (u.savingsBalance || 0)
+                : (u.activeAccount === 'credit') ? (u.creditBalance || 0)
+                : (u.activeAccount === 'business') ? (u.businessBalance || 0)
+                : (u.activeAccount === 'investment') ? (u.investBalance || 0)
+                : u.balance;
       return `
         <div class="account-item ${isCurrent ? 'current' : ''}" onclick="switchToAccount('${escapeAttr(k)}')">
           <div class="ac-avatar">${initials}</div>
@@ -1376,25 +2203,33 @@ function openSwitcher() {
 
   document.getElementById('switcher-modal').classList.add('show');
 }
-
 function closeSwitcher() {
   document.getElementById('switcher-modal').classList.remove('show');
 }
-
 function switchToAccount(key) {
   const users = getUsers();
   const user = users[key];
   if (!user) { closeSwitcher(); return; }
+  user.lastLogin = Date.now();
+  users[key] = user;
+  saveUsers(users);
   setSession(key);
   closeSwitcher();
   showScreen('screen-home');
 }
-
 function escapeAttr(s) {
   return String(s).replace(/'/g, "\\'").replace(/"/g, '&quot;');
 }
 
-/* ---------- checking vs savings ---------- */
+/* ---------- theme toggle ---------- */
+function toggleTheme() {
+  document.body.classList.toggle('light');
+  const isLight = document.body.classList.contains('light');
+  localStorage.setItem(LS_THEME, isLight ? 'light' : 'dark');
+  document.getElementById('theme-btn').textContent = isLight ? '🌙' : '☀️';
+}
+
+/* ---------- account switching ---------- */
 function switchAccountType(type) {
   const key = getSession();
   const user = getUsers()[key];
@@ -1402,25 +2237,22 @@ function switchAccountType(type) {
   user.activeAccount = type;
   persistUser(key, user);
 
-  const pillChecking = document.getElementById('pill-checking');
-  const pillSavings  = document.getElementById('pill-savings');
-  if (pillChecking && pillSavings) {
-    if (type === 'savings') {
-      pillSavings.classList.remove('inactive');
-      pillSavings.classList.add('active');
-      pillChecking.classList.remove('active');
-      pillChecking.classList.add('inactive');
-    } else {
-      pillChecking.classList.remove('inactive');
-      pillChecking.classList.add('active');
-      pillSavings.classList.remove('active');
-      pillSavings.classList.add('inactive');
+  ['checking','savings','credit','business','investment'].forEach(t => {
+    const el = document.getElementById('pill-' + (t === 'investment' ? 'invest' : t));
+    if (el) {
+      if (t === type) {
+        el.classList.add('active');
+        el.classList.remove('inactive');
+      } else {
+        el.classList.remove('active');
+        el.classList.add('inactive');
+      }
     }
-  }
+  });
   renderAll(user);
 }
 
-/* ---------- greeting / clock / date ---------- */
+/* ---------- greeting / clock ---------- */
 function greetingText() {
   const h = new Date().getHours();
   if (h >= 5 && h < 12) return 'Good Morning';
@@ -1430,20 +2262,20 @@ function greetingText() {
 
 function updateClocks() {
   const now = new Date();
-  let h = now.getHours(), m = now.getMinutes(), s = now.getSeconds();
+  let h = now.getHours(), m = now.getMinutes();
   h = h % 12; if (h === 0) h = 12;
   m = m < 10 ? '0' + m : m;
-  s = s < 10 ? '0' + s : s;
   const t = h + ':' + m;
-  ['clock','clock2','clock3','clock4','clock5','clock6','clock7','clock8','clock9'].forEach(id => {
+
+  ['clock','clock2','clock3','clock4','clock5','clock6','clock7','clock8',
+   'clock9','clock10','clock11','clock12','clock13','clock14','clock15','clock16'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.textContent = t;
   });
 
   const dateStr = now.toLocaleDateString(undefined, {
     weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'
-  }) + ' · ' + h + ':' + m + ':' + s + (now.getHours() >= 12 ? ' PM' : ' AM');
-
+  });
   ['date-line-home','date-line-history'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.textContent = dateStr;
@@ -1459,7 +2291,6 @@ function fmt(amount) {
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   return sign + '$' + parts.join('.');
 }
-
 function fmtSigned(amount) {
   const sign = amount >= 0 ? '+' : '-';
   const abs = Math.abs(amount);
@@ -1469,6 +2300,39 @@ function fmtSigned(amount) {
   return sign + '$' + parts.join('.');
 }
 
+/* ---------- balance helpers ---------- */
+function activeBalance(user) {
+  const t = user.activeAccount || 'checking';
+  if (t === 'savings') return user.savingsBalance || 0;
+  if (t === 'credit') return user.creditBalance || 0;
+  if (t === 'business') return user.businessBalance || 0;
+  if (t === 'investment') return user.investBalance || 0;
+  return user.balance;
+}
+function applyBalance(user, delta) {
+  const t = user.activeAccount || 'checking';
+  if (t === 'savings') user.savingsBalance = (user.savingsBalance || 0) + delta;
+  else if (t === 'credit') user.creditBalance = (user.creditBalance || 0) + delta;
+  else if (t === 'business') user.businessBalance = (user.businessBalance || 0) + delta;
+  else if (t === 'investment') user.investBalance = (user.investBalance || 0) + delta;
+  else user.balance += delta;
+}
+
+/* ---------- net worth ---------- */
+function totalNetWorth(user) {
+  return (user.balance || 0) + (user.savingsBalance || 0) + (user.businessBalance || 0)
+       + (user.investBalance || 0) + (user.creditBalance || 0);
+}
+
+/* ---------- credit score status ---------- */
+function creditStatus(score) {
+  if (score >= 800) return 'Exceptional';
+  if (score >= 740) return 'Very Good';
+  if (score >= 670) return 'Good';
+  if (score >= 580) return 'Fair';
+  return 'Poor';
+}
+
 /* ---------- render ---------- */
 function renderAll(user) {
   const initials = user.name.split(' ').map(s => s[0]).join('').slice(0,2).toUpperCase();
@@ -1476,53 +2340,124 @@ function renderAll(user) {
   const homeName    = document.getElementById('home-name');
   const homeAvatar  = document.getElementById('home-avatar');
   const greeting    = document.getElementById('greeting');
+  const lastLogin   = document.getElementById('last-login');
   const balance     = document.getElementById('balance-display');
   const balanceSub  = document.getElementById('balance-sub');
 
   if (homeName)   homeName.textContent   = user.name;
   if (homeAvatar) homeAvatar.textContent = initials;
-  if (greeting)   greeting.textContent   = greetingText() + ', ' + user.name;
+  if (greeting)   greeting.textContent   = greetingText() + ', ' + user.name.split(' ')[0];
+  if (lastLogin)  lastLogin.textContent  = 'Last login: ' + new Date(user.lastLogin || Date.now()).toLocaleString();
 
   const activeType = user.activeAccount || 'checking';
-  const activeBal = (activeType === 'savings')
-    ? (user.savingsBalance || 0)
-    : user.balance;
-  if (balance)    balance.textContent    = fmt(activeBal);
-  if (balanceSub) balanceSub.textContent = (activeType === 'savings' ? 'Savings Account •••• 7732' : 'Checking Account •••• 4821');
+  const activeBal = activeBalance(user);
+  if (balance)    balance.textContent = fmt(activeBal);
 
-  // pill state
-  const pillChecking = document.getElementById('pill-checking');
-  const pillSavings  = document.getElementById('pill-savings');
-  if (pillChecking && pillSavings) {
-    if (activeType === 'savings') {
-      pillSavings.classList.add('active');
-      pillSavings.classList.remove('inactive');
-      pillChecking.classList.remove('active');
-      pillChecking.classList.add('inactive');
+  const labels = {
+    checking: 'Checking Account •••• 4821',
+    savings:  'Savings Account •••• 7732',
+    credit:   'Credit Card •••• 9024',
+    business: 'Business Account •••• 3310',
+    investment: 'Investment •••• 5567'
+  };
+  if (balanceSub) balanceSub.textContent = labels[activeType] || labels.checking;
+
+  // Pills
+  ['checking','savings','credit','business','investment'].forEach(t => {
+    const el = document.getElementById('pill-' + (t === 'investment' ? 'invest' : t));
+    if (!el) return;
+    if (t === activeType) {
+      el.classList.add('active');
+      el.classList.remove('inactive');
     } else {
-      pillChecking.classList.add('active');
-      pillChecking.classList.remove('inactive');
-      pillSavings.classList.remove('active');
-      pillSavings.classList.add('inactive');
+      el.classList.remove('active');
+      el.classList.add('inactive');
     }
-  }
+  });
 
+  // Pending / Available / Interest
+  const pending = (user.transactions || [])
+    .filter(t => Date.now() - t.date < 1000 * 60 * 60 * 24 && t.pending)
+    .reduce((s, t) => s + t.amount, 0);
+  const pv = document.getElementById('pending-value');
+  const av = document.getElementById('available-value');
+  const iv = document.getElementById('interest-value');
+  if (pv) pv.textContent = fmt(pending);
+  if (av) av.textContent = fmt(activeBal + pending);
+  if (iv) iv.textContent = fmt(user.interestYTD || 0);
+
+  // Chips
+  const chipCash = document.getElementById('chip-cashback');
+  const chipStreak = document.getElementById('chip-streak');
+  const chipMember = document.getElementById('chip-member');
+  if (chipCash) chipCash.textContent = '💵 Cashback: ' + fmt(user.cashback || 0);
+  if (chipStreak) chipStreak.textContent = '🔥 ' + (user.streak || 12) + '-day streak';
+  if (chipMember) chipMember.textContent = '⭐ Member since ' + new Date(user.createdAt).toLocaleDateString(undefined, {month:'short', year:'numeric'});
+
+  // Stats
+  const txs = user.transactions || [];
+  const income = txs.filter(t => t.amount > 0).reduce((s, t) => s + t.amount, 0);
+  const spent  = txs.filter(t => t.amount < 0).reduce((s, t) => s + Math.abs(t.amount), 0);
+  const sInc = document.getElementById('stat-income');
+  const sSpe = document.getElementById('stat-spent');
+  const sSav = document.getElementById('stat-saved');
+  const sCnt = document.getElementById('stat-count');
+  if (sInc) sInc.textContent = fmt(income);
+  if (sSpe) sSpe.textContent = fmt(spent);
+  if (sSav) sSav.textContent = fmt(user.savingsBalance || 0);
+  if (sCnt) sCnt.textContent = txs.length;
+
+  // Credit score
+  const cs = document.getElementById('credit-score');
+  const cst = document.getElementById('credit-status');
+  if (cs) cs.textContent = user.creditScore || 782;
+  if (cst) cst.textContent = creditStatus(user.creditScore || 782);
+
+  // Chart
+  renderChart(user);
+
+  // Savings goal
+  const goalFill = document.getElementById('goal-fill');
+  const goalCurrent = document.getElementById('goal-current');
+  const goalPercent = document.getElementById('goal-percent');
+  const total = totalNetWorth(user);
+  const pct = Math.min(100, Math.round((total / 500000) * 100));
+  if (goalFill) goalFill.style.width = pct + '%';
+  if (goalCurrent) goalCurrent.textContent = fmt(total);
+  if (goalPercent) goalPercent.textContent = pct + '%';
+
+  // Avatars everywhere
   ['transfer-avatar','deposit-avatar','bills-avatar','history-avatar',
-   'profile-avatar','receive-avatar','wire-avatar','zelle-avatar'].forEach(id => {
+   'profile-avatar','receive-avatar','wire-avatar','zelle-avatar',
+   'notif-avatar','card-mgmt-avatar','contacts-avatar','budget-avatar',
+   'stmt-avatar','curr-avatar','split-avatar'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.textContent = initials;
   });
 
+  // Profile
   const pfName    = document.getElementById('profile-name');
   const pfHolder  = document.getElementById('pf-holder');
   const pfCode    = document.getElementById('profile-code-line');
-  const pfBalance = document.getElementById('pf-balance');
   const pfUser    = document.getElementById('pf-username');
-  if (pfName)    pfName.textContent    = user.name;
-  if (pfHolder)  pfHolder.textContent  = user.name;
-  if (pfCode)    pfCode.textContent    = 'Username: @' + user.username;
-  if (pfBalance) pfBalance.textContent = fmt(activeBal);
-  if (pfUser)    pfUser.textContent    = '@' + user.username;
+  const pfMember  = document.getElementById('pf-member-id');
+  const pfNetW    = document.getElementById('pf-net-worth');
+  const pfChk     = document.getElementById('pf-checking');
+  const pfSav     = document.getElementById('pf-savings');
+  const pfCred    = document.getElementById('pf-credit');
+  const pfBus     = document.getElementById('pf-business');
+  const pfInv     = document.getElementById('pf-invest');
+  if (pfName)   pfName.textContent   = user.name;
+  if (pfHolder) pfHolder.textContent = user.name;
+  if (pfCode)   pfCode.textContent   = 'Username: @' + user.username;
+  if (pfUser)   pfUser.textContent   = '@' + user.username;
+  if (pfMember) pfMember.textContent = user.memberId || '—';
+  if (pfNetW)   pfNetW.textContent   = fmt(totalNetWorth(user));
+  if (pfChk)    pfChk.textContent    = fmt(user.balance || 0);
+  if (pfSav)    pfSav.textContent    = fmt(user.savingsBalance || 0);
+  if (pfCred)   pfCred.textContent   = fmt(user.creditBalance || 0);
+  if (pfBus)    pfBus.textContent    = fmt(user.businessBalance || 0);
+  if (pfInv)    pfInv.textContent    = fmt(user.investBalance || 0);
 
   const rcvHolder = document.getElementById('rcv-holder');
   if (rcvHolder) rcvHolder.textContent = user.name;
@@ -1532,18 +2467,64 @@ function renderAll(user) {
   if (zEmail) zEmail.textContent = user.email || '—';
   if (zPhone) zPhone.textContent = user.phone || '—';
 
-  // stats (based on all transactions)
-  const txs = user.transactions || [];
-  const income = txs.filter(t => t.amount > 0).reduce((s, t) => s + t.amount, 0);
-  const spent  = txs.filter(t => t.amount < 0).reduce((s, t) => s + Math.abs(t.amount), 0);
-  const sInc = document.getElementById('stat-income');
-  const sSpe = document.getElementById('stat-spent');
-  const sCnt = document.getElementById('stat-count');
-  if (sInc) sInc.textContent = fmt(income);
-  if (sSpe) sSpe.textContent = fmt(spent);
-  if (sCnt) sCnt.textContent = txs.length;
+  // Notifications
+  renderNotifications(user);
+  // Contacts
+  renderContacts(user);
+  // Budget
+  renderBudgets(user);
+  // Statements
+  renderStatements(user);
+  // Currency
+  renderCurrency(user);
+  // Upcoming bills
+  renderUpcomingBills(user);
+  // Virtual cards
+  renderVirtualCards(user);
+  // Card status
+  const cardLabel = document.getElementById('card-status-label');
+  const freezeBtn = document.getElementById('freeze-btn');
+  const frozenOv = document.getElementById('frozen-overlay');
+  if (cardLabel) cardLabel.textContent = user.frozen ? '❄ Frozen' : 'Active';
+  if (freezeBtn) freezeBtn.textContent = user.frozen ? '🔥 Unfreeze Card' : '❄ Freeze Card';
+  if (frozenOv) frozenOv.classList.toggle('show', !!user.frozen);
+
+  // Notification dot
+  const dot = document.getElementById('notif-dot');
+  if (dot) dot.style.display = (user.notifications && user.notifications.length > 0) ? 'block' : 'none';
 
   renderTransactions(user);
+}
+
+function renderChart(user) {
+  const bars = document.getElementById('chart-bars');
+  if (!bars) return;
+  const txs = user.transactions || [];
+  const now = new Date();
+  const days = [];
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date(now);
+    d.setDate(now.getDate() - i);
+    d.setHours(0,0,0,0);
+    const next = new Date(d);
+    next.setDate(d.getDate() + 1);
+    const inc = txs.filter(t => t.date >= d.getTime() && t.date < next.getTime() && t.amount > 0).reduce((s,t) => s + t.amount, 0);
+    const spd = txs.filter(t => t.date >= d.getTime() && t.date < next.getTime() && t.amount < 0).reduce((s,t) => s + Math.abs(t.amount), 0);
+    days.push({ inc, spd, label: d.toLocaleDateString(undefined, {weekday:'short'}).slice(0,2) });
+  }
+  const maxVal = Math.max(1, ...days.map(d => Math.max(d.inc, d.spd)));
+  bars.innerHTML = days.map(d => {
+    const incH = Math.round((d.inc / maxVal) * 100);
+    const spdH = Math.round((d.spd / maxVal) * 100);
+    return `
+      <div class="chart-bar-wrap">
+        <div style="display:flex;gap:2px;width:100%;height:100%;align-items:flex-end;">
+          <div class="chart-bar" style="height:${Math.max(4, incH)}%"></div>
+          <div class="chart-bar spend" style="height:${Math.max(4, spdH)}%"></div>
+        </div>
+        <div class="chart-label">${d.label}</div>
+      </div>`;
+  }).join('');
 }
 
 function renderTransactions(user) {
@@ -1559,6 +2540,7 @@ function renderTransactions(user) {
                  : tx.type === 'wire'     ? '🌐'
                  : tx.type === 'zelle'    ? '⚡'
                  : tx.type === 'receive'  ? '↓'
+                 : tx.type === 'check'    ? '📷'
                  : '↗';
       const cls = tx.amount >= 0 ? 'positive' : 'negative';
       const d = new Date(tx.date);
@@ -1583,36 +2565,217 @@ function renderTransactions(user) {
   if (histList) histList.innerHTML = buildHTML(list);
 }
 
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, c =>
-    ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function renderNotifications(user) {
+  const el = document.getElementById('notif-list');
+  if (!el) return;
+  const notifs = (user.notifications || []).slice().reverse();
+  if (notifs.length === 0) {
+    el.innerHTML = '<div class="empty-state">No notifications.</div>';
+    return;
+  }
+  el.innerHTML = notifs.map(n => {
+    const d = new Date(n.date);
+    const time = d.toLocaleDateString(undefined, {month:'short', day:'numeric'}) + ' · ' +
+                 d.toLocaleTimeString(undefined, {hour:'numeric', minute:'2-digit'});
+    return `
+      <div class="notif-item">
+        <div class="notif-icon">${n.icon || '🔔'}</div>
+        <div class="notif-info">
+          <div class="notif-title">${escapeHtml(n.title)}</div>
+          <div class="notif-text">${escapeHtml(n.text)}</div>
+          <div class="notif-time">${time}</div>
+        </div>
+      </div>`;
+  }).join('');
 }
+
+function renderContacts(user) {
+  const el = document.getElementById('contacts-list');
+  if (!el) return;
+  const contacts = user.contacts || [];
+  if (contacts.length === 0) {
+    el.innerHTML = '<div class="empty-state">No contacts yet.</div>';
+    return;
+  }
+  el.innerHTML = contacts.map((c, i) => {
+    const initials = c.name.split(' ').map(s => s[0]).join('').slice(0,2).toUpperCase();
+    return `
+      <div class="contact-item">
+        <div class="co-avatar">${initials}</div>
+        <div style="flex:1;min-width:0;">
+          <div class="co-name">${escapeHtml(c.name)}</div>
+          <div class="co-info">${escapeHtml(c.info)}</div>
+        </div>
+        <button class="co-action" onclick="quickSend(${i})">Send</button>
+      </div>`;
+  }).join('');
+}
+
+function quickSend(index) {
+  const key = getSession();
+  const user = getUsers()[key];
+  if (!user) return;
+  const c = (user.contacts || [])[index];
+  if (!c) return;
+  document.getElementById('tr-recipient').value = c.name;
+  showScreen('screen-transfer');
+}
+
+function renderBudgets(user) {
+  const el = document.getElementById('budget-list');
+  if (!el) return;
+  const budgets = user.budgets || {};
+  const cats = Object.keys(budgets);
+  if (cats.length === 0) {
+    el.innerHTML = '<div class="empty-state">No budgets set yet.</div>';
+    return;
+  }
+  const txs = user.transactions || [];
+  const monthStart = new Date();
+  monthStart.setDate(1); monthStart.setHours(0,0,0,0);
+  el.innerHTML = cats.map(c => {
+    const limit = budgets[c];
+    const spent = txs.filter(t => t.amount < 0 && t.category === c && t.date >= monthStart.getTime())
+      .reduce((s,t) => s + Math.abs(t.amount), 0);
+    const pct = Math.min(100, Math.round((spent / limit) * 100));
+    return `
+      <div style="margin-bottom:14px;">
+        <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px;">
+          <span>${escapeHtml(c)}</span>
+          <span>${fmt(spent)} / ${fmt(limit)}</span>
+        </div>
+        <div class="goal-progress-bg">
+          <div class="goal-progress-fill" style="width:${pct}%;background:${pct > 90 ? 'linear-gradient(90deg,#f87171,#dc2626)' : 'linear-gradient(90deg,var(--gold-soft),var(--gold))'};"></div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function renderStatements(user) {
+  const el = document.getElementById('statements-list');
+  if (!el) return;
+  const months = [];
+  const now = new Date();
+  for (let i = 0; i < 6; i++) {
+    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    months.push(d);
+  }
+  el.innerHTML = months.map(d => {
+    const start = d.getTime();
+    const next = new Date(d.getFullYear(), d.getMonth() + 1, 1).getTime();
+    const txs = (user.transactions || []).filter(t => t.date >= start && t.date < next);
+    const inc = txs.filter(t => t.amount > 0).reduce((s,t) => s + t.amount, 0);
+    const spd = txs.filter(t => t.amount < 0).reduce((s,t) => s + Math.abs(t.amount), 0);
+    const label = d.toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
+    return `
+      <div class="row" style="cursor:pointer;" onclick="viewStatement(${start}, ${next}, '${label}')">
+        <span class="lbl">📄 ${label}</span>
+        <span class="val">${txs.length} txns</span>
+      </div>`;
+  }).join('');
+}
+
+function viewStatement(start, end, label) {
+  const key = getSession();
+  const user = getUsers()[key];
+  if (!user) return;
+  const txs = (user.transactions || []).filter(t => t.date >= start && t.date < end);
+  const inc = txs.filter(t => t.amount > 0).reduce((s,t) => s + t.amount, 0);
+  const spd = txs.filter(t => t.amount < 0).reduce((s,t) => s + Math.abs(t.amount), 0);
+  alert(
+    'Statement — ' + label + '\n\n' +
+    'Transactions: ' + txs.length + '\n' +
+    'Total In: ' + fmt(inc) + '\n' +
+    'Total Out: ' + fmt(spd) + '\n' +
+    'Net: ' + fmt(inc - spd) + '\n\n' +
+    'This is a demo statement.'
+  );
+}
+
+function renderCurrency(user) {
+  const bal = activeBalance(user);
+  const rates = { EUR: 0.92, GBP: 0.79, NGN: 1550, JPY: 155 };
+  const usd = document.getElementById('cur-usd');
+  const eur = document.getElementById('cur-eur');
+  const gbp = document.getElementById('cur-gbp');
+  const ngn = document.getElementById('cur-ngn');
+  const jpy = document.getElementById('cur-jpy');
+  if (usd) usd.textContent = fmt(bal);
+  if (eur) eur.textContent = '€' + (bal * rates.EUR).toFixed(2);
+  if (gbp) gbp.textContent = '£' + (bal * rates.GBP).toFixed(2);
+  if (ngn) ngn.textContent = '₦' + (bal * rates.NGN).toFixed(2);
+  if (jpy) jpy.textContent = '¥' + Math.round(bal * rates.JPY);
+}
+
+function updateConverter() {
+  const amt = parseFloat(document.getElementById('cv-amount').value) || 0;
+  const rates = { EUR: 0.92, GBP: 0.79, NGN: 1550 };
+  document.getElementById('cv-eur').textContent = '€' + (amt * rates.EUR).toFixed(2);
+  document.getElementById('cv-gbp').textContent = '£' + (amt * rates.GBP).toFixed(2);
+  document.getElementById('cv-ngn').textContent = '₦' + (amt * rates.NGN).toFixed(2);
+}
+
+function renderUpcomingBills(user) {
+  const el = document.getElementById('upcoming-bills');
+  if (!el) return;
+  // Default 3 upcoming bills
+  const now = new Date();
+  const bills = [
+    { name: 'Electric Company', amount: 145.00, days: 3 },
+    { name: 'Internet Provider', amount: 79.99, days: 7 },
+    { name: 'Phone Bill', amount: 55.00, days: 12 }
+  ];
+  el.innerHTML = bills.map(b => {
+    const due = new Date(now);
+    due.setDate(now.getDate() + b.days);
+    const label = due.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+    return `
+      <div class="row">
+        <span class="lbl">📄 ${b.name}</span>
+        <span class="val">${fmt(b.amount)} · ${label}</span>
+      </div>`;
+  }).join('');
+}
+
+function renderVirtualCards(user) {
+  const el = document.getElementById('vcard-gallery');
+  if (!el) return;
+  const cards = user.virtualCards || [];
+  if (cards.length === 0) {
+    el.innerHTML = '<div class="empty-state">No virtual cards generated yet.</div>';
+    return;
+  }
+  el.innerHTML = cards.map((c, i) => `
+    <div class="copy-row">
+      <div>
+        <div class="key">Card ${i+1} · Exp ${c.expiry}</div>
+        <div class="value">${c.number}</div>
+      </div>
+      <button class="copy-btn" onclick="copyText('${c.number}')">COPY</button>
+    </div>`).join('');
+}
+
+function renderChartPlaceholder() {}
 
 /* ---------- transactions ---------- */
 function addTransaction(user, tx) {
   user.transactions = user.transactions || [];
   user.transactions.push(tx);
-  if (user.transactions.length > 500) {
-    user.transactions = user.transactions.slice(-500);
-  }
+  if (user.transactions.length > 500) user.transactions = user.transactions.slice(-500);
 }
 function persistUser(key, user) {
   const users = getUsers();
   users[key] = user;
   saveUsers(users);
 }
-
-function currentBalance(user) {
-  return (user.activeAccount === 'savings')
-    ? (user.savingsBalance || 0)
-    : user.balance;
+function addNotification(user, icon, title, text) {
+  user.notifications = user.notifications || [];
+  user.notifications.push({ icon, title, text, date: Date.now() });
+  if (user.notifications.length > 50) user.notifications = user.notifications.slice(-50);
 }
-function applyBalance(user, delta) {
-  if (user.activeAccount === 'savings') {
-    user.savingsBalance = (user.savingsBalance || 0) + delta;
-  } else {
-    user.balance += delta;
-  }
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c =>
+    ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
 /* ---------- transfer ---------- */
@@ -1623,33 +2786,30 @@ function handleTransfer() {
 
   const name = document.getElementById('tr-recipient').value.trim();
   const amountStr = document.getElementById('tr-amount').value;
+  const category = document.getElementById('tr-category').value;
   const note = document.getElementById('tr-note').value.trim();
   const msg = document.getElementById('tr-msg');
-  msg.textContent = '';
-  msg.classList.remove('success-msg');
-  msg.classList.add('error-msg');
+  msg.textContent = ''; msg.classList.remove('success-msg'); msg.classList.add('error-msg');
 
   const amount = parseFloat(amountStr);
   if (!name) { msg.textContent = 'Enter recipient name.'; return; }
   if (!amount || amount <= 0) { msg.textContent = 'Enter a valid amount.'; return; }
-  if (amount > currentBalance(user)) { msg.textContent = 'Insufficient balance.'; return; }
+  if (amount > activeBalance(user)) { msg.textContent = 'Insufficient balance.'; return; }
 
   applyBalance(user, -amount);
   addTransaction(user, {
     type: 'transfer',
     label: 'Transfer to ' + name + (note ? ' — ' + note : ''),
     amount: -amount, date: Date.now(),
-    account: user.activeAccount
+    account: user.activeAccount, category
   });
+  addNotification(user, '↗', 'Transfer sent', 'You sent ' + fmt(amount) + ' to ' + name);
+  user.cashback = (user.cashback || 0) + amount * 0.01;
   persistUser(key, user);
 
-  document.getElementById('tr-recipient').value = '';
-  document.getElementById('tr-amount').value = '';
-  document.getElementById('tr-note').value = '';
+  ['tr-recipient','tr-amount','tr-note'].forEach(id => document.getElementById(id).value = '');
   msg.textContent = 'Transfer sent successfully.';
-  msg.classList.remove('error-msg');
-  msg.classList.add('success-msg');
-
+  msg.classList.remove('error-msg'); msg.classList.add('success-msg');
   renderAll(user);
   setTimeout(() => { msg.textContent = ''; }, 1800);
 }
@@ -1663,30 +2823,57 @@ function handleDeposit() {
   const amountStr = document.getElementById('dp-amount').value;
   const source = document.getElementById('dp-source').value.trim() || 'Deposit';
   const msg = document.getElementById('dp-msg');
-  msg.textContent = '';
-  msg.classList.remove('success-msg');
-  msg.classList.add('error-msg');
+  msg.textContent = ''; msg.classList.remove('success-msg'); msg.classList.add('error-msg');
 
   const amount = parseFloat(amountStr);
   if (!amount || amount <= 0) { msg.textContent = 'Enter a valid amount.'; return; }
 
   applyBalance(user, amount);
   addTransaction(user, {
-    type: 'deposit',
-    label: 'Deposit — ' + source,
+    type: 'deposit', label: 'Deposit — ' + source,
     amount: amount, date: Date.now(),
-    account: user.activeAccount
+    account: user.activeAccount, category: 'Other'
   });
+  addNotification(user, '↓', 'Deposit received', fmt(amount) + ' from ' + source);
   persistUser(key, user);
 
   document.getElementById('dp-amount').value = '';
   document.getElementById('dp-source').value = '';
   msg.textContent = 'Deposit successful.';
-  msg.classList.remove('error-msg');
-  msg.classList.add('success-msg');
-
+  msg.classList.remove('error-msg'); msg.classList.add('success-msg');
   renderAll(user);
   setTimeout(() => { msg.textContent = ''; }, 1800);
+}
+
+/* ---------- check deposit ---------- */
+function handleCheckDeposit() {
+  const key = getSession();
+  const user = getUsers()[key];
+  if (!user) { showScreen('screen-signin'); return; }
+
+  const amountStr = document.getElementById('ck-amount').value;
+  const from = document.getElementById('ck-from').value.trim() || 'Unknown';
+  const msg = document.getElementById('ck-msg');
+  msg.textContent = '';
+
+  const amount = parseFloat(amountStr);
+  if (!amount || amount <= 0) { msg.textContent = 'Enter a valid amount.'; msg.style.color = '#f87171'; return; }
+
+  applyBalance(user, amount);
+  addTransaction(user, {
+    type: 'check', label: 'Mobile Check — ' + from,
+    amount: amount, date: Date.now(),
+    account: user.activeAccount, category: 'Other'
+  });
+  addNotification(user, '📷', 'Check deposited', fmt(amount) + ' from ' + from);
+  persistUser(key, user);
+
+  document.getElementById('ck-amount').value = '';
+  document.getElementById('ck-from').value = '';
+  msg.textContent = 'Check deposited successfully.';
+  msg.style.color = '#4ade80';
+  renderAll(user);
+  setTimeout(() => { msg.textContent = ''; }, 2400);
 }
 
 /* ---------- receive ---------- */
@@ -1698,9 +2885,7 @@ function handleReceive() {
   const from = document.getElementById('rcv-from').value.trim();
   const amountStr = document.getElementById('rcv-amount').value;
   const msg = document.getElementById('rcv-msg');
-  msg.textContent = '';
-  msg.classList.remove('success-msg');
-  msg.classList.add('error-msg');
+  msg.textContent = ''; msg.classList.remove('success-msg'); msg.classList.add('error-msg');
 
   const amount = parseFloat(amountStr);
   if (!from) { msg.textContent = 'Enter sender name.'; return; }
@@ -1708,19 +2893,17 @@ function handleReceive() {
 
   applyBalance(user, amount);
   addTransaction(user, {
-    type: 'receive',
-    label: 'Received from ' + from,
+    type: 'receive', label: 'Received from ' + from,
     amount: amount, date: Date.now(),
-    account: user.activeAccount
+    account: user.activeAccount, category: 'Other'
   });
+  addNotification(user, '↓', 'Payment received', fmt(amount) + ' from ' + from);
   persistUser(key, user);
 
   document.getElementById('rcv-from').value = '';
   document.getElementById('rcv-amount').value = '';
   msg.textContent = 'Payment received successfully.';
-  msg.classList.remove('error-msg');
-  msg.classList.add('success-msg');
-
+  msg.classList.remove('error-msg'); msg.classList.add('success-msg');
   renderAll(user);
   setTimeout(() => { msg.textContent = ''; }, 1800);
 }
@@ -1731,49 +2914,41 @@ function handleWire() {
   const user = getUsers()[key];
   if (!user) { showScreen('screen-signin'); return; }
 
-  const name     = document.getElementById('wr-name').value.trim();
-  const bank     = document.getElementById('wr-bank').value.trim();
-  const routing  = document.getElementById('wr-routing').value.trim();
-  const account  = document.getElementById('wr-account').value.trim();
+  const name = document.getElementById('wr-name').value.trim();
+  const bank = document.getElementById('wr-bank').value.trim();
+  const routing = document.getElementById('wr-routing').value.trim();
+  const account = document.getElementById('wr-account').value.trim();
   const amountStr = document.getElementById('wr-amount').value;
-  const note     = document.getElementById('wr-note').value.trim();
   const msg = document.getElementById('wr-msg');
-  msg.textContent = '';
-  msg.classList.remove('success-msg');
-  msg.classList.add('error-msg');
+  msg.textContent = ''; msg.classList.remove('success-msg'); msg.classList.add('error-msg');
 
   const amount = parseFloat(amountStr);
   const FEE = 15.00;
 
   if (!name) { msg.textContent = 'Enter recipient name.'; return; }
-  if (!bank) { msg.textContent = 'Enter recipient bank.'; return; }
-  if (!/^\d{9}$/.test(routing)) { msg.textContent = 'Routing number must be 9 digits.'; return; }
-  if (!account) { msg.textContent = 'Enter recipient account number.'; return; }
+  if (!bank) { msg.textContent = 'Enter bank.'; return; }
+  if (!/^\d{9}$/.test(routing)) { msg.textContent = 'Routing must be 9 digits.'; return; }
+  if (!account) { msg.textContent = 'Enter account number.'; return; }
   if (!amount || amount <= 0) { msg.textContent = 'Enter a valid amount.'; return; }
-  if (amount + FEE > currentBalance(user)) { msg.textContent = 'Insufficient balance (amount + $15 fee).'; return; }
+  if (amount + FEE > activeBalance(user)) { msg.textContent = 'Insufficient balance.'; return; }
 
   applyBalance(user, -(amount + FEE));
   addTransaction(user, {
-    type: 'wire',
-    label: 'Wire to ' + name + ' (' + bank + ')' + (note ? ' — ' + note : ''),
+    type: 'wire', label: 'Wire to ' + name + ' (' + bank + ')',
     amount: -amount, date: Date.now(),
-    account: user.activeAccount
+    account: user.activeAccount, category: 'Bills'
   });
   addTransaction(user, {
-    type: 'wire',
-    label: 'Wire fee',
+    type: 'wire', label: 'Wire fee',
     amount: -FEE, date: Date.now(),
-    account: user.activeAccount
+    account: user.activeAccount, category: 'Bills'
   });
+  addNotification(user, '🌐', 'Wire sent', fmt(amount) + ' to ' + name);
   persistUser(key, user);
 
-  ['wr-name','wr-bank','wr-routing','wr-account','wr-amount','wr-note'].forEach(id => {
-    document.getElementById(id).value = '';
-  });
-  msg.textContent = 'Wire transfer sent. $15 fee applied.';
-  msg.classList.remove('error-msg');
-  msg.classList.add('success-msg');
-
+  ['wr-name','wr-bank','wr-routing','wr-account','wr-amount'].forEach(id => document.getElementById(id).value = '');
+  msg.textContent = 'Wire sent. $15 fee applied.';
+  msg.classList.remove('error-msg'); msg.classList.add('success-msg');
   renderAll(user);
   setTimeout(() => { msg.textContent = ''; }, 2400);
 }
@@ -1784,42 +2959,29 @@ function handleZelle() {
   const user = getUsers()[key];
   if (!user) { showScreen('screen-signin'); return; }
 
-  const type = document.getElementById('zl-type').value;
   const recipient = document.getElementById('zl-recipient').value.trim();
   const amountStr = document.getElementById('zl-amount').value;
-  const memo = document.getElementById('zl-memo').value.trim();
   const msg = document.getElementById('zl-msg');
-  msg.textContent = '';
-  msg.classList.remove('success-msg');
-  msg.classList.add('error-msg');
+  msg.textContent = ''; msg.classList.remove('success-msg'); msg.classList.add('error-msg');
 
   const amount = parseFloat(amountStr);
-  if (!recipient) { msg.textContent = 'Enter recipient ' + (type === 'email' ? 'email.' : 'phone number.'); return; }
-  if (type === 'email' && !/^\S+@\S+\.\S+$/.test(recipient)) {
-    msg.textContent = 'Enter a valid email address.'; return;
-  }
-  if (type === 'phone' && !/^[\d\s()+-]{7,}$/.test(recipient)) {
-    msg.textContent = 'Enter a valid phone number.'; return;
-  }
+  if (!recipient) { msg.textContent = 'Enter recipient.'; return; }
   if (!amount || amount <= 0) { msg.textContent = 'Enter a valid amount.'; return; }
-  if (amount > currentBalance(user)) { msg.textContent = 'Insufficient balance.'; return; }
+  if (amount > activeBalance(user)) { msg.textContent = 'Insufficient balance.'; return; }
 
   applyBalance(user, -amount);
   addTransaction(user, {
-    type: 'zelle',
-    label: 'Zelle to ' + recipient + (memo ? ' — ' + memo : ''),
+    type: 'zelle', label: 'Zelle to ' + recipient,
     amount: -amount, date: Date.now(),
-    account: user.activeAccount
+    account: user.activeAccount, category: 'Other'
   });
+  addNotification(user, '⚡', 'Zelle sent', fmt(amount) + ' to ' + recipient);
   persistUser(key, user);
 
   document.getElementById('zl-recipient').value = '';
   document.getElementById('zl-amount').value = '';
-  document.getElementById('zl-memo').value = '';
   msg.textContent = 'Zelle payment sent.';
-  msg.classList.remove('error-msg');
-  msg.classList.add('success-msg');
-
+  msg.classList.remove('error-msg'); msg.classList.add('success-msg');
   renderAll(user);
   setTimeout(() => { msg.textContent = ''; }, 1800);
 }
@@ -1833,32 +2995,162 @@ function handleBill() {
   const name = document.getElementById('bl-name').value.trim();
   const amountStr = document.getElementById('bl-amount').value;
   const msg = document.getElementById('bl-msg');
-  msg.textContent = '';
-  msg.classList.remove('success-msg');
-  msg.classList.add('error-msg');
+  msg.textContent = ''; msg.classList.remove('success-msg'); msg.classList.add('error-msg');
 
   const amount = parseFloat(amountStr);
   if (!name) { msg.textContent = 'Enter biller name.'; return; }
   if (!amount || amount <= 0) { msg.textContent = 'Enter a valid amount.'; return; }
-  if (amount > currentBalance(user)) { msg.textContent = 'Insufficient balance.'; return; }
+  if (amount > activeBalance(user)) { msg.textContent = 'Insufficient balance.'; return; }
 
   applyBalance(user, -amount);
   addTransaction(user, {
-    type: 'bill',
-    label: 'Bill — ' + name,
+    type: 'bill', label: 'Bill — ' + name,
     amount: -amount, date: Date.now(),
-    account: user.activeAccount
+    account: user.activeAccount, category: 'Bills'
   });
+  addNotification(user, '📄', 'Bill paid', fmt(amount) + ' to ' + name);
   persistUser(key, user);
 
   document.getElementById('bl-name').value = '';
   document.getElementById('bl-amount').value = '';
   msg.textContent = 'Bill paid successfully.';
-  msg.classList.remove('error-msg');
-  msg.classList.add('success-msg');
-
+  msg.classList.remove('error-msg'); msg.classList.add('success-msg');
   renderAll(user);
   setTimeout(() => { msg.textContent = ''; }, 1800);
+}
+
+/* ---------- split ---------- */
+function calcSplit() {
+  const total = parseFloat(document.getElementById('sp-total').value) || 0;
+  const count = parseInt(document.getElementById('sp-count').value) || 2;
+  const el = document.getElementById('split-result');
+  if (total <= 0 || count < 2) {
+    el.innerHTML = 'Enter total and number of people.';
+    return;
+  }
+  const each = total / count;
+  el.innerHTML = `<strong>${count} people</strong> · Each pays <strong>${fmt(each)}</strong>`;
+}
+
+function handleSplit() {
+  const key = getSession();
+  const user = getUsers()[key];
+  if (!user) { showScreen('screen-signin'); return; }
+
+  const total = parseFloat(document.getElementById('sp-total').value) || 0;
+  const count = parseInt(document.getElementById('sp-count').value) || 0;
+  const msg = document.getElementById('sp-msg');
+  msg.textContent = '';
+
+  if (total <= 0 || count < 2) { msg.textContent = 'Enter total and 2+ people.'; msg.style.color = '#f87171'; return; }
+  const each = total / count;
+  if (each > activeBalance(user)) { msg.textContent = 'Insufficient balance for your share.'; msg.style.color = '#f87171'; return; }
+
+  applyBalance(user, -each);
+  addTransaction(user, {
+    type: 'transfer', label: 'Split bill (' + count + ' people)',
+    amount: -each, date: Date.now(),
+    account: user.activeAccount, category: 'Other'
+  });
+  addNotification(user, '🧾', 'Split bill paid', 'Your share: ' + fmt(each));
+  persistUser(key, user);
+
+  document.getElementById('sp-total').value = '';
+  document.getElementById('sp-count').value = '';
+  msg.textContent = 'Your share paid: ' + fmt(each);
+  msg.style.color = '#4ade80';
+  renderAll(user);
+  setTimeout(() => { msg.textContent = ''; }, 2400);
+}
+
+/* ---------- contacts ---------- */
+function addContact() {
+  const key = getSession();
+  const user = getUsers()[key];
+  if (!user) return;
+
+  const name = document.getElementById('ct-name').value.trim();
+  const info = document.getElementById('ct-info').value.trim();
+  const msg = document.getElementById('ct-msg');
+  msg.textContent = '';
+
+  if (!name) { msg.textContent = 'Enter name.'; msg.style.color = '#f87171'; return; }
+  if (!info) { msg.textContent = 'Enter email or phone.'; msg.style.color = '#f87171'; return; }
+
+  user.contacts = user.contacts || [];
+  user.contacts.push({ name, info });
+  persistUser(key, user);
+
+  document.getElementById('ct-name').value = '';
+  document.getElementById('ct-info').value = '';
+  msg.textContent = 'Contact saved.';
+  msg.style.color = '#4ade80';
+  renderAll(user);
+  setTimeout(() => { msg.textContent = ''; }, 1800);
+}
+
+/* ---------- budget ---------- */
+function saveBudget() {
+  const key = getSession();
+  const user = getUsers()[key];
+  if (!user) return;
+
+  const cat = document.getElementById('bd-cat').value;
+  const amount = parseFloat(document.getElementById('bd-amount').value);
+  const msg = document.getElementById('bd-msg');
+  msg.textContent = '';
+
+  if (!amount || amount <= 0) { msg.textContent = 'Enter a valid amount.'; msg.style.color = '#f87171'; return; }
+
+  user.budgets = user.budgets || {};
+  user.budgets[cat] = amount;
+  persistUser(key, user);
+
+  document.getElementById('bd-amount').value = '';
+  msg.textContent = 'Budget saved for ' + cat + '.';
+  msg.style.color = '#4ade80';
+  renderAll(user);
+  setTimeout(() => { msg.textContent = ''; }, 1800);
+}
+
+/* ---------- card controls ---------- */
+function toggleFreeze() {
+  const key = getSession();
+  const user = getUsers()[key];
+  if (!user) return;
+  user.frozen = !user.frozen;
+  persistUser(key, user);
+  const msg = document.getElementById('card-msg');
+  if (msg) {
+    msg.textContent = user.frozen ? 'Card frozen.' : 'Card unfrozen.';
+    msg.style.color = '#4ade80';
+    setTimeout(() => { msg.textContent = ''; }, 1800);
+  }
+  renderAll(user);
+}
+
+function revealPin() {
+  const pin = String(Math.floor(1000 + Math.random() * 9000));
+  alert('Your demo PIN: ' + pin + '\n\n(Do not share with anyone — demo only)');
+}
+
+function generateVirtualCard() {
+  const key = getSession();
+  const user = getUsers()[key];
+  if (!user) return;
+
+  let num = '';
+  for (let i = 0; i < 16; i++) num += Math.floor(Math.random() * 10);
+  const grouped = num.match(/.{1,4}/g).join(' ');
+  const expiry = String(Math.floor(Math.random()*12)+1).padStart(2,'0') + '/' +
+                 String((new Date().getFullYear()+3)%100);
+
+  user.virtualCards = user.virtualCards || [];
+  user.virtualCards.push({ number: grouped, expiry });
+  persistUser(key, user);
+  renderAll(user);
+
+  alert('Virtual Card Generated\n\nCard: ' + grouped + '\nExpiry: ' + expiry);
 }
 
 /* ---------- reset password ---------- */
@@ -1866,38 +3158,21 @@ function handleResetPassword() {
   const key = getSession();
   const users = getUsers();
   const user = users[key];
-  if (!user) { showScreen('screen-signin'); return; }
+  if (!user) return;
 
-  const codeEl = document.getElementById('pf-reset-code');
-  const passEl = document.getElementById('pf-new-pass');
+  const code = document.getElementById('pf-reset-code').value.trim();
+  const newPass = document.getElementById('pf-new-pass').value;
   const msg = document.getElementById('pf-msg');
-
   msg.textContent = '';
 
-  const code = codeEl.value.trim();
-  const newPass = passEl.value;
-
-  if (!code || code.length !== 6) {
-    msg.textContent = 'Enter your 6-digit access code.';
-    msg.style.color = '#f87171';
-    return;
-  }
-  if (code !== user.code) {
-    msg.textContent = 'Incorrect access code.';
-    msg.style.color = '#f87171';
-    return;
-  }
-  if (!newPass || newPass.length < 4) {
-    msg.textContent = 'New password must be at least 4 characters.';
-    msg.style.color = '#f87171';
-    return;
-  }
+  if (!code || code.length !== 6) { msg.textContent = 'Enter your 6-digit access code.'; msg.style.color = '#f87171'; return; }
+  if (code !== user.code) { msg.textContent = 'Incorrect access code.'; msg.style.color = '#f87171'; return; }
+  if (!newPass || newPass.length < 4) { msg.textContent = 'Password must be 4+ chars.'; msg.style.color = '#f87171'; return; }
 
   user.pass = newPass;
   persistUser(key, user);
-
-  codeEl.value = '';
-  passEl.value = '';
+  document.getElementById('pf-reset-code').value = '';
+  document.getElementById('pf-new-pass').value = '';
   msg.textContent = 'Password reset successfully.';
   msg.style.color = '#4ade80';
   setTimeout(() => { msg.textContent = ''; }, 2400);
@@ -1908,71 +3183,39 @@ function handleChangeName() {
   const key = getSession();
   const users = getUsers();
   const user = users[key];
-  if (!user) { showScreen('screen-signin'); return; }
+  if (!user) return;
 
   const newName = document.getElementById('pf-new-name').value.trim();
   const msg = document.getElementById('pf-name-msg');
   msg.textContent = '';
 
   if (!newName || newName.length < 3) {
-    msg.textContent = 'Name must be at least 3 characters.';
+    msg.textContent = 'Name must be 3+ characters.';
     msg.style.color = '#f87171';
     return;
   }
-
   user.name = newName;
   persistUser(key, user);
-
   document.getElementById('pf-new-name').value = '';
-  msg.textContent = 'Name updated successfully.';
+  msg.textContent = 'Name updated.';
   msg.style.color = '#4ade80';
   renderAll(user);
   setTimeout(() => { msg.textContent = ''; }, 1800);
 }
 
-/* ---------- virtual card ---------- */
-function generateVirtualCard() {
-  const key = getSession();
-  const user = getUsers()[key];
-  if (!user) { showScreen('screen-signin'); return; }
-
-  let num = '';
-  for (let i = 0; i < 16; i++) num += Math.floor(Math.random() * 10);
-  const grouped = num.match(/.{1,4}/g).join(' ');
-  const expiry = String(Math.floor(Math.random()*12)+1).padStart(2,'0') + '/' +
-                 String((new Date().getFullYear()+3)%100);
-  const cvv = String(Math.floor(Math.random()*900)+100);
-
-  alert(
-    'Virtual Card Generated\n\n' +
-    'Card Number: ' + grouped + '\n' +
-    'Expiry: ' + expiry + '\n' +
-    'CVV: ' + cvv + '\n' +
-    'Cardholder: ' + user.name.toUpperCase() + '\n\n' +
-    '(This is a randomly generated card for demo purposes.)'
-  );
-}
-
-/* ---------- copy helpers ---------- */
+/* ---------- copy ---------- */
 function copyText(text) {
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).then(
       () => alert('Copied: ' + text),
-      () => alert('Copy failed — manually copy: ' + text)
+      () => alert('Copy this value: ' + text)
     );
   } else {
     alert('Copy this value: ' + text);
   }
 }
 
-function copyZelleEmail() {
-  const key = getSession();
-  const user = getUsers()[key];
-  if (!user) return;
-  copyText(user.email);
-}
-
-/* ---------- Zelle recipient label toggle ---------- */
+/* ---------- Zelle label toggle ---------- */
 document.addEventListener('change', function (e) {
   if (e.target && e.target.id === 'zl-type') {
     const label = document.getElementById('zl-recipient-label');
@@ -1987,7 +3230,7 @@ document.addEventListener('change', function (e) {
   }
 });
 
-/* ---------- click-outside modal close ---------- */
+/* ---------- click-outside modal ---------- */
 document.addEventListener('click', function (e) {
   const modal = document.getElementById('switcher-modal');
   if (e.target === modal) closeSwitcher();
@@ -1997,7 +3240,11 @@ document.addEventListener('click', function (e) {
 document.addEventListener('DOMContentLoaded', function () {
   runMigrations();
   updateClocks();
-  setInterval(updateClocks, 1000);    // updates every second
+  setInterval(updateClocks, 1000);
+
+  const isLight = document.body.classList.contains('light');
+  const btn = document.getElementById('theme-btn');
+  if (btn) btn.textContent = isLight ? '🌙' : '☀️';
 
   const session = getSession();
   if (session && getUsers()[session]) {
