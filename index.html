@@ -727,11 +727,7 @@ button { cursor: pointer; }
   margin-top: 6px;
 }
 
-.modal-close.danger {
-  background: #ef4444;
-  color: #fff;
-}
-
+.modal-close.danger { background: #ef4444; color: #fff; }
 .modal-close.ghost {
   background: transparent;
   border: 1px solid rgba(229,199,107,.4);
@@ -767,7 +763,6 @@ button { cursor: pointer; }
         <label>Access Code</label>
         <input id="accessCode" type="password" placeholder="Enter access code" autocomplete="off" required>
       </div>
-
       <button type="submit" class="primary-button">Unlock</button>
     </form>
 
@@ -790,17 +785,14 @@ button { cursor: pointer; }
         <label>Full Name</label>
         <input id="signupName" type="text" placeholder="Cerji Colvin" autocomplete="name" required>
       </div>
-
       <div class="field">
         <label>Email Address</label>
         <input id="signupEmail" type="email" placeholder="cerji@example.com" autocomplete="email" required>
       </div>
-
       <div class="field">
         <label>Password</label>
         <input id="signupPassword" type="password" placeholder="Create a password (min 8 chars)" autocomplete="new-password" required>
       </div>
-
       <button type="submit" class="primary-button">Create Account</button>
     </form>
 
@@ -824,14 +816,18 @@ button { cursor: pointer; }
         <label>Email Address</label>
         <input id="loginEmail" type="email" placeholder="cerji@example.com" autocomplete="email" required>
       </div>
-
       <div class="field">
         <label>Password</label>
         <input id="loginPassword" type="password" placeholder="Your password" autocomplete="current-password" required>
       </div>
-
       <button type="submit" class="primary-button">Sign In</button>
     </form>
+
+    <div class="auth-hint">
+      <b>Cerji's account:</b><br>
+      Email: <b>cerji@novapay.com</b><br>
+      Password: <b>Cerji2024!</b>
+    </div>
 
     <div class="auth-switch">
       Don't have an account?
@@ -864,7 +860,7 @@ button { cursor: pointer; }
 
   <div class="balance-card">
     <div class="balance-label">Available Balance</div>
-    <div class="balance" id="accountBalance">$0.00</div>
+    <div class="balance" id="accountBalance">$184,290.00</div>
     <div class="balance-sub" id="accountSub">Checking Account</div>
     <div class="actions">
       <button class="action-button primary" id="transferButton" type="button">Transfer</button>
@@ -875,15 +871,15 @@ button { cursor: pointer; }
   <div class="stats-strip">
     <div class="stat-box">
       <span class="stat-label">Income</span>
-      <span class="stat-value income" id="statIncome">+$0.00</span>
+      <span class="stat-value income" id="statIncome">+$62,450.00</span>
     </div>
     <div class="stat-box">
       <span class="stat-label">Expenses</span>
-      <span class="stat-value expense" id="statExpense">-$0.00</span>
+      <span class="stat-value expense" id="statExpense">-$3,215.80</span>
     </div>
     <div class="stat-box">
       <span class="stat-label">Savings</span>
-      <span class="stat-value" id="statSavings">$0.00</span>
+      <span class="stat-value" id="statSavings">$89,250.75</span>
     </div>
   </div>
 
@@ -895,7 +891,7 @@ button { cursor: pointer; }
     <div class="chip"></div>
     <div class="card-number">
       •••• &nbsp; •••• &nbsp; •••• &nbsp;
-      <span style="color:#f3dfa2;" id="cardLastFour">0000</span>
+      <span style="color:#f3dfa2;" id="cardLastFour">4291</span>
     </div>
     <div class="card-bottom">
       <div>
@@ -904,14 +900,14 @@ button { cursor: pointer; }
       </div>
       <div style="text-align:right;">
         <span class="card-label">VALID THRU</span>
-        <span class="card-value" id="cardExpiry">--/--</span>
+        <span class="card-value" id="cardExpiry">08/29</span>
       </div>
     </div>
   </div>
 
   <div class="section-title">
     <h2>Recent Activity</h2>
-    <span id="txCount">0 transactions</span>
+    <span id="txCount">7 transactions</span>
   </div>
 
   <div class="tx-list" id="txList"></div>
@@ -960,8 +956,8 @@ button { cursor: pointer; }
     <div class="field">
       <label>From Account</label>
       <select id="fromAccount">
-        <option value="checking">Checking · $0.00</option>
-        <option value="savings">Savings · $0.00</option>
+        <option value="checking">Checking · $184,290.00</option>
+        <option value="savings">Savings · $89,250.75</option>
       </select>
     </div>
 
@@ -1106,8 +1102,8 @@ button { cursor: pointer; }
     <div class="field">
       <label>Paying From</label>
       <select id="billFrom">
-        <option value="checking">Checking · $0.00</option>
-        <option value="savings">Savings · $0.00</option>
+        <option value="checking">Checking · $184,290.00</option>
+        <option value="savings">Savings · $89,250.75</option>
       </select>
     </div>
 
@@ -1253,7 +1249,7 @@ button { cursor: pointer; }
   </div>
 
   <div class="profile-card">
-    <div class="profile-avatar" id="profileBigAvatar">C</div>
+    <div class="profile-avatar" id="profileBigAvatar">CC</div>
     <div class="profile-name" id="profileName">Cerji Colvin</div>
     <div class="profile-email" id="profileEmail"></div>
     <div class="profile-since" id="profileSince"></div>
@@ -1262,19 +1258,19 @@ button { cursor: pointer; }
   <div class="profile-rows">
     <div class="profile-row">
       <span class="label">Checking Balance</span>
-      <span class="value" id="profChecking">$0.00</span>
+      <span class="value" id="profChecking">$184,290.00</span>
     </div>
     <div class="profile-row">
       <span class="label">Savings Balance</span>
-      <span class="value" id="profSavings">$0.00</span>
+      <span class="value" id="profSavings">$89,250.75</span>
     </div>
     <div class="profile-row">
       <span class="label">Total Net Worth</span>
-      <span class="value" id="profTotal">$0.00</span>
+      <span class="value" id="profTotal">$273,540.75</span>
     </div>
     <div class="profile-row">
       <span class="label">Transactions</span>
-      <span class="value" id="profTxCount">0</span>
+      <span class="value" id="profTxCount">7</span>
     </div>
     <div class="profile-row">
       <span class="label">Account Tier</span>
@@ -1333,7 +1329,7 @@ button { cursor: pointer; }
 <script>
 
 /* ============================================================
-   0. ACCESS CODE — REQUIRED BEFORE LOGIN
+   0. ACCESS CODE
    ============================================================ */
 
 const ACCESS_CODE = "CERJI2024";
@@ -1358,13 +1354,12 @@ function saveUsers(users) {
 
 function seedCerjiUser() {
   const users = getUsers();
-  // Fresh start — Cerji Colvin is the only real user
   if (!users["cerji@novapay.com"]) {
     users["cerji@novapay.com"] = {
       name: "Cerji Colvin",
       email: "cerji@novapay.com",
       password: "Cerji2024!",
-      createdAt: new Date().toISOString()
+      createdAt: new Date("2023-03-15").toISOString()
     };
     saveUsers(users);
   }
@@ -1615,25 +1610,32 @@ setInterval(updateGreeting, 60000);
 
 
 /* ============================================================
-   9. ACCOUNTS DATA — Empty starting balances for Cerji
+   9. ACCOUNTS DATA — Cerji Colvin
+   ------------------------------------------------------------
+   Opening balance:    $134,290.00
+   + iFundWomen grant: +$50,000.00
+   = New balance:      $184,290.00
    ============================================================ */
+
+const OPENING_BALANCE   = 134290.00;
+const IFUNDWOMEN_GRANT  = 50000.00;
 
 const accounts = {
   checking: {
     label: "Checking Account",
-    balance: 0.00,
-    income: 0.00,
-    expense: 0.00,
-    savings: 0.00,
+    balance: OPENING_BALANCE + IFUNDWOMEN_GRANT,   // 184,290.00
+    income: 12450.00 + IFUNDWOMEN_GRANT,           // 62,450.00
+    expense: 3215.80,
+    savings: 89250.75,
     lastFour: "4291",
     expiry: "08/29"
   },
   savings: {
     label: "Savings Account",
-    balance: 0.00,
-    income: 0.00,
-    expense: 0.00,
-    savings: 0.00,
+    balance: 89250.75,
+    income: 3400.00,
+    expense: 412.50,
+    savings: 25000.00,
     lastFour: "7735",
     expiry: "11/30"
   }
@@ -1643,10 +1645,18 @@ let activeAccount = "checking";
 
 
 /* ============================================================
-   10. TRANSACTION STORE — Empty for Cerji
+   10. TRANSACTION STORE — includes iFundWomen grant
    ============================================================ */
 
-const transactions = [];
+const transactions = [
+  { id: 1, type: "credit", category: "grant",    icon: "🏆", name: "iFundWomen Grant",      date: "Today · 10:32 AM",      amount: 50000.00 },
+  { id: 2, type: "credit", category: "income",   icon: "💼", name: "Salary Deposit",        date: "Today · 09:14 AM",      amount: 8500.00 },
+  { id: 3, type: "debit",  category: "bills",    icon: "🏠", name: "Rent Payment",          date: "Today · 07:02 AM",      amount: 1850.00 },
+  { id: 4, type: "debit",  category: "purchase", icon: "🛒", name: "Whole Foods Market",    date: "Yesterday · 06:45 PM",  amount: 214.35 },
+  { id: 5, type: "debit",  category: "bills",    icon: "⚡", name: "Electric Bill",         date: "Yesterday · 11:20 AM",  amount: 142.60 },
+  { id: 6, type: "credit", category: "income",   icon: "💰", name: "Freelance Payment",     date: "Sep 26 · 03:12 PM",     amount: 3950.00 },
+  { id: 7, type: "debit",  category: "bills",    icon: "📶", name: "Internet Subscription", date: "Sep 25 · 08:00 AM",     amount: 89.99 }
+];
 
 
 /* ============================================================
@@ -1683,7 +1693,7 @@ function renderTxList(target, list, emptyMessage) {
 
 function renderHomeTransactions() {
   const list = transactions.slice(0, 6);
-  renderTxList(document.getElementById("txList"), list, "No recent activity.\nYour transactions will appear here.");
+  renderTxList(document.getElementById("txList"), list, "No recent activity.");
   document.getElementById("txCount").textContent =
     transactions.length + " transaction" + (transactions.length === 1 ? "" : "s");
 }
@@ -1776,7 +1786,7 @@ function loadDashboard() {
         month: "long", day: "numeric", year: "numeric"
       });
   } else {
-    document.getElementById("profileSince").textContent = "Member since today";
+    document.getElementById("profileSince").textContent = "Member since March 15, 2023";
   }
 
   updateGreeting();
@@ -1920,343 +1930,3 @@ document.getElementById("confirmTransfer").addEventListener("click", function() 
   showConfirm(
     "Confirm Transfer",
     "Send " + formatMoney(amount) + " to " + selectedRecipient.name +
-    "?\n\nFee: " + formatMoney(fee) +
-    "\nTotal debit: " + formatMoney(total),
-    function() {
-      fromAcc.balance -= total;
-      fromAcc.expense += amount;
-
-      transactions.unshift({
-        id: Date.now(),
-        type: "debit",
-        category: "transfer",
-        icon: "➡️",
-        name: "To " + selectedRecipient.name,
-        date: "Just now · " + (note || "Transfer"),
-        amount: amount
-      });
-
-      renderAccount(fromKey);
-      renderHomeTransactions();
-      updateTransferSummary();
-      updateProfileStats();
-
-      showModal(
-        "Transfer Successful ✓",
-        "Sent " + formatMoney(amount) + " to " + selectedRecipient.name +
-        "\nBank: " + selectedRecipient.bank +
-        "\nFee: " + formatMoney(fee) +
-        "\nTotal debited: " + formatMoney(total) +
-        "\n\nNew balance: " + formatMoney(fromAcc.balance)
-      );
-
-      transferAmountEl.value = "";
-      document.getElementById("transferNote").value = "";
-      selectedRecipient = null;
-      document.querySelectorAll("#recipientList .recipient-item").forEach(function(el) {
-        el.classList.remove("selected");
-      });
-      updateTransferSummary();
-    }
-  );
-});
-
-
-/* ============================================================
-   15. BILLS
-   ============================================================ */
-
-let selectedBill = null;
-
-document.querySelectorAll("#billGrid .bill-tile").forEach(function(tile) {
-  tile.addEventListener("click", function() {
-    document.querySelectorAll("#billGrid .bill-tile").forEach(function(t) {
-      t.classList.remove("selected");
-    });
-    tile.classList.add("selected");
-    selectedBill = {
-      name: tile.dataset.bill,
-      min:  parseFloat(tile.dataset.min)
-    };
-    updateBillSummary();
-  });
-});
-
-const billAmountEl  = document.getElementById("billAmount");
-const billSumName   = document.getElementById("billSumName");
-const billSumAmount = document.getElementById("billSumAmount");
-const billSumFee    = document.getElementById("billSumFee");
-const billSumTotal  = document.getElementById("billSumTotal");
-const billLimitNote = document.getElementById("billLimitNote");
-
-function updateBillSummary() {
-  const amount = parseFloat(billAmountEl.value) || 0;
-  const fee = amount > 0 ? 1.00 : 0;
-  const total = amount + fee;
-
-  billSumName.textContent   = selectedBill ? selectedBill.name : "—";
-  billSumAmount.textContent = formatMoney(amount);
-  billSumFee.textContent    = formatMoney(fee);
-  billSumTotal.textContent  = formatMoney(total);
-
-  const fromKey = document.getElementById("billFrom").value;
-  const avail   = accounts[fromKey].balance;
-  billLimitNote.textContent =
-    "Available: " + formatMoney(avail) +
-    " · Remaining: " + formatMoney(Math.max(avail - total, 0));
-}
-
-billAmountEl.addEventListener("input", updateBillSummary);
-
-document.getElementById("billFrom").addEventListener("change", function() {
-  renderAccount(this.value);
-  updateBillSummary();
-});
-
-document.querySelectorAll(".bill-chip").forEach(function(chip) {
-  chip.addEventListener("click", function() {
-    billAmountEl.value = chip.dataset.amt;
-    updateBillSummary();
-  });
-});
-
-document.getElementById("confirmBill").addEventListener("click", function() {
-  const fromKey = document.getElementById("billFrom").value;
-  const amount  = parseFloat(billAmountEl.value) || 0;
-  const ref     = document.getElementById("billRef").value.trim();
-
-  if (!selectedBill) {
-    showModal("No Bill Selected", "Please choose a bill category above.");
-    return;
-  }
-
-  if (amount <= 0) {
-    showModal("Invalid Amount", "Please enter a bill amount greater than $0.00.");
-    return;
-  }
-
-  if (amount < selectedBill.min) {
-    showModal("Amount Too Low",
-      "Minimum payment for " + selectedBill.name + " is " + formatMoney(selectedBill.min) + ".");
-    return;
-  }
-
-  const fee   = 1.00;
-  const total = amount + fee;
-  const fromAcc = accounts[fromKey];
-
-  if (total > fromAcc.balance) {
-    showModal("Insufficient Funds",
-      "You need " + formatMoney(total) + " but your " + fromAcc.label +
-      " only has " + formatMoney(fromAcc.balance) + ".");
-    return;
-  }
-
-  showConfirm(
-    "Confirm Bill Payment",
-    "Pay " + selectedBill.name + " bill of " + formatMoney(amount) +
-    (ref ? "\nReference: " + ref : "") +
-    "\n\nFee: " + formatMoney(fee) +
-    "\nTotal: " + formatMoney(total),
-    function() {
-      fromAcc.balance -= total;
-      fromAcc.expense += amount;
-
-      transactions.unshift({
-        id: Date.now(),
-        type: "debit",
-        category: "bills",
-        icon: billEmoji(selectedBill.name),
-        name: selectedBill.name + " Bill" + (ref ? " · " + ref : ""),
-        date: "Just now",
-        amount: amount
-      });
-
-      renderAccount(fromKey);
-      renderHomeTransactions();
-      updateBillSummary();
-      updateProfileStats();
-
-      showModal(
-        "Bill Paid ✓",
-        "Successfully paid " + formatMoney(amount) + " to " + selectedBill.name + ".\n" +
-        (ref ? "Reference: " + ref + "\n" : "") +
-        "Fee: " + formatMoney(fee) +
-        "\nTotal debited: " + formatMoney(total) +
-        "\n\nNew balance: " + formatMoney(fromAcc.balance)
-      );
-
-      billAmountEl.value = "";
-      document.getElementById("billRef").value = "";
-      selectedBill = null;
-      document.querySelectorAll("#billGrid .bill-tile").forEach(function(t) {
-        t.classList.remove("selected");
-      });
-      updateBillSummary();
-    }
-  );
-});
-
-function billEmoji(name) {
-  const map = {
-    Electric: "⚡", Water: "💧", Internet: "📶", Phone: "📱",
-    Gas: "🔥", Rent: "🏠", Netflix: "🎬", Insurance: "🛡️", Gym: "💪"
-  };
-  return map[name] || "📄";
-}
-
-
-/* ============================================================
-   16. HISTORY
-   ============================================================ */
-
-let historyFilter = "all";
-
-function renderHistory() {
-  let list = transactions.slice();
-
-  if (historyFilter === "credit")        list = list.filter(t => t.type === "credit");
-  else if (historyFilter === "debit")    list = list.filter(t => t.type === "debit");
-  else if (historyFilter === "bills")    list = list.filter(t => t.category === "bills");
-  else if (historyFilter === "transfer") list = list.filter(t => t.category === "transfer");
-
-  renderTxList(document.getElementById("historyList"), list, "No transactions match this filter.");
-
-  let totalIn = 0, totalOut = 0;
-  transactions.forEach(function(t) {
-    if (t.type === "credit") totalIn += t.amount;
-    else totalOut += t.amount;
-  });
-
-  document.getElementById("histTotalIn").textContent  = "+" + formatMoney(totalIn);
-  document.getElementById("histTotalOut").textContent = "-" + formatMoney(totalOut);
-  document.getElementById("histNet").textContent      = formatMoney(totalIn - totalOut);
-  document.getElementById("historySummary").textContent =
-    list.length + " transaction" + (list.length === 1 ? "" : "s") + " shown";
-}
-
-document.querySelectorAll(".filter-chip").forEach(function(chip) {
-  chip.addEventListener("click", function() {
-    document.querySelectorAll(".filter-chip").forEach(function(c) {
-      c.classList.remove("active");
-    });
-    chip.classList.add("active");
-    historyFilter = chip.dataset.filter;
-    renderHistory();
-  });
-});
-
-
-/* ============================================================
-   17. TOP-ROW BUTTONS
-   ============================================================ */
-
-document.getElementById("transferButton").addEventListener("click", function() {
-  showScreen(transferScreen);
-  updateTransferSummary();
-});
-
-document.getElementById("depositButton").addEventListener("click", function() {
-  showModal("Deposit Funds",
-    "Deposit checks or move money from an external account.\n\n" +
-    "Mobile check deposits up to $25,000.00 are credited instantly.\n" +
-    "ACH transfers up to $50,000.00 take 1–2 business days.");
-});
-
-document.getElementById("virtualCardButton").addEventListener("click", function() {
-  showModal("Virtual Card Generated",
-    "Your new virtual card ending in " + accounts.checking.lastFour + " is ready.\n\n" +
-    "Daily limit: $10,000.00\n" +
-    "Monthly limit: $50,000.00\n" +
-    "Online purchases: Enabled\n" +
-    "Contactless payments: Enabled");
-});
-
-document.getElementById("notificationButton").addEventListener("click", function() {
-  if (transactions.length === 0) {
-    showModal("Notifications", "No new notifications.\n\nYou're all caught up.");
-  } else {
-    const recent = transactions.slice(0, 3);
-    let msg = "You have " + transactions.length + " transaction" +
-      (transactions.length === 1 ? "" : "s") + ":\n\n";
-    recent.forEach(function(t) {
-      msg += "• " + t.name + "  " +
-        (t.type === "credit" ? "+" : "-") + formatMoney(t.amount) + "\n";
-    });
-    showModal("Notifications", msg);
-  }
-});
-
-document.getElementById("themeButton").addEventListener("click", function() {
-  showModal("Theme",
-    "NovaPay is currently in Midnight Gold mode.\n\nLight mode is coming in the next release.");
-});
-
-
-/* ============================================================
-   18. BACK BUTTONS
-   ============================================================ */
-
-document.getElementById("transferBack").addEventListener("click", function() {
-  showScreen(dashboardScreen);
-});
-document.getElementById("billsBack").addEventListener("click", function() {
-  showScreen(dashboardScreen);
-});
-document.getElementById("historyBack").addEventListener("click", function() {
-  showScreen(dashboardScreen);
-});
-document.getElementById("profileBack").addEventListener("click", function() {
-  showScreen(dashboardScreen);
-});
-
-
-/* ============================================================
-   19. NAVIGATION
-   ============================================================ */
-
-function navigateTo(page) {
-  if (page === "home")            showScreen(dashboardScreen);
-  else if (page === "transfer")   { showScreen(transferScreen); updateTransferSummary(); }
-  else if (page === "bills")      { showScreen(billsScreen);    updateBillSummary(); }
-  else if (page === "history")    { showScreen(historyScreen);  renderHistory(); }
-  else if (page === "profile")    { showScreen(profileScreen);  updateProfileStats(); }
-
-  document.querySelectorAll(".nav-button").forEach(function(btn) {
-    btn.classList.toggle("active", btn.dataset.page === page);
-  });
-}
-
-document.querySelectorAll(".nav-button").forEach(function(button) {
-  button.addEventListener("click", function() {
-    navigateTo(button.dataset.page);
-  });
-});
-
-
-/* ============================================================
-   20. INIT
-   ============================================================ */
-
-(function init() {
-  const accessGranted = sessionStorage.getItem(ACCESS_KEY) === "true";
-  const existing = getSession();
-
-  if (!accessGranted) {
-    showScreen(codeScreen);
-  } else if (existing) {
-    loadDashboard();
-    showScreen(dashboardScreen);
-  } else {
-    showScreen(signupScreen);
-  }
-
-  updateTransferSummary();
-  updateBillSummary();
-  renderHistory();
-})();
-
-</script>
-
-</body>
-</html>
