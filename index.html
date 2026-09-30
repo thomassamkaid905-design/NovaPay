@@ -12,12 +12,12 @@
   --gold-dark: #c9a84a;
   --gold-soft: #f3dfa2;
   --bg: #0d0c0a;
-  --bg-2: #17150f;
   --card: #1a1813;
   --text: #f5f1e6;
   --muted: #a39d8c;
   --green: #4ade80;
   --red: #f87171;
+  --blue: #60a5fa;
 }
 
 html, body { height: 100%; background: #000; }
@@ -53,286 +53,174 @@ body {
 }
 .screen.active { display: flex; }
 
-/* ============== AUTH SCREENS ============== */
-.auth-screen {
-  padding: 60px 30px 40px;
-  justify-content: center;
-  align-items: center;
-}
+/* ============== AUTH ============== */
+.auth-screen { padding: 60px 30px 40px; justify-content: center; align-items: center; }
 
 .brand {
-  font-size: 34px;
-  font-weight: 800;
-  letter-spacing: -1px;
-  color: #f3dfa2;
-  margin-bottom: 8px;
-  text-align: center;
+  font-size: 34px; font-weight: 800; letter-spacing: -1px;
+  color: #f3dfa2; margin-bottom: 8px; text-align: center;
 }
 .brand span { color: #fdf8ea; }
 
 .tagline {
-  font-size: 14px;
-  color: rgba(200,190,160,0.6);
-  margin-bottom: 40px;
-  text-align: center;
+  font-size: 14px; color: rgba(200,190,160,0.6);
+  margin-bottom: 40px; text-align: center;
 }
 
-.auth-form {
-  width: 100%;
-  max-width: 340px;
-}
+.auth-form { width: 100%; max-width: 340px; }
 
-.field {
-  margin-bottom: 18px;
-}
+.field { margin-bottom: 18px; }
 
 .field label {
-  display: block;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.6px;
-  color: rgba(200,190,160,0.75);
-  margin-bottom: 8px;
-  text-transform: uppercase;
+  display: block; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.6px; color: rgba(200,190,160,0.75);
+  margin-bottom: 8px; text-transform: uppercase;
 }
 
 .field input {
-  width: 100%;
-  padding: 15px 18px;
-  border-radius: 14px;
+  width: 100%; padding: 15px 18px; border-radius: 14px;
   background: rgba(255,255,255,0.05);
   border: 1.5px solid rgba(229,199,107,0.2);
-  color: #fdf8ea;
-  font-size: 15px;
-  font-family: inherit;
-  outline: none;
-  transition: 0.15s;
+  color: #fdf8ea; font-size: 15px; font-family: inherit;
+  outline: none; transition: 0.15s;
 }
-
 .field input:focus {
   border-color: rgba(229,199,107,0.6);
   background: rgba(255,255,255,0.07);
 }
-
 .field input::placeholder { color: rgba(200,190,160,0.35); }
 
 .btn-gold {
-  width: 100%;
-  padding: 16px;
-  border-radius: 14px;
+  width: 100%; padding: 16px; border-radius: 14px;
   background: linear-gradient(135deg, #f3dfa2, #e5c76b);
-  color: #2a2107;
-  font-size: 15px;
-  font-weight: 800;
-  border: none;
-  cursor: pointer;
+  color: #2a2107; font-size: 15px; font-weight: 800;
+  border: none; cursor: pointer;
   box-shadow: 0 8px 22px rgba(229,199,107,0.3);
-  transition: 0.15s;
-  margin-top: 8px;
-  font-family: inherit;
+  transition: 0.15s; margin-top: 8px; font-family: inherit;
 }
 .btn-gold:active { transform: scale(0.98); }
 
 .auth-switch {
-  text-align: center;
-  margin-top: 24px;
-  font-size: 13px;
+  text-align: center; margin-top: 24px; font-size: 13px;
   color: rgba(200,190,160,0.6);
 }
 .auth-switch a {
-  color: #f3dfa2;
-  font-weight: 700;
-  cursor: pointer;
-  text-decoration: none;
+  color: #f3dfa2; font-weight: 700; cursor: pointer; text-decoration: none;
 }
 
 .error-msg {
-  color: #f87171;
-  font-size: 13px;
-  margin-top: 12px;
-  text-align: center;
-  min-height: 18px;
-  font-weight: 600;
+  color: #f87171; font-size: 13px; margin-top: 12px;
+  text-align: center; min-height: 18px; font-weight: 600;
 }
-
 .success-msg {
-  color: #4ade80;
-  font-size: 13px;
-  margin-top: 12px;
-  text-align: center;
-  min-height: 18px;
-  font-weight: 600;
+  color: #4ade80; font-size: 13px; margin-top: 12px;
+  text-align: center; min-height: 18px; font-weight: 600;
 }
 
-/* ============== CODE DISPLAY ============== */
+/* ============== CODE ============== */
 .code-box {
-  margin-top: 24px;
-  padding: 22px;
-  border-radius: 18px;
+  margin-top: 24px; padding: 22px; border-radius: 18px;
   background: linear-gradient(135deg, rgba(243,223,162,0.14), rgba(229,199,107,0.06));
-  border: 1.5px solid rgba(229,199,107,0.4);
-  text-align: center;
+  border: 1.5px solid rgba(229,199,107,0.4); text-align: center;
 }
-
 .code-box .label {
-  font-size: 12px;
-  letter-spacing: 1px;
-  color: rgba(200,190,160,0.75);
-  font-weight: 700;
-  margin-bottom: 10px;
-  text-transform: uppercase;
+  font-size: 12px; letter-spacing: 1px;
+  color: rgba(200,190,160,0.75); font-weight: 700;
+  margin-bottom: 10px; text-transform: uppercase;
 }
-
 .code-box .code {
-  font-size: 34px;
-  letter-spacing: 8px;
-  font-weight: 800;
-  color: #f3dfa2;
-  font-family: "Courier New", monospace;
+  font-size: 34px; letter-spacing: 8px; font-weight: 800;
+  color: #f3dfa2; font-family: "Courier New", monospace;
 }
-
 .code-box .hint {
-  font-size: 12px;
-  color: rgba(200,190,160,0.6);
-  margin-top: 12px;
-  line-height: 1.5;
+  font-size: 12px; color: rgba(200,190,160,0.6);
+  margin-top: 12px; line-height: 1.5;
 }
 
 /* ============== STATUS BAR ============== */
 .status-bar {
-  padding: 14px 22px 6px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 15px;
-  font-weight: 700;
-  color: #f5f1e6;
-  flex-shrink: 0;
+  padding: 14px 22px 6px; display: flex;
+  justify-content: space-between; align-items: center;
+  font-size: 15px; font-weight: 700; color: #f5f1e6; flex-shrink: 0;
 }
 .status-bar .right { display: flex; align-items: center; gap: 7px; font-size: 13px; }
 
 /* ============== TOP ROW ============== */
 .top-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 20px 18px;
-  flex-shrink: 0;
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 20px 18px; flex-shrink: 0;
 }
 
 .icon-btn {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
+  width: 42px; height: 42px; border-radius: 50%;
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(229,199,107,0.18);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  cursor: pointer;
-  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; cursor: pointer; position: relative;
   color: var(--gold);
 }
-
 .icon-btn .dot {
-  position: absolute;
-  top: 8px; right: 9px;
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: #ef4444;
-  border: 1.5px solid #23201a;
+  position: absolute; top: 8px; right: 9px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #ef4444; border: 1.5px solid #23201a;
 }
 
 .top-name {
-  flex: 1;
-  font-size: 19px;
-  font-weight: 800;
-  letter-spacing: -0.3px;
-  color: #f5f1e6;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  flex: 1; font-size: 19px; font-weight: 800;
+  letter-spacing: -0.3px; color: #f5f1e6;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 
 .avatar {
-  width: 44px; height: 44px;
-  border-radius: 50%;
+  width: 44px; height: 44px; border-radius: 50%;
   background: linear-gradient(135deg, #5b7cfa, #4a63e0);
-  color: white;
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 800; font-size: 16px;
+  color: white; display: flex; align-items: center;
+  justify-content: center; font-weight: 800; font-size: 16px;
   box-shadow: 0 4px 14px rgba(80,110,240,0.4);
-  flex-shrink: 0;
-  cursor: pointer;
+  flex-shrink: 0; cursor: pointer;
 }
 
 /* ============== GREETING ============== */
 .greeting-block { padding: 6px 22px 20px; flex-shrink: 0; }
-
 .greeting-block h1 {
-  font-size: 28px;
-  font-weight: 800;
-  letter-spacing: -0.8px;
-  color: #fdf8ea;
-  line-height: 1.15;
+  font-size: 28px; font-weight: 800; letter-spacing: -0.8px;
+  color: #fdf8ea; line-height: 1.15;
 }
-
 .greeting-block p {
-  margin-top: 6px;
-  font-size: 15px;
-  color: rgba(200,190,160,0.65);
-  font-weight: 500;
+  margin-top: 6px; font-size: 15px;
+  color: rgba(200,190,160,0.65); font-weight: 500;
 }
 
 /* ============== PILLS ============== */
 .account-pills {
-  display: flex;
-  gap: 12px;
-  padding: 0 22px 22px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  flex-shrink: 0;
+  display: flex; gap: 12px; padding: 0 22px 22px;
+  overflow-x: auto; scrollbar-width: none; flex-shrink: 0;
 }
 .account-pills::-webkit-scrollbar { display: none; }
 
 .pill {
-  flex-shrink: 0;
-  padding: 12px 20px;
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: 0.2s;
-  font-family: inherit;
-  border: none;
+  flex-shrink: 0; padding: 12px 20px; border-radius: 999px;
+  font-size: 14px; font-weight: 700; display: flex;
+  align-items: center; gap: 8px; white-space: nowrap;
+  cursor: pointer; transition: 0.2s; font-family: inherit; border: none;
 }
 .pill.active {
   background: linear-gradient(135deg, #f3dfa2, #e5c76b);
-  color: #2a2107;
-  box-shadow: 0 6px 18px rgba(229,199,107,0.3);
+  color: #2a2107; box-shadow: 0 6px 18px rgba(229,199,107,0.3);
 }
 .pill.inactive {
   background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(229,199,107,0.22);
-  color: #e5c76b;
+  border: 1px solid rgba(229,199,107,0.22); color: #e5c76b;
 }
 
 /* ============== BALANCE CARD ============== */
 .balance-card {
-  margin: 0 18px 22px;
-  padding: 26px 24px 24px;
+  margin: 0 18px 22px; padding: 26px 24px 24px;
   border-radius: 24px;
   background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 60%);
   border: 1px solid rgba(229,199,107,0.16);
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.5);
-  flex-shrink: 0;
+  position: relative; overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.5); flex-shrink: 0;
 }
 .balance-card::after {
   content: ""; position: absolute;
@@ -341,292 +229,227 @@ body {
   background: radial-gradient(circle, rgba(229,199,107,0.14) 0%, transparent 65%);
   pointer-events: none;
 }
-
 .balance-label {
-  font-size: 14px;
-  color: rgba(200,190,160,0.75);
-  font-weight: 500;
-  position: relative; z-index: 2;
+  font-size: 14px; color: rgba(200,190,160,0.75);
+  font-weight: 500; position: relative; z-index: 2;
 }
 .balance-amount {
-  margin: 8px 0 6px;
-  font-size: 42px;
-  font-weight: 800;
-  letter-spacing: -1.5px;
-  color: #fdf8ea;
-  position: relative; z-index: 2;
-  line-height: 1.05;
+  margin: 8px 0 6px; font-size: 42px; font-weight: 800;
+  letter-spacing: -1.5px; color: #fdf8ea;
+  position: relative; z-index: 2; line-height: 1.05;
 }
 .balance-sub {
-  font-size: 14px;
-  color: rgba(200,190,160,0.6);
-  font-weight: 500;
-  position: relative; z-index: 2;
+  font-size: 14px; color: rgba(200,190,160,0.6);
+  font-weight: 500; position: relative; z-index: 2;
 }
 .balance-actions {
-  margin-top: 22px;
-  display: flex;
-  gap: 12px;
+  margin-top: 22px; display: flex; gap: 12px;
   position: relative; z-index: 2;
 }
 
 .btn-primary {
-  padding: 13px 26px;
-  border-radius: 12px;
+  padding: 13px 26px; border-radius: 12px;
   background: linear-gradient(135deg, #f3dfa2, #e5c76b);
-  color: #2a2107;
-  font-size: 14px;
-  font-weight: 800;
-  border: none;
-  cursor: pointer;
+  color: #2a2107; font-size: 14px; font-weight: 800;
+  border: none; cursor: pointer;
   box-shadow: 0 6px 18px rgba(229,199,107,0.28);
-  transition: 0.15s;
-  font-family: inherit;
+  transition: 0.15s; font-family: inherit;
 }
 .btn-primary:active { transform: scale(0.97); }
 
 .btn-outline {
-  padding: 13px 26px;
-  border-radius: 12px;
-  background: transparent;
-  color: #e5c76b;
-  font-size: 14px;
-  font-weight: 800;
+  padding: 13px 26px; border-radius: 12px;
+  background: transparent; color: #e5c76b;
+  font-size: 14px; font-weight: 800;
   border: 1.5px solid rgba(229,199,107,0.45);
-  cursor: pointer;
-  transition: 0.15s;
-  font-family: inherit;
+  cursor: pointer; transition: 0.15s; font-family: inherit;
 }
 .btn-outline:active { transform: scale(0.97); }
 
 /* ============== DEBIT CARD ============== */
 .debit-wrap {
-  margin: 0 18px 22px;
-  padding: 26px 24px 22px;
+  margin: 0 18px 22px; padding: 26px 24px 22px;
   border-radius: 24px;
   background: linear-gradient(150deg, #1a1813 0%, #0a0908 70%);
   border: 1px solid rgba(229,199,107,0.16);
   box-shadow: 0 18px 40px rgba(0,0,0,0.5);
-  position: relative;
-  overflow: hidden;
-  flex-shrink: 0;
+  position: relative; overflow: hidden; flex-shrink: 0;
 }
 
 .debit-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 22px;
+  display: flex; justify-content: space-between;
+  align-items: flex-start; margin-bottom: 22px;
 }
 .debit-head h2 {
-  font-size: 22px;
-  font-weight: 800;
-  color: #f3dfa2;
-  letter-spacing: -0.4px;
+  font-size: 22px; font-weight: 800;
+  color: #f3dfa2; letter-spacing: -0.4px;
 }
-
-.wifi-icon {
-  color: #f3dfa2;
-  font-size: 22px;
-  transform: rotate(90deg);
-  opacity: 0.9;
-}
+.wifi-icon { color: #f3dfa2; font-size: 22px; transform: rotate(90deg); opacity: 0.9; }
 
 .chip {
-  width: 46px; height: 34px;
-  border-radius: 7px;
+  width: 46px; height: 34px; border-radius: 7px;
   background: linear-gradient(135deg, #f3dfa2, #c9a84a);
   box-shadow: inset 0 1px 3px rgba(0,0,0,0.35), 0 2px 6px rgba(229,199,107,0.25);
-  margin-bottom: 24px;
-  position: relative;
+  margin-bottom: 24px; position: relative;
 }
 .chip::after {
-  content: ""; position: absolute;
-  inset: 6px 8px;
-  border: 1px solid rgba(42,33,7,0.35);
-  border-radius: 3px;
+  content: ""; position: absolute; inset: 6px 8px;
+  border: 1px solid rgba(42,33,7,0.35); border-radius: 3px;
 }
 
 .card-number {
-  font-size: 20px;
-  letter-spacing: 5px;
-  font-weight: 700;
-  color: #fdf8ea;
-  margin-bottom: 20px;
+  font-size: 20px; letter-spacing: 5px; font-weight: 700;
+  color: #fdf8ea; margin-bottom: 20px;
 }
 .card-number .last { letter-spacing: 4px; color: #f3dfa2; }
 
 .card-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  font-size: 12px;
-  letter-spacing: 0.8px;
-  font-weight: 600;
+  display: flex; justify-content: space-between;
+  align-items: flex-end; font-size: 12px;
+  letter-spacing: 0.8px; font-weight: 600;
   color: rgba(220,210,180,0.85);
 }
 .card-bottom .label {
-  font-size: 10px;
-  color: rgba(180,170,140,0.55);
-  letter-spacing: 0.6px;
-  font-weight: 500;
-  margin-bottom: 3px;
-  display: block;
+  font-size: 10px; color: rgba(180,170,140,0.55);
+  letter-spacing: 0.6px; font-weight: 500;
+  margin-bottom: 3px; display: block;
 }
 .card-bottom .name {
-  font-size: 13px;
-  color: #fdf8ea;
-  font-weight: 700;
-  letter-spacing: 0.6px;
+  font-size: 13px; color: #fdf8ea;
+  font-weight: 700; letter-spacing: 0.6px;
 }
 
 /* ============== GENERATE BUTTON ============== */
 .generate-btn {
-  margin: 0 18px 26px;
-  padding: 18px;
-  border-radius: 18px;
+  margin: 0 18px 26px; padding: 18px; border-radius: 18px;
   background: linear-gradient(135deg, rgba(243,223,162,0.14), rgba(229,199,107,0.08));
   border: 1.5px solid rgba(229,199,107,0.35);
-  color: #f3dfa2;
-  font-size: 15px;
-  font-weight: 800;
-  text-align: center;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: 0.15s;
-  flex-shrink: 0;
-  font-family: inherit;
+  color: #f3dfa2; font-size: 15px; font-weight: 800;
+  text-align: center; cursor: pointer; display: flex;
+  align-items: center; justify-content: center; gap: 8px;
+  transition: 0.15s; flex-shrink: 0; font-family: inherit;
 }
 .generate-btn:active { transform: scale(0.98); }
 .generate-btn .plus { font-size: 18px; font-weight: 900; }
 
+/* ============== SERVICE GRID (Receive / Wire / Zelle) ============== */
+.service-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 10px; padding: 0 18px 22px; flex-shrink: 0;
+}
+.service-tile {
+  background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 70%);
+  border: 1px solid rgba(229,199,107,0.18);
+  border-radius: 16px; padding: 16px 8px;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 8px; cursor: pointer;
+  transition: 0.15s; font-family: inherit;
+}
+.service-tile:active {
+  transform: scale(0.97);
+  background: linear-gradient(140deg, #221f18 0%, #131110 70%);
+}
+.service-tile .ico {
+  width: 40px; height: 40px; border-radius: 12px;
+  background: rgba(229,199,107,0.12);
+  display: flex; align-items: center;
+  justify-content: center; font-size: 20px;
+  color: #f3dfa2;
+}
+.service-tile .lbl {
+  font-size: 11.5px; font-weight: 700;
+  color: #f5f1e6; text-align: center; line-height: 1.2;
+}
+
 /* ============== BOTTOM NAV ============== */
 .bottom-nav {
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
+  position: absolute; left: 0; right: 0; bottom: 0;
   background: rgba(10,9,8,0.96);
   backdrop-filter: blur(14px);
   border-top: 1px solid rgba(229,199,107,0.14);
-  display: flex;
-  justify-content: space-around;
-  padding: 12px 8px 20px;
-  z-index: 40;
+  display: flex; justify-content: space-around;
+  padding: 12px 8px 20px; z-index: 40;
 }
-
 .nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 4px;
   color: rgba(180,170,140,0.6);
-  font-size: 11px;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 4px 10px;
-  transition: 0.15s;
-  background: none;
-  border: none;
-  font-family: inherit;
+  font-size: 11px; font-weight: 600;
+  cursor: pointer; padding: 4px 10px;
+  transition: 0.15s; background: none;
+  border: none; font-family: inherit;
 }
 .nav-item.active { color: #f3dfa2; }
 .nav-item .nav-icon { font-size: 20px; }
 
-/* ============== GENERIC PANEL ============== */
+/* ============== PANEL ============== */
 .panel {
-  margin: 0 18px 18px;
-  padding: 22px;
-  border-radius: 20px;
+  margin: 0 18px 18px; padding: 22px; border-radius: 20px;
   background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 60%);
   border: 1px solid rgba(229,199,107,0.16);
   box-shadow: 0 12px 30px rgba(0,0,0,0.4);
 }
-
 .panel h2 {
-  font-size: 18px;
-  font-weight: 800;
-  color: #f3dfa2;
-  margin-bottom: 18px;
+  font-size: 18px; font-weight: 800;
+  color: #f3dfa2; margin-bottom: 18px;
   letter-spacing: -0.3px;
 }
 
 .form-group { margin-bottom: 16px; }
 .form-group label {
-  display: block;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  color: rgba(200,190,160,0.75);
-  margin-bottom: 6px;
-  text-transform: uppercase;
+  display: block; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.5px; color: rgba(200,190,160,0.75);
+  margin-bottom: 6px; text-transform: uppercase;
 }
-.form-group input {
-  width: 100%;
-  padding: 14px 16px;
-  border-radius: 12px;
+.form-group input, .form-group select {
+  width: 100%; padding: 14px 16px; border-radius: 12px;
   background: rgba(255,255,255,0.05);
   border: 1.5px solid rgba(229,199,107,0.2);
-  color: #fdf8ea;
-  font-size: 15px;
-  font-family: inherit;
-  outline: none;
-  transition: 0.15s;
+  color: #fdf8ea; font-size: 15px;
+  font-family: inherit; outline: none; transition: 0.15s;
 }
-.form-group input:focus { border-color: rgba(229,199,107,0.6); }
+.form-group input:focus, .form-group select:focus {
+  border-color: rgba(229,199,107,0.6);
+}
+.form-group select option { background: #1a1813; color: #fdf8ea; }
 
-.row-btns {
-  display: flex;
-  gap: 10px;
-  margin-top: 6px;
-}
+.row-btns { display: flex; gap: 10px; margin-top: 6px; }
 .row-btns .btn-gold { flex: 1; }
 .row-btns .btn-outline { flex: 1; padding: 16px; border-radius: 14px; font-size: 15px; font-weight: 800; }
 
-/* ============== TRANSACTIONS ============== */
-.tx-list { display: flex; flex-direction: column; gap: 2px; max-height: 60vh; overflow-y: auto; }
-
+/* ============== TX LIST ============== */
+.tx-list {
+  display: flex; flex-direction: column;
+  gap: 2px; max-height: 60vh; overflow-y: auto;
+}
 .tx {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 0;
+  display: flex; justify-content: space-between;
+  align-items: center; padding: 14px 0;
   border-bottom: 1px solid rgba(229,199,107,0.08);
 }
 .tx:last-child { border-bottom: none; }
-
 .tx-left { display: flex; align-items: center; gap: 12px; }
-
 .tx-icon {
-  width: 42px; height: 42px;
-  border-radius: 12px;
+  width: 42px; height: 42px; border-radius: 12px;
   background: rgba(229,199,107,0.1);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px;
-  flex-shrink: 0;
+  display: flex; align-items: center;
+  justify-content: center; font-size: 18px; flex-shrink: 0;
 }
-
 .tx-name { font-size: 14px; font-weight: 700; color: #fdf8ea; }
 .tx-date { font-size: 11px; color: rgba(200,190,160,0.55); margin-top: 3px; }
-
 .tx-amount { font-size: 14px; font-weight: 800; white-space: nowrap; }
 .tx-amount.positive { color: #4ade80; }
 .tx-amount.negative { color: #f87171; }
 
 .empty-state {
-  text-align: center;
-  padding: 30px 10px;
-  color: rgba(200,190,160,0.5);
-  font-size: 14px;
+  text-align: center; padding: 30px 10px;
+  color: rgba(200,190,160,0.5); font-size: 14px;
 }
 
-/* ============== PROFILE ROWS ============== */
+/* ============== INFO ROWS ============== */
 .row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 0;
+  display: flex; justify-content: space-between;
+  align-items: center; padding: 14px 0;
   border-bottom: 1px solid rgba(229,199,107,0.08);
   font-size: 14px;
 }
@@ -634,13 +457,46 @@ body {
 .row .lbl { color: rgba(200,190,160,0.65); font-weight: 500; }
 .row .val { color: #fdf8ea; font-weight: 700; text-align: right; }
 
-/* ============== BOTTOM BANNER ============== */
 .section-title {
-  padding: 0 22px 12px;
-  font-size: 15px;
-  font-weight: 800;
-  color: #f3dfa2;
-  letter-spacing: -0.2px;
+  padding: 0 22px 12px; font-size: 15px; font-weight: 800;
+  color: #f3dfa2; letter-spacing: -0.2px;
+}
+
+/* ============== RECEIVE INFO BOX ============== */
+.info-box {
+  padding: 16px; border-radius: 14px;
+  background: rgba(96,165,250,0.08);
+  border: 1.5px solid rgba(96,165,250,0.3);
+  margin-bottom: 16px;
+  font-size: 13px; color: rgba(230,240,255,0.9);
+  line-height: 1.6;
+}
+.info-box strong { color: #93c5fd; }
+
+.copy-row {
+  display: flex; justify-content: space-between;
+  align-items: center; padding: 12px 14px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 10px; margin-bottom: 8px;
+  border: 1px solid rgba(229,199,107,0.1);
+}
+.copy-row .key { font-size: 12px; color: rgba(200,190,160,0.7); font-weight: 600; }
+.copy-row .value { font-size: 14px; color: #fdf8ea; font-weight: 700; font-family: "Courier New", monospace; }
+.copy-row .copy-btn {
+  background: rgba(229,199,107,0.15); color: #f3dfa2;
+  border: none; padding: 6px 12px; border-radius: 8px;
+  font-size: 11px; font-weight: 700; cursor: pointer;
+  font-family: inherit;
+}
+
+/* ============== DESKTOP ============== */
+@media (min-width: 480px) {
+  body { padding: 20px 0; background: #000; }
+  .phone {
+    border-radius: 42px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+    min-height: 900px; max-height: 900px;
+  }
 }
 </style>
 </head>
@@ -648,7 +504,7 @@ body {
 
 <div class="phone">
 
-  <!-- ============= SIGN UP SCREEN ============= -->
+  <!-- ============= SIGN UP ============= -->
   <section id="screen-signup" class="screen auth-screen active">
     <div class="brand">Nova<span>Pay</span></div>
     <div class="tagline">Create your account in seconds</div>
@@ -664,7 +520,6 @@ body {
       </div>
 
       <button class="btn-gold" onclick="handleSignUp()">Create Account</button>
-
       <div class="error-msg" id="su-error"></div>
 
       <div class="auth-switch">
@@ -673,11 +528,10 @@ body {
     </div>
   </section>
 
-  <!-- ============= SHOW CODE SCREEN ============= -->
+  <!-- ============= SHOW CODE ============= -->
   <section id="screen-code" class="screen auth-screen">
     <div class="brand">You're in 🎉</div>
     <div class="tagline">Save this 6-digit access code</div>
-
     <div class="auth-form">
       <div class="code-box">
         <div class="label">Your Access Code</div>
@@ -687,18 +541,16 @@ body {
           Write it down somewhere safe.
         </div>
       </div>
-
       <button class="btn-gold" style="margin-top:24px;" onclick="showScreen('screen-signin')">
         Continue to Sign In
       </button>
     </div>
   </section>
 
-  <!-- ============= SIGN IN SCREEN ============= -->
+  <!-- ============= SIGN IN ============= -->
   <section id="screen-signin" class="screen auth-screen">
     <div class="brand">Welcome <span>Back</span></div>
     <div class="tagline">Sign in to your NovaPay account</div>
-
     <div class="auth-form">
       <div class="field">
         <label for="si-name">Full Name</label>
@@ -708,18 +560,15 @@ body {
         <label for="si-code">6-Digit Access Code</label>
         <input id="si-code" type="text" inputmode="numeric" maxlength="6" placeholder="••••••" autocomplete="one-time-code">
       </div>
-
       <button class="btn-gold" onclick="handleSignIn()">Sign In</button>
-
       <div class="error-msg" id="si-error"></div>
-
       <div class="auth-switch">
         Don't have an account? <a onclick="showScreen('screen-signup')">Sign up</a>
       </div>
     </div>
   </section>
 
-  <!-- ============= HOME SCREEN ============= -->
+  <!-- ============= HOME ============= -->
   <section id="screen-home" class="screen">
     <div class="status-bar">
       <span id="clock">9:43</span>
@@ -745,7 +594,7 @@ body {
 
     <div class="balance-card">
       <div class="balance-label">Available Balance</div>
-      <div class="balance-amount" id="balance-display">$0</div>
+      <div class="balance-amount" id="balance-display">$134,290.00</div>
       <div class="balance-sub">Checking Account •••• 4821</div>
       <div class="balance-actions">
         <button class="btn-primary" onclick="showScreen('screen-transfer')">Transfer</button>
@@ -753,27 +602,20 @@ body {
       </div>
     </div>
 
-    <div class="debit-wrap">
-      <div class="debit-head">
-        <h2>NovaPay Debit</h2>
-        <div class="wifi-icon">)))</div>
-      </div>
-      <div class="chip"></div>
-      <div class="card-number">•••• &nbsp; •••• &nbsp; •••• &nbsp; <span class="last">4821</span></div>
-      <div class="card-bottom">
-        <div>
-          <span class="label">CARD HOLDER</span>
-          <span class="name" id="card-holder">—</span>
-        </div>
-        <div style="text-align:right;">
-          <span class="label">VALID THRU</span>
-          <span class="name">12/29</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="generate-btn" onclick="generateVirtualCard()">
-      <span class="plus">+</span> Generate Virtual Card
+    <!-- SERVICE TILES -->
+    <div class="service-grid">
+      <button class="service-tile" onclick="showScreen('screen-receive')">
+        <div class="ico">↓</div>
+        <div class="lbl">Receive</div>
+      </button>
+      <button class="service-tile" onclick="showScreen('screen-wire')">
+        <div class="ico">🌐</div>
+        <div class="lbl">Wire Transfer</div>
+      </button>
+      <button class="service-tile" onclick="showScreen('screen-zelle')">
+        <div class="ico">⚡</div>
+        <div class="lbl">Zelle</div>
+      </button>
     </div>
 
     <div class="section-title">Recent Activity</div>
@@ -792,10 +634,9 @@ body {
     </nav>
   </section>
 
-  <!-- ============= TRANSFER SCREEN ============= -->
+  <!-- ============= TRANSFER ============= -->
   <section id="screen-transfer" class="screen">
     <div class="status-bar"><span id="clock2">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
-
     <div class="top-row">
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">Transfer</div>
@@ -804,22 +645,18 @@ body {
 
     <div class="panel">
       <h2>Send Money</h2>
-
       <div class="form-group">
         <label for="tr-recipient">Recipient Name</label>
         <input id="tr-recipient" type="text" placeholder="e.g. John Doe">
       </div>
-
       <div class="form-group">
         <label for="tr-amount">Amount (USD)</label>
         <input id="tr-amount" type="number" inputmode="decimal" placeholder="0.00" min="0" step="0.01">
       </div>
-
       <div class="form-group">
         <label for="tr-note">Note (optional)</label>
         <input id="tr-note" type="text" placeholder="What's this for?">
       </div>
-
       <button class="btn-gold" onclick="handleTransfer()">Send Transfer</button>
       <div class="error-msg" id="tr-msg"></div>
     </div>
@@ -833,10 +670,9 @@ body {
     </nav>
   </section>
 
-  <!-- ============= DEPOSIT SCREEN ============= -->
+  <!-- ============= DEPOSIT ============= -->
   <section id="screen-deposit" class="screen">
     <div class="status-bar"><span id="clock3">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
-
     <div class="top-row">
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">Deposit</div>
@@ -845,17 +681,14 @@ body {
 
     <div class="panel">
       <h2>Add Funds</h2>
-
       <div class="form-group">
         <label for="dp-amount">Amount (USD)</label>
         <input id="dp-amount" type="number" inputmode="decimal" placeholder="0.00" min="0" step="0.01">
       </div>
-
       <div class="form-group">
         <label for="dp-source">Source</label>
         <input id="dp-source" type="text" placeholder="e.g. Paycheck, Cash, Refund">
       </div>
-
       <button class="btn-gold" onclick="handleDeposit()">Deposit</button>
       <div class="error-msg" id="dp-msg"></div>
     </div>
@@ -869,10 +702,208 @@ body {
     </nav>
   </section>
 
-  <!-- ============= BILLS SCREEN ============= -->
+  <!-- ============= RECEIVE ============= -->
+  <section id="screen-receive" class="screen">
+    <div class="status-bar"><span id="clock7">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
+    <div class="top-row">
+      <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
+      <div class="top-name">Receive Money</div>
+      <div class="avatar" id="receive-avatar">--</div>
+    </div>
+
+    <div class="panel">
+      <h2>Receive Funds</h2>
+
+      <div class="info-box">
+        Share the details below to receive money into your NovaPay Checking account.
+      </div>
+
+      <div class="copy-row">
+        <div>
+          <div class="key">Account Holder</div>
+          <div class="value" id="rcv-holder">—</div>
+        </div>
+      </div>
+
+      <div class="copy-row">
+        <div>
+          <div class="key">Routing Number</div>
+          <div class="value">021000021</div>
+        </div>
+        <button class="copy-btn" onclick="copyText('021000021')">COPY</button>
+      </div>
+
+      <div class="copy-row">
+        <div>
+          <div class="key">Account Number</div>
+          <div class="value">•••• 4821</div>
+        </div>
+        <button class="copy-btn" onclick="copyText('00001234821')">COPY</button>
+      </div>
+
+      <div class="copy-row">
+        <div>
+          <div class="key">Account Type</div>
+          <div class="value">Checking</div>
+        </div>
+      </div>
+
+      <div style="margin-top:18px;">
+        <h2 style="font-size:15px; color:#f3dfa2; margin-bottom:12px;">Simulate an Incoming Payment</h2>
+        <div class="form-group">
+          <label for="rcv-from">From (Name)</label>
+          <input id="rcv-from" type="text" placeholder="e.g. Ifundwomen">
+        </div>
+        <div class="form-group">
+          <label for="rcv-amount">Amount (USD)</label>
+          <input id="rcv-amount" type="number" inputmode="decimal" placeholder="0.00" min="0" step="0.01">
+        </div>
+        <button class="btn-gold" onclick="handleReceive()">Receive Payment</button>
+        <div class="error-msg" id="rcv-msg"></div>
+      </div>
+    </div>
+
+    <nav class="bottom-nav">
+      <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
+      <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
+      <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
+      <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
+      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
+    </nav>
+  </section>
+
+  <!-- ============= WIRE TRANSFER ============= -->
+  <section id="screen-wire" class="screen">
+    <div class="status-bar"><span id="clock8">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
+    <div class="top-row">
+      <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
+      <div class="top-name">Wire Transfer</div>
+      <div class="avatar" id="wire-avatar">--</div>
+    </div>
+
+    <div class="panel">
+      <h2>Send a Wire</h2>
+      <div class="info-box">
+        Wire transfers are typically processed within 1 business day. A <strong>$15.00</strong> wire fee applies.
+      </div>
+
+      <div class="form-group">
+        <label for="wr-name">Recipient Full Name</label>
+        <input id="wr-name" type="text" placeholder="e.g. Jane Smith">
+      </div>
+
+      <div class="form-group">
+        <label for="wr-bank">Recipient Bank</label>
+        <input id="wr-bank" type="text" placeholder="e.g. Chase, Wells Fargo">
+      </div>
+
+      <div class="form-group">
+        <label for="wr-routing">Routing Number (9 digits)</label>
+        <input id="wr-routing" type="text" inputmode="numeric" maxlength="9" placeholder="021000021">
+      </div>
+
+      <div class="form-group">
+        <label for="wr-account">Recipient Account Number</label>
+        <input id="wr-account" type="text" inputmode="numeric" placeholder="Account number">
+      </div>
+
+      <div class="form-group">
+        <label for="wr-amount">Amount (USD)</label>
+        <input id="wr-amount" type="number" inputmode="decimal" placeholder="0.00" min="0" step="0.01">
+      </div>
+
+      <div class="form-group">
+        <label for="wr-note">Reference / Note</label>
+        <input id="wr-note" type="text" placeholder="Optional">
+      </div>
+
+      <button class="btn-gold" onclick="handleWire()">Send Wire Transfer</button>
+      <div class="error-msg" id="wr-msg"></div>
+    </div>
+
+    <nav class="bottom-nav">
+      <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
+      <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
+      <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
+      <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
+      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
+    </nav>
+  </section>
+
+  <!-- ============= ZELLE ============= -->
+  <section id="screen-zelle" class="screen">
+    <div class="status-bar"><span id="clock9">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
+    <div class="top-row">
+      <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
+      <div class="top-name">Zelle®</div>
+      <div class="avatar" id="zelle-avatar">--</div>
+    </div>
+
+    <div class="panel">
+      <h2>Send with Zelle®</h2>
+      <div class="info-box">
+        Send money fast to friends and family using their email or U.S. mobile number.
+      </div>
+
+      <div class="form-group">
+        <label for="zl-type">Send To</label>
+        <select id="zl-type">
+          <option value="email">Email Address</option>
+          <option value="phone">Mobile Number</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="zl-recipient" id="zl-recipient-label">Recipient Email</label>
+        <input id="zl-recipient" type="text" placeholder="name@example.com">
+      </div>
+
+      <div class="form-group">
+        <label for="zl-amount">Amount (USD)</label>
+        <input id="zl-amount" type="number" inputmode="decimal" placeholder="0.00" min="0" step="0.01">
+      </div>
+
+      <div class="form-group">
+        <label for="zl-memo">Memo (optional)</label>
+        <input id="zl-memo" type="text" placeholder="What's this for?">
+      </div>
+
+      <button class="btn-gold" onclick="handleZelle()">Send Zelle Payment</button>
+      <div class="error-msg" id="zl-msg"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Receive with Zelle®</h2>
+      <div class="info-box">
+        Your Zelle® contact info — share this so others can send you money instantly.
+      </div>
+      <div class="copy-row">
+        <div>
+          <div class="key">Zelle® Email</div>
+          <div class="value" id="zl-my-email">—</div>
+        </div>
+        <button class="copy-btn" onclick="copyZelleEmail()">COPY</button>
+      </div>
+      <div class="copy-row">
+        <div>
+          <div class="key">Zelle® Phone</div>
+          <div class="value" id="zl-my-phone">—</div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="bottom-nav">
+      <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
+      <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
+      <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
+      <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
+      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
+    </nav>
+  </section>
+
+  <!-- ============= BILLS ============= -->
   <section id="screen-bills" class="screen">
     <div class="status-bar"><span id="clock4">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
-
     <div class="top-row">
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">Bills</div>
@@ -881,17 +912,14 @@ body {
 
     <div class="panel">
       <h2>Pay a Bill</h2>
-
       <div class="form-group">
         <label for="bl-name">Biller Name</label>
         <input id="bl-name" type="text" placeholder="e.g. Electric Company">
       </div>
-
       <div class="form-group">
         <label for="bl-amount">Amount (USD)</label>
         <input id="bl-amount" type="number" inputmode="decimal" placeholder="0.00" min="0" step="0.01">
       </div>
-
       <button class="btn-gold" onclick="handleBill()">Pay Bill</button>
       <div class="error-msg" id="bl-msg"></div>
     </div>
@@ -905,10 +933,9 @@ body {
     </nav>
   </section>
 
-  <!-- ============= HISTORY SCREEN ============= -->
+  <!-- ============= HISTORY ============= -->
   <section id="screen-history" class="screen">
     <div class="status-bar"><span id="clock5">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
-
     <div class="top-row">
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">History</div>
@@ -931,10 +958,9 @@ body {
     </nav>
   </section>
 
-  <!-- ============= PROFILE SCREEN ============= -->
+  <!-- ============= PROFILE ============= -->
   <section id="screen-profile" class="screen">
     <div class="status-bar"><span id="clock6">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
-
     <div class="top-row">
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">Profile</div>
@@ -951,6 +977,7 @@ body {
       <div class="row"><span class="lbl">Account Holder</span><span class="val" id="pf-holder">—</span></div>
       <div class="row"><span class="lbl">Account Type</span><span class="val">Checking</span></div>
       <div class="row"><span class="lbl">Account Number</span><span class="val">•••• 4821</span></div>
+      <div class="row"><span class="lbl">Routing Number</span><span class="val">021000021</span></div>
       <div class="row"><span class="lbl">Currency</span><span class="val">USD</span></div>
       <div class="row"><span class="lbl">Status</span><span class="val" style="color:#4ade80;">Active</span></div>
     </div>
@@ -986,30 +1013,22 @@ body {
 <script>
 /* =========================================================
    NovaPay — local browser app
-   Data is stored in localStorage. NOT a real bank.
+   All data is stored in localStorage. NOT a real bank.
 ========================================================= */
 
 const LS_USERS = 'novapay_users';
 const LS_SESSION = 'novapay_session';
+const STARTING_BALANCE = 134290.00;   // <-- your requested starting balance
 
-/* ---------- storage helpers ---------- */
+/* ---------- storage ---------- */
 function getUsers() {
   try { return JSON.parse(localStorage.getItem(LS_USERS)) || {}; }
   catch (e) { return {}; }
 }
-function saveUsers(u) {
-  localStorage.setItem(LS_USERS, JSON.stringify(u));
-}
-function getSession() {
-  const n = localStorage.getItem(LS_SESSION);
-  return n || null;
-}
-function setSession(name) {
-  localStorage.setItem(LS_SESSION, name);
-}
-function clearSession() {
-  localStorage.removeItem(LS_SESSION);
-}
+function saveUsers(u) { localStorage.setItem(LS_USERS, JSON.stringify(u)); }
+function getSession() { return localStorage.getItem(LS_SESSION); }
+function setSession(name) { localStorage.setItem(LS_SESSION, name); }
+function clearSession() { localStorage.removeItem(LS_SESSION); }
 
 /* ---------- screen routing ---------- */
 function showScreen(id) {
@@ -1018,14 +1037,14 @@ function showScreen(id) {
   if (target) target.classList.add('active');
   window.scrollTo(0, 0);
 
-  // If moving to a protected screen, make sure we have a session
-  const protectedScreens = ['screen-home','screen-transfer','screen-deposit','screen-bills','screen-history','screen-profile'];
+  const protectedScreens = ['screen-home','screen-transfer','screen-deposit',
+    'screen-bills','screen-history','screen-profile','screen-receive',
+    'screen-wire','screen-zelle'];
   if (protectedScreens.includes(id) && !getSession()) {
     showScreen('screen-signin');
     return;
   }
 
-  // If logged in, refresh dynamic data
   if (getSession()) {
     const user = getUsers()[getSession()];
     if (!user) { clearSession(); showScreen('screen-signin'); return; }
@@ -1037,11 +1056,10 @@ function showScreen(id) {
 function handleSignUp() {
   const nameEl = document.getElementById('su-name');
   const passEl = document.getElementById('su-pass');
-  const errEl = document.getElementById('su-error');
+  const errEl  = document.getElementById('su-error');
 
   const name = nameEl.value.trim();
   const pass = passEl.value;
-
   errEl.textContent = '';
 
   if (!name) { errEl.textContent = 'Please enter your full name.'; return; }
@@ -1050,7 +1068,6 @@ function handleSignUp() {
 
   const users = getUsers();
   const key = name.toLowerCase();
-
   if (users[key]) {
     errEl.textContent = 'An account with that name already exists. Try signing in.';
     return;
@@ -1061,17 +1078,16 @@ function handleSignUp() {
     name: name,
     pass: pass,
     code: code,
-    balance: 0,
+    balance: STARTING_BALANCE,
     transactions: [],
+    email: name.toLowerCase().replace(/\s+/g,'.') + '@novapay.demo',
+    phone: '(555) ' + Math.floor(100+Math.random()*900) + '-' + Math.floor(1000+Math.random()*9000),
     createdAt: Date.now()
   };
   saveUsers(users);
 
-  // show code
   document.getElementById('code-display').textContent = code;
   showScreen('screen-code');
-
-  // prefill sign in
   document.getElementById('si-name').value = name;
   nameEl.value = '';
   passEl.value = '';
@@ -1087,11 +1103,10 @@ function generateCode() {
 function handleSignIn() {
   const nameEl = document.getElementById('si-name');
   const codeEl = document.getElementById('si-code');
-  const errEl = document.getElementById('si-error');
+  const errEl  = document.getElementById('si-error');
 
   const name = nameEl.value.trim();
   const code = codeEl.value.trim();
-
   errEl.textContent = '';
 
   if (!name || !code) { errEl.textContent = 'Enter your name and access code.'; return; }
@@ -1117,7 +1132,7 @@ function handleSignOut() {
   showScreen('screen-signin');
 }
 
-/* ---------- dynamic greeting ---------- */
+/* ---------- greeting / clock ---------- */
 function greetingText() {
   const h = new Date().getHours();
   if (h >= 5 && h < 12) return 'Good Morning';
@@ -1125,21 +1140,19 @@ function greetingText() {
   return 'Good Evening';
 }
 
-/* ---------- live clock ---------- */
 function updateClocks() {
   const now = new Date();
-  let h = now.getHours();
-  let m = now.getMinutes();
+  let h = now.getHours(), m = now.getMinutes();
   h = h % 12; if (h === 0) h = 12;
   m = m < 10 ? '0' + m : m;
   const t = h + ':' + m;
-  ['clock','clock2','clock3','clock4','clock5','clock6'].forEach(id => {
+  ['clock','clock2','clock3','clock4','clock5','clock6','clock7','clock8','clock9'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.textContent = t;
   });
 }
 
-/* ---------- number formatting ---------- */
+/* ---------- formatting ---------- */
 function fmt(amount) {
   const sign = amount < 0 ? '-' : '';
   const abs = Math.abs(amount);
@@ -1158,36 +1171,44 @@ function fmtSigned(amount) {
   return sign + '$' + parts.join('.');
 }
 
-/* ---------- render user data ---------- */
+/* ---------- render ---------- */
 function renderAll(user) {
   const initials = user.name.split(' ').map(s => s[0]).join('').slice(0,2).toUpperCase();
 
-  // home
-  const homeName = document.getElementById('home-name');
-  const homeAvatar = document.getElementById('home-avatar');
-  const greeting = document.getElementById('greeting');
-  const balance = document.getElementById('balance-display');
-  const cardHolder = document.getElementById('card-holder');
+  const homeName    = document.getElementById('home-name');
+  const homeAvatar  = document.getElementById('home-avatar');
+  const greeting    = document.getElementById('greeting');
+  const balance     = document.getElementById('balance-display');
+  const cardHolder  = document.querySelector('.card-bottom .name');
 
-  if (homeName) homeName.textContent = user.name;
+  if (homeName)   homeName.textContent   = user.name;
   if (homeAvatar) homeAvatar.textContent = initials;
-  if (greeting) greeting.textContent = greetingText() + ', ' + user.name;
-  if (balance) balance.textContent = fmt(user.balance);
+  if (greeting)   greeting.textContent   = greetingText() + ', ' + user.name;
+  if (balance)    balance.textContent    = fmt(user.balance);
   if (cardHolder) cardHolder.textContent = user.name.toUpperCase();
 
-  // avatars on other screens
-  ['transfer-avatar','deposit-avatar','bills-avatar','history-avatar','profile-avatar'].forEach(id => {
+  ['transfer-avatar','deposit-avatar','bills-avatar','history-avatar',
+   'profile-avatar','receive-avatar','wire-avatar','zelle-avatar'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.textContent = initials;
   });
 
-  // profile
-  const pfName = document.getElementById('profile-name');
+  const pfName   = document.getElementById('profile-name');
   const pfHolder = document.getElementById('pf-holder');
-  const pfCode = document.getElementById('profile-code-line');
-  if (pfName) pfName.textContent = user.name;
+  const pfCode   = document.getElementById('profile-code-line');
+  if (pfName)   pfName.textContent   = user.name;
   if (pfHolder) pfHolder.textContent = user.name;
-  if (pfCode) pfCode.textContent = 'Access code: ' + user.code;
+  if (pfCode)   pfCode.textContent   = 'Access code: ' + user.code;
+
+  // receive screen holder
+  const rcvHolder = document.getElementById('rcv-holder');
+  if (rcvHolder) rcvHolder.textContent = user.name;
+
+  // zelle contact info
+  const zEmail = document.getElementById('zl-my-email');
+  const zPhone = document.getElementById('zl-my-phone');
+  if (zEmail) zEmail.textContent = user.email || '—';
+  if (zPhone) zPhone.textContent = user.phone || '—';
 
   renderTransactions(user);
 }
@@ -1198,13 +1219,17 @@ function renderTransactions(user) {
   const histList = document.getElementById('history-tx-list');
 
   const buildHTML = (items) => {
-    if (items.length === 0) {
-      return '<div class="empty-state">No transactions yet.</div>';
-    }
+    if (items.length === 0) return '<div class="empty-state">No transactions yet.</div>';
     return items.slice().reverse().map(tx => {
-      const icon = tx.type === 'deposit' ? '↓' : (tx.type === 'bill' ? '📄' : '↗');
+      const icon = tx.type === 'deposit'  ? '↓'
+                 : tx.type === 'bill'     ? '📄'
+                 : tx.type === 'wire'     ? '🌐'
+                 : tx.type === 'zelle'    ? '⚡'
+                 : tx.type === 'receive'  ? '↓'
+                 : '↗';
       const cls = tx.amount >= 0 ? 'positive' : 'negative';
-      const date = new Date(tx.date).toLocaleDateString(undefined, { month:'short', day:'numeric', year:'numeric' });
+      const date = new Date(tx.date).toLocaleDateString(undefined,
+        { month:'short', day:'numeric', year:'numeric' });
       return `
         <div class="tx">
           <div class="tx-left">
@@ -1224,18 +1249,18 @@ function renderTransactions(user) {
 }
 
 function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  return String(s).replace(/[&<>"']/g, c =>
+    ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
-/* ---------- add transaction ---------- */
+/* ---------- transactions ---------- */
 function addTransaction(user, tx) {
   user.transactions = user.transactions || [];
   user.transactions.push(tx);
-  if (user.transactions.length > 200) {
-    user.transactions = user.transactions.slice(-200);
+  if (user.transactions.length > 500) {
+    user.transactions = user.transactions.slice(-500);
   }
 }
-
 function persistUser(key, user) {
   const users = getUsers();
   users[key] = user;
@@ -1252,8 +1277,9 @@ function handleTransfer() {
   const amountStr = document.getElementById('tr-amount').value;
   const note = document.getElementById('tr-note').value.trim();
   const msg = document.getElementById('tr-msg');
-
   msg.textContent = '';
+  msg.classList.remove('success-msg');
+  msg.classList.add('error-msg');
 
   const amount = parseFloat(amountStr);
   if (!name) { msg.textContent = 'Enter recipient name.'; return; }
@@ -1264,8 +1290,7 @@ function handleTransfer() {
   addTransaction(user, {
     type: 'transfer',
     label: 'Transfer to ' + name + (note ? ' — ' + note : ''),
-    amount: -amount,
-    date: Date.now()
+    amount: -amount, date: Date.now()
   });
   persistUser(key, user);
 
@@ -1277,7 +1302,7 @@ function handleTransfer() {
   msg.classList.add('success-msg');
 
   renderAll(user);
-  setTimeout(() => { msg.textContent = ''; msg.classList.remove('success-msg'); msg.classList.add('error-msg'); }, 1800);
+  setTimeout(() => { msg.textContent = ''; }, 1800);
 }
 
 /* ---------- deposit ---------- */
@@ -1289,8 +1314,9 @@ function handleDeposit() {
   const amountStr = document.getElementById('dp-amount').value;
   const source = document.getElementById('dp-source').value.trim() || 'Deposit';
   const msg = document.getElementById('dp-msg');
-
   msg.textContent = '';
+  msg.classList.remove('success-msg');
+  msg.classList.add('error-msg');
 
   const amount = parseFloat(amountStr);
   if (!amount || amount <= 0) { msg.textContent = 'Enter a valid amount.'; return; }
@@ -1299,8 +1325,7 @@ function handleDeposit() {
   addTransaction(user, {
     type: 'deposit',
     label: 'Deposit — ' + source,
-    amount: amount,
-    date: Date.now()
+    amount: amount, date: Date.now()
   });
   persistUser(key, user);
 
@@ -1311,7 +1336,138 @@ function handleDeposit() {
   msg.classList.add('success-msg');
 
   renderAll(user);
-  setTimeout(() => { msg.textContent = ''; msg.classList.remove('success-msg'); msg.classList.add('error-msg'); }, 1800);
+  setTimeout(() => { msg.textContent = ''; }, 1800);
+}
+
+/* ---------- receive ---------- */
+function handleReceive() {
+  const key = getSession();
+  const user = getUsers()[key];
+  if (!user) { showScreen('screen-signin'); return; }
+
+  const from = document.getElementById('rcv-from').value.trim();
+  const amountStr = document.getElementById('rcv-amount').value;
+  const msg = document.getElementById('rcv-msg');
+  msg.textContent = '';
+  msg.classList.remove('success-msg');
+  msg.classList.add('error-msg');
+
+  const amount = parseFloat(amountStr);
+  if (!from) { msg.textContent = 'Enter sender name.'; return; }
+  if (!amount || amount <= 0) { msg.textContent = 'Enter a valid amount.'; return; }
+
+  user.balance += amount;
+  addTransaction(user, {
+    type: 'receive',
+    label: 'Received from ' + from,
+    amount: amount, date: Date.now()
+  });
+  persistUser(key, user);
+
+  document.getElementById('rcv-from').value = '';
+  document.getElementById('rcv-amount').value = '';
+  msg.textContent = 'Payment received successfully.';
+  msg.classList.remove('error-msg');
+  msg.classList.add('success-msg');
+
+  renderAll(user);
+  setTimeout(() => { msg.textContent = ''; }, 1800);
+}
+
+/* ---------- wire ---------- */
+function handleWire() {
+  const key = getSession();
+  const user = getUsers()[key];
+  if (!user) { showScreen('screen-signin'); return; }
+
+  const name     = document.getElementById('wr-name').value.trim();
+  const bank     = document.getElementById('wr-bank').value.trim();
+  const routing  = document.getElementById('wr-routing').value.trim();
+  const account  = document.getElementById('wr-account').value.trim();
+  const amountStr = document.getElementById('wr-amount').value;
+  const note     = document.getElementById('wr-note').value.trim();
+  const msg = document.getElementById('wr-msg');
+  msg.textContent = '';
+  msg.classList.remove('success-msg');
+  msg.classList.add('error-msg');
+
+  const amount = parseFloat(amountStr);
+  const FEE = 15.00;
+
+  if (!name) { msg.textContent = 'Enter recipient name.'; return; }
+  if (!bank) { msg.textContent = 'Enter recipient bank.'; return; }
+  if (!/^\d{9}$/.test(routing)) { msg.textContent = 'Routing number must be 9 digits.'; return; }
+  if (!account) { msg.textContent = 'Enter recipient account number.'; return; }
+  if (!amount || amount <= 0) { msg.textContent = 'Enter a valid amount.'; return; }
+  if (amount + FEE > user.balance) { msg.textContent = 'Insufficient balance (amount + $15 fee).'; return; }
+
+  user.balance -= (amount + FEE);
+  addTransaction(user, {
+    type: 'wire',
+    label: 'Wire to ' + name + ' (' + bank + ')' + (note ? ' — ' + note : ''),
+    amount: -amount, date: Date.now()
+  });
+  addTransaction(user, {
+    type: 'wire',
+    label: 'Wire fee',
+    amount: -FEE, date: Date.now()
+  });
+  persistUser(key, user);
+
+  ['wr-name','wr-bank','wr-routing','wr-account','wr-amount','wr-note'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  msg.textContent = 'Wire transfer sent. $15 fee applied.';
+  msg.classList.remove('error-msg');
+  msg.classList.add('success-msg');
+
+  renderAll(user);
+  setTimeout(() => { msg.textContent = ''; }, 2400);
+}
+
+/* ---------- zelle ---------- */
+function handleZelle() {
+  const key = getSession();
+  const user = getUsers()[key];
+  if (!user) { showScreen('screen-signin'); return; }
+
+  const type = document.getElementById('zl-type').value;
+  const recipient = document.getElementById('zl-recipient').value.trim();
+  const amountStr = document.getElementById('zl-amount').value;
+  const memo = document.getElementById('zl-memo').value.trim();
+  const msg = document.getElementById('zl-msg');
+  msg.textContent = '';
+  msg.classList.remove('success-msg');
+  msg.classList.add('error-msg');
+
+  const amount = parseFloat(amountStr);
+  if (!recipient) { msg.textContent = 'Enter recipient ' + (type === 'email' ? 'email.' : 'phone number.'); return; }
+  if (type === 'email' && !/^\S+@\S+\.\S+$/.test(recipient)) {
+    msg.textContent = 'Enter a valid email address.'; return;
+  }
+  if (type === 'phone' && !/^[\d\s()+-]{7,}$/.test(recipient)) {
+    msg.textContent = 'Enter a valid phone number.'; return;
+  }
+  if (!amount || amount <= 0) { msg.textContent = 'Enter a valid amount.'; return; }
+  if (amount > user.balance) { msg.textContent = 'Insufficient balance.'; return; }
+
+  user.balance -= amount;
+  addTransaction(user, {
+    type: 'zelle',
+    label: 'Zelle to ' + recipient + (memo ? ' — ' + memo : ''),
+    amount: -amount, date: Date.now()
+  });
+  persistUser(key, user);
+
+  document.getElementById('zl-recipient').value = '';
+  document.getElementById('zl-amount').value = '';
+  document.getElementById('zl-memo').value = '';
+  msg.textContent = 'Zelle payment sent.';
+  msg.classList.remove('error-msg');
+  msg.classList.add('success-msg');
+
+  renderAll(user);
+  setTimeout(() => { msg.textContent = ''; }, 1800);
 }
 
 /* ---------- bill ---------- */
@@ -1323,8 +1479,9 @@ function handleBill() {
   const name = document.getElementById('bl-name').value.trim();
   const amountStr = document.getElementById('bl-amount').value;
   const msg = document.getElementById('bl-msg');
-
   msg.textContent = '';
+  msg.classList.remove('success-msg');
+  msg.classList.add('error-msg');
 
   const amount = parseFloat(amountStr);
   if (!name) { msg.textContent = 'Enter biller name.'; return; }
@@ -1335,8 +1492,7 @@ function handleBill() {
   addTransaction(user, {
     type: 'bill',
     label: 'Bill — ' + name,
-    amount: -amount,
-    date: Date.now()
+    amount: -amount, date: Date.now()
   });
   persistUser(key, user);
 
@@ -1347,7 +1503,7 @@ function handleBill() {
   msg.classList.add('success-msg');
 
   renderAll(user);
-  setTimeout(() => { msg.textContent = ''; msg.classList.remove('success-msg'); msg.classList.add('error-msg'); }, 1800);
+  setTimeout(() => { msg.textContent = ''; }, 1800);
 }
 
 /* ---------- change name ---------- */
@@ -1360,9 +1516,12 @@ function handleChangeName() {
   const newName = document.getElementById('pf-new-name').value.trim();
   const msg = document.getElementById('pf-msg');
   msg.textContent = '';
-  msg.classList.remove('success-msg');
 
-  if (!newName || newName.length < 3) { msg.textContent = 'Name must be at least 3 characters.'; msg.style.color = '#f87171'; return; }
+  if (!newName || newName.length < 3) {
+    msg.textContent = 'Name must be at least 3 characters.';
+    msg.style.color = '#f87171';
+    return;
+  }
 
   const newKey = newName.toLowerCase();
   if (newKey !== key && users[newKey]) {
@@ -1380,7 +1539,6 @@ function handleChangeName() {
   document.getElementById('pf-new-name').value = '';
   msg.textContent = 'Name updated successfully.';
   msg.style.color = '#4ade80';
-
   renderAll(user);
   setTimeout(() => { msg.textContent = ''; }, 1800);
 }
@@ -1394,7 +1552,8 @@ function generateVirtualCard() {
   let num = '';
   for (let i = 0; i < 16; i++) num += Math.floor(Math.random() * 10);
   const grouped = num.match(/.{1,4}/g).join(' ');
-  const expiry = String(Math.floor(Math.random()*12)+1).padStart(2,'0') + '/' + String((new Date().getFullYear()+3)%100);
+  const expiry = String(Math.floor(Math.random()*12)+1).padStart(2,'0') + '/' +
+                 String((new Date().getFullYear()+3)%100);
   const cvv = String(Math.floor(Math.random()*900)+100);
 
   alert(
@@ -1406,6 +1565,40 @@ function generateVirtualCard() {
     '(This is a randomly generated card for demo purposes.)'
   );
 }
+
+/* ---------- copy helpers ---------- */
+function copyText(text) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(
+      () => alert('Copied: ' + text),
+      () => alert('Copy failed — manually copy: ' + text)
+    );
+  } else {
+    alert('Copy this value: ' + text);
+  }
+}
+
+function copyZelleEmail() {
+  const key = getSession();
+  const user = getUsers()[key];
+  if (!user) return;
+  copyText(user.email);
+}
+
+/* ---------- Zelle recipient label toggle ---------- */
+document.addEventListener('change', function (e) {
+  if (e.target && e.target.id === 'zl-type') {
+    const label = document.getElementById('zl-recipient-label');
+    const input = document.getElementById('zl-recipient');
+    if (e.target.value === 'email') {
+      label.textContent = 'Recipient Email';
+      input.placeholder = 'name@example.com';
+    } else {
+      label.textContent = 'Recipient Mobile Number';
+      input.placeholder = '(555) 123-4567';
+    }
+  }
+});
 
 /* ---------- boot ---------- */
 document.addEventListener('DOMContentLoaded', function () {
