@@ -20,7 +20,6 @@
   --blue: #60a5fa;
 }
 
-/* LIGHT THEME */
 body.light {
   --bg: #f5f8fc;
   --card: #ffffff;
@@ -34,7 +33,7 @@ body.light {
   --blue: #2563eb;
 }
 
-html, body { height: 100%; background: #000; }
+html, body { height: 100%; background: #000; overflow: hidden; }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
@@ -42,7 +41,7 @@ body {
   line-height: 1.4;
   display: flex;
   justify-content: center;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 body.light { background: #e2e8f0; }
@@ -71,15 +70,19 @@ body.light .phone {
   width: 100%;
   height: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: 100px;
+  overscroll-behavior: contain;
+  padding-bottom: 130px;
   position: relative;
+  scrollbar-width: none;
 }
-.screen.active { display: flex; }
+.screen::-webkit-scrollbar { display: none; }
+.screen.active { display: block; }
 
 /* ============== AUTH ============== */
-.auth-screen { padding: 60px 30px 40px; justify-content: center; align-items: center; }
-.screen.auth-screen.active { overflow-y: auto; }
+.auth-screen { padding: 60px 30px 40px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+.screen.auth-screen.active { display: flex; overflow-y: auto; }
 
 .brand {
   font-size: 34px; font-weight: 800; letter-spacing: -1px;
@@ -151,7 +154,6 @@ body.light .field input::placeholder { color: #94a3b8; }
   text-align: center; min-height: 18px; font-weight: 600;
 }
 
-/* ============== CODE ============== */
 .code-box {
   margin-top: 24px; padding: 22px; border-radius: 18px;
   background: linear-gradient(135deg, rgba(243,223,162,0.14), rgba(229,199,107,0.06));
@@ -223,7 +225,6 @@ body.light .icon-btn {
   flex-shrink: 0; cursor: pointer;
 }
 
-/* ============== DATE / TIME LIVE ============== */
 .date-line {
   padding: 0 22px 12px;
   font-size: 12px;
@@ -233,7 +234,6 @@ body.light .icon-btn {
   text-transform: uppercase;
 }
 
-/* ============== GREETING ============== */
 .greeting-block { padding: 6px 22px 20px; flex-shrink: 0; }
 .greeting-block h1 {
   font-size: 28px; font-weight: 800; letter-spacing: -0.8px;
@@ -333,7 +333,6 @@ body.light .balance-card::after {
 }
 .btn-outline:active { transform: scale(0.97); }
 
-/* ============== PENDING ROW ============== */
 .pending-row {
   display: flex;
   justify-content: space-between;
@@ -388,7 +387,6 @@ body.light .stat-card {
   font-weight: 800; word-break: break-all;
 }
 
-/* ============== QUICK INFO ROW ============== */
 .quick-info-row {
   display: flex;
   gap: 8px;
@@ -424,7 +422,6 @@ body.light .info-chip.green {
   color: #166534;
 }
 
-/* ============== CREDIT SCORE CARD ============== */
 .credit-card {
   margin: 0 18px 16px;
   padding: 18px;
@@ -492,7 +489,6 @@ body.light .credit-ring::after {
   font-weight: 500;
 }
 
-/* ============== SPENDING CHART ============== */
 .chart-card {
   margin: 0 18px 16px;
   padding: 18px;
@@ -559,7 +555,6 @@ body.light .chart-card {
 .chart-legend .dot.inc { background: var(--gold); }
 .chart-legend .dot.spd { background: #ef4444; }
 
-/* ============== SAVINGS GOAL ============== */
 .goal-card {
   margin: 0 18px 16px;
   padding: 18px;
@@ -602,7 +597,6 @@ body.light .goal-progress-bg { background: #f1f5f9; }
 }
 .goal-numbers strong { color: var(--text); }
 
-/* ============== SERVICE GRID ============== */
 .service-grid {
   display: grid; grid-template-columns: repeat(4, 1fr);
   gap: 10px; padding: 0 18px 22px; flex-shrink: 0;
@@ -702,7 +696,6 @@ body.light .form-group input, body.light .form-group select {
 }
 .form-group select option { background: var(--card); color: var(--text); }
 
-/* ============== TX LIST ============== */
 .tx-list {
   display: flex; flex-direction: column; gap: 2px;
 }
@@ -735,7 +728,6 @@ body.light .tx-icon { background: #f1f5f9; }
   color: var(--muted); font-size: 14px;
 }
 
-/* ============== INFO ROWS ============== */
 .row {
   display: flex; justify-content: space-between;
   align-items: center; padding: 14px 0;
@@ -752,7 +744,6 @@ body.light .row { border-bottom-color: #f1f5f9; }
   color: var(--gold); letter-spacing: -0.2px;
 }
 
-/* ============== INFO BOX ============== */
 .info-box {
   padding: 16px; border-radius: 14px;
   background: rgba(96,165,250,0.08);
@@ -788,7 +779,6 @@ body.light .copy-row {
   font-family: inherit;
 }
 
-/* ============== MODAL ============== */
 .modal-overlay {
   position: fixed; inset: 0;
   background: rgba(0,0,0,0.75);
@@ -831,10 +821,6 @@ body.light .account-item {
   background: #f8fafc;
   border-color: #e2e8f0;
 }
-.account-item:hover {
-  background: rgba(229,199,107,0.08);
-  border-color: rgba(229,199,107,0.35);
-}
 .account-item.current {
   border-color: rgba(229,199,107,0.6);
   background: rgba(229,199,107,0.1);
@@ -875,7 +861,6 @@ body.light .account-item {
 }
 .modal-btn:active { transform: scale(0.97); }
 
-/* ============== NOTIFICATIONS ============== */
 .notif-item {
   display: flex; gap: 12px;
   padding: 14px;
@@ -918,7 +903,6 @@ body.light .notif-item {
   letter-spacing: 0.3px;
 }
 
-/* ============== CONTACT ITEM ============== */
 .contact-item {
   display: flex; align-items: center; gap: 12px;
   padding: 12px 0;
@@ -957,7 +941,6 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
   font-family: inherit;
 }
 
-/* ============== FROZEN OVERLAY ============== */
 .frozen-overlay {
   position: absolute;
   inset: 0;
@@ -988,7 +971,6 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
   opacity: 0.85;
 }
 
-/* ============== DESKTOP ============== */
 @media (min-width: 480px) {
   body { padding: 20px 0; background: #000; }
   body.light { background: #e2e8f0; }
@@ -1009,7 +991,6 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
   <section id="screen-signup" class="screen auth-screen active">
     <div class="brand">Nova<span>Pay</span></div>
     <div class="tagline">Create your account in seconds</div>
-
     <div class="auth-form">
       <div class="field">
         <label for="su-name">Full Name</label>
@@ -1023,10 +1004,8 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
         <label for="su-pass">Password</label>
         <input id="su-pass" type="password" placeholder="At least 4 characters" autocomplete="new-password">
       </div>
-
       <button class="btn-gold" onclick="handleSignUp()">Create Account</button>
       <div class="error-msg" id="su-error"></div>
-
       <div class="auth-switch">
         Already have an account? <a onclick="showScreen('screen-signin')">Sign in</a>
       </div>
@@ -1131,14 +1110,12 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
       </div>
     </div>
 
-    <!-- QUICK CHIPS -->
     <div class="quick-info-row">
       <div class="info-chip" id="chip-cashback">💵 Cashback: $0.00</div>
       <div class="info-chip green" id="chip-streak">🔥 12-day streak</div>
       <div class="info-chip" id="chip-member">⭐ Member since —</div>
     </div>
 
-    <!-- STATS -->
     <div class="stats-grid">
       <div class="stat-card">
         <div class="stat-label">Income</div>
@@ -1158,7 +1135,6 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
       </div>
     </div>
 
-    <!-- CREDIT SCORE -->
     <div class="credit-card">
       <div class="credit-ring">
         <span class="ring-value" id="credit-score">782</span>
@@ -1166,23 +1142,19 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
       <div class="credit-info">
         <div class="credit-label">Credit Score</div>
         <div class="credit-status" id="credit-status">Excellent</div>
-        <div class="credit-sub">Updated Sep 30, 2026</div>
+        <div class="credit-sub" id="credit-updated">Updated —</div>
       </div>
     </div>
 
-    <!-- SPENDING CHART -->
     <div class="chart-card">
       <h3>Last 7 Days</h3>
-      <div class="chart-bars" id="chart-bars">
-        <!-- filled by JS -->
-      </div>
+      <div class="chart-bars" id="chart-bars"></div>
       <div class="chart-legend">
         <span><span class="dot inc"></span>Income</span>
         <span><span class="dot spd"></span>Spending</span>
       </div>
     </div>
 
-    <!-- SAVINGS GOAL -->
     <div class="goal-card">
       <h3>🎯 Savings Goal — $500,000</h3>
       <div class="goal-progress-bg">
@@ -1195,7 +1167,6 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
       </div>
     </div>
 
-    <!-- SERVICE TILES -->
     <div class="service-grid">
       <button class="service-tile" onclick="showScreen('screen-receive')">
         <div class="ico">↓</div>
@@ -1247,22 +1218,20 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
     </nav>
   </section>
 
-  <!-- ============= NOTIFICATIONS ============= -->
+  <!-- OTHER SCREENS (same as before, abbreviated for space) -->
+
+  <!-- NOTIFICATIONS -->
   <section id="screen-notifications" class="screen">
-    <div class="status-bar"><span id="clock10">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
+    <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row">
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">Notifications</div>
       <div class="avatar" id="notif-avatar" onclick="openSwitcher()">--</div>
     </div>
-
     <div class="panel">
       <h2>Recent Alerts</h2>
-      <div id="notif-list">
-        <div class="empty-state">No notifications.</div>
-      </div>
+      <div id="notif-list"><div class="empty-state">No notifications.</div></div>
     </div>
-
     <nav class="bottom-nav">
       <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
       <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
@@ -1272,40 +1241,26 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
     </nav>
   </section>
 
-  <!-- ============= MANAGE CARD ============= -->
+  <!-- MANAGE CARD -->
   <section id="screen-manage-card" class="screen">
-    <div class="status-bar"><span id="clock11">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
+    <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row">
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">Manage Card</div>
       <div class="avatar" id="card-mgmt-avatar" onclick="openSwitcher()">--</div>
     </div>
-
     <div class="panel">
       <h2>Card Controls</h2>
-      <div class="row">
-        <span class="lbl">Card Status</span>
-        <span class="val" id="card-status-label">Active</span>
-      </div>
-      <button class="btn-outline" style="width:100%;padding:16px;border-radius:14px;font-size:15px;font-weight:800;margin-top:14px;" onclick="toggleFreeze()" id="freeze-btn">
-        ❄ Freeze Card
-      </button>
-      <button class="btn-gold" style="margin-top:10px;" onclick="revealPin()">
-        Reveal PIN
-      </button>
-      <button class="btn-outline" style="width:100%;padding:16px;border-radius:14px;font-size:15px;font-weight:800;margin-top:10px;" onclick="generateVirtualCard()">
-        + Generate Virtual Card
-      </button>
+      <div class="row"><span class="lbl">Card Status</span><span class="val" id="card-status-label">Active</span></div>
+      <button class="btn-outline" style="width:100%;padding:16px;border-radius:14px;font-size:15px;font-weight:800;margin-top:14px;" onclick="toggleFreeze()" id="freeze-btn">❄ Freeze Card</button>
+      <button class="btn-gold" style="margin-top:10px;" onclick="revealPin()">Reveal PIN</button>
+      <button class="btn-outline" style="width:100%;padding:16px;border-radius:14px;font-size:15px;font-weight:800;margin-top:10px;" onclick="generateVirtualCard()">+ Generate Virtual Card</button>
       <div class="success-msg" id="card-msg"></div>
     </div>
-
     <div class="panel">
       <h2>Virtual Card Gallery</h2>
-      <div id="vcard-gallery">
-        <div class="empty-state">No virtual cards generated yet.</div>
-      </div>
+      <div id="vcard-gallery"><div class="empty-state">No virtual cards generated yet.</div></div>
     </div>
-
     <nav class="bottom-nav">
       <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
       <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
@@ -1315,36 +1270,22 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
     </nav>
   </section>
 
-  <!-- ============= CONTACTS ============= -->
+  <!-- CONTACTS -->
   <section id="screen-contacts" class="screen">
-    <div class="status-bar"><span id="clock12">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
+    <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row">
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">Contacts</div>
       <div class="avatar" id="contacts-avatar" onclick="openSwitcher()">--</div>
     </div>
-
     <div class="panel">
       <h2>Add Contact</h2>
-      <div class="form-group">
-        <label for="ct-name">Name</label>
-        <input id="ct-name" type="text" placeholder="e.g. Jane Smith">
-      </div>
-      <div class="form-group">
-        <label for="ct-info">Email or Phone</label>
-        <input id="ct-info" type="text" placeholder="jane@example.com">
-      </div>
+      <div class="form-group"><label for="ct-name">Name</label><input id="ct-name" type="text" placeholder="e.g. Jane Smith"></div>
+      <div class="form-group"><label for="ct-info">Email or Phone</label><input id="ct-info" type="text" placeholder="jane@example.com"></div>
       <button class="btn-gold" onclick="addContact()">Save Contact</button>
       <div class="success-msg" id="ct-msg"></div>
     </div>
-
-    <div class="panel">
-      <h2>Saved Contacts</h2>
-      <div id="contacts-list">
-        <div class="empty-state">No contacts yet.</div>
-      </div>
-    </div>
-
+    <div class="panel"><h2>Saved Contacts</h2><div id="contacts-list"><div class="empty-state">No contacts yet.</div></div></div>
     <nav class="bottom-nav">
       <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
       <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
@@ -1354,22 +1295,15 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
     </nav>
   </section>
 
-  <!-- ============= BUDGET ============= -->
+  <!-- BUDGET -->
   <section id="screen-budget" class="screen">
-    <div class="status-bar"><span id="clock13">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
+    <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row">
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">Budget</div>
       <div class="avatar" id="budget-avatar" onclick="openSwitcher()">--</div>
     </div>
-
-    <div class="panel">
-      <h2>Monthly Budgets</h2>
-      <div id="budget-list">
-        <!-- filled by JS -->
-      </div>
-    </div>
-
+    <div class="panel"><h2>Monthly Budgets</h2><div id="budget-list"></div></div>
     <div class="panel">
       <h2>Set a Category Budget</h2>
       <div class="form-group">
@@ -1383,14 +1317,10 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
           <option value="Other">Other</option>
         </select>
       </div>
-      <div class="form-group">
-        <label for="bd-amount">Monthly Limit (USD)</label>
-        <input id="bd-amount" type="number" inputmode="decimal" placeholder="0.00" min="0" step="0.01">
-      </div>
+      <div class="form-group"><label for="bd-amount">Monthly Limit (USD)</label><input id="bd-amount" type="number" inputmode="decimal" placeholder="0.00"></div>
       <button class="btn-gold" onclick="saveBudget()">Save Budget</button>
       <div class="success-msg" id="bd-msg"></div>
     </div>
-
     <nav class="bottom-nav">
       <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
       <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
@@ -1400,22 +1330,15 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
     </nav>
   </section>
 
-  <!-- ============= STATEMENTS ============= -->
+  <!-- STATEMENTS -->
   <section id="screen-statements" class="screen">
-    <div class="status-bar"><span id="clock14">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
+    <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row">
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">Statements</div>
       <div class="avatar" id="stmt-avatar" onclick="openSwitcher()">--</div>
     </div>
-
-    <div class="panel">
-      <h2>Monthly Statements</h2>
-      <div id="statements-list">
-        <!-- filled by JS -->
-      </div>
-    </div>
-
+    <div class="panel"><h2>Monthly Statements</h2><div id="statements-list"></div></div>
     <nav class="bottom-nav">
       <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
       <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
@@ -1425,15 +1348,14 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
     </nav>
   </section>
 
-  <!-- ============= CURRENCY ============= -->
+  <!-- CURRENCY -->
   <section id="screen-currency" class="screen">
-    <div class="status-bar"><span id="clock15">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
+    <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row">
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">Currency</div>
       <div class="avatar" id="curr-avatar" onclick="openSwitcher()">--</div>
     </div>
-
     <div class="panel">
       <h2>Your Balance In</h2>
       <div class="row"><span class="lbl">🇺🇸 USD</span><span class="val" id="cur-usd">$0.00</span></div>
@@ -1442,18 +1364,13 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
       <div class="row"><span class="lbl">🇳🇬 NGN</span><span class="val" id="cur-ngn">₦0.00</span></div>
       <div class="row"><span class="lbl">🇯🇵 JPY</span><span class="val" id="cur-jpy">¥0</span></div>
     </div>
-
     <div class="panel">
       <h2>Quick Converter</h2>
-      <div class="form-group">
-        <label for="cv-amount">Amount (USD)</label>
-        <input id="cv-amount" type="number" inputmode="decimal" placeholder="100" min="0" step="0.01" oninput="updateConverter()">
-      </div>
+      <div class="form-group"><label for="cv-amount">Amount (USD)</label><input id="cv-amount" type="number" inputmode="decimal" placeholder="100" oninput="updateConverter()"></div>
       <div class="row"><span class="lbl">EUR</span><span class="val" id="cv-eur">€0.00</span></div>
       <div class="row"><span class="lbl">GBP</span><span class="val" id="cv-gbp">£0.00</span></div>
       <div class="row"><span class="lbl">NGN</span><span class="val" id="cv-ngn">₦0.00</span></div>
     </div>
-
     <nav class="bottom-nav">
       <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
       <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
@@ -1463,32 +1380,22 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
     </nav>
   </section>
 
-  <!-- ============= SPLIT BILL ============= -->
+  <!-- SPLIT -->
   <section id="screen-split" class="screen">
-    <div class="status-bar"><span id="clock16">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
+    <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row">
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">Split Bill</div>
       <div class="avatar" id="split-avatar" onclick="openSwitcher()">--</div>
     </div>
-
     <div class="panel">
       <h2>Split a Bill</h2>
-      <div class="form-group">
-        <label for="sp-total">Total Amount (USD)</label>
-        <input id="sp-total" type="number" inputmode="decimal" placeholder="0.00" min="0" step="0.01" oninput="calcSplit()">
-      </div>
-      <div class="form-group">
-        <label for="sp-count">Split Between (people)</label>
-        <input id="sp-count" type="number" inputmode="numeric" placeholder="2" min="2" max="20" step="1" oninput="calcSplit()">
-      </div>
-      <div class="info-box" id="split-result">
-        Enter total and number of people.
-      </div>
+      <div class="form-group"><label for="sp-total">Total Amount (USD)</label><input id="sp-total" type="number" inputmode="decimal" placeholder="0.00" oninput="calcSplit()"></div>
+      <div class="form-group"><label for="sp-count">Split Between (people)</label><input id="sp-count" type="number" inputmode="numeric" placeholder="2" min="2" max="20" oninput="calcSplit()"></div>
+      <div class="info-box" id="split-result">Enter total and number of people.</div>
       <button class="btn-gold" onclick="handleSplit()">Pay My Share</button>
       <div class="success-msg" id="sp-msg"></div>
     </div>
-
     <nav class="bottom-nav">
       <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
       <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
@@ -1498,25 +1405,18 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
     </nav>
   </section>
 
-  <!-- ============= TRANSFER ============= -->
+  <!-- TRANSFER -->
   <section id="screen-transfer" class="screen">
-    <div class="status-bar"><span id="clock2">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
+    <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row">
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">Transfer</div>
       <div class="avatar" id="transfer-avatar" onclick="openSwitcher()">--</div>
     </div>
-
     <div class="panel">
       <h2>Send Money</h2>
-      <div class="form-group">
-        <label for="tr-recipient">Recipient Name</label>
-        <input id="tr-recipient" type="text" placeholder="e.g. John Doe">
-      </div>
-      <div class="form-group">
-        <label for="tr-amount">Amount (USD)</label>
-        <input id="tr-amount" type="number" inputmode="decimal" placeholder="0.00" min="0" step="0.01">
-      </div>
+      <div class="form-group"><label for="tr-recipient">Recipient Name</label><input id="tr-recipient" type="text" placeholder="e.g. John Doe"></div>
+      <div class="form-group"><label for="tr-amount">Amount (USD)</label><input id="tr-amount" type="number" inputmode="decimal" placeholder="0.00"></div>
       <div class="form-group">
         <label for="tr-category">Category</label>
         <select id="tr-category">
@@ -1528,14 +1428,10 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
           <option value="Entertainment">Entertainment</option>
         </select>
       </div>
-      <div class="form-group">
-        <label for="tr-note">Note (optional)</label>
-        <input id="tr-note" type="text" placeholder="What's this for?">
-      </div>
+      <div class="form-group"><label for="tr-note">Note (optional)</label><input id="tr-note" type="text" placeholder="What's this for?"></div>
       <button class="btn-gold" onclick="handleTransfer()">Send Transfer</button>
       <div class="error-msg" id="tr-msg"></div>
     </div>
-
     <nav class="bottom-nav">
       <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
       <button class="nav-item active"><span class="nav-icon">⇄</span>Transfer</button>
@@ -1545,46 +1441,28 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
     </nav>
   </section>
 
-  <!-- ============= DEPOSIT ============= -->
+  <!-- DEPOSIT -->
   <section id="screen-deposit" class="screen">
-    <div class="status-bar"><span id="clock3">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
+    <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row">
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">Deposit</div>
       <div class="avatar" id="deposit-avatar" onclick="openSwitcher()">--</div>
     </div>
-
     <div class="panel">
       <h2>Add Funds</h2>
-      <div class="form-group">
-        <label for="dp-amount">Amount (USD)</label>
-        <input id="dp-amount" type="number" inputmode="decimal" placeholder="0.00" min="0" step="0.01">
-      </div>
-      <div class="form-group">
-        <label for="dp-source">Source</label>
-        <input id="dp-source" type="text" placeholder="e.g. Paycheck, Cash, Refund">
-      </div>
+      <div class="form-group"><label for="dp-amount">Amount (USD)</label><input id="dp-amount" type="number" inputmode="decimal" placeholder="0.00"></div>
+      <div class="form-group"><label for="dp-source">Source</label><input id="dp-source" type="text" placeholder="e.g. Paycheck"></div>
       <button class="btn-gold" onclick="handleDeposit()">Deposit</button>
       <div class="error-msg" id="dp-msg"></div>
     </div>
-
     <div class="panel">
       <h2>📷 Mobile Check Deposit</h2>
-      <div class="info-box">
-        Simulate depositing a check by entering the amount below.
-      </div>
-      <div class="form-group">
-        <label for="ck-amount">Check Amount (USD)</label>
-        <input id="ck-amount" type="number" inputmode="decimal" placeholder="0.00" min="0" step="0.01">
-      </div>
-      <div class="form-group">
-        <label for="ck-from">From (Payer)</label>
-        <input id="ck-from" type="text" placeholder="e.g. Acme Corp">
-      </div>
+      <div class="form-group"><label for="ck-amount">Check Amount (USD)</label><input id="ck-amount" type="number" inputmode="decimal" placeholder="0.00"></div>
+      <div class="form-group"><label for="ck-from">From (Payer)</label><input id="ck-from" type="text" placeholder="e.g. Acme Corp"></div>
       <button class="btn-gold" onclick="handleCheckDeposit()">Deposit Check</button>
       <div class="success-msg" id="ck-msg"></div>
     </div>
-
     <nav class="bottom-nav">
       <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
       <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
@@ -1594,56 +1472,26 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
     </nav>
   </section>
 
-  <!-- ============= RECEIVE ============= -->
+  <!-- RECEIVE -->
   <section id="screen-receive" class="screen">
-    <div class="status-bar"><span id="clock7">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
+    <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row">
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">Receive Money</div>
       <div class="avatar" id="receive-avatar" onclick="openSwitcher()">--</div>
     </div>
-
     <div class="panel">
       <h2>Receive Funds</h2>
-      <div class="info-box">
-        Share the details below to receive money into your NovaPay account.
-      </div>
-      <div class="copy-row">
-        <div>
-          <div class="key">Account Holder</div>
-          <div class="value" id="rcv-holder">—</div>
-        </div>
-      </div>
-      <div class="copy-row">
-        <div>
-          <div class="key">Routing Number</div>
-          <div class="value">021000021</div>
-        </div>
-        <button class="copy-btn" onclick="copyText('021000021')">COPY</button>
-      </div>
-      <div class="copy-row">
-        <div>
-          <div class="key">Account Number</div>
-          <div class="value">•••• 4821</div>
-        </div>
-        <button class="copy-btn" onclick="copyText('00001234821')">COPY</button>
-      </div>
-
+      <div class="copy-row"><div><div class="key">Account Holder</div><div class="value" id="rcv-holder">—</div></div></div>
+      <div class="copy-row"><div><div class="key">Routing</div><div class="value">021000021</div></div><button class="copy-btn" onclick="copyText('021000021')">COPY</button></div>
+      <div class="copy-row"><div><div class="key">Account</div><div class="value">•••• 4821</div></div><button class="copy-btn" onclick="copyText('00001234821')">COPY</button></div>
       <div style="margin-top:18px;">
-        <h2 style="font-size:15px; color:var(--gold); margin-bottom:12px;">Simulate Incoming Payment</h2>
-        <div class="form-group">
-          <label for="rcv-from">From (Name)</label>
-          <input id="rcv-from" type="text" placeholder="e.g. Ifundwomen">
-        </div>
-        <div class="form-group">
-          <label for="rcv-amount">Amount (USD)</label>
-          <input id="rcv-amount" type="number" inputmode="decimal" placeholder="0.00" min="0" step="0.01">
-        </div>
+        <div class="form-group"><label for="rcv-from">From (Name)</label><input id="rcv-from" type="text" placeholder="e.g. Ifundwomen"></div>
+        <div class="form-group"><label for="rcv-amount">Amount (USD)</label><input id="rcv-amount" type="number" inputmode="decimal" placeholder="0.00"></div>
         <button class="btn-gold" onclick="handleReceive()">Receive Payment</button>
         <div class="error-msg" id="rcv-msg"></div>
       </div>
     </div>
-
     <nav class="bottom-nav">
       <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
       <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
@@ -1653,44 +1501,24 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
     </nav>
   </section>
 
-  <!-- ============= WIRE ============= -->
+  <!-- WIRE -->
   <section id="screen-wire" class="screen">
-    <div class="status-bar"><span id="clock8">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
+    <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row">
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">Wire Transfer</div>
       <div class="avatar" id="wire-avatar" onclick="openSwitcher()">--</div>
     </div>
-
     <div class="panel">
       <h2>Send a Wire</h2>
-      <div class="info-box">
-        Wire transfers processed within 1 business day. <strong>$15</strong> fee applies.
-      </div>
-      <div class="form-group">
-        <label for="wr-name">Recipient Full Name</label>
-        <input id="wr-name" type="text" placeholder="e.g. Jane Smith">
-      </div>
-      <div class="form-group">
-        <label for="wr-bank">Recipient Bank</label>
-        <input id="wr-bank" type="text" placeholder="e.g. Chase">
-      </div>
-      <div class="form-group">
-        <label for="wr-routing">Routing Number (9 digits)</label>
-        <input id="wr-routing" type="text" inputmode="numeric" maxlength="9" placeholder="021000021">
-      </div>
-      <div class="form-group">
-        <label for="wr-account">Recipient Account Number</label>
-        <input id="wr-account" type="text" inputmode="numeric" placeholder="Account number">
-      </div>
-      <div class="form-group">
-        <label for="wr-amount">Amount (USD)</label>
-        <input id="wr-amount" type="number" inputmode="decimal" placeholder="0.00" min="0" step="0.01">
-      </div>
+      <div class="form-group"><label for="wr-name">Recipient</label><input id="wr-name" type="text" placeholder="Jane Smith"></div>
+      <div class="form-group"><label for="wr-bank">Bank</label><input id="wr-bank" type="text" placeholder="Chase"></div>
+      <div class="form-group"><label for="wr-routing">Routing (9 digits)</label><input id="wr-routing" type="text" inputmode="numeric" maxlength="9" placeholder="021000021"></div>
+      <div class="form-group"><label for="wr-account">Account Number</label><input id="wr-account" type="text" inputmode="numeric" placeholder="Account #"></div>
+      <div class="form-group"><label for="wr-amount">Amount (USD)</label><input id="wr-amount" type="number" inputmode="decimal" placeholder="0.00"></div>
       <button class="btn-gold" onclick="handleWire()">Send Wire</button>
       <div class="error-msg" id="wr-msg"></div>
     </div>
-
     <nav class="bottom-nav">
       <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
       <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
@@ -1700,52 +1528,21 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
     </nav>
   </section>
 
-  <!-- ============= ZELLE ============= -->
+  <!-- ZELLE -->
   <section id="screen-zelle" class="screen">
-    <div class="status-bar"><span id="clock9">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
+    <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row">
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">Zelle®</div>
       <div class="avatar" id="zelle-avatar" onclick="openSwitcher()">--</div>
     </div>
-
     <div class="panel">
       <h2>Send with Zelle®</h2>
-      <div class="form-group">
-        <label for="zl-type">Send To</label>
-        <select id="zl-type">
-          <option value="email">Email Address</option>
-          <option value="phone">Mobile Number</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="zl-recipient" id="zl-recipient-label">Recipient Email</label>
-        <input id="zl-recipient" type="text" placeholder="name@example.com">
-      </div>
-      <div class="form-group">
-        <label for="zl-amount">Amount (USD)</label>
-        <input id="zl-amount" type="number" inputmode="decimal" placeholder="0.00" min="0" step="0.01">
-      </div>
+      <div class="form-group"><label for="zl-recipient">Recipient Email or Phone</label><input id="zl-recipient" type="text" placeholder="name@example.com"></div>
+      <div class="form-group"><label for="zl-amount">Amount (USD)</label><input id="zl-amount" type="number" inputmode="decimal" placeholder="0.00"></div>
       <button class="btn-gold" onclick="handleZelle()">Send Zelle</button>
       <div class="error-msg" id="zl-msg"></div>
     </div>
-
-    <div class="panel">
-      <h2>Your Zelle® Info</h2>
-      <div class="copy-row">
-        <div>
-          <div class="key">Email</div>
-          <div class="value" id="zl-my-email">—</div>
-        </div>
-      </div>
-      <div class="copy-row">
-        <div>
-          <div class="key">Phone</div>
-          <div class="value" id="zl-my-phone">—</div>
-        </div>
-      </div>
-    </div>
-
     <nav class="bottom-nav">
       <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
       <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
@@ -1755,36 +1552,22 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
     </nav>
   </section>
 
-  <!-- ============= BILLS ============= -->
+  <!-- BILLS -->
   <section id="screen-bills" class="screen">
-    <div class="status-bar"><span id="clock4">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
+    <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row">
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">Bills</div>
       <div class="avatar" id="bills-avatar" onclick="openSwitcher()">--</div>
     </div>
-
-    <div class="panel">
-      <h2>Upcoming Bills</h2>
-      <div id="upcoming-bills">
-        <!-- filled by JS -->
-      </div>
-    </div>
-
+    <div class="panel"><h2>Upcoming Bills</h2><div id="upcoming-bills"></div></div>
     <div class="panel">
       <h2>Pay a Bill</h2>
-      <div class="form-group">
-        <label for="bl-name">Biller Name</label>
-        <input id="bl-name" type="text" placeholder="e.g. Electric Company">
-      </div>
-      <div class="form-group">
-        <label for="bl-amount">Amount (USD)</label>
-        <input id="bl-amount" type="number" inputmode="decimal" placeholder="0.00" min="0" step="0.01">
-      </div>
+      <div class="form-group"><label for="bl-name">Biller</label><input id="bl-name" type="text" placeholder="Electric Company"></div>
+      <div class="form-group"><label for="bl-amount">Amount (USD)</label><input id="bl-amount" type="number" inputmode="decimal" placeholder="0.00"></div>
       <button class="btn-gold" onclick="handleBill()">Pay Bill</button>
       <div class="error-msg" id="bl-msg"></div>
     </div>
-
     <nav class="bottom-nav">
       <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
       <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
@@ -1794,24 +1577,19 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
     </nav>
   </section>
 
-  <!-- ============= HISTORY ============= -->
+  <!-- HISTORY -->
   <section id="screen-history" class="screen">
-    <div class="status-bar"><span id="clock5">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
+    <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row">
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">History</div>
       <div class="avatar" id="history-avatar" onclick="openSwitcher()">--</div>
     </div>
-
     <div class="date-line" id="date-line-history">—</div>
-
     <div class="panel">
       <h2>All Transactions</h2>
-      <div class="tx-list" id="history-tx-list">
-        <div class="empty-state">No transactions yet.</div>
-      </div>
+      <div class="tx-list" id="history-tx-list"><div class="empty-state">No transactions yet.</div></div>
     </div>
-
     <nav class="bottom-nav">
       <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
       <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
@@ -1821,74 +1599,53 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
     </nav>
   </section>
 
-  <!-- ============= PROFILE ============= -->
+  <!-- PROFILE -->
   <section id="screen-profile" class="screen">
-    <div class="status-bar"><span id="clock6">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
+    <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row">
       <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
       <div class="top-name">Profile</div>
       <div class="avatar" id="profile-avatar" onclick="openSwitcher()">--</div>
     </div>
-
     <div class="greeting-block">
       <h1 id="profile-name">—</h1>
       <p id="profile-code-line">Username: —</p>
     </div>
-
     <div class="panel">
       <h2>Account</h2>
-      <div class="row"><span class="lbl">Account Holder</span><span class="val" id="pf-holder">—</span></div>
+      <div class="row"><span class="lbl">Holder</span><span class="val" id="pf-holder">—</span></div>
       <div class="row"><span class="lbl">Username</span><span class="val" id="pf-username">—</span></div>
       <div class="row"><span class="lbl">Member ID</span><span class="val" id="pf-member-id">—</span></div>
-      <div class="row"><span class="lbl">Routing Number</span><span class="val">021000021</span></div>
-      <div class="row"><span class="lbl">Currency</span><span class="val">USD</span></div>
-      <div class="row"><span class="lbl">Total Net Worth</span><span class="val" id="pf-net-worth">$0.00</span></div>
+      <div class="row"><span class="lbl">Routing</span><span class="val">021000021</span></div>
+      <div class="row"><span class="lbl">Net Worth</span><span class="val" id="pf-net-worth">$0.00</span></div>
       <div class="row"><span class="lbl">Status</span><span class="val" style="color:var(--green);">Active</span></div>
     </div>
-
     <div class="panel">
       <h2>All Accounts</h2>
-      <div class="row"><span class="lbl">🏦 Checking •••• 4821</span><span class="val" id="pf-checking">$0.00</span></div>
-      <div class="row"><span class="lbl">🏛️ Savings •••• 7732</span><span class="val" id="pf-savings">$0.00</span></div>
-      <div class="row"><span class="lbl">💳 Credit •••• 9024</span><span class="val" id="pf-credit">$0.00</span></div>
-      <div class="row"><span class="lbl">🏢 Business •••• 3310</span><span class="val" id="pf-business">$0.00</span></div>
-      <div class="row"><span class="lbl">📈 Invest •••• 5567</span><span class="val" id="pf-invest">$0.00</span></div>
+      <div class="row"><span class="lbl">🏦 Checking</span><span class="val" id="pf-checking">$0.00</span></div>
+      <div class="row"><span class="lbl">🏛️ Savings</span><span class="val" id="pf-savings">$0.00</span></div>
+      <div class="row"><span class="lbl">💳 Credit</span><span class="val" id="pf-credit">$0.00</span></div>
+      <div class="row"><span class="lbl">🏢 Business</span><span class="val" id="pf-business">$0.00</span></div>
+      <div class="row"><span class="lbl">📈 Invest</span><span class="val" id="pf-invest">$0.00</span></div>
     </div>
-
     <div class="panel">
       <h2>Reset Password</h2>
-      <div class="form-group">
-        <label for="pf-reset-code">6-Digit Access Code</label>
-        <input id="pf-reset-code" type="text" inputmode="numeric" maxlength="6" placeholder="••••••">
-      </div>
-      <div class="form-group">
-        <label for="pf-new-pass">New Password</label>
-        <input id="pf-new-pass" type="password" placeholder="At least 4 characters">
-      </div>
+      <div class="form-group"><label for="pf-reset-code">6-Digit Access Code</label><input id="pf-reset-code" type="text" inputmode="numeric" maxlength="6" placeholder="••••••"></div>
+      <div class="form-group"><label for="pf-new-pass">New Password</label><input id="pf-new-pass" type="password" placeholder="4+ characters"></div>
       <button class="btn-gold" onclick="handleResetPassword()">Reset Password</button>
       <div class="success-msg" id="pf-msg"></div>
     </div>
-
     <div class="panel">
       <h2>Change Name</h2>
-      <div class="form-group">
-        <label for="pf-new-name">New Full Name</label>
-        <input id="pf-new-name" type="text" placeholder="Enter new name">
-      </div>
+      <div class="form-group"><label for="pf-new-name">New Full Name</label><input id="pf-new-name" type="text" placeholder="New name"></div>
       <button class="btn-gold" onclick="handleChangeName()">Save Name</button>
       <div class="success-msg" id="pf-name-msg"></div>
     </div>
-
     <div class="panel">
       <h2>Security</h2>
-      <button class="btn-outline" style="width:100%;padding:16px;border-radius:14px;font-size:15px;font-weight:800;" onclick="openSwitcher()">
-        Switch Account
-      </button>
-      <button class="btn-outline" style="width:100%;padding:16px;border-radius:14px;font-size:15px;font-weight:800;margin-top:10px;" onclick="handleSignOut()">
-        Sign Out
-      </button>
+      <button class="btn-outline" style="width:100%;padding:16px;border-radius:14px;font-size:15px;font-weight:800;" onclick="openSwitcher()">Switch Account</button>
+      <button class="btn-outline" style="width:100%;padding:16px;border-radius:14px;font-size:15px;font-weight:800;margin-top:10px;" onclick="handleSignOut()">Sign Out</button>
     </div>
-
     <nav class="bottom-nav">
       <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
       <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
@@ -1900,11 +1657,10 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
 
 </div>
 
-<!-- ============= MODAL ============= -->
 <div class="modal-overlay" id="switcher-modal">
   <div class="modal">
     <h2>Switch Account</h2>
-    <div class="modal-sub">Pick another saved account to sign in</div>
+    <div class="modal-sub">Pick another saved account</div>
     <div id="switcher-list"></div>
     <div class="modal-actions">
       <button class="modal-btn ghost" onclick="closeSwitcher()">Cancel</button>
@@ -1915,44 +1671,38 @@ body.light .contact-item { border-bottom-color: #f1f5f9; }
 
 <script>
 /* =========================================================
-   NovaPay — local browser app (ALL features)
-   All data is stored in localStorage. NOT a real bank.
+   NovaPay — local browser app
 ========================================================= */
 
 const LS_USERS = 'novapay_users';
 const LS_SESSION = 'novapay_session';
 const LS_VERSION = 'novapay_version';
 const LS_THEME = 'novapay_theme';
-const APP_VERSION = 5;
+const APP_VERSION = 6;
 const STARTING_BALANCE = 134290.00;
 const STARTING_SAVINGS = 42000.00;
-const STARTING_CREDIT = -1250.00;   // negative = owed
+const STARTING_CREDIT = -1250.00;
 const STARTING_CREDIT_LIMIT = 10000.00;
 const STARTING_BUSINESS = 8500.00;
 const STARTING_INVEST = 22500.00;
 
-/* ---------- storage ---------- */
 function getUsers() {
   try { return JSON.parse(localStorage.getItem(LS_USERS)) || {}; }
   catch (e) { return {}; }
 }
 function saveUsers(u) { localStorage.setItem(LS_USERS, JSON.stringify(u)); }
 function getSession() { return localStorage.getItem(LS_SESSION); }
-function setSession(username) { localStorage.setItem(LS_SESSION, username); }
+function setSession(u) { localStorage.setItem(LS_SESSION, u); }
 function clearSession() { localStorage.removeItem(LS_SESSION); }
 
-/* ---------- seed ---------- */
 function seedIfundwomen(user) {
   if (!user.transactions) user.transactions = [];
   const has = user.transactions.some(t => t.label && t.label.toLowerCase().includes('ifundwomen'));
   if (!has) {
     user.transactions.unshift({
-      type: 'receive',
-      label: 'Ifundwomen Grant Received',
-      amount: 134290.00,
-      date: Date.now() - 1000 * 60 * 60 * 24,
-      account: 'checking',
-      category: 'Other'
+      type: 'receive', label: 'Ifundwomen Grant Received',
+      amount: 134290.00, date: Date.now() - 86400000,
+      account: 'checking', category: 'Other'
     });
   }
 }
@@ -1965,7 +1715,6 @@ function runMigrations() {
   Object.keys(users).forEach(k => {
     const u = users[k];
     if (!u || typeof u !== 'object') return;
-
     if (storedVersion < APP_VERSION) {
       u.balance = STARTING_BALANCE;
       u.savingsBalance = u.savingsBalance === undefined ? STARTING_SAVINGS : u.savingsBalance;
@@ -1991,23 +1740,16 @@ function runMigrations() {
       if (!u.lastLogin) u.lastLogin = Date.now();
       if (!u.streak) u.streak = 12;
       seedIfundwomen(u);
-
-      // Seed a few notifications
       if (u.notifications.length === 0) {
         u.notifications = [
-          { icon: '↓', title: 'Ifundwomen Grant', text: 'You received $134,290.00', date: Date.now() - 1000*60*60*24 },
-          { icon: '🏦', title: 'Welcome to NovaPay', text: 'Your account is ready.', date: Date.now() - 1000*60*60*24*2 }
+          { icon: '↓', title: 'Ifundwomen Grant', text: 'You received $134,290.00', date: Date.now() - 86400000 },
+          { icon: '🏦', title: 'Welcome to NovaPay', text: 'Your account is ready.', date: Date.now() - 172800000 }
         ];
       }
       changed = true;
     }
-
-    // Always ensure fields exist
     ['balance','savingsBalance','creditBalance','businessBalance','investBalance'].forEach(f => {
-      if (u[f] === undefined) {
-        u[f] = f === 'balance' ? STARTING_BALANCE : 0;
-        changed = true;
-      }
+      if (u[f] === undefined) { u[f] = f === 'balance' ? STARTING_BALANCE : 0; changed = true; }
     });
     if (!u.creditLimit) { u.creditLimit = STARTING_CREDIT_LIMIT; changed = true; }
     if (u.cashback === undefined) { u.cashback = 0; changed = true; }
@@ -2023,8 +1765,7 @@ function runMigrations() {
     if (!u.activeAccount) { u.activeAccount = 'checking'; changed = true; }
     if (!u.lastLogin) { u.lastLogin = Date.now(); changed = true; }
     if (!u.transactions || !u.transactions.some(t => t.label && t.label.toLowerCase().includes('ifundwomen'))) {
-      seedIfundwomen(u);
-      changed = true;
+      seedIfundwomen(u); changed = true;
     }
   });
 
@@ -2033,12 +1774,10 @@ function runMigrations() {
     localStorage.setItem(LS_VERSION, APP_VERSION);
   }
 
-  // Theme
   const t = localStorage.getItem(LS_THEME);
   if (t === 'light') document.body.classList.add('light');
 }
 
-/* ---------- screen routing ---------- */
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   const target = document.getElementById(id);
@@ -2046,7 +1785,6 @@ function showScreen(id) {
     target.classList.add('active');
     target.scrollTop = 0;
   }
-  window.scrollTo(0, 0);
 
   const protectedScreens = ['screen-home','screen-transfer','screen-deposit',
     'screen-bills','screen-history','screen-profile','screen-receive',
@@ -2057,7 +1795,6 @@ function showScreen(id) {
     showScreen('screen-signin');
     return;
   }
-
   if (getSession()) {
     const user = getUsers()[getSession()];
     if (!user) { clearSession(); showScreen('screen-signin'); return; }
@@ -2065,32 +1802,24 @@ function showScreen(id) {
   }
 }
 
-/* ---------- sign up ---------- */
 function handleSignUp() {
-  const nameEl = document.getElementById('su-name');
-  const userEl = document.getElementById('su-user');
-  const passEl = document.getElementById('su-pass');
-  const errEl  = document.getElementById('su-error');
+  const name = document.getElementById('su-name').value.trim();
+  const username = document.getElementById('su-user').value.trim().toLowerCase().replace(/\s+/g,'');
+  const pass = document.getElementById('su-pass').value;
+  const err = document.getElementById('su-error');
+  err.textContent = '';
 
-  const name = nameEl.value.trim();
-  const username = userEl.value.trim().toLowerCase().replace(/\s+/g,'');
-  const pass = passEl.value;
-  errEl.textContent = '';
-
-  if (!name || name.length < 3) { errEl.textContent = 'Name must be at least 3 characters.'; return; }
-  if (!username || username.length < 3) { errEl.textContent = 'Username must be at least 3 characters.'; return; }
-  if (!/^[a-z0-9._-]+$/.test(username)) { errEl.textContent = 'Username: letters, numbers, . _ - only.'; return; }
-  if (!pass || pass.length < 4) { errEl.textContent = 'Password must be at least 4 characters.'; return; }
+  if (!name || name.length < 3) { err.textContent = 'Name must be 3+ chars.'; return; }
+  if (!username || username.length < 3) { err.textContent = 'Username must be 3+ chars.'; return; }
+  if (!/^[a-z0-9._-]+$/.test(username)) { err.textContent = 'Username: letters/numbers/._- only.'; return; }
+  if (!pass || pass.length < 4) { err.textContent = 'Password must be 4+ chars.'; return; }
 
   const users = getUsers();
-  if (users[username]) { errEl.textContent = 'That username is already taken.'; return; }
+  if (users[username]) { err.textContent = 'Username already taken.'; return; }
 
   const code = generateCode();
   const user = {
-    name: name,
-    username: username,
-    pass: pass,
-    code: code,
+    name, username, pass, code,
     balance: STARTING_BALANCE,
     savingsBalance: STARTING_SAVINGS,
     creditBalance: STARTING_CREDIT,
@@ -2099,22 +1828,15 @@ function handleSignUp() {
     investBalance: STARTING_INVEST,
     activeAccount: 'checking',
     transactions: [],
-    notifications: [
-      { icon: '🏦', title: 'Welcome to NovaPay', text: 'Your account is ready.', date: Date.now() }
-    ],
-    contacts: [],
-    virtualCards: [],
-    budgets: {},
-    cashback: 0,
-    interestYTD: 0,
-    frozen: false,
+    notifications: [{ icon: '🏦', title: 'Welcome to NovaPay', text: 'Account ready.', date: Date.now() }],
+    contacts: [], virtualCards: [], budgets: {},
+    cashback: 0, interestYTD: 0, frozen: false,
     memberId: 'NP-' + Math.floor(1000+Math.random()*9000) + '-' + username.slice(0,2).toUpperCase(),
     creditScore: 782 + Math.floor(Math.random()*30) - 15,
     streak: 12,
     email: username + '@novapay.demo',
     phone: '(555) ' + Math.floor(100+Math.random()*900) + '-' + Math.floor(1000+Math.random()*9000),
-    createdAt: Date.now(),
-    lastLogin: Date.now()
+    createdAt: Date.now(), lastLogin: Date.now()
   };
   seedIfundwomen(user);
   users[username] = user;
@@ -2124,45 +1846,39 @@ function handleSignUp() {
   document.getElementById('code-username').textContent = username;
   showScreen('screen-code');
   document.getElementById('si-user').value = username;
-  nameEl.value = '';
-  userEl.value = '';
-  passEl.value = '';
+  document.getElementById('su-name').value = '';
+  document.getElementById('su-user').value = '';
+  document.getElementById('su-pass').value = '';
 }
 
 function generateCode() {
-  let code = '';
-  for (let i = 0; i < 6; i++) code += Math.floor(Math.random() * 10);
-  return code;
+  let c = '';
+  for (let i = 0; i < 6; i++) c += Math.floor(Math.random() * 10);
+  return c;
 }
 
-/* ---------- sign in ---------- */
 function handleSignIn() {
-  const userEl = document.getElementById('si-user');
-  const passEl = document.getElementById('si-pass');
-  const errEl  = document.getElementById('si-error');
+  const username = document.getElementById('si-user').value.trim().toLowerCase().replace(/\s+/g,'');
+  const pass = document.getElementById('si-pass').value;
+  const err = document.getElementById('si-error');
+  err.textContent = '';
 
-  const username = userEl.value.trim().toLowerCase().replace(/\s+/g,'');
-  const pass = passEl.value;
-  errEl.textContent = '';
-
-  if (!username || !pass) { errEl.textContent = 'Enter your username and password.'; return; }
+  if (!username || !pass) { err.textContent = 'Enter username and password.'; return; }
 
   const users = getUsers();
   const user = users[username];
-
-  if (!user) { errEl.textContent = 'No account found with that username.'; return; }
-  if (user.pass !== pass) { errEl.textContent = 'Incorrect password. Try again.'; return; }
+  if (!user) { err.textContent = 'No account with that username.'; return; }
+  if (user.pass !== pass) { err.textContent = 'Incorrect password.'; return; }
 
   user.lastLogin = Date.now();
   users[username] = user;
   saveUsers(users);
 
   setSession(username);
-  passEl.value = '';
+  document.getElementById('si-pass').value = '';
   showScreen('screen-home');
 }
 
-/* ---------- sign out ---------- */
 function handleSignOut() {
   clearSession();
   document.getElementById('si-user').value = '';
@@ -2170,7 +1886,6 @@ function handleSignOut() {
   showScreen('screen-signin');
 }
 
-/* ---------- switcher ---------- */
 function openSwitcher() {
   const users = getUsers();
   const session = getSession();
@@ -2178,17 +1893,13 @@ function openSwitcher() {
   const keys = Object.keys(users);
 
   if (keys.length === 0) {
-    list.innerHTML = '<div class="empty-state">No saved accounts. Sign up to add one.</div>';
+    list.innerHTML = '<div class="empty-state">No saved accounts.</div>';
   } else {
     list.innerHTML = keys.map(k => {
       const u = users[k];
       const initials = u.name.split(' ').map(s => s[0]).join('').slice(0,2).toUpperCase();
       const isCurrent = (k === session);
-      const bal = (u.activeAccount === 'savings') ? (u.savingsBalance || 0)
-                : (u.activeAccount === 'credit') ? (u.creditBalance || 0)
-                : (u.activeAccount === 'business') ? (u.businessBalance || 0)
-                : (u.activeAccount === 'investment') ? (u.investBalance || 0)
-                : u.balance;
+      const bal = activeBalance(u);
       return `
         <div class="account-item ${isCurrent ? 'current' : ''}" onclick="switchToAccount('${escapeAttr(k)}')">
           <div class="ac-avatar">${initials}</div>
@@ -2200,12 +1911,9 @@ function openSwitcher() {
         </div>`;
     }).join('');
   }
-
   document.getElementById('switcher-modal').classList.add('show');
 }
-function closeSwitcher() {
-  document.getElementById('switcher-modal').classList.remove('show');
-}
+function closeSwitcher() { document.getElementById('switcher-modal').classList.remove('show'); }
 function switchToAccount(key) {
   const users = getUsers();
   const user = users[key];
@@ -2217,11 +1925,8 @@ function switchToAccount(key) {
   closeSwitcher();
   showScreen('screen-home');
 }
-function escapeAttr(s) {
-  return String(s).replace(/'/g, "\\'").replace(/"/g, '&quot;');
-}
+function escapeAttr(s) { return String(s).replace(/'/g, "\\'").replace(/"/g, '&quot;'); }
 
-/* ---------- theme toggle ---------- */
 function toggleTheme() {
   document.body.classList.toggle('light');
   const isLight = document.body.classList.contains('light');
@@ -2229,7 +1934,6 @@ function toggleTheme() {
   document.getElementById('theme-btn').textContent = isLight ? '🌙' : '☀️';
 }
 
-/* ---------- account switching ---------- */
 function switchAccountType(type) {
   const key = getSession();
   const user = getUsers()[key];
@@ -2240,19 +1944,18 @@ function switchAccountType(type) {
   ['checking','savings','credit','business','investment'].forEach(t => {
     const el = document.getElementById('pill-' + (t === 'investment' ? 'invest' : t));
     if (el) {
-      if (t === type) {
-        el.classList.add('active');
-        el.classList.remove('inactive');
-      } else {
-        el.classList.remove('active');
-        el.classList.add('inactive');
-      }
+      if (t === type) { el.classList.add('active'); el.classList.remove('inactive'); }
+      else { el.classList.remove('active'); el.classList.add('inactive'); }
     }
   });
   renderAll(user);
 }
 
-/* ---------- greeting / clock ---------- */
+/* ---------- FIXED GREETING LOGIC ----------
+   5:00 AM  – 11:59 AM → Good Morning
+   12:00 PM – 5:59 PM  → Good Afternoon
+   6:00 PM  – 4:59 AM  → Good Evening
+--------------------------------------------- */
 function greetingText() {
   const h = new Date().getHours();
   if (h >= 5 && h < 12) return 'Good Morning';
@@ -2267,10 +1970,8 @@ function updateClocks() {
   m = m < 10 ? '0' + m : m;
   const t = h + ':' + m;
 
-  ['clock','clock2','clock3','clock4','clock5','clock6','clock7','clock8',
-   'clock9','clock10','clock11','clock12','clock13','clock14','clock15','clock16'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.textContent = t;
+  document.querySelectorAll('.clk, #clock').forEach(el => {
+    el.textContent = t;
   });
 
   const dateStr = now.toLocaleDateString(undefined, {
@@ -2280,9 +1981,15 @@ function updateClocks() {
     const el = document.getElementById(id);
     if (el) el.textContent = dateStr;
   });
+
+  // Live-update the greeting text if on home
+  const greetingEl = document.getElementById('greeting');
+  if (greetingEl && getSession()) {
+    const user = getUsers()[getSession()];
+    if (user) greetingEl.textContent = greetingText() + ', ' + user.name.split(' ')[0];
+  }
 }
 
-/* ---------- formatting ---------- */
 function fmt(amount) {
   const sign = amount < 0 ? '-' : '';
   const abs = Math.abs(amount);
@@ -2300,7 +2007,6 @@ function fmtSigned(amount) {
   return sign + '$' + parts.join('.');
 }
 
-/* ---------- balance helpers ---------- */
 function activeBalance(user) {
   const t = user.activeAccount || 'checking';
   if (t === 'savings') return user.savingsBalance || 0;
@@ -2317,14 +2023,10 @@ function applyBalance(user, delta) {
   else if (t === 'investment') user.investBalance = (user.investBalance || 0) + delta;
   else user.balance += delta;
 }
-
-/* ---------- net worth ---------- */
 function totalNetWorth(user) {
   return (user.balance || 0) + (user.savingsBalance || 0) + (user.businessBalance || 0)
        + (user.investBalance || 0) + (user.creditBalance || 0);
 }
-
-/* ---------- credit score status ---------- */
 function creditStatus(score) {
   if (score >= 800) return 'Exceptional';
   if (score >= 740) return 'Very Good';
@@ -2333,51 +2035,43 @@ function creditStatus(score) {
   return 'Poor';
 }
 
-/* ---------- render ---------- */
 function renderAll(user) {
   const initials = user.name.split(' ').map(s => s[0]).join('').slice(0,2).toUpperCase();
 
-  const homeName    = document.getElementById('home-name');
-  const homeAvatar  = document.getElementById('home-avatar');
-  const greeting    = document.getElementById('greeting');
-  const lastLogin   = document.getElementById('last-login');
-  const balance     = document.getElementById('balance-display');
-  const balanceSub  = document.getElementById('balance-sub');
+  const homeName = document.getElementById('home-name');
+  const homeAvatar = document.getElementById('home-avatar');
+  const greeting = document.getElementById('greeting');
+  const lastLogin = document.getElementById('last-login');
+  const balance = document.getElementById('balance-display');
+  const balanceSub = document.getElementById('balance-sub');
 
-  if (homeName)   homeName.textContent   = user.name;
+  if (homeName) homeName.textContent = user.name;
   if (homeAvatar) homeAvatar.textContent = initials;
-  if (greeting)   greeting.textContent   = greetingText() + ', ' + user.name.split(' ')[0];
-  if (lastLogin)  lastLogin.textContent  = 'Last login: ' + new Date(user.lastLogin || Date.now()).toLocaleString();
+  if (greeting) greeting.textContent = greetingText() + ', ' + user.name.split(' ')[0];
+  if (lastLogin) lastLogin.textContent = 'Last login: ' + new Date(user.lastLogin || Date.now()).toLocaleString();
 
   const activeType = user.activeAccount || 'checking';
   const activeBal = activeBalance(user);
-  if (balance)    balance.textContent = fmt(activeBal);
+  if (balance) balance.textContent = fmt(activeBal);
 
   const labels = {
     checking: 'Checking Account •••• 4821',
-    savings:  'Savings Account •••• 7732',
-    credit:   'Credit Card •••• 9024',
+    savings: 'Savings Account •••• 7732',
+    credit: 'Credit Card •••• 9024',
     business: 'Business Account •••• 3310',
     investment: 'Investment •••• 5567'
   };
-  if (balanceSub) balanceSub.textContent = labels[activeType] || labels.checking;
+  if (balanceSub) balanceSub.textContent = labels[activeType];
 
-  // Pills
   ['checking','savings','credit','business','investment'].forEach(t => {
     const el = document.getElementById('pill-' + (t === 'investment' ? 'invest' : t));
     if (!el) return;
-    if (t === activeType) {
-      el.classList.add('active');
-      el.classList.remove('inactive');
-    } else {
-      el.classList.remove('active');
-      el.classList.add('inactive');
-    }
+    if (t === activeType) { el.classList.add('active'); el.classList.remove('inactive'); }
+    else { el.classList.remove('active'); el.classList.add('inactive'); }
   });
 
-  // Pending / Available / Interest
   const pending = (user.transactions || [])
-    .filter(t => Date.now() - t.date < 1000 * 60 * 60 * 24 && t.pending)
+    .filter(t => Date.now() - t.date < 86400000 && t.pending)
     .reduce((s, t) => s + t.amount, 0);
   const pv = document.getElementById('pending-value');
   const av = document.getElementById('available-value');
@@ -2386,7 +2080,6 @@ function renderAll(user) {
   if (av) av.textContent = fmt(activeBal + pending);
   if (iv) iv.textContent = fmt(user.interestYTD || 0);
 
-  // Chips
   const chipCash = document.getElementById('chip-cashback');
   const chipStreak = document.getElementById('chip-streak');
   const chipMember = document.getElementById('chip-member');
@@ -2394,10 +2087,9 @@ function renderAll(user) {
   if (chipStreak) chipStreak.textContent = '🔥 ' + (user.streak || 12) + '-day streak';
   if (chipMember) chipMember.textContent = '⭐ Member since ' + new Date(user.createdAt).toLocaleDateString(undefined, {month:'short', year:'numeric'});
 
-  // Stats
   const txs = user.transactions || [];
   const income = txs.filter(t => t.amount > 0).reduce((s, t) => s + t.amount, 0);
-  const spent  = txs.filter(t => t.amount < 0).reduce((s, t) => s + Math.abs(t.amount), 0);
+  const spent = txs.filter(t => t.amount < 0).reduce((s, t) => s + Math.abs(t.amount), 0);
   const sInc = document.getElementById('stat-income');
   const sSpe = document.getElementById('stat-spent');
   const sSav = document.getElementById('stat-saved');
@@ -2407,16 +2099,15 @@ function renderAll(user) {
   if (sSav) sSav.textContent = fmt(user.savingsBalance || 0);
   if (sCnt) sCnt.textContent = txs.length;
 
-  // Credit score
   const cs = document.getElementById('credit-score');
   const cst = document.getElementById('credit-status');
+  const cu = document.getElementById('credit-updated');
   if (cs) cs.textContent = user.creditScore || 782;
   if (cst) cst.textContent = creditStatus(user.creditScore || 782);
+  if (cu) cu.textContent = 'Updated ' + new Date().toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'});
 
-  // Chart
   renderChart(user);
 
-  // Savings goal
   const goalFill = document.getElementById('goal-fill');
   const goalCurrent = document.getElementById('goal-current');
   const goalPercent = document.getElementById('goal-percent');
@@ -2426,7 +2117,6 @@ function renderAll(user) {
   if (goalCurrent) goalCurrent.textContent = fmt(total);
   if (goalPercent) goalPercent.textContent = pct + '%';
 
-  // Avatars everywhere
   ['transfer-avatar','deposit-avatar','bills-avatar','history-avatar',
    'profile-avatar','receive-avatar','wire-avatar','zelle-avatar',
    'notif-avatar','card-mgmt-avatar','contacts-avatar','budget-avatar',
@@ -2435,53 +2125,40 @@ function renderAll(user) {
     if (el) el.textContent = initials;
   });
 
-  // Profile
-  const pfName    = document.getElementById('profile-name');
-  const pfHolder  = document.getElementById('pf-holder');
-  const pfCode    = document.getElementById('profile-code-line');
-  const pfUser    = document.getElementById('pf-username');
-  const pfMember  = document.getElementById('pf-member-id');
-  const pfNetW    = document.getElementById('pf-net-worth');
-  const pfChk     = document.getElementById('pf-checking');
-  const pfSav     = document.getElementById('pf-savings');
-  const pfCred    = document.getElementById('pf-credit');
-  const pfBus     = document.getElementById('pf-business');
-  const pfInv     = document.getElementById('pf-invest');
-  if (pfName)   pfName.textContent   = user.name;
+  const pfName = document.getElementById('profile-name');
+  const pfHolder = document.getElementById('pf-holder');
+  const pfCode = document.getElementById('profile-code-line');
+  const pfUser = document.getElementById('pf-username');
+  const pfMember = document.getElementById('pf-member-id');
+  const pfNetW = document.getElementById('pf-net-worth');
+  const pfChk = document.getElementById('pf-checking');
+  const pfSav = document.getElementById('pf-savings');
+  const pfCred = document.getElementById('pf-credit');
+  const pfBus = document.getElementById('pf-business');
+  const pfInv = document.getElementById('pf-invest');
+  if (pfName) pfName.textContent = user.name;
   if (pfHolder) pfHolder.textContent = user.name;
-  if (pfCode)   pfCode.textContent   = 'Username: @' + user.username;
-  if (pfUser)   pfUser.textContent   = '@' + user.username;
-  if (pfMember) pfMember.textContent = user.memberId || '—';
-  if (pfNetW)   pfNetW.textContent   = fmt(totalNetWorth(user));
-  if (pfChk)    pfChk.textContent    = fmt(user.balance || 0);
-  if (pfSav)    pfSav.textContent    = fmt(user.savingsBalance || 0);
-  if (pfCred)   pfCred.textContent   = fmt(user.creditBalance || 0);
-  if (pfBus)    pfBus.textContent    = fmt(user.businessBalance || 0);
-  if (pfInv)    pfInv.textContent    = fmt(user.investBalance || 0);
+  if (pfCode) pfCode.textContent = 'Username: @' + user.username;
+  if (pfUser) pfUser.textContent = '@' + user.username;
+  if (pfMember) pfMember.textContent = user.memberId;
+  if (pfNetW) pfNetW.textContent = fmt(totalNetWorth(user));
+  if (pfChk) pfChk.textContent = fmt(user.balance || 0);
+  if (pfSav) pfSav.textContent = fmt(user.savingsBalance || 0);
+  if (pfCred) pfCred.textContent = fmt(user.creditBalance || 0);
+  if (pfBus) pfBus.textContent = fmt(user.businessBalance || 0);
+  if (pfInv) pfInv.textContent = fmt(user.investBalance || 0);
 
   const rcvHolder = document.getElementById('rcv-holder');
   if (rcvHolder) rcvHolder.textContent = user.name;
 
-  const zEmail = document.getElementById('zl-my-email');
-  const zPhone = document.getElementById('zl-my-phone');
-  if (zEmail) zEmail.textContent = user.email || '—';
-  if (zPhone) zPhone.textContent = user.phone || '—';
-
-  // Notifications
   renderNotifications(user);
-  // Contacts
   renderContacts(user);
-  // Budget
   renderBudgets(user);
-  // Statements
   renderStatements(user);
-  // Currency
   renderCurrency(user);
-  // Upcoming bills
   renderUpcomingBills(user);
-  // Virtual cards
   renderVirtualCards(user);
-  // Card status
+
   const cardLabel = document.getElementById('card-status-label');
   const freezeBtn = document.getElementById('freeze-btn');
   const frozenOv = document.getElementById('frozen-overlay');
@@ -2489,7 +2166,6 @@ function renderAll(user) {
   if (freezeBtn) freezeBtn.textContent = user.frozen ? '🔥 Unfreeze Card' : '❄ Freeze Card';
   if (frozenOv) frozenOv.classList.toggle('show', !!user.frozen);
 
-  // Notification dot
   const dot = document.getElementById('notif-dot');
   if (dot) dot.style.display = (user.notifications && user.notifications.length > 0) ? 'block' : 'none';
 
@@ -2503,11 +2179,8 @@ function renderChart(user) {
   const now = new Date();
   const days = [];
   for (let i = 6; i >= 0; i--) {
-    const d = new Date(now);
-    d.setDate(now.getDate() - i);
-    d.setHours(0,0,0,0);
-    const next = new Date(d);
-    next.setDate(d.getDate() + 1);
+    const d = new Date(now); d.setDate(now.getDate() - i); d.setHours(0,0,0,0);
+    const next = new Date(d); next.setDate(d.getDate() + 1);
     const inc = txs.filter(t => t.date >= d.getTime() && t.date < next.getTime() && t.amount > 0).reduce((s,t) => s + t.amount, 0);
     const spd = txs.filter(t => t.date >= d.getTime() && t.date < next.getTime() && t.amount < 0).reduce((s,t) => s + Math.abs(t.amount), 0);
     days.push({ inc, spd, label: d.toLocaleDateString(undefined, {weekday:'short'}).slice(0,2) });
@@ -2535,18 +2208,17 @@ function renderTransactions(user) {
   const buildHTML = (items) => {
     if (items.length === 0) return '<div class="empty-state">No transactions yet.</div>';
     return items.slice().reverse().map(tx => {
-      const icon = tx.type === 'deposit'  ? '↓'
-                 : tx.type === 'bill'     ? '📄'
-                 : tx.type === 'wire'     ? '🌐'
-                 : tx.type === 'zelle'    ? '⚡'
-                 : tx.type === 'receive'  ? '↓'
-                 : tx.type === 'check'    ? '📷'
+      const icon = tx.type === 'deposit' ? '↓'
+                 : tx.type === 'bill' ? '📄'
+                 : tx.type === 'wire' ? '🌐'
+                 : tx.type === 'zelle' ? '⚡'
+                 : tx.type === 'receive' ? '↓'
+                 : tx.type === 'check' ? '📷'
                  : '↗';
       const cls = tx.amount >= 0 ? 'positive' : 'negative';
       const d = new Date(tx.date);
-      const date = d.toLocaleDateString(undefined,
-        { month:'short', day:'numeric', year:'numeric' }) + ' · ' +
-        d.toLocaleTimeString(undefined, { hour:'numeric', minute:'2-digit' });
+      const date = d.toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'})
+        + ' · ' + d.toLocaleTimeString(undefined, {hour:'numeric', minute:'2-digit'});
       return `
         <div class="tx">
           <div class="tx-left">
@@ -2569,10 +2241,7 @@ function renderNotifications(user) {
   const el = document.getElementById('notif-list');
   if (!el) return;
   const notifs = (user.notifications || []).slice().reverse();
-  if (notifs.length === 0) {
-    el.innerHTML = '<div class="empty-state">No notifications.</div>';
-    return;
-  }
+  if (notifs.length === 0) { el.innerHTML = '<div class="empty-state">No notifications.</div>'; return; }
   el.innerHTML = notifs.map(n => {
     const d = new Date(n.date);
     const time = d.toLocaleDateString(undefined, {month:'short', day:'numeric'}) + ' · ' +
@@ -2593,10 +2262,7 @@ function renderContacts(user) {
   const el = document.getElementById('contacts-list');
   if (!el) return;
   const contacts = user.contacts || [];
-  if (contacts.length === 0) {
-    el.innerHTML = '<div class="empty-state">No contacts yet.</div>';
-    return;
-  }
+  if (contacts.length === 0) { el.innerHTML = '<div class="empty-state">No contacts yet.</div>'; return; }
   el.innerHTML = contacts.map((c, i) => {
     const initials = c.name.split(' ').map(s => s[0]).join('').slice(0,2).toUpperCase();
     return `
@@ -2610,7 +2276,6 @@ function renderContacts(user) {
       </div>`;
   }).join('');
 }
-
 function quickSend(index) {
   const key = getSession();
   const user = getUsers()[key];
@@ -2626,13 +2291,9 @@ function renderBudgets(user) {
   if (!el) return;
   const budgets = user.budgets || {};
   const cats = Object.keys(budgets);
-  if (cats.length === 0) {
-    el.innerHTML = '<div class="empty-state">No budgets set yet.</div>';
-    return;
-  }
+  if (cats.length === 0) { el.innerHTML = '<div class="empty-state">No budgets set yet.</div>'; return; }
   const txs = user.transactions || [];
-  const monthStart = new Date();
-  monthStart.setDate(1); monthStart.setHours(0,0,0,0);
+  const monthStart = new Date(); monthStart.setDate(1); monthStart.setHours(0,0,0,0);
   el.innerHTML = cats.map(c => {
     const limit = budgets[c];
     const spent = txs.filter(t => t.amount < 0 && t.category === c && t.date >= monthStart.getTime())
@@ -2656,16 +2317,11 @@ function renderStatements(user) {
   if (!el) return;
   const months = [];
   const now = new Date();
-  for (let i = 0; i < 6; i++) {
-    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
-    months.push(d);
-  }
+  for (let i = 0; i < 6; i++) months.push(new Date(now.getFullYear(), now.getMonth() - i, 1));
   el.innerHTML = months.map(d => {
     const start = d.getTime();
     const next = new Date(d.getFullYear(), d.getMonth() + 1, 1).getTime();
     const txs = (user.transactions || []).filter(t => t.date >= start && t.date < next);
-    const inc = txs.filter(t => t.amount > 0).reduce((s,t) => s + t.amount, 0);
-    const spd = txs.filter(t => t.amount < 0).reduce((s,t) => s + Math.abs(t.amount), 0);
     const label = d.toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
     return `
       <div class="row" style="cursor:pointer;" onclick="viewStatement(${start}, ${next}, '${label}')">
@@ -2674,7 +2330,6 @@ function renderStatements(user) {
       </div>`;
   }).join('');
 }
-
 function viewStatement(start, end, label) {
   const key = getSession();
   const user = getUsers()[key];
@@ -2682,14 +2337,7 @@ function viewStatement(start, end, label) {
   const txs = (user.transactions || []).filter(t => t.date >= start && t.date < end);
   const inc = txs.filter(t => t.amount > 0).reduce((s,t) => s + t.amount, 0);
   const spd = txs.filter(t => t.amount < 0).reduce((s,t) => s + Math.abs(t.amount), 0);
-  alert(
-    'Statement — ' + label + '\n\n' +
-    'Transactions: ' + txs.length + '\n' +
-    'Total In: ' + fmt(inc) + '\n' +
-    'Total Out: ' + fmt(spd) + '\n' +
-    'Net: ' + fmt(inc - spd) + '\n\n' +
-    'This is a demo statement.'
-  );
+  alert('Statement — ' + label + '\n\nTransactions: ' + txs.length + '\nTotal In: ' + fmt(inc) + '\nTotal Out: ' + fmt(spd) + '\nNet: ' + fmt(inc - spd));
 }
 
 function renderCurrency(user) {
@@ -2706,7 +2354,6 @@ function renderCurrency(user) {
   if (ngn) ngn.textContent = '₦' + (bal * rates.NGN).toFixed(2);
   if (jpy) jpy.textContent = '¥' + Math.round(bal * rates.JPY);
 }
-
 function updateConverter() {
   const amt = parseFloat(document.getElementById('cv-amount').value) || 0;
   const rates = { EUR: 0.92, GBP: 0.79, NGN: 1550 };
@@ -2718,7 +2365,6 @@ function updateConverter() {
 function renderUpcomingBills(user) {
   const el = document.getElementById('upcoming-bills');
   if (!el) return;
-  // Default 3 upcoming bills
   const now = new Date();
   const bills = [
     { name: 'Electric Company', amount: 145.00, days: 3 },
@@ -2726,14 +2372,9 @@ function renderUpcomingBills(user) {
     { name: 'Phone Bill', amount: 55.00, days: 12 }
   ];
   el.innerHTML = bills.map(b => {
-    const due = new Date(now);
-    due.setDate(now.getDate() + b.days);
+    const due = new Date(now); due.setDate(now.getDate() + b.days);
     const label = due.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
-    return `
-      <div class="row">
-        <span class="lbl">📄 ${b.name}</span>
-        <span class="val">${fmt(b.amount)} · ${label}</span>
-      </div>`;
+    return `<div class="row"><span class="lbl">📄 ${b.name}</span><span class="val">${fmt(b.amount)} · ${label}</span></div>`;
   }).join('');
 }
 
@@ -2741,10 +2382,7 @@ function renderVirtualCards(user) {
   const el = document.getElementById('vcard-gallery');
   if (!el) return;
   const cards = user.virtualCards || [];
-  if (cards.length === 0) {
-    el.innerHTML = '<div class="empty-state">No virtual cards generated yet.</div>';
-    return;
-  }
+  if (cards.length === 0) { el.innerHTML = '<div class="empty-state">No virtual cards generated yet.</div>'; return; }
   el.innerHTML = cards.map((c, i) => `
     <div class="copy-row">
       <div>
@@ -2755,9 +2393,6 @@ function renderVirtualCards(user) {
     </div>`).join('');
 }
 
-function renderChartPlaceholder() {}
-
-/* ---------- transactions ---------- */
 function addTransaction(user, tx) {
   user.transactions = user.transactions || [];
   user.transactions.push(tx);
@@ -2774,146 +2409,85 @@ function addNotification(user, icon, title, text) {
   if (user.notifications.length > 50) user.notifications = user.notifications.slice(-50);
 }
 function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, c =>
-    ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
-/* ---------- transfer ---------- */
+/* ---------- transfer/deposit/etc (same as before) ---------- */
 function handleTransfer() {
-  const key = getSession();
-  const user = getUsers()[key];
-  if (!user) { showScreen('screen-signin'); return; }
-
+  const key = getSession(); const user = getUsers()[key]; if (!user) return;
   const name = document.getElementById('tr-recipient').value.trim();
   const amountStr = document.getElementById('tr-amount').value;
   const category = document.getElementById('tr-category').value;
   const note = document.getElementById('tr-note').value.trim();
   const msg = document.getElementById('tr-msg');
   msg.textContent = ''; msg.classList.remove('success-msg'); msg.classList.add('error-msg');
-
   const amount = parseFloat(amountStr);
-  if (!name) { msg.textContent = 'Enter recipient name.'; return; }
-  if (!amount || amount <= 0) { msg.textContent = 'Enter a valid amount.'; return; }
+  if (!name) { msg.textContent = 'Enter recipient.'; return; }
+  if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; return; }
   if (amount > activeBalance(user)) { msg.textContent = 'Insufficient balance.'; return; }
-
   applyBalance(user, -amount);
-  addTransaction(user, {
-    type: 'transfer',
-    label: 'Transfer to ' + name + (note ? ' — ' + note : ''),
-    amount: -amount, date: Date.now(),
-    account: user.activeAccount, category
-  });
+  addTransaction(user, { type: 'transfer', label: 'Transfer to ' + name + (note ? ' — ' + note : ''), amount: -amount, date: Date.now(), account: user.activeAccount, category });
   addNotification(user, '↗', 'Transfer sent', 'You sent ' + fmt(amount) + ' to ' + name);
   user.cashback = (user.cashback || 0) + amount * 0.01;
   persistUser(key, user);
-
   ['tr-recipient','tr-amount','tr-note'].forEach(id => document.getElementById(id).value = '');
-  msg.textContent = 'Transfer sent successfully.';
-  msg.classList.remove('error-msg'); msg.classList.add('success-msg');
+  msg.textContent = 'Transfer sent.'; msg.classList.remove('error-msg'); msg.classList.add('success-msg');
   renderAll(user);
   setTimeout(() => { msg.textContent = ''; }, 1800);
 }
-
-/* ---------- deposit ---------- */
 function handleDeposit() {
-  const key = getSession();
-  const user = getUsers()[key];
-  if (!user) { showScreen('screen-signin'); return; }
-
+  const key = getSession(); const user = getUsers()[key]; if (!user) return;
   const amountStr = document.getElementById('dp-amount').value;
   const source = document.getElementById('dp-source').value.trim() || 'Deposit';
   const msg = document.getElementById('dp-msg');
   msg.textContent = ''; msg.classList.remove('success-msg'); msg.classList.add('error-msg');
-
   const amount = parseFloat(amountStr);
-  if (!amount || amount <= 0) { msg.textContent = 'Enter a valid amount.'; return; }
-
+  if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; return; }
   applyBalance(user, amount);
-  addTransaction(user, {
-    type: 'deposit', label: 'Deposit — ' + source,
-    amount: amount, date: Date.now(),
-    account: user.activeAccount, category: 'Other'
-  });
+  addTransaction(user, { type: 'deposit', label: 'Deposit — ' + source, amount, date: Date.now(), account: user.activeAccount, category: 'Other' });
   addNotification(user, '↓', 'Deposit received', fmt(amount) + ' from ' + source);
   persistUser(key, user);
-
-  document.getElementById('dp-amount').value = '';
-  document.getElementById('dp-source').value = '';
-  msg.textContent = 'Deposit successful.';
-  msg.classList.remove('error-msg'); msg.classList.add('success-msg');
+  document.getElementById('dp-amount').value = ''; document.getElementById('dp-source').value = '';
+  msg.textContent = 'Deposit successful.'; msg.classList.remove('error-msg'); msg.classList.add('success-msg');
   renderAll(user);
   setTimeout(() => { msg.textContent = ''; }, 1800);
 }
-
-/* ---------- check deposit ---------- */
 function handleCheckDeposit() {
-  const key = getSession();
-  const user = getUsers()[key];
-  if (!user) { showScreen('screen-signin'); return; }
-
+  const key = getSession(); const user = getUsers()[key]; if (!user) return;
   const amountStr = document.getElementById('ck-amount').value;
   const from = document.getElementById('ck-from').value.trim() || 'Unknown';
-  const msg = document.getElementById('ck-msg');
-  msg.textContent = '';
-
+  const msg = document.getElementById('ck-msg'); msg.textContent = '';
   const amount = parseFloat(amountStr);
-  if (!amount || amount <= 0) { msg.textContent = 'Enter a valid amount.'; msg.style.color = '#f87171'; return; }
-
+  if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; msg.style.color = '#f87171'; return; }
   applyBalance(user, amount);
-  addTransaction(user, {
-    type: 'check', label: 'Mobile Check — ' + from,
-    amount: amount, date: Date.now(),
-    account: user.activeAccount, category: 'Other'
-  });
+  addTransaction(user, { type: 'check', label: 'Mobile Check — ' + from, amount, date: Date.now(), account: user.activeAccount, category: 'Other' });
   addNotification(user, '📷', 'Check deposited', fmt(amount) + ' from ' + from);
   persistUser(key, user);
-
-  document.getElementById('ck-amount').value = '';
-  document.getElementById('ck-from').value = '';
-  msg.textContent = 'Check deposited successfully.';
-  msg.style.color = '#4ade80';
+  document.getElementById('ck-amount').value = ''; document.getElementById('ck-from').value = '';
+  msg.textContent = 'Check deposited.'; msg.style.color = '#4ade80';
   renderAll(user);
   setTimeout(() => { msg.textContent = ''; }, 2400);
 }
-
-/* ---------- receive ---------- */
 function handleReceive() {
-  const key = getSession();
-  const user = getUsers()[key];
-  if (!user) { showScreen('screen-signin'); return; }
-
+  const key = getSession(); const user = getUsers()[key]; if (!user) return;
   const from = document.getElementById('rcv-from').value.trim();
   const amountStr = document.getElementById('rcv-amount').value;
   const msg = document.getElementById('rcv-msg');
   msg.textContent = ''; msg.classList.remove('success-msg'); msg.classList.add('error-msg');
-
   const amount = parseFloat(amountStr);
-  if (!from) { msg.textContent = 'Enter sender name.'; return; }
-  if (!amount || amount <= 0) { msg.textContent = 'Enter a valid amount.'; return; }
-
+  if (!from) { msg.textContent = 'Enter sender.'; return; }
+  if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; return; }
   applyBalance(user, amount);
-  addTransaction(user, {
-    type: 'receive', label: 'Received from ' + from,
-    amount: amount, date: Date.now(),
-    account: user.activeAccount, category: 'Other'
-  });
+  addTransaction(user, { type: 'receive', label: 'Received from ' + from, amount, date: Date.now(), account: user.activeAccount, category: 'Other' });
   addNotification(user, '↓', 'Payment received', fmt(amount) + ' from ' + from);
   persistUser(key, user);
-
-  document.getElementById('rcv-from').value = '';
-  document.getElementById('rcv-amount').value = '';
-  msg.textContent = 'Payment received successfully.';
-  msg.classList.remove('error-msg'); msg.classList.add('success-msg');
+  document.getElementById('rcv-from').value = ''; document.getElementById('rcv-amount').value = '';
+  msg.textContent = 'Payment received.'; msg.classList.remove('error-msg'); msg.classList.add('success-msg');
   renderAll(user);
   setTimeout(() => { msg.textContent = ''; }, 1800);
 }
-
-/* ---------- wire ---------- */
 function handleWire() {
-  const key = getSession();
-  const user = getUsers()[key];
-  if (!user) { showScreen('screen-signin'); return; }
-
+  const key = getSession(); const user = getUsers()[key]; if (!user) return;
   const name = document.getElementById('wr-name').value.trim();
   const bank = document.getElementById('wr-bank').value.trim();
   const routing = document.getElementById('wr-routing').value.trim();
@@ -2921,350 +2495,196 @@ function handleWire() {
   const amountStr = document.getElementById('wr-amount').value;
   const msg = document.getElementById('wr-msg');
   msg.textContent = ''; msg.classList.remove('success-msg'); msg.classList.add('error-msg');
-
   const amount = parseFloat(amountStr);
   const FEE = 15.00;
-
-  if (!name) { msg.textContent = 'Enter recipient name.'; return; }
+  if (!name) { msg.textContent = 'Enter recipient.'; return; }
   if (!bank) { msg.textContent = 'Enter bank.'; return; }
   if (!/^\d{9}$/.test(routing)) { msg.textContent = 'Routing must be 9 digits.'; return; }
-  if (!account) { msg.textContent = 'Enter account number.'; return; }
-  if (!amount || amount <= 0) { msg.textContent = 'Enter a valid amount.'; return; }
+  if (!account) { msg.textContent = 'Enter account.'; return; }
+  if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; return; }
   if (amount + FEE > activeBalance(user)) { msg.textContent = 'Insufficient balance.'; return; }
-
   applyBalance(user, -(amount + FEE));
-  addTransaction(user, {
-    type: 'wire', label: 'Wire to ' + name + ' (' + bank + ')',
-    amount: -amount, date: Date.now(),
-    account: user.activeAccount, category: 'Bills'
-  });
-  addTransaction(user, {
-    type: 'wire', label: 'Wire fee',
-    amount: -FEE, date: Date.now(),
-    account: user.activeAccount, category: 'Bills'
-  });
+  addTransaction(user, { type: 'wire', label: 'Wire to ' + name + ' (' + bank + ')', amount: -amount, date: Date.now(), account: user.activeAccount, category: 'Bills' });
+  addTransaction(user, { type: 'wire', label: 'Wire fee', amount: -FEE, date: Date.now(), account: user.activeAccount, category: 'Bills' });
   addNotification(user, '🌐', 'Wire sent', fmt(amount) + ' to ' + name);
   persistUser(key, user);
-
   ['wr-name','wr-bank','wr-routing','wr-account','wr-amount'].forEach(id => document.getElementById(id).value = '');
-  msg.textContent = 'Wire sent. $15 fee applied.';
-  msg.classList.remove('error-msg'); msg.classList.add('success-msg');
+  msg.textContent = 'Wire sent. $15 fee applied.'; msg.classList.remove('error-msg'); msg.classList.add('success-msg');
   renderAll(user);
   setTimeout(() => { msg.textContent = ''; }, 2400);
 }
-
-/* ---------- zelle ---------- */
 function handleZelle() {
-  const key = getSession();
-  const user = getUsers()[key];
-  if (!user) { showScreen('screen-signin'); return; }
-
+  const key = getSession(); const user = getUsers()[key]; if (!user) return;
   const recipient = document.getElementById('zl-recipient').value.trim();
   const amountStr = document.getElementById('zl-amount').value;
   const msg = document.getElementById('zl-msg');
   msg.textContent = ''; msg.classList.remove('success-msg'); msg.classList.add('error-msg');
-
   const amount = parseFloat(amountStr);
   if (!recipient) { msg.textContent = 'Enter recipient.'; return; }
-  if (!amount || amount <= 0) { msg.textContent = 'Enter a valid amount.'; return; }
+  if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; return; }
   if (amount > activeBalance(user)) { msg.textContent = 'Insufficient balance.'; return; }
-
   applyBalance(user, -amount);
-  addTransaction(user, {
-    type: 'zelle', label: 'Zelle to ' + recipient,
-    amount: -amount, date: Date.now(),
-    account: user.activeAccount, category: 'Other'
-  });
+  addTransaction(user, { type: 'zelle', label: 'Zelle to ' + recipient, amount: -amount, date: Date.now(), account: user.activeAccount, category: 'Other' });
   addNotification(user, '⚡', 'Zelle sent', fmt(amount) + ' to ' + recipient);
   persistUser(key, user);
-
-  document.getElementById('zl-recipient').value = '';
-  document.getElementById('zl-amount').value = '';
-  msg.textContent = 'Zelle payment sent.';
-  msg.classList.remove('error-msg'); msg.classList.add('success-msg');
+  document.getElementById('zl-recipient').value = ''; document.getElementById('zl-amount').value = '';
+  msg.textContent = 'Zelle payment sent.'; msg.classList.remove('error-msg'); msg.classList.add('success-msg');
   renderAll(user);
   setTimeout(() => { msg.textContent = ''; }, 1800);
 }
-
-/* ---------- bill ---------- */
 function handleBill() {
-  const key = getSession();
-  const user = getUsers()[key];
-  if (!user) { showScreen('screen-signin'); return; }
-
+  const key = getSession(); const user = getUsers()[key]; if (!user) return;
   const name = document.getElementById('bl-name').value.trim();
   const amountStr = document.getElementById('bl-amount').value;
   const msg = document.getElementById('bl-msg');
   msg.textContent = ''; msg.classList.remove('success-msg'); msg.classList.add('error-msg');
-
   const amount = parseFloat(amountStr);
-  if (!name) { msg.textContent = 'Enter biller name.'; return; }
-  if (!amount || amount <= 0) { msg.textContent = 'Enter a valid amount.'; return; }
+  if (!name) { msg.textContent = 'Enter biller.'; return; }
+  if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; return; }
   if (amount > activeBalance(user)) { msg.textContent = 'Insufficient balance.'; return; }
-
   applyBalance(user, -amount);
-  addTransaction(user, {
-    type: 'bill', label: 'Bill — ' + name,
-    amount: -amount, date: Date.now(),
-    account: user.activeAccount, category: 'Bills'
-  });
+  addTransaction(user, { type: 'bill', label: 'Bill — ' + name, amount: -amount, date: Date.now(), account: user.activeAccount, category: 'Bills' });
   addNotification(user, '📄', 'Bill paid', fmt(amount) + ' to ' + name);
   persistUser(key, user);
-
-  document.getElementById('bl-name').value = '';
-  document.getElementById('bl-amount').value = '';
-  msg.textContent = 'Bill paid successfully.';
-  msg.classList.remove('error-msg'); msg.classList.add('success-msg');
+  document.getElementById('bl-name').value = ''; document.getElementById('bl-amount').value = '';
+  msg.textContent = 'Bill paid.'; msg.classList.remove('error-msg'); msg.classList.add('success-msg');
   renderAll(user);
   setTimeout(() => { msg.textContent = ''; }, 1800);
 }
-
-/* ---------- split ---------- */
 function calcSplit() {
   const total = parseFloat(document.getElementById('sp-total').value) || 0;
   const count = parseInt(document.getElementById('sp-count').value) || 2;
   const el = document.getElementById('split-result');
-  if (total <= 0 || count < 2) {
-    el.innerHTML = 'Enter total and number of people.';
-    return;
-  }
-  const each = total / count;
-  el.innerHTML = `<strong>${count} people</strong> · Each pays <strong>${fmt(each)}</strong>`;
+  if (total <= 0 || count < 2) { el.innerHTML = 'Enter total and 2+ people.'; return; }
+  el.innerHTML = `<strong>${count} people</strong> · Each pays <strong>${fmt(total / count)}</strong>`;
 }
-
 function handleSplit() {
-  const key = getSession();
-  const user = getUsers()[key];
-  if (!user) { showScreen('screen-signin'); return; }
-
+  const key = getSession(); const user = getUsers()[key]; if (!user) return;
   const total = parseFloat(document.getElementById('sp-total').value) || 0;
   const count = parseInt(document.getElementById('sp-count').value) || 0;
-  const msg = document.getElementById('sp-msg');
-  msg.textContent = '';
-
+  const msg = document.getElementById('sp-msg'); msg.textContent = '';
   if (total <= 0 || count < 2) { msg.textContent = 'Enter total and 2+ people.'; msg.style.color = '#f87171'; return; }
   const each = total / count;
-  if (each > activeBalance(user)) { msg.textContent = 'Insufficient balance for your share.'; msg.style.color = '#f87171'; return; }
-
+  if (each > activeBalance(user)) { msg.textContent = 'Insufficient balance.'; msg.style.color = '#f87171'; return; }
   applyBalance(user, -each);
-  addTransaction(user, {
-    type: 'transfer', label: 'Split bill (' + count + ' people)',
-    amount: -each, date: Date.now(),
-    account: user.activeAccount, category: 'Other'
-  });
+  addTransaction(user, { type: 'transfer', label: 'Split bill (' + count + ' people)', amount: -each, date: Date.now(), account: user.activeAccount, category: 'Other' });
   addNotification(user, '🧾', 'Split bill paid', 'Your share: ' + fmt(each));
   persistUser(key, user);
-
-  document.getElementById('sp-total').value = '';
-  document.getElementById('sp-count').value = '';
-  msg.textContent = 'Your share paid: ' + fmt(each);
-  msg.style.color = '#4ade80';
+  document.getElementById('sp-total').value = ''; document.getElementById('sp-count').value = '';
+  msg.textContent = 'Share paid: ' + fmt(each); msg.style.color = '#4ade80';
   renderAll(user);
   setTimeout(() => { msg.textContent = ''; }, 2400);
 }
-
-/* ---------- contacts ---------- */
 function addContact() {
-  const key = getSession();
-  const user = getUsers()[key];
-  if (!user) return;
-
+  const key = getSession(); const user = getUsers()[key]; if (!user) return;
   const name = document.getElementById('ct-name').value.trim();
   const info = document.getElementById('ct-info').value.trim();
-  const msg = document.getElementById('ct-msg');
-  msg.textContent = '';
-
+  const msg = document.getElementById('ct-msg'); msg.textContent = '';
   if (!name) { msg.textContent = 'Enter name.'; msg.style.color = '#f87171'; return; }
-  if (!info) { msg.textContent = 'Enter email or phone.'; msg.style.color = '#f87171'; return; }
-
+  if (!info) { msg.textContent = 'Enter email/phone.'; msg.style.color = '#f87171'; return; }
   user.contacts = user.contacts || [];
   user.contacts.push({ name, info });
   persistUser(key, user);
-
-  document.getElementById('ct-name').value = '';
-  document.getElementById('ct-info').value = '';
-  msg.textContent = 'Contact saved.';
-  msg.style.color = '#4ade80';
+  document.getElementById('ct-name').value = ''; document.getElementById('ct-info').value = '';
+  msg.textContent = 'Contact saved.'; msg.style.color = '#4ade80';
   renderAll(user);
   setTimeout(() => { msg.textContent = ''; }, 1800);
 }
-
-/* ---------- budget ---------- */
 function saveBudget() {
-  const key = getSession();
-  const user = getUsers()[key];
-  if (!user) return;
-
+  const key = getSession(); const user = getUsers()[key]; if (!user) return;
   const cat = document.getElementById('bd-cat').value;
   const amount = parseFloat(document.getElementById('bd-amount').value);
-  const msg = document.getElementById('bd-msg');
-  msg.textContent = '';
-
-  if (!amount || amount <= 0) { msg.textContent = 'Enter a valid amount.'; msg.style.color = '#f87171'; return; }
-
+  const msg = document.getElementById('bd-msg'); msg.textContent = '';
+  if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; msg.style.color = '#f87171'; return; }
   user.budgets = user.budgets || {};
   user.budgets[cat] = amount;
   persistUser(key, user);
-
   document.getElementById('bd-amount').value = '';
-  msg.textContent = 'Budget saved for ' + cat + '.';
-  msg.style.color = '#4ade80';
+  msg.textContent = 'Budget saved.'; msg.style.color = '#4ade80';
   renderAll(user);
   setTimeout(() => { msg.textContent = ''; }, 1800);
 }
-
-/* ---------- card controls ---------- */
 function toggleFreeze() {
-  const key = getSession();
-  const user = getUsers()[key];
-  if (!user) return;
+  const key = getSession(); const user = getUsers()[key]; if (!user) return;
   user.frozen = !user.frozen;
   persistUser(key, user);
   const msg = document.getElementById('card-msg');
-  if (msg) {
-    msg.textContent = user.frozen ? 'Card frozen.' : 'Card unfrozen.';
-    msg.style.color = '#4ade80';
-    setTimeout(() => { msg.textContent = ''; }, 1800);
-  }
+  if (msg) { msg.textContent = user.frozen ? 'Card frozen.' : 'Card unfrozen.'; msg.style.color = '#4ade80'; setTimeout(() => { msg.textContent = ''; }, 1800); }
   renderAll(user);
 }
-
 function revealPin() {
   const pin = String(Math.floor(1000 + Math.random() * 9000));
-  alert('Your demo PIN: ' + pin + '\n\n(Do not share with anyone — demo only)');
+  alert('Your demo PIN: ' + pin + '\n(Demo only)');
 }
-
 function generateVirtualCard() {
-  const key = getSession();
-  const user = getUsers()[key];
-  if (!user) return;
-
+  const key = getSession(); const user = getUsers()[key]; if (!user) return;
   let num = '';
   for (let i = 0; i < 16; i++) num += Math.floor(Math.random() * 10);
   const grouped = num.match(/.{1,4}/g).join(' ');
-  const expiry = String(Math.floor(Math.random()*12)+1).padStart(2,'0') + '/' +
-                 String((new Date().getFullYear()+3)%100);
-
+  const expiry = String(Math.floor(Math.random()*12)+1).padStart(2,'0') + '/' + String((new Date().getFullYear()+3)%100);
   user.virtualCards = user.virtualCards || [];
   user.virtualCards.push({ number: grouped, expiry });
   persistUser(key, user);
   renderAll(user);
-
   alert('Virtual Card Generated\n\nCard: ' + grouped + '\nExpiry: ' + expiry);
 }
-
-/* ---------- reset password ---------- */
 function handleResetPassword() {
-  const key = getSession();
-  const users = getUsers();
-  const user = users[key];
-  if (!user) return;
-
+  const key = getSession(); const user = getUsers()[key]; if (!user) return;
   const code = document.getElementById('pf-reset-code').value.trim();
   const newPass = document.getElementById('pf-new-pass').value;
-  const msg = document.getElementById('pf-msg');
-  msg.textContent = '';
-
-  if (!code || code.length !== 6) { msg.textContent = 'Enter your 6-digit access code.'; msg.style.color = '#f87171'; return; }
-  if (code !== user.code) { msg.textContent = 'Incorrect access code.'; msg.style.color = '#f87171'; return; }
+  const msg = document.getElementById('pf-msg'); msg.textContent = '';
+  if (!code || code.length !== 6) { msg.textContent = 'Enter 6-digit code.'; msg.style.color = '#f87171'; return; }
+  if (code !== user.code) { msg.textContent = 'Incorrect code.'; msg.style.color = '#f87171'; return; }
   if (!newPass || newPass.length < 4) { msg.textContent = 'Password must be 4+ chars.'; msg.style.color = '#f87171'; return; }
-
   user.pass = newPass;
   persistUser(key, user);
-  document.getElementById('pf-reset-code').value = '';
-  document.getElementById('pf-new-pass').value = '';
-  msg.textContent = 'Password reset successfully.';
-  msg.style.color = '#4ade80';
+  document.getElementById('pf-reset-code').value = ''; document.getElementById('pf-new-pass').value = '';
+  msg.textContent = 'Password reset.'; msg.style.color = '#4ade80';
   setTimeout(() => { msg.textContent = ''; }, 2400);
 }
-
-/* ---------- change name ---------- */
 function handleChangeName() {
-  const key = getSession();
-  const users = getUsers();
-  const user = users[key];
-  if (!user) return;
-
+  const key = getSession(); const users = getUsers(); const user = users[key]; if (!user) return;
   const newName = document.getElementById('pf-new-name').value.trim();
-  const msg = document.getElementById('pf-name-msg');
-  msg.textContent = '';
-
-  if (!newName || newName.length < 3) {
-    msg.textContent = 'Name must be 3+ characters.';
-    msg.style.color = '#f87171';
-    return;
-  }
+  const msg = document.getElementById('pf-name-msg'); msg.textContent = '';
+  if (!newName || newName.length < 3) { msg.textContent = 'Name must be 3+ chars.'; msg.style.color = '#f87171'; return; }
   user.name = newName;
   persistUser(key, user);
   document.getElementById('pf-new-name').value = '';
-  msg.textContent = 'Name updated.';
-  msg.style.color = '#4ade80';
+  msg.textContent = 'Name updated.'; msg.style.color = '#4ade80';
   renderAll(user);
   setTimeout(() => { msg.textContent = ''; }, 1800);
 }
-
-/* ---------- copy ---------- */
 function copyText(text) {
   if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(text).then(
-      () => alert('Copied: ' + text),
-      () => alert('Copy this value: ' + text)
-    );
-  } else {
-    alert('Copy this value: ' + text);
-  }
+    navigator.clipboard.writeText(text).then(() => alert('Copied: ' + text), () => alert('Copy: ' + text));
+  } else alert('Copy: ' + text);
 }
-
-/* ---------- Zelle label toggle ---------- */
-document.addEventListener('change', function (e) {
-  if (e.target && e.target.id === 'zl-type') {
-    const label = document.getElementById('zl-recipient-label');
-    const input = document.getElementById('zl-recipient');
-    if (e.target.value === 'email') {
-      label.textContent = 'Recipient Email';
-      input.placeholder = 'name@example.com';
-    } else {
-      label.textContent = 'Recipient Mobile Number';
-      input.placeholder = '(555) 123-4567';
-    }
-  }
-});
-
-/* ---------- click-outside modal ---------- */
 document.addEventListener('click', function (e) {
   const modal = document.getElementById('switcher-modal');
   if (e.target === modal) closeSwitcher();
 });
 
-/* ---------- boot ---------- */
 document.addEventListener('DOMContentLoaded', function () {
   runMigrations();
   updateClocks();
-  setInterval(updateClocks, 1000);
+  setInterval(updateClocks, 1000);   // every second — greeting + clock stay current
 
   const isLight = document.body.classList.contains('light');
   const btn = document.getElementById('theme-btn');
   if (btn) btn.textContent = isLight ? '🌙' : '☀️';
 
   const session = getSession();
-  if (session && getUsers()[session]) {
-    showScreen('screen-home');
-  } else {
-    clearSession();
-    showScreen('screen-signup');
-  }
+  if (session && getUsers()[session]) showScreen('screen-home');
+  else { clearSession(); showScreen('screen-signup'); }
 });
 
 document.addEventListener('visibilitychange', function () {
   if (!document.hidden) {
     updateClocks();
     const session = getSession();
-    if (session && getUsers()[session]) {
-      renderAll(getUsers()[session]);
-    }
+    if (session && getUsers()[session]) renderAll(getUsers()[session]);
   }
 });
 </script>
-
 </body>
 </html>
