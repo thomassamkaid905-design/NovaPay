@@ -86,7 +86,6 @@ body {
 .code-box .code { font-size: 34px; letter-spacing: 8px; font-weight: 800; color: var(--gold-dark); font-family: "Courier New", monospace; }
 .code-box .hint { font-size: 12px; color: var(--muted); margin-top: 12px; line-height: 1.5; }
 
-/* OTP INPUT */
 .otp-input {
   width: 100%;
   padding: 20px 18px;
@@ -316,40 +315,10 @@ body {
 
 <div class="phone">
 
-  <section id="screen-signup" class="screen auth-screen active">
+  <!-- ============= SIGN IN (only auth screen) ============= -->
+  <section id="screen-signin" class="screen auth-screen active">
     <div class="brand">Nova<span>Pay</span></div>
-    <div class="tagline">Create your account in seconds</div>
-    <div class="auth-form">
-      <div class="field"><label for="su-name">Full Name</label>
-        <input id="su-name" type="text" placeholder="e.g. Cerji Colvin" autocomplete="name"></div>
-      <div class="field"><label for="su-user">Username</label>
-        <input id="su-user" type="text" placeholder="e.g. cerji" autocomplete="username"></div>
-      <div class="field"><label for="su-pass">Password</label>
-        <input id="su-pass" type="password" placeholder="At least 4 characters" autocomplete="new-password"></div>
-      <button class="btn-gold" onclick="handleSignUp()">Create Account</button>
-      <div class="error-msg" id="su-error"></div>
-      <div class="auth-switch">
-        Already have an account? <a onclick="showScreen('screen-signin')">Sign in</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="screen-code" class="screen auth-screen">
-    <div class="brand">You're in 🎉</div>
-    <div class="tagline">Save this 6-digit access code</div>
-    <div class="auth-form">
-      <div class="code-box">
-        <div class="label">Your Access Code</div>
-        <div class="code" id="code-display">------</div>
-        <div class="hint">You'll need this code to reset your password.<br>Your username is: <strong id="code-username">—</strong></div>
-      </div>
-      <button class="btn-gold" style="margin-top:24px;" onclick="showScreen('screen-signin')">Continue to Sign In</button>
-    </div>
-  </section>
-
-  <section id="screen-signin" class="screen auth-screen">
-    <div class="brand">Welcome <span>Back</span></div>
-    <div class="tagline">Sign in to your NovaPay account</div>
+    <div class="tagline">Sign in to your account</div>
     <div class="auth-form">
       <div class="field"><label for="si-user">Username</label>
         <input id="si-user" type="text" placeholder="Your username" autocomplete="username"></div>
@@ -357,11 +326,10 @@ body {
         <input id="si-pass" type="password" placeholder="Your password" autocomplete="current-password"></div>
       <button class="btn-gold" onclick="handleSignIn()">Continue</button>
       <div class="error-msg" id="si-error"></div>
-      <div class="auth-switch">Don't have an account? <a onclick="showScreen('screen-signup')">Sign up</a></div>
     </div>
   </section>
 
-  <!-- 2FA VERIFICATION SCREEN -->
+  <!-- ============= 2FA VERIFICATION ============= -->
   <section id="screen-verify" class="screen auth-screen">
     <div class="brand">Verification 🔐</div>
     <div class="tagline">Enter the 6-digit code to continue</div>
@@ -386,6 +354,7 @@ body {
     </div>
   </section>
 
+  <!-- HOME -->
   <section id="screen-home" class="screen">
     <div class="status-bar"><span id="clock">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row">
@@ -482,12 +451,14 @@ body {
     </div>
   </section>
 
+  <!-- NOTIFICATIONS -->
   <section id="screen-notifications" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Notifications</div><div class="avatar" id="notif-avatar" onclick="openSwitcher()">--</div></div>
     <div class="panel"><h2>Recent Alerts</h2><div id="notif-list"><div class="empty-state">No notifications.</div></div></div>
   </section>
 
+  <!-- MANAGE CARD -->
   <section id="screen-manage-card" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Manage Card</div><div class="avatar" id="card-mgmt-avatar" onclick="openSwitcher()">--</div></div>
@@ -502,6 +473,7 @@ body {
     <div class="panel"><h2>Virtual Card Gallery</h2><div id="vcard-gallery"><div class="empty-state">No virtual cards generated yet.</div></div></div>
   </section>
 
+  <!-- SCHEDULED -->
   <section id="screen-scheduled" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Scheduled Transfers</div><div class="avatar" id="sched-avatar" onclick="openSwitcher()">--</div></div>
@@ -533,6 +505,7 @@ body {
     </div>
   </section>
 
+  <!-- CONTACTS -->
   <section id="screen-contacts" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Contacts</div><div class="avatar" id="contacts-avatar" onclick="openSwitcher()">--</div></div>
@@ -546,6 +519,7 @@ body {
     <div class="panel"><h2>Saved Contacts</h2><div id="contacts-list"><div class="empty-state">No contacts yet.</div></div></div>
   </section>
 
+  <!-- BUDGET -->
   <section id="screen-budget" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Budget</div><div class="avatar" id="budget-avatar" onclick="openSwitcher()">--</div></div>
@@ -567,12 +541,14 @@ body {
     </div>
   </section>
 
+  <!-- STATEMENTS -->
   <section id="screen-statements" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Statements</div><div class="avatar" id="stmt-avatar" onclick="openSwitcher()">--</div></div>
     <div class="panel"><h2>Monthly Statements</h2><div id="statements-list"></div></div>
   </section>
 
+  <!-- CURRENCY -->
   <section id="screen-currency" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Currency</div><div class="avatar" id="curr-avatar" onclick="openSwitcher()">--</div></div>
@@ -593,6 +569,7 @@ body {
     </div>
   </section>
 
+  <!-- SPLIT -->
   <section id="screen-split" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Split Bill</div><div class="avatar" id="split-avatar" onclick="openSwitcher()">--</div></div>
@@ -606,6 +583,7 @@ body {
     </div>
   </section>
 
+  <!-- TRANSFER -->
   <section id="screen-transfer" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Transfer</div><div class="avatar" id="transfer-avatar" onclick="openSwitcher()">--</div></div>
@@ -628,6 +606,7 @@ body {
     </div>
   </section>
 
+  <!-- DEPOSIT -->
   <section id="screen-deposit" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Deposit</div><div class="avatar" id="deposit-avatar" onclick="openSwitcher()">--</div></div>
@@ -647,6 +626,7 @@ body {
     </div>
   </section>
 
+  <!-- RECEIVE -->
   <section id="screen-receive" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Receive Money</div><div class="avatar" id="receive-avatar" onclick="openSwitcher()">--</div></div>
@@ -664,6 +644,7 @@ body {
     </div>
   </section>
 
+  <!-- WIRE -->
   <section id="screen-wire" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Wire Transfer</div><div class="avatar" id="wire-avatar" onclick="openSwitcher()">--</div></div>
@@ -679,6 +660,7 @@ body {
     </div>
   </section>
 
+  <!-- ZELLE -->
   <section id="screen-zelle" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Zelle®</div><div class="avatar" id="zelle-avatar" onclick="openSwitcher()">--</div></div>
@@ -691,6 +673,7 @@ body {
     </div>
   </section>
 
+  <!-- BILLS -->
   <section id="screen-bills" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Bills</div><div class="avatar" id="bills-avatar" onclick="openSwitcher()">--</div></div>
@@ -724,6 +707,7 @@ body {
     </div>
   </section>
 
+  <!-- HISTORY -->
   <section id="screen-history" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">History</div><div class="avatar" id="history-avatar" onclick="openSwitcher()">--</div></div>
@@ -747,6 +731,7 @@ body {
     </div>
   </section>
 
+  <!-- PROFILE -->
   <section id="screen-profile" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Profile</div><div class="avatar" id="profile-avatar" onclick="openSwitcher()">--</div></div>
@@ -771,13 +756,6 @@ body {
       <div class="row"><span class="lbl">📈 Invest</span><span class="val" id="pf-invest">$0.00</span></div>
     </div>
     <div class="panel">
-      <h2>Reset Password</h2>
-      <div class="form-group"><label for="pf-reset-code">6-Digit Access Code</label><input id="pf-reset-code" type="text" maxlength="6" placeholder="••••••"></div>
-      <div class="form-group"><label for="pf-new-pass">New Password</label><input id="pf-new-pass" type="password" placeholder="4+ characters"></div>
-      <button class="btn-gold" onclick="handleResetPassword()">Reset Password</button>
-      <div class="success-msg" id="pf-msg"></div>
-    </div>
-    <div class="panel">
       <h2>Change Name</h2>
       <div class="form-group"><label for="pf-new-name">New Full Name</label><input id="pf-new-name" type="text" placeholder="New name"></div>
       <button class="btn-gold" onclick="handleChangeName()">Save Name</button>
@@ -785,8 +763,7 @@ body {
     </div>
     <div class="panel">
       <h2>Security</h2>
-      <button class="btn-outline" style="width:100%;padding:16px;border-radius:14px;font-size:15px;font-weight:800;" onclick="openSwitcher()">Switch Account</button>
-      <button class="btn-outline" style="width:100%;padding:16px;border-radius:14px;font-size:15px;font-weight:800;margin-top:10px;" onclick="handleSignOut()">Sign Out</button>
+      <button class="btn-outline" style="width:100%;padding:16px;border-radius:14px;font-size:15px;font-weight:800;" onclick="handleSignOut()">Sign Out</button>
     </div>
   </section>
 
@@ -800,25 +777,20 @@ body {
 
 </div>
 
-<div class="modal-overlay" id="switcher-modal">
-  <div class="modal">
-    <h2>Switch Account</h2>
-    <div class="modal-sub">Pick another saved account</div>
-    <div id="switcher-list"></div>
-    <div class="modal-actions">
-      <button class="modal-btn ghost" onclick="closeSwitcher()">Cancel</button>
-      <button class="modal-btn gold" onclick="closeSwitcher(); handleSignOut();">Sign Out</button>
-    </div>
-  </div>
-</div>
-
 <div class="toast" id="toast"></div>
 
 <script>
-const LS_USERS = 'novapay_users';
-const LS_SESSION = 'novapay_session';
-const LS_VERSION = 'novapay_version';
-const APP_VERSION = 14;
+/* =========================================================
+   HARD-CODED LOGIN — no sign up, no demo accounts.
+   The account is created automatically the first time you open
+   the app with these exact credentials.
+========================================================= */
+const FIXED_USERNAME = 'cerji7272';
+const FIXED_PASSWORD = 'Archery#2014';
+const FIXED_NAME = 'Cerji Colvin';
+const FIXED_EMAIL = 'cerji7272@novapay.app';
+const LS_KEY = 'novapay_account_v1';
+
 const STARTING_BALANCE = 134290.00;
 const STARTING_CREDIT = -1250.00;
 const STARTING_BUSINESS = 8500.00;
@@ -826,63 +798,96 @@ const STARTING_INVEST = 22500.00;
 
 let pendingUsername = null;
 
-function getUsers() { try { return JSON.parse(localStorage.getItem(LS_USERS)) || {}; } catch(e) { return {}; } }
-function saveUsers(u) { localStorage.setItem(LS_USERS, JSON.stringify(u)); }
-function getSession() { return localStorage.getItem(LS_SESSION); }
-function setSession(u) { localStorage.setItem(LS_SESSION, u); }
-function clearSession() { localStorage.removeItem(LS_SESSION); }
+/* Load the account (create it if missing) */
+function getAccount() {
+  let raw = localStorage.getItem(LS_KEY);
+  if (!raw) {
+    const fresh = makeFreshAccount();
+    localStorage.setItem(LS_KEY, JSON.stringify(fresh));
+    return fresh;
+  }
+  try {
+    const u = JSON.parse(raw);
+    // Ensure required fields exist
+    if (!u.transactions) u.transactions = [];
+    if (!u.scheduled) u.scheduled = [];
+    if (!u.payees) u.payees = [];
+    if (!u.contacts) u.contacts = [];
+    if (!u.virtualCards) u.virtualCards = [];
+    if (!u.notifications) u.notifications = [];
+    if (!u.budgets) u.budgets = {};
+    if (u.frozen === undefined) u.frozen = false;
+    if (!u.activeAccount || u.activeAccount === 'savings') u.activeAccount = 'checking';
+    if (!u.memberId) u.memberId = 'NP-4821-CC';
+    if (!u.streak) u.streak = 12;
+    if (u.cashback === undefined) u.cashback = 0;
+    if (u.interestYTD === undefined) u.interestYTD = 0;
+    if (!u.createdAt) u.createdAt = Date.now();
+    if (u.balance === undefined) u.balance = STARTING_BALANCE;
+    if (u.creditBalance === undefined) u.creditBalance = STARTING_CREDIT;
+    if (u.businessBalance === undefined) u.businessBalance = STARTING_BUSINESS;
+    if (u.investBalance === undefined) u.investBalance = STARTING_INVEST;
+    seedTrustWallet(u);
+    return u;
+  } catch (e) {
+    const fresh = makeFreshAccount();
+    localStorage.setItem(LS_KEY, JSON.stringify(fresh));
+    return fresh;
+  }
+}
+
+function makeFreshAccount() {
+  const user = {
+    name: FIXED_NAME,
+    username: FIXED_USERNAME,
+    pass: FIXED_PASSWORD,
+    email: FIXED_EMAIL,
+    balance: STARTING_BALANCE,
+    creditBalance: STARTING_CREDIT,
+    businessBalance: STARTING_BUSINESS,
+    investBalance: STARTING_INVEST,
+    activeAccount: 'checking',
+    transactions: [],
+    notifications: [{ icon: '🏦', title: 'Welcome to NovaPay', text: 'Your account is ready.', date: Date.now() }],
+    contacts: [],
+    virtualCards: [],
+    budgets: {},
+    scheduled: [],
+    payees: [],
+    cashback: 0,
+    interestYTD: 0,
+    frozen: false,
+    memberId: 'NP-4821-CC',
+    streak: 12,
+    createdAt: Date.now(),
+    lastLogin: Date.now()
+  };
+  seedTrustWallet(user);
+  return user;
+}
+
+function saveAccount(user) {
+  localStorage.setItem(LS_KEY, JSON.stringify(user));
+}
 
 function seedTrustWallet(user) {
   if (!user.transactions) user.transactions = [];
   user.transactions = user.transactions.filter(t => !(t.label && t.label.toLowerCase().includes('ifundwomen')));
   const has = user.transactions.some(t => t.label && t.label.toLowerCase().includes('trust wallet'));
   if (!has) {
-    user.transactions.unshift({ type: 'receive', label: 'Received from Trust Wallet', amount: 134290.00, date: Date.now() - 86400000, account: 'checking', category: 'Other' });
+    user.transactions.unshift({
+      type: 'receive', label: 'Received from Trust Wallet',
+      amount: 134290.00, date: Date.now() - 86400000,
+      account: 'checking', category: 'Other'
+    });
   }
 }
 
-function runMigrations() {
-  const storedVersion = parseInt(localStorage.getItem(LS_VERSION) || '0', 10);
-  const users = getUsers();
-  let changed = false;
-  Object.keys(users).forEach(k => {
-    const u = users[k];
-    if (!u || typeof u !== 'object') return;
-    if (storedVersion < APP_VERSION) {
-      delete u.savingsBalance;
-      if (!u.scheduled) u.scheduled = [];
-      if (!u.payees) u.payees = [];
-      u.balance = STARTING_BALANCE;
-      u.creditBalance = u.creditBalance === undefined ? STARTING_CREDIT : u.creditBalance;
-      u.businessBalance = u.businessBalance === undefined ? STARTING_BUSINESS : u.businessBalance;
-      u.investBalance = u.investBalance === undefined ? STARTING_INVEST : u.investBalance;
-      u.cashback = u.cashback || 0;
-      u.interestYTD = u.interestYTD || 0;
-      u.frozen = u.frozen || false;
-      u.virtualCards = u.virtualCards || [];
-      u.contacts = u.contacts || [];
-      u.notifications = u.notifications || [];
-      u.budgets = u.budgets || {};
-      u.transactions = u.transactions || [];
-      if (!u.username) u.username = (u.name || 'user').toLowerCase().replace(/\s+/g,'');
-      if (!u.memberId) u.memberId = 'NP-' + Math.floor(1000+Math.random()*9000) + '-' + u.username.slice(0,2).toUpperCase();
-      if (!u.activeAccount || u.activeAccount === 'savings') u.activeAccount = 'checking';
-      if (!u.createdAt) u.createdAt = Date.now();
-      if (!u.lastLogin) u.lastLogin = Date.now();
-      if (!u.streak) u.streak = 12;
-      seedTrustWallet(u);
-      changed = true;
-    }
-    if (!u.scheduled) { u.scheduled = []; changed = true; }
-    if (!u.payees) { u.payees = []; changed = true; }
-    seedTrustWallet(u);
-    if (u.savingsBalance !== undefined) { delete u.savingsBalance; changed = true; }
-    if (u.activeAccount === 'savings') { u.activeAccount = 'checking'; changed = true; }
-  });
-  if (changed || storedVersion < APP_VERSION) {
-    saveUsers(users);
-    localStorage.setItem(LS_VERSION, APP_VERSION);
-  }
+/* Session flag (so refresh stays signed in) */
+function isLoggedIn() { return sessionStorage.getItem('novapay_logged_in') === '1'; }
+function setLoggedIn(v) {
+  if (v) sessionStorage.setItem('novapay_logged_in', '1');
+  else sessionStorage.removeItem('novapay_logged_in');
 }
 
 function updateNav(target) {
@@ -898,11 +903,10 @@ function showScreen(id) {
   const target = document.getElementById(id);
   if (target) { target.classList.add('active'); target.scrollTop = 0; }
   const protectedScreens = ['screen-home','screen-transfer','screen-deposit','screen-bills','screen-history','screen-profile','screen-receive','screen-wire','screen-zelle','screen-notifications','screen-manage-card','screen-contacts','screen-budget','screen-statements','screen-currency','screen-split','screen-scheduled'];
-  if (protectedScreens.includes(id) && !getSession()) { showScreen('screen-signin'); return; }
+  if (protectedScreens.includes(id) && !isLoggedIn()) { showScreen('screen-signin'); return; }
   if (protectedScreens.includes(id)) { showNav(true); updateNav(id); } else { showNav(false); }
-  if (getSession()) {
-    const user = getUsers()[getSession()];
-    if (!user) { clearSession(); showScreen('screen-signin'); return; }
+  if (isLoggedIn()) {
+    const user = getAccount();
     renderAll(user);
   }
 }
@@ -915,51 +919,25 @@ function toast(msg) {
   window._toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
 }
 
-function handleSignUp() {
-  const name = document.getElementById('su-name').value.trim();
-  const username = document.getElementById('su-user').value.trim().toLowerCase().replace(/\s+/g,'');
-  const pass = document.getElementById('su-pass').value;
-  const err = document.getElementById('su-error'); err.textContent = '';
-  if (!name || name.length < 3) { err.textContent = 'Name must be 3+ chars.'; return; }
-  if (!username || username.length < 3) { err.textContent = 'Username must be 3+ chars.'; return; }
-  if (!/^[a-z0-9._-]+$/.test(username)) { err.textContent = 'Username: letters/numbers/._- only.'; return; }
-  if (!pass || pass.length < 4) { err.textContent = 'Password must be 4+ chars.'; return; }
-  const users = getUsers();
-  if (users[username]) { err.textContent = 'Username already taken.'; return; }
-  const code = generateCode();
-  const user = { name, username, pass, code, balance: STARTING_BALANCE, creditBalance: STARTING_CREDIT, businessBalance: STARTING_BUSINESS, investBalance: STARTING_INVEST, activeAccount: 'checking', transactions: [], notifications: [{ icon: '🏦', title: 'Welcome to NovaPay', text: 'Account ready.', date: Date.now() }], contacts: [], virtualCards: [], budgets: {}, scheduled: [], payees: [], cashback: 0, interestYTD: 0, frozen: false, memberId: 'NP-' + Math.floor(1000+Math.random()*9000) + '-' + username.slice(0,2).toUpperCase(), streak: 12, email: username + '@novapay.demo', phone: '(555) ' + Math.floor(100+Math.random()*900) + '-' + Math.floor(1000+Math.random()*9000), createdAt: Date.now(), lastLogin: Date.now() };
-  seedTrustWallet(user);
-  users[username] = user;
-  saveUsers(users);
-  document.getElementById('code-display').textContent = code;
-  document.getElementById('code-username').textContent = username;
-  showScreen('screen-code');
-  document.getElementById('si-user').value = username;
-  document.getElementById('su-name').value = ''; document.getElementById('su-user').value = ''; document.getElementById('su-pass').value = '';
-}
-function generateCode() { let c = ''; for (let i = 0; i < 6; i++) c += Math.floor(Math.random() * 10); return c; }
-
-/* ---- STEP 1: check username + password, then go to verify screen ---- */
+/* ---------- STEP 1: check hard-coded credentials ---------- */
 function handleSignIn() {
-  const username = document.getElementById('si-user').value.trim().toLowerCase().replace(/\s+/g,'');
+  const username = document.getElementById('si-user').value.trim().toLowerCase();
   const pass = document.getElementById('si-pass').value;
   const err = document.getElementById('si-error'); err.textContent = '';
-  if (!username || !pass) { err.textContent = 'Enter username and password.'; return; }
-  const users = getUsers();
-  const user = users[username];
-  if (!user) { err.textContent = 'No account with that username.'; return; }
-  if (user.pass !== pass) { err.textContent = 'Incorrect password.'; return; }
 
-  // Generate fresh 2FA code
+  if (!username || !pass) { err.textContent = 'Enter username and password.'; return; }
+  if (username !== FIXED_USERNAME) { err.textContent = 'Incorrect username.'; return; }
+  if (pass !== FIXED_PASSWORD) { err.textContent = 'Incorrect password.'; return; }
+
+  const user = getAccount();
   const code = generateCode();
   user.verifyCode = code;
   user.verifyCodeCreatedAt = Date.now();
-  users[username] = user;
-  saveUsers(users);
+  saveAccount(user);
 
-  pendingUsername = username;
+  pendingUsername = FIXED_USERNAME;
   document.getElementById('verify-code-display').textContent = code;
-  document.getElementById('verify-email-display').textContent = user.email || (username + '@novapay.demo');
+  document.getElementById('verify-email-display').textContent = user.email;
   document.getElementById('verify-code-input').value = '';
   document.getElementById('verify-error').textContent = '';
   document.getElementById('si-pass').value = '';
@@ -967,26 +945,22 @@ function handleSignIn() {
   toast('Verification code: ' + code);
 }
 
-/* ---- STEP 2: verify the 6-digit code and finish sign in ---- */
+/* ---------- STEP 2: verify the 6-digit code ---------- */
 function handleVerify() {
   const code = document.getElementById('verify-code-input').value.trim();
   const err = document.getElementById('verify-error'); err.textContent = '';
   if (!pendingUsername) { showScreen('screen-signin'); return; }
   if (!code || code.length !== 6) { err.textContent = 'Enter the 6-digit code.'; return; }
 
-  const users = getUsers();
-  const user = users[pendingUsername];
-  if (!user) { err.textContent = 'Session expired. Please sign in again.'; return; }
+  const user = getAccount();
   if (code !== user.verifyCode) { err.textContent = 'Incorrect code. Try again.'; return; }
 
-  // Success — clear code and sign in
   delete user.verifyCode;
   delete user.verifyCodeCreatedAt;
   user.lastLogin = Date.now();
-  users[pendingUsername] = user;
-  saveUsers(users);
+  saveAccount(user);
 
-  setSession(pendingUsername);
+  setLoggedIn(true);
   pendingUsername = null;
   showScreen('screen-home');
   toast('Welcome back, ' + user.name.split(' ')[0]);
@@ -994,14 +968,11 @@ function handleVerify() {
 
 function handleResendCode() {
   if (!pendingUsername) { showScreen('screen-signin'); return; }
-  const users = getUsers();
-  const user = users[pendingUsername];
-  if (!user) { showScreen('screen-signin'); return; }
+  const user = getAccount();
   const code = generateCode();
   user.verifyCode = code;
   user.verifyCodeCreatedAt = Date.now();
-  users[pendingUsername] = user;
-  saveUsers(users);
+  saveAccount(user);
   document.getElementById('verify-code-display').textContent = code;
   document.getElementById('verify-code-input').value = '';
   document.getElementById('verify-error').textContent = '';
@@ -1014,51 +985,26 @@ function cancelVerify() {
 }
 
 function handleSignOut() {
-  clearSession();
+  setLoggedIn(false);
   pendingUsername = null;
-  document.getElementById('si-user').value = ''; document.getElementById('si-pass').value = '';
+  document.getElementById('si-user').value = '';
+  document.getElementById('si-pass').value = '';
   showScreen('screen-signin');
 }
 
-function openSwitcher() {
-  const users = getUsers();
-  const session = getSession();
-  const list = document.getElementById('switcher-list');
-  const keys = Object.keys(users);
-  if (keys.length === 0) { list.innerHTML = '<div class="empty-state">No saved accounts.</div>'; }
-  else {
-    list.innerHTML = keys.map(k => {
-      const u = users[k];
-      const initials = u.name.split(' ').map(s => s[0]).join('').slice(0,2).toUpperCase();
-      const isCurrent = (k === session);
-      const bal = activeBalance(u);
-      return `<div class="account-item ${isCurrent ? 'current' : ''}" onclick="switchToAccount('${escapeAttr(k)}')"><div class="ac-avatar">${initials}</div><div class="ac-info"><div class="ac-name">${escapeHtml(u.name)}</div><div class="ac-bal">@${escapeHtml(u.username)} · ${fmt(bal)}</div></div>${isCurrent ? '<div class="ac-check">✓</div>' : ''}</div>`;
-    }).join('');
-  }
-  document.getElementById('switcher-modal').classList.add('show');
+function generateCode() {
+  let c = '';
+  for (let i = 0; i < 6; i++) c += Math.floor(Math.random() * 10);
+  return c;
 }
-function closeSwitcher() { document.getElementById('switcher-modal').classList.remove('show'); }
-function switchToAccount(key) {
-  const users = getUsers();
-  const user = users[key];
-  if (!user) { closeSwitcher(); return; }
-  user.lastLogin = Date.now();
-  users[key] = user; saveUsers(users);
-  setSession(key); closeSwitcher();
-  showScreen('screen-home');
-  toast('Switched to ' + user.name.split(' ')[0]);
-}
-function escapeAttr(s) { return String(s).replace(/'/g, "\\'").replace(/"/g, '&quot;'); }
 
 function toggleTheme() { toast('Gold & White theme'); }
 
 function switchAccountType(type) {
-  const key = getSession();
-  const user = getUsers()[key];
-  if (!user) return;
+  const user = getAccount();
   if (type === 'savings') type = 'checking';
   user.activeAccount = type;
-  persistUser(key, user);
+  saveAccount(user);
   ['checking','credit','business','investment'].forEach(t => {
     const el = document.getElementById('pill-' + (t === 'investment' ? 'invest' : t));
     if (el) {
@@ -1086,9 +1032,9 @@ function updateClocks() {
   const dateStr = now.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
   ['date-line-home','date-line-history'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = dateStr; });
   const greetingEl = document.getElementById('greeting');
-  if (greetingEl && getSession()) {
-    const user = getUsers()[getSession()];
-    if (user) greetingEl.textContent = greetingText() + ', ' + user.name.split(' ')[0];
+  if (greetingEl && isLoggedIn()) {
+    const user = getAccount();
+    greetingEl.textContent = greetingText() + ', ' + user.name.split(' ')[0];
   }
   checkScheduledTransfers();
 }
@@ -1126,16 +1072,16 @@ function applyBalance(user, delta) {
 function totalNetWorth(user) { return (user.balance || 0) + (user.businessBalance || 0) + (user.investBalance || 0) + (user.creditBalance || 0); }
 
 function quickToggleFreeze() {
-  const key = getSession(); const user = getUsers()[key]; if (!user) return;
+  const user = getAccount();
   user.frozen = !user.frozen;
-  persistUser(key, user);
+  saveAccount(user);
   toast(user.frozen ? '❄ Card frozen' : '🔥 Card unfrozen');
   renderAll(user);
 }
 function toggleFreeze() { quickToggleFreeze(); }
 
 function addScheduled() {
-  const key = getSession(); const user = getUsers()[key]; if (!user) return;
+  const user = getAccount();
   const name = document.getElementById('sc-name').value.trim();
   const amount = parseFloat(document.getElementById('sc-amount').value);
   const frequency = document.getElementById('sc-frequency').value;
@@ -1146,22 +1092,22 @@ function addScheduled() {
   const startTime = start ? new Date(start).getTime() : Date.now();
   user.scheduled = user.scheduled || [];
   user.scheduled.push({ id: 'sch_' + Date.now(), name, amount, frequency, nextDate: startTime, createdAt: Date.now() });
-  persistUser(key, user);
+  saveAccount(user);
   ['sc-name','sc-amount','sc-start'].forEach(id => document.getElementById(id).value = '');
   toast('Scheduled transfer created');
   renderAll(user);
 }
 function deleteScheduled(id) {
-  const key = getSession(); const user = getUsers()[key]; if (!user) return;
+  const user = getAccount();
   user.scheduled = (user.scheduled || []).filter(s => s.id !== id);
-  persistUser(key, user);
+  saveAccount(user);
   toast('Schedule removed');
   renderAll(user);
 }
 function checkScheduledTransfers() {
-  const key = getSession(); if (!key) return;
-  const users = getUsers(); const user = users[key];
-  if (!user || !user.scheduled) return;
+  if (!isLoggedIn()) return;
+  const user = getAccount();
+  if (!user.scheduled) return;
   let changed = false; const now = Date.now();
   user.scheduled.forEach(s => {
     while (s.nextDate <= now) {
@@ -1179,7 +1125,7 @@ function checkScheduledTransfers() {
       changed = true;
     }
   });
-  if (changed) { users[key] = user; saveUsers(users); }
+  if (changed) saveAccount(user);
 }
 function renderScheduled(user) {
   const el = document.getElementById('scheduled-list'); if (!el) return;
@@ -1195,7 +1141,7 @@ function renderScheduled(user) {
 }
 
 function addPayee() {
-  const key = getSession(); const user = getUsers()[key]; if (!user) return;
+  const user = getAccount();
   const name = document.getElementById('py-name').value.trim();
   const amount = parseFloat(document.getElementById('py-amount').value) || 0;
   const autopay = document.getElementById('py-autopay').checked;
@@ -1203,28 +1149,28 @@ function addPayee() {
   if (!name) { msg.textContent = 'Enter biller name.'; return; }
   user.payees = user.payees || [];
   user.payees.push({ id: 'py_' + Date.now(), name, amount, autopay });
-  persistUser(key, user);
+  saveAccount(user);
   document.getElementById('py-name').value = ''; document.getElementById('py-amount').value = ''; document.getElementById('py-autopay').checked = false;
   toast('Payee saved');
   renderAll(user);
 }
 function deletePayee(id) {
-  const key = getSession(); const user = getUsers()[key]; if (!user) return;
+  const user = getAccount();
   user.payees = (user.payees || []).filter(p => p.id !== id);
-  persistUser(key, user);
+  saveAccount(user);
   toast('Payee removed');
   renderAll(user);
 }
 function togglePayeeAutopay(id) {
-  const key = getSession(); const user = getUsers()[key]; if (!user) return;
+  const user = getAccount();
   const p = (user.payees || []).find(x => x.id === id); if (!p) return;
   p.autopay = !p.autopay;
-  persistUser(key, user);
+  saveAccount(user);
   toast(p.autopay ? 'Autopay on for ' + p.name : 'Autopay off for ' + p.name);
   renderAll(user);
 }
 function payPayee(id) {
-  const key = getSession(); const user = getUsers()[key]; if (!user) return;
+  const user = getAccount();
   const p = (user.payees || []).find(x => x.id === id); if (!p) return;
   const amount = p.amount || 0;
   if (!amount || amount <= 0) { toast('Set a default amount first'); return; }
@@ -1232,7 +1178,7 @@ function payPayee(id) {
   applyBalance(user, -amount);
   addTransaction(user, { type: 'bill', label: 'Bill — ' + p.name, amount: -amount, date: Date.now(), account: user.activeAccount, category: 'Bills' });
   addNotification(user, '📄', 'Bill paid', fmt(amount) + ' to ' + p.name);
-  persistUser(key, user);
+  saveAccount(user);
   toast('Paid ' + p.name);
   renderAll(user);
 }
@@ -1250,8 +1196,8 @@ function setHistoryFilter(f) {
   renderHistoryFiltered();
 }
 function renderHistoryFiltered() {
-  const key = getSession(); if (!key) return;
-  const user = getUsers()[key]; if (!user) return;
+  if (!isLoggedIn()) return;
+  const user = getAccount();
   const q = (document.getElementById('history-search').value || '').toLowerCase().trim();
   let list = user.transactions || [];
   if (historyFilter === 'income') list = list.filter(t => t.amount > 0);
@@ -1431,7 +1377,7 @@ function renderContacts(user) {
   }).join('');
 }
 function quickSend(index) {
-  const key = getSession(); const user = getUsers()[key]; if (!user) return;
+  const user = getAccount();
   const c = (user.contacts || [])[index]; if (!c) return;
   document.getElementById('tr-recipient').value = c.name;
   showScreen('screen-transfer');
@@ -1465,7 +1411,7 @@ function renderStatements(user) {
   }).join('');
 }
 function viewStatement(start, end, label) {
-  const key = getSession(); const user = getUsers()[key]; if (!user) return;
+  const user = getAccount();
   const txs = (user.transactions || []).filter(t => t.date >= start && t.date < end);
   const inc = txs.filter(t => t.amount > 0).reduce((s,t) => s + t.amount, 0);
   const spd = txs.filter(t => t.amount < 0).reduce((s,t) => s + Math.abs(t.amount), 0);
@@ -1513,7 +1459,6 @@ function addTransaction(user, tx) {
   user.transactions.push(tx);
   if (user.transactions.length > 500) user.transactions = user.transactions.slice(-500);
 }
-function persistUser(key, user) { const users = getUsers(); users[key] = user; saveUsers(users); }
 function addNotification(user, icon, title, text) {
   user.notifications = user.notifications || [];
   user.notifications.push({ icon, title, text, date: Date.now() });
@@ -1522,7 +1467,7 @@ function addNotification(user, icon, title, text) {
 function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
 function handleTransfer() {
-  const key = getSession(); const user = getUsers()[key]; if (!user) return;
+  const user = getAccount();
   const name = document.getElementById('tr-recipient').value.trim();
   const amountStr = document.getElementById('tr-amount').value;
   const category = document.getElementById('tr-category').value;
@@ -1536,13 +1481,13 @@ function handleTransfer() {
   addTransaction(user, { type: 'transfer', label: 'Transfer to ' + name + (note ? ' — ' + note : ''), amount: -amount, date: Date.now(), account: user.activeAccount, category });
   addNotification(user, '↗', 'Transfer sent', 'You sent ' + fmt(amount) + ' to ' + name);
   user.cashback = (user.cashback || 0) + amount * 0.01;
-  persistUser(key, user);
+  saveAccount(user);
   ['tr-recipient','tr-amount','tr-note'].forEach(id => document.getElementById(id).value = '');
   toast('Transfer sent → ' + name);
   renderAll(user);
 }
 function handleDeposit() {
-  const key = getSession(); const user = getUsers()[key]; if (!user) return;
+  const user = getAccount();
   const amountStr = document.getElementById('dp-amount').value;
   const source = document.getElementById('dp-source').value.trim() || 'Deposit';
   const msg = document.getElementById('dp-msg'); msg.textContent = '';
@@ -1551,13 +1496,13 @@ function handleDeposit() {
   applyBalance(user, amount);
   addTransaction(user, { type: 'deposit', label: 'Deposit — ' + source, amount, date: Date.now(), account: user.activeAccount, category: 'Other' });
   addNotification(user, '↓', 'Deposit received', fmt(amount) + ' from ' + source);
-  persistUser(key, user);
+  saveAccount(user);
   document.getElementById('dp-amount').value = ''; document.getElementById('dp-source').value = '';
   toast('Deposited ' + fmt(amount));
   renderAll(user);
 }
 function handleCheckDeposit() {
-  const key = getSession(); const user = getUsers()[key]; if (!user) return;
+  const user = getAccount();
   const amountStr = document.getElementById('ck-amount').value;
   const from = document.getElementById('ck-from').value.trim() || 'Unknown';
   const msg = document.getElementById('ck-msg'); msg.textContent = '';
@@ -1566,13 +1511,13 @@ function handleCheckDeposit() {
   applyBalance(user, amount);
   addTransaction(user, { type: 'check', label: 'Mobile Check — ' + from, amount, date: Date.now(), account: user.activeAccount, category: 'Other' });
   addNotification(user, '📷', 'Check deposited', fmt(amount) + ' from ' + from);
-  persistUser(key, user);
+  saveAccount(user);
   document.getElementById('ck-amount').value = ''; document.getElementById('ck-from').value = '';
   toast('Check deposited');
   renderAll(user);
 }
 function handleReceive() {
-  const key = getSession(); const user = getUsers()[key]; if (!user) return;
+  const user = getAccount();
   const from = document.getElementById('rcv-from').value.trim();
   const amountStr = document.getElementById('rcv-amount').value;
   const msg = document.getElementById('rcv-msg'); msg.textContent = '';
@@ -1582,13 +1527,13 @@ function handleReceive() {
   applyBalance(user, amount);
   addTransaction(user, { type: 'receive', label: 'Received from ' + from, amount, date: Date.now(), account: user.activeAccount, category: 'Other' });
   addNotification(user, '↓', 'Payment received', fmt(amount) + ' from ' + from);
-  persistUser(key, user);
+  saveAccount(user);
   document.getElementById('rcv-from').value = ''; document.getElementById('rcv-amount').value = '';
   toast('Received ' + fmt(amount));
   renderAll(user);
 }
 function handleWire() {
-  const key = getSession(); const user = getUsers()[key]; if (!user) return;
+  const user = getAccount();
   const name = document.getElementById('wr-name').value.trim();
   const bank = document.getElementById('wr-bank').value.trim();
   const routing = document.getElementById('wr-routing').value.trim();
@@ -1607,13 +1552,13 @@ function handleWire() {
   addTransaction(user, { type: 'wire', label: 'Wire to ' + name + ' (' + bank + ')', amount: -amount, date: Date.now(), account: user.activeAccount, category: 'Bills' });
   addTransaction(user, { type: 'wire', label: 'Wire fee', amount: -FEE, date: Date.now(), account: user.activeAccount, category: 'Bills' });
   addNotification(user, '🌐', 'Wire sent', fmt(amount) + ' to ' + name);
-  persistUser(key, user);
+  saveAccount(user);
   ['wr-name','wr-bank','wr-routing','wr-account','wr-amount'].forEach(id => document.getElementById(id).value = '');
   toast('Wire sent · $15 fee');
   renderAll(user);
 }
 function handleZelle() {
-  const key = getSession(); const user = getUsers()[key]; if (!user) return;
+  const user = getAccount();
   const recipient = document.getElementById('zl-recipient').value.trim();
   const amountStr = document.getElementById('zl-amount').value;
   const msg = document.getElementById('zl-msg'); msg.textContent = '';
@@ -1624,13 +1569,13 @@ function handleZelle() {
   applyBalance(user, -amount);
   addTransaction(user, { type: 'zelle', label: 'Zelle to ' + recipient, amount: -amount, date: Date.now(), account: user.activeAccount, category: 'Other' });
   addNotification(user, '⚡', 'Zelle sent', fmt(amount) + ' to ' + recipient);
-  persistUser(key, user);
+  saveAccount(user);
   document.getElementById('zl-recipient').value = ''; document.getElementById('zl-amount').value = '';
   toast('Zelle sent');
   renderAll(user);
 }
 function handleBill() {
-  const key = getSession(); const user = getUsers()[key]; if (!user) return;
+  const user = getAccount();
   const name = document.getElementById('bl-name').value.trim();
   const amountStr = document.getElementById('bl-amount').value;
   const msg = document.getElementById('bl-msg'); msg.textContent = '';
@@ -1641,7 +1586,7 @@ function handleBill() {
   applyBalance(user, -amount);
   addTransaction(user, { type: 'bill', label: 'Bill — ' + name, amount: -amount, date: Date.now(), account: user.activeAccount, category: 'Bills' });
   addNotification(user, '📄', 'Bill paid', fmt(amount) + ' to ' + name);
-  persistUser(key, user);
+  saveAccount(user);
   document.getElementById('bl-name').value = ''; document.getElementById('bl-amount').value = '';
   toast('Bill paid');
   renderAll(user);
@@ -1654,7 +1599,7 @@ function calcSplit() {
   el.innerHTML = `<strong>${count} people</strong> · Each pays <strong>${fmt(total / count)}</strong>`;
 }
 function handleSplit() {
-  const key = getSession(); const user = getUsers()[key]; if (!user) return;
+  const user = getAccount();
   const total = parseFloat(document.getElementById('sp-total').value) || 0;
   const count = parseInt(document.getElementById('sp-count').value) || 0;
   const msg = document.getElementById('sp-msg'); msg.textContent = '';
@@ -1664,13 +1609,13 @@ function handleSplit() {
   applyBalance(user, -each);
   addTransaction(user, { type: 'transfer', label: 'Split bill (' + count + ' people)', amount: -each, date: Date.now(), account: user.activeAccount, category: 'Other' });
   addNotification(user, '🧾', 'Split bill paid', 'Your share: ' + fmt(each));
-  persistUser(key, user);
+  saveAccount(user);
   document.getElementById('sp-total').value = ''; document.getElementById('sp-count').value = '';
   toast('Paid your share · ' + fmt(each));
   renderAll(user);
 }
 function addContact() {
-  const key = getSession(); const user = getUsers()[key]; if (!user) return;
+  const user = getAccount();
   const name = document.getElementById('ct-name').value.trim();
   const info = document.getElementById('ct-info').value.trim();
   const msg = document.getElementById('ct-msg'); msg.textContent = '';
@@ -1678,56 +1623,43 @@ function addContact() {
   if (!info) { msg.textContent = 'Enter email/phone.'; return; }
   user.contacts = user.contacts || [];
   user.contacts.push({ name, info });
-  persistUser(key, user);
+  saveAccount(user);
   document.getElementById('ct-name').value = ''; document.getElementById('ct-info').value = '';
   toast('Contact saved');
   renderAll(user);
 }
 function saveBudget() {
-  const key = getSession(); const user = getUsers()[key]; if (!user) return;
+  const user = getAccount();
   const cat = document.getElementById('bd-cat').value;
   const amount = parseFloat(document.getElementById('bd-amount').value);
   const msg = document.getElementById('bd-msg'); msg.textContent = '';
   if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; return; }
   user.budgets = user.budgets || {};
   user.budgets[cat] = amount;
-  persistUser(key, user);
+  saveAccount(user);
   document.getElementById('bd-amount').value = '';
   toast('Budget saved for ' + cat);
   renderAll(user);
 }
-function revealPin() { const pin = String(Math.floor(1000 + Math.random() * 9000)); alert('Your demo PIN: ' + pin + '\n(Demo only)'); }
+function revealPin() { const pin = String(Math.floor(1000 + Math.random() * 9000)); alert('Your PIN: ' + pin); }
 function generateVirtualCard() {
-  const key = getSession(); const user = getUsers()[key]; if (!user) return;
+  const user = getAccount();
   let num = ''; for (let i = 0; i < 16; i++) num += Math.floor(Math.random() * 10);
   const grouped = num.match(/.{1,4}/g).join(' ');
   const expiry = String(Math.floor(Math.random()*12)+1).padStart(2,'0') + '/' + String((new Date().getFullYear()+3)%100);
   user.virtualCards = user.virtualCards || [];
   user.virtualCards.push({ number: grouped, expiry });
-  persistUser(key, user);
+  saveAccount(user);
   renderAll(user);
   toast('Virtual card created');
 }
-function handleResetPassword() {
-  const key = getSession(); const user = getUsers()[key]; if (!user) return;
-  const code = document.getElementById('pf-reset-code').value.trim();
-  const newPass = document.getElementById('pf-new-pass').value;
-  const msg = document.getElementById('pf-msg'); msg.textContent = '';
-  if (!code || code.length !== 6) { msg.textContent = 'Enter 6-digit code.'; return; }
-  if (code !== user.code) { msg.textContent = 'Incorrect code.'; return; }
-  if (!newPass || newPass.length < 4) { msg.textContent = 'Password must be 4+ chars.'; return; }
-  user.pass = newPass;
-  persistUser(key, user);
-  document.getElementById('pf-reset-code').value = ''; document.getElementById('pf-new-pass').value = '';
-  toast('Password reset');
-}
 function handleChangeName() {
-  const key = getSession(); const user = getUsers()[key]; if (!user) return;
+  const user = getAccount();
   const newName = document.getElementById('pf-new-name').value.trim();
   const msg = document.getElementById('pf-name-msg'); msg.textContent = '';
   if (!newName || newName.length < 3) { msg.textContent = 'Name must be 3+ chars.'; return; }
   user.name = newName;
-  persistUser(key, user);
+  saveAccount(user);
   document.getElementById('pf-new-name').value = '';
   toast('Name updated');
   renderAll(user);
@@ -1737,25 +1669,22 @@ function copyText(text) {
     navigator.clipboard.writeText(text).then(() => toast('Copied'), () => toast('Copy: ' + text));
   } else toast('Copy: ' + text);
 }
-document.addEventListener('click', function (e) {
-  const modal = document.getElementById('switcher-modal');
-  if (e.target === modal) closeSwitcher();
-});
+
 document.addEventListener('DOMContentLoaded', function () {
-  runMigrations();
+  // Ensure account exists
+  getAccount();
   updateClocks();
   setInterval(updateClocks, 30000);
   const sc = document.getElementById('sc-start');
   if (sc && !sc.value) { const d = new Date(); d.setDate(d.getDate() + 1); sc.value = d.toISOString().split('T')[0]; }
-  const session = getSession();
-  if (session && getUsers()[session]) showScreen('screen-home');
-  else { clearSession(); showScreen('screen-signup'); }
+
+  if (isLoggedIn()) showScreen('screen-home');
+  else showScreen('screen-signin');
 });
 document.addEventListener('visibilitychange', function () {
   if (!document.hidden) {
     updateClocks();
-    const session = getSession();
-    if (session && getUsers()[session]) renderAll(getUsers()[session]);
+    if (isLoggedIn()) renderAll(getAccount());
   }
 });
 </script>
