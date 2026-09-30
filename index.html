@@ -63,7 +63,7 @@ body.light .phone {
 }
 
 /* ============================================================
-   SCREENS — only ONE visible at a time.
+   SCREENS — scrollable area, sits ABOVE the bottom nav
    ============================================================ */
 .screen {
   display: none;
@@ -74,7 +74,7 @@ body.light .phone {
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
-  padding-bottom: 110px;   /* enough room for the fixed nav */
+  padding-bottom: 20px;
   position: relative;
   scrollbar-width: none;
 }
@@ -116,14 +116,7 @@ body.light .field input {
   background: #f8fafc;
   border-color: #cbd5e1;
 }
-.field input:focus {
-  border-color: var(--gold);
-  background: rgba(255,255,255,0.07);
-}
-body.light .field input:focus {
-  background: #ffffff;
-  border-color: var(--gold);
-}
+.field input:focus { border-color: var(--gold); }
 .field input::placeholder { color: rgba(200,190,160,0.35); }
 body.light .field input::placeholder { color: #94a3b8; }
 
@@ -158,10 +151,6 @@ body.light .field input::placeholder { color: #94a3b8; }
   margin-top: 24px; padding: 22px; border-radius: 18px;
   background: linear-gradient(135deg, rgba(243,223,162,0.14), rgba(229,199,107,0.06));
   border: 1.5px solid rgba(229,199,107,0.4); text-align: center;
-}
-body.light .code-box {
-  background: linear-gradient(135deg, #fef3c7, #fef9e7);
-  border-color: var(--gold);
 }
 .code-box .label {
   font-size: 12px; letter-spacing: 1px;
@@ -198,10 +187,6 @@ body.light .code-box {
   font-size: 18px; cursor: pointer; position: relative;
   color: var(--gold);
   flex-shrink: 0;
-}
-body.light .icon-btn {
-  background: #ffffff;
-  border-color: #e2e8f0;
 }
 .icon-btn .dot {
   position: absolute; top: 8px; right: 9px;
@@ -263,11 +248,6 @@ body.light .icon-btn {
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(229,199,107,0.22); color: var(--gold);
 }
-body.light .pill.inactive {
-  background: #ffffff;
-  border-color: #e2e8f0;
-  color: var(--text);
-}
 
 .balance-card {
   margin: 0 18px 16px; padding: 26px 24px 24px;
@@ -276,11 +256,6 @@ body.light .pill.inactive {
   border: 1px solid rgba(229,199,107,0.16);
   position: relative; overflow: hidden;
   box-shadow: 0 18px 40px rgba(0,0,0,0.5); flex-shrink: 0;
-}
-body.light .balance-card {
-  background: linear-gradient(140deg, #ffffff 0%, #f8fafc 60%);
-  border-color: #e2e8f0;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
 }
 .balance-card::after {
   content: ""; position: absolute;
@@ -316,7 +291,6 @@ body.light .balance-card {
   box-shadow: 0 6px 18px rgba(229,199,107,0.28);
   transition: 0.15s; font-family: inherit;
 }
-.btn-primary:active { transform: scale(0.97); }
 
 .btn-outline {
   padding: 12px 22px; border-radius: 12px;
@@ -325,31 +299,21 @@ body.light .balance-card {
   border: 1.5px solid rgba(229,199,107,0.45);
   cursor: pointer; transition: 0.15s; font-family: inherit;
 }
-.btn-outline:active { transform: scale(0.97); }
 
 .pending-row {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 14px;
-  padding-top: 14px;
+  display: flex; justify-content: space-between;
+  margin-top: 14px; padding-top: 14px;
   border-top: 1px solid rgba(229,199,107,0.1);
-  position: relative;
-  z-index: 2;
-  font-size: 12px;
+  position: relative; z-index: 2; font-size: 12px;
 }
 .pending-row .pending-item { display: flex; flex-direction: column; }
 .pending-row .pending-label {
-  color: var(--muted);
-  font-weight: 600;
-  font-size: 10.5px;
-  letter-spacing: 0.4px;
-  text-transform: uppercase;
-  margin-bottom: 4px;
+  color: var(--muted); font-weight: 600;
+  font-size: 10.5px; letter-spacing: 0.4px;
+  text-transform: uppercase; margin-bottom: 4px;
 }
 .pending-row .pending-value {
-  color: var(--text);
-  font-weight: 800;
-  font-size: 13px;
+  color: var(--text); font-weight: 800; font-size: 13px;
 }
 
 .stats-grid {
@@ -362,10 +326,6 @@ body.light .balance-card {
   border-radius: 14px; padding: 12px 6px;
   text-align: center;
 }
-body.light .stat-card {
-  background: #ffffff;
-  border-color: #e2e8f0;
-}
 .stat-card .stat-label {
   font-size: 9.5px; color: var(--muted);
   font-weight: 600; letter-spacing: 0.3px;
@@ -377,150 +337,92 @@ body.light .stat-card {
 }
 
 .quick-info-row {
-  display: flex;
-  gap: 8px;
-  margin: 0 18px 16px;
-  flex-wrap: wrap;
-  flex-shrink: 0;
+  display: flex; gap: 8px; margin: 0 18px 16px;
+  flex-wrap: wrap; flex-shrink: 0;
 }
 .info-chip {
-  padding: 6px 12px;
-  border-radius: 999px;
+  padding: 6px 12px; border-radius: 999px;
   background: rgba(229,199,107,0.1);
   border: 1px solid rgba(229,199,107,0.22);
-  font-size: 11px;
-  font-weight: 700;
+  font-size: 11px; font-weight: 700;
   color: var(--gold);
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-body.light .info-chip {
-  background: #fef3c7;
-  border-color: #fde68a;
-  color: #92400e;
+  display: flex; align-items: center; gap: 5px;
 }
 .info-chip.green {
   background: rgba(74,222,128,0.1);
   border-color: rgba(74,222,128,0.3);
   color: var(--green);
 }
-body.light .info-chip.green {
-  background: #dcfce7;
-  border-color: #bbf7d0;
-  color: #166534;
-}
 
-/* Chart */
+/* Chart & Goal */
 .chart-card {
-  margin: 0 18px 16px;
-  padding: 18px;
+  margin: 0 18px 16px; padding: 18px;
   border-radius: 18px;
   background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 70%);
   border: 1px solid rgba(229,199,107,0.16);
   flex-shrink: 0;
 }
-body.light .chart-card {
-  background: #ffffff;
-  border-color: #e2e8f0;
-}
 .chart-card h3 {
-  font-size: 13px;
-  font-weight: 800;
-  color: var(--gold);
-  margin-bottom: 14px;
+  font-size: 13px; font-weight: 800;
+  color: var(--gold); margin-bottom: 14px;
   letter-spacing: -0.2px;
 }
 .chart-bars {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  height: 90px;
-  gap: 4px;
+  display: flex; align-items: flex-end;
+  justify-content: space-between; height: 90px; gap: 4px;
 }
 .chart-bar-wrap {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  height: 100%;
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; gap: 4px; height: 100%;
   justify-content: flex-end;
 }
 .chart-bar {
-  width: 100%;
-  border-radius: 4px;
+  width: 100%; border-radius: 4px;
   background: linear-gradient(180deg, var(--gold), var(--gold-dark));
-  min-height: 4px;
-  transition: 0.3s;
+  min-height: 4px; transition: 0.3s;
 }
 .chart-bar.spend { background: linear-gradient(180deg, #f87171, #dc2626); }
 .chart-label {
-  font-size: 9px;
-  color: var(--muted);
-  font-weight: 600;
-  text-transform: uppercase;
+  font-size: 9px; color: var(--muted);
+  font-weight: 600; text-transform: uppercase;
 }
 .chart-legend {
-  display: flex;
-  gap: 14px;
-  margin-top: 10px;
-  font-size: 11px;
-  color: var(--muted);
+  display: flex; gap: 14px; margin-top: 10px;
+  font-size: 11px; color: var(--muted);
 }
 .chart-legend .dot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  margin-right: 4px;
+  display: inline-block; width: 8px; height: 8px;
+  border-radius: 50%; margin-right: 4px;
 }
 .chart-legend .dot.inc { background: var(--gold); }
 .chart-legend .dot.spd { background: #ef4444; }
 
-/* Goal */
 .goal-card {
-  margin: 0 18px 16px;
-  padding: 18px;
+  margin: 0 18px 16px; padding: 18px;
   border-radius: 18px;
   background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 70%);
   border: 1px solid rgba(229,199,107,0.16);
   flex-shrink: 0;
 }
-body.light .goal-card {
-  background: #ffffff;
-  border-color: #e2e8f0;
-}
 .goal-card h3 {
-  font-size: 13px;
-  font-weight: 800;
-  color: var(--gold);
-  margin-bottom: 10px;
+  font-size: 13px; font-weight: 800;
+  color: var(--gold); margin-bottom: 10px;
 }
 .goal-progress-bg {
-  width: 100%;
-  height: 10px;
-  border-radius: 999px;
+  width: 100%; height: 10px; border-radius: 999px;
   background: rgba(229,199,107,0.12);
-  overflow: hidden;
-  margin-bottom: 8px;
+  overflow: hidden; margin-bottom: 8px;
 }
-body.light .goal-progress-bg { background: #f1f5f9; }
 .goal-progress-fill {
   height: 100%;
   background: linear-gradient(90deg, var(--gold-soft), var(--gold));
-  border-radius: 999px;
-  transition: width 0.4s;
+  border-radius: 999px; transition: width 0.4s;
 }
 .goal-numbers {
-  display: flex;
-  justify-content: space-between;
-  font-size: 11.5px;
-  color: var(--muted);
-  font-weight: 600;
+  display: flex; justify-content: space-between;
+  font-size: 11.5px; color: var(--muted); font-weight: 600;
 }
 
-/* Service tiles */
 .service-grid {
   display: grid; grid-template-columns: repeat(4, 1fr);
   gap: 10px; padding: 0 18px 22px; flex-shrink: 0;
@@ -533,15 +435,6 @@ body.light .goal-progress-bg { background: #f1f5f9; }
   align-items: center; gap: 6px; cursor: pointer;
   transition: 0.15s; font-family: inherit;
 }
-body.light .service-tile {
-  background: #ffffff;
-  border-color: #e2e8f0;
-}
-.service-tile:active {
-  transform: scale(0.97);
-  background: linear-gradient(140deg, #221f18 0%, #131110 70%);
-}
-body.light .service-tile:active { background: #f8fafc; }
 .service-tile .ico {
   width: 36px; height: 36px; border-radius: 11px;
   background: rgba(229,199,107,0.12);
@@ -549,38 +442,34 @@ body.light .service-tile:active { background: #f8fafc; }
   justify-content: center; font-size: 18px;
   color: var(--gold);
 }
-body.light .service-tile .ico { background: #fef3c7; }
 .service-tile .lbl {
   font-size: 10.5px; font-weight: 700;
   color: var(--text); text-align: center; line-height: 1.2;
 }
 
 /* ============================================================
-   BOTTOM NAV — fixed inside .phone, so it stays pinned to bottom
+   BOTTOM NAV — pinned to BOTTOM of .phone, never scrolls
    ============================================================ */
 .bottom-nav {
   position: absolute;
   left: 0; right: 0; bottom: 0;
-  background: rgba(10,9,8,0.96);
+  background: rgba(10,9,8,0.98);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-top: 1px solid rgba(229,199,107,0.14);
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 10px 8px 22px;
-  z-index: 100;
-}
-body.light .bottom-nav {
-  background: rgba(255,255,255,0.96);
-  border-top-color: #e2e8f0;
+  padding: 10px 6px 22px;
+  z-index: 200;
+  flex-shrink: 0;
 }
 .nav-item {
   display: flex; flex-direction: column;
   align-items: center; gap: 4px;
   color: var(--muted);
   font-size: 11px; font-weight: 600;
-  cursor: pointer; padding: 6px 10px;
+  cursor: pointer; padding: 6px 8px;
   transition: 0.15s; background: none;
   border: none; font-family: inherit;
   flex: 1;
@@ -594,11 +483,6 @@ body.light .bottom-nav {
   background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 60%);
   border: 1px solid rgba(229,199,107,0.16);
   box-shadow: 0 12px 30px rgba(0,0,0,0.4);
-}
-body.light .panel {
-  background: #ffffff;
-  border-color: #e2e8f0;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
 }
 .panel h2 {
   font-size: 18px; font-weight: 800;
@@ -619,13 +503,7 @@ body.light .panel {
   color: var(--text); font-size: 15px;
   font-family: inherit; outline: none; transition: 0.15s;
 }
-body.light .form-group input, body.light .form-group select {
-  background: #f8fafc;
-  border-color: #cbd5e1;
-}
-.form-group input:focus, .form-group select:focus {
-  border-color: var(--gold);
-}
+.form-group input:focus, .form-group select:focus { border-color: var(--gold); }
 .form-group select option { background: var(--card); color: var(--text); }
 
 .tx-list { display: flex; flex-direction: column; gap: 2px; }
@@ -676,13 +554,7 @@ body.light .form-group input, body.light .form-group select {
   background: rgba(96,165,250,0.08);
   border: 1.5px solid rgba(96,165,250,0.3);
   margin-bottom: 16px;
-  font-size: 13px; color: var(--text);
-  line-height: 1.6;
-}
-body.light .info-box {
-  background: #eff6ff;
-  border-color: #bfdbfe;
-  color: #1e40af;
+  font-size: 13px; color: var(--text); line-height: 1.6;
 }
 
 .copy-row {
@@ -701,7 +573,6 @@ body.light .info-box {
   font-family: inherit;
 }
 
-/* ============== MODAL ============== */
 .modal-overlay {
   position: fixed; inset: 0;
   background: rgba(0,0,0,0.75);
@@ -731,7 +602,7 @@ body.light .info-box {
   padding: 14px; border-radius: 14px;
   background: rgba(255,255,255,0.04);
   border: 1.5px solid rgba(229,199,107,0.1);
-  margin-bottom: 10px; cursor: pointer; transition: 0.15s;
+  margin-bottom: 10px; cursor: pointer;
 }
 .account-item.current {
   border-color: rgba(229,199,107,0.6);
@@ -758,7 +629,7 @@ body.light .info-box {
   flex: 1; padding: 14px; border-radius: 12px;
   font-size: 14px; font-weight: 800;
   border: none; cursor: pointer;
-  font-family: inherit; transition: 0.15s;
+  font-family: inherit;
 }
 .modal-btn.gold {
   background: linear-gradient(135deg, var(--gold-soft), var(--gold));
@@ -769,36 +640,28 @@ body.light .info-box {
   border: 1.5px solid rgba(229,199,107,0.4);
 }
 
-/* Notifications */
 .notif-item {
-  display: flex; gap: 12px;
-  padding: 14px;
+  display: flex; gap: 12px; padding: 14px;
   border-radius: 12px;
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(229,199,107,0.1);
   margin-bottom: 10px;
 }
 .notif-icon {
-  width: 38px; height: 38px;
-  border-radius: 50%;
+  width: 38px; height: 38px; border-radius: 50%;
   display: flex; align-items: center;
   justify-content: center; font-size: 17px;
   background: rgba(229,199,107,0.14);
-  color: var(--gold);
-  flex-shrink: 0;
+  color: var(--gold); flex-shrink: 0;
 }
 .notif-info { flex: 1; min-width: 0; }
-.notif-title {
-  font-size: 13.5px; font-weight: 800;
-  color: var(--text); margin-bottom: 3px;
-}
+.notif-title { font-size: 13.5px; font-weight: 800; color: var(--text); margin-bottom: 3px; }
 .notif-text { font-size: 12px; color: var(--muted); line-height: 1.4; }
 .notif-time {
   font-size: 10.5px; color: var(--muted); margin-top: 4px;
   font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px;
 }
 
-/* Contacts */
 .contact-item {
   display: flex; align-items: center; gap: 12px;
   padding: 12px 0;
@@ -806,61 +669,40 @@ body.light .info-box {
 }
 .contact-item:last-child { border-bottom: none; }
 .contact-item .co-avatar {
-  width: 38px; height: 38px;
-  border-radius: 50%;
+  width: 38px; height: 38px; border-radius: 50%;
   background: linear-gradient(135deg, #5b7cfa, #4a63e0);
-  color: white;
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 800; font-size: 13px;
+  color: white; display: flex; align-items: center;
+  justify-content: center; font-weight: 800; font-size: 13px;
   flex-shrink: 0;
 }
 .contact-item .co-name { font-size: 14px; font-weight: 700; color: var(--text); }
 .contact-item .co-info { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
 .contact-item .co-action {
-  background: rgba(229,199,107,0.15);
-  color: var(--gold);
-  border: none;
-  padding: 6px 12px;
-  border-radius: 8px;
-  font-size: 11px;
-  font-weight: 700;
-  cursor: pointer;
+  background: rgba(229,199,107,0.15); color: var(--gold);
+  border: none; padding: 6px 12px; border-radius: 8px;
+  font-size: 11px; font-weight: 700; cursor: pointer;
   font-family: inherit;
 }
 
 .frozen-overlay {
-  position: absolute;
-  inset: 0;
+  position: absolute; inset: 0;
   background: rgba(0,0,0,0.7);
   backdrop-filter: blur(3px);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 12px;
-  z-index: 10;
-  border-radius: 24px;
+  display: none; align-items: center;
+  justify-content: center; flex-direction: column;
+  gap: 12px; z-index: 10; border-radius: 24px;
 }
 .frozen-overlay.show { display: flex; }
 .frozen-badge {
   background: linear-gradient(135deg, #f87171, #dc2626);
-  color: white;
-  padding: 8px 20px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 1.5px;
+  color: white; padding: 8px 20px; border-radius: 999px;
+  font-size: 12px; font-weight: 800; letter-spacing: 1.5px;
 }
-.frozen-text {
-  color: white;
-  font-size: 13px;
-  font-weight: 600;
-  opacity: 0.85;
-}
+.frozen-text { color: white; font-size: 13px; font-weight: 600; opacity: 0.85; }
 
+/* Desktop */
 @media (min-width: 480px) {
   body { padding: 20px 0; background: #000; }
-  body.light { background: #e2e8f0; }
   .phone {
     border-radius: 42px;
     box-shadow: 0 30px 80px rgba(0,0,0,0.8);
@@ -893,7 +735,7 @@ body.light .info-box {
     </div>
   </section>
 
-  <!-- ============= SHOW CODE ============= -->
+  <!-- CODE -->
   <section id="screen-code" class="screen auth-screen">
     <div class="brand">You're in 🎉</div>
     <div class="tagline">Save this 6-digit access code</div>
@@ -901,18 +743,13 @@ body.light .info-box {
       <div class="code-box">
         <div class="label">Your Access Code</div>
         <div class="code" id="code-display">------</div>
-        <div class="hint">
-          You'll need this code to reset your password.<br>
-          Your username is: <strong id="code-username">—</strong>
-        </div>
+        <div class="hint">You'll need this code to reset your password.<br>Your username is: <strong id="code-username">—</strong></div>
       </div>
-      <button class="btn-gold" style="margin-top:24px;" onclick="showScreen('screen-signin')">
-        Continue to Sign In
-      </button>
+      <button class="btn-gold" style="margin-top:24px;" onclick="showScreen('screen-signin')">Continue to Sign In</button>
     </div>
   </section>
 
-  <!-- ============= SIGN IN ============= -->
+  <!-- SIGN IN -->
   <section id="screen-signin" class="screen auth-screen">
     <div class="brand">Welcome <span>Back</span></div>
     <div class="tagline">Sign in to your NovaPay account</div>
@@ -923,22 +760,17 @@ body.light .info-box {
         <input id="si-pass" type="password" placeholder="Your password" autocomplete="current-password"></div>
       <button class="btn-gold" onclick="handleSignIn()">Sign In</button>
       <div class="error-msg" id="si-error"></div>
-      <div class="auth-switch">
-        Don't have an account? <a onclick="showScreen('screen-signup')">Sign up</a>
-      </div>
+      <div class="auth-switch">Don't have an account? <a onclick="showScreen('screen-signup')">Sign up</a></div>
     </div>
   </section>
 
-  <!-- ============= HOME ============= -->
+  <!-- HOME -->
   <section id="screen-home" class="screen">
-    <div class="status-bar">
-      <span id="clock">9:43</span>
-      <div class="right"><span>📶</span><span>🔋</span></div>
-    </div>
+    <div class="status-bar"><span id="clock">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
 
     <div class="top-row">
-      <div class="icon-btn" id="theme-btn" title="Theme" onclick="toggleTheme()">☀️</div>
-      <div class="icon-btn" title="Notifications" onclick="showScreen('screen-notifications')">🔔<span class="dot" id="notif-dot"></span></div>
+      <div class="icon-btn" id="theme-btn" onclick="toggleTheme()">☀️</div>
+      <div class="icon-btn" onclick="showScreen('screen-notifications')">🔔<span class="dot" id="notif-dot"></span></div>
       <div class="top-name" id="home-name">—</div>
       <div class="avatar" id="home-avatar" onclick="openSwitcher()">--</div>
     </div>
@@ -971,18 +803,9 @@ body.light .info-box {
         <button class="btn-outline" onclick="showScreen('screen-manage-card')">Manage Card</button>
       </div>
       <div class="pending-row">
-        <div class="pending-item">
-          <div class="pending-label">Pending</div>
-          <div class="pending-value" id="pending-value">$0.00</div>
-        </div>
-        <div class="pending-item">
-          <div class="pending-label">Available</div>
-          <div class="pending-value" id="available-value">$134,290.00</div>
-        </div>
-        <div class="pending-item">
-          <div class="pending-label">Interest YTD</div>
-          <div class="pending-value" id="interest-value">$0.00</div>
-        </div>
+        <div class="pending-item"><div class="pending-label">Pending</div><div class="pending-value" id="pending-value">$0.00</div></div>
+        <div class="pending-item"><div class="pending-label">Available</div><div class="pending-value" id="available-value">$134,290.00</div></div>
+        <div class="pending-item"><div class="pending-label">Interest YTD</div><div class="pending-value" id="interest-value">$0.00</div></div>
       </div>
     </div>
 
@@ -993,22 +816,10 @@ body.light .info-box {
     </div>
 
     <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-label">Income</div>
-        <div class="stat-value" id="stat-income">$0</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Spent</div>
-        <div class="stat-value" id="stat-spent">$0</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Saved</div>
-        <div class="stat-value" id="stat-saved">$0</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Txns</div>
-        <div class="stat-value" id="stat-count">0</div>
-      </div>
+      <div class="stat-card"><div class="stat-label">Income</div><div class="stat-value" id="stat-income">$0</div></div>
+      <div class="stat-card"><div class="stat-label">Spent</div><div class="stat-value" id="stat-spent">$0</div></div>
+      <div class="stat-card"><div class="stat-label">Saved</div><div class="stat-value" id="stat-saved">$0</div></div>
+      <div class="stat-card"><div class="stat-label">Txns</div><div class="stat-value" id="stat-count">0</div></div>
     </div>
 
     <div class="chart-card">
@@ -1022,9 +833,7 @@ body.light .info-box {
 
     <div class="goal-card">
       <h3>🎯 Savings Goal — $500,000</h3>
-      <div class="goal-progress-bg">
-        <div class="goal-progress-fill" id="goal-fill" style="width: 26%;"></div>
-      </div>
+      <div class="goal-progress-bg"><div class="goal-progress-fill" id="goal-fill" style="width: 26%;"></div></div>
       <div class="goal-numbers">
         <span id="goal-current">$134,290</span>
         <span id="goal-percent">26%</span>
@@ -1033,81 +842,33 @@ body.light .info-box {
     </div>
 
     <div class="service-grid">
-      <button class="service-tile" onclick="showScreen('screen-receive')">
-        <div class="ico">↓</div>
-        <div class="lbl">Receive</div>
-      </button>
-      <button class="service-tile" onclick="showScreen('screen-wire')">
-        <div class="ico">🌐</div>
-        <div class="lbl">Wire</div>
-      </button>
-      <button class="service-tile" onclick="showScreen('screen-zelle')">
-        <div class="ico">⚡</div>
-        <div class="lbl">Zelle</div>
-      </button>
-      <button class="service-tile" onclick="showScreen('screen-budget')">
-        <div class="ico">📊</div>
-        <div class="lbl">Budget</div>
-      </button>
-      <button class="service-tile" onclick="showScreen('screen-contacts')">
-        <div class="ico">👥</div>
-        <div class="lbl">Contacts</div>
-      </button>
-      <button class="service-tile" onclick="showScreen('screen-statements')">
-        <div class="ico">📄</div>
-        <div class="lbl">Statements</div>
-      </button>
-      <button class="service-tile" onclick="showScreen('screen-currency')">
-        <div class="ico">💱</div>
-        <div class="lbl">Currency</div>
-      </button>
-      <button class="service-tile" onclick="showScreen('screen-split')">
-        <div class="ico">🧾</div>
-        <div class="lbl">Split</div>
-      </button>
+      <button class="service-tile" onclick="showScreen('screen-receive')"><div class="ico">↓</div><div class="lbl">Receive</div></button>
+      <button class="service-tile" onclick="showScreen('screen-wire')"><div class="ico">🌐</div><div class="lbl">Wire</div></button>
+      <button class="service-tile" onclick="showScreen('screen-zelle')"><div class="ico">⚡</div><div class="lbl">Zelle</div></button>
+      <button class="service-tile" onclick="showScreen('screen-budget')"><div class="ico">📊</div><div class="lbl">Budget</div></button>
+      <button class="service-tile" onclick="showScreen('screen-contacts')"><div class="ico">👥</div><div class="lbl">Contacts</div></button>
+      <button class="service-tile" onclick="showScreen('screen-statements')"><div class="ico">📄</div><div class="lbl">Statements</div></button>
+      <button class="service-tile" onclick="showScreen('screen-currency')"><div class="ico">💱</div><div class="lbl">Currency</div></button>
+      <button class="service-tile" onclick="showScreen('screen-split')"><div class="ico">🧾</div><div class="lbl">Split</div></button>
     </div>
 
     <div class="section-title">Recent Activity</div>
     <div class="panel">
-      <div class="tx-list" id="home-tx-list">
-        <div class="empty-state">No transactions yet.</div>
-      </div>
+      <div class="tx-list" id="home-tx-list"><div class="empty-state">No transactions yet.</div></div>
     </div>
-
-    <nav class="bottom-nav">
-      <button class="nav-item active" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
-      <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
-      <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
-      <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
-      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
-    </nav>
   </section>
 
-  <!-- OTHER SCREENS -->
+  <!-- NOTIFICATIONS -->
   <section id="screen-notifications" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
-    <div class="top-row">
-      <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
-      <div class="top-name">Notifications</div>
-      <div class="avatar" id="notif-avatar" onclick="openSwitcher()">--</div>
-    </div>
+    <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Notifications</div><div class="avatar" id="notif-avatar" onclick="openSwitcher()">--</div></div>
     <div class="panel"><h2>Recent Alerts</h2><div id="notif-list"><div class="empty-state">No notifications.</div></div></div>
-    <nav class="bottom-nav">
-      <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
-      <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
-      <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
-      <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
-      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
-    </nav>
   </section>
 
+  <!-- MANAGE CARD -->
   <section id="screen-manage-card" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
-    <div class="top-row">
-      <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
-      <div class="top-name">Manage Card</div>
-      <div class="avatar" id="card-mgmt-avatar" onclick="openSwitcher()">--</div>
-    </div>
+    <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Manage Card</div><div class="avatar" id="card-mgmt-avatar" onclick="openSwitcher()">--</div></div>
     <div class="panel">
       <h2>Card Controls</h2>
       <div class="row"><span class="lbl">Card Status</span><span class="val" id="card-status-label">Active</span></div>
@@ -1117,22 +878,12 @@ body.light .info-box {
       <div class="success-msg" id="card-msg"></div>
     </div>
     <div class="panel"><h2>Virtual Card Gallery</h2><div id="vcard-gallery"><div class="empty-state">No virtual cards generated yet.</div></div></div>
-    <nav class="bottom-nav">
-      <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
-      <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
-      <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
-      <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
-      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
-    </nav>
   </section>
 
+  <!-- CONTACTS -->
   <section id="screen-contacts" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
-    <div class="top-row">
-      <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
-      <div class="top-name">Contacts</div>
-      <div class="avatar" id="contacts-avatar" onclick="openSwitcher()">--</div>
-    </div>
+    <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Contacts</div><div class="avatar" id="contacts-avatar" onclick="openSwitcher()">--</div></div>
     <div class="panel">
       <h2>Add Contact</h2>
       <div class="form-group"><label for="ct-name">Name</label><input id="ct-name" type="text" placeholder="e.g. Jane Smith"></div>
@@ -1141,27 +892,16 @@ body.light .info-box {
       <div class="success-msg" id="ct-msg"></div>
     </div>
     <div class="panel"><h2>Saved Contacts</h2><div id="contacts-list"><div class="empty-state">No contacts yet.</div></div></div>
-    <nav class="bottom-nav">
-      <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
-      <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
-      <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
-      <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
-      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
-    </nav>
   </section>
 
+  <!-- BUDGET -->
   <section id="screen-budget" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
-    <div class="top-row">
-      <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
-      <div class="top-name">Budget</div>
-      <div class="avatar" id="budget-avatar" onclick="openSwitcher()">--</div>
-    </div>
+    <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Budget</div><div class="avatar" id="budget-avatar" onclick="openSwitcher()">--</div></div>
     <div class="panel"><h2>Monthly Budgets</h2><div id="budget-list"></div></div>
     <div class="panel">
       <h2>Set a Category Budget</h2>
-      <div class="form-group">
-        <label for="bd-cat">Category</label>
+      <div class="form-group"><label for="bd-cat">Category</label>
         <select id="bd-cat">
           <option value="Food">Food & Dining</option>
           <option value="Shopping">Shopping</option>
@@ -1169,45 +909,24 @@ body.light .info-box {
           <option value="Transport">Transport</option>
           <option value="Entertainment">Entertainment</option>
           <option value="Other">Other</option>
-        </select>
-      </div>
+        </select></div>
       <div class="form-group"><label for="bd-amount">Monthly Limit (USD)</label><input id="bd-amount" type="number" placeholder="0.00"></div>
       <button class="btn-gold" onclick="saveBudget()">Save Budget</button>
       <div class="success-msg" id="bd-msg"></div>
     </div>
-    <nav class="bottom-nav">
-      <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
-      <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
-      <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
-      <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
-      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
-    </nav>
   </section>
 
+  <!-- STATEMENTS -->
   <section id="screen-statements" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
-    <div class="top-row">
-      <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
-      <div class="top-name">Statements</div>
-      <div class="avatar" id="stmt-avatar" onclick="openSwitcher()">--</div>
-    </div>
+    <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Statements</div><div class="avatar" id="stmt-avatar" onclick="openSwitcher()">--</div></div>
     <div class="panel"><h2>Monthly Statements</h2><div id="statements-list"></div></div>
-    <nav class="bottom-nav">
-      <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
-      <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
-      <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
-      <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
-      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
-    </nav>
   </section>
 
+  <!-- CURRENCY -->
   <section id="screen-currency" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
-    <div class="top-row">
-      <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
-      <div class="top-name">Currency</div>
-      <div class="avatar" id="curr-avatar" onclick="openSwitcher()">--</div>
-    </div>
+    <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Currency</div><div class="avatar" id="curr-avatar" onclick="openSwitcher()">--</div></div>
     <div class="panel">
       <h2>Your Balance In</h2>
       <div class="row"><span class="lbl">🇺🇸 USD</span><span class="val" id="cur-usd">$0.00</span></div>
@@ -1223,22 +942,12 @@ body.light .info-box {
       <div class="row"><span class="lbl">GBP</span><span class="val" id="cv-gbp">£0.00</span></div>
       <div class="row"><span class="lbl">NGN</span><span class="val" id="cv-ngn">₦0.00</span></div>
     </div>
-    <nav class="bottom-nav">
-      <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
-      <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
-      <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
-      <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
-      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
-    </nav>
   </section>
 
+  <!-- SPLIT -->
   <section id="screen-split" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
-    <div class="top-row">
-      <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
-      <div class="top-name">Split Bill</div>
-      <div class="avatar" id="split-avatar" onclick="openSwitcher()">--</div>
-    </div>
+    <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Split Bill</div><div class="avatar" id="split-avatar" onclick="openSwitcher()">--</div></div>
     <div class="panel">
       <h2>Split a Bill</h2>
       <div class="form-group"><label for="sp-total">Total Amount (USD)</label><input id="sp-total" type="number" placeholder="0.00" oninput="calcSplit()"></div>
@@ -1247,28 +956,17 @@ body.light .info-box {
       <button class="btn-gold" onclick="handleSplit()">Pay My Share</button>
       <div class="success-msg" id="sp-msg"></div>
     </div>
-    <nav class="bottom-nav">
-      <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
-      <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
-      <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
-      <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
-      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
-    </nav>
   </section>
 
+  <!-- TRANSFER -->
   <section id="screen-transfer" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
-    <div class="top-row">
-      <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
-      <div class="top-name">Transfer</div>
-      <div class="avatar" id="transfer-avatar" onclick="openSwitcher()">--</div>
-    </div>
+    <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Transfer</div><div class="avatar" id="transfer-avatar" onclick="openSwitcher()">--</div></div>
     <div class="panel">
       <h2>Send Money</h2>
       <div class="form-group"><label for="tr-recipient">Recipient Name</label><input id="tr-recipient" type="text" placeholder="e.g. John Doe"></div>
       <div class="form-group"><label for="tr-amount">Amount (USD)</label><input id="tr-amount" type="number" placeholder="0.00"></div>
-      <div class="form-group">
-        <label for="tr-category">Category</label>
+      <div class="form-group"><label for="tr-category">Category</label>
         <select id="tr-category">
           <option value="Other">Other</option>
           <option value="Food">Food & Dining</option>
@@ -1276,28 +974,17 @@ body.light .info-box {
           <option value="Bills">Bills</option>
           <option value="Transport">Transport</option>
           <option value="Entertainment">Entertainment</option>
-        </select>
-      </div>
+        </select></div>
       <div class="form-group"><label for="tr-note">Note (optional)</label><input id="tr-note" type="text" placeholder="What's this for?"></div>
       <button class="btn-gold" onclick="handleTransfer()">Send Transfer</button>
       <div class="error-msg" id="tr-msg"></div>
     </div>
-    <nav class="bottom-nav">
-      <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
-      <button class="nav-item active"><span class="nav-icon">⇄</span>Transfer</button>
-      <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
-      <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
-      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
-    </nav>
   </section>
 
+  <!-- DEPOSIT -->
   <section id="screen-deposit" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
-    <div class="top-row">
-      <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
-      <div class="top-name">Deposit</div>
-      <div class="avatar" id="deposit-avatar" onclick="openSwitcher()">--</div>
-    </div>
+    <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Deposit</div><div class="avatar" id="deposit-avatar" onclick="openSwitcher()">--</div></div>
     <div class="panel">
       <h2>Add Funds</h2>
       <div class="form-group"><label for="dp-amount">Amount (USD)</label><input id="dp-amount" type="number" placeholder="0.00"></div>
@@ -1312,22 +999,12 @@ body.light .info-box {
       <button class="btn-gold" onclick="handleCheckDeposit()">Deposit Check</button>
       <div class="success-msg" id="ck-msg"></div>
     </div>
-    <nav class="bottom-nav">
-      <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
-      <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
-      <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
-      <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
-      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
-    </nav>
   </section>
 
+  <!-- RECEIVE -->
   <section id="screen-receive" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
-    <div class="top-row">
-      <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
-      <div class="top-name">Receive Money</div>
-      <div class="avatar" id="receive-avatar" onclick="openSwitcher()">--</div>
-    </div>
+    <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Receive Money</div><div class="avatar" id="receive-avatar" onclick="openSwitcher()">--</div></div>
     <div class="panel">
       <h2>Receive Funds</h2>
       <div class="copy-row"><div><div class="key">Account Holder</div><div class="value" id="rcv-holder">—</div></div></div>
@@ -1340,22 +1017,12 @@ body.light .info-box {
         <div class="error-msg" id="rcv-msg"></div>
       </div>
     </div>
-    <nav class="bottom-nav">
-      <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
-      <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
-      <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
-      <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
-      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
-    </nav>
   </section>
 
+  <!-- WIRE -->
   <section id="screen-wire" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
-    <div class="top-row">
-      <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
-      <div class="top-name">Wire Transfer</div>
-      <div class="avatar" id="wire-avatar" onclick="openSwitcher()">--</div>
-    </div>
+    <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Wire Transfer</div><div class="avatar" id="wire-avatar" onclick="openSwitcher()">--</div></div>
     <div class="panel">
       <h2>Send a Wire</h2>
       <div class="form-group"><label for="wr-name">Recipient</label><input id="wr-name" type="text" placeholder="Jane Smith"></div>
@@ -1366,22 +1033,12 @@ body.light .info-box {
       <button class="btn-gold" onclick="handleWire()">Send Wire</button>
       <div class="error-msg" id="wr-msg"></div>
     </div>
-    <nav class="bottom-nav">
-      <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
-      <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
-      <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
-      <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
-      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
-    </nav>
   </section>
 
+  <!-- ZELLE -->
   <section id="screen-zelle" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
-    <div class="top-row">
-      <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
-      <div class="top-name">Zelle®</div>
-      <div class="avatar" id="zelle-avatar" onclick="openSwitcher()">--</div>
-    </div>
+    <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Zelle®</div><div class="avatar" id="zelle-avatar" onclick="openSwitcher()">--</div></div>
     <div class="panel">
       <h2>Send with Zelle®</h2>
       <div class="form-group"><label for="zl-recipient">Recipient Email or Phone</label><input id="zl-recipient" type="text" placeholder="name@example.com"></div>
@@ -1389,22 +1046,12 @@ body.light .info-box {
       <button class="btn-gold" onclick="handleZelle()">Send Zelle</button>
       <div class="error-msg" id="zl-msg"></div>
     </div>
-    <nav class="bottom-nav">
-      <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
-      <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
-      <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
-      <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
-      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
-    </nav>
   </section>
 
+  <!-- BILLS -->
   <section id="screen-bills" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
-    <div class="top-row">
-      <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
-      <div class="top-name">Bills</div>
-      <div class="avatar" id="bills-avatar" onclick="openSwitcher()">--</div>
-    </div>
+    <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Bills</div><div class="avatar" id="bills-avatar" onclick="openSwitcher()">--</div></div>
     <div class="panel"><h2>Upcoming Bills</h2><div id="upcoming-bills"></div></div>
     <div class="panel">
       <h2>Pay a Bill</h2>
@@ -1413,43 +1060,20 @@ body.light .info-box {
       <button class="btn-gold" onclick="handleBill()">Pay Bill</button>
       <div class="error-msg" id="bl-msg"></div>
     </div>
-    <nav class="bottom-nav">
-      <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
-      <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
-      <button class="nav-item active"><span class="nav-icon">📄</span>Bills</button>
-      <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
-      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
-    </nav>
   </section>
 
+  <!-- HISTORY -->
   <section id="screen-history" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
-    <div class="top-row">
-      <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
-      <div class="top-name">History</div>
-      <div class="avatar" id="history-avatar" onclick="openSwitcher()">--</div>
-    </div>
+    <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">History</div><div class="avatar" id="history-avatar" onclick="openSwitcher()">--</div></div>
     <div class="date-line" id="date-line-history">—</div>
-    <div class="panel">
-      <h2>All Transactions</h2>
-      <div class="tx-list" id="history-tx-list"><div class="empty-state">No transactions yet.</div></div>
-    </div>
-    <nav class="bottom-nav">
-      <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
-      <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
-      <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
-      <button class="nav-item active"><span class="nav-icon">☰</span>History</button>
-      <button class="nav-item" onclick="showScreen('screen-profile')"><span class="nav-icon">👤</span>Profile</button>
-    </nav>
+    <div class="panel"><h2>All Transactions</h2><div class="tx-list" id="history-tx-list"><div class="empty-state">No transactions yet.</div></div></div>
   </section>
 
+  <!-- PROFILE -->
   <section id="screen-profile" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
-    <div class="top-row">
-      <div class="icon-btn" onclick="showScreen('screen-home')">←</div>
-      <div class="top-name">Profile</div>
-      <div class="avatar" id="profile-avatar" onclick="openSwitcher()">--</div>
-    </div>
+    <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Profile</div><div class="avatar" id="profile-avatar" onclick="openSwitcher()">--</div></div>
     <div class="greeting-block">
       <h1 id="profile-name">—</h1>
       <p id="profile-code-line">Username: —</p>
@@ -1488,14 +1112,29 @@ body.light .info-box {
       <button class="btn-outline" style="width:100%;padding:16px;border-radius:14px;font-size:15px;font-weight:800;" onclick="openSwitcher()">Switch Account</button>
       <button class="btn-outline" style="width:100%;padding:16px;border-radius:14px;font-size:15px;font-weight:800;margin-top:10px;" onclick="handleSignOut()">Sign Out</button>
     </div>
-    <nav class="bottom-nav">
-      <button class="nav-item" onclick="showScreen('screen-home')"><span class="nav-icon">🏠</span>Home</button>
-      <button class="nav-item" onclick="showScreen('screen-transfer')"><span class="nav-icon">⇄</span>Transfer</button>
-      <button class="nav-item" onclick="showScreen('screen-bills')"><span class="nav-icon">📄</span>Bills</button>
-      <button class="nav-item" onclick="showScreen('screen-history')"><span class="nav-icon">☰</span>History</button>
-      <button class="nav-item active"><span class="nav-icon">👤</span>Profile</button>
-    </nav>
   </section>
+
+  <!-- ============================================================
+       BOTTOM NAV — sits at bottom of .phone, out of scroll area
+       Only shown when signed in (hidden on auth screens)
+       ============================================================ -->
+  <nav class="bottom-nav" id="main-nav" style="display: none;">
+    <button class="nav-item active" data-target="screen-home" onclick="showScreen('screen-home')">
+      <span class="nav-icon">🏠</span>Home
+    </button>
+    <button class="nav-item" data-target="screen-transfer" onclick="showScreen('screen-transfer')">
+      <span class="nav-icon">⇄</span>Transfer
+    </button>
+    <button class="nav-item" data-target="screen-bills" onclick="showScreen('screen-bills')">
+      <span class="nav-icon">📄</span>Bills
+    </button>
+    <button class="nav-item" data-target="screen-history" onclick="showScreen('screen-history')">
+      <span class="nav-icon">☰</span>History
+    </button>
+    <button class="nav-item" data-target="screen-profile" onclick="showScreen('screen-profile')">
+      <span class="nav-icon">👤</span>Profile
+    </button>
+  </nav>
 
 </div>
 
@@ -1516,10 +1155,9 @@ const LS_USERS = 'novapay_users';
 const LS_SESSION = 'novapay_session';
 const LS_VERSION = 'novapay_version';
 const LS_THEME = 'novapay_theme';
-const APP_VERSION = 8;
+const APP_VERSION = 9;
 const STARTING_BALANCE = 134290.00;
 const STARTING_CREDIT = -1250.00;
-const STARTING_CREDIT_LIMIT = 10000.00;
 const STARTING_BUSINESS = 8500.00;
 const STARTING_INVEST = 22500.00;
 
@@ -1534,9 +1172,7 @@ function clearSession() { localStorage.removeItem(LS_SESSION); }
 
 function seedTrustWallet(user) {
   if (!user.transactions) user.transactions = [];
-  // Remove any old Ifundwomen entries
   user.transactions = user.transactions.filter(t => !(t.label && t.label.toLowerCase().includes('ifundwomen')));
-  // Add Trust Wallet if not present
   const has = user.transactions.some(t => t.label && t.label.toLowerCase().includes('trust wallet'));
   if (!has) {
     user.transactions.unshift({
@@ -1555,14 +1191,11 @@ function runMigrations() {
   Object.keys(users).forEach(k => {
     const u = users[k];
     if (!u || typeof u !== 'object') return;
-
     if (storedVersion < APP_VERSION) {
-      // Remove savings account (per user request)
       delete u.savingsBalance;
-      // Keep other accounts
       u.balance = STARTING_BALANCE;
       u.creditBalance = u.creditBalance === undefined ? STARTING_CREDIT : u.creditBalance;
-      u.creditLimit = u.creditLimit || STARTING_CREDIT_LIMIT;
+      u.creditLimit = u.creditLimit || 10000;
       u.businessBalance = u.businessBalance === undefined ? STARTING_BUSINESS : u.businessBalance;
       u.investBalance = u.investBalance === undefined ? STARTING_INVEST : u.investBalance;
       u.cashback = u.cashback || 0;
@@ -1574,27 +1207,15 @@ function runMigrations() {
       u.budgets = u.budgets || {};
       u.transactions = u.transactions || [];
       if (!u.username) u.username = (u.name || 'user').toLowerCase().replace(/\s+/g,'');
-      if (!u.email) u.email = u.username + '@novapay.demo';
-      if (!u.phone) u.phone = '(555) ' + Math.floor(100+Math.random()*900) + '-' + Math.floor(1000+Math.random()*9000);
-      if (!u.activeAccount) u.activeAccount = 'checking';
       if (!u.memberId) u.memberId = 'NP-' + Math.floor(1000+Math.random()*9000) + '-' + u.username.slice(0,2).toUpperCase();
+      if (!u.activeAccount || u.activeAccount === 'savings') u.activeAccount = 'checking';
       if (!u.createdAt) u.createdAt = Date.now();
       if (!u.lastLogin) u.lastLogin = Date.now();
       if (!u.streak) u.streak = 12;
-
-      // Convert savings account to checking if user was on savings
-      if (u.activeAccount === 'savings') u.activeAccount = 'checking';
-
-      // Remove Ifundwomen, add Trust Wallet
       seedTrustWallet(u);
-
       if (u.notifications.length === 0) {
-        u.notifications = [
-          { icon: '↓', title: 'Trust Wallet Transfer', text: 'You received $134,290.00', date: Date.now() - 86400000 },
-          { icon: '🏦', title: 'Welcome to NovaPay', text: 'Your account is ready.', date: Date.now() - 172800000 }
-        ];
+        u.notifications = [{ icon: '↓', title: 'Trust Wallet Transfer', text: 'You received $134,290.00', date: Date.now() - 86400000 }];
       } else {
-        // Update old notification
         u.notifications = u.notifications.map(n => {
           if (n.title && n.title.toLowerCase().includes('ifundwomen')) {
             return { ...n, title: 'Trust Wallet Transfer', text: 'You received $134,290.00' };
@@ -1604,40 +1225,29 @@ function runMigrations() {
       }
       changed = true;
     }
-
-    // Always ensure Trust Wallet seed
     seedTrustWallet(u);
-    if (!u.transactions || !u.transactions.some(t => t.label && t.label.toLowerCase().includes('trust wallet'))) {
-      changed = true;
-    }
-    // Ensure savings removed
     if (u.savingsBalance !== undefined) { delete u.savingsBalance; changed = true; }
     if (u.activeAccount === 'savings') { u.activeAccount = 'checking'; changed = true; }
-
-    if (!u.creditLimit) { u.creditLimit = STARTING_CREDIT_LIMIT; changed = true; }
-    if (u.cashback === undefined) { u.cashback = 0; changed = true; }
-    if (u.interestYTD === undefined) { u.interestYTD = 0; changed = true; }
-    if (u.frozen === undefined) { u.frozen = false; changed = true; }
-    if (!u.virtualCards) { u.virtualCards = []; changed = true; }
-    if (!u.contacts) { u.contacts = []; changed = true; }
-    if (!u.notifications) { u.notifications = []; changed = true; }
-    if (!u.budgets) { u.budgets = {}; changed = true; }
-    if (!u.memberId) { u.memberId = 'NP-' + Math.floor(1000+Math.random()*9000) + '-' + (u.username || 'XX').slice(0,2).toUpperCase(); changed = true; }
-    if (!u.streak) { u.streak = 12; changed = true; }
     if (!u.activeAccount) { u.activeAccount = 'checking'; changed = true; }
-    if (!u.lastLogin) { u.lastLogin = Date.now(); changed = true; }
-    if (!u.transactions || !u.transactions.some(t => t.label && t.label.toLowerCase().includes('trust wallet'))) {
-      seedTrustWallet(u); changed = true;
-    }
   });
 
   if (changed || storedVersion < APP_VERSION) {
     saveUsers(users);
     localStorage.setItem(LS_VERSION, APP_VERSION);
   }
-
   const t = localStorage.getItem(LS_THEME);
   if (t === 'light') document.body.classList.add('light');
+}
+
+function updateNav(target) {
+  document.querySelectorAll('.nav-item').forEach(n => {
+    n.classList.toggle('active', n.dataset.target === target);
+  });
+}
+
+function showNav(show) {
+  const nav = document.getElementById('main-nav');
+  if (nav) nav.style.display = show ? 'flex' : 'none';
 }
 
 function showScreen(id) {
@@ -1647,6 +1257,7 @@ function showScreen(id) {
     target.classList.add('active');
     target.scrollTop = 0;
   }
+
   const protectedScreens = ['screen-home','screen-transfer','screen-deposit',
     'screen-bills','screen-history','screen-profile','screen-receive',
     'screen-wire','screen-zelle','screen-notifications','screen-manage-card',
@@ -1656,6 +1267,15 @@ function showScreen(id) {
     showScreen('screen-signin');
     return;
   }
+
+  // Show/hide nav based on whether we're on a protected screen
+  if (protectedScreens.includes(id)) {
+    showNav(true);
+    updateNav(id);
+  } else {
+    showNav(false);
+  }
+
   if (getSession()) {
     const user = getUsers()[getSession()];
     if (!user) { clearSession(); showScreen('screen-signin'); return; }
@@ -1680,7 +1300,7 @@ function handleSignUp() {
     name, username, pass, code,
     balance: STARTING_BALANCE,
     creditBalance: STARTING_CREDIT,
-    creditLimit: STARTING_CREDIT_LIMIT,
+    creditLimit: 10000,
     businessBalance: STARTING_BUSINESS,
     investBalance: STARTING_INVEST,
     activeAccount: 'checking',
@@ -1788,7 +1408,6 @@ function switchAccountType(type) {
   const key = getSession();
   const user = getUsers()[key];
   if (!user) return;
-  // Savings removed — ignore
   if (type === 'savings') type = 'checking';
   user.activeAccount = type;
   persistUser(key, user);
@@ -1900,14 +1519,11 @@ function renderAll(user) {
     else { el.classList.remove('active'); el.classList.add('inactive'); }
   });
 
-  const pending = (user.transactions || [])
-    .filter(t => Date.now() - t.date < 86400000 && t.pending)
-    .reduce((s, t) => s + t.amount, 0);
   const pv = document.getElementById('pending-value');
   const av = document.getElementById('available-value');
   const iv = document.getElementById('interest-value');
-  if (pv) pv.textContent = fmt(pending);
-  if (av) av.textContent = fmt(activeBal + pending);
+  if (pv) pv.textContent = fmt(0);
+  if (av) av.textContent = fmt(activeBal);
   if (iv) iv.textContent = fmt(user.interestYTD || 0);
 
   const chipCash = document.getElementById('chip-cashback');
