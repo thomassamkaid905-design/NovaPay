@@ -18,6 +18,7 @@
   --green: #4ade80;
   --red: #f87171;
   --blue: #60a5fa;
+  --purple: #a78bfa;
 }
 
 body.light {
@@ -31,6 +32,7 @@ body.light {
   --green: #16a34a;
   --red: #dc2626;
   --blue: #2563eb;
+  --purple: #7c3aed;
 }
 
 html, body { height: 100%; background: #000; overflow: hidden; }
@@ -62,9 +64,6 @@ body.light .phone {
   background: linear-gradient(180deg, #eef2f7 0%, #f5f8fc 45%, #ffffff 100%);
 }
 
-/* ============================================================
-   SCREENS — scrollable area, sits ABOVE the bottom nav
-   ============================================================ */
 .screen {
   display: none;
   flex-direction: column;
@@ -75,640 +74,355 @@ body.light .phone {
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
   padding-bottom: 20px;
-  position: relative;
   scrollbar-width: none;
 }
 .screen::-webkit-scrollbar { display: none; }
 .screen.active { display: flex; }
 
-/* ============== AUTH ============== */
+/* AUTH */
 .auth-screen { padding: 60px 30px 40px; justify-content: center; align-items: center; }
-
-.brand {
-  font-size: 34px; font-weight: 800; letter-spacing: -1px;
-  color: var(--gold-soft); margin-bottom: 8px; text-align: center;
-}
+.brand { font-size: 34px; font-weight: 800; letter-spacing: -1px; color: var(--gold-soft); margin-bottom: 8px; text-align: center; }
 .brand span { color: var(--text); }
-
-.tagline {
-  font-size: 14px; color: var(--muted);
-  margin-bottom: 40px; text-align: center;
-}
-
+.tagline { font-size: 14px; color: var(--muted); margin-bottom: 40px; text-align: center; }
 .auth-form { width: 100%; max-width: 340px; }
-
 .field { margin-bottom: 18px; }
-
-.field label {
-  display: block; font-size: 12px; font-weight: 700;
-  letter-spacing: 0.6px; color: var(--muted);
-  margin-bottom: 8px; text-transform: uppercase;
-}
-
-.field input {
-  width: 100%; padding: 15px 18px; border-radius: 14px;
-  background: rgba(255,255,255,0.05);
-  border: 1.5px solid rgba(229,199,107,0.2);
-  color: var(--text); font-size: 15px; font-family: inherit;
-  outline: none; transition: 0.15s;
-}
-body.light .field input {
-  background: #f8fafc;
-  border-color: #cbd5e1;
-}
+.field label { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.6px; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; }
+.field input { width: 100%; padding: 15px 18px; border-radius: 14px; background: rgba(255,255,255,0.05); border: 1.5px solid rgba(229,199,107,0.2); color: var(--text); font-size: 15px; font-family: inherit; outline: none; transition: 0.15s; }
 .field input:focus { border-color: var(--gold); }
 .field input::placeholder { color: rgba(200,190,160,0.35); }
-body.light .field input::placeholder { color: #94a3b8; }
 
-.btn-gold {
-  width: 100%; padding: 16px; border-radius: 14px;
-  background: linear-gradient(135deg, var(--gold-soft), var(--gold));
-  color: #2a2107; font-size: 15px; font-weight: 800;
-  border: none; cursor: pointer;
-  box-shadow: 0 8px 22px rgba(229,199,107,0.3);
-  transition: 0.15s; margin-top: 8px; font-family: inherit;
-}
+.btn-gold { width: 100%; padding: 16px; border-radius: 14px; background: linear-gradient(135deg, var(--gold-soft), var(--gold)); color: #2a2107; font-size: 15px; font-weight: 800; border: none; cursor: pointer; box-shadow: 0 8px 22px rgba(229,199,107,0.3); transition: 0.15s; margin-top: 8px; font-family: inherit; }
 .btn-gold:active { transform: scale(0.98); }
+.auth-switch { text-align: center; margin-top: 24px; font-size: 13px; color: var(--muted); }
+.auth-switch a { color: var(--gold); font-weight: 700; cursor: pointer; text-decoration: none; }
+.error-msg { color: var(--red); font-size: 13px; margin-top: 12px; text-align: center; min-height: 18px; font-weight: 600; }
+.success-msg { color: var(--green); font-size: 13px; margin-top: 12px; text-align: center; min-height: 18px; font-weight: 600; }
 
-.auth-switch {
-  text-align: center; margin-top: 24px; font-size: 13px;
-  color: var(--muted);
-}
-.auth-switch a {
-  color: var(--gold); font-weight: 700; cursor: pointer; text-decoration: none;
-}
+.code-box { margin-top: 24px; padding: 22px; border-radius: 18px; background: linear-gradient(135deg, rgba(243,223,162,0.14), rgba(229,199,107,0.06)); border: 1.5px solid rgba(229,199,107,0.4); text-align: center; }
+.code-box .label { font-size: 12px; letter-spacing: 1px; color: var(--muted); font-weight: 700; margin-bottom: 10px; text-transform: uppercase; }
+.code-box .code { font-size: 34px; letter-spacing: 8px; font-weight: 800; color: var(--gold); font-family: "Courier New", monospace; }
+.code-box .hint { font-size: 12px; color: var(--muted); margin-top: 12px; line-height: 1.5; }
 
-.error-msg {
-  color: var(--red); font-size: 13px; margin-top: 12px;
-  text-align: center; min-height: 18px; font-weight: 600;
-}
-.success-msg {
-  color: var(--green); font-size: 13px; margin-top: 12px;
-  text-align: center; min-height: 18px; font-weight: 600;
-}
-
-.code-box {
-  margin-top: 24px; padding: 22px; border-radius: 18px;
-  background: linear-gradient(135deg, rgba(243,223,162,0.14), rgba(229,199,107,0.06));
-  border: 1.5px solid rgba(229,199,107,0.4); text-align: center;
-}
-.code-box .label {
-  font-size: 12px; letter-spacing: 1px;
-  color: var(--muted); font-weight: 700;
-  margin-bottom: 10px; text-transform: uppercase;
-}
-.code-box .code {
-  font-size: 34px; letter-spacing: 8px; font-weight: 800;
-  color: var(--gold); font-family: "Courier New", monospace;
-}
-.code-box .hint {
-  font-size: 12px; color: var(--muted);
-  margin-top: 12px; line-height: 1.5;
-}
-
-/* ============== STATUS BAR ============== */
-.status-bar {
-  padding: 14px 22px 6px; display: flex;
-  justify-content: space-between; align-items: center;
-  font-size: 15px; font-weight: 700; color: var(--text); flex-shrink: 0;
-}
+/* STATUS BAR + TOP ROW */
+.status-bar { padding: 14px 22px 6px; display: flex; justify-content: space-between; align-items: center; font-size: 15px; font-weight: 700; color: var(--text); flex-shrink: 0; }
 .status-bar .right { display: flex; align-items: center; gap: 7px; font-size: 13px; }
+.top-row { display: flex; align-items: center; gap: 12px; padding: 10px 20px 18px; flex-shrink: 0; }
+.icon-btn { width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,0.06); border: 1px solid rgba(229,199,107,0.18); display: flex; align-items: center; justify-content: center; font-size: 18px; cursor: pointer; position: relative; color: var(--gold); flex-shrink: 0; }
+.icon-btn .dot { position: absolute; top: 8px; right: 9px; width: 8px; height: 8px; border-radius: 50%; background: #ef4444; border: 1.5px solid var(--bg); }
+.top-name { flex: 1; font-size: 19px; font-weight: 800; letter-spacing: -0.3px; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #5b7cfa, #4a63e0); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; box-shadow: 0 4px 14px rgba(80,110,240,0.4); flex-shrink: 0; cursor: pointer; }
+.date-line { padding: 0 22px 12px; font-size: 12px; color: var(--muted); font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; }
+.greeting-block { padding: 6px 22px 20px; flex-shrink: 0; }
+.greeting-block h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.8px; color: var(--text); line-height: 1.15; }
+.greeting-block p { margin-top: 6px; font-size: 15px; color: var(--muted); font-weight: 500; }
 
-.top-row {
-  display: flex; align-items: center; gap: 12px;
-  padding: 10px 20px 18px; flex-shrink: 0;
-}
+/* PILLS */
+.account-pills { display: flex; gap: 10px; padding: 0 22px 22px; overflow-x: auto; scrollbar-width: none; flex-shrink: 0; }
+.account-pills::-webkit-scrollbar { display: none; }
+.pill { flex-shrink: 0; padding: 11px 18px; border-radius: 999px; font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 8px; white-space: nowrap; cursor: pointer; transition: 0.2s; font-family: inherit; border: none; }
+.pill.active { background: linear-gradient(135deg, var(--gold-soft), var(--gold)); color: #2a2107; box-shadow: 0 6px 18px rgba(229,199,107,0.3); }
+.pill.inactive { background: rgba(255,255,255,0.06); border: 1px solid rgba(229,199,107,0.22); color: var(--gold); }
 
-.icon-btn {
-  width: 42px; height: 42px; border-radius: 50%;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(229,199,107,0.18);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px; cursor: pointer; position: relative;
-  color: var(--gold);
+/* BALANCE CARD */
+.balance-card { margin: 0 18px 16px; padding: 26px 24px 24px; border-radius: 24px; background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 60%); border: 1px solid rgba(229,199,107,0.16); position: relative; overflow: hidden; box-shadow: 0 18px 40px rgba(0,0,0,0.5); flex-shrink: 0; }
+.balance-card::after { content: ""; position: absolute; width: 320px; height: 320px; border-radius: 50%; right: -160px; bottom: -180px; background: radial-gradient(circle, rgba(229,199,107,0.14) 0%, transparent 65%); pointer-events: none; }
+.balance-label { font-size: 14px; color: var(--muted); font-weight: 500; position: relative; z-index: 2; }
+.balance-amount { margin: 8px 0 6px; font-size: 40px; font-weight: 800; letter-spacing: -1.5px; color: var(--text); position: relative; z-index: 2; line-height: 1.05; word-break: break-all; transition: 0.3s; }
+.balance-sub { font-size: 14px; color: var(--muted); font-weight: 500; position: relative; z-index: 2; }
+.balance-actions { margin-top: 20px; display: flex; gap: 12px; position: relative; z-index: 2; flex-wrap: wrap; }
+.btn-primary { padding: 12px 22px; border-radius: 12px; background: linear-gradient(135deg, var(--gold-soft), var(--gold)); color: #2a2107; font-size: 14px; font-weight: 800; border: none; cursor: pointer; box-shadow: 0 6px 18px rgba(229,199,107,0.28); transition: 0.15s; font-family: inherit; }
+.btn-outline { padding: 12px 22px; border-radius: 12px; background: transparent; color: var(--gold); font-size: 14px; font-weight: 800; border: 1.5px solid rgba(229,199,107,0.45); cursor: pointer; transition: 0.15s; font-family: inherit; }
+.pending-row { display: flex; justify-content: space-between; margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(229,199,107,0.1); position: relative; z-index: 2; font-size: 12px; }
+.pending-row .pending-item { display: flex; flex-direction: column; }
+.pending-row .pending-label { color: var(--muted); font-weight: 600; font-size: 10.5px; letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 4px; }
+.pending-row .pending-value { color: var(--text); font-weight: 800; font-size: 13px; }
+
+/* QUICK ACTIONS (freeze card + schedule) */
+.quick-actions-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 0 18px 16px;
   flex-shrink: 0;
 }
-.icon-btn .dot {
-  position: absolute; top: 8px; right: 9px;
-  width: 8px; height: 8px; border-radius: 50%;
-  background: #ef4444; border: 1.5px solid var(--bg);
+.quick-action {
+  padding: 14px;
+  border-radius: 14px;
+  background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 70%);
+  border: 1px solid rgba(229,199,107,0.16);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: 0.15s;
+  font-family: inherit;
+  color: var(--text);
+  text-align: left;
 }
-
-.top-name {
-  flex: 1; font-size: 19px; font-weight: 800;
-  letter-spacing: -0.3px; color: var(--text);
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+.quick-action:active { transform: scale(0.97); }
+.quick-action .qa-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(229,199,107,0.14);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
 }
-
-.avatar {
-  width: 44px; height: 44px; border-radius: 50%;
-  background: linear-gradient(135deg, #5b7cfa, #4a63e0);
-  color: white; display: flex; align-items: center;
-  justify-content: center; font-weight: 800; font-size: 16px;
-  box-shadow: 0 4px 14px rgba(80,110,240,0.4);
-  flex-shrink: 0; cursor: pointer;
+.quick-action.frozen .qa-icon {
+  background: rgba(248,113,113,0.15);
+  color: #f87171;
 }
-
-.date-line {
-  padding: 0 22px 12px;
-  font-size: 12px;
+.quick-action .qa-label {
+  font-size: 10.5px;
   color: var(--muted);
   font-weight: 600;
-  letter-spacing: 0.4px;
   text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+.quick-action .qa-value {
+  font-size: 13px;
+  color: var(--text);
+  font-weight: 800;
+  margin-top: 2px;
 }
 
-.greeting-block { padding: 6px 22px 20px; flex-shrink: 0; }
-.greeting-block h1 {
-  font-size: 28px; font-weight: 800; letter-spacing: -0.8px;
-  color: var(--text); line-height: 1.15;
-}
-.greeting-block p {
-  margin-top: 6px; font-size: 15px;
-  color: var(--muted); font-weight: 500;
-}
+/* STATS */
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 0 18px 16px; flex-shrink: 0; }
+.stat-card { background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 70%); border: 1px solid rgba(229,199,107,0.16); border-radius: 14px; padding: 12px 6px; text-align: center; }
+.stat-card .stat-label { font-size: 9.5px; color: var(--muted); font-weight: 600; letter-spacing: 0.3px; text-transform: uppercase; margin-bottom: 6px; }
+.stat-card .stat-value { font-size: 13px; color: var(--gold); font-weight: 800; word-break: break-all; }
 
-.account-pills {
-  display: flex; gap: 10px; padding: 0 22px 22px;
-  overflow-x: auto; scrollbar-width: none; flex-shrink: 0;
-}
-.account-pills::-webkit-scrollbar { display: none; }
+.quick-info-row { display: flex; gap: 8px; margin: 0 18px 16px; flex-wrap: wrap; flex-shrink: 0; }
+.info-chip { padding: 6px 12px; border-radius: 999px; background: rgba(229,199,107,0.1); border: 1px solid rgba(229,199,107,0.22); font-size: 11px; font-weight: 700; color: var(--gold); display: flex; align-items: center; gap: 5px; }
+.info-chip.green { background: rgba(74,222,128,0.1); border-color: rgba(74,222,128,0.3); color: var(--green); }
 
-.pill {
-  flex-shrink: 0; padding: 11px 18px; border-radius: 999px;
-  font-size: 13px; font-weight: 700; display: flex;
-  align-items: center; gap: 8px; white-space: nowrap;
-  cursor: pointer; transition: 0.2s; font-family: inherit; border: none;
-}
-.pill.active {
-  background: linear-gradient(135deg, var(--gold-soft), var(--gold));
-  color: #2a2107; box-shadow: 0 6px 18px rgba(229,199,107,0.3);
-}
-.pill.inactive {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(229,199,107,0.22); color: var(--gold);
-}
-
-.balance-card {
-  margin: 0 18px 16px; padding: 26px 24px 24px;
-  border-radius: 24px;
-  background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 60%);
-  border: 1px solid rgba(229,199,107,0.16);
-  position: relative; overflow: hidden;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.5); flex-shrink: 0;
-}
-.balance-card::after {
-  content: ""; position: absolute;
-  width: 320px; height: 320px; border-radius: 50%;
-  right: -160px; bottom: -180px;
-  background: radial-gradient(circle, rgba(229,199,107,0.14) 0%, transparent 65%);
-  pointer-events: none;
-}
-.balance-label {
-  font-size: 14px; color: var(--muted);
-  font-weight: 500; position: relative; z-index: 2;
-}
-.balance-amount {
-  margin: 8px 0 6px; font-size: 40px; font-weight: 800;
-  letter-spacing: -1.5px; color: var(--text);
-  position: relative; z-index: 2; line-height: 1.05;
-  word-break: break-all;
-}
-.balance-sub {
-  font-size: 14px; color: var(--muted);
-  font-weight: 500; position: relative; z-index: 2;
-}
-.balance-actions {
-  margin-top: 20px; display: flex; gap: 12px;
-  position: relative; z-index: 2; flex-wrap: wrap;
-}
-
-.btn-primary {
-  padding: 12px 22px; border-radius: 12px;
-  background: linear-gradient(135deg, var(--gold-soft), var(--gold));
-  color: #2a2107; font-size: 14px; font-weight: 800;
-  border: none; cursor: pointer;
-  box-shadow: 0 6px 18px rgba(229,199,107,0.28);
-  transition: 0.15s; font-family: inherit;
-}
-
-.btn-outline {
-  padding: 12px 22px; border-radius: 12px;
-  background: transparent; color: var(--gold);
-  font-size: 14px; font-weight: 800;
-  border: 1.5px solid rgba(229,199,107,0.45);
-  cursor: pointer; transition: 0.15s; font-family: inherit;
-}
-
-.pending-row {
-  display: flex; justify-content: space-between;
-  margin-top: 14px; padding-top: 14px;
-  border-top: 1px solid rgba(229,199,107,0.1);
-  position: relative; z-index: 2; font-size: 12px;
-}
-.pending-row .pending-item { display: flex; flex-direction: column; }
-.pending-row .pending-label {
-  color: var(--muted); font-weight: 600;
-  font-size: 10.5px; letter-spacing: 0.4px;
-  text-transform: uppercase; margin-bottom: 4px;
-}
-.pending-row .pending-value {
-  color: var(--text); font-weight: 800; font-size: 13px;
-}
-
-.stats-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 8px; margin: 0 18px 16px; flex-shrink: 0;
-}
-.stat-card {
-  background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 70%);
-  border: 1px solid rgba(229,199,107,0.16);
-  border-radius: 14px; padding: 12px 6px;
-  text-align: center;
-}
-.stat-card .stat-label {
-  font-size: 9.5px; color: var(--muted);
-  font-weight: 600; letter-spacing: 0.3px;
-  text-transform: uppercase; margin-bottom: 6px;
-}
-.stat-card .stat-value {
-  font-size: 13px; color: var(--gold);
-  font-weight: 800; word-break: break-all;
-}
-
-.quick-info-row {
-  display: flex; gap: 8px; margin: 0 18px 16px;
-  flex-wrap: wrap; flex-shrink: 0;
-}
-.info-chip {
-  padding: 6px 12px; border-radius: 999px;
-  background: rgba(229,199,107,0.1);
-  border: 1px solid rgba(229,199,107,0.22);
-  font-size: 11px; font-weight: 700;
-  color: var(--gold);
-  display: flex; align-items: center; gap: 5px;
-}
-.info-chip.green {
-  background: rgba(74,222,128,0.1);
-  border-color: rgba(74,222,128,0.3);
-  color: var(--green);
-}
-
-/* Chart & Goal */
-.chart-card {
-  margin: 0 18px 16px; padding: 18px;
-  border-radius: 18px;
-  background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 70%);
-  border: 1px solid rgba(229,199,107,0.16);
-  flex-shrink: 0;
-}
-.chart-card h3 {
-  font-size: 13px; font-weight: 800;
-  color: var(--gold); margin-bottom: 14px;
-  letter-spacing: -0.2px;
-}
-.chart-bars {
-  display: flex; align-items: flex-end;
-  justify-content: space-between; height: 90px; gap: 4px;
-}
-.chart-bar-wrap {
-  flex: 1; display: flex; flex-direction: column;
-  align-items: center; gap: 4px; height: 100%;
-  justify-content: flex-end;
-}
-.chart-bar {
-  width: 100%; border-radius: 4px;
-  background: linear-gradient(180deg, var(--gold), var(--gold-dark));
-  min-height: 4px; transition: 0.3s;
-}
+/* CHART */
+.chart-card { margin: 0 18px 16px; padding: 18px; border-radius: 18px; background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 70%); border: 1px solid rgba(229,199,107,0.16); flex-shrink: 0; }
+.chart-card h3 { font-size: 13px; font-weight: 800; color: var(--gold); margin-bottom: 14px; letter-spacing: -0.2px; }
+.chart-bars { display: flex; align-items: flex-end; justify-content: space-between; height: 90px; gap: 4px; }
+.chart-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end; }
+.chart-bar { width: 100%; border-radius: 4px; background: linear-gradient(180deg, var(--gold), var(--gold-dark)); min-height: 4px; transition: 0.3s; }
 .chart-bar.spend { background: linear-gradient(180deg, #f87171, #dc2626); }
-.chart-label {
-  font-size: 9px; color: var(--muted);
-  font-weight: 600; text-transform: uppercase;
-}
-.chart-legend {
-  display: flex; gap: 14px; margin-top: 10px;
-  font-size: 11px; color: var(--muted);
-}
-.chart-legend .dot {
-  display: inline-block; width: 8px; height: 8px;
-  border-radius: 50%; margin-right: 4px;
-}
+.chart-label { font-size: 9px; color: var(--muted); font-weight: 600; text-transform: uppercase; }
+.chart-legend { display: flex; gap: 14px; margin-top: 10px; font-size: 11px; color: var(--muted); }
+.chart-legend .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; }
 .chart-legend .dot.inc { background: var(--gold); }
 .chart-legend .dot.spd { background: #ef4444; }
 
-.goal-card {
-  margin: 0 18px 16px; padding: 18px;
-  border-radius: 18px;
-  background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 70%);
-  border: 1px solid rgba(229,199,107,0.16);
-  flex-shrink: 0;
+/* DONUT */
+.donut-wrap { display: flex; align-items: center; gap: 16px; margin-top: 4px; }
+.donut {
+  width: 110px; height: 110px; border-radius: 50%; flex-shrink: 0;
+  position: relative;
+  background: conic-gradient(
+    #e5c76b 0% var(--p1, 0%),
+    #60a5fa var(--p1, 0%) var(--p2, 0%),
+    #4ade80 var(--p2, 0%) var(--p3, 0%),
+    #f87171 var(--p3, 0%) var(--p4, 0%),
+    #a78bfa var(--p4, 0%) var(--p5, 0%),
+    #a39d8c var(--p5, 0%) 100%
+  );
 }
-.goal-card h3 {
-  font-size: 13px; font-weight: 800;
-  color: var(--gold); margin-bottom: 10px;
+.donut::after {
+  content: ""; position: absolute;
+  inset: 14px;
+  background: var(--card);
+  border-radius: 50%;
 }
-.goal-progress-bg {
-  width: 100%; height: 10px; border-radius: 999px;
-  background: rgba(229,199,107,0.12);
-  overflow: hidden; margin-bottom: 8px;
-}
-.goal-progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--gold-soft), var(--gold));
-  border-radius: 999px; transition: width 0.4s;
-}
-.goal-numbers {
-  display: flex; justify-content: space-between;
-  font-size: 11.5px; color: var(--muted); font-weight: 600;
-}
+body.light .donut::after { background: #ffffff; }
+.donut-legend { flex: 1; display: flex; flex-direction: column; gap: 6px; font-size: 12px; }
+.donut-legend .item { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.donut-legend .item .name { display: flex; align-items: center; gap: 6px; color: var(--muted); font-weight: 600; }
+.donut-legend .item .swatch { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.donut-legend .item .pct { color: var(--text); font-weight: 800; }
 
-.service-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 10px; padding: 0 18px 22px; flex-shrink: 0;
-}
-.service-tile {
-  background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 70%);
-  border: 1px solid rgba(229,199,107,0.18);
-  border-radius: 16px; padding: 14px 6px;
-  display: flex; flex-direction: column;
-  align-items: center; gap: 6px; cursor: pointer;
-  transition: 0.15s; font-family: inherit;
-}
-.service-tile .ico {
-  width: 36px; height: 36px; border-radius: 11px;
-  background: rgba(229,199,107,0.12);
-  display: flex; align-items: center;
-  justify-content: center; font-size: 18px;
-  color: var(--gold);
-}
-.service-tile .lbl {
-  font-size: 10.5px; font-weight: 700;
-  color: var(--text); text-align: center; line-height: 1.2;
-}
+/* SERVICE GRID */
+.service-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 0 18px 22px; flex-shrink: 0; }
+.service-tile { background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 70%); border: 1px solid rgba(229,199,107,0.18); border-radius: 16px; padding: 14px 6px; display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; transition: 0.15s; font-family: inherit; }
+.service-tile:active { transform: scale(0.97); }
+.service-tile .ico { width: 36px; height: 36px; border-radius: 11px; background: rgba(229,199,107,0.12); display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--gold); }
+.service-tile .lbl { font-size: 10.5px; font-weight: 700; color: var(--text); text-align: center; line-height: 1.2; }
 
-/* ============================================================
-   BOTTOM NAV — pinned to BOTTOM of .phone, never scrolls
-   ============================================================ */
-.bottom-nav {
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  background: rgba(10,9,8,0.98);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-top: 1px solid rgba(229,199,107,0.14);
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 10px 6px 22px;
-  z-index: 200;
-  flex-shrink: 0;
-}
-.nav-item {
-  display: flex; flex-direction: column;
-  align-items: center; gap: 4px;
-  color: var(--muted);
-  font-size: 11px; font-weight: 600;
-  cursor: pointer; padding: 6px 8px;
-  transition: 0.15s; background: none;
-  border: none; font-family: inherit;
-  flex: 1;
-}
+/* BOTTOM NAV */
+.bottom-nav { position: absolute; left: 0; right: 0; bottom: 0; background: rgba(10,9,8,0.98); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-top: 1px solid rgba(229,199,107,0.14); display: flex; justify-content: space-around; align-items: center; padding: 10px 6px 22px; z-index: 200; }
+.nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--muted); font-size: 11px; font-weight: 600; cursor: pointer; padding: 6px 8px; transition: 0.15s; background: none; border: none; font-family: inherit; flex: 1; }
 .nav-item.active { color: var(--gold); }
 .nav-item .nav-icon { font-size: 20px; }
 
-/* ============== PANEL ============== */
-.panel {
-  margin: 0 18px 18px; padding: 22px; border-radius: 20px;
-  background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 60%);
-  border: 1px solid rgba(229,199,107,0.16);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
-}
-.panel h2 {
-  font-size: 18px; font-weight: 800;
-  color: var(--gold); margin-bottom: 18px;
-  letter-spacing: -0.3px;
-}
-
+/* PANEL */
+.panel { margin: 0 18px 18px; padding: 22px; border-radius: 20px; background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 60%); border: 1px solid rgba(229,199,107,0.16); box-shadow: 0 12px 30px rgba(0,0,0,0.4); }
+.panel h2 { font-size: 18px; font-weight: 800; color: var(--gold); margin-bottom: 18px; letter-spacing: -0.3px; }
 .form-group { margin-bottom: 16px; }
-.form-group label {
-  display: block; font-size: 12px; font-weight: 700;
-  letter-spacing: 0.5px; color: var(--muted);
-  margin-bottom: 6px; text-transform: uppercase;
-}
-.form-group input, .form-group select {
-  width: 100%; padding: 14px 16px; border-radius: 12px;
-  background: rgba(255,255,255,0.05);
-  border: 1.5px solid rgba(229,199,107,0.2);
-  color: var(--text); font-size: 15px;
-  font-family: inherit; outline: none; transition: 0.15s;
-}
+.form-group label { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; }
+.form-group input, .form-group select { width: 100%; padding: 14px 16px; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1.5px solid rgba(229,199,107,0.2); color: var(--text); font-size: 15px; font-family: inherit; outline: none; transition: 0.15s; }
 .form-group input:focus, .form-group select:focus { border-color: var(--gold); }
 .form-group select option { background: var(--card); color: var(--text); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
+/* TOGGLE SWITCH */
+.toggle-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; }
+.toggle-row .toggle-label { font-size: 14px; font-weight: 700; color: var(--text); }
+.toggle-row .toggle-sub { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+.switch { position: relative; width: 48px; height: 28px; flex-shrink: 0; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.switch .slider { position: absolute; cursor: pointer; inset: 0; background: rgba(255,255,255,0.12); border-radius: 999px; transition: 0.3s; }
+.switch .slider::before { content: ""; position: absolute; height: 22px; width: 22px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: 0.3s; }
+.switch input:checked + .slider { background: linear-gradient(135deg, var(--gold-soft), var(--gold)); }
+.switch input:checked + .slider::before { transform: translateX(20px); }
+
+/* TX */
 .tx-list { display: flex; flex-direction: column; gap: 2px; }
-.tx {
-  display: flex; justify-content: space-between;
-  align-items: center; padding: 14px 0;
-  border-bottom: 1px solid rgba(229,199,107,0.08);
-}
+.tx { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(229,199,107,0.08); }
 .tx:last-child { border-bottom: none; }
 .tx-left { display: flex; align-items: center; gap: 12px; min-width: 0; flex: 1; }
-.tx-icon {
-  width: 42px; height: 42px; border-radius: 12px;
-  background: rgba(229,199,107,0.1);
-  display: flex; align-items: center;
-  justify-content: center; font-size: 18px; flex-shrink: 0;
-}
-.tx-name {
-  font-size: 14px; font-weight: 700; color: var(--text);
-  overflow: hidden; text-overflow: ellipsis;
-}
+.tx-icon { width: 42px; height: 42px; border-radius: 12px; background: rgba(229,199,107,0.1); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.tx-name { font-size: 14px; font-weight: 700; color: var(--text); overflow: hidden; text-overflow: ellipsis; }
 .tx-date { font-size: 11px; color: var(--muted); margin-top: 3px; }
 .tx-amount { font-size: 14px; font-weight: 800; white-space: nowrap; margin-left: 8px; }
 .tx-amount.positive { color: var(--green); }
 .tx-amount.negative { color: var(--red); }
 
-.empty-state {
-  text-align: center; padding: 30px 10px;
-  color: var(--muted); font-size: 14px;
-}
+.empty-state { text-align: center; padding: 30px 10px; color: var(--muted); font-size: 14px; }
 
-.row {
-  display: flex; justify-content: space-between;
-  align-items: center; padding: 14px 0;
-  border-bottom: 1px solid rgba(229,199,107,0.08);
-  font-size: 14px;
-}
+.row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(229,199,107,0.08); font-size: 14px; }
 .row:last-child { border-bottom: none; }
 .row .lbl { color: var(--muted); font-weight: 500; }
 .row .val { color: var(--text); font-weight: 700; text-align: right; }
 
-.section-title {
-  padding: 0 22px 12px; font-size: 15px; font-weight: 800;
-  color: var(--gold); letter-spacing: -0.2px;
-}
+.section-title { padding: 0 22px 12px; font-size: 15px; font-weight: 800; color: var(--gold); letter-spacing: -0.2px; }
 
-.info-box {
-  padding: 16px; border-radius: 14px;
-  background: rgba(96,165,250,0.08);
-  border: 1.5px solid rgba(96,165,250,0.3);
-  margin-bottom: 16px;
-  font-size: 13px; color: var(--text); line-height: 1.6;
-}
+.info-box { padding: 16px; border-radius: 14px; background: rgba(96,165,250,0.08); border: 1.5px solid rgba(96,165,250,0.3); margin-bottom: 16px; font-size: 13px; color: var(--text); line-height: 1.6; }
 
-.copy-row {
-  display: flex; justify-content: space-between;
-  align-items: center; padding: 12px 14px;
-  background: rgba(255,255,255,0.04);
-  border-radius: 10px; margin-bottom: 8px;
-  border: 1px solid rgba(229,199,107,0.1);
-}
+.copy-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; background: rgba(255,255,255,0.04); border-radius: 10px; margin-bottom: 8px; border: 1px solid rgba(229,199,107,0.1); }
 .copy-row .key { font-size: 12px; color: var(--muted); font-weight: 600; }
 .copy-row .value { font-size: 14px; color: var(--text); font-weight: 700; font-family: "Courier New", monospace; }
-.copy-row .copy-btn {
-  background: rgba(229,199,107,0.15); color: var(--gold);
-  border: none; padding: 6px 12px; border-radius: 8px;
-  font-size: 11px; font-weight: 700; cursor: pointer;
-  font-family: inherit;
-}
+.copy-row .copy-btn { background: rgba(229,199,107,0.15); color: var(--gold); border: none; padding: 6px 12px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer; font-family: inherit; }
 
-.modal-overlay {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,0.75);
-  backdrop-filter: blur(6px);
-  display: none; align-items: center;
-  justify-content: center; z-index: 999;
-  padding: 20px;
-}
+/* SEARCH / FILTER */
+.search-bar { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 14px; background: rgba(255,255,255,0.05); border: 1.5px solid rgba(229,199,107,0.2); margin-bottom: 12px; }
+.search-bar input { flex: 1; background: transparent; border: none; color: var(--text); font-size: 14px; font-family: inherit; outline: none; }
+.search-bar input::placeholder { color: rgba(200,190,160,0.35); }
+.search-bar .search-icon { color: var(--gold); font-size: 16px; }
+.filter-chips { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-bottom: 4px; margin-bottom: 14px; }
+.filter-chips::-webkit-scrollbar { display: none; }
+.filter-chip { flex-shrink: 0; padding: 8px 14px; border-radius: 999px; font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.15s; border: 1.5px solid rgba(229,199,107,0.22); background: transparent; color: var(--gold); font-family: inherit; }
+.filter-chip.active { background: linear-gradient(135deg, var(--gold-soft), var(--gold)); color: #2a2107; border-color: transparent; }
+
+/* MODAL */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center; z-index: 999; padding: 20px; }
 .modal-overlay.show { display: flex; }
-.modal {
-  width: 100%; max-width: 380px; max-height: 80vh;
-  overflow-y: auto;
-  background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 70%);
-  border: 1.5px solid rgba(229,199,107,0.3);
-  border-radius: 22px; padding: 24px;
-}
-.modal h2 {
-  font-size: 20px; font-weight: 800;
-  color: var(--gold); margin-bottom: 6px; text-align: center;
-}
-.modal .modal-sub {
-  font-size: 13px; color: var(--muted);
-  text-align: center; margin-bottom: 20px;
-}
-.account-item {
-  display: flex; align-items: center; gap: 12px;
-  padding: 14px; border-radius: 14px;
-  background: rgba(255,255,255,0.04);
-  border: 1.5px solid rgba(229,199,107,0.1);
-  margin-bottom: 10px; cursor: pointer;
-}
-.account-item.current {
-  border-color: rgba(229,199,107,0.6);
-  background: rgba(229,199,107,0.1);
-}
-.account-item .ac-avatar {
-  width: 44px; height: 44px; border-radius: 50%;
-  background: linear-gradient(135deg, #5b7cfa, #4a63e0);
-  color: white; display: flex; align-items: center;
-  justify-content: center; font-weight: 800; font-size: 15px;
-  flex-shrink: 0;
-}
+.modal { width: 100%; max-width: 380px; max-height: 80vh; overflow-y: auto; background: linear-gradient(140deg, #1a1813 0%, #0d0c0a 70%); border: 1.5px solid rgba(229,199,107,0.3); border-radius: 22px; padding: 24px; }
+.modal h2 { font-size: 20px; font-weight: 800; color: var(--gold); margin-bottom: 6px; text-align: center; }
+.modal .modal-sub { font-size: 13px; color: var(--muted); text-align: center; margin-bottom: 20px; }
+.account-item { display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: 14px; background: rgba(255,255,255,0.04); border: 1.5px solid rgba(229,199,107,0.1); margin-bottom: 10px; cursor: pointer; }
+.account-item.current { border-color: rgba(229,199,107,0.6); background: rgba(229,199,107,0.1); }
+.account-item .ac-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #5b7cfa, #4a63e0); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 15px; flex-shrink: 0; }
 .account-item .ac-info { flex: 1; min-width: 0; }
-.account-item .ac-name {
-  font-size: 15px; font-weight: 800; color: var(--text);
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-}
-.account-item .ac-bal {
-  font-size: 12px; color: var(--muted); margin-top: 3px;
-}
+.account-item .ac-name { font-size: 15px; font-weight: 800; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.account-item .ac-bal { font-size: 12px; color: var(--muted); margin-top: 3px; }
 .account-item .ac-check { font-size: 18px; color: var(--gold); }
 .modal-actions { display: flex; gap: 10px; margin-top: 18px; }
-.modal-btn {
-  flex: 1; padding: 14px; border-radius: 12px;
-  font-size: 14px; font-weight: 800;
-  border: none; cursor: pointer;
-  font-family: inherit;
-}
-.modal-btn.gold {
-  background: linear-gradient(135deg, var(--gold-soft), var(--gold));
-  color: #2a2107;
-}
-.modal-btn.ghost {
-  background: transparent; color: var(--gold);
-  border: 1.5px solid rgba(229,199,107,0.4);
-}
+.modal-btn { flex: 1; padding: 14px; border-radius: 12px; font-size: 14px; font-weight: 800; border: none; cursor: pointer; font-family: inherit; }
+.modal-btn.gold { background: linear-gradient(135deg, var(--gold-soft), var(--gold)); color: #2a2107; }
+.modal-btn.ghost { background: transparent; color: var(--gold); border: 1.5px solid rgba(229,199,107,0.4); }
 
-.notif-item {
-  display: flex; gap: 12px; padding: 14px;
-  border-radius: 12px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(229,199,107,0.1);
-  margin-bottom: 10px;
-}
-.notif-icon {
-  width: 38px; height: 38px; border-radius: 50%;
-  display: flex; align-items: center;
-  justify-content: center; font-size: 17px;
-  background: rgba(229,199,107,0.14);
-  color: var(--gold); flex-shrink: 0;
-}
+/* NOTIFICATIONS */
+.notif-item { display: flex; gap: 12px; padding: 14px; border-radius: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(229,199,107,0.1); margin-bottom: 10px; }
+.notif-icon { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 17px; background: rgba(229,199,107,0.14); color: var(--gold); flex-shrink: 0; }
 .notif-info { flex: 1; min-width: 0; }
 .notif-title { font-size: 13.5px; font-weight: 800; color: var(--text); margin-bottom: 3px; }
 .notif-text { font-size: 12px; color: var(--muted); line-height: 1.4; }
-.notif-time {
-  font-size: 10.5px; color: var(--muted); margin-top: 4px;
-  font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px;
-}
+.notif-time { font-size: 10.5px; color: var(--muted); margin-top: 4px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
 
-.contact-item {
-  display: flex; align-items: center; gap: 12px;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(229,199,107,0.08);
-}
+/* CONTACTS */
+.contact-item { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid rgba(229,199,107,0.08); }
 .contact-item:last-child { border-bottom: none; }
-.contact-item .co-avatar {
-  width: 38px; height: 38px; border-radius: 50%;
-  background: linear-gradient(135deg, #5b7cfa, #4a63e0);
-  color: white; display: flex; align-items: center;
-  justify-content: center; font-weight: 800; font-size: 13px;
-  flex-shrink: 0;
-}
+.contact-item .co-avatar { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, #5b7cfa, #4a63e0); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; flex-shrink: 0; }
 .contact-item .co-name { font-size: 14px; font-weight: 700; color: var(--text); }
 .contact-item .co-info { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
-.contact-item .co-action {
-  background: rgba(229,199,107,0.15); color: var(--gold);
-  border: none; padding: 6px 12px; border-radius: 8px;
-  font-size: 11px; font-weight: 700; cursor: pointer;
+.contact-item .co-action { background: rgba(229,199,107,0.15); color: var(--gold); border: none; padding: 6px 12px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer; font-family: inherit; }
+
+/* PAYEE CARD */
+.payee-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(229,199,107,0.12);
+  margin-bottom: 10px;
+}
+.payee-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(229,199,107,0.15);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.payee-info { flex: 1; min-width: 0; }
+.payee-name { font-size: 14px; font-weight: 800; color: var(--text); }
+.payee-meta { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+.payee-actions { display: flex; gap: 6px; flex-shrink: 0; }
+.payee-btn {
+  background: rgba(229,199,107,0.15);
+  color: var(--gold);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
   font-family: inherit;
 }
+.payee-btn.danger {
+  background: rgba(248,113,113,0.12);
+  color: #f87171;
+}
 
-.frozen-overlay {
-  position: absolute; inset: 0;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(3px);
-  display: none; align-items: center;
-  justify-content: center; flex-direction: column;
-  gap: 12px; z-index: 10; border-radius: 24px;
-}
+/* FROZEN OVERLAY */
+.frozen-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(3px); display: none; align-items: center; justify-content: center; flex-direction: column; gap: 12px; z-index: 10; border-radius: 24px; }
 .frozen-overlay.show { display: flex; }
-.frozen-badge {
-  background: linear-gradient(135deg, #f87171, #dc2626);
-  color: white; padding: 8px 20px; border-radius: 999px;
-  font-size: 12px; font-weight: 800; letter-spacing: 1.5px;
-}
+.frozen-badge { background: linear-gradient(135deg, #f87171, #dc2626); color: white; padding: 8px 20px; border-radius: 999px; font-size: 12px; font-weight: 800; letter-spacing: 1.5px; }
 .frozen-text { color: white; font-size: 13px; font-weight: 600; opacity: 0.85; }
 
-/* Desktop */
+/* TOAST */
+.toast {
+  position: fixed;
+  bottom: 110px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: linear-gradient(135deg, var(--gold-soft), var(--gold));
+  color: #2a2107;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 800;
+  box-shadow: 0 12px 30px rgba(229,199,107,0.4);
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+  max-width: 340px;
+  text-align: center;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 @media (min-width: 480px) {
   body { padding: 20px 0; background: #000; }
-  .phone {
-    border-radius: 42px;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.8);
-    height: 900px;
-    max-height: 90vh;
-  }
+  .phone { border-radius: 42px; box-shadow: 0 30px 80px rgba(0,0,0,0.8); height: 900px; max-height: 90vh; }
 }
 </style>
 </head>
@@ -716,7 +430,7 @@ body.light .field input::placeholder { color: #94a3b8; }
 
 <div class="phone">
 
-  <!-- ============= SIGN UP ============= -->
+  <!-- SIGN UP -->
   <section id="screen-signup" class="screen auth-screen active">
     <div class="brand">Nova<span>Pay</span></div>
     <div class="tagline">Create your account in seconds</div>
@@ -792,7 +506,7 @@ body.light .field input::placeholder { color: #94a3b8; }
     <div class="balance-card" id="main-balance-card">
       <div class="frozen-overlay" id="frozen-overlay">
         <div class="frozen-badge">❄ CARD FROZEN</div>
-        <div class="frozen-text">Tap Manage Card to unfreeze</div>
+        <div class="frozen-text">Tap Quick Freeze to unfreeze</div>
       </div>
       <div class="balance-label">Available Balance</div>
       <div class="balance-amount" id="balance-display">$134,290.00</div>
@@ -809,6 +523,24 @@ body.light .field input::placeholder { color: #94a3b8; }
       </div>
     </div>
 
+    <!-- QUICK ACTIONS: FREEZE + SCHEDULE -->
+    <div class="quick-actions-row">
+      <button class="quick-action" id="quick-freeze" onclick="quickToggleFreeze()">
+        <div class="qa-icon" id="freeze-icon">❄</div>
+        <div>
+          <div class="qa-label">Card</div>
+          <div class="qa-value" id="freeze-label">Freeze</div>
+        </div>
+      </button>
+      <button class="quick-action" onclick="showScreen('screen-scheduled')">
+        <div class="qa-icon">⏰</div>
+        <div>
+          <div class="qa-label">Scheduled</div>
+          <div class="qa-value" id="scheduled-count">None</div>
+        </div>
+      </button>
+    </div>
+
     <div class="quick-info-row">
       <div class="info-chip" id="chip-cashback">💵 Cashback: $0.00</div>
       <div class="info-chip green" id="chip-streak">🔥 12-day streak</div>
@@ -822,6 +554,7 @@ body.light .field input::placeholder { color: #94a3b8; }
       <div class="stat-card"><div class="stat-label">Txns</div><div class="stat-value" id="stat-count">0</div></div>
     </div>
 
+    <!-- 7-day chart -->
     <div class="chart-card">
       <h3>Last 7 Days</h3>
       <div class="chart-bars" id="chart-bars"></div>
@@ -831,13 +564,12 @@ body.light .field input::placeholder { color: #94a3b8; }
       </div>
     </div>
 
-    <div class="goal-card">
-      <h3>🎯 Savings Goal — $500,000</h3>
-      <div class="goal-progress-bg"><div class="goal-progress-fill" id="goal-fill" style="width: 26%;"></div></div>
-      <div class="goal-numbers">
-        <span id="goal-current">$134,290</span>
-        <span id="goal-percent">26%</span>
-        <span>$500,000</span>
+    <!-- Spending breakdown donut -->
+    <div class="chart-card">
+      <h3>Spending Breakdown</h3>
+      <div class="donut-wrap">
+        <div class="donut" id="donut-chart"></div>
+        <div class="donut-legend" id="donut-legend"></div>
       </div>
     </div>
 
@@ -878,6 +610,40 @@ body.light .field input::placeholder { color: #94a3b8; }
       <div class="success-msg" id="card-msg"></div>
     </div>
     <div class="panel"><h2>Virtual Card Gallery</h2><div id="vcard-gallery"><div class="empty-state">No virtual cards generated yet.</div></div></div>
+  </section>
+
+  <!-- SCHEDULED / RECURRING -->
+  <section id="screen-scheduled" class="screen">
+    <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
+    <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Scheduled Transfers</div><div class="avatar" id="sched-avatar" onclick="openSwitcher()">--</div></div>
+
+    <div class="panel">
+      <h2>New Recurring Transfer</h2>
+      <div class="form-group"><label for="sc-name">Recipient</label><input id="sc-name" type="text" placeholder="e.g. Mom"></div>
+      <div class="form-group"><label for="sc-amount">Amount (USD)</label><input id="sc-amount" type="number" placeholder="0.00" min="0" step="0.01"></div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="sc-frequency">Frequency</label>
+          <select id="sc-frequency">
+            <option value="daily">Daily</option>
+            <option value="weekly" selected>Weekly</option>
+            <option value="biweekly">Bi-Weekly</option>
+            <option value="monthly">Monthly</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="sc-start">Start Date</label>
+          <input id="sc-start" type="date">
+        </div>
+      </div>
+      <button class="btn-gold" onclick="addScheduled()">Schedule Transfer</button>
+      <div class="error-msg" id="sc-msg"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Active Schedules</h2>
+      <div id="scheduled-list"><div class="empty-state">No scheduled transfers yet.</div></div>
+    </div>
   </section>
 
   <!-- CONTACTS -->
@@ -1052,9 +818,32 @@ body.light .field input::placeholder { color: #94a3b8; }
   <section id="screen-bills" class="screen">
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">Bills</div><div class="avatar" id="bills-avatar" onclick="openSwitcher()">--</div></div>
-    <div class="panel"><h2>Upcoming Bills</h2><div id="upcoming-bills"></div></div>
+
     <div class="panel">
-      <h2>Pay a Bill</h2>
+      <h2>Saved Payees</h2>
+      <div id="payees-list"><div class="empty-state">No saved payees yet.</div></div>
+    </div>
+
+    <div class="panel">
+      <h2>Add a Payee</h2>
+      <div class="form-group"><label for="py-name">Biller Name</label><input id="py-name" type="text" placeholder="e.g. Electric Company"></div>
+      <div class="form-group"><label for="py-amount">Default Amount (optional)</label><input id="py-amount" type="number" placeholder="0.00"></div>
+      <div class="toggle-row">
+        <div>
+          <div class="toggle-label">Autopay</div>
+          <div class="toggle-sub">Automatically pay this bill monthly</div>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="py-autopay">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <button class="btn-gold" onclick="addPayee()">Save Payee</button>
+      <div class="success-msg" id="py-msg"></div>
+    </div>
+
+    <div class="panel">
+      <h2>One-time Payment</h2>
       <div class="form-group"><label for="bl-name">Biller</label><input id="bl-name" type="text" placeholder="Electric Company"></div>
       <div class="form-group"><label for="bl-amount">Amount (USD)</label><input id="bl-amount" type="number" placeholder="0.00"></div>
       <button class="btn-gold" onclick="handleBill()">Pay Bill</button>
@@ -1067,7 +856,24 @@ body.light .field input::placeholder { color: #94a3b8; }
     <div class="status-bar"><span class="clk">9:43</span><div class="right"><span>📶</span><span>🔋</span></div></div>
     <div class="top-row"><div class="icon-btn" onclick="showScreen('screen-home')">←</div><div class="top-name">History</div><div class="avatar" id="history-avatar" onclick="openSwitcher()">--</div></div>
     <div class="date-line" id="date-line-history">—</div>
-    <div class="panel"><h2>All Transactions</h2><div class="tx-list" id="history-tx-list"><div class="empty-state">No transactions yet.</div></div></div>
+
+    <div class="panel">
+      <div class="search-bar">
+        <span class="search-icon">🔍</span>
+        <input id="history-search" type="text" placeholder="Search transactions…" oninput="renderHistoryFiltered()">
+      </div>
+      <div class="filter-chips" id="history-filters">
+        <button class="filter-chip active" data-filter="all" onclick="setHistoryFilter('all')">All</button>
+        <button class="filter-chip" data-filter="income" onclick="setHistoryFilter('income')">Income</button>
+        <button class="filter-chip" data-filter="spending" onclick="setHistoryFilter('spending')">Spending</button>
+        <button class="filter-chip" data-filter="Food" onclick="setHistoryFilter('Food')">Food</button>
+        <button class="filter-chip" data-filter="Shopping" onclick="setHistoryFilter('Shopping')">Shopping</button>
+        <button class="filter-chip" data-filter="Bills" onclick="setHistoryFilter('Bills')">Bills</button>
+        <button class="filter-chip" data-filter="Transport" onclick="setHistoryFilter('Transport')">Transport</button>
+        <button class="filter-chip" data-filter="Entertainment" onclick="setHistoryFilter('Entertainment')">Entertainment</button>
+      </div>
+      <div class="tx-list" id="history-tx-list"><div class="empty-state">No transactions yet.</div></div>
+    </div>
   </section>
 
   <!-- PROFILE -->
@@ -1114,10 +920,7 @@ body.light .field input::placeholder { color: #94a3b8; }
     </div>
   </section>
 
-  <!-- ============================================================
-       BOTTOM NAV — sits at bottom of .phone, out of scroll area
-       Only shown when signed in (hidden on auth screens)
-       ============================================================ -->
+  <!-- BOTTOM NAV -->
   <nav class="bottom-nav" id="main-nav" style="display: none;">
     <button class="nav-item active" data-target="screen-home" onclick="showScreen('screen-home')">
       <span class="nav-icon">🏠</span>Home
@@ -1138,6 +941,7 @@ body.light .field input::placeholder { color: #94a3b8; }
 
 </div>
 
+<!-- SWITCHER MODAL -->
 <div class="modal-overlay" id="switcher-modal">
   <div class="modal">
     <h2>Switch Account</h2>
@@ -1150,12 +954,15 @@ body.light .field input::placeholder { color: #94a3b8; }
   </div>
 </div>
 
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
 <script>
 const LS_USERS = 'novapay_users';
 const LS_SESSION = 'novapay_session';
 const LS_VERSION = 'novapay_version';
 const LS_THEME = 'novapay_theme';
-const APP_VERSION = 9;
+const APP_VERSION = 10;
 const STARTING_BALANCE = 134290.00;
 const STARTING_CREDIT = -1250.00;
 const STARTING_BUSINESS = 8500.00;
@@ -1193,9 +1000,10 @@ function runMigrations() {
     if (!u || typeof u !== 'object') return;
     if (storedVersion < APP_VERSION) {
       delete u.savingsBalance;
+      if (!u.scheduled) u.scheduled = [];
+      if (!u.payees) u.payees = [];
       u.balance = STARTING_BALANCE;
       u.creditBalance = u.creditBalance === undefined ? STARTING_CREDIT : u.creditBalance;
-      u.creditLimit = u.creditLimit || 10000;
       u.businessBalance = u.businessBalance === undefined ? STARTING_BUSINESS : u.businessBalance;
       u.investBalance = u.investBalance === undefined ? STARTING_INVEST : u.investBalance;
       u.cashback = u.cashback || 0;
@@ -1213,22 +1021,13 @@ function runMigrations() {
       if (!u.lastLogin) u.lastLogin = Date.now();
       if (!u.streak) u.streak = 12;
       seedTrustWallet(u);
-      if (u.notifications.length === 0) {
-        u.notifications = [{ icon: '↓', title: 'Trust Wallet Transfer', text: 'You received $134,290.00', date: Date.now() - 86400000 }];
-      } else {
-        u.notifications = u.notifications.map(n => {
-          if (n.title && n.title.toLowerCase().includes('ifundwomen')) {
-            return { ...n, title: 'Trust Wallet Transfer', text: 'You received $134,290.00' };
-          }
-          return n;
-        });
-      }
       changed = true;
     }
+    if (!u.scheduled) { u.scheduled = []; changed = true; }
+    if (!u.payees) { u.payees = []; changed = true; }
     seedTrustWallet(u);
     if (u.savingsBalance !== undefined) { delete u.savingsBalance; changed = true; }
     if (u.activeAccount === 'savings') { u.activeAccount = 'checking'; changed = true; }
-    if (!u.activeAccount) { u.activeAccount = 'checking'; changed = true; }
   });
 
   if (changed || storedVersion < APP_VERSION) {
@@ -1244,7 +1043,6 @@ function updateNav(target) {
     n.classList.toggle('active', n.dataset.target === target);
   });
 }
-
 function showNav(show) {
   const nav = document.getElementById('main-nav');
   if (nav) nav.style.display = show ? 'flex' : 'none';
@@ -1253,22 +1051,18 @@ function showNav(show) {
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   const target = document.getElementById(id);
-  if (target) {
-    target.classList.add('active');
-    target.scrollTop = 0;
-  }
+  if (target) { target.classList.add('active'); target.scrollTop = 0; }
 
   const protectedScreens = ['screen-home','screen-transfer','screen-deposit',
     'screen-bills','screen-history','screen-profile','screen-receive',
     'screen-wire','screen-zelle','screen-notifications','screen-manage-card',
     'screen-contacts','screen-budget','screen-statements','screen-currency',
-    'screen-split'];
+    'screen-split','screen-scheduled'];
   if (protectedScreens.includes(id) && !getSession()) {
     showScreen('screen-signin');
     return;
   }
 
-  // Show/hide nav based on whether we're on a protected screen
   if (protectedScreens.includes(id)) {
     showNav(true);
     updateNav(id);
@@ -1283,6 +1077,15 @@ function showScreen(id) {
   }
 }
 
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+/* === SIGN UP / SIGN IN / OUT === */
 function handleSignUp() {
   const name = document.getElementById('su-name').value.trim();
   const username = document.getElementById('su-user').value.trim().toLowerCase().replace(/\s+/g,'');
@@ -1300,13 +1103,12 @@ function handleSignUp() {
     name, username, pass, code,
     balance: STARTING_BALANCE,
     creditBalance: STARTING_CREDIT,
-    creditLimit: 10000,
     businessBalance: STARTING_BUSINESS,
     investBalance: STARTING_INVEST,
     activeAccount: 'checking',
-    transactions: [],
-    notifications: [{ icon: '🏦', title: 'Welcome to NovaPay', text: 'Account ready.', date: Date.now() }],
+    transactions: [], notifications: [{ icon: '🏦', title: 'Welcome to NovaPay', text: 'Account ready.', date: Date.now() }],
     contacts: [], virtualCards: [], budgets: {},
+    scheduled: [], payees: [],
     cashback: 0, interestYTD: 0, frozen: false,
     memberId: 'NP-' + Math.floor(1000+Math.random()*9000) + '-' + username.slice(0,2).toUpperCase(),
     streak: 12,
@@ -1348,6 +1150,7 @@ function handleSignIn() {
   setSession(username);
   document.getElementById('si-pass').value = '';
   showScreen('screen-home');
+  toast('Welcome back, ' + user.name.split(' ')[0]);
 }
 
 function handleSignOut() {
@@ -1357,6 +1160,7 @@ function handleSignOut() {
   showScreen('screen-signin');
 }
 
+/* === SWITCHER === */
 function openSwitcher() {
   const users = getUsers();
   const session = getSession();
@@ -1394,6 +1198,7 @@ function switchToAccount(key) {
   setSession(key);
   closeSwitcher();
   showScreen('screen-home');
+  toast('Switched to ' + user.name.split(' ')[0]);
 }
 function escapeAttr(s) { return String(s).replace(/'/g, "\\'").replace(/"/g, '&quot;'); }
 
@@ -1435,9 +1240,7 @@ function updateClocks() {
   m = m < 10 ? '0' + m : m;
   const t = h + ':' + m;
   document.querySelectorAll('.clk, #clock').forEach(el => { el.textContent = t; });
-  const dateStr = now.toLocaleDateString(undefined, {
-    weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'
-  });
+  const dateStr = now.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
   ['date-line-home','date-line-history'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.textContent = dateStr;
@@ -1447,6 +1250,8 @@ function updateClocks() {
     const user = getUsers()[getSession()];
     if (user) greetingEl.textContent = greetingText() + ', ' + user.name.split(' ')[0];
   }
+  // Process any scheduled transfers due
+  checkScheduledTransfers();
 }
 
 function fmt(amount) {
@@ -1485,6 +1290,281 @@ function totalNetWorth(user) {
        + (user.investBalance || 0) + (user.creditBalance || 0);
 }
 
+/* === QUICK FREEZE === */
+function quickToggleFreeze() {
+  const key = getSession();
+  const user = getUsers()[key];
+  if (!user) return;
+  user.frozen = !user.frozen;
+  persistUser(key, user);
+  toast(user.frozen ? '❄ Card frozen' : '🔥 Card unfrozen');
+  renderAll(user);
+}
+function toggleFreeze() { quickToggleFreeze(); }
+
+/* === SCHEDULED TRANSFERS === */
+function addScheduled() {
+  const key = getSession();
+  const user = getUsers()[key];
+  if (!user) return;
+  const name = document.getElementById('sc-name').value.trim();
+  const amount = parseFloat(document.getElementById('sc-amount').value);
+  const frequency = document.getElementById('sc-frequency').value;
+  const start = document.getElementById('sc-start').value;
+  const msg = document.getElementById('sc-msg');
+  msg.textContent = '';
+  if (!name) { msg.textContent = 'Enter recipient.'; msg.style.color = '#f87171'; return; }
+  if (!amount || amount <= 0) { msg.textContent = 'Enter valid amount.'; msg.style.color = '#f87171'; return; }
+  const startTime = start ? new Date(start).getTime() : Date.now();
+  user.scheduled = user.scheduled || [];
+  user.scheduled.push({
+    id: 'sch_' + Date.now(),
+    name, amount, frequency,
+    nextDate: startTime,
+    createdAt: Date.now()
+  });
+  persistUser(key, user);
+  ['sc-name','sc-amount','sc-start'].forEach(id => document.getElementById(id).value = '');
+  toast('Scheduled transfer created');
+  renderAll(user);
+}
+
+function deleteScheduled(id) {
+  const key = getSession();
+  const user = getUsers()[key];
+  if (!user) return;
+  user.scheduled = (user.scheduled || []).filter(s => s.id !== id);
+  persistUser(key, user);
+  toast('Schedule removed');
+  renderAll(user);
+}
+
+function checkScheduledTransfers() {
+  const key = getSession();
+  if (!key) return;
+  const users = getUsers();
+  const user = users[key];
+  if (!user || !user.scheduled) return;
+  let changed = false;
+  const now = Date.now();
+  user.scheduled.forEach(s => {
+    while (s.nextDate <= now) {
+      if (s.amount <= (user.balance || 0)) {
+        user.balance -= s.amount;
+        addTransaction(user, {
+          type: 'transfer',
+          label: 'Scheduled → ' + s.name,
+          amount: -s.amount,
+          date: now,
+          account: 'checking',
+          category: 'Other'
+        });
+        addNotification(user, '⏰', 'Scheduled transfer sent', fmt(s.amount) + ' to ' + s.name);
+      }
+      // advance nextDate
+      const d = new Date(s.nextDate);
+      if (s.frequency === 'daily') d.setDate(d.getDate() + 1);
+      else if (s.frequency === 'weekly') d.setDate(d.getDate() + 7);
+      else if (s.frequency === 'biweekly') d.setDate(d.getDate() + 14);
+      else d.setMonth(d.getMonth() + 1);
+      s.nextDate = d.getTime();
+      changed = true;
+    }
+  });
+  if (changed) {
+    users[key] = user;
+    saveUsers(users);
+  }
+}
+
+function renderScheduled(user) {
+  const el = document.getElementById('scheduled-list');
+  if (!el) return;
+  const list = user.scheduled || [];
+  if (list.length === 0) {
+    el.innerHTML = '<div class="empty-state">No scheduled transfers yet.</div>';
+    return;
+  }
+  el.innerHTML = list.map(s => {
+    const d = new Date(s.nextDate);
+    const next = d.toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'});
+    return `
+      <div class="row">
+        <div>
+          <div class="lbl" style="color:var(--text);font-weight:800;">→ ${escapeHtml(s.name)}</div>
+          <div style="font-size:11.5px;color:var(--muted);margin-top:4px;">${fmt(s.amount)} · ${s.frequency} · next ${next}</div>
+        </div>
+        <button class="payee-btn danger" onclick="deleteScheduled('${s.id}')">Delete</button>
+      </div>`;
+  }).join('');
+  // Update count on home
+  const c = document.getElementById('scheduled-count');
+  if (c) c.textContent = list.length === 0 ? 'None' : (list.length + ' active');
+}
+
+/* === PAYEES / BILLS === */
+function addPayee() {
+  const key = getSession();
+  const user = getUsers()[key];
+  if (!user) return;
+  const name = document.getElementById('py-name').value.trim();
+  const amount = parseFloat(document.getElementById('py-amount').value) || 0;
+  const autopay = document.getElementById('py-autopay').checked;
+  const msg = document.getElementById('py-msg');
+  msg.textContent = '';
+  if (!name) { msg.textContent = 'Enter biller name.'; msg.style.color = '#f87171'; return; }
+  user.payees = user.payees || [];
+  user.payees.push({ id: 'py_' + Date.now(), name, amount, autopay });
+  persistUser(key, user);
+  document.getElementById('py-name').value = '';
+  document.getElementById('py-amount').value = '';
+  document.getElementById('py-autopay').checked = false;
+  toast('Payee saved');
+  renderAll(user);
+}
+
+function deletePayee(id) {
+  const key = getSession();
+  const user = getUsers()[key];
+  if (!user) return;
+  user.payees = (user.payees || []).filter(p => p.id !== id);
+  persistUser(key, user);
+  toast('Payee removed');
+  renderAll(user);
+}
+
+function togglePayeeAutopay(id) {
+  const key = getSession();
+  const user = getUsers()[key];
+  if (!user) return;
+  const p = (user.payees || []).find(x => x.id === id);
+  if (!p) return;
+  p.autopay = !p.autopay;
+  persistUser(key, user);
+  toast(p.autopay ? 'Autopay on for ' + p.name : 'Autopay off for ' + p.name);
+  renderAll(user);
+}
+
+function payPayee(id) {
+  const key = getSession();
+  const user = getUsers()[key];
+  if (!user) return;
+  const p = (user.payees || []).find(x => x.id === id);
+  if (!p) return;
+  const amount = p.amount || 0;
+  if (!amount || amount <= 0) { toast('Set a default amount first'); return; }
+  if (amount > activeBalance(user)) { toast('Insufficient balance'); return; }
+  applyBalance(user, -amount);
+  addTransaction(user, {
+    type: 'bill', label: 'Bill — ' + p.name, amount: -amount,
+    date: Date.now(), account: user.activeAccount, category: 'Bills'
+  });
+  addNotification(user, '📄', 'Bill paid', fmt(amount) + ' to ' + p.name);
+  persistUser(key, user);
+  toast('Paid ' + p.name);
+  renderAll(user);
+}
+
+function renderPayees(user) {
+  const el = document.getElementById('payees-list');
+  if (!el) return;
+  const payees = user.payees || [];
+  if (payees.length === 0) {
+    el.innerHTML = '<div class="empty-state">No saved payees yet.</div>';
+    return;
+  }
+  el.innerHTML = payees.map(p => `
+    <div class="payee-card">
+      <div class="payee-avatar">🏢</div>
+      <div class="payee-info">
+        <div class="payee-name">${escapeHtml(p.name)}</div>
+        <div class="payee-meta">${p.amount > 0 ? fmt(p.amount) + ' · ' : ''}${p.autopay ? '🔁 Autopay ON' : 'Manual'}</div>
+      </div>
+      <div class="payee-actions">
+        <button class="payee-btn" onclick="payPayee('${p.id}')">Pay</button>
+        <button class="payee-btn" onclick="togglePayeeAutopay('${p.id}')">${p.autopay ? '🔁' : '🔁'}</button>
+        <button class="payee-btn danger" onclick="deletePayee('${p.id}')">✕</button>
+      </div>
+    </div>`).join('');
+}
+
+/* === HISTORY SEARCH & FILTER === */
+let historyFilter = 'all';
+function setHistoryFilter(f) {
+  historyFilter = f;
+  document.querySelectorAll('#history-filters .filter-chip').forEach(c => {
+    c.classList.toggle('active', c.dataset.filter === f);
+  });
+  renderHistoryFiltered();
+}
+function renderHistoryFiltered() {
+  const key = getSession();
+  if (!key) return;
+  const user = getUsers()[key];
+  if (!user) return;
+  const q = (document.getElementById('history-search').value || '').toLowerCase().trim();
+  let list = user.transactions || [];
+
+  if (historyFilter === 'income') list = list.filter(t => t.amount > 0);
+  else if (historyFilter === 'spending') list = list.filter(t => t.amount < 0);
+  else if (historyFilter !== 'all') list = list.filter(t => t.category === historyFilter);
+
+  if (q) list = list.filter(t => (t.label || '').toLowerCase().includes(q));
+
+  const el = document.getElementById('history-tx-list');
+  if (!el) return;
+  if (list.length === 0) {
+    el.innerHTML = '<div class="empty-state">No matching transactions.</div>';
+    return;
+  }
+  el.innerHTML = list.slice().reverse().map(tx => txHTML(tx)).join('');
+}
+
+/* === DONUT CHART === */
+function renderDonut(user) {
+  const donutEl = document.getElementById('donut-chart');
+  const legendEl = document.getElementById('donut-legend');
+  if (!donutEl || !legendEl) return;
+
+  const txs = (user.transactions || []).filter(t => t.amount < 0);
+  const cats = ['Food', 'Shopping', 'Bills', 'Transport', 'Entertainment', 'Other'];
+  const colors = ['#e5c76b', '#60a5fa', '#4ade80', '#f87171', '#a78bfa', '#a39d8c'];
+  const totals = {};
+  let total = 0;
+  cats.forEach(c => totals[c] = 0);
+  txs.forEach(t => {
+    const c = cats.includes(t.category) ? t.category : 'Other';
+    totals[c] += Math.abs(t.amount);
+    total += Math.abs(t.amount);
+  });
+
+  if (total === 0) {
+    donutEl.style.background = 'conic-gradient(rgba(229,199,107,0.15) 0% 100%)';
+    legendEl.innerHTML = '<div style="color:var(--muted);font-size:12px;">No spending yet.</div>';
+    return;
+  }
+
+  let cumulative = 0;
+  const stops = [];
+  const legend = [];
+  cats.forEach((c, i) => {
+    const pct = (totals[c] / total) * 100;
+    const start = cumulative;
+    cumulative += pct;
+    stops.push(`${colors[i]} ${start}% ${cumulative}%`);
+    if (totals[c] > 0) {
+      legend.push(`
+        <div class="item">
+          <span class="name"><span class="swatch" style="background:${colors[i]}"></span>${c}</span>
+          <span class="pct">${pct.toFixed(0)}%</span>
+        </div>`);
+    }
+  });
+  donutEl.style.background = `conic-gradient(${stops.join(', ')})`;
+  legendEl.innerHTML = legend.join('');
+}
+
+/* === RENDER ALL === */
 function renderAll(user) {
   const initials = user.name.split(' ').map(s => s[0]).join('').slice(0,2).toUpperCase();
 
@@ -1502,7 +1582,10 @@ function renderAll(user) {
 
   const activeType = user.activeAccount || 'checking';
   const activeBal = activeBalance(user);
-  if (balance) balance.textContent = fmt(activeBal);
+  if (balance) {
+    // number animation
+    animateNumber(balance, activeBal);
+  }
 
   const labels = {
     checking: 'Checking Account •••• 4821',
@@ -1526,6 +1609,14 @@ function renderAll(user) {
   if (av) av.textContent = fmt(activeBal);
   if (iv) iv.textContent = fmt(user.interestYTD || 0);
 
+  // Quick freeze button
+  const freezeEl = document.getElementById('quick-freeze');
+  const freezeIcon = document.getElementById('freeze-icon');
+  const freezeLbl = document.getElementById('freeze-label');
+  if (freezeEl) freezeEl.classList.toggle('frozen', !!user.frozen);
+  if (freezeIcon) freezeIcon.textContent = user.frozen ? '🔥' : '❄';
+  if (freezeLbl) freezeLbl.textContent = user.frozen ? 'Unfreeze' : 'Freeze';
+
   const chipCash = document.getElementById('chip-cashback');
   const chipStreak = document.getElementById('chip-streak');
   const chipMember = document.getElementById('chip-member');
@@ -1546,20 +1637,12 @@ function renderAll(user) {
   if (sCnt) sCnt.textContent = txs.length;
 
   renderChart(user);
-
-  const goalFill = document.getElementById('goal-fill');
-  const goalCurrent = document.getElementById('goal-current');
-  const goalPercent = document.getElementById('goal-percent');
-  const total = totalNetWorth(user);
-  const pct = Math.min(100, Math.round((total / 500000) * 100));
-  if (goalFill) goalFill.style.width = pct + '%';
-  if (goalCurrent) goalCurrent.textContent = fmt(total);
-  if (goalPercent) goalPercent.textContent = pct + '%';
+  renderDonut(user);
 
   ['transfer-avatar','deposit-avatar','bills-avatar','history-avatar',
    'profile-avatar','receive-avatar','wire-avatar','zelle-avatar',
    'notif-avatar','card-mgmt-avatar','contacts-avatar','budget-avatar',
-   'stmt-avatar','curr-avatar','split-avatar'].forEach(id => {
+   'stmt-avatar','curr-avatar','split-avatar','sched-avatar'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.textContent = initials;
   });
@@ -1595,6 +1678,8 @@ function renderAll(user) {
   renderCurrency(user);
   renderUpcomingBills(user);
   renderVirtualCards(user);
+  renderScheduled(user);
+  renderPayees(user);
 
   const cardLabel = document.getElementById('card-status-label');
   const freezeBtn = document.getElementById('freeze-btn');
@@ -1607,6 +1692,22 @@ function renderAll(user) {
   if (dot) dot.style.display = (user.notifications && user.notifications.length > 0) ? 'block' : 'none';
 
   renderTransactions(user);
+  renderHistoryFiltered();
+}
+
+/* number animation */
+function animateNumber(el, target) {
+  const start = parseFloat((el.dataset.value || '0').replace(/,/g,'')) || 0;
+  const duration = 400;
+  const t0 = performance.now();
+  function step(now) {
+    const p = Math.min(1, (now - t0) / duration);
+    const val = start + (target - start) * p;
+    el.textContent = fmt(val);
+    if (p < 1) requestAnimationFrame(step);
+    else el.dataset.value = String(target);
+  }
+  requestAnimationFrame(step);
 }
 
 function renderChart(user) {
@@ -1637,41 +1738,43 @@ function renderChart(user) {
   }).join('');
 }
 
+function txHTML(tx) {
+  const icon = tx.type === 'deposit' ? '↓'
+             : tx.type === 'bill' ? '📄'
+             : tx.type === 'wire' ? '🌐'
+             : tx.type === 'zelle' ? '⚡'
+             : tx.type === 'receive' ? '↓'
+             : tx.type === 'check' ? '📷'
+             : '↗';
+  const cls = tx.amount >= 0 ? 'positive' : 'negative';
+  const d = new Date(tx.date);
+  const date = d.toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'})
+    + ' · ' + d.toLocaleTimeString(undefined, {hour:'numeric', minute:'2-digit'});
+  return `
+    <div class="tx">
+      <div class="tx-left">
+        <div class="tx-icon">${icon}</div>
+        <div style="min-width:0;">
+          <div class="tx-name">${escapeHtml(tx.label)}</div>
+          <div class="tx-date">${date}</div>
+        </div>
+      </div>
+      <div class="tx-amount ${cls}">${fmtSigned(tx.amount)}</div>
+    </div>`;
+}
+
 function renderTransactions(user) {
   const list = user.transactions || [];
   const homeList = document.getElementById('home-tx-list');
   const histList = document.getElementById('history-tx-list');
-
-  const buildHTML = (items) => {
-    if (items.length === 0) return '<div class="empty-state">No transactions yet.</div>';
-    return items.slice().reverse().map(tx => {
-      const icon = tx.type === 'deposit' ? '↓'
-                 : tx.type === 'bill' ? '📄'
-                 : tx.type === 'wire' ? '🌐'
-                 : tx.type === 'zelle' ? '⚡'
-                 : tx.type === 'receive' ? '↓'
-                 : tx.type === 'check' ? '📷'
-                 : '↗';
-      const cls = tx.amount >= 0 ? 'positive' : 'negative';
-      const d = new Date(tx.date);
-      const date = d.toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'})
-        + ' · ' + d.toLocaleTimeString(undefined, {hour:'numeric', minute:'2-digit'});
-      return `
-        <div class="tx">
-          <div class="tx-left">
-            <div class="tx-icon">${icon}</div>
-            <div style="min-width:0;">
-              <div class="tx-name">${escapeHtml(tx.label)}</div>
-              <div class="tx-date">${date}</div>
-            </div>
-          </div>
-          <div class="tx-amount ${cls}">${fmtSigned(tx.amount)}</div>
-        </div>`;
-    }).join('');
-  };
-
-  if (homeList) homeList.innerHTML = buildHTML(list.slice(-5));
-  if (histList) histList.innerHTML = buildHTML(list);
+  if (homeList) {
+    homeList.innerHTML = list.length === 0
+      ? '<div class="empty-state">No transactions yet.</div>'
+      : list.slice(-5).reverse().map(txHTML).join('');
+  }
+  if (histList) {
+    // history is handled by renderHistoryFiltered
+  }
 }
 
 function renderNotifications(user) {
@@ -1849,6 +1952,7 @@ function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
+/* === MONEY OPERATIONS === */
 function handleTransfer() {
   const key = getSession(); const user = getUsers()[key]; if (!user) return;
   const name = document.getElementById('tr-recipient').value.trim();
@@ -1867,9 +1971,8 @@ function handleTransfer() {
   user.cashback = (user.cashback || 0) + amount * 0.01;
   persistUser(key, user);
   ['tr-recipient','tr-amount','tr-note'].forEach(id => document.getElementById(id).value = '');
-  msg.textContent = 'Transfer sent.'; msg.classList.remove('error-msg'); msg.classList.add('success-msg');
+  toast('Transfer sent → ' + name);
   renderAll(user);
-  setTimeout(() => { msg.textContent = ''; }, 1800);
 }
 function handleDeposit() {
   const key = getSession(); const user = getUsers()[key]; if (!user) return;
@@ -1884,9 +1987,8 @@ function handleDeposit() {
   addNotification(user, '↓', 'Deposit received', fmt(amount) + ' from ' + source);
   persistUser(key, user);
   document.getElementById('dp-amount').value = ''; document.getElementById('dp-source').value = '';
-  msg.textContent = 'Deposit successful.'; msg.classList.remove('error-msg'); msg.classList.add('success-msg');
+  toast('Deposited ' + fmt(amount));
   renderAll(user);
-  setTimeout(() => { msg.textContent = ''; }, 1800);
 }
 function handleCheckDeposit() {
   const key = getSession(); const user = getUsers()[key]; if (!user) return;
@@ -1900,9 +2002,8 @@ function handleCheckDeposit() {
   addNotification(user, '📷', 'Check deposited', fmt(amount) + ' from ' + from);
   persistUser(key, user);
   document.getElementById('ck-amount').value = ''; document.getElementById('ck-from').value = '';
-  msg.textContent = 'Check deposited.'; msg.style.color = '#4ade80';
+  toast('Check deposited');
   renderAll(user);
-  setTimeout(() => { msg.textContent = ''; }, 2400);
 }
 function handleReceive() {
   const key = getSession(); const user = getUsers()[key]; if (!user) return;
@@ -1918,9 +2019,8 @@ function handleReceive() {
   addNotification(user, '↓', 'Payment received', fmt(amount) + ' from ' + from);
   persistUser(key, user);
   document.getElementById('rcv-from').value = ''; document.getElementById('rcv-amount').value = '';
-  msg.textContent = 'Payment received.'; msg.classList.remove('error-msg'); msg.classList.add('success-msg');
+  toast('Received ' + fmt(amount));
   renderAll(user);
-  setTimeout(() => { msg.textContent = ''; }, 1800);
 }
 function handleWire() {
   const key = getSession(); const user = getUsers()[key]; if (!user) return;
@@ -1945,9 +2045,8 @@ function handleWire() {
   addNotification(user, '🌐', 'Wire sent', fmt(amount) + ' to ' + name);
   persistUser(key, user);
   ['wr-name','wr-bank','wr-routing','wr-account','wr-amount'].forEach(id => document.getElementById(id).value = '');
-  msg.textContent = 'Wire sent. $15 fee applied.'; msg.classList.remove('error-msg'); msg.classList.add('success-msg');
+  toast('Wire sent · $15 fee');
   renderAll(user);
-  setTimeout(() => { msg.textContent = ''; }, 2400);
 }
 function handleZelle() {
   const key = getSession(); const user = getUsers()[key]; if (!user) return;
@@ -1964,9 +2063,8 @@ function handleZelle() {
   addNotification(user, '⚡', 'Zelle sent', fmt(amount) + ' to ' + recipient);
   persistUser(key, user);
   document.getElementById('zl-recipient').value = ''; document.getElementById('zl-amount').value = '';
-  msg.textContent = 'Zelle payment sent.'; msg.classList.remove('error-msg'); msg.classList.add('success-msg');
+  toast('Zelle sent');
   renderAll(user);
-  setTimeout(() => { msg.textContent = ''; }, 1800);
 }
 function handleBill() {
   const key = getSession(); const user = getUsers()[key]; if (!user) return;
@@ -1983,9 +2081,8 @@ function handleBill() {
   addNotification(user, '📄', 'Bill paid', fmt(amount) + ' to ' + name);
   persistUser(key, user);
   document.getElementById('bl-name').value = ''; document.getElementById('bl-amount').value = '';
-  msg.textContent = 'Bill paid.'; msg.classList.remove('error-msg'); msg.classList.add('success-msg');
+  toast('Bill paid');
   renderAll(user);
-  setTimeout(() => { msg.textContent = ''; }, 1800);
 }
 function calcSplit() {
   const total = parseFloat(document.getElementById('sp-total').value) || 0;
@@ -2007,9 +2104,8 @@ function handleSplit() {
   addNotification(user, '🧾', 'Split bill paid', 'Your share: ' + fmt(each));
   persistUser(key, user);
   document.getElementById('sp-total').value = ''; document.getElementById('sp-count').value = '';
-  msg.textContent = 'Share paid: ' + fmt(each); msg.style.color = '#4ade80';
+  toast('Paid your share · ' + fmt(each));
   renderAll(user);
-  setTimeout(() => { msg.textContent = ''; }, 2400);
 }
 function addContact() {
   const key = getSession(); const user = getUsers()[key]; if (!user) return;
@@ -2022,9 +2118,8 @@ function addContact() {
   user.contacts.push({ name, info });
   persistUser(key, user);
   document.getElementById('ct-name').value = ''; document.getElementById('ct-info').value = '';
-  msg.textContent = 'Contact saved.'; msg.style.color = '#4ade80';
+  toast('Contact saved');
   renderAll(user);
-  setTimeout(() => { msg.textContent = ''; }, 1800);
 }
 function saveBudget() {
   const key = getSession(); const user = getUsers()[key]; if (!user) return;
@@ -2036,16 +2131,7 @@ function saveBudget() {
   user.budgets[cat] = amount;
   persistUser(key, user);
   document.getElementById('bd-amount').value = '';
-  msg.textContent = 'Budget saved.'; msg.style.color = '#4ade80';
-  renderAll(user);
-  setTimeout(() => { msg.textContent = ''; }, 1800);
-}
-function toggleFreeze() {
-  const key = getSession(); const user = getUsers()[key]; if (!user) return;
-  user.frozen = !user.frozen;
-  persistUser(key, user);
-  const msg = document.getElementById('card-msg');
-  if (msg) { msg.textContent = user.frozen ? 'Card frozen.' : 'Card unfrozen.'; msg.style.color = '#4ade80'; setTimeout(() => { msg.textContent = ''; }, 1800); }
+  toast('Budget saved for ' + cat);
   renderAll(user);
 }
 function revealPin() {
@@ -2062,7 +2148,7 @@ function generateVirtualCard() {
   user.virtualCards.push({ number: grouped, expiry });
   persistUser(key, user);
   renderAll(user);
-  alert('Virtual Card Generated\n\nCard: ' + grouped + '\nExpiry: ' + expiry);
+  toast('Virtual card created');
 }
 function handleResetPassword() {
   const key = getSession(); const user = getUsers()[key]; if (!user) return;
@@ -2075,8 +2161,7 @@ function handleResetPassword() {
   user.pass = newPass;
   persistUser(key, user);
   document.getElementById('pf-reset-code').value = ''; document.getElementById('pf-new-pass').value = '';
-  msg.textContent = 'Password reset.'; msg.style.color = '#4ade80';
-  setTimeout(() => { msg.textContent = ''; }, 2400);
+  toast('Password reset');
 }
 function handleChangeName() {
   const key = getSession(); const users = getUsers(); const user = users[key]; if (!user) return;
@@ -2086,14 +2171,13 @@ function handleChangeName() {
   user.name = newName;
   persistUser(key, user);
   document.getElementById('pf-new-name').value = '';
-  msg.textContent = 'Name updated.'; msg.style.color = '#4ade80';
+  toast('Name updated');
   renderAll(user);
-  setTimeout(() => { msg.textContent = ''; }, 1800);
 }
 function copyText(text) {
   if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(text).then(() => alert('Copied: ' + text), () => alert('Copy: ' + text));
-  } else alert('Copy: ' + text);
+    navigator.clipboard.writeText(text).then(() => toast('Copied'), () => toast('Copy: ' + text));
+  } else toast('Copy: ' + text);
 }
 document.addEventListener('click', function (e) {
   const modal = document.getElementById('switcher-modal');
@@ -2103,12 +2187,16 @@ document.addEventListener('click', function (e) {
 document.addEventListener('DOMContentLoaded', function () {
   runMigrations();
   updateClocks();
-  setInterval(updateClocks, 1000);
-
+  setInterval(updateClocks, 30000);
+  // Set default start date
+  const sc = document.getElementById('sc-start');
+  if (sc && !sc.value) {
+    const d = new Date(); d.setDate(d.getDate() + 1);
+    sc.value = d.toISOString().split('T')[0];
+  }
   const isLight = document.body.classList.contains('light');
   const btn = document.getElementById('theme-btn');
   if (btn) btn.textContent = isLight ? '🌙' : '☀️';
-
   const session = getSession();
   if (session && getUsers()[session]) showScreen('screen-home');
   else { clearSession(); showScreen('screen-signup'); }
